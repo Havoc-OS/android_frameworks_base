@@ -9118,6 +9118,11 @@ public final class Settings {
         public static final String ADB_PORT = "adb_port";
 
         /**
+         * @hide
+         */
+        public static final String DEVICE_HOSTNAME = "device_hostname";
+
+        /**
          * Whether to show the brightness slider in quick settings panel
          * @hide
          */
