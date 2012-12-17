@@ -20,8 +20,12 @@ import static android.app.StatusBarManager.DISABLE_SYSTEM_INFO;
 
 import android.annotation.Nullable;
 import android.app.Fragment;
+import android.content.ContentResolver;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.SparseArray;
 import android.content.ContentResolver;
@@ -71,6 +75,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private LinearLayout mSystemIconArea;
     private LinearLayout mCustomIconArea;
     private View mClockView;
+    private int mClockStyle;
     private View mHavocLogoRight;
     private View mNotificationIconAreaInner;
     private View mCenteredIconArea;
@@ -79,6 +84,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private DarkIconManager mDarkIconManager;
     private View mOperatorNameFrame;
     private CommandQueue mCommandQueue;
+    private LinearLayout mCenterClockLayout;
+    private View mRightClock;
+    private boolean mShowClock = true;
     private BatteryMeterView mBatteryMeterView;
     private StatusIconContainer mStatusIcons;
     private int mSignalClusterEndPadding = 0;
@@ -99,6 +107,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                     false, this, UserHandle.USER_ALL);
             mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.CARRIER_LABEL_LOCATION),
+                    false, this, UserHandle.USER_ALL);
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK),
+                    false, this, UserHandle.USER_ALL);
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK_STYLE),
                     false, this, UserHandle.USER_ALL);
         }
 
@@ -160,6 +174,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mSystemIconArea = mStatusBar.findViewById(R.id.system_icon_area);
         mCustomIconArea = mStatusBar.findViewById(R.id.left_icon_area);
         mClockView = mStatusBar.findViewById(R.id.clock);
+        mCenterClockLayout = (LinearLayout) mStatusBar.findViewById(R.id.center_clock_layout);
+        mRightClock = mStatusBar.findViewById(R.id.right_clock);
         mSignalClusterEndPadding = getResources().getDimensionPixelSize(R.dimen.signal_cluster_battery_padding);
         mStatusIcons = mStatusBar.findViewById(R.id.statusIcons);
         int batteryStyle = Settings.System.getInt(getContext().getContentResolver(),
@@ -172,8 +188,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mBatteryBars[0] = mStatusBar.findViewById(R.id.battery_bar);
         mBatteryBars[1] = mStatusBar.findViewById(R.id.battery_bar_1);
         showSystemIconArea(false);
-        showClock(false);
         initEmergencyCryptkeeperText();
+        animateHide(mClockView, false, false);
         initOperatorName();
         mSettingsObserver.observe();
         updateSettings(false);
@@ -258,18 +274,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             if ((state1 & DISABLE_NOTIFICATION_ICONS) != 0) {
                 hideNotificationIconArea(animate);
                 hideCarrierName(animate);
+                animateHide(mClockView, animate, mClockStyle == 0);
             } else {
                 showNotificationIconArea(animate);
+                updateClockStyle(animate);
                 showCarrierName(animate);
-            }
-        }
-        // The clock may have already been hidden, but we might want to shift its
-        // visibility to GONE from INVISIBLE or vice versa
-        if ((diff1 & DISABLE_CLOCK) != 0 || mClockView.getVisibility() != clockHiddenMode()) {
-            if ((state1 & DISABLE_CLOCK) != 0) {
-                hideClock(animate);
-            } else {
-                showClock(animate);
             }
         }
     }
@@ -321,6 +330,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void hideSystemIconArea(boolean animate) {
+        animateHide(mCenterClockLayout, animate, true);
+        if (mClockStyle == 2) {
+            animateHide(mRightClock, animate, true);
+        }
         animateHide(mSystemIconArea, animate, true);
         animateHide(mHavocLogoRight, animate, true);
         for (View batteryBar: mBatteryBars) {
@@ -329,6 +342,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void showSystemIconArea(boolean animate) {
+        animateShow(mCenterClockLayout, animate);
+        if (mClockStyle == 2) {
+            animateShow(mRightClock, animate);
+        }
         animateShow(mSystemIconArea, animate);
         animateShow(mHavocLogoRight, animate);
         for (View batteryBar: mBatteryBars) {
@@ -336,35 +353,36 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
     }
 
-    public void hideClock(boolean animate) {
-        animateHide(mClockView, animate, clockHiddenMode() == View.INVISIBLE);
+/*    public void hideClock(boolean animate) {
+        animateHide(mClockView, animate, false);
     }
 
     public void showClock(boolean animate) {
         animateShow(mClockView, animate);
     }
-
+*/
     /**
      * If panel is expanded/expanding it usually means QS shade is opening, so
      * don't set the clock GONE otherwise it'll mess up the animation.
-     */
     private int clockHiddenMode() {
         if (!mStatusBar.isClosed() && !mKeyguardStateController.isShowing()
                 && !mStatusBarStateController.isDozing()) {
             return View.INVISIBLE;
         }
         return View.GONE;
-    }
+    }*/
 
     public void hideNotificationIconArea(boolean animate) {
         animateHide(mNotificationIconAreaInner, animate, true);
         animateHide(mCenteredIconArea, animate, true);
+	    animateHide(mCenterClockLayout, animate, true);
         animateHide(mCustomIconArea, animate, true);
     }
 
     public void showNotificationIconArea(boolean animate) {
         animateShow(mNotificationIconAreaInner, animate);
         animateShow(mCenteredIconArea, animate);
+        animateShow(mCenterClockLayout, animate);
         animateShow(mCustomIconArea, animate);
     }
 
@@ -396,9 +414,6 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
      * Hides a view.
      */
     private void animateHide(final View v, boolean animate, final boolean invisible) {
-        if (v instanceof Clock && !((Clock)v).shouldBeVisible()) {
-            return;
-        }
         v.animate().cancel();
         if (!animate) {
             v.setAlpha(0f);
@@ -418,7 +433,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
      * Shows a view, and synchronizes the animation with Keyguard exit animations, if applicable.
      */
     private void animateShow(View v, boolean animate) {
-        if (v instanceof Clock && !((Clock)v).shouldBeVisible()) {
+        if (v instanceof Clock && !((Clock)v).isClockVisible()) {
             return;
         }
         v.animate().cancel();
@@ -479,12 +494,25 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void updateSettings(boolean animate) {
-        boolean carrierEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
+        boolean carrierEnabled = Settings.System.getIntForUser(mContentResolver,
                 Settings.System.CARRIER_LABEL_ENABLED, 1, UserHandle.USER_CURRENT) == 1;
-        int carrierLocation = Settings.System.getIntForUser(getContext().getContentResolver(),
+        int carrierLocation = Settings.System.getIntForUser(mContentResolver,
                 Settings.System.CARRIER_LABEL_LOCATION, 0, UserHandle.USER_CURRENT);
         mHasCarrierLabel = carrierEnabled && carrierLocation != 0;
 
+        mShowClock = Settings.System.getIntForUser(mContentResolver,
+                Settings.System.STATUSBAR_CLOCK, 1,
+                UserHandle.USER_CURRENT) == 1;
+        if (!mShowClock) {
+            mClockStyle = 1; // internally switch to centered clock layout because
+                             // left & right will show up again after QS pulldown
+        } else {
+            mClockStyle = Settings.System.getIntForUser(mContentResolver,
+                    Settings.System.STATUSBAR_CLOCK_STYLE, 0,
+                    UserHandle.USER_CURRENT);
+        }
+
+        updateClockStyle(animate);
         setCarrierLabel(animate);
     }
 
@@ -493,6 +521,16 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             animateShow(mCustomCarrierLabel, animate);
         } else {
             animateHide(mCustomCarrierLabel, animate, false);
+        }
+    }
+
+    private void updateClockStyle(boolean animate) {
+        if (mClockStyle == 1 || mClockStyle == 2) {
+            animateHide(mClockView, animate, false);
+        } else {
+            if (((Clock)mClockView).isClockVisible()) {
+                 animateShow(mClockView, animate);
+            }
         }
     }
 }

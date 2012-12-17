@@ -16,9 +16,13 @@
 
 package com.android.systemui.statusbar.phone;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.DisplayCutout;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.WindowInsets;
 import android.widget.LinearLayout;
@@ -39,7 +43,6 @@ import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
-import com.android.systemui.statusbar.policy.Clock;
 import com.android.systemui.statusbar.policy.OnHeadsUpChangedListener;
 
 import java.util.function.BiConsumer;
@@ -280,15 +283,18 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
     }
 
     private void setShown(boolean isShown) {
+        final int clockStyle = Settings.System.getIntForUser(mClockView.getContext().getContentResolver(),
+                Settings.System.STATUSBAR_CLOCK_STYLE, 0, UserHandle.USER_CURRENT);
+        final boolean isClockVisible = Settings.System.getIntForUser(mClockView.getContext().getContentResolver(),
+                Settings.System.STATUSBAR_CLOCK, 1,
+                UserHandle.USER_CURRENT) == 1;
         if (mShown != isShown) {
             mShown = isShown;
             if (isShown) {
                 updateParentClipping(false /* shouldClip */);
                 mHeadsUpStatusBarView.setVisibility(View.VISIBLE);
                 show(mHeadsUpStatusBarView);
-                if (((Clock)mClockView).shouldBeVisible()) {
-                    hide(mClockView, View.INVISIBLE);
-                }
+                hide(mClockView, View.INVISIBLE);
                 if (mCenteredIconView.getVisibility() != View.GONE) {
                     hide(mCenteredIconView, View.INVISIBLE);
                 }
@@ -297,8 +303,10 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
                 }
                 hide(mCustomIconArea, View.INVISIBLE);
             } else {
-                if (((Clock)mClockView).shouldBeVisible()) {
+                if (clockStyle == 0 && isClockVisible) {
                     show(mClockView);
+                } else {
+                    mClockView.setVisibility(View.GONE);
                 }
                 if (mCenteredIconView.getVisibility() != View.GONE) {
                     show(mCenteredIconView);

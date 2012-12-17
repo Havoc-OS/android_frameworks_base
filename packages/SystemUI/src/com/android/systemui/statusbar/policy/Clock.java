@@ -16,30 +16,28 @@
 
 package com.android.systemui.statusbar.policy;
 
-import static android.provider.Settings.Secure.STATUS_BAR_CLOCK;
-import static android.provider.Settings.Secure.STATUSBAR_CLOCK_AM_PM_STYLE;
-import static android.provider.Settings.Secure.STATUSBAR_CLOCK_DATE_DISPLAY;
-import static android.provider.Settings.Secure.STATUSBAR_CLOCK_DATE_STYLE;
-import static android.provider.Settings.Secure.STATUSBAR_CLOCK_DATE_FORMAT;
-import static android.provider.Settings.Secure.STATUSBAR_CLOCK_DATE_POSITION;
-
 import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.TypedArray;
+import android.database.ContentObserver;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.os.SystemClock;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateFormat;
 import android.text.style.CharacterStyle;
 import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
+import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
 
@@ -53,10 +51,7 @@ import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.plugins.DarkIconDispatcher.DarkReceiver;
 import com.android.systemui.settings.CurrentUserTracker;
 import com.android.systemui.statusbar.CommandQueue;
-import com.android.systemui.statusbar.phone.StatusBarIconController;
 import com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener;
-import com.android.systemui.tuner.TunerService;
-import com.android.systemui.tuner.TunerService.Tunable;
 
 import libcore.icu.LocaleData;
 
@@ -69,33 +64,35 @@ import java.util.TimeZone;
 /**
  * Digital clock for the status bar.
  */
-public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.Callbacks,
+public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
         DarkReceiver, ConfigurationListener {
 
     private static final String CLOCK_SUPER_PARCELABLE = "clock_super_parcelable";
     private static final String CURRENT_USER_ID = "current_user_id";
     private static final String VISIBLE_BY_POLICY = "visible_by_policy";
     private static final String VISIBLE_BY_USER = "visible_by_user";
+    private static final String SHOW_SECONDS = "show_seconds";
     private static final String VISIBILITY = "visibility";
-    private static final String QSHEADER = "qsheader";
 
     private final CurrentUserTracker mCurrentUserTracker;
     private final CommandQueue mCommandQueue;
     private int mCurrentUserId;
 
-    private boolean mClockVisibleByPolicy = true;
-    private boolean mClockVisibleByUser = true;
+    protected boolean mClockVisibleByPolicy = true;
+    protected boolean mClockVisibleByUser = true;
+    protected boolean mClockHideableByUser = true;
 
-    private boolean mAttached;
-    private Calendar mCalendar;
-    private String mClockFormatString;
-    private SimpleDateFormat mClockFormat;
+    protected boolean mAttached;
+    private boolean mScreenReceiverRegistered;
+    protected Calendar mCalendar;
+    protected String mClockFormatString;
+    protected SimpleDateFormat mClockFormat;
     private SimpleDateFormat mContentDescriptionFormat;
-    private Locale mLocale;
+    protected Locale mLocale;
 
-    public static final int AM_PM_STYLE_GONE    = 0;
-    public static final int AM_PM_STYLE_SMALL   = 1;
-    public static final int AM_PM_STYLE_NORMAL  = 2;
+    public static final int AM_PM_STYLE_GONE = 0;
+    public static final int AM_PM_STYLE_SMALL = 1;
+    public static final int AM_PM_STYLE_NORMAL = 2;
 
     private static int AM_PM_STYLE = AM_PM_STYLE_GONE;
 
@@ -110,14 +107,22 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
     public static final int STYLE_DATE_LEFT = 0;
     public static final int STYLE_DATE_RIGHT = 1;
 
-    private int mClockDateDisplay = CLOCK_DATE_DISPLAY_GONE;
-    private int mClockDateStyle = CLOCK_DATE_STYLE_REGULAR;
-    private String mClockDateFormat = null;
-    private int mClockDatePosition;
-    private int mAmPmStyle;
+    public static final int STYLE_CLOCK_LEFT = 0;
+    public static final int STYLE_CLOCK_CENTER = 1;
+    public static final int STYLE_CLOCK_RIGHT = 2;
 
+    protected int mClockDateDisplay = CLOCK_DATE_DISPLAY_GONE;
+    protected int mClockDateStyle = CLOCK_DATE_STYLE_REGULAR;
+    protected int mClockStyle = STYLE_CLOCK_LEFT;
+    protected String mClockDateFormat = null;
+    protected int mClockDatePosition;
+    protected boolean mShowClock = true;
+    private int mAmPmStyle;
     private final boolean mShowDark;
-    private boolean mQsHeader;
+    protected boolean mQsHeader;
+    private boolean mShowSeconds;
+    private Handler mSecondsHandler;
+    private SettingsObserver mSettingsObserver;
 
     /**
      * Whether we should use colors that adapt based on wallpaper/the scrim behind quick settings
@@ -130,8 +135,47 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
      */
     private int mNonAdaptedColor;
 
-    private final BroadcastDispatcher mBroadcastDispatcher;
+    protected class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
 
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK_STYLE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK_SECONDS),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK_AM_PM_STYLE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK_DATE_DISPLAY),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK_DATE_STYLE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK_DATE_FORMAT),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUSBAR_CLOCK_DATE_POSITION),
+                    false, this, UserHandle.USER_ALL);
+            updateSettings();
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateSettings();
+        }
+    }
+
+    private final BroadcastDispatcher mBroadcastDispatcher;
     public Clock(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
@@ -157,6 +201,7 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
                 mCurrentUserId = newUserId;
             }
         };
+        updateSettings();
     }
 
     @Override
@@ -166,8 +211,8 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         bundle.putInt(CURRENT_USER_ID, mCurrentUserId);
         bundle.putBoolean(VISIBLE_BY_POLICY, mClockVisibleByPolicy);
         bundle.putBoolean(VISIBLE_BY_USER, mClockVisibleByUser);
+        bundle.putBoolean(SHOW_SECONDS, mShowSeconds);
         bundle.putInt(VISIBILITY, getVisibility());
-        bundle.putBoolean(QSHEADER, mQsHeader);
 
         return bundle;
     }
@@ -187,10 +232,10 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         }
         mClockVisibleByPolicy = bundle.getBoolean(VISIBLE_BY_POLICY, true);
         mClockVisibleByUser = bundle.getBoolean(VISIBLE_BY_USER, true);
+        mShowSeconds = bundle.getBoolean(SHOW_SECONDS, false);
         if (bundle.containsKey(VISIBILITY)) {
             super.setVisibility(bundle.getInt(VISIBILITY));
         }
-        mQsHeader = bundle.getBoolean(QSHEADER, false);
     }
 
     @Override
@@ -212,9 +257,6 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
             // The receiver will return immediately if the view does not have a Handler yet.
             mBroadcastDispatcher.registerReceiverWithHandler(mIntentReceiver, filter,
                     Dependency.get(Dependency.TIME_TICK_HANDLER), UserHandle.ALL);
-            Dependency.get(TunerService.class).addTunable(this,
-                    STATUS_BAR_CLOCK, STATUSBAR_CLOCK_AM_PM_STYLE, STATUSBAR_CLOCK_DATE_DISPLAY,
-                    STATUSBAR_CLOCK_DATE_STYLE, STATUSBAR_CLOCK_DATE_FORMAT, STATUSBAR_CLOCK_DATE_POSITION);
             mCommandQueue.addCallback(this);
             if (mShowDark) {
                 Dependency.get(DarkIconDispatcher.class).addDarkReceiver(this);
@@ -227,18 +269,29 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         mCalendar = Calendar.getInstance(TimeZone.getDefault());
         mClockFormatString = "";
 
-        // Make sure we update to the current time
-        updateClock();
-        updateClockVisibility();
+        if (mSettingsObserver == null) {
+            mSettingsObserver = new SettingsObserver(new Handler());
+        }
+        mSettingsObserver.observe();
+        updateSettings();
+        updateShowSeconds();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
+        if (mScreenReceiverRegistered) {
+            mScreenReceiverRegistered = false;
+            mBroadcastDispatcher.unregisterReceiver(mScreenReceiver);
+            if (mSecondsHandler != null) {
+                mSecondsHandler.removeCallbacks(mSecondTick);
+                mSecondsHandler = null;
+            }
+        }
         if (mAttached) {
             mBroadcastDispatcher.unregisterReceiver(mIntentReceiver);
+            getContext().getContentResolver().unregisterContentObserver(mSettingsObserver);
             mAttached = false;
-            Dependency.get(TunerService.class).removeTunable(this);
             mCommandQueue.removeCallback(this);
             if (mShowDark) {
                 Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(this);
@@ -271,6 +324,8 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
                     if (!newLocale.equals(mLocale)) {
                         mLocale = newLocale;
                     }
+                    updateSettings();
+                    return;
                 });
             }
             handler.post(() -> updateClock());
@@ -287,23 +342,34 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
     }
 
     public void setClockVisibleByUser(boolean visible) {
-        mClockVisibleByUser = visible;
-        updateClockVisibility();
+        if (mClockHideableByUser) {
+            mClockVisibleByUser = visible;
+            updateClockVisibility();
+        }
     }
 
     public void setClockVisibilityByPolicy(boolean visible) {
-        mClockVisibleByPolicy = visible && mClockVisibleByUser;
+        mClockVisibleByPolicy = visible;
         updateClockVisibility();
     }
 
-    public boolean shouldBeVisible() {
+    private boolean shouldBeVisible() {
         return mClockVisibleByPolicy && mClockVisibleByUser;
     }
 
-    private void updateClockVisibility() {
-        boolean visible = shouldBeVisible();
+    protected void updateClockVisibility() {
+        boolean visible = ((mClockStyle == STYLE_CLOCK_LEFT) || (mQsHeader))
+                && mShowClock && mClockVisibleByPolicy && mClockVisibleByUser;
         int visibility = visible ? View.VISIBLE : View.GONE;
         super.setVisibility(visibility);
+    }
+
+    public boolean isClockVisible() {
+        return mClockVisibleByPolicy && mClockVisibleByUser;
+    }
+
+    public void setClockHideableByUser(boolean value) {
+        mClockHideableByUser = value;
     }
 
     final void updateClock() {
@@ -311,18 +377,6 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         mCalendar.setTimeInMillis(System.currentTimeMillis());
         setText(getSmallTime());
         setContentDescription(mContentDescriptionFormat.format(mCalendar.getTime()));
-    }
-
-    @Override
-    public void onTuningChanged(String key, String newValue) {
-        if (STATUSBAR_CLOCK_AM_PM_STYLE.equals(key)
-                || STATUSBAR_CLOCK_DATE_DISPLAY.equals(key)
-                || STATUSBAR_CLOCK_DATE_STYLE.equals(key)
-                || STATUSBAR_CLOCK_DATE_FORMAT.equals(key)
-                || STATUSBAR_CLOCK_DATE_POSITION.equals(key)
-                || STATUS_BAR_CLOCK.equals(key)) {
-            updateSettings(key, newValue);
-        }
     }
 
     @Override
@@ -375,6 +429,31 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         }
     }
 
+    private void updateShowSeconds() {
+        if (mShowSeconds) {
+            // Wait until we have a display to start trying to show seconds.
+            if (mSecondsHandler == null && getDisplay() != null) {
+                mSecondsHandler = new Handler();
+                if (getDisplay().getState() == Display.STATE_ON) {
+                    mSecondsHandler.postAtTime(mSecondTick,
+                            SystemClock.uptimeMillis() / 1000 * 1000 + 1000);
+                }
+                mScreenReceiverRegistered = true;
+                IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+                filter.addAction(Intent.ACTION_SCREEN_ON);
+                mBroadcastDispatcher.registerReceiver(mScreenReceiver, filter);
+            }
+        } else {
+            if (mSecondsHandler != null) {
+                mScreenReceiverRegistered = false;
+                mBroadcastDispatcher.unregisterReceiver(mScreenReceiver);
+                mSecondsHandler.removeCallbacks(mSecondTick);
+                mSecondsHandler = null;
+                updateClock();
+            }
+        }
+    }
+
     private final CharSequence getSmallTime() {
         Context context = getContext();
         boolean is24 = DateFormat.is24HourFormat(context, mCurrentUserId);
@@ -384,7 +463,9 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         final char MAGIC2 = '\uEF01';
 
         SimpleDateFormat sdf;
-        String format = is24 ? d.timeFormat_Hm : d.timeFormat_hm;
+        String format = mShowSeconds
+                ? is24 ? d.timeFormat_Hms : d.timeFormat_hms
+                : is24 ? d.timeFormat_Hm : d.timeFormat_hm;
         if (!format.equals(mClockFormatString)) {
             mContentDescriptionFormat = new SimpleDateFormat(format);
             /*
@@ -422,6 +503,7 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         } else {
             sdf = mClockFormat;
         }
+
         CharSequence dateString = null;
 
         String result = "";
@@ -489,9 +571,15 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
                 }
             }
         }
-
         return formatted;
+    }
 
+
+    private void updateStatus() {
+        if (mAttached) {
+            updateClock();
+            updateShowSeconds();
+        }
     }
 
     private boolean mDemoMode;
@@ -524,54 +612,89 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         }
     }
 
-    public void updateSettings(String key, String newValue) {
-        switch (key) {
-            case (STATUSBAR_CLOCK_AM_PM_STYLE):
-                boolean is24hour = DateFormat.is24HourFormat(getContext(), mCurrentUserId);
-                if (newValue == null) {
-                    newValue = "0"; // no am/pm
+    private final BroadcastReceiver mScreenReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (Intent.ACTION_SCREEN_OFF.equals(action)) {
+                if (mSecondsHandler != null) {
+                    mSecondsHandler.removeCallbacks(mSecondTick);
                 }
-                int amPmStyle = Integer.parseInt(newValue);
-                mAmPmStyle = is24hour ? AM_PM_STYLE_GONE : amPmStyle;
-                mClockFormatString = "";
-                break;
-
-            case (STATUSBAR_CLOCK_DATE_DISPLAY):
-                if (newValue == null) {
-                    newValue = "0"; // no date
+            } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
+                if (mSecondsHandler != null) {
+                    mSecondsHandler.postAtTime(mSecondTick,
+                            SystemClock.uptimeMillis() / 1000 * 1000 + 1000);
                 }
-                mClockDateDisplay = mQsHeader ? CLOCK_DATE_DISPLAY_GONE
-                        : Integer.parseInt(newValue);
-                break;
-
-            case (STATUSBAR_CLOCK_DATE_STYLE):
-                if (newValue == null) {
-                    newValue = "0"; // capital letters
-                }
-                mClockDateStyle = Integer.parseInt(newValue);
-                break;
-
-            case (STATUSBAR_CLOCK_DATE_FORMAT):
-                mClockDateFormat = newValue;
-                break;
-
-            case (STATUSBAR_CLOCK_DATE_POSITION):
-                if (newValue == null) {
-                    newValue = "0"; // left of clock
-                }
-                mClockDatePosition = Integer.parseInt(newValue);
-                break;
-
-            case (STATUS_BAR_CLOCK):
-                if (newValue == null || mQsHeader) {
-                    newValue = "1"; // show clock
-                }
-                setClockVisibleByUser(Integer.parseInt(newValue) != 0);
-                break;
+            }
         }
-        if (mCalendar != null) {
+    };
+
+    private final Runnable mSecondTick = new Runnable() {
+        @Override
+        public void run() {
+            if (mCalendar != null) {
+                updateClock();
+            }
+            mSecondsHandler.postAtTime(this, SystemClock.uptimeMillis() / 1000 * 1000 + 1000);
+        }
+    };
+
+    protected void updateSettings() {
+        ContentResolver resolver = mContext.getContentResolver();
+
+        mShowClock = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUSBAR_CLOCK, 1,
+                UserHandle.USER_CURRENT) == 1;
+        if (mQsHeader) {
+            mShowClock = true; // QSHeader clock may override show clock
+        }
+
+        mShowSeconds = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUSBAR_CLOCK_SECONDS, 0,
+                UserHandle.USER_CURRENT) == 1;
+
+        if (!mShowClock) {
+            mClockStyle = 1; // internally switch to centered clock layout because
+                             // left & right will show up again after QS pulldown
+        } else {
+            mClockStyle = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUSBAR_CLOCK_STYLE, STYLE_CLOCK_LEFT,
+                    UserHandle.USER_CURRENT);
+        }
+
+        boolean is24hour = DateFormat.is24HourFormat(mContext);
+        int amPmStyle = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUSBAR_CLOCK_AM_PM_STYLE,
+                AM_PM_STYLE_GONE,
+                UserHandle.USER_CURRENT);
+        mAmPmStyle = is24hour ? AM_PM_STYLE_GONE : amPmStyle;
+        mClockFormatString = "";
+
+        mClockDateDisplay = mQsHeader ? CLOCK_DATE_DISPLAY_GONE
+                        : Settings.System.getIntForUser(resolver,
+                Settings.System.STATUSBAR_CLOCK_DATE_DISPLAY, CLOCK_DATE_DISPLAY_GONE,
+                UserHandle.USER_CURRENT);
+
+        mClockDateStyle = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUSBAR_CLOCK_DATE_STYLE, CLOCK_DATE_STYLE_REGULAR,
+                UserHandle.USER_CURRENT);
+
+        mClockDateFormat = Settings.System.getString(resolver,
+                Settings.System.STATUSBAR_CLOCK_DATE_FORMAT);
+
+        mClockDatePosition = Settings.System.getIntForUser(resolver,
+                Settings.System.STATUSBAR_CLOCK_DATE_POSITION, STYLE_DATE_LEFT,
+                UserHandle.USER_CURRENT);
+
+        if (mAttached) {
+            updateClockVisibility();
             updateClock();
+            updateShowSeconds();
         }
+    }
+
+    public boolean isClockDateEnabled() {
+        return isClockVisible() && mClockDateDisplay != CLOCK_DATE_DISPLAY_GONE;
     }
 
     public void setQsHeader() {
