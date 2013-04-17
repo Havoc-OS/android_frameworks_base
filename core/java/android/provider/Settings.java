@@ -4167,6 +4167,15 @@ public final class Settings {
          * the setting value. See an example above.
          */
 
+       /**
+        * MediaScanner behavior on boot.
+        * 0 = enabled
+        * 1 = ask (notification)
+        * 2 = disabled
+        * @hide
+        */
+        public static final String MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
+
         /**
          * Whether to show the battery info on the lockscreen while charging
          * @hide
