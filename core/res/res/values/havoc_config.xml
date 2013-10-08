@@ -222,4 +222,7 @@
 
     <!-- Name of that alternative key handler class -->
     <string name="config_alternativeDeviceKeyHandlerClass" translatable="false"></string>
+
+    <!-- True if the gesture service should be started at system start -->
+    <bool name="config_enableGestureService">false</bool>
 </resources>
