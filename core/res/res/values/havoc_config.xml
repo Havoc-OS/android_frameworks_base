@@ -28,6 +28,11 @@
         <item>com.google.android.youtube</item>   
     </string-array>
 
+      <!-- EdgeGesture service --> 
+    <java-symbol type="dimen" name="edge_gesture_trigger_distance" /> 
+    <java-symbol type="dimen" name="edge_gesture_perpendicular_distance" /> 
+    <java-symbol type="dimen" name="edge_gesture_trigger_thickness" /> 
+
     <!-- High Brightness Mode --> 
     <add-resource type="bool" name="config_supportHighBrightness"></add-resource> 
     <bool name="config_supportHighBrightness">false</bool>
