@@ -9014,7 +9014,7 @@ public void setNewOverlayAlpha() {
             gesturesController = null;
         }
     }
-}
+
 
 
     public static void updatePreferences(Context mContext) {
