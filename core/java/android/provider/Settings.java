@@ -4815,6 +4815,12 @@ public final class Settings {
         public static final String SCREEN_STATE_GPS = "screen_state_gps";
 
         /**
+         * Force expanded notifications on all apps that support it.
+         * @hide
+         */
+        public static final String FORCE_EXPANDED_NOTIFICATIONS = "force_expanded_notifications";
+
+        /**
          * @hide
          */
         public static final String SCREEN_STATE_MOBILE_DATA = "screen_state_mobile_data";
