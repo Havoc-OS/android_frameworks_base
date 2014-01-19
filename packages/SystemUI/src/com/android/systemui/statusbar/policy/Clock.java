@@ -77,7 +77,8 @@ public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
     protected String mClockFormatString;
     protected SimpleDateFormat mClockFormat;
     private SimpleDateFormat mContentDescriptionFormat;
-    protected Locale mLocale;
+    private Locale mLocale;
+    private boolean mScreenOn = true;
 
     public static final int AM_PM_STYLE_GONE    = 0;
     public static final int AM_PM_STYLE_SMALL   = 1;
@@ -240,6 +241,8 @@ public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
             filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
             filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
             filter.addAction(Intent.ACTION_USER_SWITCHED);
+            filter.addAction(Intent.ACTION_SCREEN_ON);
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
 
             getContext().registerReceiverAsUser(mIntentReceiver, UserHandle.ALL, filter,
                     null, Dependency.get(Dependency.TIME_TICK_HANDLER));
@@ -306,7 +309,16 @@ public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
                     return;
                 });
             }
-            getHandler().post(() -> updateClock());
+
+            if (action.equals(Intent.ACTION_SCREEN_ON)) {
+                mScreenOn = true;
+            } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
+                mScreenOn = false;
+            }
+
+            if (mScreenOn) {
+                getHandler().post(() -> updateClock());
+            }
         }
     };
 
