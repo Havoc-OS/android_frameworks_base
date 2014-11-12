@@ -67,6 +67,7 @@ import android.os.PowerManager;
 import android.os.Process;
 import android.os.UserHandle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Slog;
@@ -763,6 +764,7 @@ class GlobalScreenshot {
             @Override
             public void run() {
                 // Play the shutter sound to notify that we've taken a screenshot
+                if (Settings.System.getInt(mContext.getContentResolver(), Settings.System.SCREENSHOT_SOUND, 1) == 1)
                 mCameraSound.play(MediaActionSound.SHUTTER_CLICK);
 
                 mScreenshotView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
