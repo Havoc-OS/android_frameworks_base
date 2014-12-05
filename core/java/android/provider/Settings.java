@@ -4369,9 +4369,12 @@ public final class Settings {
         public static final String HIDE_FROM_RECENTS_LIST = "hide_from_recents_list";
 
         /**
+         * Show the pending notification counts as overlays on the status bar
          * @hide
          */
         public static final String DATA_ACTIVITY_ARROWS = "data_activity_arrows";
+        
+        public static final String STATUS_BAR_NOTIF_COUNT = "status_bar_notif_count";
 
         /**
          * Whether to display data activity arrows for wifi connections
