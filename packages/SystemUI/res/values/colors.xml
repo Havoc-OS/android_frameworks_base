@@ -163,6 +163,10 @@
     <color name="fingerprint_dialog_error_color">#fff44336</color> <!-- red -->
     <color name="fingerprint_dialog_fingerprint_color">#ff008577</color> <!-- teal -->
 
+    <!-- Gesture Anywhere specific colors -->
+    <color name="gesture_overlay_background_fill_color">#80000000</color>
+    <color name="gesture_color">@android:color/holo_blue_light</color>
+
     <!-- Logout button -->
     <color name="logout_button_bg_color">#ccffffff</color>
 </resources>

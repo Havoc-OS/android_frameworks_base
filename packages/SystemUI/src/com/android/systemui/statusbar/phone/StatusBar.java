@@ -48,6 +48,11 @@ import android.ambient.AmbientIndicationManagerCallback;
 import android.ambient.play.RecoginitionObserver.Observable;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.ChaosLab;
+import android.annotation.ChaosLab.Classification;
+import android.app.Activity;
+import android.animation.TimeInterpolator;
+import com.android.systemui.chaos.lab.gestureanywhere.GestureAnywhereView;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
@@ -83,6 +88,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
+import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
@@ -132,6 +138,7 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.view.Display;
 import android.view.HapticFeedbackConstants;
+import android.view.Gravity;
 import android.view.IWindowManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -142,6 +149,7 @@ import android.view.ThreadedRenderer;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
@@ -971,6 +979,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     // ================================================================================
     // Constructing the view
     // ================================================================================
+    @ChaosLab(name="GestureAnywhere", classification=Classification.CHANGE_CODE)
     protected void makeStatusBarView() {
         final Context context = mContext;
 
@@ -1075,6 +1084,9 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         addAppCircleSidebar();
         mScreenPinningNotify = new ScreenPinningNotify(mContext);
         mStackScroller.setLongPressListener(mEntryManager.getNotificationLongClicker());
+
+        addGestureAnywhereView();
+
         mStackScroller.setStatusBar(this);
         mStackScroller.setGroupManager(mGroupManager);
         mStackScroller.setHeadsUpManager(mHeadsUpManager);
@@ -5764,6 +5776,9 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
 
     protected RecentsComponent mRecents;
 
+    @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
+    protected GestureAnywhereView mGestureAnywhereView;
+
     protected NotificationShelf mNotificationShelf;
     protected FooterView mFooterView;
     protected EmptyShadeView mEmptyShadeView;
@@ -6543,5 +6558,39 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                     }
                 }
             };
+    }
+
+    @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
+    protected void addGestureAnywhereView() {
+        mGestureAnywhereView = (GestureAnywhereView)View.inflate(
+                mContext, R.layout.gesture_anywhere_overlay, null);
+        mWindowManager.addView(mGestureAnywhereView, getGestureAnywhereViewLayoutParams(Gravity.LEFT));
+        mGestureAnywhereView.setStatusBar(this);
+    }
+
+    @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
+    protected void removeGestureAnywhereView() {
+        if (mGestureAnywhereView != null)
+            mWindowManager.removeView(mGestureAnywhereView);
+    }
+
+    @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
+    protected WindowManager.LayoutParams getGestureAnywhereViewLayoutParams(int gravity) {
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
+                LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.TYPE_STATUS_BAR_SUB_PANEL,
+                0
+                | WindowManager.LayoutParams.FLAG_TOUCHABLE_WHEN_WAKING
+                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
+                PixelFormat.TRANSLUCENT);
+        lp.privateFlags |= WindowManager.LayoutParams.PRIVATE_FLAG_NO_MOVE_ANIMATION;
+        lp.gravity = Gravity.TOP | gravity;
+        lp.setTitle("GestureAnywhereView");
+
+        return lp;
     }
 }
