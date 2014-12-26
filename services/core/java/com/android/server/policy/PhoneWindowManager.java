@@ -314,6 +314,8 @@ import com.android.server.wm.DisplayFrames;
 import com.android.server.wm.WindowManagerInternal;
 import com.android.server.wm.WindowManagerInternal.AppTransitionListener;
 
+import com.android.internal.mirrorpowersave.LcdPowerSaveInternal;
+
 import dalvik.system.PathClassLoader;
 
 import java.io.File;
@@ -511,6 +513,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     // Assigned on main thread, accessed on UI thread
     volatile VrManagerInternal mVrManagerInternal;
+
+    private LcdPowerSaveInternal mLcdPowerSaveInternal;
 
     // Vibrator pattern for haptic feedback of a long press.
     long[] mLongPressVibePattern;
@@ -2636,6 +2640,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             startedGoingToSleep(WindowManagerPolicy.OFF_BECAUSE_OF_USER);
             finishedGoingToSleep(WindowManagerPolicy.OFF_BECAUSE_OF_USER);
         }
+
+        mLcdPowerSaveInternal = LocalServices.getService(LcdPowerSaveInternal.class);
 
         mWindowManagerInternal.registerAppTransitionListener(
                 mStatusBarController.getAppTransitionListener());
@@ -6802,6 +6808,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     public int interceptKeyBeforeQueueing(KeyEvent event, int policyFlags) {
         if (!mSystemBooted) {
             // If we have not yet booted, don't let key events do anything.
+            return 0;
+        }
+
+        if (mLcdPowerSaveInternal.interceptPowerKeyBeforeQueueingWhenLcdOff(event, policyFlags)) {
             return 0;
         }
 

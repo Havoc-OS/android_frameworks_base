@@ -160,6 +160,8 @@ import com.android.internal.app.IAppOpsService;
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.app.ISoundTriggerService;
 import com.android.internal.appwidget.IAppWidgetService;
+import com.android.internal.mirrorpowersave.ILcdPowerSave;
+import com.android.internal.mirrorpowersave.LcdPowerSaveManager;
 import com.android.internal.net.INetworkWatchlistManager;
 import com.android.internal.os.IDropBoxManagerService;
 import com.android.internal.policy.PhoneLayoutInflater;
@@ -1008,6 +1010,15 @@ final class SystemServiceRegistry {
                                         Context.DEVICE_IDLE_CONTROLLER));
                         return new DeviceIdleManager(ctx.getOuterContext(), service);
                     }});
+
+        registerService(Context.LCD_POWER_SAVE_SERVICE, LcdPowerSaveManager.class,
+                new CachedServiceFetcher<LcdPowerSaveManager>() {
+            @Override
+            public LcdPowerSaveManager createService(ContextImpl ctx) {
+                IBinder b = ServiceManager.getService(Context.LCD_POWER_SAVE_SERVICE);
+                ILcdPowerSave service = ILcdPowerSave.Stub.asInterface(b);
+                return new LcdPowerSaveManager(ctx.getOuterContext(), service);
+            }});
     }
 
     /**

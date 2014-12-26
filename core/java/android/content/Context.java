@@ -4076,6 +4076,17 @@ public abstract class Context {
     public static final String MEDIA_PROJECTION_SERVICE = "media_projection";
 
     /**
+     * Use with {@link #getSystemService} to retrieve a
+     * com.android.internal.mirrorpowersave.LcdPowerSaveManager instance
+     * for save the local LCD power consumption while mirroring
+     * to the external display.
+     *
+     * @see #getSystemService
+     * @hide
+     */
+    public static final String LCD_POWER_SAVE_SERVICE = "mirror_power_save";
+
+    /**
      * Use with {@link #getSystemService(String)} to retrieve a
      * {@link android.media.midi.MidiManager} for accessing the MIDI service.
      *
