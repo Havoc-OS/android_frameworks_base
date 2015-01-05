@@ -2283,8 +2283,12 @@ public final class ActiveServices {
                 if(stack != null) {
                     top_rc = stack.topRunningActivityLocked();
                 }
+
+                boolean isPersistent
+                        = !((r.serviceInfo.applicationInfo.flags&ApplicationInfo.FLAG_PERSISTENT) == 0);
                 if(top_rc != null) {
-                    if(!top_rc.nowVisible && !r.shortName.contains(top_rc.packageName)) {
+                    if(top_rc.launching && !r.shortName.contains(top_rc.packageName)
+                            && !isPersistent) {
                         shouldDelay = true;
                     }
                 }
