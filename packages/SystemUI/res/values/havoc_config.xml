@@ -30,7 +30,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false">
-        caffeine,cpuinfo,dc_dimming,fpsinfo,gaming,heads_up,killapp,livedisplay,reading_mode,smartpixels,soundsearch,dataswitch,sync
+        caffeine,cpuinfo,dc_dimming,fpsinfo,gaming,heads_up,killapp,livedisplay,reading_mode,smartpixels,soundsearch,dataswitch,sync,usb_tether
     </string>
 
     <!-- Max visible notification icons -->
