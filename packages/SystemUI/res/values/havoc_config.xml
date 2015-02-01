@@ -34,7 +34,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false">
-        caffeine,heads_up,livedisplay,reading_mode
+        caffeine,heads_up,livedisplay,reading_mode,usb_tether
     </string>
 
 </resources>
