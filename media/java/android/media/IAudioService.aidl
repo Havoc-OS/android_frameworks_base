@@ -108,6 +108,8 @@ interface IAudioService {
 
     int getMinVolumeIndexForAttributes(in AudioAttributes aa);
 
+    void setStreamMaxVolume(int streamType, int maxVol);
+
     int getLastAudibleStreamVolume(int streamType);
 
     void setSupportedSystemUsages(in int[] systemUsages);
