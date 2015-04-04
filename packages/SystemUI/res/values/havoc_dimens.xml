@@ -64,4 +64,6 @@
     <!-- QS detail view scrolling -->
     <dimen name="qs_detail_item_height_twoline">72dp</dimen>
 
+    <!-- Membar spacing -->
+    <dimen name="recents_membar_spacing">12dp</dimen>
 </resources>

@@ -5447,6 +5447,12 @@ public final class Settings {
          */
         public static final String DOZE_VIBRATE_PROX = "doze_vibrate_prox";
 
+	    /**
+         * show the membar in recents
+         *  @hide
+         */
+        public static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "systemui_recents_mem_display";
+
         /**
          * Show Settings icon in QS Footer
          *
