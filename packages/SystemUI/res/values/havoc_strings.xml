@@ -167,4 +167,11 @@
     <string name="qs_menu_item_rows_two">2</string>
     <string name="qs_menu_item_rows_three">3</string>
     <string name="qs_menu_item_rows_four">4</string>
+
+    <!-- Heads Up QS Tile -->
+    <string name="quick_settings_heads_up_label">Heads Up</string>
+    <string name="accessibility_quick_settings_heads_up_off">Heads Up</string>
+    <string name="accessibility_quick_settings_heads_up_on">Heads Up</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Heads up turned off</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Heads up turned on</string>
 </resources>
