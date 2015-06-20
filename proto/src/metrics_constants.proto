@@ -6494,6 +6494,8 @@ message MetricsEvent {
 
     // ---- End Q Constants, all Q constants go above this line ----
 
+    TILE_LOCATION_DETAIL = 1801;
+
     // Add new aosp constants above this line.
     // END OF AOSP CONSTANTS
 
