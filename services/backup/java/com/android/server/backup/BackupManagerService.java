@@ -3341,6 +3341,12 @@ public class BackupManagerService implements BackupManagerServiceInterface {
 
                 final String pkgName = mCurrentPackage.packageName;
                 final long filepos = mBackupDataName.length();
+                if (mBackupDataName == null) {
+                    failAgent(mAgentBinder, "Backup data was null: " + mBackupDataName);
+                    addBackupTrace("backup data was null: " + mBackupDataName);
+                    errorCleanup();
+                    return;
+                }
                 FileDescriptor fd = mBackupData.getFileDescriptor();
                 try {
                     // If it's a 3rd party app, see whether they wrote any protected keys
