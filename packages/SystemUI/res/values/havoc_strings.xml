@@ -207,4 +207,6 @@
     <!-- Nav Bar Swipe -->
     <string name="nav_bar_layout_inverse">Swap back and recents</string>
 
+    <!-- Volume panel QS tile -->
+    <string name="quick_settings_volume_panel_label">Volume Panel</string>
 </resources>
