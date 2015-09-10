@@ -83,4 +83,8 @@
     <!-- Whether to invert the sim slots for VoLTE/VoWiFi icon -->
     <bool name="config_invertImsSlots">false</bool>
 
+    <!-- On-The-Go -->
+    <integer name="quick_settings_onthego_dialog_short_timeout">3000</integer>
+    <integer name="quick_settings_onthego_dialog_long_timeout">6000</integer>
+
 </resources>
