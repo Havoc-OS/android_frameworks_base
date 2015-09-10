@@ -39,6 +39,17 @@
     <string name="accessibility_quick_settings_caffeine_off">Caffeine</string>
     <string name="accessibility_quick_settings_caffeine_on">Caffeine</string>
 
+    <!-- On The Go -->
+    <string name="onthego_notif_ticker">On-The-Go activated</string>
+    <string name="onthego_notif_title">On-The-Go is active</string>
+    <string name="onthego_notif_stop">Stop</string>
+    <string name="onthego_notif_options">Options</string>
+    <string name="onthego_notif_error">Unable to start On-The-Go</string>
+    <string name="onthego_notif_restart">Restart On-The-Go</string>
+    <string name="onthego_notif_camera_changed">Camera mode changed</string>
+    <string name="onthego_transparency">Transparency</string>
+    <string name="onthego_front_camera">Use front camera</string>
+
     <!-- Screenrecord Notification Ticker -->
     <string name="screenrecord_notif_ticker">Screen is being recorded</string>
     <!-- Screenrecord notification title -->
