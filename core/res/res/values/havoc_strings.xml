@@ -58,4 +58,7 @@
     <string name="reboot_title">Reboot</string>
     <string name="reboot_message">Rebooting system...</string>
 
+    <!-- Vendor mismatch fingerprint warning [CHAR LIMIT=NONE] -->
+    <string name="system_error_vendorprint">It appears your vendor image may be out of date. Please flash the latest vendor image for your device.</string>
+
 </resources>

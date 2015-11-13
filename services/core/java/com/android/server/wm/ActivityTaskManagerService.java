@@ -6504,7 +6504,7 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
                             d.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ERROR);
                             d.setCancelable(false);
                             d.setTitle(mUiContext.getText(R.string.android_system_label));
-                            d.setMessage(mUiContext.getText(R.string.system_error_manufacturer));
+                            d.setMessage(mUiContext.getText(R.string.system_error_vendorprint));
                             d.setButton(DialogInterface.BUTTON_POSITIVE,
                                     mUiContext.getText(R.string.ok),
                                     mUiHandler.obtainMessage(DISMISS_DIALOG_UI_MSG, d));
