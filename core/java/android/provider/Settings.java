@@ -4718,6 +4718,15 @@ public final class Settings {
                 BOOLEAN_VALIDATOR;
 
         /**
+         * Volume rocker wake
+         * @hide
+         */
+        public static final String VOLUME_ROCKER_WAKE = "volume_rocker_wake";
+        /** @hide */
+        private static final Validator VOLUME_ROCKER_WAKE_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4784,6 +4793,7 @@ public final class Settings {
             NOTIFICATION_LIGHT_PULSE,
             ANBI_ENABLED_OPTION,
             ALLOW_INCALL_HOME,
+            VOLUME_ROCKER_WAKE,
         };
 
         /**
@@ -4920,6 +4930,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(PROXIMITY_ON_WAKE);
             PRIVATE_SETTINGS.add(ANBI_ENABLED_OPTION);
             PRIVATE_SETTINGS.add(ALLOW_INCALL_HOME);
+            PRIVATE_SETTINGS.add(VOLUME_ROCKER_WAKE);
         }
 
         /**
@@ -5029,6 +5040,7 @@ public final class Settings {
             VALIDATORS.put(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED, BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED_VALIDATOR);
             VALIDATORS.put(ANBI_ENABLED_OPTION, ANBI_ENABLED_OPTION_VALIDATOR);
             VALIDATORS.put(ALLOW_INCALL_HOME, ALLOW_INCALL_HOME_VALIDATOR);
+            VALIDATORS.put(VOLUME_ROCKER_WAKE, VOLUME_ROCKER_WAKE_VALIDATOR);
         }
 
         /**
