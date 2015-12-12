@@ -190,4 +190,7 @@
 
     <!-- Screenrecord Tile --> 
     <string name="quick_settings_screenrecord">Screenrecord</string> 	
+	
+    <!-- Ambient display QS tile -->
+    <string name="quick_settings_ambient_display_label">Ambient Display</string>
 </resources>
