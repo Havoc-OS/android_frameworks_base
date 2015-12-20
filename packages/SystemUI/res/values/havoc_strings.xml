@@ -214,4 +214,7 @@
 	
     <!-- Battery saver tile -->
     <string name="battery_saver_qs_tile_fully_charged">Fully Charged</string>	
+
+    <!-- Screenrecord Tile --> 
+    <string name="quick_settings_screenrecord">Screenrecord</string> 	
 </resources>
