@@ -181,4 +181,6 @@
     <string name="accessibility_quick_settings_hwkeys_off">HW Keys</string>
     <string name="quick_settings_hwkeys_label">HW Keys</string>
 
+    <!-- Screenrecord Tile --> 
+    <string name="quick_settings_screenrecord">Screenrecord</string> 	
 </resources>
