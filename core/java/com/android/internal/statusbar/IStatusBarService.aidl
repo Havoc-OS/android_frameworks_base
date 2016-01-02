@@ -92,4 +92,6 @@ interface IStatusBarService
     void toggleFlashlight();
     void toggleNavigationEditor();
     void dispatchNavigationEditorResults(in Intent intent);
+    void toggleOrientationListener(boolean enable);
+    void setAutoRotate(boolean enabled);
 }

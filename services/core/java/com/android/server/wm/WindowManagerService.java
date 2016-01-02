@@ -656,6 +656,7 @@ public class WindowManagerService extends IWindowManager.Stub
     // while any windows are seamlessly rotated, so we need to track when this
     // hits zero so we can apply deferred orientation updates.
     int mSeamlessRotationCount = 0;
+    boolean mAnimationsForceDisabled = false;
 
     private final class SettingsObserver extends ContentObserver {
         private final Uri mDisplayInversionEnabledUri =

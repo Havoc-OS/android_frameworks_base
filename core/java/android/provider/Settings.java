@@ -4947,8 +4947,26 @@ public final class Settings {
          * List of wakelock blocks selected
          * @hide
          */
-        public static final String WAKELOCK_BLOCKING_LIST = "wakelock_blocking_list";
+         public static final String WAKELOCK_BLOCKING_LIST = "wakelock_blocking_list";
 
+          /** 
+         * Override and forcefully disable the fullscreen keyboard 
+         * @hide 
+         */ 
+        public static final String DISABLE_FULLSCREEN_KEYBOARD = "disable_fullscreen_keyboard"; 
+ 
+        /** 
+         * Automatic keyboard rotation timeout.  0 to disable completely. 
+         * @hide 
+         */ 
+        public static final String KEYBOARD_ROTATION_TIMEOUT = "keyboard_rotation_timeout"; 
+ 
+        /** 
+         * Forces formal text input.  1 to replace emoticon key with enter key. 
+         * @hide 
+         */ 
+        public static final String FORMAL_TEXT_INPUT = "formal_text_input"; 
+   
         /**
          * List of alarms blocks selected
          * @hide

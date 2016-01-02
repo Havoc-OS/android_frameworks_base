@@ -63,7 +63,7 @@ oneway interface IStatusBar
     void preloadRecentApps();
     void cancelPreloadRecentApps();
     void showScreenPinningRequest(int taskId);
-
+    void toggleOrientationListener(boolean enable);
     void dismissKeyboardShortcutsMenu();
     void toggleKeyboardShortcutsMenu(int deviceId);
 
@@ -100,6 +100,7 @@ oneway interface IStatusBar
     void toggleFlashlight();
     void toggleNavigationEditor();
     void dispatchNavigationEditorResults(in Intent intent);
+    void setAutoRotate(boolean enabled);
 
     /**
      * Notifies the status bar that a camera launch gesture has been detected.
