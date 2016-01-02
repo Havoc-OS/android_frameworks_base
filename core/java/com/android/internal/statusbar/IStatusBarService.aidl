@@ -106,4 +106,5 @@ interface IStatusBarService
      * Havoc
      */
     void toggleCameraFlash();
+    void setAutoRotate(boolean enabled);
 }
