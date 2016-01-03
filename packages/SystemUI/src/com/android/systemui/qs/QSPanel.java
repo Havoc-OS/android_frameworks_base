@@ -149,8 +149,10 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
         addQSPanel();
 
+        ImageView brightnessIcon = (ImageView) mBrightnessView.findViewById(R.id.brightness_icon);
+        brightnessIcon.setVisibility(View.VISIBLE);
         mBrightnessController = new BrightnessController(getContext(),
-                findViewById(R.id.brightness_icon),
+                brightnessIcon,
                 findViewById(R.id.brightness_slider));
         mDumpController = dumpController;
 
