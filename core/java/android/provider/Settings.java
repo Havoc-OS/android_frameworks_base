@@ -4147,7 +4147,14 @@ public final class Settings {
         public static final String QS_SMART_PULLDOWN = "qs_smart_pulldown";
 
         /**
-         * Whether to display data activity arrows for data connections
+
+         * Pixel Anim Duration
+        * List of Apps hidden from recents
+        * @hide
+        */
+        public static final String HIDE_FROM_RECENTS_LIST = "hide_from_recents_list";
+
+        /**
          * @hide
          */
         public static final String DATA_ACTIVITY_ARROWS = "data_activity_arrows";
