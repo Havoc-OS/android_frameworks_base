@@ -4986,6 +4986,16 @@ public final class Settings {
         public static final String POWERMENU_LOCKSCREEN = "powermenu_lockscreen";
 
         /**
+         * @hide
+         */
+        public static final String TORCH_LONG_PRESS_POWER_GESTURE = "torch_long_press_power_gesture";
+
+        /**
+         * @hide
+         */
+        public static final String TORCH_LONG_PRESS_POWER_TIMEOUT = "torch_long_press_power_timeout";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
