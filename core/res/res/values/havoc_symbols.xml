@@ -125,4 +125,10 @@
 
   <!-- Whether the device supports Smart Pixels -->
   <java-symbol type="bool" name="config_enableSmartPixels" />
+
+  <!-- Show battery fully charged notification -->
+  <java-symbol type="string" name="battery_charged_channel_name" />
+  <java-symbol type="string" name="notify_battery_fully_charged_title" />
+  <java-symbol type="string" name="notify_battery_fully_charged_text" />
+
 </resources>
