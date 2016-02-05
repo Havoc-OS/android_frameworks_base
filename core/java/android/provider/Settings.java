@@ -4233,6 +4233,12 @@ public final class Settings {
         public static final String MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
         
         /**
+         * Whether the phone volume up / down effect should be played
+         * @hide
+         */
+        public static final String VOLUME_ADJUST_SOUNDS_ENABLED = "volume_adjust_sounds_enabled";
+
+        /**
          * @hide
          */
         public static final String OMNI_NAVIGATION_BAR_RECENTS = "navigation_bar_recents";
