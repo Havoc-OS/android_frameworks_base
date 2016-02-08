@@ -371,4 +371,6 @@
     <!-- Ambient Display Pixel-Like string -->
     <string name="ambientmusic_songinfo">%s by %s</string>
 
+    <!-- App Picker Tile -->
+    <string name="quick_settings_apppicker">App Picker</string>
 </resources>

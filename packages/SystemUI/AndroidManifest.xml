@@ -664,6 +664,19 @@
             </intent-filter>
         </activity>
 
+        <!-- App picker activity -->
+        <activity
+            android:name=".xtended.apppicker.AppPickerActivity"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
+            android:label="@string/quick_settings_apppicker"
+            android:enabled="true"
+            android:excludeFromRecents="true" >
+            <intent-filter>
+                <action android:name=".xtended.apppicker.AppPickerActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".settings.BrightnessDialog"
             android:label="@string/quick_settings_brightness_dialog_title"

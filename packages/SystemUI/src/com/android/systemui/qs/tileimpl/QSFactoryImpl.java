@@ -76,6 +76,7 @@ import com.android.systemui.qs.tiles.UserTile;
 import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.qs.tiles.WorkModeTile;
+import com.android.systemui.qs.tiles.AppPickerTile;
 import com.android.systemui.qs.QSTileHost;
 import com.android.systemui.util.leak.GarbageMonitor;
 
@@ -203,6 +204,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new MusicTile(mHost);
             case "soundsearch":
                 return new SoundSearchTile(mHost);
+            case "app_picker":
+                return new AppPickerTile(mHost);
         }
 
         // Intent tiles.
