@@ -156,6 +156,8 @@ import com.android.server.inputmethod.InputMethodUtils.InputMethodSettings;
 import com.android.server.statusbar.StatusBarManagerService;
 import com.android.server.wm.WindowManagerInternal;
 
+import com.android.internal.custom.hardware.LineageHardwareManager;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -362,6 +364,8 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
     private PendingIntent mImeSwitchPendingIntent;
     private boolean mShowOngoingImeSwitcherForPhones;
     private boolean mNotificationShown;
+
+    private LineageHardwareManager mLineageHardware;
 
     static class SessionState {
         final ClientState client;
@@ -961,6 +965,16 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                     Settings.Secure.SHOW_IME_WITH_HARD_KEYBOARD), false, this, userId);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.ACCESSIBILITY_SOFT_KEYBOARD_MODE), false, this, userId);
+            if (mLineageHardware.isSupported(
+                    LineageHardwareManager.FEATURE_HIGH_TOUCH_SENSITIVITY)) {
+                resolver.registerContentObserver(Settings.System.getUriFor(
+                        Settings.System.HIGH_TOUCH_SENSITIVITY_ENABLE),
+                        false, this, userId);
+            }
+            if (mLineageHardware.isSupported(LineageHardwareManager.FEATURE_TOUCH_HOVERING)) {
+                resolver.registerContentObserver(Settings.System.getUriFor(
+                        Settings.System.FEATURE_TOUCH_HOVERING), false, this, userId);
+            }
             mRegistered = true;
         }
 
@@ -969,6 +983,10 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                     Settings.Secure.SHOW_IME_WITH_HARD_KEYBOARD);
             final Uri accessibilityRequestingNoImeUri = Settings.Secure.getUriFor(
                     Settings.Secure.ACCESSIBILITY_SOFT_KEYBOARD_MODE);
+            final Uri touchSensitivityUri = Settings.System.getUriFor(
+                    Settings.System.HIGH_TOUCH_SENSITIVITY_ENABLE);
+            final Uri touchHoveringUri = Settings.System.getUriFor(
+                    Settings.System.FEATURE_TOUCH_HOVERING);
             synchronized (mMethodMap) {
                 if (showImeUri.equals(uri)) {
                     updateKeyboardFromSettingsLocked();
@@ -986,6 +1004,10 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                     } else if (mShowRequested) {
                         showCurrentInputLocked(InputMethodManager.SHOW_IMPLICIT, null);
                     }
+                } else if (touchSensitivityUri.equals(uri)) {
+                    updateTouchSensitivity();
+                } else if (touchHoveringUri.equals(uri)) {
+                    updateTouchHovering();
                 } else {
                     boolean enabledChanged = false;
                     String newEnabled = mSettings.getEnabledInputMethodsStr();
@@ -1580,6 +1602,9 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                     mContext.getBasePackageName());
         }
 
+        updateTouchHovering();
+        updateTouchSensitivity();
+
         if (DEBUG) Slog.d(TAG, "Switching user stage 3/3. newUserId=" + newUserId
                 + " selectedIme=" + mSettings.getSelectedInputMethod());
 
@@ -1617,6 +1642,13 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
                 final int currentUserId = mSettings.getCurrentUserId();
                 mSettings.switchCurrentUser(currentUserId,
                         !mUserManagerInternal.isUserUnlockingOrUnlocked(currentUserId));
+
+                // Must happen before registerContentObserverLocked
+                mLineageHardware = LineageHardwareManager.getInstance(mContext);
+
+                updateTouchHovering();
+                updateTouchSensitivity();
+
                 mKeyguardManager = mContext.getSystemService(KeyguardManager.class);
                 mNotificationManager = mContext.getSystemService(NotificationManager.class);
                 mStatusBar = statusBar;
@@ -2674,6 +2706,24 @@ public class InputMethodManagerService extends IInputMethodManager.Stub
         // the same enabled IMEs list.
         mSwitchingController.resetCircularListLocked(mContext);
 
+    }
+
+    private void updateTouchSensitivity() {
+        if (!mLineageHardware.isSupported(LineageHardwareManager.FEATURE_HIGH_TOUCH_SENSITIVITY)) {
+            return;
+        }
+        final boolean enabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HIGH_TOUCH_SENSITIVITY_ENABLE, 0) == 1;
+        mLineageHardware.set(LineageHardwareManager.FEATURE_HIGH_TOUCH_SENSITIVITY, enabled);
+    }
+
+    private void updateTouchHovering() {
+        if (!mLineageHardware.isSupported(LineageHardwareManager.FEATURE_TOUCH_HOVERING)) {
+            return;
+        }
+        final boolean enabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.FEATURE_TOUCH_HOVERING, 0) == 1;
+        mLineageHardware.set(LineageHardwareManager.FEATURE_TOUCH_HOVERING, enabled);
     }
 
     public void updateKeyboardFromSettingsLocked() {
