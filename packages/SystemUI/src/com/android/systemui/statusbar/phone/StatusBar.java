@@ -4917,22 +4917,14 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.HEADS_UP_STOPLIST_VALUES), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_BLACKLIST_VALUES), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.LOCKSCREEN_ROTATION),
-                    false, this, UserHandle.USER_ALL);
         }
          @Override
         public void onChange(boolean selfChange, Uri uri) {
-            if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.LOCKSCREEN_ROTATION))) {
-                updateLockScreenRotation();
-            }
             update();
         }
          public void update() {
             setHeadsUpStoplist();
             setHeadsUpBlacklist();
-            updateLockScreenRotation();
         }
     }
 
@@ -4945,12 +4937,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         final String blackString = Settings.System.getString(mContext.getContentResolver(),
                     Settings.System.HEADS_UP_BLACKLIST_VALUES);
         splitAndAddToArrayList(mBlacklist, blackString, "\\|");
-    }
-
-    private void updateLockScreenRotation() {
-        if (mStatusBarWindowManager != null) {
-            mStatusBarWindowManager.updateKeyguardScreenRotation();
-        }
     }
 
     public int getWakefulnessState() {
