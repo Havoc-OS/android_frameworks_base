@@ -4473,7 +4473,22 @@ public final class Settings {
         /**
          * @hide
          */
-        public static final String BATTERY_BAR_BATTERY_LOW_COLOR = "battery_bar_battery_low_color";
+        public static final String BATTERY_BAR_BATTERY_LOW_COLOR_WARNING = "battery_bar_battery_low_color_warning";
+
+        /**
+         * @hide
+         */
+        public static final String BATTERY_BAR_HIGH_COLOR = "battery_bar_high_color";
+
+        /**
+         * @hide
+         */
+        public static final String BATTERY_BAR_LOW_COLOR = "battery_bar_low_color";
+
+        /**
+         * @hide
+         */
+        public static final String BATTERY_BAR_USE_GRADIENT_COLOR = "battery_bar_use_gradient_color";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
