@@ -651,5 +651,10 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <service
+            android:name=".screenshot.ScreenshotEditor"
+            android:enabled="true"
+            android:exported="true" />
+
     </application>
 </manifest>
