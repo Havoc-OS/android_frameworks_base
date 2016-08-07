@@ -551,6 +551,7 @@ public final class PowerManagerService extends SystemService
     private int mCurrentButtonBrightness = 0;
     private int mCustomButtonBrightness = -1;
     private boolean mButtonUseScreenBrightness = true;
+    private boolean mButtonBacklight;
     private boolean mButtonBacklightEnable = true;
     private boolean mButtonBacklightOnTouchOnly;
     private int mButtonTimeout;
@@ -1003,7 +1004,7 @@ public final class PowerManagerService extends SystemService
         filter.addAction(Intent.ACTION_DOCK_EVENT);
         mContext.registerReceiver(new DockReceiver(), filter, null, mHandler);
 
-        if (mButtonBrightnessSupport){
+        if (mButtonBrightnessSupport) {
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.CUSTOM_BUTTON_BRIGHTNESS),
                     false, mSettingsObserver, UserHandle.USER_ALL);
@@ -1016,8 +1017,11 @@ public final class PowerManagerService extends SystemService
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.FORCE_SHOW_NAVBAR),
                     false, mSettingsObserver, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.BUTTON_BACKLIGHT_TIMEOUT),
+            resolver.registerContentObserver(
+                    Settings.Secure.getUriFor(Settings.Secure.HARDWARE_KEYS_ENABLE),
+                    false, mSettingsObserver, UserHandle.USER_ALL);
+            resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.BUTTON_BACKLIGHT_TIMEOUT),
                     false, mSettingsObserver, UserHandle.USER_ALL);
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.BUTTON_BACKLIGHT_ON_TOUCH_ONLY),
@@ -5260,13 +5264,16 @@ public final class PowerManagerService extends SystemService
             mButtonUseScreenBrightness = Settings.System.getIntForUser(
                     mContext.getContentResolver(), Settings.System.CUSTOM_BUTTON_USE_SCREEN_BRIGHTNESS,
                     0, UserHandle.USER_CURRENT) != 0;
-            mButtonBacklightEnable = Settings.System.getIntForUser(
+            mButtonBacklight = Settings.System.getIntForUser(
                     mContext.getContentResolver(), Settings.System.BUTTON_BACKLIGHT_ENABLE,
                     1, UserHandle.USER_CURRENT) != 0;
             boolean navbarEnabled = Settings.System.getIntForUser(
                     mContext.getContentResolver(), Settings.System.FORCE_SHOW_NAVBAR,
                     0, UserHandle.USER_CURRENT) != 0;
-            mButtonBacklightEnable = mButtonBacklightEnable && !navbarEnabled;
+            boolean hwKeysEnabled = Settings.Secure.getIntForUser(
+                    mContext.getContentResolver(), Settings.Secure.HARDWARE_KEYS_ENABLE,
+                    1, UserHandle.USER_CURRENT) != 0;
+            mButtonBacklightEnable = mButtonBacklight && !navbarEnabled && hwKeysEnabled;
             mButtonBacklightOnTouchOnly = Settings.System.getIntForUser(
                     mContext.getContentResolver(), Settings.System.BUTTON_BACKLIGHT_ON_TOUCH_ONLY,
                     0, UserHandle.USER_CURRENT) != 0;
