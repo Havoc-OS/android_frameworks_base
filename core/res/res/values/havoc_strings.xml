@@ -171,4 +171,7 @@
 
     <!-- Text of the checkbox for the permission confirmation dialog to remember the user's choice. [CHAR LIMIT=40] -->
     <string name="permission_remember_choice">Remember my choice</string>
+
+    <string name="default_string">Default</string>
+
 </resources>
