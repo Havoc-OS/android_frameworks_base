@@ -395,10 +395,7 @@ public class CommandQueue extends IStatusBar.Stub {
     }
 
     public void toggleOrientationListener(boolean enable) {
-        synchronized (mLock) {
-            mHandler.removeMessages(MSG_TOGGLE_PIE_ORIENTATION);
-            mHandler.obtainMessage(MSG_TOGGLE_PIE_ORIENTATION).sendToTarget();
-        }
+        mCallbacks.toggleOrientationListener(enable);
     }
 
     public void setWindowState(int window, int state) {
