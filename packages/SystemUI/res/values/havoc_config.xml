@@ -34,7 +34,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false">
-        adb_network,caffeine,compass,cpuinfo,gaming,heads_up,hwkeys,livedisplay,lte,music,reading_mode,reboot,screenrecord,screenshot,smartpixels,soundsearch,dataswitch,usb_tether
+        adb_network,caffeine,compass,cpuinfo,gaming,heads_up,hwkeys,livedisplay,lte,music,reading_mode,reboot,screenrecord,screenshot,smartpixels,soundsearch,dataswitch,sync,usb_tether
     </string>
 
     <!-- Color of the FOD view -->
