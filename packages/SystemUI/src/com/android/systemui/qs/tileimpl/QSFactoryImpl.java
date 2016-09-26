@@ -42,6 +42,7 @@ import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.AlarmTile;
 import com.android.systemui.qs.tiles.CallTile;
 import com.android.systemui.qs.tiles.CalendarTile;
+import com.android.systemui.qs.tiles.ExpandedDesktopTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HavocTile;
@@ -188,6 +189,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new WeatherTile(mHost);
             case "gaming":
                 return new GamingModeTile(mHost);
+            case "expanded_desktop":
+                return new ExpandedDesktopTile(mHost);
         }
 
         // Intent tiles.
