@@ -118,4 +118,7 @@
     <!-- USB tethering QS tile -->
     <string name="quick_settings_usb_tether_label">USB tethering</string>
 
+    <!-- Havoc Tile -->
+    <string name="quick_settings_havoc_label">Havoc Settings</string>
+
 </resources>
