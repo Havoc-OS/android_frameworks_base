@@ -4025,6 +4025,9 @@ public final class Settings {
          * @hide
          */
         public static final String MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
+        
+        public static final String POCKET_JUDGE = "pocket_judge";
+
 
         /**
          * Whether to display roaming indicator for roaming signal connection
