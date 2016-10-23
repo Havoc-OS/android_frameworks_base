@@ -53,6 +53,9 @@ $(gen): $(aidl_parcelables)
 	cat $^ | sort -u > $@.tmp
 	$(call commit-change-for-toc,$@)
 
+LOCAL_SRC_FILES += \
+	core/java/android/pocket/IPocketService.aidl \
+	core/java/android/pocket/IPocketCallback.aidl \
 # the documentation
 # ============================================================
 

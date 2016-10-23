@@ -4192,6 +4192,16 @@ public abstract class Context {
     public static final String TIME_ZONE_RULES_MANAGER_SERVICE = "timezone";
 
     /**
+     * Use with {@link #getSystemService} to retrieve a
+     * {@link android.os.PocketManager} for accessing and listening to device pocket state.
+     *
+     * @hide
+     * @see #getSystemService
+     * @see android.os.PocketManager
+     */
+    public static final String POCKET_SERVICE = "pocket";
+
+    /**
      * Use with {@link #getSystemService(String)} to retrieve a
      * {@link android.content.pm.CrossProfileApps} for cross profile operations.
      *
