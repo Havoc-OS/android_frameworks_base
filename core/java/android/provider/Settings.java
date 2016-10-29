@@ -4434,6 +4434,12 @@ public final class Settings {
         public static final String TOAST_ICON = "toast_icon";
 
         /**
+         * Whether to disable ripple on lockscreen pin entry
+         * @hide
+         */
+        public static final String LOCKSCREEN_PIN_RIPPLE = "lockscreen_pin_ripple";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
