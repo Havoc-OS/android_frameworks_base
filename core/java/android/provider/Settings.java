@@ -4883,6 +4883,22 @@ public final class Settings {
         public static final String ANIM_TILE_INTERPOLATOR = "anim_tile_interpolator";
 
         /**
+         * Number of qs columns on landscape orientation
+         * @hide
+         */
+        public static final String OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE = "qs_layout_columns_landscape";
+         /** @hide */
+        private static final Validator OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE_VALIDATOR =
+                ANY_STRING_VALIDATOR;
+         /**
+         * @hide
+         */
+        public static final String OMNI_QS_LAYOUT_COLUMNS = "qs_layout_columns";
+         /** @hide */
+        private static final Validator OMNI_QS_LAYOUT_COLUMNS_VALIDATOR =
+                ANY_STRING_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4940,7 +4956,9 @@ public final class Settings {
             SHOW_BATTERY_PERCENT,
             NOTIFICATION_VIBRATION_INTENSITY,
             HAPTIC_FEEDBACK_INTENSITY,
-            DISPLAY_COLOR_MODE
+            DISPLAY_COLOR_MODE,
+            OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE,
+            OMNI_QS_LAYOUT_COLUMNS,
         };
 
         /**
@@ -5068,6 +5086,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(SCREENSHOT_DEFAULT_MODE);
             PRIVATE_SETTINGS.add(FINGERPRINT_SUCCESS_VIB);
             PRIVATE_SETTINGS.add(LOCKSCREEN_ROTATION);
+            PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE);
+            PRIVATE_SETTINGS.add(OMNI_QS_LAYOUT_COLUMNS);
         }
 
 
@@ -5164,6 +5184,9 @@ public final class Settings {
             VALIDATORS.put(WIFI_STATIC_DNS1, WIFI_STATIC_DNS1_VALIDATOR);
             VALIDATORS.put(WIFI_STATIC_DNS2, WIFI_STATIC_DNS2_VALIDATOR);
             VALIDATORS.put(SHOW_BATTERY_PERCENT, SHOW_BATTERY_PERCENT_VALIDATOR);
+            VALIDATORS.put(OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE,
+                    OMNI_QS_LAYOUT_COLUMNS_LANDSCAPE_VALIDATOR);
+            VALIDATORS.put(OMNI_QS_LAYOUT_COLUMNS, OMNI_QS_LAYOUT_COLUMNS_VALIDATOR);
         }
 
         /**
