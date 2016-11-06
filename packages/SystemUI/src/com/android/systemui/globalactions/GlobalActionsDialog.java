@@ -154,6 +154,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener, DialogIn
     private boolean mHasVibrator;
     private final boolean mShowSilentToggle;
     private final EmergencyAffordanceManager mEmergencyAffordanceManager;
+    private int mScreenshotDelay;
 
     private BitSet mAirplaneModeBits;
     private final List<PhoneStateListener> mPhoneStateListeners = new ArrayList<>();
@@ -313,6 +314,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener, DialogIn
     private void handleShow() {
         awakenIfNecessary();
         mDialog = createDialog();
+        checkSettings();
         prepareDialog();
 
         // If we only have 1 item and it's a simple press action, just do this action.
@@ -1071,7 +1073,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener, DialogIn
                                      //  Do nothing
                                 }
                             }
-                        }, 1000);
+                        }, mScreenshotDelay);
                     }
                 }
                 @Override
@@ -1853,5 +1855,10 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener, DialogIn
     private static boolean showWallpaperTint(Context context) {
         return Settings.System.getIntForUser(context.getContentResolver(),
                 Settings.System.WALLPAPER_POWER_MENU_TINT, 1, UserHandle.USER_CURRENT) == 1;
+    }
+
+   private void checkSettings() {
+        mScreenshotDelay = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREENSHOT_DELAY, 100);
     }
 }

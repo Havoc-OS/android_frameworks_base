@@ -18,6 +18,14 @@ package com.android.systemui.qs.tiles;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
+import android.content.ComponentName;
+import android.content.ServiceConnection;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
+import android.view.View;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 
@@ -28,10 +36,13 @@ import com.android.systemui.plugins.qs.QSTile.BooleanState;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.R;
 
+import android.provider.Settings;
+
 /** Quick settings tile: Screenshot **/
 public class ScreenshotTile extends QSTileImpl<BooleanState> {
 
     private boolean mRegion = false;
+    private int mScreenshotDelay;
 
     public ScreenshotTile(QSHost host) {
         super(host);
@@ -59,11 +70,13 @@ public class ScreenshotTile extends QSTileImpl<BooleanState> {
     @Override
     public void handleLongClick() {
         mHost.collapsePanels();
-
-        //finish collapsing the panel
+        checkSettings();
+        /* wait for the panel to close */
         try {
-             Thread.sleep(1000); //1s
-        } catch (InterruptedException ie) {}
+             Thread.sleep(mScreenshotDelay);
+        } catch (InterruptedException ie) {
+             // Do nothing
+        }
         Utils.takeScreenshot(mRegion ? false : true);
     }
 
@@ -90,5 +103,10 @@ public class ScreenshotTile extends QSTileImpl<BooleanState> {
             state.contentDescription =  mContext.getString(
                     R.string.quick_settings_screenshot_label);
         }
+    }
+
+    private void checkSettings() {
+        mScreenshotDelay = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREENSHOT_DELAY, 100);
     }
 }
