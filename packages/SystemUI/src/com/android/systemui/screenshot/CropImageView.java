@@ -281,13 +281,13 @@ public class CropImageView extends ImageView {
                     paths.clear();
                     pathAttr.clear();
                     Point oldPoint = new Point();
-                    boolean firstEntry = true;
                     Path path = null;
 
                     for (int i = 0; i<points.size(); i++) {
                         boolean startNewPath = false;
                         Point newPoint;
                         if (newLine.contains(i)||i==0){
+                            startNewPath = true;
                             path = new Path();
                             path.setFillType(Path.FillType.EVEN_ODD);
                             newPoint = points.get(i);
@@ -296,17 +296,14 @@ public class CropImageView extends ImageView {
                             newPoint = points.get(i);
                             path.lineTo(newPoint.x, newPoint.y);
                         }
-                        if (firstEntry) {
-                            firstEntry = false;
+
+                        if(newPoint.color != oldPoint.color){
                             startNewPath = true;
-                        } else {
-                            if(newPoint.color != oldPoint.color){
-                                startNewPath = true;
-                            }
-                            if(newPoint.penSize != oldPoint.penSize){
-                                startNewPath = true;
-                            }
                         }
+                        if(newPoint.penSize != oldPoint.penSize){
+                            startNewPath = true;
+                        }
+
                         if (startNewPath) {
                             paths.add(path);
                             oldPoint.color = newPoint.color;
@@ -314,10 +311,10 @@ public class CropImageView extends ImageView {
                             pathAttr.add(newPoint);
                         }
                     }
+                    final Paint paint = getDrawPaint();
                     for(int j = 0; j < paths.size(); j++){
                         Path currentPath = paths.get(j);
                         Point currentPathAttr = pathAttr.get(j);
-                        final Paint paint = getDrawPaint();
                         paint.setColor(currentPathAttr.color);
                         paint.setStrokeWidth(currentPathAttr.penSize);
                         Matrix invertMatrix = new Matrix();

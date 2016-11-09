@@ -88,7 +88,6 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
     static String KEY_NOTIFICATION_ACCESS_SWITCH = "notification_access_switch";
     static String KEY_CATEGORY_MAIN = "category_main";
     static String KEY_CROP_BEHAVIOR = "crop_behavior";
-    static String KEY_ACTION_COLOR = "action_color";
     static String KEY_DRAW_COLOR = "draw_color";
     static String KEY_CROP_MODE = "crop_mode";
     static String KEY_WORK_MODE = "work_mode";
@@ -97,10 +96,6 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
 
     private SharedPreferences preferences;
     private float mDensity;
-
-    public ScreenshotEditor() {
-
-    }
 
     @Override
     public void onCreate() {
@@ -135,7 +130,7 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
         buttonBar = (RelativeLayout) mainLayout.findViewById(R.id.buttonBar);
         buttonBar.setVisibility(View.VISIBLE);
 
-        nOverlayColor = preferences.getInt(KEY_ACTION_COLOR, Color.parseColor("#263238"));
+        nOverlayColor = getResources().getColor(R.color.crop_action_overlay);
 
         initButtons();
 
@@ -172,7 +167,7 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        screenshotPath = intent.getStringExtra("screenshotPath");
+        screenshotPath = intent.getStringExtra(GlobalScreenshot.SCREENSHOT_FILE_PATH);
         addView();
         return Service.START_STICKY;
     }
@@ -180,7 +175,6 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
     Bitmap screenshot = null;
 
     private void addView() {
-        nOverlayColor = preferences.getInt(KEY_ACTION_COLOR, Color.parseColor("#263238"));
         if (!isShowing)
            initButtons();
         mainHandler.post(new Runnable() {
@@ -262,13 +256,11 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
         cropView.setGuideShowMode(CropImageView.ShowMode.SHOW_ON_TOUCH);
 
         cropModeButton = (ImageButton) mainLayout.findViewById(R.id.cropMode);
-        nCropMode++;
         final ListPopupWindow listPopupWindowCropMode = new ListPopupWindow(mContext);
         nCropMode = preferences.getInt(KEY_WORK_MODE, 0);
         ImageArrayAdapter cropModeAdapter = new ImageArrayAdapter(mContext,
                 new Integer[]{R.drawable.ic_image_crop_free, R.drawable.ic_image_crop_square, R.drawable.ic_image_crop_circle});
         listPopupWindowCropMode.setAdapter(cropModeAdapter);
-        listPopupWindowCropMode.setSelection(nCropMode);
         listPopupWindowCropMode.setAnchorView(cropModeButton);
         listPopupWindowCropMode.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -329,8 +321,6 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
 
         final ListPopupWindow listPopupWindowColorPicker = new ListPopupWindow(mContext);
         listPopupWindowColorPicker.setAdapter(new ColorArrayAdapter(mContext, colors));
-        listPopupWindowColorPicker.setWidth(ListPopupWindow.WRAP_CONTENT);
-
         int width = mContext.getResources().getDimensionPixelSize(R.dimen.crop_buttons);
         final ImageButton drawColorButton = (ImageButton) mainLayout.findViewById(R.id.drawColor);
         listPopupWindowColorPicker.setAnchorView(drawColorButton);
@@ -369,8 +359,6 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
         final String [] penSizeValues = getResources().getStringArray(R.array.crop_pen_size_entries);
         final ListPopupWindow listPopupPenSizerPicker = new ListPopupWindow(mContext);
         listPopupPenSizerPicker.setAdapter(new PenSizeArrayAdapter(this, android.R.layout.simple_list_item_1, penSizeValues));
-        listPopupPenSizerPicker.setWidth(ListPopupWindow.WRAP_CONTENT);
-
         final ImageButton penSizeButton = (ImageButton) mainLayout.findViewById(R.id.penSize);
         listPopupPenSizerPicker.setAnchorView(penSizeButton);
         final int penSizeValue = preferences.getInt(KEY_PEN_SIZE, 5);
@@ -415,7 +403,6 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
         ImageArrayAdapter adapter = new ImageArrayAdapter(mContext,
                 new Integer[]{R.drawable.ic_image_crop, R.drawable.ic_image_edit, R.drawable.ic_action_visibility});
         listPopupWindow.setAdapter(adapter);
-        listPopupWindow.setSelection(workMode);
         listPopupWindow.setAnchorView(workModeButton);
         listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -466,10 +453,12 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
             case R.id.share:
                 boolean cropAnytime = Settings.System.getInt(getContentResolver(), Settings.System.SCREENSHOT_CROP_BEHAVIOR, 1) != 0;
                 bm = cropAnytime ? cropView.getCroppedBitmap() : cropView.getImageBitmap();
-                cropView.setCropEnabled(false);
-                progressBar.setVisibility(View.VISIBLE);
-                shareBitmap(bm);
-                progressBar.setVisibility(View.GONE);
+                if (saveBitmap(bm)) {
+                    shareBitmap();
+                } else {
+                    msg = getString(R.string.action_save_fault);
+                    Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+                }
                 removeView();
                 break;
             case R.id.save:
@@ -595,36 +584,13 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
         }
     }
 
-    private void shareBitmap(final Bitmap bitmap) {
-
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                try {
-                    File file = new File(mContext.getCacheDir(), "croppedScreenshot_" + String.valueOf(System.currentTimeMillis()) + "_.png");
-                    File cacheFiles = new File(getCacheDir().getPath());
-                    File[] cachedScreenshots = cacheFiles.listFiles();
-                    for (File screenshot : cachedScreenshots)
-                        screenshot.delete();
-
-                    FileOutputStream fOut = new FileOutputStream(file);
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-                    fOut.flush();
-                    fOut.close();
-                    file.setReadable(true, false);
-                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(file)));
-                    final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-                    intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-                    intent.setType("image/png");
-                    Intent sender = Intent.createChooser(intent, null);
-                    sender.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getApplicationContext().startActivity(sender);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-        }.execute();
+    private void shareBitmap() {
+        final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(screenshotPath)));
+        intent.setType("image/png");
+        Intent sender = Intent.createChooser(intent, null);
+        sender.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(sender);
     }
 
     private void deleteBitmap(String file) {
@@ -646,18 +612,11 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
     }
 
     private int getUiOptions() {
-        if (Build.VERSION.SDK_INT >= 19) {
-            return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                     | View.SYSTEM_UI_FLAG_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        } else return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
     }
 
     private BitmapDrawable createPenSizeImage(int penSize){
@@ -679,9 +638,15 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
         canvas.setDrawFilter(new PaintFlagsDrawFilter(Paint.ANTI_ALIAS_FLAG,Paint.FILTER_BITMAP_FLAG));
         final Bitmap bmp = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888);
         canvas.setBitmap(bmp);
+        // inside
         final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(color);
+        canvas.drawRect(0, 0, width, width, paint);
+        // border
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
+        paint.setColor(Color.BLACK);
         canvas.drawRect(0, 0, width, width, paint);
         return new BitmapDrawable(getResources(), bmp);
     }
