@@ -42,6 +42,10 @@
     <string name="quick_settings_compass_W">W</string>
     <string name="quick_settings_compass_NW">NW</string>
 
+    <string name="systemui_tuner_lockscreen_bottom_shortcuts_title">Bottom shortcuts</string>
+
+    <string name="recents_custom_android_n">CLEAR ALL</string> 
+
        <!-- App circle sidebar -->  
     <string name="app_float_maximize_item_title">Maximize</string>  
     <string name="app_float_item_title">Float view</string>  
