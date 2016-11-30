@@ -160,7 +160,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class BackupManagerService implements BackupManagerServiceInterface {
 
     public static final String TAG = "BackupManagerService";
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
     public static final boolean MORE_DEBUG = false;
     public static final boolean DEBUG_SCHEDULING = MORE_DEBUG || true;
 
