@@ -329,7 +329,7 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         boolean settingsButtonVisible = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.QSFOOTER_SHOW_SETTINGS, 1) != 0;
         mMultiUserSwitch.setVisibility(showUserSwitcher(isDemo) ? View.VISIBLE : View.INVISIBLE);
-        mEdit.setVisibility(isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE);
+        mEdit.setVisibility(isEditEnabled() ? isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE : View.GONE);
         mSettingsButton.setVisibility(isDemo || settingsButtonVisible ? View.VISIBLE : View.GONE);
         mRunningServicesButton.setVisibility(!isDemo && mExpanded ? View.VISIBLE : View.INVISIBLE);
         mRunningServicesButton.setVisibility(servicesButtonVisible ? (!isDemo && mExpanded ? View.VISIBLE : View.INVISIBLE) : View.GONE);
@@ -377,6 +377,11 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
             mMultiUserSwitch.setQsPanel(qsPanel);
             mQsPanel.setFooterPageIndicator(mPageIndicator);
         }
+    }
+
+    public boolean isEditEnabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.QS_EDIT_TOGGLE, 1) == 1;
     }
 
     @Override
