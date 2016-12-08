@@ -19,6 +19,7 @@ package com.android.systemui.recents.views;
 import static android.app.ActivityManager.StackId.INVALID_STACK_ID;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
@@ -41,6 +42,7 @@ import android.view.AppTransitionAnimationSpec;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewDebug;
 import android.view.ViewPropertyAnimator;
 import android.view.Window;
@@ -443,6 +445,30 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
         mMultiWindowBackgroundScrim.setAlpha(alpha);
     }
 
+    public void startFABanimation() {
+        RecentsConfiguration config = Recents.getConfiguration();
+        // Animate the action button in
+        mFloatingButton = ((View)getParent()).findViewById(R.id.floating_action_button);
+        mFloatingButton.animate().alpha(1f)
+                .setStartDelay(config.fabEnterAnimDelay)
+                .setDuration(config.fabEnterAnimDuration)
+                .setInterpolator(Interpolators.ALPHA_IN)
+                .withLayer()
+                .start();
+    }
+
+    public void endFABanimation() {
+        RecentsConfiguration config = Recents.getConfiguration();
+        // Animate the action button away
+        mFloatingButton = ((View)getParent()).findViewById(R.id.floating_action_button);
+        mFloatingButton.animate().alpha(0f)
+                .setStartDelay(0)
+                .setDuration(config.fabExitAnimDuration)
+                .setInterpolator(Interpolators.ALPHA_OUT)
+                .withLayer()
+                .start();
+    }
+
     @Override
     protected void onAttachedToWindow() {
         EventBus.getDefault().register(this, RecentsActivity.EVENT_BUS_PRIORITY + 1);
@@ -475,29 +501,19 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
             case SHOW_CLEAR_ALL_RECENTS:
                 mShowClearAllRecents =
                         newValue == null || Integer.parseInt(newValue) != 0;
-                showClearAllRecents();
+                setClearRecents();
                 break;
             case RECENTS_CLEAR_ALL_LOCATION:
                 mClearRecentsLocation =
                         newValue == null ? 3 : Integer.parseInt(newValue);
-                setClearRecentsLocation();
+                setClearRecents();
                 break;
             default:
                 break;
         }
     }
 
-    private void showClearAllRecents() {
-        if (mShowClearAllRecents) {
-            mStackActionButton.setVisibility(View.GONE);
-            mFloatingButton.setVisibility(View.VISIBLE);
-        } else {
-            mFloatingButton.setVisibility(View.GONE);
-            mStackActionButton.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void setClearRecentsLocation() {
+    private void setClearRecents() {
         if (mFloatingButton == null)
             return;
 
@@ -528,6 +544,15 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
                 break;
         }
         mFloatingButton.setLayoutParams(params);
+
+        if (mShowClearAllRecents) {
+            mStackActionButton.setVisibility(View.INVISIBLE);
+            if (mEmptyView.getVisibility() == View.INVISIBLE) {
+                mFloatingButton.setVisibility(View.VISIBLE);
+            }
+        } else {
+            mFloatingButton.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -845,6 +870,10 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
     }
 
     public final void onBusEvent(ShowStackActionButtonEvent event) {
+        if (mFloatingButton != null && mShowClearAllRecents) {
+            return;
+        }
+
         if (!RecentsDebugFlags.Static.EnableStackActionButton) {
             return;
         }
@@ -873,9 +902,6 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
      */
     private void showStackActionButton(final int duration, final boolean translate) {
         if (!RecentsDebugFlags.Static.EnableStackActionButton) {
-            return;
-        }
-        if (mFloatingButton != null && mShowClearAllRecents) {
             return;
         }
 
