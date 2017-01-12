@@ -54,6 +54,8 @@ import android.graphics.PixelFormat;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.media.MediaActionSound;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -482,7 +484,7 @@ class GlobalScreenshot {
 
     private AsyncTask<Void, Void, Void> mSaveInBgTask;
 
-    private MediaActionSound mCameraSound;
+    private Ringtone  mScreenshotSound;
 
 
     /**
@@ -551,9 +553,9 @@ class GlobalScreenshot {
         mPreviewWidth = panelWidth;
         mPreviewHeight = r.getDimensionPixelSize(R.dimen.notification_max_height);
 
-        // Setup the Camera shutter sound
-        mCameraSound = new MediaActionSound();
-        mCameraSound.load(MediaActionSound.SHUTTER_CLICK);
+        // Setup the Screenshot sound
+        mScreenshotSound= RingtoneManager.getRingtone(mContext,
+                    Uri.parse("file://" + "/system/media/audio/ui/camera_click.ogg"));
     }
 
     /**
@@ -730,10 +732,11 @@ class GlobalScreenshot {
         mScreenshotLayout.post(new Runnable() {
             @Override
             public void run() {
-                if (Settings.System.getIntForUser(mContext.getContentResolver(),
-                        Settings.System.SCREENSHOT_SHUTTER_SOUND, 1, UserHandle.USER_CURRENT) == 1) {
-                    // Play the shutter sound to notify that we've taken a screenshot
-                    mCameraSound.play(MediaActionSound.SHUTTER_CLICK);
+                // Play the shutter sound to notify that we've taken a screenshot
+                if (Settings.System.getInt(mContext.getContentResolver(), Settings.System.SCREENSHOT_SOUND, 1) == 1) {
+                    if (mScreenshotSound != null) {
+                        mScreenshotSound.play();
+                    }
                 }
 
                 mScreenshotView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
