@@ -14465,6 +14465,12 @@ public final class Settings {
                 "power_button_very_long_press";
 
         /**
+         * Audio focus mode for ringtones when headset is connected
+         * @hide
+         */
+        public static final String RINGTONE_FOCUS_MODE = "ringtone_focus_mode";
+
+        /**
          * Global settings that shouldn't be persisted.
          *
          * @hide
