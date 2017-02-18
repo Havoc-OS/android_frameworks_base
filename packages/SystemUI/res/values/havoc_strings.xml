@@ -240,4 +240,8 @@
     <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_running_services">Open Running Services screen.</string>
 
+    <!-- ADB over network tile -->
+    <string name="quick_settings_network_adb_label">ADB over network</string>
+    <string name="quick_settings_network_adb_toast">USB debugging is not enabled</string>
+
 </resources>
