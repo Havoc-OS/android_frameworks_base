@@ -281,6 +281,8 @@
     <uses-permission android:name="android.permission.SET_ACTIVITY_WATCHER" />
     <uses-permission android:name="android.permission.SHUTDOWN" />
 
+    <protected-broadcast android:name="android.intent.action.SCREEN_STATE_SERVICE_UPDATE" />
+
     <application
         android:name=".SystemUIApplication"
         android:persistent="true"
@@ -718,5 +720,12 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <service android:name=".havoc.screenstate.ScreenStateService"
+                android:exported="true" >
+            <intent-filter>
+               <action android:name="android.intent.action.SCREEN_STATE_SERVICE_UPDATE"/>
+            </intent-filter>
+        </service>
     </application>
 </manifest>
