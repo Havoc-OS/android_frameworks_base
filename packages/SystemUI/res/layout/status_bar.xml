@@ -57,6 +57,25 @@
             android:scaleType="center"
             android:visibility="gone" />
 
+        <com.android.systemui.havoc.statusbarweather.StatusBarWeatherImage
+            android:id="@+id/weather_image"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:paddingStart="2dip"
+            android:paddingEnd="1dip"
+            android:visibility="gone" />
+
+        <com.android.systemui.havoc.statusbarweather.StatusBarWeather
+            android:id="@+id/weather_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.StatusBar.Expanded.Weather.Detailed"
+            android:gravity="left|center_vertical"
+            android:paddingStart="2dip"
+            android:paddingEnd="1dip"
+            android:visibility="gone" />
+
         <!-- The alpha of this area is controlled from both PhoneStatusBarTransitions and
              PhoneStatusBar (DISABLE_NOTIFICATION_ICONS). -->
         <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
@@ -87,6 +106,25 @@
 
             </com.android.systemui.statusbar.LineageStatusBarItemHolder>
 
+            <com.android.systemui.havoc.statusbarweather.StatusBarWeatherImageRight
+                android:id="@+id/weather_image_right"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:paddingStart="1dip"
+                android:paddingEnd="2dip"
+                android:visibility="gone" />
+
+            <com.android.systemui.havoc.statusbarweather.StatusBarWeatherRight
+                android:id="@+id/weather_temp_right"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.StatusBar.Expanded.Weather.Detailed"
+                android:gravity="right|center_vertical"
+                android:paddingStart="1dip"
+                android:paddingEnd="2dip"
+                android:visibility="gone" />
+
             <include layout="@layout/system_icons" />
 
             <com.android.systemui.statusbar.policy.Clock
@@ -100,8 +138,8 @@
                 android:gravity="center_vertical|start"
                 />
 
-            <com.android.systemui.crdroid.logo.LogoImageViewRight
-                android:id="@+id/crdroid_logo_right"
+            <com.android.systemui.havoc.logo.LogoImageViewRight
+                android:id="@+id/havoc_logo_right"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingStart="2dip"

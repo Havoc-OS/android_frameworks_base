@@ -60,6 +60,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private NetworkController mNetworkController;
     private LinearLayout mSystemIconArea;
     private View mHavocLogo, mHavocLogoRight;
+    private View mWeather, mWeatherImage, mWeatherRight, mWeatherImageRight;
     private View mNotificationIconAreaInner;
     private int mDisabled1;
     private StatusBar mStatusBarComponent;
@@ -118,8 +119,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mDarkIconManager = new DarkIconManager(view.findViewById(R.id.statusIcons));
         Dependency.get(StatusBarIconController.class).addIconGroup(mDarkIconManager);
         mSystemIconArea = mStatusBar.findViewById(R.id.system_icon_area);
-        mHavocLogo = mStatusBar.findViewById(R.id.crdroid_logo);
-        mHavocLogoRight = mStatusBar.findViewById(R.id.crdroid_logo_right);
+        mHavocLogo = mStatusBar.findViewById(R.id.havoc_logo);
+        mHavocLogoRight = mStatusBar.findViewById(R.id.havoc_logo_right);
+        mWeather = mStatusBar.findViewById(R.id.weather_temp);
+        mWeatherImage = mStatusBar.findViewById(R.id.weather_image);
+        mWeatherRight = mStatusBar.findViewById(R.id.weather_temp_right);
+        mWeatherImageRight = mStatusBar.findViewById(R.id.weather_image_right);
         mBatteryBar = mStatusBar.findViewById(R.id.battery_bar);
         mSignalClusterView = mStatusBar.findViewById(R.id.signal_cluster);
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mSignalClusterView);
@@ -228,11 +233,19 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         animateHide(mBatteryBar, animate);
         animateHide(mHavocLogo, animate);
         animateHide(mHavocLogoRight, animate);
+        animateHide(mWeather, animate);
+        animateHide(mWeatherImage, animate);
+        animateHide(mWeatherRight, animate);
+        animateHide(mWeatherImageRight, animate);
         animateHide(mSystemIconArea, animate);
     }
 
     public void showSystemIconArea(boolean animate) {
         animateShow(mSystemIconArea, animate);
+        animateShow(mWeatherImageRight, animate);
+        animateShow(mWeatherRight, animate);
+        animateShow(mWeatherImage, animate);
+        animateShow(mWeather, animate);
         animateShow(mHavocLogoRight, animate);
         animateShow(mHavocLogo, animate);
         animateShow(mBatteryBar, animate);
