@@ -424,7 +424,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private boolean mVolumeWakeActive;
 
     // Double-tap-to-doze
-    private boolean mDoubleTapToWake;
     private boolean mDoubleTapToDoze;
     private boolean mNativeDoubleTapToDozeAvailable;
 
@@ -649,6 +648,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     // Maps global key codes to the components that will handle them.
     private GlobalKeyManager mGlobalKeyManager;
+
+    // Gesture key handler.
+    private KeyHandler mGestureKeyHandler;
 
     // Fallback actions by key code.
     private final SparseArray<KeyCharacterMap.FallbackAction> mFallbackActions =
@@ -2283,7 +2285,13 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
         if (DEBUG_INPUT) Slog.d(TAG, "" + mDeviceKeyHandlers.size() + " device key handlers loaded");
 
-        if (!defaultKeyHandlerLoaded){
+        boolean enableKeyHandler = context.getResources().
+                getBoolean(com.android.internal.R.bool.config_enableKeyHandler);
+        if (enableKeyHandler) {
+            mGestureKeyHandler = new KeyHandler(mContext);
+        }
+
+        if (!defaultKeyHandlerLoaded || !enableKeyHandler){
             String alternativeDeviceKeyHandlerLib = res.getString(
                     com.android.internal.R.string.config_alternativeDeviceKeyHandlerLib);
 
@@ -2307,10 +2315,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 }
             }
         }
-
     }
 
-     private void enableSwipeThreeFingerGesture(boolean enable){
+    private void enableSwipeThreeFingerGesture(boolean enable){
         if (enable) {
             if (haveEnableGesture) return;
             haveEnableGesture = true;
@@ -2355,8 +2362,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         boolean updateRotation = false;
 
         // Double-tap-to-doze
-        mDoubleTapToWake = Settings.Secure.getInt(resolver,
-                Settings.Secure.DOUBLE_TAP_TO_WAKE, 0) == 1;
         mDoubleTapToDoze = Settings.System.getInt(resolver,
                 Settings.System.DOZE_TRIGGER_DOUBLETAP, 0) == 1;
 
@@ -4148,6 +4153,16 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     + " policyFlags=" + Integer.toHexString(policyFlags));
         }
 
+        /**
+         * Handle gestures input earlier then anything when screen is off.
+         * @author Carlo Savignano
+         */
+        if (!interactive) {
+            if (mGestureKeyHandler != null && mGestureKeyHandler.handleKeyEvent(event)) {
+                return 0;
+            }
+        }
+
         if (mANBIHandler != null && mANBIEnabled && mANBIHandler.isScreenTouched()
                 && !navBarKey && (appSwitchKey || homeKey || menuKey || backKey)) {
             return 0;
@@ -4559,7 +4574,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             case KeyEvent.KEYCODE_WAKEUP: {
                 result &= ~ACTION_PASS_TO_USER;
                 // Double-tap-to-doze
-                if (mDoubleTapToWake && mDoubleTapToDoze && !mNativeDoubleTapToDozeAvailable) {
+                if (mDoubleTapToDoze && !mNativeDoubleTapToDozeAvailable) {
                     isWakeKey = false;
                     if (!down) {
                         mContext.sendBroadcast(new Intent("com.android.systemui.doze.pulse"));
@@ -5573,6 +5588,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
 
         mAutofillManagerInternal = LocalServices.getService(AutofillManagerInternal.class);
+        if (mGestureKeyHandler != null) {
+            mGestureKeyHandler.systemReady();
+        }
     }
 
     /** {@inheritDoc} */
