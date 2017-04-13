@@ -4985,6 +4985,13 @@ public final class Settings {
         /**
          * Change fonts for the system lockscreen clock widget
          *
+         * Whether to display cross sign for a data disabled connection
+         * @hide
+         */
+        public static final String DATA_DISABLED_ICON = "data_disabled_icon";
+
+        /**
+         * Whether to display app circle sidebar
          * @hide
          */
         public static final String LOCK_CLOCK_FONTS = "lock_clock_fonts";
