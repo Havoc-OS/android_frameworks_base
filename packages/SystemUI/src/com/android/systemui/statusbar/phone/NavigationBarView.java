@@ -499,7 +499,7 @@ public class NavigationBarView extends FrameLayout implements Navigator,
     }
 
     public void setWakeAndUnlocking(boolean wakeAndUnlocking) {
-        setUseFadingAnimations(wakeAndUnlocking);
+        setUseFadingAnimations(!wakeAndUnlocking);
         mWakeAndUnlocking = wakeAndUnlocking;
         updateLayoutTransitionsEnabled();
     }
