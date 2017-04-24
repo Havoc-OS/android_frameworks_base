@@ -40,6 +40,9 @@
   <java-symbol type="id" name="pocket_hint_image" /> 
   <java-symbol type="id" name="pocket_hint_message" /> 
 
+  <!-- Pocket bridge --> 
+  <java-symbol type="string" name="config_pocketBridgeSysfsInpocket" /> 
+
   <!-- Dynamic Navbar -->
   <java-symbol type="color" name="input_method_navigation_guard_dynamic" />
 
