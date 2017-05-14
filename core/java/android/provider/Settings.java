@@ -6480,6 +6480,32 @@ public final class Settings {
         private static final Validator SLIM_RECENT_ENTER_EXIT_ANIMATION_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * Statusbar logo
+         * @hide
+         */
+        public static final String STATUS_BAR_LOGO = "status_bar_logo";
+
+        /**
+         * Statusbar logo color setting
+         * @hide
+         */
+        public static final String STATUS_BAR_LOGO_COLOR = "status_bar_logo_color";
+
+        /**
+         * Position of Status bar logo
+         * 0 - Left (default)
+         * 1 - Right
+         * @hide
+         */
+        public static final String STATUS_BAR_LOGO_POSITION = "status_bar_logo_position";
+
+        /**
+         * Statusbar logo custom style
+         * @hide
+         */
+        public static final String STATUS_BAR_LOGO_STYLE = "status_bar_logo_style";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
