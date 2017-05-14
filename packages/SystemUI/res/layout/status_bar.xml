@@ -100,6 +100,15 @@
                         android:textAppearance="@style/TextAppearance.StatusBar.Clock"
                         android:visibility="gone"
                         android:singleLine="true"/>
+
+                    <com.android.systemui.statusbar.logo.LogoImageView
+                        android:id="@+id/havoc_logo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingStart="3dp"
+                        android:paddingEnd="3dp"
+                        android:scaleType="center"
+                        android:visibility="gone" />
                 </com.android.keyguard.AlphaOptimizedLinearLayout>
 
                 <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
