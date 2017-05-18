@@ -699,13 +699,13 @@ public class LockPatternUtils {
     }
 
     /**
-     * clears stored password.
+     * Clears stored password.
      */
     public void sanitizePassword() {
         try {
             getLockSettings().sanitizePassword();
-        } catch (RemoteException re) {
-            Log.e(TAG, "Couldn't sanitize password" + re);
+        } catch (RemoteException e) {
+            Log.e(TAG, "Couldn't sanitize password", e);
         }
     }
 
