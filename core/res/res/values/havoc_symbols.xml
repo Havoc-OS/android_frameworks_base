@@ -289,4 +289,6 @@
 
     <java-symbol type="array" name="config_customPermissionsList" />
 
+    <java-symbol type="array" name="config_blockPackagesSensorDrain" />
+
 </resources>
