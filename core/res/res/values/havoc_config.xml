@@ -45,6 +45,20 @@
     -->
     <integer name="config_LTE_antenna_bar_quantity_metric">0</integer>
 
+        <!-- Any package that has one of the package names defined below will be prevented 
+         from using specific sensors in order to stop battery drain --> 
+    <string-array name="config_blockPackagesSensorDrain"> 
+        <item>com.whatsapp</item> 
+        <item>com.gbwhatsapp</item> 
+        <item>com.yowhatsapp</item> 
+        <item>com.whatsapp.plus</item> 
+        <item>org.telegram.messenger</item> 
+        <item>org.telegram.messenger.plus</item> 
+        <item>com.snapchat.android</item> 
+        <item>com.facebook.orca</item> 
+        <item>com.Slack</item> 
+    </string-array> 
+
     <!-- Flag indicating whether strict threshold is used, or lenient threshold is used,
           when evaluating RSRP for LTE antenna bar display
            0. Strict threshold
