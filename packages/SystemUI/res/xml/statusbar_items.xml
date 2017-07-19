@@ -78,6 +78,11 @@
         android:key="cast"
         android:title="@string/quick_settings_cast_title" />
 
+    <com.android.systemui.tuner.TunerSwitch
+        android:key="ims"
+        android:title="@string/status_bar_ims"
+        sysui:defValue="true" />
+
     <com.android.systemui.tuner.StatusBarSwitch
         android:key="volume"
         android:title="@*android:string/volume_unknown" />
