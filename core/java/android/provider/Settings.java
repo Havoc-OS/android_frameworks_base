@@ -4729,6 +4729,13 @@ public final class Settings {
         public static final String QUICK_SETTINGS_SHOW_CARRIER = "quick_settings_show_carrier";
 
         /**
+         * Sensor block per-package
+         * @hide
+         */
+        public static final String SENSOR_BLOCK = "sensor_block";
+
+        /**
+         * --- AICP System settings end
          * custom carrier label. The value is
          * String.
          * @hide
