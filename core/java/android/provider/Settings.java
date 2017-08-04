@@ -4613,7 +4613,15 @@ public final class Settings {
          public static final String SCREENSHOT_SHUTTER_SOUND = "screenshot_shutter_sound";
 
         /**
-         * Volume rocker wake
+         * Sensor block per-package
+         * @hide
+         */
+        public static final String SENSOR_BLOCK = "sensor_block";
+
+        /**
+         * --- AICP System settings end
+         * custom carrier label. The value is
+         * String.
          * @hide
          */
         public static final String VOLUME_ROCKER_WAKE = "volume_rocker_wake";
