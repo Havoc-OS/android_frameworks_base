@@ -155,4 +155,6 @@
     <!-- Whether device has a notch -->
     <java-symbol type="bool" name="config_haveNotch" />
 
+    <java-symbol type="array" name="config_blockPackagesSensorDrain" />
+
 </resources>
