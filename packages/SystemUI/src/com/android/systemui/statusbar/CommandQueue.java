@@ -96,7 +96,7 @@ public class CommandQueue extends IStatusBar.Stub {
     private static final int MSG_TOGGLE_CAMERA_FLASH           = 47 << MSG_SHIFT;
     private static final int MSG_SET_AUTOROTATE_STATUS         = 48 << MSG_SHIFT;
     private static final int MSG_RESTART_UI                    = 49 << MSG_SHIFT;
-    private static final int MSG_TOGGLE_PIE_ORIENTATION = 43 << MSG_SHIFT;
+    private static final int MSG_TOGGLE_PIE_ORIENTATION        = 50 << MSG_SHIFT;
 
     public static final int FLAG_EXCLUDE_NONE = 0;
     public static final int FLAG_EXCLUDE_SEARCH_PANEL = 1 << 0;
@@ -172,6 +172,7 @@ public class CommandQueue extends IStatusBar.Stub {
         default void toggleCameraFlash() { }
         default void setAutoRotate(boolean enabled) { }
         default void restartUI() { }
+     	default void toggleOrientationListener(boolean enable) {}
     }
 
     @VisibleForTesting
