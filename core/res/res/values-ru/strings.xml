@@ -1953,4 +1953,7 @@
     <string name="notification_appops_microphone_active" msgid="4335305527588191730">"Микрофон"</string>
     <string name="notification_appops_overlay_active" msgid="633813008357934729">"показ поверх других окон"</string>
     <string name="car_loading_profile" msgid="3545132581795684027">"Загрузка"</string>
+    
+    <!-- Informative text shown when the device is in One handed mode. It also explains how to exit the mode. -->
+    <string name="onehand_guide" xliff:restype="x-GENERIC/FULLSCREEN/TEXT">Коснитесь пустой области чтобы выйти из режима одной руки</string>
 </resources>
