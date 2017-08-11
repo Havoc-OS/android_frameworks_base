@@ -1684,8 +1684,12 @@
     <string-array name="config_locationProviderPackageNames" translatable="false">
         <!-- The standard AOSP fused location provider -->
         <item>com.android.location.fused</item>
-	<!-- The (faked) microg fused location provider (a free reimplementation) -->
+
+        <!-- The (faked) microg fused location provider -->
         <item>com.google.android.gms</item>
+
+        <!-- microG unifiednlp location provider (standalone) -->
+        <item>org.microg.nlp</item>
     </string-array>
 
     <!-- This string array can be overriden to enable test location providers initially. -->
