@@ -23,6 +23,7 @@ import static android.os.BatteryManager.EXTRA_HEALTH;
 import static android.os.BatteryManager.EXTRA_LEVEL;
 import static android.os.BatteryManager.EXTRA_MAX_CHARGING_CURRENT;
 import static android.os.BatteryManager.EXTRA_MAX_CHARGING_VOLTAGE;
+import static android.os.BatteryManager.EXTRA_OEM_FAST_CHARGER;
 import static android.os.BatteryManager.EXTRA_PLUGGED;
 import static android.os.BatteryManager.EXTRA_STATUS;
 import static android.os.BatteryManager.EXTRA_TEMPERATURE;
@@ -53,10 +54,11 @@ public class BatteryStatus {
     public final int maxChargingVoltage;
     public final int maxChargingWattage;
     public final float temperature;
+    public final boolean oemFastChargeStatus;
 
     public BatteryStatus(int status, int level, int plugged, int health,
             int maxChargingCurrent, int maxChargingVoltage, int maxChargingWattage,
-            float temperature) {
+            float temperature, boolean oemFastChargeStatus) {
         this.status = status;
         this.level = level;
         this.plugged = plugged;
@@ -65,6 +67,7 @@ public class BatteryStatus {
         this.maxChargingVoltage = maxChargingVoltage;
         this.maxChargingWattage = maxChargingWattage;
         this.temperature = temperature;
+        this.oemFastChargeStatus = oemFastChargeStatus;
     }
 
     public BatteryStatus(Intent batteryChangedIntent) {
@@ -90,6 +93,7 @@ public class BatteryStatus {
         } else {
             maxChargingWattage = -1;
         }
+        oemFastChargeStatus = batteryChangedIntent.getBooleanExtra(EXTRA_OEM_FAST_CHARGER, false);
     }
 
     /**
@@ -139,6 +143,9 @@ public class BatteryStatus {
      * @return the charing speed
      */
     public final int getChargingSpeed(Context context) {
+        if (oemFastChargeStatus) {
+                return CHARGING_FAST;
+        }
         final int slowThreshold = context.getResources().getInteger(
                 R.integer.config_chargingSlowlyThreshold);
         final int fastThreshold = context.getResources().getInteger(
