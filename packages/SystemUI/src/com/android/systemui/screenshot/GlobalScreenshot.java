@@ -659,7 +659,7 @@ class GlobalScreenshot {
                         mWindowManager.removeView(mScreenshotSelectorLayout);
                         final Rect rect = view.getSelectionRect();
                         if (rect != null) {
-                            if (rect.width() != 0 && rect.height() != 0) {
+                            if (rect.left >= 0 && rect.top >= 0 && rect.width() != 0 && rect.height() != 0) {
                                 // Need mScreenshotSelectorLayout to handle it after the view disappears
                                 mScreenshotSelectorLayout.post(new Runnable() {
                                     public void run() {
@@ -898,8 +898,8 @@ class GlobalScreenshot {
 
         // Repurpose the existing notification to notify the user of the error
         Notification.Builder b = new Notification.Builder(context, NotificationChannels.ALERTS)
-            .setTicker(r.getString(R.string.screenshot_failed_title))
-            .setContentTitle(r.getString(R.string.screenshot_failed_title))
+            .setTicker(r.getString(R.string.screenshot_abort_title))
+            .setContentTitle(r.getString(R.string.screenshot_abort_title))
             .setContentText(errorMsg)
             .setSmallIcon(R.drawable.stat_notify_image_error)
             .setWhen(System.currentTimeMillis())
