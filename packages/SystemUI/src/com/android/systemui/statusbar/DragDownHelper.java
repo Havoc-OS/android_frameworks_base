@@ -27,6 +27,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
+import com.android.internal.util.havoc.Utils;
+
 import com.android.systemui.ExpandHelper;
 import com.android.systemui.Gefingerpoken;
 import com.android.systemui.Interpolators;
@@ -66,7 +68,7 @@ public class DragDownHelper implements Gefingerpoken {
     private long mDoubleTapTimeout;
     private Runnable mGoToSleep;
 
-    public DragDownHelper(Context context, View host, ExpandHelper.Callback callback,
+    public DragDownHelper(final Context context, View host, ExpandHelper.Callback callback,
             DragDownCallback dragDownCallback) {
         mMinDragDistance = context.getResources().getDimensionPixelSize(
                 R.dimen.keyguard_drag_down_min_distance);
@@ -81,10 +83,7 @@ public class DragDownHelper implements Gefingerpoken {
         mGoToSleep = new Runnable() {
             @Override
             public void run() {
-                PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-                if(pm != null) {
-                    pm.goToSleep(mLastDownEvent);
-                }
+                Utils.switchScreenOff(context);
             }
         };
     }
