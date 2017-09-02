@@ -102,4 +102,7 @@ interface IPowerManager
 
     // Custom API
     void setKeyboardVisibility(boolean visible);
+
+    // blocked wakelock support
+    String getSeenWakeLocks();
 }
