@@ -12665,6 +12665,11 @@ public final class Settings {
                 "max_sound_trigger_detection_service_ops_per_day";
 
         /**
+         * @hide
+         */
+        public static final String SHOW_CPU_OVERLAY = "show_cpu_overlay";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
