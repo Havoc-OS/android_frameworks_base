@@ -241,4 +241,9 @@
 
     <!-- Screenrecord Tile --> 
     <string name="quick_settings_screenrecord">Screenrecord</string> 	
+	
+    <!-- LTE QS Tile --> 
+    <string name="qs_lte_label">LTE</string> 
+    <string name="lte_on">LTE ON</string> 
+    <string name="lte_off">LTE OFF</string>
 </resources>
