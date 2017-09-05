@@ -48,4 +48,7 @@
     <!-- Accessibility label for nfc icon (not shown on screen) [CHAR LIMIT=NONE] -->
     <string name="accessibility_status_bar_nfc">Nfc</string>
 
+    <!-- LTE QS Tile -->
+    <string name="qs_lte_label">LTE</string>
+
 </resources>
