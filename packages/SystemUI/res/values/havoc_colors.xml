@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
- * Copyright (c) 2017, The Android Open Source Project
+/**
+ * Copyright (C) 2018 Havoc-OS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +14,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 -->
-
 <resources>
-    <!-- The number of rows in the QuickSettings -->
-    <integer name="quick_settings_num_rows">2</integer>
-	
-    <!-- Height of the status bar header bar -->
-    <dimen name="status_bar_header_height">130dp</dimen>
-
     <!-- Floating action button -->
-    <dimen name="floating_action_button_height">54dp</dimen>
-    <dimen name="floating_action_button_width">54dp</dimen>
-    <dimen name="floating_action_button_translation_z">12dp</dimen>
-    <dimen name="floating_action_button_margin_side">32dp</dimen>
-    <dimen name="floating_action_button_margin_bottom">46dp</dimen>
-
+    <color name="fab_color">@*android:attr/panelColorBackground</color>
+    <color name="floating_action_button_icon_color">@*android:attr/colorControlNormal</color>
 </resources>
