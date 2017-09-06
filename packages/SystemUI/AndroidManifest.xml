@@ -270,6 +270,7 @@
     <!-- Permission to make accessibility service access Bubbles -->
     <uses-permission android:name="android.permission.ADD_TRUSTED_DISPLAY" />
 
+    <uses-permission android:name="android.permission.ACCESS_SURFACE_FLINGER" />
 
     <protected-broadcast android:name="com.android.settingslib.action.REGISTER_SLICE_RECEIVER" />
     <protected-broadcast android:name="com.android.settingslib.action.UNREGISTER_SLICE_RECEIVER" />
