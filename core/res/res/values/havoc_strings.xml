@@ -26,6 +26,9 @@
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_toggleNavigationEditor">Allows an application to control the navigation bar editor.</string>
 
+  <!-- Pocket Lock --> 
+    <string name="pocket_lock_message_long_press">Long press power button to interact</string> 
+    
     <!-- AOKP custom system animations -->
     <string name="animation_fade">Fade</string>
     <string name="animation_slide_right">Slide in right</string>
