@@ -18,6 +18,7 @@ package com.android.internal.util.havoc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
 import android.os.Handler;
@@ -26,6 +27,13 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.UserHandle;
+import android.net.ConnectivityManager;
+import android.os.Looper;
+import android.view.InputDevice;
+import android.view.IWindowManager;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
+import android.view.WindowManagerGlobal;
 
 import com.android.internal.statusbar.IStatusBarService;
 
@@ -33,6 +41,9 @@ import com.android.internal.statusbar.IStatusBarService;
  * Some custom utilities
  */
 public class HavocUtils {
+
+    public static final String INTENT_SCREENSHOT = "action_take_screenshot";
+    public static final String INTENT_REGION_SCREENSHOT = "action_take_region_screenshot";
 
     public static void switchScreenOff(Context ctx) {
         PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
@@ -98,6 +109,15 @@ public class HavocUtils {
                         InputManager.INJECT_INPUT_EVENT_MODE_ASYNC);
             }
         }, 20);
+    }
+	
+    public static void takeScreenshot(boolean full) {
+        IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+        try {
+            wm.sendCustomAction(new Intent(full? INTENT_SCREENSHOT : INTENT_REGION_SCREENSHOT));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
