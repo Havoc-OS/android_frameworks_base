@@ -43,6 +43,7 @@ import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.plugins.qs.QSIconView;
 import com.android.systemui.plugins.qs.QSTile.SignalState;
+import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.SignalTileView;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
@@ -63,16 +64,18 @@ public class CellularTile extends QSTileImpl<SignalState> {
 
     private final CellSignalCallback mSignalCallback = new CellSignalCallback();
     private final ActivityStarter mActivityStarter;
+    private final KeyguardStateController mKeyguard;
 
     @Inject
     public CellularTile(QSHost host, NetworkController networkController,
-            ActivityStarter activityStarter) {
+            ActivityStarter activityStarter, KeyguardStateController keyguardStateController) {
         super(host);
         mController = networkController;
         mActivityStarter = activityStarter;
         mDataController = mController.getMobileDataController();
         mDetailAdapter = new CellularDetailAdapter();
         mController.observe(getLifecycle(), mSignalCallback);
+        mKeyguard = keyguardStateController;
     }
 
     @Override
@@ -104,7 +107,11 @@ public class CellularTile extends QSTileImpl<SignalState> {
             return;
         }
         if (mDataController.isMobileDataEnabled()) {
-            maybeShowDisableDialog();
+            if (mKeyguard.isMethodSecure() && mKeyguard.isShowing()) {
+                mActivityStarter.postQSRunnableDismissingKeyguard(this::maybeShowDisableDialog);
+            } else {
+                maybeShowDisableDialog();
+            }
         } else {
             mDataController.setMobileDataEnabled(true);
         }
