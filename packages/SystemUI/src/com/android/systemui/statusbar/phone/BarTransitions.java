@@ -77,6 +77,12 @@ public class BarTransitions {
         // Default is don't care.
     }
 
+    public void setWarningColor(int color) {
+        if (mBarBackground != null) {
+            mBarBackground.setWarningColor(color);
+        }
+    }
+
     /**
      * @param resourceMap Theme support
      */
@@ -147,7 +153,7 @@ public class BarTransitions {
         private final int mSemiTransparent;
         private final int mTransparent;
         private final int mPowerSaveWarning;
-        private final int mWarning;
+        private int mWarning;
         private final Drawable mGradient;
 
         private int mMode = -1;
@@ -217,6 +223,12 @@ public class BarTransitions {
         protected void onBoundsChange(Rect bounds) {
             super.onBoundsChange(bounds);
             mGradient.setBounds(bounds);
+        }
+
+        public void setWarningColor(int color) {
+            if (!DEBUG_COLORS) {
+                mWarning = color;
+            }
         }
 
         public void applyModeBackground(int oldMode, int newMode, boolean animate) {
