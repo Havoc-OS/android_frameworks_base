@@ -32,8 +32,8 @@
     <color name="autofill_autofill_save_custom_subtitle_color">@color/primary_text_default_material_light</color>
 
     <!-- Toast text and bg colors -->
-    <color name="toast_bg_color">#E6EEEEEE</color>
-    <color name="toast_text_color">@color/primary_text_default_material_light</color>
+    <color name="toast_bg_color">@color/white</color>
+    <color name="toast_text_color">@color/black</color>
 
     <!-- Misc colors -->
     <color name="theme_color1">@color/black</color>
@@ -72,4 +72,3 @@
     <!-- Fastscroller -->
     <color name="fastscroller_text_color">#FFFFFFFF</color>
 </resources>
-
