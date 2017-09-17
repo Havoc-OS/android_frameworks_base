@@ -140,4 +140,8 @@
     <!-- Whether device has a big physical display cutout -->
     <java-symbol type="bool" name="config_bigPhysicalDisplayCutout" />
 
+    <java-symbol type="bool" name="config_intrusiveBatteryLed" />
+    <java-symbol type="bool" name="config_multiColorBatteryLed" />
+    <java-symbol type="bool" name="config_ledCanPulse" />
+
 </resources>
