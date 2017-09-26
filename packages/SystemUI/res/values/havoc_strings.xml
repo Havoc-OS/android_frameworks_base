@@ -319,4 +319,9 @@
     <!-- Language toggle tile -->
     <string name="quick_settings_locale_label">Language</string>
     <string name="quick_settings_locale_more_locales_toast">Please configure multiple languages to enable toggle functionality</string>
+
+    <!-- ANBI Tile -->
+    <string name="quick_settings_anbi_label">Accidental Touch</string>
+    <string name="accessibility_quick_settings_anbi_changed_off">Accidental touch turned off</string>
+    <string name="accessibility_quick_settings_anbi_changed_on">Accidental touch turned on</string>
 </resources>
