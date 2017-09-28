@@ -19,4 +19,8 @@
 <resources>
     <!-- The number of rows in the QuickSettings -->
     <integer name="quick_settings_num_rows">2</integer>
+	
+    <!-- Height of the status bar header bar -->
+    <dimen name="status_bar_header_height">130dp</dimen>
+
 </resources>
