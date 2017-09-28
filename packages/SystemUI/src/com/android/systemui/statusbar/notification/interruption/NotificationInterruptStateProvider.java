@@ -66,4 +66,7 @@ public interface NotificationInterruptStateProvider {
      * Whether heads-up notification should be skipped when Less Boring heads up is enabled.
      */
     void setUseLessBoringHeadsUp(boolean lessBoring);
+
+    void setHeadsUpStoplist();
+    void setHeadsUpBlacklist();
 }
