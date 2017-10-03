@@ -25,6 +25,7 @@ import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.os.BatteryManager;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -42,6 +43,7 @@ public class BatteryBarController extends LinearLayout {
 
     public static final int STYLE_REGULAR = 0;
     public static final int STYLE_SYMMETRIC = 1;
+    public static final int STYLE_REVERSE = 2;
 
     int mStyle = STYLE_REGULAR;
     int mLocation = 0;
@@ -144,8 +146,8 @@ public class BatteryBarController extends LinearLayout {
     public void addBars() {
         // set heights
         DisplayMetrics metrics = getContext().getResources().getDisplayMetrics();
-        float dp = (float) Settings.System.getInt(getContext().getContentResolver(),
-                Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, 1);
+        float dp = (float) Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.STATUSBAR_BATTERY_BAR_THICKNESS, 2, UserHandle.USER_CURRENT);
         int pixels = (int) ((metrics.density * dp) + 0.5);
 
         ViewGroup.LayoutParams params = (ViewGroup.LayoutParams) getLayoutParams();
@@ -183,7 +185,11 @@ public class BatteryBarController extends LinearLayout {
                 addView(bar2, (new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                         LayoutParams.MATCH_PARENT, 1)));
             }
-
+        } else if (mStyle == STYLE_REVERSE) {
+            BatteryBar bar = new BatteryBar(mContext, mBatteryCharging, mBatteryLevel, isVertical);
+            bar.setRotation(180);
+            addView(bar, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+                        LayoutParams.MATCH_PARENT, 1));
         }
     }
 
@@ -192,18 +198,16 @@ public class BatteryBarController extends LinearLayout {
     }
 
     public void updateSettings() {
-        mStyle = Settings.System.getInt(getContext().getContentResolver(),
-                Settings.System.STATUSBAR_BATTERY_BAR_STYLE, 0);
-        mLocation = Settings.System.getInt(getContext().getContentResolver(),
-                Settings.System.STATUSBAR_BATTERY_BAR, 0);
+        mStyle = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.STATUSBAR_BATTERY_BAR_STYLE, 0, UserHandle.USER_CURRENT);
+        mLocation = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.STATUSBAR_BATTERY_BAR, 0, UserHandle.USER_CURRENT);
 
         if (mLocation > 0 && isLocationValid(mLocation)) {
             removeBars();
             addBars();
-            setVisibility(View.VISIBLE);
         } else {
             removeBars();
-            setVisibility(View.GONE);
         }
     }
 
