@@ -28,6 +28,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.input.InputManager;
 import android.hardware.Sensor;
@@ -328,5 +329,37 @@ public class Utils {
         int state = enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED :
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
         pm.setComponentEnabledSetting(componentName, state, PackageManager.DONT_KILL_APP);
+    }
+
+    public static int getBlendColorForPercent(int fullColor, int emptyColor, boolean reversed,
+                                        int percentage) {
+        float[] newColor = new float[3];
+        float[] empty = new float[3];
+        float[] full = new float[3];
+        Color.colorToHSV(fullColor, full);
+        int fullAlpha = Color.alpha(fullColor);
+        Color.colorToHSV(emptyColor, empty);
+        int emptyAlpha = Color.alpha(emptyColor);
+        float blendFactor = percentage/100f;
+        if (reversed) {
+            if (empty[0] < full[0]) {
+                empty[0] += 360f;
+            }
+            newColor[0] = empty[0] - (empty[0]-full[0])*blendFactor;
+        } else {
+            if (empty[0] > full[0]) {
+                full[0] += 360f;
+            }
+            newColor[0] = empty[0] + (full[0]-empty[0])*blendFactor;
+        }
+        if (newColor[0] > 360f) {
+            newColor[0] -= 360f;
+        } else if (newColor[0] < 0) {
+            newColor[0] += 360f;
+        }
+        newColor[1] = empty[1] + ((full[1]-empty[1])*blendFactor);
+        newColor[2] = empty[2] + ((full[2]-empty[2])*blendFactor);
+        int newAlpha = (int) (emptyAlpha + ((fullAlpha-emptyAlpha)*blendFactor));
+        return Color.HSVToColor(newAlpha, newColor);
     }
 }
