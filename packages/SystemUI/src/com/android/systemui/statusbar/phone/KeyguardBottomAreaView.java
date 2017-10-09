@@ -984,7 +984,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         public IconState getIcon() {
             mLeftIsVoiceAssist = canLaunchVoiceAssist();
             if (mLeftIsVoiceAssist) {
-                mIconState.isVisible = mUserSetupComplete;
+                mIconState.isVisible = mUserSetupComplete && !hideShortcuts();;
                 if (mLeftAssistIcon == null) {
                     mIconState.drawable = mContext.getDrawable(R.drawable.ic_mic_26dp);
                 } else {
@@ -993,7 +993,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
                 mIconState.contentDescription = mContext.getString(
                         R.string.accessibility_voice_assist_button);
             } else {
-                mIconState.isVisible = mUserSetupComplete && isPhoneVisible();
+                mIconState.isVisible = mUserSetupComplete && isPhoneVisible() && !hideShortcuts();
                 mIconState.drawable = mContext.getDrawable(R.drawable.ic_phone_24dp);
                 mIconState.contentDescription = mContext.getString(
                         R.string.accessibility_phone_button);
@@ -1017,7 +1017,8 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
             boolean isCameraDisabled = (mStatusBar != null) && !mStatusBar.isCameraAllowedByAdmin();
             mIconState.isVisible = !isCameraDisabled && resolved != null
                     && getResources().getBoolean(R.bool.config_keyguardShowCameraAffordance)
-                    && mUserSetupComplete;
+                    && mUserSetupComplete
+                    && !hideShortcuts();
             mIconState.drawable = mContext.getDrawable(R.drawable.ic_camera_alt_24dp);
             mIconState.contentDescription =
                     mContext.getString(R.string.accessibility_camera_button);
@@ -1076,5 +1077,12 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         if (mIndicationText != null) {
             mIndicationText.setTextColor(color);
         }
+    }
+
+     private boolean hideShortcuts() {
+        boolean secure = mLockPatternUtils.isSecure(KeyguardUpdateMonitor.getCurrentUser());
+        return secure && Settings.Secure.getIntForUser(
+                mContext.getContentResolver(), Settings.Secure.HIDE_LOCK_SHORTCUTS, 0,
+                KeyguardUpdateMonitor.getCurrentUser()) != 0;
     }
 }

@@ -9699,6 +9699,13 @@ public final class Settings {
          */
         public static final String FORCE_AUTHORIZE_SUBSTRATUM_PACKAGES = "force_authorize_substratum_packages";
 
+	/*
+         * Hide lockscreen shortcuts on secure lock screens
+         *
+         * @hide
+         */
+        public static final String HIDE_LOCK_SHORTCUTS = "hide_lock_shortcuts";
+
         /**
          * This are the settings to be backed up.
          *
