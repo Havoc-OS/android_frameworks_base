@@ -13288,6 +13288,11 @@ public final class Settings {
                 "autofill_compat_mode_allowed_packages";
 
         /**
+         * @hide
+         */
+        public static final String DEVICE_IDLE_CONSTANTS_USER = "device_idle_constants_user";
+
+        /**
          * Exemptions to the hidden API blacklist.
          *
          * @hide
