@@ -109,4 +109,10 @@
     <!-- Width of the battery icon in the status bar when set to circle style. -->
     <dimen name="status_bar_battery_icon_circle_width">13.5dp</dimen>
 
+    <!-- Status bar notification ticker -->
+    <dimen name="ticker_start_padding">6dp</dimen>
+    <dimen name="ticker_icon_end_margin">4dp</dimen>
+    <dimen name="ticker_text_top_padding">2dp</dimen>
+    <dimen name="ticker_text_end_padding">10dp</dimen>
+
 </resources>

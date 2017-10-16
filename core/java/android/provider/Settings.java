@@ -6457,6 +6457,27 @@ public final class Settings {
                 "statusbar_battery_bar_blend_dark_color_reverse";
 
         /**
+         * Whether to show the notification ticker on the status bar
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_TICKER = "status_bar_show_ticker";
+
+        /**
+         * Ticker animation
+         * 0: Fade animation
+         * 1: Scrolling ticker
+         * @hide
+         */
+        public static final String STATUS_BAR_TICKER_ANIMATION_MODE = "status_bar_ticker_animation_mode";
+
+        /**
+         * Status bar ticker duration in milliseconds.
+         *
+         * @hide
+         */
+        public static final String STATUS_BAR_TICKER_TICK_DURATION = "status_bar_ticker_tick_duration";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
