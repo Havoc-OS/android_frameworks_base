@@ -22,6 +22,7 @@ import android.annotation.Nullable;
 import android.app.Fragment;
 import android.app.StatusBarManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.ImageSwitcher;
 import android.widget.LinearLayout;
 
 import com.android.systemui.Dependency;
@@ -39,6 +41,7 @@ import com.android.systemui.R;
 import com.android.systemui.SysUiServiceProvider;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.phone.StatusBarIconController.DarkIconManager;
+import com.android.systemui.statusbar.phone.TickerView;
 import com.android.systemui.statusbar.policy.DarkIconDispatcher;
 import com.android.systemui.statusbar.policy.EncryptionHelper;
 import com.android.systemui.statusbar.policy.KeyguardMonitor;
@@ -76,24 +79,30 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private View mCustomCarrierLabel;
     private int mShowCarrierLabel;
 
-    private class SettingsObserver extends ContentObserver {
-       SettingsObserver(Handler handler) {
-           super(handler);
-       }
+    private int mTickerEnabled;
+    private View mTickerViewFromStub;
 
-       void observe() {
-         mContentResolver.registerContentObserver(Settings.System.getUriFor(
+    private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUSBAR_CLOCK_STYLE),
                     false, this, UserHandle.USER_ALL);
-         mContentResolver.registerContentObserver(Settings.System.getUriFor(
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_CARRIER),
                     false, this, UserHandle.USER_ALL);
-       }
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_TICKER),
+                    false, this, UserHandle.USER_ALL);
+        }
 
-       @Override
-       public void onChange(boolean selfChange) {
-           updateSettings(true);
-       }
+        @Override
+        public void onChange(boolean selfChange) {
+            updateSettings(true);
+        }
     }
     private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
     private ContentResolver mContentResolver;
@@ -112,6 +121,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mKeyguardMonitor = Dependency.get(KeyguardMonitor.class);
         mNetworkController = Dependency.get(NetworkController.class);
         mStatusBarComponent = SysUiServiceProvider.getComponent(getContext(), StatusBar.class);
+        mSettingsObserver = new SettingsObserver(mHandler);
     }
 
     @Override
@@ -139,7 +149,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         initEmergencyCryptkeeperText();
         initOperatorName();
         mSettingsObserver.observe();
-        updateSettings(true);
+        updateSettings(false);
     }
 
     @Override
@@ -366,8 +376,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mShowCarrierLabel = Settings.System.getIntForUser(mContentResolver,
                 Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
                 UserHandle.USER_CURRENT);
+        mTickerEnabled = Settings.System.getIntForUser(mContentResolver,
+                Settings.System.STATUS_BAR_SHOW_TICKER, 0,
+                UserHandle.USER_CURRENT);
         updateClockStyle(animate);
         setCarrierLabel(animate);
+        initTickerView();
     }
 
     private void updateClockStyle(boolean animate) {
@@ -383,6 +397,21 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             animateShow(mCustomCarrierLabel, animate);
         } else {
             animateHide(mCustomCarrierLabel, animate, false);
+        }
+    }
+
+    private void initTickerView() {
+        if (mTickerEnabled != 0) {
+            View tickerStub = mStatusBar.findViewById(R.id.ticker_stub);
+            if (mTickerViewFromStub == null && tickerStub != null) {
+                mTickerViewFromStub = ((ViewStub) tickerStub).inflate();
+            }
+            TickerView tickerView = (TickerView) mStatusBar.findViewById(R.id.tickerText);
+            ImageSwitcher tickerIcon = (ImageSwitcher) mStatusBar.findViewById(R.id.tickerIcon);
+            mStatusBarComponent.createTicker(
+                    mTickerEnabled, getContext(), mStatusBar, tickerView, tickerIcon, mTickerViewFromStub);
+        } else {
+            mStatusBarComponent.disableTicker();
         }
     }
 }
