@@ -52,6 +52,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.policy.DockedDividerUtils;
 import com.android.systemui.R;
 import com.android.systemui.SystemUIApplication;
+import com.android.systemui.recents.Recents;
 import com.android.systemui.recents.events.EventBus;
 import com.android.systemui.recents.events.activity.DockedTopTaskEvent;
 import com.android.systemui.recents.events.activity.EnterRecentsWindowLastAnimationFrameEvent;
@@ -292,6 +293,9 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
     }
 
     public void onConfigurationChanged() {
+        if (Recents.mUseSlimRecents) {
+            return;
+        }
         reloadResources();
         mDummyStackView.reloadOnConfigurationChange();
         synchronized (mBackgroundLayoutAlgorithm) {
@@ -314,6 +318,9 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
      * {@link Recents#onBusEvent(ScreenPinningRequestEvent)}.
      */
     public void onStartScreenPinning(Context context, int taskId) {
+        if (Recents.mUseSlimRecents) {
+            return;
+        }
         SystemUIApplication app = (SystemUIApplication) context;
         StatusBar statusBar = app.getComponent(StatusBar.class);
         if (statusBar != null) {
@@ -324,6 +331,9 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
     public void showRecents(boolean triggeredFromAltTab, boolean draggingInRecents,
             boolean animate, boolean launchedWhileDockingTask, boolean fromHome,
             int growTarget) {
+        if (Recents.mUseSlimRecents) {
+            return;
+        }
         mTriggeredFromAltTab = triggeredFromAltTab;
         mDraggingInRecents = draggingInRecents;
         mLaunchedWhileDocking = launchedWhileDockingTask;
@@ -363,6 +373,9 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
     }
 
     public void hideRecents(boolean triggeredFromAltTab, boolean triggeredFromHomeKey) {
+        if (Recents.mUseSlimRecents) {
+            return;
+        }
         if (triggeredFromAltTab && mFastAltTabTrigger.isDozing()) {
             // The user has released alt-tab before the trigger has run, so just show the next
             // task immediately
@@ -388,6 +401,9 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
 
         // Skip this toggle if we are already waiting to trigger recents via alt-tab
         if (mFastAltTabTrigger.isDozing()) {
+            return;
+        }
+        if (Recents.mUseSlimRecents) {
             return;
         }
 
@@ -463,6 +479,9 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
     }
 
     public void preloadRecents() {
+        if (Recents.mUseSlimRecents) {
+            return;
+        }
         // Skip preloading if the task is locked
         SystemServicesProxy ssp = Recents.getSystemServices();
         if (ssp.isScreenPinningActive()) {

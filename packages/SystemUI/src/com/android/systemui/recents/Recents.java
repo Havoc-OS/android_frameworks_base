@@ -92,6 +92,7 @@ public class Recents extends SystemUI
 
     public final static Set<Task> sLockedTasks = new HashSet<>();
     public static boolean mAllowLockTask = true;
+    public static boolean mUseSlimRecents = false;
 
     // Purely for experimentation
     private final static String RECENTS_OVERRIDE_SYSPROP_KEY = "persist.recents_override_pkg";
@@ -205,6 +206,10 @@ public class Recents extends SystemUI
 
     public void resetIconCache() {
         getTaskLoader().resetIconCache();
+    }
+
+    public void evictAllCaches() {
+        getTaskLoader().evictAllCaches();
     }
 
     @Override
