@@ -613,6 +613,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     boolean mExpandedVisible;
 
+    private ArrayList<String> mBlacklist = new ArrayList<String>();
+
     private int mStatusBarHeaderHeight;
 
     private boolean mFpDismissNotifications;
@@ -6880,6 +6882,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Settings.System.CLEAR_RECENTS_STYLE_ENABLE), 
                 false, this, UserHandle.USER_ALL); 
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_BLACKLIST_VALUES),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_ALPHA),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -6913,11 +6918,17 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.RECENTS_OMNI_SWITCH_ENABLED))) {
                 updateOmniSwitch();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_BLACKLIST_VALUES))) {
+                final String blackString = Settings.System.getString(mContext.getContentResolver(),
+                        Settings.System.HEADS_UP_BLACKLIST_VALUES);
+                splitAndAddToArrayList(mBlacklist, blackString, "\\|");
             }
         }
 
         public void update() {
             updateOmniSwitch();
+            setHeadsUpBlacklist();
             updateBlurSettings();
             setNewOverlayAlpha();
             setSecurityAlpha();
@@ -6974,6 +6985,12 @@ public void setNewOverlayAlpha() {
         if (mNavigationBar != null) {
             mNavigationBar.setOmniSwitchEnabled(mOmniSwitchRecents);
         }
+    }
+
+    private void setHeadsUpBlacklist() {
+        final String blackString = Settings.System.getString(mContext.getContentResolver(),
+                    Settings.System.HEADS_UP_BLACKLIST_VALUES);
+        splitAndAddToArrayList(mBlacklist, blackString, "\\|");
     }
 
     private RemoteViews.OnClickHandler mOnClickHandler = new RemoteViews.OnClickHandler() {
@@ -8596,6 +8613,10 @@ public void setNewOverlayAlpha() {
             return false;
         }
 
+        if(isPackageInBlacklist(sbn.getPackageName())) {
+            return false;
+        }
+
         if (mNotificationData.shouldFilterOut(sbn)) {
             if (DEBUG) Log.d(TAG, "No peeking: filtered notification: " + sbn.getKey());
             return false;
@@ -8666,6 +8687,22 @@ public void setNewOverlayAlpha() {
         }
 
         return true;
+    }
+
+    private boolean isPackageInBlacklist(String packageName) {
+        return mBlacklist.contains(packageName);
+    }
+
+    private void splitAndAddToArrayList(ArrayList<String> arrayList,
+            String baseString, String separator) {
+        // clear first
+        arrayList.clear();
+        if (baseString != null) {
+            final String[] array = TextUtils.split(baseString, separator);
+            for (String item : array) {
+                arrayList.add(item.trim());
+            }
+        }
     }
 
     /**

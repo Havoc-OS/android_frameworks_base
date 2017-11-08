@@ -5450,6 +5450,13 @@ public final class Settings {
         public static final String RECENTS_OMNI_SWITCH_ENABLED = "recents_omni_switch";
 
         /**
+         * Which applications to disable heads up notifications for
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_BLACKLIST_VALUES = "heads_up_blacklist_values";
+
+        /**
          * Show Settings icon in QS Footer
          *
          * @hide
