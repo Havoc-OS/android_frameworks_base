@@ -108,7 +108,7 @@ import java.util.Set;
 public final class Settings {
 
     // Intent actions for Settings
-
+    
     /**
      * Activity Action: Show system settings.
      * <p>
@@ -119,6 +119,16 @@ public final class Settings {
     @SdkConstant(SdkConstantType.ACTIVITY_INTENT_ACTION)
     public static final String ACTION_SETTINGS = "android.settings.SETTINGS";
 
+    /**
+     * Activity Action: Show screen satbilization settings.
+     * <p>
+     * Input: Nothing.
+     * <p>
+     * Output: Nothing.
+     */
+    @SdkConstant(SdkConstantType.ACTIVITY_INTENT_ACTION)
+    public static final String SCREEN_STABILIZATION_SETTINGS = "android.settings.SCREEN_STABILIZATION";
+    
     /**
      * Activity Action: Show settings to allow configuration of APNs.
      * <p>
@@ -4199,12 +4209,19 @@ public final class Settings {
         public static final Validator SHOW_BATTERY_PERCENT_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 2);
 
-        /**
-         * IMPORTANT: If you add a new public settings you also have to add it to
-         * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
-         * it to PRIVATE_SETTINGS below. Also add a validator that can validate
-         * the setting value. See an example above.
+        /** 
+         * Screen stabilization parameters
+         * @hide
          */
+        public static final String STABILIZATION_ENABLE = "stabilization_enable";
+        
+        public static final String STABILIZATION_VELOCITY_FRICTION = "stabilization_velocity_friction";
+        
+        public static final String STABILIZATION_POSITION_FRICTION = "stabilization_position_friction";
+        
+        public static final String STABILIZATION_LOWPASS_ALPHA = "stabilization_lowpass_alpha";
+        
+        public static final String STABILIZATION_VELOCITY_AMPLITUDE = "stabilization_velocity_amplitude";
 
        /**
         * MediaScanner behavior on boot.
@@ -4452,7 +4469,6 @@ public final class Settings {
         public static final String ON_THE_GO_ALPHA = "on_the_go_alpha";
 
         /**
-         * Whether the service should restart itself or not.
          *
          * @hide
          */
