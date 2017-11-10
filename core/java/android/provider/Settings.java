@@ -5402,6 +5402,12 @@ public final class Settings {
         public static final String LOCKSCREEN_ALPHA = "lockscreen_alpha";
 
         /**
+         * Whether to show a notification when the battery is charged at the set level and screen is off
+         * @hide
+         */
+        public static final String ALERT_ON_CHARGED_LEVEL = "alert_on_charged_level";
+
+        /**
          * Whether to enable OmniSwitch as recents implementation.
          * @hide
          */

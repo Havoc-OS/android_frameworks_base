@@ -30,4 +30,7 @@
 
     <!-- Custom Carrier Label -->
     <color name="status_bar_carrier_color">#FFFFFFFF</color>
+
+	<color name="battery_level_good_color">#ff319111</color><!-- green -->
+	
 </resources>

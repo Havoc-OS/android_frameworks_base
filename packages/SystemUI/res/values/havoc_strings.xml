@@ -154,4 +154,10 @@
 	<!-- Smart Pixels --> 
     <string name="quick_settings_smart_pixels">Smart Pixels</string> 
     <string name="quick_settings_smart_pixels_on_power_save">Auto-enabled Smart Pixels</string>
+	
+	<!-- Alert on battery -->
+    <string name="alert_on_charged_level">You can disconnect the charger ( ">"<xliff:g id="percentage">%s</xliff:g> )</string>
+    <string name="battery_level_good_title">Optimal battery level</string>
+    <string name="battery_level_good_sound" translatable="false">/system/media/audio/ui/GoodBattery.ogg</string>
+    <string name="notification_channel_charge_alert">Optimal battery charge level</string>
 </resources>
