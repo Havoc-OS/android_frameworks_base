@@ -201,4 +201,6 @@
     <string name="quick_settings_compass_NW">NW</string>
 
     <string name="quick_settings_sleepscreen_label">Sleep Screen</string>
+	
+    <string name="lockscreen_tuner_activity">Lockscreen shortcuts</string>
 </resources>
