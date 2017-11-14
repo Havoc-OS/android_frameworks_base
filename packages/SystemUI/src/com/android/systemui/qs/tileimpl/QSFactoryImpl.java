@@ -122,7 +122,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("hw_keys")) return new HWKeysTile(mHost);
         else if (tileSpec.equals("soundsearch")) return new SoundSearchTIle(mHost);
         else if (tileSpec.equals("sleepscreen")) return new SleepScreenTile(mHost);
-		else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(this);
+		else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);

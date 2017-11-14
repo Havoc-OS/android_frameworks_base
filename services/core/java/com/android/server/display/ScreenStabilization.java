@@ -27,7 +27,7 @@ public class ScreenStabilization extends SystemService
     private static final String TAG = ScreenStabilization.class.getSimpleName();
     
     private static final float NS2S = 1.0f / 1000000000.0f;
-    private static final float MAX_ACC = 10.0f;
+    private static final float MAX_ACC = 8.0f;
     private static final float MAX_POS_SHIFT = 100.0f;
     private static final float MAX_ZOOM_FACTOR = 0.2f;
 
@@ -47,7 +47,7 @@ public class ScreenStabilization extends SystemService
     private boolean mEnable;
     private float mVelocityFriction = 0.3f;
     private float mPositionFriction = 0.1f;
-    private float mLowPassAlpha = 0.85f;
+    private float mLowPassAlpha = 0.92f;
     private int mVelocityAmpl = 10000;
 
     private int x = 0, y = 0;
@@ -91,7 +91,7 @@ public class ScreenStabilization extends SystemService
 	if(mEnable){
 	    mVelocityFriction = (float) Settings.System.getFloatForUser(resolver, Settings.System.STABILIZATION_VELOCITY_FRICTION, 0.1f, UserHandle.USER_CURRENT);
 	    mPositionFriction = (float) Settings.System.getFloatForUser(resolver, Settings.System.STABILIZATION_POSITION_FRICTION, 0.1f, UserHandle.USER_CURRENT);
-	    mLowPassAlpha = 0.5f;
+	    mLowPassAlpha = 0.92f;
 	    mVelocityAmpl = (int) Settings.System.getIntForUser(resolver, Settings.System.STABILIZATION_VELOCITY_AMPLITUDE, 8000, UserHandle.USER_CURRENT);
 	}
 	if(!accListenerRegistered && mEnable){
