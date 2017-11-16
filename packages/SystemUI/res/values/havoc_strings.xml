@@ -95,5 +95,7 @@
     <string name="accessibility_quick_settings_navbar_changed_on">Navigation bar turned on</string>
     <!-- OnTheGo Tile -->
     <string name="quick_settings_onthego_label">On-The-Go</string>
+    <!-- Screenshot -->
+    <string name="quick_settings_screenshot_label">Screenshot</string>
 
 </resources>
