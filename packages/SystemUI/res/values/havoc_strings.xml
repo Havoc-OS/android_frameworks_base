@@ -33,4 +33,9 @@
 	
     <!-- AOD QS tile -->
     <string name="quick_settings_aod_label">AOD</string>
+	
+    <!-- Caffeine tile -->
+    <string name="quick_settings_caffeine_label">Caffeine</string>
+    <string name="accessibility_quick_settings_caffeine_off">Caffeine</string>
+    <string name="accessibility_quick_settings_caffeine_on">Caffeine</string>
 </resources>
