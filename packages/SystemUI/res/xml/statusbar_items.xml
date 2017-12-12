@@ -57,4 +57,8 @@
     <com.android.systemui.tuner.StatusBarSwitch
         android:key="zen"
         android:title="@string/quick_settings_dnd_label" />
+
+    <com.android.systemui.tuner.StatusBarSwitch
+        android:key="vpn"
+        android:title="@string/status_bar_vpn" />
 </PreferenceScreen>
