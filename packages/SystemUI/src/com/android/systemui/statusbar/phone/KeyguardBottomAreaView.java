@@ -260,6 +260,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         mAssistManager = Dependency.get(AssistManager.class);
         mLockIcon.setAccessibilityController(mAccessibilityController);
         updateLeftAffordance();
+        updateRightAffordance();
     }
 
     @Override
@@ -345,10 +346,12 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
 
     private void updateRightAffordanceIcon() {
         IconState state = mRightButton.getIcon();
-        mRightAffordanceView.setVisibility(!mDozing && state.isVisible
-                && !NotificationPanelView.isQSEventBlocked() ? View.VISIBLE : View.GONE);
-        mRightAffordanceView.setImageDrawable(state.drawable, state.tint);
-        mRightAffordanceView.setContentDescription(state.contentDescription);
+        mRightAffordanceView.setVisibility(!mDozing && state.isVisible ? View.VISIBLE : View.GONE);
+        if (state.isVisible) {
+            mRightAffordanceView.setImageDrawable(state.drawable, state.tint,
+                    state.isDefaultButton ? false : true);
+            mRightAffordanceView.setContentDescription(state.contentDescription);
+        }
     }
 
     public void setStatusBar(StatusBar statusBar) {
@@ -364,6 +367,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         mUserSetupComplete = userSetupComplete;
         updateCameraVisibility();
         updateLeftAffordanceIcon();
+        updateRightAffordanceIcon();
     }
 
     private Intent getCameraIntent() {
@@ -397,10 +401,12 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
 
     private void updateLeftAffordanceIcon() {
         IconState state = mLeftButton.getIcon();
-        mLeftAffordanceView.setVisibility(!mDozing && state.isVisible
-                && !NotificationPanelView.isQSEventBlocked() ? View.VISIBLE : View.GONE);
-        mLeftAffordanceView.setImageDrawable(state.drawable, state.tint);
-        mLeftAffordanceView.setContentDescription(state.contentDescription);
+        mLeftAffordanceView.setVisibility(!mDozing && state.isVisible ? View.VISIBLE : View.GONE);
+        if (state.isVisible) {
+            mLeftAffordanceView.setImageDrawable(state.drawable, state.tint,
+                    state.isDefaultButton ? false : true);
+            mLeftAffordanceView.setContentDescription(state.contentDescription);
+        }
     }
 
     public boolean isLeftVoiceAssist() {
@@ -769,6 +775,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
                     inflateCameraPreview();
                     updateCameraVisibility();
                     updateLeftAffordance();
+                    updateRightAffordance();
                 }
             };
 
@@ -781,17 +788,22 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         updateLeftAffordanceIcon();
         updateLeftPreview();
     }
+	
+    public void updateRightAffordance() {
+        updateRightAffordanceIcon();
+    }	
 
     public void onKeyguardShowingChanged() {
         updateLeftAffordance();
+        updateRightAffordance();
         inflateCameraPreview();
     }
 
     private void setRightButton(IntentButton button) {
         mRightButton = button;
-        updateRightAffordanceIcon();
         updateCameraVisibility();
         inflateCameraPreview();
+        updateRightAffordance();
     }
 
     private void setLeftButton(IntentButton button) {
@@ -807,6 +819,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
 
         updateCameraVisibility();
         updateLeftAffordanceIcon();
+        updateRightAffordanceIcon();
 
         if (dozing) {
             mLockIcon.setVisibility(INVISIBLE);
