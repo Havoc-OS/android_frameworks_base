@@ -210,4 +210,6 @@
     <string name="screenrecord_show_hint">Show hint</string>
 
     <string name="status_bar_vpn">VPN</string>
+
+    <string name="status_bar_roaming">Roaming</string>
 </resources>
