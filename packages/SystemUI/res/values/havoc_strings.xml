@@ -249,4 +249,9 @@
 	
     <!-- OnTheGo Tile --> 
     <string name="quick_settings_onthego_label">On-The-Go</string> 
+	
+    <!-- HW Keys Tile -->
+    <string name="accessibility_quick_settings_hwkeys_on">HW Keys</string>
+    <string name="accessibility_quick_settings_hwkeys_off">HW Keys</string>
+    <string name="quick_settings_hwkeys_label">HW Keys</string>
 </resources>
