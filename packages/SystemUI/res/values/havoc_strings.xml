@@ -101,5 +101,11 @@
     <!-- SmartPixels QS Tile -->
     <string name="quick_settings_smart_pixels">Smart Pixels</string>
     <string name="quick_settings_smart_pixels_on_power_save">Auto-enabled Smart Pixels</string>
+    <!-- CPUInfo tile -->
+    <string name="quick_settings_cpuinfo_label">CPU Info</string>
+    <string name="accessibility_quick_settings_cpuinfo_off">CPU Info off</string>
+    <string name="accessibility_quick_settings_cpuinfo_on">CPU Info on</string>
+    <string name="accessibility_quick_settings_cpuinfo_changed_off">CPU Info turned off</string>
+    <string name="accessibility_quick_settings_cpuinfo_changed_on">CPU Info turned on</string>
 
 </resources>
