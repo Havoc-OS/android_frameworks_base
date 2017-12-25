@@ -294,5 +294,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.CAMERA_LAUNCH, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.HIGH_TOUCH_SENSITIVITY_ENABLE, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.VOLUME_KEY_CURSOR_CONTROL, new InclusiveIntegerRangeValidator(0, 2));
+        VALIDATORS.put(System.VOLUME_WAKE_SCREEN, BOOLEAN_VALIDATOR);
     }
 }
