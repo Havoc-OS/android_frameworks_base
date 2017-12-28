@@ -425,7 +425,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, TunerS
 			    if (showCircle == 1)
 					return context.getColor(R.color.qs_tiles_active_color);
 				else 
-					return Utils.getColorAttr(context, android.R.attr.textColorPrimary);
+					return Utils.getColorAttr(context, android.R.attr.colorControlNormal);
             default:
                 Log.e("QSTile", "Invalid state " + state);
                 return 0;
