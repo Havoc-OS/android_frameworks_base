@@ -639,6 +639,27 @@ public class KeyguardStatusView extends GridLayout implements
         }
     }
 
+    private void updateClockColor() {
+        ContentResolver resolver = getContext().getContentResolver();
+        int color = Settings.System.getInt(resolver,
+                Settings.System.LOCKSCREEN_CLOCK_COLOR, 0xFFFFFFFF);
+
+        if (mClockView != null) {
+            mClockView.setTextColor(color);
+        }
+    }
+
+    private void updateClockDateColor() {
+        ContentResolver resolver = getContext().getContentResolver();
+        int color = Settings.System.getInt(resolver,
+                Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR, 0xFFFFFFFF);
+
+        if (mDateView != null) {
+            mDateView.setTextColor(color);
+        }
+    }
+
+     // DateFormat.getBestDateTimePattern is extremely expensive, and refresh is called often.
     // DateFormat.getBestDateTimePattern is extremely expensive, and refresh is called often.
     // This is an optimization to ensure we only recompute the patterns when the inputs change.
     private static final class Patterns {
