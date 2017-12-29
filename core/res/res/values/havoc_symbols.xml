@@ -117,6 +117,7 @@
     <java-symbol type="bool" name="config_hasDashCharger" />
 
     <!-- Advanced reboot -->
+    <java-symbol type="array" name="config_custom_globalActionsList" />
     <java-symbol type="string" name="reboot_to_recovery_title" />
     <java-symbol type="string" name="reboot_to_recovery_message" />
     <java-symbol type="string" name="reboot_to_bootloader_title" />
