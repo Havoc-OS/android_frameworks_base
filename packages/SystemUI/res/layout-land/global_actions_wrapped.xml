@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:layout_gravity="top|right"
     android:layout_marginBottom="0dp"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingTop="@dimen/global_actions_top_padding"
     android:clipToPadding="false"
     android:theme="@style/qs_theme"
     android:clipChildren="false">
 
-    <ScrollView
+    <HorizontalScrollView
         android:layout_width="@dimen/global_actions_panel_width"
         android:layout_height="wrap_content"
         android:scrollbars="none"
@@ -24,11 +24,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="@dimen/global_actions_padding"
             android:translationZ="@dimen/global_actions_translate" />
 
-    </ScrollView>
+    </HorizontalScrollView>
 
     <!-- For separated button-->
     <FrameLayout
