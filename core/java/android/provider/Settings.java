@@ -10878,6 +10878,18 @@ public final class Settings {
         public static final String SLEEP_MODE_RINGER_MODE = "sleep_mode_ringer_mode";
 
         /**
+         * Setting to allow setting rounded corner size and content padding
+         * @hide
+         */
+        public static final String SYSUI_ROUNDED_SIZE = "sysui_rounded_size";
+
+        /**
+         * Setting to disable rounded corner preferences and use frameworks values instead
+         * @hide
+         */
+        public static final String SYSUI_ROUNDED_FWVALS = "sysui_rounded_fwvals";
+
+        /**
          * These entries are considered common between the personal and the managed profile,
          * since the managed profile doesn't get to change them.
          */

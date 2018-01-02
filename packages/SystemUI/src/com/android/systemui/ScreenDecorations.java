@@ -154,6 +154,7 @@ public class ScreenDecorations extends SystemUI implements Tunable,
     private int mImmerseModeSetting = 0;
     private boolean mTopEnabled = true;
     private Point mZeroPoint = new Point(0, 0);
+
     private final SysuiStatusBarStateController mStatusBarStateController =
             (SysuiStatusBarStateController) Dependency.get(StatusBarStateController.class);
     private boolean mFullscreenMode = false;
@@ -245,6 +246,9 @@ public class ScreenDecorations extends SystemUI implements Tunable,
         mIsRoundedCornerMultipleRadius = mContext.getResources().getBoolean(
                 R.bool.config_roundedCornerMultipleRadius);
         updateRoundedCornerRadii();
+
+        mMainHandler.post(() -> mTunerService.addTunable(this, SIZE));
+
         setupDecorations();
         setupCameraListener();
 
@@ -316,8 +320,6 @@ public class ScreenDecorations extends SystemUI implements Tunable,
             DisplayMetrics metrics = new DisplayMetrics();
             mDisplayManager.getDisplay(DEFAULT_DISPLAY).getMetrics(metrics);
             mDensity = metrics.density;
-
-            mMainHandler.post(() -> mTunerService.addTunable(this, SIZE));
 
             // Watch color inversion and invert the overlay as needed.
             if (mColorInversionSetting == null) {
@@ -737,11 +739,11 @@ public class ScreenDecorations extends SystemUI implements Tunable,
         }
     }
     private boolean hasRoundedCorners() {
-        //return mRoundedDefault.x > 0
-        //        || mRoundedDefaultBottom.x > 0
-        //        || mRoundedDefaultTop.x > 0
-        //        || mIsRoundedCornerMultipleRadius;
-        return true;
+        return mRoundedDefault.x > 0
+                || mRoundedDefaultBottom.x > 0
+                || mRoundedDefaultTop.x > 0
+                || mIsRoundedCornerMultipleRadius
+                || mRoundedSize > 0;
     }
 
     private boolean shouldShowRoundedCorner(@BoundsPosition int pos) {
@@ -825,13 +827,18 @@ public class ScreenDecorations extends SystemUI implements Tunable,
         if (mOverlays == null) {
             return;
         }
-        if (!mTopEnabled && mRotation == RotationUtils.ROTATION_NONE) {
-            sizeTop = mZeroPoint;
-        } else if (sizeTop.x == 0) {
+        if (sizeDefault.x > 0) {
             sizeTop = sizeDefault;
-        }
-        if (sizeBottom.x == 0) {
             sizeBottom = sizeDefault;
+        } else {
+            if (!mTopEnabled && mRotation == RotationUtils.ROTATION_NONE) {
+                sizeTop = mZeroPoint;
+            } else if (sizeTop.x == 0) {
+                sizeTop = sizeDefault;
+            }
+            if (sizeBottom.x == 0) {
+                sizeBottom = sizeDefault;
+            }
         }
 
         for (int i = 0; i < BOUNDS_POSITION_LENGTH; i++) {
@@ -1357,11 +1364,11 @@ public class ScreenDecorations extends SystemUI implements Tunable,
 
     private void updateCutoutMode() {
         boolean newImmerseMode;
-        if (mRotation == RotationUtils.ROTATION_LANDSCAPE ||
-                mRotation == RotationUtils.ROTATION_SEASCAPE)
-            newImmerseMode = false;
-        else
+        if (mRotation == RotationUtils.ROTATION_NONE) {
             newImmerseMode = mImmerseModeSetting == 1;
+        } else {
+            newImmerseMode = false;
+        }
         if (mImmerseMode != newImmerseMode) {
             mImmerseMode = newImmerseMode;
             if (mOverlays != null) {
