@@ -82,4 +82,7 @@
     <integer name="config_deviceHardwareKeys">64</integer>
     <bool name="config_button_brightness_support">false</bool>
     <integer name="config_button_brightness_default">128</integer>
+	
+	<!-- Whether the device supports Smart Pixels --> 
+    <bool name="config_enableSmartPixels">false</bool>
 </resources>
