@@ -63,4 +63,8 @@
 
     <!-- Whether device has dash charging support -->
     <bool name="config_hasDashCharger">false</bool>
+
+  <!-- Whether the device supports Smart Pixels
+       Disable if it doesn't -->
+  <bool name="config_enableSmartPixels">true</bool>
 </resources>
