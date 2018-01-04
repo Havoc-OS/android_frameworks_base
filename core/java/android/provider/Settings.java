@@ -5420,6 +5420,18 @@ public final class Settings {
         public static final String QSFOOTER_SHOW_SERVICES = "qs_footer_show_services";
 
         /**
+         * Wheter to play notification sound and vibration if screen is ON
+         * 0 - never
+         * 1 - always
+         * @hide
+         */
+        public static final String NOTIFICATION_SOUND_VIB_SCREEN_ON = "notification_sound_vib_screen_on";
+
+        /** @hide */
+        private static final Validator NOTIFICATION_SOUND_VIB_SCREEN_ON_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
 	     ** Change fonts for the system lockscreen clock widget
 	     **
 	     ** @hide
@@ -5498,7 +5510,8 @@ public final class Settings {
             BURN_IN_PROTECTION,
             BURN_IN_PROTECTION_INTERVAL,
             USE_OLD_MOBILETYPE,
-            OMNI_NAVIGATION_BAR_RECENTS
+            OMNI_NAVIGATION_BAR_RECENTS,
+            NOTIFICATION_SOUND_VIB_SCREEN_ON
         };
 
         /**
@@ -5642,8 +5655,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(PROXIMITY_AUTO_SPEAKER_DELAY);
             PRIVATE_SETTINGS.add(PROXIMITY_AUTO_SPEAKER_INCALL_ONLY);
             PRIVATE_SETTINGS.add(OMNI_NAVIGATION_BAR_RECENTS);
+            PRIVATE_SETTINGS.add(NOTIFICATION_SOUND_VIB_SCREEN_ON);
         }
-
 
         /**
          * Whether to display the torch option in the power menu
@@ -5754,6 +5767,7 @@ public final class Settings {
             VALIDATORS.put(BURN_IN_PROTECTION_INTERVAL, BURN_IN_PROTECTION_INTERVAL_VALIDATOR);
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
             VALIDATORS.put(OMNI_NAVIGATION_BAR_RECENTS, OMNI_NAVIGATION_BAR_RECENTS_VALIDATOR);
+            VALIDATORS.put(NOTIFICATION_SOUND_VIB_SCREEN_ON, NOTIFICATION_SOUND_VIB_SCREEN_ON_VALIDATOR);
         }
 
         /**
