@@ -650,14 +650,10 @@ public final class ShutdownThread extends Thread {
         Thread t = new Thread() {
             public void run() {
                 TimingsTraceLog shutdownTimingsTraceLog = newTimingsLog();
-                boolean bluetoothReadyForShutdown;
                 boolean radioOff;
 
                 final ITelephony phone =
                         ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
-                final IBluetoothManager bluetooth =
-                        IBluetoothManager.Stub.asInterface(ServiceManager.checkService(
-                                BluetoothAdapter.BLUETOOTH_MANAGER_SERVICE));
 
                 try {
                     radioOff = phone == null || !phone.needMobileRadioShutdown();
@@ -671,7 +667,7 @@ public final class ShutdownThread extends Thread {
                     radioOff = true;
                 }
 
-                Log.i(TAG, "Waiting for Bluetooth and Radio...");
+                Log.i(TAG, "Waiting for Radio...");
 
                 long delay = endTime - SystemClock.elapsedRealtime();
                 while (delay > 0) {
@@ -697,8 +693,8 @@ public final class ShutdownThread extends Thread {
                         }
                     }
 
-                    if (radioOff && bluetoothReadyForShutdown) {
-                        Log.i(TAG, "Radio and Bluetooth shutdown complete.");
+                    if (radioOff) {
+                        Log.i(TAG, "Radio shutdown complete.");
                         done[0] = true;
                         break;
                     }
@@ -715,7 +711,7 @@ public final class ShutdownThread extends Thread {
         } catch (InterruptedException ex) {
         }
         if (!done[0]) {
-            Log.w(TAG, "Timed out waiting for Radio and Bluetooth shutdown.");
+            Log.w(TAG, "Timed out waiting for Radio shutdown.");
         }
     }
 
