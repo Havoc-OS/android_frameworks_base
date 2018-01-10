@@ -235,4 +235,7 @@
 
     <!-- Whether to allow sending active app broadcast -->
     <bool name="config_allowActivePackageBroadcast">false</bool>
+
+    <!-- add proximity sensor check for powerbutton flashlight -->
+    <integer name="config_flashlightProximityTimeout">300</integer>
 </resources>

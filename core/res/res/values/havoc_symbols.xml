@@ -298,6 +298,8 @@
   <java-symbol type="drawable" name="ic_shortcut_action_screenshot" />
   <java-symbol type="drawable" name="ic_shortcut_action_search" />
 
+  <java-symbol type="integer" name="config_flashlightProximityTimeout" />
+
   <!-- Device keyhandlers -->
   <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
   <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
