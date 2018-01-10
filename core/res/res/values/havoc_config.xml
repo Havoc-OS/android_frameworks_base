@@ -209,4 +209,6 @@
     <integer name="config_notificationsFastBatteryARGB">0xFF0000FF</integer>
 
     <bool name="config_canForceDozeNotifications">true</bool>
+
+    <integer name="config_flashlightProximityTimeout">300</integer>
 </resources>
