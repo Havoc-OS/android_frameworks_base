@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -260,6 +261,7 @@ public class KeyguardStatusView extends GridLayout implements
 
         refreshTime();
         refreshAlarmStatus(nextAlarm);
+        updateSettings(false);
     }
 
     void refreshAlarmStatus(AlarmManager.AlarmClockInfo nextAlarm) {
@@ -349,13 +351,13 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherData = mWeatherClient.getWeatherInfo();
             // Weather data not available. Try later.
             if (mWeatherData == null) {
-                updateSettings();
+                updateSettings(false);
                 return;
             }
             mWeatherCity.setText(mWeatherData.city);
             mWeatherCurrentTemp.setText(mWeatherData.temp + mWeatherData.tempUnits);
             mWeatherConditionText.setText(mWeatherData.condition);
-            updateSettings();
+            updateSettings(true);
        } catch(Exception e) {
           // Do nothing
        }
@@ -374,7 +376,7 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherCity.setText(mWeatherData.city);
             mWeatherCurrentTemp.setText(mWeatherData.temp + mWeatherData.tempUnits);
             mWeatherConditionText.setText(mWeatherData.condition);
-            updateSettings();
+            updateSettings(false);
        } catch(Exception e) {
           // Do nothing
        }
@@ -385,9 +387,10 @@ public class KeyguardStatusView extends GridLayout implements
         return false;
     }
 
-    private void updateSettings() {
+    private void updateSettings(boolean forceHide) {
         boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
-
+        final ContentResolver resolver = getContext().getContentResolver();
+        
         if (mWeatherView == null || weatherPanel == null)
             return;
 
@@ -552,7 +555,11 @@ public class KeyguardStatusView extends GridLayout implements
         static void update(Context context, boolean hasAlarm) {
             final Locale locale = Locale.getDefault();
             final Resources res = context.getResources();
-            dateViewSkel = res.getString(hasAlarm
+
+            final ContentResolver resolver = context.getContentResolver();
+            final boolean showAlarm = Settings.System.getIntForUser(resolver,
+                    Settings.System.HIDE_LOCKSCREEN_ALARM, 1, UserHandle.USER_CURRENT) == 1;
+            dateViewSkel = res.getString(hasAlarm && showAlarm
                     ? R.string.abbrev_wday_month_day_no_year_alarm
                     : R.string.abbrev_wday_month_day_no_year);
             final String clockView12Skel = res.getString(R.string.clock_12hr_format);

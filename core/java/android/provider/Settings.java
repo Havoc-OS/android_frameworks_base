@@ -4748,8 +4748,27 @@ public final class Settings {
         public static final String SCREEN_STATE_OFF_DELAY = "screen_state_off_delay";
 
         /**
+         * Hide lockscreen date
          * @hide
          */
+        public static final String HIDE_LOCKSCREEN_DATE = "hide_lockscreen_date";
+
+        /**
+         * Hide lockscreen clock
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_CLOCK = "hide_lockscreen_clock";
+
+        /**
+         * Hide lockscreen alarm
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_ALARM = "hide_lockscreen_alarm";
+        
+        /**
+         * @hide
+         */
+         
         public static final String SCREEN_STATE_ON_DELAY = "screen_state_on_delay";
 
         /**
