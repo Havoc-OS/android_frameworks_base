@@ -91,6 +91,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private StatusIconContainer mStatusIcons;
     private int mSignalClusterEndPadding = 0;
 
+    private View mBatteryBar;
+
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
             super(handler);
@@ -175,6 +177,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mRightClock = mStatusBar.findViewById(R.id.right_clock);
         mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
         mHavocLogoRight = mStatusBar.findViewById(R.id.havoc_logo_right);
+        mBatteryBar = mStatusBar.findViewById(R.id.battery_bar);
         showSystemIconArea(false);
         initEmergencyCryptkeeperText();
         animateHide(mClockView, false, false);
@@ -324,6 +327,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
         animateHide(mSystemIconArea, animate, true);
         animateHide(mHavocLogoRight, animate, true);
+        animateHide(mBatteryBar, animate, true));
     }
 
     public void showSystemIconArea(boolean animate) {
@@ -333,6 +337,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
         animateShow(mSystemIconArea, animate);
         animateShow(mHavocLogoRight, animate);
+        animateShow(mBatteryBar, animate);
     }
 
 /*    public void hideClock(boolean animate) {
