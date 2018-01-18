@@ -274,4 +274,6 @@
 
   <java-symbol type="bool" name="config_FastChargingLedSupported" />
   <java-symbol type="integer" name="config_notificationsFastBatteryARGB" />
+
+  <java-symbol type="bool" name="config_canForceDozeNotifications" />
 </resources>
