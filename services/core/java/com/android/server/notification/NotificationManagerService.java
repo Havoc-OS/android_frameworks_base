@@ -323,7 +323,6 @@ public class NotificationManagerService extends SystemService {
     private AudioAttributes mInCallNotificationAudioAttributes;
     private float mInCallNotificationVolume;
     private int mVibrationStrength = 30;
-    private boolean mInCallNotificationsVibrate;
 
     // used as a mutex for access to all active notifications & listeners
     final Object mNotificationLock = new Object();
