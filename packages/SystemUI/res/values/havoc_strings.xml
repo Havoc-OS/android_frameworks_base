@@ -351,4 +351,7 @@
     <!-- Partial screenshot -->
     <string name="screenshot_abort_title">No screenshot taken</string>
     <string name="screenshot_abort_text">Operation aborted</string>
+
+    <!-- Label for item that screenrecords in power menu options dialog -->
+    <string name="global_action_screenrecord">Screenrecord</string>
 </resources>
