@@ -369,7 +369,7 @@ public class PieController extends EdgeGestureManager.EdgeGestureActivationListe
                 injectKey(KeyEvent.KEYCODE_HOME);
                 break;
             case PieController.RECENT_BUTTON:
-                injectKey(KeyEvent.KEYCODE_APP_SWITCH);
+                 injectKey(KeyEvent.KEYCODE_APP_SWITCH);
                 break;
         }
     }
