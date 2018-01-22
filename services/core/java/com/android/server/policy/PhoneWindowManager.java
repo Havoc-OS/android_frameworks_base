@@ -766,10 +766,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private boolean mPendingKeyguardOccluded;
     private boolean mKeyguardOccludedChanged;
 
-
-    /** Custom system-wide flags deciding what features get enabled. */
-    private int mSystemDesignFlags = 0;
-
     // Pie
     boolean mPieState;
 
@@ -3242,10 +3238,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 }
                 updateEdgeGestureListenerState();
             }
-
-            final int systemDesignFlags = mSystemDesignFlags;
-            mSystemDesignFlags = Settings.Secure.getIntForUser(resolver,
-                        Settings.Secure.SYSTEM_DESIGN_FLAGS, 0, UserHandle.USER_CURRENT);
 
             if (mSystemReady) {
                 int pointerLocation = Settings.System.getIntForUser(resolver,
@@ -6626,8 +6618,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     }
 
     private boolean immersiveModeImplementsPie() {
-        return mPieState && mSystemDesignFlags != 0 &&
-                mSystemDesignFlags != View.SYSTEM_DESIGN_FLAG_IMMERSIVE_STATUS;
+        return mPieState;
     }
 
     private void offsetInputMethodWindowLw(WindowState win) {
