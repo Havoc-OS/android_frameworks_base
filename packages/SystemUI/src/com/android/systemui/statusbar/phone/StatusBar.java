@@ -1724,7 +1724,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         mNotificationShelf.setStatusBarState(mState);
     }
 
-    @Override
     public NetworkController getNetworkController() {
         return mNetworkController;
     }
@@ -6851,8 +6850,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
         return notifs;
     }
-
-    public abstract NetworkController getNetworkController();
 
     private final ContentObserver mPieSettingsObserver = new ContentObserver(mHandler) {
         @Override

@@ -32,6 +32,9 @@
     <color name="status_bar_carrier_color">#FFFFFFFF</color>
 
 	<color name="battery_level_good_color">#ff319111</color><!-- green -->
+
+    <color name="system_primary_color">@*android:color/primary_material_light</color> 
+    <color name="system_accent_color">@*android:color/material_deep_teal_700</color> 
 	
     <!-- Power menu wallpaper tint off color --> 
     <color name="power_menu_wallpaper_tint_off_color">#80202020</color> 	
