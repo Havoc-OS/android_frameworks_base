@@ -4832,28 +4832,56 @@ public final class Settings {
         public static final String DOZE_TRIGGER_DOUBLETAP = "doze_trigger_doubletap";
 
         /**
-         * Whether to display the reboot option in the power menu
+         * Whether to display the power menu reboot option on a secured lockscreen
+         *
+         * @hide
+         */
+        public static final String POWERMENU_LS_REBOOT = "powermenu_ls_reboot";
+
+        /**
+         * Whether to display the power menu advanced reboot option on a secured lockscreen
+         *
+         * @hide
+         */
+        public static final String POWERMENU_LS_ADVANCED_REBOOT = "powermenu_ls_advanced_reboot";
+
+        /**
+         * Whether to display the power menu screenshot option on a secured lockscreen
+         *
+         * @hide
+         */
+        public static final String POWERMENU_LS_SCREENSHOT = "powermenu_ls_screenshot";
+
+        /**
+         * Whether to display the power menu torch option on a secured lockscreen
+         *
+         * @hide
+         */
+        public static final String POWERMENU_LS_TORCH = "powermenu_ls_torch";
+
+        /**
+         * Whether to display the reboot option on the power menu
          *
          * @hide
          */
         public static final String POWERMENU_REBOOT = "powermenu_reboot";
 
         /**
-         * Whether to display the advanced reboot option in the power menu
+         * Whether to display the advanced reboot option on the power menu
          *
          * @hide
          */
         public static final String POWERMENU_ADVANCED_REBOOT = "powermenu_advanced_reboot";
 
         /**
-         * Whether to display the screenshot option in the power menu
+         * Whether to display the screenshot option on the power menu
          *
          * @hide
          */
         public static final String POWERMENU_SCREENSHOT = "powermenu_screenshot";
 
         /**
-         * Whether to display the torch option in the power menu
+         * Whether to display the torch option on the power menu
          *
          * @hide
          */
