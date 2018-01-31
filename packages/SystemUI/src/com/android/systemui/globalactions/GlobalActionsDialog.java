@@ -367,7 +367,9 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 mWindowManagerFuncs, mHandler) {
 
             public boolean showDuringKeyguard() {
-                return true;
+                boolean showlocked = Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_LS_ADVANCED_REBOOT, 0) == 1;
+                return showlocked;
             }
 
             public boolean showBeforeProvisioning() {
@@ -701,7 +703,9 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         @Override
         public boolean showDuringKeyguard() {
-            return true;
+            boolean showlocked = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.POWERMENU_LS_REBOOT, 1) == 1;
+            return showlocked;
         }
 
         @Override
@@ -738,7 +742,9 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         @Override
         public boolean showDuringKeyguard() {
-            return true;
+            boolean showlocked = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.POWERMENU_LS_SCREENSHOT, 0) == 1;
+            return showlocked;
         }
 
         @Override
@@ -779,7 +785,9 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             }
 
             public boolean showDuringKeyguard() {
-                return true;
+            boolean showlocked = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.POWERMENU_LS_TORCH, 0) == 1;
+            return showlocked;
             }
 
             public boolean showBeforeProvisioning() {
