@@ -43,6 +43,7 @@ public class ToggleSliderView extends RelativeLayout implements ToggleSlider {
 
     private ToggleSliderView mMirror;
     private BrightnessMirrorController mMirrorController;
+    private Context mContext;
 
     public ToggleSliderView(Context context) {
         this(context, null);
@@ -54,6 +55,7 @@ public class ToggleSliderView extends RelativeLayout implements ToggleSlider {
 
     public ToggleSliderView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        mContext = context;
 
         View.inflate(context, R.layout.status_bar_toggle_slider, this);
 
@@ -145,6 +147,12 @@ public class ToggleSliderView extends RelativeLayout implements ToggleSlider {
             copy.recycle();
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void setAutoBrightness(boolean enable) {
+        mSlider.setThumb(enable ? mContext.getDrawable(R.drawable.ic_qs_brightness_auto_on) :
+                mContext.getDrawable(R.drawable.ic_qs_brightness_auto_off));
     }
 
     private final OnCheckedChangeListener mCheckListener = new OnCheckedChangeListener() {
