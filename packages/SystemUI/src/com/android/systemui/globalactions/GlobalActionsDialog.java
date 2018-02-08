@@ -760,6 +760,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         @Override
         public boolean onLongPress() {
             //if (FeatureFlagUtils.isEnabled(mContext, FeatureFlagUtils.SCREENRECORD_LONG_PRESS)) {
+                mDialog.dismiss();
                 mScreenRecordHelper.launchRecordPrompt();
             /*} else {
                 onPress();
