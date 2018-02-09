@@ -341,4 +341,7 @@
     <string name="dlg_ok">@android:string/ok</string>
     <string name="dlg_cancel">@android:string/cancel</string>
     <string name="kill">Kill App</string>
+
+    <!--Google sound search tile -->
+    <string name="quick_settings_sound_search">Sound Search</string>
 </resources>
