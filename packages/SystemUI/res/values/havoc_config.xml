@@ -30,7 +30,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false">
-        caffeine,livedisplay,reading_mode
+        caffeine,livedisplay,reading_mode,soundsearch
     </string>
 
     <!-- Max visible notification icons -->
