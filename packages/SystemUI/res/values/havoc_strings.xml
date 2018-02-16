@@ -42,6 +42,8 @@
     <string name="quick_settings_compass_W">W</string>
     <string name="quick_settings_compass_NW">NW</string>
 
+    <string name="quick_settings_sound_search">Sound search</string> 
+
     <!-- Music tile -->
     <string name="quick_settings_music_label">Music</string>
     <string name="quick_settings_music_play">Play</string>
