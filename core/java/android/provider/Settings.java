@@ -4869,8 +4869,14 @@ public final class Settings {
         public static final String ALARM_BLOCKING_LIST = "alarm_blocking_list";
 
         /**
-         * Enable blocking alarm
-         * @hide
+        * Whether to gently vibrate instead of playin a sound when in-call and a notification is pushed
+        * @hide
+        */
+        public static final String INCALL_NOTIFICATIONS_VIBRATE = "incall_notifications_vibrate";
+
+        /**
+         * --- HAVOC System settings end
+         *  Add new system settings above this comment
          */
         public static final String ALARM_BLOCKING_ENABLED = "alarm_blocking_enabled";
 
