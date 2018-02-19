@@ -164,4 +164,7 @@
   <java-symbol type="string" name="adb_both_active_notification_title" />
   <java-symbol type="string" name="adb_active_generic_notification_message" />
 
+  <!-- In call notification vibration strength -->
+  <java-symbol type="integer" name="config_in_call_notification_vibration_strength" />
+
 </resources>
