@@ -322,6 +322,8 @@ public class NotificationManagerService extends SystemService {
     private Uri mInCallNotificationUri;
     private AudioAttributes mInCallNotificationAudioAttributes;
     private float mInCallNotificationVolume;
+    private int mVibrationStrength = 30;
+    private boolean mInCallNotificationsVibrate;
 
     // used as a mutex for access to all active notifications & listeners
     final Object mNotificationLock = new Object();
@@ -1353,6 +1355,9 @@ public class NotificationManagerService extends SystemService {
 
         mIsTelevision = mPackageManagerClient.hasSystemFeature(FEATURE_LEANBACK)
                 || mPackageManagerClient.hasSystemFeature(FEATURE_TELEVISION);
+
+        mVibrationStrength = resources.getInteger(
+                R.integer.config_in_call_notification_vibration_strength);
     }
 
     @Override
@@ -4296,7 +4301,7 @@ public class NotificationManagerService extends SystemService {
                         }
                     } else {
                         mVibrator.vibrate(
-                                VibrationEffect.createOneShot(30, 30));
+                                VibrationEffect.createOneShot(30, mVibrationStrength));
                     }
                 } catch (RemoteException e) {
                 } finally {
