@@ -7381,7 +7381,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
         boolean useHapticFeedback = down
                 && (policyFlags & WindowManagerPolicy.FLAG_VIRTUAL) != 0
-                && event.getRepeatCount() == 0;
+                && event.getRepeatCount() == 0
+                && !keyguardOn();
 
         // Specific device key handling
         if (dispatchKeyToKeyHandlers(event)) {
