@@ -4466,7 +4466,60 @@ public final class Settings {
         public static final String QS_COLUMNS_PORTRAIT = "qs_columns_portrait";
 
         /**
-         * How many columns to show in the qs panel when in landscape
+         * Finger amount for CarbonGestures
+         * @hide
+         */
+        public static final String CARBON_CUSTOM_GESTURE_FINGERS = "carbon_custom_gesture_fingers";
+
+        /**
+         * right gesture for CarbonGestures
+         * @hide
+         */
+        public static final String CARBON_CUSTOM_GESTURE_RIGHT = "carbon_custom_gesture_right";
+
+        /**
+         * left gesture for CarbonGestures
+         * @hide
+         */
+        public static final String CARBON_CUSTOM_GESTURE_LEFT = "carbon_custom_gesture_left";
+
+        /**
+         * up gesture for CarbonGestures
+         * @hide
+         */
+        public static final String CARBON_CUSTOM_GESTURE_UP = "carbon_custom_gesture_up";
+
+        /**
+         * down gesture for CarbonGestures
+         * @hide
+         */
+        public static final String CARBON_CUSTOM_GESTURE_DOWN = "carbon_custom_gesture_down";
+
+        /**
+         * right gesture for CarbonGestures
+         * @hide
+         */
+        public static final String CARBON_CUSTOM_GESTURE_PACKAGE_RIGHT = "carbon_custom_gesture_package_right";
+
+        /**
+         * left gesture for CarbonGestures
+         * @hide
+         */
+        public static final String CARBON_CUSTOM_GESTURE_PACKAGE_LEFT = "carbon_custom_gesture_package_left";
+
+        /**
+         * up gesture for CarbonGestures
+         * @hide
+         */
+        public static final String CARBON_CUSTOM_GESTURE_PACKAGE_UP = "carbon_custom_gesture_package_up";
+
+        /**
+         * down gesture for CarbonGestures
+         * @hide
+         */
+        public static final String CARBON_CUSTOM_GESTURE_PACKAGE_DOWN = "carbon_custom_gesture_package_down";
+
+        /*
          * @hide
          */
         public static final String QS_COLUMNS_LANDSCAPE = "qs_columns_landscape";
