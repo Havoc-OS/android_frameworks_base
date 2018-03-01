@@ -38,6 +38,7 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -659,7 +660,7 @@ public class RecentsView extends FrameLayout {
 	    mDate.setTextColor(mDatecolor);
 	    }
    } else {
-        mMemBar.getProgressDrawable().setColorFilter(mContext.getResources().getColor(R.color.system_accent_color), Mode.MULTIPLY);
+        mMemBar.getProgressDrawable().setColorFilter(mContext.getResources().getColor(R.color.accent_membar_color), Mode.MULTIPLY);
 	    mMemText.setTextColor(mDefaultcolor);
 	    mClock.setTextColor(mDefaultcolor);
 	    mDate.setTextColor(mDefaultcolor);
@@ -1566,11 +1567,6 @@ public class RecentsView extends FrameLayout {
         if (mTaskStackView != null) {
             mTaskStackView.dump(innerPrefix, writer);
         }
-    }
-
-    private boolean showWallpaperTint() {
-        return Settings.System.getIntForUser(mContext.getContentResolver(),
-                   Settings.System.WALLPAPER_RECENTS_TINT, 1, UserHandle.USER_CURRENT) == 1;
     }
 
     class SettingsObserver extends ContentObserver {
