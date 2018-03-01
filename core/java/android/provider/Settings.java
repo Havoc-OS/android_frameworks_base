@@ -5853,7 +5853,15 @@ public final class Settings {
         public static final String APP_CIRCLE_BAR_TRIGGER_TOP = "app_circle_bar_trigger_top";
 
         /**
-         * Apps to hide in the ChooserActivity
+         * Whether to show the kill app button in notification guts
+         *
+         * @hide
+         */
+        public static final String NOTIFICATION_GUTS_KILL_APP_BUTTON =
+                "notification_guts_kill_app_button";
+
+        /**
+         * Whether to gently vibrate instead of playin a sound when in-call and a notification is pushed
          * @hide
          */
         public static final String CHOOSER_ACTIVITY_BLACKLIST = "chooser_activity_blacklist";
