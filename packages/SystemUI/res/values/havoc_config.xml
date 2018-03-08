@@ -46,4 +46,12 @@
      <!-- System icon area layout weight -->
     <item name="system_icon_area_weight" format="float" type="integer">1</item>
 
+    <!-- Hardware ui (power menu) alignement:
+         Use one of the following values basing on the power button position:
+         * Top | Back -> 49 (Gravity.TOP | Gravity.CENTER_HORIZONTAL)
+         * Left -> 51 (Gravity.TOP | Gravity.LEFT)
+         * Right -> 53 (Gravity.TOP | Gravity.RIGHT)
+    -->
+    <integer name="hardware_ui_align">53</integer>
+
 </resources>

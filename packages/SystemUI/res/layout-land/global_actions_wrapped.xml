@@ -4,7 +4,7 @@
     android:id="@id/global_actions_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="top|right"
+    android:layout_gravity="@integer/hardware_ui_align"
     android:layout_marginBottom="@dimen/global_actions_top_padding"
     android:orientation="horizontal"
     android:paddingTop="@dimen/global_actions_top_padding"
@@ -16,7 +16,7 @@
         android:layout_width="@dimen/global_actions_panel_width"
         android:layout_height="wrap_content"
         android:scrollbars="none"
-        android:layout_gravity="top|right">
+        android:layout_gravity="@integer/hardware_ui_align">
 
         <!-- Global actions is right-aligned to be physically near power button -->
         <LinearLayout
