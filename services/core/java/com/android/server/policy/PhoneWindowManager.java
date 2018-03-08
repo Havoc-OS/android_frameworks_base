@@ -1073,7 +1073,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     KeyEvent event = (KeyEvent) msg.obj;
                     mIsLongPress = true;
                     break;
-                }
                 case HardkeyActionHandler.MSG_FIRE_HOME:
                     launchHomeFromHotKey();
                     break;
@@ -1459,10 +1458,15 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     // returns true if the key was handled and should not be passed to the user
     private boolean interceptBackKeyUp(KeyEvent event) {
+        final boolean keyguardOn = keyguardOn();
+        final boolean virtualKey = event.getDeviceId() == KeyCharacterMap.VIRTUAL_KEYBOARD;
+
         // Cache handled state
         boolean handled = mBackKeyHandled;
 
-        if (hasPanicPressOnBackBehavior()) {
+        // Only update panic press counter if this event won't get remapped by DU KeyHandler,
+        // i.e. is the final back action to prevent duplicates
+        if (hasPanicPressOnBackBehavior() && (mKeyHandler == null || keyguardOn || virtualKey)) {
             // Check for back key panic press
             ++mBackKeyPressCounter;
 
