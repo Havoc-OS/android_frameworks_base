@@ -163,4 +163,10 @@
 
     <!-- In call notification vibration strength -->
     <integer name="config_in_call_notification_vibration_strength">30</integer>
+
+    <!-- True if the notification's dynamic app icon/title tint should be optimised for dark
+    backgrounds (requires config_allowNotificationIconTextTinting to be true)-->
+    <bool name="config_useDarkBgNotificationIconTextTinting">false</bool>
+    <bool name="config_useDarkBgNotificationTinting_override">false</bool>
+    <bool name="config_notificationTinting_override">false</bool>
 </resources>
