@@ -456,7 +456,7 @@ class SaveImageInBackgroundTask extends AsyncTask<Void, Void, Void> {
                 mNotificationManager.notify(SystemMessage.NOTE_GLOBAL_SCREENSHOT,
                         mNotificationBuilder.build());
             } else{
-                Intent startIntent = new Intent(mParams.context, com.android.systemui.screenshot.ScreenshotEditor.class);
+                Intent startIntent = new Intent(mParams.context, ScreenshotEditor.class);
                 startIntent.putExtra(GlobalScreenshot.SCREENSHOT_FILE_PATH, mImageFilePath);
                 mParams.context.startService(startIntent);
             }
@@ -1138,7 +1138,7 @@ class GlobalScreenshot {
             final String imageFilePath = intent.getStringExtra(SCREENSHOT_FILE_PATH);
             nm.cancel(SystemMessage.NOTE_GLOBAL_SCREENSHOT);
 
-            Intent startIntent = new Intent(this, com.android.systemui.screenshot.ScreenshotEditor.class);
+            Intent startIntent = new Intent(this, ScreenshotEditor.class);
             startIntent.putExtra(SCREENSHOT_FILE_PATH, imageFilePath);
             startService(startIntent);
             finish();

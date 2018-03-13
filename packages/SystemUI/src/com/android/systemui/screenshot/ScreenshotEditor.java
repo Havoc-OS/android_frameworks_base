@@ -49,10 +49,14 @@ import com.android.systemui.screenshot.ColorArrayAdapter;
 import com.android.systemui.screenshot.ImageArrayAdapter;
 import com.android.systemui.R;
 
+import android.support.v4.content.FileProvider;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
 public class ScreenshotEditor extends Service implements View.OnClickListener {
+
+    private final String FILEPROVIDER_AUTHORITY = "com.android.systemui.fileprovider";
 
     private Context mContext;
 
@@ -443,6 +447,7 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
     public void onClick(View v) {
         String msg = "";
         Bitmap bm = null;
+        progressBar.setVisibility(View.VISIBLE);
         switch (v.getId()) {
             case R.id.recover:
                 cropView.recoverImage();
@@ -474,6 +479,7 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
                 cropView.cropImage(cropView.getCroppedBitmap());
                 break;
         }
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -586,7 +592,7 @@ public class ScreenshotEditor extends Service implements View.OnClickListener {
 
     private void shareBitmap() {
         final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(screenshotPath)));
+        intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(mContext, FILEPROVIDER_AUTHORITY, new File(screenshotPath)));
         intent.setType("image/png");
         Intent sender = Intent.createChooser(intent, null);
         sender.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
