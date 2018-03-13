@@ -17,6 +17,7 @@
 package com.android.systemui.havoc.onthego;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -50,6 +51,7 @@ public class OnTheGoService extends Service {
     private static final boolean DEBUG = false;
 
     private static final int ONTHEGO_NOTIFICATION_ID = 81333378;
+    private static final String ONTHEGO_CHANNEL_ID = "onthego_notif";
 
     public static final String ACTION_START          = "start";
     public static final String ACTION_STOP           = "stop";
@@ -71,6 +73,7 @@ public class OnTheGoService extends Service {
     private FrameLayout         mOverlay;
     private Camera              mCamera;
     private NotificationManager mNotificationManager;
+    private NotificationChannel mNotificationChannel;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -173,6 +176,7 @@ public class OnTheGoService extends Service {
         // Cancel notification
         if (mNotificationManager != null) {
             mNotificationManager.cancel(ONTHEGO_NOTIFICATION_ID);
+            mNotificationManager.deleteNotificationChannel(ONTHEGO_CHANNEL_ID);
             mNotificationManager = null;
         }
 
@@ -332,7 +336,7 @@ public class OnTheGoService extends Service {
 
     private void createNotification(final int type) {
         final Resources r = getResources();
-        final Notification.Builder builder = new Notification.Builder(this)
+        final Notification.Builder builder = new Notification.Builder(this, ONTHEGO_CHANNEL_ID)
                 .setTicker(r.getString(
                         (type == 1 ? R.string.onthego_notif_camera_changed :
                                 (type == 2 ? R.string.onthego_notif_error
@@ -379,6 +383,11 @@ public class OnTheGoService extends Service {
         final Notification notif = builder.build();
 
         mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationChannel = new NotificationChannel(ONTHEGO_CHANNEL_ID,
+                r.getString(R.string.onthego_channel_name),
+                NotificationManager.IMPORTANCE_LOW);
+        mNotificationManager.createNotificationChannel(mNotificationChannel);
+
         mNotificationManager.notify(ONTHEGO_NOTIFICATION_ID, notif);
     }
 
