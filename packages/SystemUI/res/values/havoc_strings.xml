@@ -214,4 +214,12 @@
     <string name="status_bar_roaming">Roaming</string>
 
     <string name="status_bar_data_saver">Data saver</string>
+	
+
+    <!-- QuickSettings: ScreenStabilization tile [CHAR LIMIT=NONE] -->
+    <string name="quick_settings_stabilization_label">Screen Stabilization</string>
+    <!-- QuickSettings: ScreenStabilization (off) [CHAR LIMIT=NONE] -->
+    <string name="quick_settings_stabilization_off">Screen Stabilization</string>
+    <!-- QuickSettings: ScreenStabilization (on) [CHAR LIMIT=NONE] -->
+    <string name="quick_settings_stabilization_on">Screen Stabilization</string>
 </resources>
