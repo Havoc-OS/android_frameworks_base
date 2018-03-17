@@ -29,6 +29,7 @@ import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.IActivityManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -48,6 +49,8 @@ import android.os.ShellCallback;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -668,8 +671,14 @@ public final class OverlayManagerService extends SystemService {
         }
     };
 
+    private boolean isUntrustedOverlayAllowed() {
+        return Settings.Secure.getIntForUser(getContext().getContentResolver(),
+                Settings.Secure.UNTRUSTED_OVERLAY_TOGGLE, 0, UserHandle.USER_CURRENT) == 1;
+    }
+
     private boolean isOverlayPackage(@NonNull final PackageInfo pi) {
-        return pi != null && pi.overlayTarget != null;
+        return pi != null && pi.overlayTarget != null
+            && (((pi.overlayFlags & PackageInfo.FLAG_OVERLAY_TRUSTED) != 0) || isUntrustedOverlayAllowed());
     }
 
     private final class OverlayChangeListener
