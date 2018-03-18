@@ -4502,6 +4502,18 @@ public final class Settings {
          */
         public static final String QS_ROWS_PORTRAIT = "qs_rows_portrait";
 
+	/**
+         * Heads up timeout configuration
+         * @hide
+         */
+        public static final String HEADS_UP_TIMEOUT = "heads_up_timeout";
+
+	/**
+         * Defines the global heads up notification snooze
+         * @hide
+         */
+        public static final String HEADS_UP_NOTIFICATION_SNOOZE = "heads_up_notification_snooze";
+
         /**
          * How many rows to show in the qs panel when in landscape
          * @hide

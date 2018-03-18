@@ -36,7 +36,7 @@ import com.android.systemui.R;
 
 public class SmartPixelsTile extends QSTileImpl<BooleanState> {
     private static final ComponentName SMART_PIXELS_SETTING_COMPONENT = new ComponentName(
-            "com.android.settings", "com.android.settings.Settings$SmartPixelsActivity");
+            "com.havoc.settings", "com.havoc.settings.Settings$StartSmartPixelActivity");
 
     private static final Intent SMART_PIXELS_SETTINGS =
             new Intent().setComponent(SMART_PIXELS_SETTING_COMPONENT);
