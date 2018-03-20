@@ -6855,6 +6855,14 @@ public final class Settings {
         @Deprecated
         public static final String LOCK_SCREEN_OWNER_INFO = "lock_screen_owner_info";
 
+                
+        /**
+        * Count of small QS tiles.
+        * @hide
+        */
+       public static final String QQS_COUNT = "sysui_qqs_count";
+
+
         /**
          * Ids of the user-selected appwidgets on the lockscreen (comma-delimited).
          * @hide
