@@ -77,7 +77,7 @@ public class KeyguardShortcuts extends LinearLayout {
         mPackageManager = mContext.getPackageManager();
         mLockPatternUtils = new LockPatternUtils(mContext);
         mSettingsObserver = new SettingsObserver(mHandler);
-        createShortcuts();
+        createShortcuts(false);
     }
 
     @Override
@@ -96,9 +96,9 @@ public class KeyguardShortcuts extends LinearLayout {
         mSettingsObserver.unobserve();
     }
 
-    private void createShortcuts() {
+    private void createShortcuts(boolean isdozing) {
         ArrayList<ActionConfig> actionConfigs = ActionHelper.getLockscreenShortcutConfig(mContext);
-        if (actionConfigs.size() == 0) {
+        if (actionConfigs.size() == 0 || isdozing) {
             setVisibility(View.GONE);
             return;
         }
@@ -192,6 +192,15 @@ public class KeyguardShortcuts extends LinearLayout {
         return false;
     }
 
+    public void setDozing(boolean dozing) {
+        if (dozing) {
+            removeAllViews();
+            createShortcuts(true);
+        } else {
+            recreateShortcuts();
+        }
+    }
+
     class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
             super(handler);
@@ -224,6 +233,6 @@ public class KeyguardShortcuts extends LinearLayout {
 
     private void recreateShortcuts() {
         removeAllViews();
-        createShortcuts();
+        createShortcuts(false);
     }
 }
