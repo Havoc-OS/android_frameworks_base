@@ -5083,6 +5083,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         Dependency.get(ConfigurationController.class).removeCallback(this);
     }
 
+    // From DUPackageMonitor (mPackageMonitor) util
     @Override
     public void onPackageChanged(String pkg, PackageState state) {
         if (state == PackageState.PACKAGE_REMOVED
