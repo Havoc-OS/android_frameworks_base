@@ -6880,6 +6880,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Settings.System.CLEAR_RECENTS_STYLE_ENABLE), 
                 false, this, UserHandle.USER_ALL); 
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_ALPHA),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_SECURITY_ALPHA),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.RECENTS_OMNI_SWITCH_ENABLED),
                     false, this, UserHandle.USER_ALL);
             update();
@@ -6913,6 +6919,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         public void update() {
             updateOmniSwitch();
             updateBlurSettings();
+            setNewOverlayAlpha();
+            setSecurityAlpha();
         }
     }
 
@@ -6943,6 +6951,13 @@ public class StatusBar extends SystemUI implements DemoMode,
         RecentsActivity.updateBlurColors(mBlurDarkColorFilter,mBlurMixedColorFilter,mBlurLightColorFilter); 
         RecentsActivity.updateRadiusScale(mScaleRecents,mRadiusRecents); 
 } 
+    public void setSecurityAlpha() {
+        float securityoverlayalpha = Settings.System.getFloatForUser(mContext.getContentResolver(),
+        Settings.System.LOCKSCREEN_SECURITY_ALPHA, 0.75f, UserHandle.USER_CURRENT);
+        if (mScrimController != null) {
+        mScrimController.setSecurityOverlayAlpha(securityoverlayalpha);
+        }
+    }
 
 
     private void updateOmniSwitch() {

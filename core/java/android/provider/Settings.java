@@ -5347,12 +5347,24 @@ public final class Settings {
         public static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
 
         /**
+         * change lockscreen alpha color
+         * @hide
+         */
+        public static final String LOCKSCREEN_ALPHA = "lockscreen_alpha";
+
+        /**
          * Whether to enable OmniSwitch as recents implementation.
          * @hide
          */
         public static final String RECENTS_OMNI_SWITCH_ENABLED = "recents_omni_switch";
 
-         /**
+        /**
+         * change lockscreen security alpha color
+         * @hide
+         */
+        public static final String LOCKSCREEN_SECURITY_ALPHA = "lockscreen_security_alpha";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *

@@ -24,6 +24,8 @@ import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.graphics.drawable.Drawable;
 import android.os.Trace;
 import android.util.MathUtils;
@@ -134,6 +136,9 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener,
     private boolean mScrimsVisble;
     private final Consumer<Boolean> mScrimVisibleListener;
 
+    private float mOverlayAlpha;
+    private float mSecurityOverlayAlpha;
+
     public ScrimController(LightBarController lightBarController, ScrimView scrimBehind,
             ScrimView scrimInFront, View headsUpScrim,
             Consumer<Boolean> scrimVisibleListener) {
@@ -158,8 +163,27 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener,
                 ColorExtractor.TYPE_DARK, true /* ignoreVisibility */);
         mNeedsDrawableColorUpdate = true;
 
+        mOverlayAlpha = Settings.System.getFloatForUser(context.getContentResolver(),
+                Settings.System.LOCKSCREEN_ALPHA, 0.45f, UserHandle.USER_CURRENT);
+        mSecurityOverlayAlpha = Settings.System.getFloatForUser(context.getContentResolver(),
+                Settings.System.LOCKSCREEN_SECURITY_ALPHA, 0.75f, UserHandle.USER_CURRENT);
+        mOverlayAlpha = Settings.System.getFloatForUser(context.getContentResolver(),
+                Settings.System.LOCKSCREEN_ALPHA, 0.45f, UserHandle.USER_CURRENT);
+        mSecurityOverlayAlpha = Settings.System.getFloatForUser(context.getContentResolver(),
+                Settings.System.LOCKSCREEN_SECURITY_ALPHA, 0.75f, UserHandle.USER_CURRENT);
+
         updateHeadsUpScrim(false);
         updateScrims();
+    }
+
+    public void setOverlayAlpha(float alpha) {
+        mOverlayAlpha = alpha;
+        scheduleUpdate();
+    }
+
+    public void setSecurityOverlayAlpha(float alpha) {
+        mSecurityOverlayAlpha = alpha;
+        scheduleUpdate();
     }
 
     public void setKeyguardShowing(boolean showing) {
@@ -415,19 +439,19 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener,
             float fraction = 1 - behindFraction;
             fraction = (float) Math.pow(fraction, 0.8f);
             behindFraction = (float) Math.pow(behindFraction, 0.8f);
-            setScrimInFrontAlpha(fraction * getScrimInFrontAlpha());
-            setScrimBehindAlpha(behindFraction * mScrimBehindAlphaKeyguard);
+            setScrimInFrontAlpha(fraction * mSecurityOverlayAlpha);
+            setScrimBehindAlpha(behindFraction * mOverlayAlpha);
         } else if (mBouncerShowing && !mBouncerIsKeyguard) {
-            setScrimInFrontAlpha(getScrimInFrontAlpha());
+            setScrimInFrontAlpha(mSecurityOverlayAlpha);
             updateScrimNormal();
         } else if (mBouncerShowing) {
-            setScrimInFrontAlpha(0f);
-            setScrimBehindAlpha(mScrimBehindAlpha);
+            setScrimInFrontAlpha(mSecurityOverlayAlpha);
+            setScrimBehindAlpha(0f);
         } else {
             float fraction = Math.max(0, Math.min(mFraction, 1));
             setScrimInFrontAlpha(0f);
             setScrimBehindAlpha(fraction
-                    * (mScrimBehindAlphaKeyguard - mScrimBehindAlphaUnlocking)
+                    * (mOverlayAlpha - mScrimBehindAlphaUnlocking)
                     + mScrimBehindAlphaUnlocking);
         }
     }
