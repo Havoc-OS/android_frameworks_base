@@ -6951,6 +6951,14 @@ public class StatusBar extends SystemUI implements DemoMode,
         RecentsActivity.updateBlurColors(mBlurDarkColorFilter,mBlurMixedColorFilter,mBlurLightColorFilter); 
         RecentsActivity.updateRadiusScale(mScaleRecents,mRadiusRecents); 
 } 
+
+public void setNewOverlayAlpha() { 
+    float overlayalpha = Settings.System.getFloatForUser(mContext.getContentResolver(), 
+    Settings.System.LOCKSCREEN_ALPHA, 0.45f, UserHandle.USER_CURRENT); 
+    if (mScrimController != null) { 
+    mScrimController.setOverlayAlpha(overlayalpha); 
+    	} 
+}
     public void setSecurityAlpha() {
         float securityoverlayalpha = Settings.System.getFloatForUser(mContext.getContentResolver(),
         Settings.System.LOCKSCREEN_SECURITY_ALPHA, 0.75f, UserHandle.USER_CURRENT);

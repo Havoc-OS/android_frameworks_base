@@ -122,7 +122,7 @@ public class KeyguardIndicationController {
         mIndicationArea = indicationArea;
         mTextView = (KeyguardIndicationTextView) indicationArea.findViewById(
                 R.id.keyguard_indication_text);
-        mInitialTextColor = mTextView != null ? mTextView.getCurrentTextColor() : Color.WHITE;
+        mInitialTextColor = mTextView != null ? mTextView.getCurrentTextColor() : Color.RED;
         mDisclosure = (KeyguardIndicationTextView) indicationArea.findViewById(
                 R.id.keyguard_indication_enterprise_disclosure);
         mLockIcon = lockIcon;

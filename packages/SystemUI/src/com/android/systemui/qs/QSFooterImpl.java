@@ -70,7 +70,7 @@ import com.android.systemui.statusbar.policy.UserInfoController.OnUserInfoChange
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.tuner.TunerService.Tunable;
 
-public class QSFooterImpl extends FrameLayout implements QSFooter,
+public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         NextAlarmChangeCallback, OnClickListener, OnLongClickListener, OnUserInfoChangedListener, EmergencyListener,
         SignalCallback {
     private static final float EXPAND_INDICATOR_THRESHOLD = .93f;
