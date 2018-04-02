@@ -5690,6 +5690,20 @@ public final class Settings {
 
 
         /**
+         * Change font size for the system lockscreen date
+         *
+         * @hide
+         */
+        public static final String LOCKDATE_FONT_SIZE= "lockdate_font_size";
+
+        /**
+         * Change font size for the system lockscreen clock widget
+         *
+         * @hide
+         */
+        public static final String LOCKCLOCK_FONT_SIZE = "lockclock_font_size";
+
+        /**
          * Width of the app circle bar trigger
          *
          * @hide
