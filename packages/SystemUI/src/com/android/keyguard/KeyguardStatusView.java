@@ -113,6 +113,7 @@ public class KeyguardStatusView extends GridLayout implements
     private int mTextColor;
     private int mDateTextColor;
     private int mAlarmTextColor;
+    private int dateFont;
 
     private boolean mForcedMediaDoze;
 
@@ -692,6 +693,81 @@ public class KeyguardStatusView extends GridLayout implements
             weatherPanel.setVisibility(mShowWeather ?
                 View.VISIBLE : View.GONE);
         }
+        if (dateFont == 0) {
+            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        }
+        if (dateFont == 1) {
+            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+        }
+        if (dateFont == 2) {
+            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+        }
+        if (dateFont == 3) {
+            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
+        }
+        if (dateFont == 4) {
+            mDateView.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
+        }
+        if (dateFont == 5) {
+                mDateView.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
+        }
+        if (dateFont == 6) {
+            mDateView.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));
+        }
+        if (dateFont == 7) {
+                mDateView.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));
+        }
+        if (dateFont == 8) {
+            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
+        }
+        if (dateFont == 9) {
+            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));
+        }
+        if (dateFont == 10) {
+            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+        }
+        if (dateFont == 11) {
+            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
+        }
+        if (dateFont == 12) {
+            mDateView.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        }
+        if (dateFont == 13) {
+            mDateView.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));
+        }
+        if (dateFont == 14) {
+                mDateView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));
+        }
+        if (dateFont == 15) {
+                mDateView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));
+        }
+        if (dateFont == 16) {
+                mDateView.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
+        }
+        if (dateFont == 17) {
+                mDateView.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));
+        }
+        if (dateFont == 18) {
+                mDateView.setTypeface(Typeface.create("cursive", Typeface.NORMAL));
+        }
+        if (dateFont == 19) {
+                mDateView.setTypeface(Typeface.create("cursive", Typeface.BOLD));
+        }
+        if (dateFont == 20) {
+                mDateView.setTypeface(Typeface.create("casual", Typeface.NORMAL));
+        }
+        if (dateFont == 21) {
+                mDateView.setTypeface(Typeface.create("serif", Typeface.NORMAL));
+        }
+        if (dateFont == 22) {
+                mDateView.setTypeface(Typeface.create("serif", Typeface.ITALIC));
+        }
+        if (dateFont == 23) {
+                mDateView.setTypeface(Typeface.create("serif", Typeface.BOLD));
+        }
+        if (dateFont == 24) {
+                mDateView.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
+        }
         updateVisibilities();
         updateDozeVisibleViews();
     }
@@ -1052,6 +1128,8 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCKSCREEN_CLOCK_COLOR, 0xFFFFFFFF);
            mDateColor = Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR, 0xFFFFFFFF);
+           dateFont = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCK_DATE_FONTS, 8, UserHandle.USER_CURRENT);
           
            updateSettings(false);
          }
