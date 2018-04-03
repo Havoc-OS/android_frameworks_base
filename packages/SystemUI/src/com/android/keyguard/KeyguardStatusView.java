@@ -964,9 +964,9 @@ public class KeyguardStatusView extends GridLayout implements
         } else {
             mBatteryDoze.setDark(dark);
         }
-        mClockView.setTextColor(ColorUtils.blendARGB(mTextColor, Color.WHITE, darkAmount));
-        mDateView.setTextColor(ColorUtils.blendARGB(mDateTextColor, Color.WHITE, darkAmount));
-        int blendedAlarmColor = ColorUtils.blendARGB(mAlarmTextColor, Color.WHITE, darkAmount);
+        mClockView.setTextColor(ColorUtils.blendARGB(mTextColor, Color.RED, darkAmount));
+        mDateView.setTextColor(ColorUtils.blendARGB(mDateTextColor, Color.RED, darkAmount));
+        int blendedAlarmColor = ColorUtils.blendARGB(mAlarmTextColor, Color.RED, darkAmount);
         mAlarmStatusView.setTextColor(blendedAlarmColor);
         mAlarmStatusView.setCompoundDrawableTintList(ColorStateList.valueOf(blendedAlarmColor));
         mAnalogClockView.setDark(dark);
@@ -1027,6 +1027,8 @@ public class KeyguardStatusView extends GridLayout implements
                      Settings.System.LOCKSCREEN_CLOCK_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR), false, this, UserHandle.USER_ALL);
+             resolver.registerContentObserver(Settings.System.getUriFor(
+                     Settings.System.LOCK_DATE_FONTS), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
@@ -1102,11 +1104,13 @@ public class KeyguardStatusView extends GridLayout implements
                     queryAndUpdateWeather();
                 }  else if (uri.equals(Settings.System.getUriFor(
                         Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION))) {
-                    queryAndUpdateWeather();
-                }
+                             queryAndUpdateWeather();
+              } else if (uri.equals(Settings.System.getUriFor(
+                      Settings.System.LOCK_DATE_FONTS))) {
+                 refreshdatesize();
+                 
            update();
         }
-              
 
        public void update() {
            ContentResolver resolver = mContext.getContentResolver();
