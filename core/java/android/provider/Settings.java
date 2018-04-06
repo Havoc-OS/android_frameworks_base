@@ -5426,6 +5426,20 @@ public final class Settings {
         public static final String RECENTS_OMNI_SWITCH_ENABLED = "recents_omni_switch";
 
         /**
+         * Show Settings icon in QS Footer
+         *
+         * @hide
+         */
+        public static final String QSFOOTER_SHOW_SETTINGS = "qs_footer_show_settings";
+
+        /**
+         *
+         * Show Running Services icon in QS Footer.
+         * @hide
+         */
+        public static final String QSFOOTER_SHOW_SERVICES = "qs_footer_show_services";
+
+        /**
          * change lockscreen security alpha color
          * @hide
          */
