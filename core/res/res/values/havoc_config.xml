@@ -53,4 +53,7 @@
     <string-array name="device_configs_override" translatable="false">
     </string-array>
 
+    <!-- Whether the device supports Smart Pixels -->
+    <bool name="config_supportSmartPixels">true</bool>
+
 </resources>
