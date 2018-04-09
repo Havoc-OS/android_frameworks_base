@@ -150,4 +150,8 @@
     <!-- Content description of the HW keys tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_hw_keys_enabled">HW Keys enabled.</string>
     <string name="quick_settings_sleepscreen_label">Sleep Screen</string>
+	
+	<!-- Smart Pixels --> 
+    <string name="quick_settings_smart_pixels">Smart Pixels</string> 
+    <string name="quick_settings_smart_pixels_on_power_save">Auto-enabled Smart Pixels</string>
 </resources>

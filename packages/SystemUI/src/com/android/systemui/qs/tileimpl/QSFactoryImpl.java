@@ -57,6 +57,7 @@ import com.android.systemui.qs.tiles.ReadingModeTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenStabilizationTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
+import com.android.systemui.qs.tiles.SmartPixelsTile;
 import com.android.systemui.qs.tiles.SoundSearchTIle;
 import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.SleepScreenTile;
@@ -123,6 +124,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("soundsearch")) return new SoundSearchTIle(mHost);
         else if (tileSpec.equals("sleepscreen")) return new SleepScreenTile(mHost);
 		else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
+        else if (tileSpec.equals("smartpixels")) return new SmartPixelsTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);
