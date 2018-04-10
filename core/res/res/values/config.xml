@@ -1512,6 +1512,8 @@
         <item>com.android.location.fused</item>
         <!-- microG unifiednlp location provider (standalone) -->
         <item>org.microg.nlp</item>
+        <!-- The (faked) microg fused location provider -->
+        <item>com.google.android.gms</item>
     </string-array>
 
     <!-- This string array can be overriden to enable test location providers initially. -->
