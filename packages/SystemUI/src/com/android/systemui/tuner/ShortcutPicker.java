@@ -68,11 +68,11 @@ public class ShortcutPicker extends PreferenceFragment implements Tunable {
         screen.addPreference(mDefaultPreference);
         if (LOCKSCREEN_LEFT_BUTTON.equals(mKey)) {
             Drawable d = context.getDrawable(R.drawable.ic_mic_26dp);
-            d.mutate().setTint(Utils.getColorAttr(context, android.R.attr.textColorPrimary));
+            d.mutate().setTint(Utils.getColorAttrDefaultColor(context, android.R.attr.textColorPrimary));
             mDefaultPreference.setIcon(d);
         } else {
             Drawable d = context.getDrawable(R.drawable.ic_camera_alt_24dp);
-            d.mutate().setTint(Utils.getColorAttr(context, android.R.attr.textColorPrimary));
+            d.mutate().setTint(Utils.getColorAttrDefaultColor(context, android.R.attr.textColorPrimary));
             mDefaultPreference.setIcon(d);
         }
 

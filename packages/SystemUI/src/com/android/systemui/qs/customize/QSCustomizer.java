@@ -139,8 +139,7 @@ public class QSCustomizer extends LinearLayout implements OnMenuItemClickListene
                 UserHandle.USER_CURRENT);
         MenuItem qsTitlesMenuItem = mToolbar.getMenu().findItem(R.id.menu_item_titles);
         qsTitlesMenuItem.setChecked(qsTitlesValue == 1);
-
-        int accentColor = Utils.getColorAttr(context, android.R.attr.colorAccent);
+        int accentColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
         mToolbar.setTitleTextColor(accentColor);
         mToolbar.getNavigationIcon().setTint(accentColor);
         mToolbar.getOverflowIcon().setTint(accentColor);

@@ -69,10 +69,10 @@ public class StatusBarInoutContainer extends FrameLayout {
         mLightContext = new ContextThemeWrapper(mContext, dualToneLightTheme);
         mDarkContext = new ContextThemeWrapper(mContext, dualToneDarkTheme);
 
-        mDarkModeBackgroundColor = Utils.getColorAttr(mDarkContext, R.attr.backgroundColor);
-        mDarkModeFillColor = Utils.getColorAttr(mDarkContext, R.attr.fillColor);
-        mLightModeBackgroundColor = Utils.getColorAttr(mLightContext, R.attr.backgroundColor);
-        mLightModeFillColor = Utils.getColorAttr(mLightContext, R.attr.fillColor);
+        mDarkModeBackgroundColor = Utils.getColorAttrDefaultColor(mDarkContext, R.attr.backgroundColor);
+        mDarkModeFillColor = Utils.getColorAttrDefaultColor(mDarkContext, R.attr.fillColor);
+        mLightModeBackgroundColor = Utils.getColorAttrDefaultColor(mLightContext, R.attr.backgroundColor);
+        mLightModeFillColor = Utils.getColorAttrDefaultColor(mLightContext, R.attr.fillColor);
     }
 
     @Override

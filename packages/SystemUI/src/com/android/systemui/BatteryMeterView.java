@@ -189,9 +189,9 @@ public class BatteryMeterView extends LinearLayout implements
 
         if (mUseWallpaperTextColors) {
             updateColors(
-                    Utils.getColorAttr(mContext, R.attr.wallpaperTextColor),
-                    Utils.getColorAttr(mContext, R.attr.wallpaperTextColorSecondary),
-                    Utils.getColorAttr(mContext, R.attr.wallpaperTextColor));
+                    Utils.getColorAttrDefaultColor(mContext, R.attr.wallpaperTextColor),
+                    Utils.getColorAttrDefaultColor(mContext, R.attr.wallpaperTextColorSecondary),
+                    Utils.getColorAttrDefaultColor(mContext, R.attr.wallpaperTextColor));
         } else {
             updateColors(mNonAdaptedForegroundColor, mNonAdaptedBackgroundColor, mNonAdaptedSingleToneColor);
         }
@@ -206,12 +206,15 @@ public class BatteryMeterView extends LinearLayout implements
                 Utils.getThemeAttr(context, R.attr.darkIconTheme));
         Context dualToneLightTheme = new ContextThemeWrapper(context,
                 Utils.getThemeAttr(context, R.attr.lightIconTheme));
-        mDarkModeSingleToneColor = Utils.getColorAttr(dualToneDarkTheme, R.attr.singleToneColor);
-        mDarkModeBackgroundColor = Utils.getColorAttr(dualToneDarkTheme, R.attr.backgroundColor);
-        mDarkModeFillColor = Utils.getColorAttr(dualToneDarkTheme, R.attr.fillColor);
-        mLightModeSingleToneColor = Utils.getColorAttr(dualToneLightTheme, R.attr.singleToneColor);
-        mLightModeBackgroundColor = Utils.getColorAttr(dualToneLightTheme, R.attr.backgroundColor);
-        mLightModeFillColor = Utils.getColorAttr(dualToneLightTheme, R.attr.fillColor);
+        mDarkModeSingleToneColor = Utils.getColorAttrDefaultColor(dualToneDarkTheme, R.attr.singleToneColor);
+        mDarkModeBackgroundColor = Utils.getColorAttrDefaultColor(dualToneDarkTheme,
+                R.attr.backgroundColor);
+        mDarkModeFillColor = Utils.getColorAttrDefaultColor(dualToneDarkTheme,
+                R.attr.fillColor);
+        mLightModeSingleToneColor = Utils.getColorAttrDefaultColor(dualToneLightTheme, R.attr.singleToneColor);
+        mLightModeBackgroundColor = Utils.getColorAttrDefaultColor(dualToneLightTheme,
+                R.attr.backgroundColor);
+        mLightModeFillColor = Utils.getColorAttrDefaultColor(dualToneLightTheme, R.attr.fillColor);
     }
 
     @Override
