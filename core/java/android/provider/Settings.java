@@ -5670,12 +5670,14 @@ public final class Settings {
         public static final String BLUETOOTH_QS_SHOW_BATTERY = "bluetooth_qs_show_battery";
 
         /**
-         * Which component to use for Recents UI
+         * Which kind of style you might want to see on Recents UI
          * 0 - Pie Recents (Quickstep)
          * 1 - Oreo Recents (SystemUI)
+         * 2 - Grid Recents (SystemUI)
+         * 3 - Android Go Recents (SystemUI)
          * @hide
          */
-        public static final String RECENTS_COMPONENT = "recents_component";
+        public static final String RECENTS_LAYOUT_STYLE  = "recents_layout_style";
 
         /** @hide */
         public static final Validator RECENTS_COMPONENT_VALIDATOR =
@@ -5957,7 +5959,6 @@ public final class Settings {
             USE_OLD_MOBILETYPE,
             DEVICE_FEATURE_SETTINGS,
             NOTIFICATION_SOUND_VIB_SCREEN_ON,
-            RECENTS_COMPONENT,
             STATUSBAR_HIDE_NOTCH,
             ONE_HAND_MODE_ENABLED,
             STATUSBAR_SHOW_WIFI_ACTIVITY,
@@ -6110,7 +6111,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(PROXIMITY_AUTO_SPEAKER_DELAY);
             PRIVATE_SETTINGS.add(PROXIMITY_AUTO_SPEAKER_INCALL_ONLY);
             PRIVATE_SETTINGS.add(NOTIFICATION_SOUND_VIB_SCREEN_ON);
-            PRIVATE_SETTINGS.add(RECENTS_COMPONENT);
             PRIVATE_SETTINGS.add(STATUSBAR_HIDE_NOTCH);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
@@ -6246,7 +6246,6 @@ public final class Settings {
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
             VALIDATORS.put(DEVICE_FEATURE_SETTINGS, DEVICE_FEATURE_SETTINGS_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_SOUND_VIB_SCREEN_ON, NOTIFICATION_SOUND_VIB_SCREEN_ON_VALIDATOR);
-            VALIDATORS.put(RECENTS_COMPONENT,RECENTS_COMPONENT_VALIDATOR);
             VALIDATORS.put(STATUSBAR_HIDE_NOTCH, STATUSBAR_HIDE_NOTCH_VALIDATOR);
             VALIDATORS.put(ONE_HAND_MODE_ENABLED, ONE_HAND_MODE_ENABLED_VALIDATOR);
             VALIDATORS.put(STATUSBAR_SHOW_WIFI_ACTIVITY, STATUSBAR_SHOW_WIFI_ACTIVITY_VALIDATOR);

@@ -281,7 +281,7 @@ public class OverviewProxyService implements CallbackController<OverviewProxyLis
 
     private boolean isPieRecentsEnabled() {
        return Settings.System.getInt(mContext.getContentResolver(),
-                      Settings.System.RECENTS_COMPONENT, 0) == 0;
+                      Settings.System.RECENTS_LAYOUT_STYLE, 0) == 0;
     }
 
     public void startConnectionToCurrentUser() {

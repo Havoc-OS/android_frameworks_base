@@ -34,6 +34,8 @@ import android.content.ContentResolver;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.content.res.ColorStateList;
+import android.content.ContentResolver;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Canvas;
@@ -44,8 +46,11 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.UserHandle;
 import android.os.Handler;
 import android.os.IRemoteCallback;
+import android.provider.Settings;
 import android.util.ArraySet;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -516,6 +521,7 @@ public class RecentsView extends FrameLayout {
         mDate = (TextView) ((View)getParent()).findViewById(R.id.recents_date);
         updateTimeVisibility();
         updateeverything();
+        mSettingsObserver.observe();
     }
 
     public void updatebuttoncolor() {
@@ -1570,116 +1576,123 @@ public class RecentsView extends FrameLayout {
     }
 
     class SettingsObserver extends ContentObserver {
-         SettingsObserver(Handler handler) {
-             super(handler);
-         }
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
 
-         void observe() {
-             ContentResolver resolver = mContext.getContentResolver();
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.SHOW_CLEAR_ALL_RECENTS), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.RECENTS_ROTATE_FAB), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.CLEAR_RECENTS_STYLE), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.CLEAR_RECENTS_STYLE_ENABLE), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.FAB_BUTTON_COLOR), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.MEM_BAR_COLOR), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.MEM_TEXT_COLOR), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.CLEAR_BUTTON_COLOR), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.RECENTS_CLOCK_COLOR), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.RECENTS_DATE_COLOR), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.FAB_ANIMATION_STYLE), false, this, UserHandle.USER_ALL);
-             update();
-         }
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SHOW_CLEAR_ALL_RECENTS), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.RECENTS_ROTATE_FAB), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.CLEAR_RECENTS_STYLE), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.CLEAR_RECENTS_STYLE_ENABLE), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.FAB_BUTTON_COLOR), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.MEM_BAR_COLOR), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.MEM_TEXT_COLOR), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.CLEAR_BUTTON_COLOR), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.RECENTS_CLOCK_COLOR), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.RECENTS_DATE_COLOR), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.FAB_ANIMATION_STYLE), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.RECENTS_LAYOUT_STYLE), false, this, UserHandle.USER_ALL);
+            update();
+        }
 
-         void unobserve() {
-             ContentResolver resolver = mContext.getContentResolver();
-             resolver.unregisterContentObserver(this);
-         }
+        void unobserve() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.unregisterContentObserver(this);
+        }
 
-         @Override
-         public void onChange(boolean selfChange, Uri uri) {
-             if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.RECENTS_ROTATE_FAB))) {
-                 checkrotation();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.FAB_ANIMATION_STYLE))) {
-                 checkrotation();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.CLEAR_RECENTS_STYLE))) {
-                  //destroybutton();
-                  checkbutton();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.CLEAR_RECENTS_STYLE_ENABLE))) {
-        	      updateeverything();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.FAB_BUTTON_COLOR))) {
-                 updatebuttoncolor();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.CLEAR_BUTTON_COLOR))) {
-                 updatebuttoncolor();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.RECENTS_CLOCK_COLOR))) {
-                 checkcolors();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.RECENTS_DATE_COLOR))) {
-                 checkcolors();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.MEM_BAR_COLOR))) {
-                 checkcolors();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.MEM_TEXT_COLOR))) {
-                 checkcolors();
-             }
-             update();
-         }
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.RECENTS_ROTATE_FAB))) {
+                checkrotation();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.FAB_ANIMATION_STYLE))) {
+                checkrotation();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.CLEAR_RECENTS_STYLE))) {
+                //destroybutton();
+                checkbutton();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.CLEAR_RECENTS_STYLE_ENABLE))) {
+        	    updateeverything();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.FAB_BUTTON_COLOR))) {
+                updatebuttoncolor();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.CLEAR_BUTTON_COLOR))) {
+                updatebuttoncolor();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.RECENTS_CLOCK_COLOR))) {
+                checkcolors();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.RECENTS_DATE_COLOR))) {
+                checkcolors();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.MEM_BAR_COLOR))) {
+                checkcolors();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.MEM_TEXT_COLOR))) {
+                checkcolors();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.RECENTS_LAYOUT_STYLE))) {
+                try {
+                mTaskStackView.reloadOnConfigurationChange();
+                } catch (Exception e) {}
+            }
+            update();
+        }
  
-    public void update() {
-	    final ContentResolver resolver = mContext.getContentResolver();
-        final Resources res = getContext().getResources();
-        mFloatingButton = ((View)getParent()).findViewById(R.id.floating_action_button);
-        mClearRecents = (ImageButton) ((View)getParent()).findViewById(R.id.clear_recents);
-        showClearAllRecents = Settings.System.getIntForUser(mContext.getContentResolver(),
-             Settings.System.SHOW_CLEAR_ALL_RECENTS, 1, UserHandle.USER_CURRENT) != 0;
-        mMemText = (TextView) ((View)getParent()).findViewById(R.id.recents_memory_text);
-        mMemBar = (ProgressBar) ((View)getParent()).findViewById(R.id.recents_memory_bar);
-        mClock = (TextClock) ((View)getParent()).findViewById(R.id.recents_clock);
-        mDate = (TextView) ((View)getParent()).findViewById(R.id.recents_date);
-	    mClearRecents = (ImageButton) ((View)getParent()).findViewById(R.id.clear_recents);
-        mSetfabcolor = res.getColor(R.color.fab_color);
-	    mButtonsRotation =  Settings.System.getInt(mContext.getContentResolver(),
-                 Settings.System.RECENTS_ROTATE_FAB, 0) == 1;	
-	    mClearStyle = Settings.System.getIntForUser(
+        public void update() {
+            final ContentResolver resolver = mContext.getContentResolver();
+            final Resources res = getContext().getResources();
+            mFloatingButton = ((View)getParent()).findViewById(R.id.floating_action_button);
+            mClearRecents = (ImageButton) ((View)getParent()).findViewById(R.id.clear_recents);
+            showClearAllRecents = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.SHOW_CLEAR_ALL_RECENTS, 1, UserHandle.USER_CURRENT) != 0;
+            mMemText = (TextView) ((View)getParent()).findViewById(R.id.recents_memory_text);
+            mMemBar = (ProgressBar) ((View)getParent()).findViewById(R.id.recents_memory_bar);
+            mClock = (TextClock) ((View)getParent()).findViewById(R.id.recents_clock);
+            mDate = (TextView) ((View)getParent()).findViewById(R.id.recents_date);
+                mClearRecents = (ImageButton) ((View)getParent()).findViewById(R.id.clear_recents);
+            mSetfabcolor = res.getColor(R.color.fab_color);
+                mButtonsRotation =  Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.RECENTS_ROTATE_FAB, 0) == 1;	
+                mClearStyle = Settings.System.getIntForUser(
                     resolver, Settings.System.CLEAR_RECENTS_STYLE, 0,
                     UserHandle.USER_CURRENT);
-        mClearStyleSwitch  = Settings.System.getInt(mContext.getContentResolver(),
-                 Settings.System.CLEAR_RECENTS_STYLE_ENABLE, 0) == 1;
-        mfabcolor = Settings.System.getInt(mContext.getContentResolver(),
+            mClearStyleSwitch  = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.CLEAR_RECENTS_STYLE_ENABLE, 0) == 1;
+            mfabcolor = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.FAB_BUTTON_COLOR, mSetfabcolor);
-        mbarcolor = Settings.System.getInt(mContext.getContentResolver(),
+            mbarcolor = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.MEM_BAR_COLOR, 0xff4285f4);
-        mtextcolor = Settings.System.getInt(mContext.getContentResolver(),
+            mtextcolor = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.MEM_TEXT_COLOR, 0xFFFFFFFF);
-        mclearallcolor = Settings.System.getInt(mContext.getContentResolver(),
+            mclearallcolor = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.CLEAR_BUTTON_COLOR, 0xFF4285F4);
-        mClockcolor = Settings.System.getInt(mContext.getContentResolver(),
+            mClockcolor = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.RECENTS_CLOCK_COLOR, 0xFFFFFFFF);
-        mDatecolor = Settings.System.getInt(mContext.getContentResolver(),
+            mDatecolor = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.RECENTS_DATE_COLOR, 0xFFFFFFFF);
-        mAnimStyle =  Settings.System.getIntForUser(
+            mAnimStyle =  Settings.System.getIntForUser(
                     resolver, Settings.System.FAB_ANIMATION_STYLE, 0,
                     UserHandle.USER_CURRENT);
-        mDefaultcolor = res.getColor(R.color.recents_membar_text_color);
-        updateeverything();
+            mDefaultcolor = res.getColor(R.color.recents_membar_text_color);
+            updateeverything();
         }
     }
 }

@@ -269,7 +269,7 @@ class RecentTasks {
 
     private boolean isPieRecentsEnabled() {
        return Settings.System.getInt(mService.mContext.getContentResolver(),
-                      Settings.System.RECENTS_COMPONENT, 0) == 0;
+                      Settings.System.RECENTS_LAYOUT_STYLE, 0) == 0;
     }
 
     /**
