@@ -58,6 +58,7 @@ public class NavigationBarInflaterView extends FrameLayout
     public static final String NAV_BAR_VIEWS = "sysui_nav_bar";
     public static final String NAV_BAR_LEFT = "sysui_nav_bar_left";
     public static final String NAV_BAR_RIGHT = "sysui_nav_bar_right";
+    public static final String NAV_BAR_INVERSE = "sysui_nav_bar_inverse";
 
     public static final String MENU_IME_ROTATE = "menu_ime";
     public static final String BACK = "back";
@@ -103,7 +104,7 @@ public class NavigationBarInflaterView extends FrameLayout
 
     private OverviewProxyService mOverviewProxyService;
 
-    private boolean mSwappedOrder;
+    private boolean mInverseLayout;
 
     public NavigationBarInflaterView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -147,18 +148,14 @@ public class NavigationBarInflaterView extends FrameLayout
         final int defaultResource = mOverviewProxyService.shouldShowSwipeUpUI()
                 ? R.string.config_navBarLayoutQuickstep
                 : R.string.config_navBarLayout;
-        if (mSwappedOrder && defaultResource != 1) {
-            return mContext.getString(R.string.config_navBarLayoutSwapped);
-        } else {
-            return mContext.getString(defaultResource);
-        }
+        return mContext.getString(defaultResource);
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         Dependency.get(TunerService.class).addTunable(this, NAV_BAR_VIEWS, NAV_BAR_LEFT,
-                NAV_BAR_RIGHT);
+                NAV_BAR_RIGHT, NAV_BAR_INVERSE);
         Dependency.get(PluginManager.class).addPluginListener(this,
                 NavBarButtonProvider.class, true /* Allow multiple */);
     }
@@ -179,6 +176,10 @@ public class NavigationBarInflaterView extends FrameLayout
                 inflateLayout(newValue);
             }
         } else if (NAV_BAR_LEFT.equals(key) || NAV_BAR_RIGHT.equals(key)) {
+            clearViews();
+            inflateLayout(mCurrentLayout);
+        } else if (NAV_BAR_INVERSE.equals(key)) {
+            mInverseLayout = newValue != null && Integer.parseInt(newValue) != 0;
             clearViews();
             inflateLayout(mCurrentLayout);
         }
@@ -236,17 +237,6 @@ public class NavigationBarInflaterView extends FrameLayout
         }
     }
 
-    public void setSwappedOrder(boolean swappedOrder) {
-        if (swappedOrder != mSwappedOrder) {
-            mSwappedOrder = swappedOrder;
-            updateSwappedOrder();
-        }
-    }
-
-    private void updateSwappedOrder() {
-        onTuningChanged(NAV_BAR_VIEWS, getDefaultLayout());
-    }
-
     private void initiallyFill(ButtonDispatcher buttonDispatcher) {
         addAll(buttonDispatcher, (ViewGroup) mRot0.findViewById(R.id.ends_group));
         addAll(buttonDispatcher, (ViewGroup) mRot0.findViewById(R.id.center_group));
@@ -272,6 +262,9 @@ public class NavigationBarInflaterView extends FrameLayout
         mCurrentLayout = newLayout;
         if (newLayout == null) {
             newLayout = getDefaultLayout();
+        }
+        if (mInverseLayout) {
+            newLayout = newLayout.replace("recent", "back").replaceFirst("back", "recent");
         }
         String[] sets = newLayout.split(GRAVITY_SEPARATOR, 3);
         if (sets.length != 3) {
