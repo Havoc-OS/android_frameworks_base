@@ -25,6 +25,9 @@
    <!-- Config.xml entries --> 
   <java-symbol type="bool" name="config_show_cmIMESwitcher"/> 
 
+  <!-- Emergency button in power menu -->
+  <java-symbol type="bool" name="config_showEmergencyButtonInPowerMenu" />
+
   <!-- Slim recent app screen-->
   <java-symbol type="integer" name="config_recentDefaultDur" />
   <java-symbol type="style" name="Animation.SlimRecentScreen" />

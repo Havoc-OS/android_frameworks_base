@@ -35,6 +35,9 @@
     <!-- The duration (in milliseconds) of recent app screen animation. -->
     <integer name="config_recentDefaultDur">150</integer>
 
+    <!-- Emergency button in power menu -->
+    <bool name="config_showEmergencyButtonInPowerMenu">false</bool>
+
     <!-- Whether device has dash charging support -->
     <bool name="config_hasDashCharger">false</bool>
 
