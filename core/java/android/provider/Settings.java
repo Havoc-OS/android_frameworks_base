@@ -5299,6 +5299,12 @@ public final class Settings {
         public static final String ALARM_BLOCKING_ENABLED = "alarm_blocking_enabled";
 
         /**
+         * Whether to change the transparency of the qs panel
+         * @hide
+         */
+        public static final String QS_PANEL_BG_ALPHA = "qs_panel_bg_alpha";
+
+        /**
          * Change fonts for the system lockscreen clock widget
          *
          * Whether to display cross sign for a data disabled connection
