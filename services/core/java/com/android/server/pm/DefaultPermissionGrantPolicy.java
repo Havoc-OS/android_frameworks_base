@@ -747,6 +747,13 @@ final class DefaultPermissionGrantPolicy {
                 grantRuntimePermissionsLPw(chromiumPackage, STORAGE_PERMISSIONS, true, userId);
             }
 
+            // SystemUI: needed for Pulse support
+            PackageParser.Package invSystemUI = getSystemPackageLPr(
+                      "com.android.systemui");
+            if (invSystemUI != null && doesPackageSupportRuntimePermissions(invSystemUI)) {
+                 grantRuntimePermissionsLPw(invSystemUI, MICROPHONE_PERMISSIONS, true, userId);
+            }
+
             // Google Account
             PackageParser.Package googleaccountPackage = getSystemPackageLPr(
                     "com.google.android.gsf.login");
