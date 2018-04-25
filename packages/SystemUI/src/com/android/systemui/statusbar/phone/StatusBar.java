@@ -622,6 +622,9 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private boolean mFpDismissNotifications;
 
+    ActivityManager mAm;
+    private ArrayList<String> mStoplist = new ArrayList<String>();
+
     // the tracker view
     int mTrackingPosition; // the position of the top of the tracking view.
 
@@ -1121,6 +1124,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mContext.getSystemService(Context.ACCESSIBILITY_SERVICE);
 
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+
+        mAm = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
 
         mDeviceProvisionedController = Dependency.get(DeviceProvisionedController.class);
         mDeviceProvisionedController.addCallback(mDeviceProvisionedListener);
@@ -6902,6 +6907,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.LOCKSCREEN_SECURITY_ALPHA),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_STOPLIST_VALUES), false, this);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.RECENTS_OMNI_SWITCH_ENABLED),
                     false, this, UserHandle.USER_ALL);
             update();
@@ -6934,12 +6941,18 @@ public class StatusBar extends SystemUI implements DemoMode,
                 final String blackString = Settings.System.getString(mContext.getContentResolver(),
                         Settings.System.HEADS_UP_BLACKLIST_VALUES);
                 splitAndAddToArrayList(mBlacklist, blackString, "\\|");
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.HEADS_UP_STOPLIST_VALUES))) {
+                final String stopString = Settings.System.getString(mContext.getContentResolver(),
+                        Settings.System.HEADS_UP_STOPLIST_VALUES);
+                splitAndAddToArrayList(mStoplist, stopString, "\\|");
             }
         }
 
         public void update() {
             updateOmniSwitch();
             setHeadsUpBlacklist();
+            setHeadsUpStoplist();
             updateBlurSettings();
             setNewOverlayAlpha();
             setSecurityAlpha();
@@ -7002,6 +7015,13 @@ public void setNewOverlayAlpha() {
         final String blackString = Settings.System.getString(mContext.getContentResolver(),
                     Settings.System.HEADS_UP_BLACKLIST_VALUES);
         splitAndAddToArrayList(mBlacklist, blackString, "\\|");
+    }
+
+
+    private void setHeadsUpStoplist() {
+        final String stopString = Settings.System.getString(mContext.getContentResolver(),
+                    Settings.System.HEADS_UP_STOPLIST_VALUES);
+        splitAndAddToArrayList(mStoplist, stopString, "\\|");
     }
 
     private RemoteViews.OnClickHandler mOnClickHandler = new RemoteViews.OnClickHandler() {
@@ -8619,6 +8639,16 @@ public void setNewOverlayAlpha() {
     }
 
     protected boolean shouldPeek(Entry entry, StatusBarNotification sbn) {
+
+        // get the info from the currently running task
+        List<ActivityManager.RunningTaskInfo> taskInfo = mAm.getRunningTasks(1);
+        ComponentName componentInfo = taskInfo.get(0).topActivity;
+
+        if(isPackageInStoplist(componentInfo.getPackageName())
+                && !isDialerApp(sbn.getPackageName())) {
+            return false;
+        }
+
         if ((!mUseHeadsUp || isDeviceInVrMode()) && !isDozing()) {
             if (DEBUG) Log.d(TAG, "No peeking: no huns or vr mode");
             return false;
@@ -8714,6 +8744,15 @@ public void setNewOverlayAlpha() {
                 arrayList.add(item.trim());
             }
         }
+    }
+
+    private boolean isPackageInStoplist(String packageName) {
+        return mStoplist.contains(packageName);
+    }
+
+    private boolean isDialerApp(String packageName) {
+        return packageName.equals("com.android.dialer")
+            || packageName.equals("com.google.android.dialer");
     }
 
     /**

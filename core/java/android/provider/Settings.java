@@ -5532,6 +5532,13 @@ public final class Settings {
         public static final String LOCKSCREEN_OWNER_INFO_COLOR = "lockscreen_owner_info_color";
 
         /**
+         * Applications list where heasdup should't show
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_STOPLIST_VALUES = "heads_up_stoplist_values";
+
+        /**
          * Change the color of the lockscreen alarm text
          *
          * @hide
