@@ -170,4 +170,11 @@
   
   <!-- Whether the device supports Smart Pixels --> 
   <java-symbol type="bool" name="config_enableSmartPixels" /> 
+  
+  <!-- Round corner wifi icons --> 
+  <java-symbol type="drawable" name="ic_wifi_signal_round_0" /> 
+  <java-symbol type="drawable" name="ic_wifi_signal_round_1" /> 
+  <java-symbol type="drawable" name="ic_wifi_signal_round_2" /> 
+  <java-symbol type="drawable" name="ic_wifi_signal_round_3" /> 
+  <java-symbol type="drawable" name="ic_wifi_signal_round_4" />   
 </resources>

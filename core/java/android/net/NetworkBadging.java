@@ -83,15 +83,15 @@ public class NetworkBadging {
     @DrawableRes private static int getWifiSignalResource(int signalLevel) {
         switch (signalLevel) {
             case 0:
-                return com.android.internal.R.drawable.ic_wifi_signal_0;
+                return com.android.internal.R.drawable.ic_wifi_signal_round_0;
             case 1:
-                return com.android.internal.R.drawable.ic_wifi_signal_1;
+                return com.android.internal.R.drawable.ic_wifi_signal_round_1;
             case 2:
-                return com.android.internal.R.drawable.ic_wifi_signal_2;
+                return com.android.internal.R.drawable.ic_wifi_signal_round_2;
             case 3:
-                return com.android.internal.R.drawable.ic_wifi_signal_3;
+                return com.android.internal.R.drawable.ic_wifi_signal_round_3;
             case 4:
-                return com.android.internal.R.drawable.ic_wifi_signal_4;
+                return com.android.internal.R.drawable.ic_wifi_signal_round_4;
             default:
                 throw new IllegalArgumentException("Invalid signal level: " + signalLevel);
         }
