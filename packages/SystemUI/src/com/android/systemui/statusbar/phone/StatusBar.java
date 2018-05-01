@@ -289,6 +289,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     protected static final int MSG_CANCEL_PRELOAD_RECENT_APPS = 1023;
     protected static final int MSG_TOGGLE_KEYBOARD_SHORTCUTS_MENU = 1026;
     protected static final int MSG_DISMISS_KEYBOARD_SHORTCUTS_MENU = 1027;
+    protected static final int MSG_TOGGLE_FLASH_ON = 1028;
+    protected static final int MSG_TOGGLE_FLASH_OFF = 1029;
 
     // Should match the values in PhoneWindowManager
     public static final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
@@ -2467,6 +2469,20 @@ public class StatusBar extends SystemUI implements DemoMode,
                 case MSG_LAUNCH_TRANSITION_TIMEOUT:
                     onLaunchTransitionTimeout();
                     break;
+                case MSG_TOGGLE_FLASH_ON:
+                    if (mFlashlightController.isAvailable() && !mFlashlightController.isEnabled()) {
+                        mFlashlightController.setFlashlight(true);
+                        int delay = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.FLASH_ON_CALLWAITING_DELAY, 200, UserHandle.USER_CURRENT);
+                        mHandler.sendEmptyMessageDelayed(MSG_TOGGLE_FLASH_OFF, delay);
+                    }
+                    break;
+                case MSG_TOGGLE_FLASH_OFF:
+                    if (mFlashlightController.isAvailable() && mFlashlightController.isEnabled()) {
+                        mFlashlightController.setFlashlight(false);
+                        int delay = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.FLASH_ON_CALLWAITING_DELAY, 200, UserHandle.USER_CURRENT);
+                        mHandler.sendEmptyMessageDelayed(MSG_TOGGLE_FLASH_ON, delay);
+                    }
+                    break;
             }
         }
     }
@@ -2586,6 +2602,33 @@ public class StatusBar extends SystemUI implements DemoMode,
     public void performTriggeredAction(String action) {
         mVibrator.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_HEAVY_CLICK));
         LineageButtons.getAttachedInstance(mContext).performTriggeredAction(action, mContext, mDeviceInteractive);
+    }
+
+    @Override
+    public void toggleCameraFlashOn() {
+        if (DEBUG) {
+            Log.d(TAG, "Toggling camera flashlight ON");
+        }
+        if (mFlashlightController.isAvailable() && !mFlashlightController.isEnabled()) {
+            mFlashlightController.setFlashlight(true);
+            int delay = Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.FLASH_ON_CALLWAITING_DELAY, 200, UserHandle.USER_CURRENT);
+            mHandler.sendEmptyMessageDelayed(MSG_TOGGLE_FLASH_OFF, delay);
+        }
+    }
+
+    @Override
+    public void toggleCameraFlashOff() {
+        if (DEBUG) {
+            Log.d(TAG, "Toggling camera flashlight OFF");
+        }
+
+        mHandler.removeMessages(MSG_TOGGLE_FLASH_ON);
+        mHandler.removeMessages(MSG_TOGGLE_FLASH_OFF);
+
+        if (mFlashlightController.isAvailable()) {
+            mFlashlightController.setFlashlight(false);
+
+        }
     }
 
     void makeExpandedVisible(boolean force) {

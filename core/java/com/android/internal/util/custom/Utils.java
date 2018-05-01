@@ -136,6 +136,14 @@ public class Utils {
         FireActions.toggleCameraFlash(proximityCheck);
     }
 
+    public static void toggleCameraFlashOn() {
+        FireActions.toggleCameraFlashOn();
+    }
+
+    public static void toggleCameraFlashOff() {
+        FireActions.toggleCameraFlashOff();
+    }
+
     public static void killForegroundApp() {
         FireActions.killForegroundApp();
     }
@@ -315,6 +323,28 @@ public class Utils {
             wm.showGlobalActions();
         } catch (RemoteException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void toggleCameraFlashOn(){
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.toggleCameraFlashOn();
+            } catch (RemoteException e) {
+                // do nothing.
+            }
+        }
+    }
+
+    public static void toggleCameraFlashOff(){
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                service.toggleCameraFlashOff();
+            } catch (RemoteException e) {
+                 // do nothing.
+            }
         }
     }
 

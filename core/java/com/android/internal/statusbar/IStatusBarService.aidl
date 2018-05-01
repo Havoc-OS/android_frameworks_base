@@ -166,6 +166,9 @@ interface IStatusBarService
      */
     void setBlockedGesturalNavigation(boolean blocked);
 
+    void toggleCameraFlashOn();
+    void toggleCameraFlashOff();
+
     /**
      * Havoc
      */
@@ -175,4 +178,5 @@ interface IStatusBarService
     void killForegroundApp();
 
     void screenPinningStateChanged(boolean enabled);
+
 }
