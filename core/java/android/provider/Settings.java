@@ -5809,6 +5809,12 @@ public final class Settings {
         public static final String APP_CIRCLE_BAR_TRIGGER_TOP = "app_circle_bar_trigger_top";
 
         /**
+         * Apps to hide in the ChooserActivity
+         * @hide
+         */
+        public static final String CHOOSER_ACTIVITY_BLACKLIST = "chooser_activity_blacklist";
+
+        /**
          * Height of the app circle bar trigger
          *
          * @hide
