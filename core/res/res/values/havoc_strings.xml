@@ -63,4 +63,6 @@
     <string name="notify_battery_fully_charged_text">Disconnect your device from the charger to improve battery longevity.</string>
     <string name="battery_charged_channel_name">Battery charged</string>
 
+    <!-- App Blacklist -->
+    <string name="app_blacklist">Blacklist app</string>
 </resources>
