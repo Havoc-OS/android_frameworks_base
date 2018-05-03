@@ -21,6 +21,10 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.ColorInt;
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -36,6 +40,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -80,6 +85,8 @@ public class KeyguardStatusBarView extends RelativeLayout
     private MultiUserSwitch mMultiUserSwitch;
     private ImageView mMultiUserAvatar;
     private BatteryMeterView mBatteryView;
+    private boolean mHideContents;
+    private boolean mTouchStarted;
 
     private BatteryController mBatteryController;
     private KeyguardUserSwitcher mKeyguardUserSwitcher;
@@ -114,6 +121,23 @@ public class KeyguardStatusBarView extends RelativeLayout
         loadDimens();
         updateUserSwitcher();
         mBatteryController = Dependency.get(BatteryController.class);
+        setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int action = event.getAction();
+                if (action == MotionEvent.ACTION_DOWN) {
+                    mTouchStarted = true;
+                } else if (action == MotionEvent.ACTION_UP) {
+                    if (mTouchStarted) {
+                        toggleContents(!mHideContents);
+                    }
+                    mTouchStarted = false;
+                } else if (action == MotionEvent.ACTION_CANCEL) {
+                    mTouchStarted = false;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
