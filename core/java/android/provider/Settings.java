@@ -5584,7 +5584,17 @@ public final class Settings {
         public static final String GESTURE_ANYWHERE_TRIGGER_TOP = "gesture_anywhere_trigger_top";
 
         /**
-         * Height of the gesture anywhere trigger.
+         * FP unlock only with screen on
+         * @hide
+         */
+        public static final String FP_ONLY_SCREEN_ON = "fp_only_screen_on";
+
+         /**
+         * Force an Ambient notification when a new media track is being played
+         * 0 - disabled
+         * 1 - show track info within normal Ambient Display notifications
+         * 2 - show track info within normal Ambient Display and also force new notifications when skipping tracks
+         * 3 - like 2, but for forced notifications use a clean layout with hidden clock
          * @hide
          */
         @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)

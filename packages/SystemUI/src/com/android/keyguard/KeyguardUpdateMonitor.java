@@ -1263,7 +1263,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener,
     }
 
     private boolean shouldListenForFingerprint() {
-        if (!mFpWakeAndUnlock) {
+        if (!mFpWakeAndUnlock || isFpScreenOnOnlyEnabled()) {
             return (mKeyguardIsVisible || mBouncer || shouldListenForFingerprintAssistant() ||
                     (mKeyguardOccluded && mIsDreaming)) && mDeviceInteractive && !mGoingToSleep
                     && !mSwitchingUser && !isFingerprintDisabled(getCurrentUser())
@@ -1316,6 +1316,11 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener,
     private boolean isDeviceProvisionedInSettingsDb() {
         return Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEVICE_PROVISIONED, 0) != 0;
+    }
+
+    private boolean isFpScreenOnOnlyEnable() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.FP_ONLY_SCREEN_ON, 0) != 0;
     }
 
     private void watchForDeviceProvisioning() {

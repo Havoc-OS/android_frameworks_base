@@ -286,9 +286,6 @@ public class KeyguardStatusView extends GridLayout implements
         Typeface tfLight = Typeface.create(FONT_FAMILY_LIGHT, Typeface.NORMAL);
         Typeface tfMedium = Typeface.create(FONT_FAMILY_MEDIUM, Typeface.NORMAL);
 
-        mClockView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.widget_big_font_size));
-        mClockView.setTypeface(tfLight);
         // Some layouts like burmese have a different margin for the clock
         MarginLayoutParams layoutParams = (MarginLayoutParams) mClockView.getLayoutParams();
         layoutParams.bottomMargin = getResources().getDimensionPixelSize(
