@@ -200,6 +200,7 @@
     <!-- Device keys user-customisable behavior -->
     <java-symbol type="integer" name="config_longPressOnHomeBehavior" />
     <java-symbol type="integer" name="config_doubleTapOnHomeBehavior" />
+    <java-symbol type="integer" name="config_longPressOnBackBehavior" />
     <java-symbol type="integer" name="config_longPressOnMenuBehavior" />
     <java-symbol type="integer" name="config_longPressOnAppSwitchBehavior" />
     <java-symbol type="integer" name="config_pressOnAppSwitchBehavior" />
