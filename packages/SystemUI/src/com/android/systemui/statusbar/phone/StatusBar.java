@@ -9032,7 +9032,7 @@ public void setNewOverlayAlpha() {
             case RECENTS_ICON_PACK:
                 if (newValue != null) {
                     String currentIconPack = (String) newValue;
-                    mRecents.getIconsHandler().updatePrefs(currentIconPack);
+                    mRecents.setCurrentIconPack(currentIconPack);
                 }
                 if (!mUseSlimRecents) {
                     mRecents.resetIconCache();
