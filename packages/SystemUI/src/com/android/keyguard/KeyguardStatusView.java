@@ -540,7 +540,7 @@ public class KeyguardStatusView extends GridLayout implements
     public void weatherError(int errorReason) {
         if (DEBUG) Log.d(TAG, "weatherError " + errorReason);
         if (mShowWeather && !mWeatherClient.isOmniJawsEnabled()) {
-            updateSettings();
+            updateSettings(false);
         }
     }
 
