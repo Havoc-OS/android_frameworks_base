@@ -208,13 +208,41 @@
     <!-- Any package that has one of the package names defined below will be prevented
          from using specific sensors in order to stop battery drain -->
     <string-array name="config_blockPackagesSensorDrain">
-        <item>com.whatsapp</item>
+ 	<item>com.android.AssetBrowserActivity</item>
+        <item>com.android.chrome</item>
+        <item>com.android.vending</item>
+        <item>com.amazon.mShop.android.shopping</item>
+        <item>com.bsb.hike</item>
+        <item>com.csam.icici.bank.imobile</item>
+        <item>com.facebook.katana</item>
+        <item>com.facebook.lite</item>
+        <item>com.facebook.orca</item>
+        <item>com.google.android.apps.plus</item>
+        <item>com.google.android.gms</item>
+        <item>com.google.android.gms.setup</item>
+        <item>com.google.android.inputmethod.latin</item>
         <item>com.gbwhatsapp</item>
-        <item>com.yowhatsapp</item>
+        <item>com.instagram.android</item>
+        <item>com.linkedin.android</item>
+        <item>com.slack</item>
+        <item>com.snapchat.android</item>
+        <item>com.snapchat.android.LandingPageActivity</item>
+        <item>com.spotify</item>
+        <item>com.spotify.music</item>
+        <item>com.spotify.music.Spotify</item>
+        <item>com.trtf.blue</item>
+        <item>com.whatsapp</item>
+        <item>com.whatsapp.Main</item>
         <item>com.whatsapp.plus</item>
+        <item>com.whatsapp.Whatsapp</item>
+        <item>com.yowhatsapp</item>
+        <item>org.mozilla.firefox</item>
         <item>org.telegram.messenger</item>
         <item>org.telegram.messenger.plus</item>
-        <item>com.snapchat.android</item>
+        <item>org.telegram.messenger.Telegram</item>
+        <item>org.thunderdog.challegram</item>
+        <item>ru.ok.android</item>
+        <item>tugapower.codeaurora.browser</item>
     </string-array>
 
     <!-- OnePlus uses a proprietary vibrator hal to utilize the new powerful motor since the
