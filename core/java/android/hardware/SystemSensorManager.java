@@ -175,6 +175,28 @@ public class SystemSensorManager extends SensorManager {
                     }
                 }
             }
+            if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+                String pkgName = mContext.getPackageName();
+                for (String blockedPkgName : mContext.getResources().getStringArray(
+                        com.android.internal.R.array.config_blockPackagesSensorDrain)) {
+                    if (pkgName.equals(blockedPkgName)) {
+                        Log.w(TAG, "Preventing " + pkgName + "from draining battery using " +
+                                "accelerometer sensor");
+                        return false;
+                    }
+                }
+            }
+            if (sensor.getType() == Sensor.TYPE_LINEAR_ACCELERATION) {
+                String pkgName = mContext.getPackageName();
+                for (String blockedPkgName : mContext.getResources().getStringArray(
+                        com.android.internal.R.array.config_blockPackagesSensorDrain)) {
+                    if (pkgName.equals(blockedPkgName)) {
+                        Log.w(TAG, "Preventing " + pkgName + "from draining battery using " +
+                                "linear acceleration sensor");
+                        return false;
+                    }
+                }
+            }
         }
 
         // Invariants to preserve:
