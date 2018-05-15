@@ -219,4 +219,7 @@
     <integer name="config_oneFingerSwipeLeftDefault">0</integer>
     <integer name="config_twoFingerSwipeDefault">0</integer>
 
+    <!-- Whether device has physical tri state switch -->
+    <bool name="config_hasAlertSlider">false</bool>
+
 </resources>

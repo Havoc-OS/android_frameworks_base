@@ -249,4 +249,9 @@
     <java-symbol type="integer" name="config_oneFingerSwipeLeftDefault" />
     <java-symbol type="integer" name="config_twoFingerSwipeDefault" />
 
+    <!-- Alert slider -->
+    <java-symbol type="string" name="alert_slider_state_path" />
+    <java-symbol type="string" name="alert_slider_uevent_match_path" />
+    <java-symbol type="bool" name="config_hasAlertSlider" />
+
 </resources>
