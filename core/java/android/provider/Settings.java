@@ -5985,6 +5985,13 @@ public final class Settings {
                 ANY_INTEGER_VALIDATOR;
 
         /**
+         * Change fonts for the system lockscreen date
+         *
+         * @hide
+         */
+        public static final String LOCK_DATE_FONTS = "lock_date_fonts";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
