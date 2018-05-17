@@ -16,9 +16,7 @@
 
 package android.content.substratum;
 
-/**
- * @hide
- */
+/** {@hide} */
 interface ISubstratumService {
 
     /**
