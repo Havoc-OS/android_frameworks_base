@@ -119,4 +119,31 @@
   <java-symbol type="color" name="updater_snackbar_text_color" />
   <!-- In call notification vibration strength -->
   <java-symbol type="integer" name="config_in_call_notification_vibration_strength" />
+
+  <!-- Shortcut actions -->
+  <java-symbol type="drawable" name="ic_shortcut_action_silent" />
+  <java-symbol type="drawable" name="ic_shortcut_action_theme_switch" />
+  <java-symbol type="drawable" name="ic_shortcut_action_torch" />
+  <java-symbol type="drawable" name="ic_shortcut_action_vib" />
+  <java-symbol type="drawable" name="ic_shortcut_action_back" />
+  <java-symbol type="drawable" name="ic_shortcut_action_back_ime" />
+  <java-symbol type="drawable" name="ic_shortcut_action_camera" />
+  <java-symbol type="drawable" name="ic_shortcut_action_expanded_desktop" />
+  <java-symbol type="drawable" name="ic_shortcut_action_home" />
+  <java-symbol type="drawable" name="ic_shortcut_action_ime_switcher" />
+  <java-symbol type="drawable" name="ic_shortcut_action_killtask" />
+  <java-symbol type="drawable" name="ic_shortcut_action_lastapp" />
+  <java-symbol type="drawable" name="ic_shortcut_action_menu_big" />
+  <java-symbol type="drawable" name="ic_shortcut_action_navbar" />
+  <java-symbol type="drawable" name="ic_shortcut_action_notifications" />
+  <java-symbol type="drawable" name="ic_shortcut_action_null" />
+  <java-symbol type="drawable" name="ic_shortcut_action_pie" />
+  <java-symbol type="drawable" name="ic_shortcut_action_power" />
+  <java-symbol type="drawable" name="ic_shortcut_action_power_menu" />
+  <java-symbol type="drawable" name="ic_shortcut_action_quicksettings" />
+  <java-symbol type="drawable" name="ic_shortcut_action_recent" />
+  <java-symbol type="drawable" name="ic_shortcut_action_ring_vib_silent" />
+  <java-symbol type="drawable" name="ic_shortcut_action_screenshot" />
+  <java-symbol type="drawable" name="ic_shortcut_action_search" />
+
 </resources>
