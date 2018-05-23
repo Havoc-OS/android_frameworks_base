@@ -563,6 +563,11 @@ public class NotificationPanelViewController extends PanelViewController {
             @Override
             public boolean onDoubleTap(MotionEvent e) {
                 Utils.switchScreenOff(mView.getContext());
+                // quick pulldown can trigger those values
+                // on double tap - so reset them
+                mQsExpandImmediate = false;
+                requestPanelHeightUpdate();
+                setListening(false);
                 return true;
             }
         });
