@@ -435,15 +435,17 @@ public class StatusBar extends SystemUI implements DemoMode,
     private static final float SRC_MIN_ALPHA = 0.002f;
 
     private static final String[] DARK_OVERLAYS = {
-            "com.android.system.theme.dark",
-            "com.android.systemui.theme.dark",
-            "com.android.settings.theme.dark",
+            "com.havoc.overlay.defaultdark.android",
+            "com.havoc.overlay.defaultdark.com.android.systemui",
+            "com.havoc.overlay.defaultdark.com.android.settings",
+            "com.havoc.overlay.defaultdark.org.lineageos.lineageparts",
     };
 
     private static final String[] BLACK_OVERLAYS = {
-            "com.android.system.theme.black",
-            "com.android.systemui.theme.black",
-            "com.android.settings.theme.black",
+            "com.havoc.overlay.defaultblack.android",
+            "com.havoc.overlay.defaultblack.com.android.systemui",
+            "com.havoc.overlay.defaultdark.com.android.settings",
+            "com.havoc.overlay.defaultdark.org.lineageos.lineageparts",
     };
 
     private boolean mCustomMaxKeyguard;

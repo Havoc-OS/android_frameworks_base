@@ -343,8 +343,8 @@ public class SignalClusterView extends LinearLayout implements NetworkController
         if (state == null) {
             return;
         }
-        final int slotId = SubscriptionManager.getSlotId(subId);
-        final int simState = SubscriptionManager.getSimStateForSlotIdx(slotId);
+        final int slotId = SubscriptionManager.getSlotIndex(subId);
+        final int simState = SubscriptionManager.getSimStateForSlotIndex(slotId);
         state.mMobileVisible = statusIcon.visible && !mBlockMobile &&
                 simState != TelephonyManager.SIM_STATE_NOT_READY;
         state.mMobileStrengthId = statusIcon.icon;
