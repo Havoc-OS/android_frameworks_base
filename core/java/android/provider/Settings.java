@@ -4897,11 +4897,6 @@ public final class Settings {
                 "status_bar_ticker_animation_mode";
 
         /**
-         * @hide
-         */
-        public static final String SCREENRECORD_QUALITY_MODE = "screenrecord_quality_mode";
-
-        /**
          * Shade of dark
          * @hide
          */

@@ -54,7 +54,6 @@ import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.RebootTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
-import com.android.systemui.qs.tiles.ScreenrecordTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.SyncTile;
@@ -114,7 +113,6 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("assist")) return new GoogleAssistTile(mHost);
         else if (tileSpec.equals("voiceassist")) return new GoogleVoiceAssistTile(mHost);
         else if (tileSpec.equals("google")) return new GoogleNowTile(mHost);
-        else if (tileSpec.equals("screenrecord")) return new ScreenrecordTile(mHost);
         else if (tileSpec.equals("always_on_display")) return new AlwaysOnDisplayTile(mHost);
         else if (tileSpec.equals("hw_keys")) return new HWKeysTile(mHost);
         // Intent tiles.
