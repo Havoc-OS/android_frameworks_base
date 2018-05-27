@@ -41,4 +41,9 @@
     <color name="notification_snooze_text">#dd000000</color>
 
     <color name="updater_snackbar_text_color">@android:color/white</color>
+	
+    <!-- Generic colors -->  
+    <color name="generic_theme_primary">#4285f4</color>  
+    <color name="generic_theme_primary_dark">#346AC3</color>  
+    <color name="generic_theme_accent">#3B77DB</color>	
 </resources>

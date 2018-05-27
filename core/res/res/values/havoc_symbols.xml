@@ -160,7 +160,6 @@
   <java-symbol type="drawable" name="ic_shortcut_action_screenshot" />
   <java-symbol type="drawable" name="ic_shortcut_action_search" />
 
-
   <!-- Hardware key binding -->
   <java-symbol type="integer" name="config_deviceHardwareKeys" />
 
@@ -180,4 +179,9 @@
   <java-symbol type="drawable" name="ic_wifi_signal_round_2" /> 
   <java-symbol type="drawable" name="ic_wifi_signal_round_3" /> 
   <java-symbol type="drawable" name="ic_wifi_signal_round_4" />   
+  
+  <!-- Generic colors --> 
+  <java-symbol type="color" name="generic_theme_primary" /> 
+  <java-symbol type="color" name="generic_theme_primary_dark" /> 
+  <java-symbol type="color" name="generic_theme_accent" /> 
 </resources>
