@@ -835,6 +835,7 @@ public class KeyguardStatusView extends GridLayout implements
 
     public void setDark(float darkAmount) {
         if (mDarkAmount == darkAmount) {
+            updateVisibilities();
             return;
         }
         mDarkAmount = darkAmount;
