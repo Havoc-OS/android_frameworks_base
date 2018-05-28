@@ -32,6 +32,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.content.Intent;
+import android.provider.MediaStore;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -42,7 +44,7 @@ import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.qs.GlobalSetting;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
-import android.provider.AlarmClock;
+import android.content.ComponentName;
 
 import com.android.systemui.R;
 
@@ -50,12 +52,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class AlarmTile extends QSTileImpl<BooleanState> {
+public class CalcTile extends QSTileImpl<BooleanState> {
     private boolean mListening;
     private final ActivityStarter mActivityStarter;
-    static final int REQUEST_ALARM = 1;
+    static final int REQUEST_CALC = 1;
 
-    public AlarmTile(QSHost host) {
+    private static final Intent gCalc = new Intent().setComponent(new ComponentName(
+            "com.android.calculator2", "com.android.calculator2.Calculator"));
+
+
+    public CalcTile(QSHost host) {
         super(host);
         mActivityStarter = Dependency.get(ActivityStarter.class);
     }
@@ -70,29 +76,21 @@ public class AlarmTile extends QSTileImpl<BooleanState> {
         return MetricsEvent.HAVOC_SETTINGS;
     }
 
+    private void dispatchCalcIntent(Context context) {
+        if (gCalc.resolveActivity(context.getPackageManager()) != null) {
+            mActivityStarter.postStartActivityDismissingKeyguard(gCalc, REQUEST_CALC);
+        }
+    }
+
     @Override
     public CharSequence getTileLabel() {
-        return mContext.getString(R.string.alarm_title_tile);
+        return mContext.getString(R.string.calc_title_tile);
     }
 
     @Override
     protected void handleClick() {
         mHost.collapsePanels();
-        dispatchAlarmIntent(mContext);
-        refreshState();
-    }
-
-    private void dispatchAlarmIntent(Context context) {
-        Intent alarmIntent = new Intent(AlarmClock.ACTION_SET_ALARM );
-        if (alarmIntent.resolveActivity(context.getPackageManager()) != null) {
-            mActivityStarter.postStartActivityDismissingKeyguard(alarmIntent, REQUEST_ALARM);
-        }
-    }
-
-
-    @Override
-    public void handleLongClick() {
-       // do nothing
+        dispatchCalcIntent(mContext);
     }
 
     @Override
@@ -103,8 +101,8 @@ public class AlarmTile extends QSTileImpl<BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        state.icon = ResourceIcon.get(R.drawable.ic_qs_alarm);
-        state.label = mContext.getString(R.string.alarm_title_tile);
+        state.icon = ResourceIcon.get(R.drawable.ic_qs_calc);
+        state.label = mContext.getString(R.string.calc_title_tile);
 
     }
 
