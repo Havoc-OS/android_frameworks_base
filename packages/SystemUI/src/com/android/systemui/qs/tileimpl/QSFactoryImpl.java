@@ -40,6 +40,7 @@ import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.ExpandedDesktopTile;
 import com.android.systemui.qs.tiles.AlarmTile;
+import com.android.systemui.qs.tiles.CallTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.GoogleAssistTile;
 import com.android.systemui.qs.tiles.GoogleNowTile;
@@ -131,6 +132,8 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("camera")) return new CameraTile(mHost);
         else if (tileSpec.equals("alarm")) return new AlarmTile(mHost);
         else if (tileSpec.equals("calc")) return new CalcTile(mHost);
+        else if (tileSpec.equals("call")) return new CallTile(mHost);
+        
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);

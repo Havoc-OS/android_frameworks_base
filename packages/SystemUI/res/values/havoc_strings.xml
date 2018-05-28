@@ -153,6 +153,7 @@
     <string name="camera_title_tile">Camera</string>
     <string name="alarm_title_tile">Alarm</string>
     <string name="calc_title_tile">Calculator</string>
+    <string name="call_title_tile">Dialer</string>
 	
 	<!-- Smart Pixels --> 
     <string name="quick_settings_smart_pixels">Smart Pixels</string> 
