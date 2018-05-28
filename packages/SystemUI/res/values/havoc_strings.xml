@@ -151,6 +151,7 @@
     <string name="accessibility_quick_settings_hw_keys_enabled">HW Keys enabled.</string>
     <string name="quick_settings_sleepscreen_label">Sleep Screen</string>
     <string name="camera_title_tile">Camera</string>
+    <string name="alarm_title_tile">Alarm</string>
 	
 	<!-- Smart Pixels --> 
     <string name="quick_settings_smart_pixels">Smart Pixels</string> 
