@@ -74,6 +74,7 @@
     <string name="alarm_title_tile">Alarm</string>
     <string name="calc_title_tile">Calculator</string>
     <string name="call_title_tile">Dialer</string>
+    <string name="calendar_title_tile">Add Event</string>
 	
     <!-- Heads up snooze toast -->
     <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - Peeking notification are snoozing for 1 minute.</string>
