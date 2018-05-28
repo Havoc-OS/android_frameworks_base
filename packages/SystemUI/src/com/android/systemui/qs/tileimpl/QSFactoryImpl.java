@@ -32,6 +32,7 @@ import com.android.systemui.qs.tiles.BluetoothTile;
 import com.android.systemui.qs.tiles.CaffeineTile;
 import com.android.systemui.qs.tiles.CastTile;
 import com.android.systemui.qs.tiles.CellularTile;
+import com.android.systemui.qs.tiles.CameraTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.CompassTile;
 import com.android.systemui.qs.tiles.CPUInfoTile;
@@ -125,6 +126,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("sleepscreen")) return new SleepScreenTile(mHost);
 		else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
         else if (tileSpec.equals("smartpixels")) return new SmartPixelsTile(mHost);
+        else if (tileSpec.equals("camera")) return new CameraTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);
