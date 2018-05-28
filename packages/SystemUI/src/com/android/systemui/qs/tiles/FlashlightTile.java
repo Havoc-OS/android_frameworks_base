@@ -101,7 +101,9 @@ public class FlashlightTile extends QSTileImpl<BooleanState> implements
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        if (mFlashlightController == null) return;
+        if (mFlashlightController == null) { 
+            return; 
+        } 
         if (state.slash == null) {
             state.slash = new SlashState();
         }

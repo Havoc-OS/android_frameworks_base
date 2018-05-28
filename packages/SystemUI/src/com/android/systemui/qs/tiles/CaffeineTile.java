@@ -202,7 +202,9 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
             state.slash = new SlashState();
         }
         state.icon = mIcon;
-        if (mWakeLock == null) return;
+        if (mWakeLock == null) { 
+            return; 
+        } 
         state.value = mWakeLock.isHeld();
         if (state.value) {
             state.label = formatValueWithRemainingTime();

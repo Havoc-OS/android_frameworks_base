@@ -102,7 +102,9 @@ public class AirplaneModeTile extends QSTileImpl<BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        if (mSetting == null) return;
+        if (mSetting == null) { 
+            return; 
+        } 
         final int value = arg instanceof Integer ? (Integer)arg : mSetting.getValue();
         final boolean airplaneMode = value != 0;
         state.value = airplaneMode;
