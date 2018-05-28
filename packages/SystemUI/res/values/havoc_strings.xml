@@ -154,6 +154,7 @@
     <string name="alarm_title_tile">Alarm</string>
     <string name="calc_title_tile">Calculator</string>
     <string name="call_title_tile">Dialer</string>
+    <string name="calendar_title_tile">Add Event</string>
 	
 	<!-- Smart Pixels --> 
     <string name="quick_settings_smart_pixels">Smart Pixels</string> 
