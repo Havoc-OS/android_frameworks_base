@@ -33,6 +33,7 @@ import com.android.systemui.qs.tiles.CaffeineTile;
 import com.android.systemui.qs.tiles.CastTile;
 import com.android.systemui.qs.tiles.CellularTile;
 import com.android.systemui.qs.tiles.CameraTile;
+import com.android.systemui.qs.tiles.ProfilesTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.CompassTile;
 import com.android.systemui.qs.tiles.CPUInfoTile;
@@ -129,15 +130,15 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("hw_keys")) return new HWKeysTile(mHost);
         else if (tileSpec.equals("soundsearch")) return new SoundSearchTIle(mHost);
         else if (tileSpec.equals("sleepscreen")) return new SleepScreenTile(mHost);
-		else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
+		    else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
         else if (tileSpec.equals("smartpixels")) return new SmartPixelsTile(mHost);
         else if (tileSpec.equals("camera")) return new CameraTile(mHost);
         else if (tileSpec.equals("alarm")) return new AlarmTile(mHost);
         else if (tileSpec.equals("calc")) return new CalcTile(mHost);
         else if (tileSpec.equals("calendar")) return new CalendarTile(mHost);
         else if (tileSpec.equals("call")) return new CallTile(mHost);
-        
         else if (tileSpec.equals("pip")) return new PictureInPictureTile(mHost);
+        else if (tileSpec.equals("profiles")) return new ProfilesTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);

@@ -20,7 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.service.quicksettings.Tile;
 
-import com.android.internal.util.havoc.HavocUtils;
+import com.android.internal.util.havoc.Utils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.systemui.qs.QSHost;
@@ -49,7 +49,7 @@ public class PictureInPictureTile extends QSTileImpl<BooleanState> {
     @Override
     public void handleClick() {
         mHost.collapsePanels();
-        HavocUtils.sendKeycode(171);
+        Utils.sendKeycode(171);
     }
 
     @Override

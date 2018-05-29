@@ -34,6 +34,7 @@ import com.android.systemui.statusbar.phone.LockIcon;
 import com.android.systemui.statusbar.phone.LockscreenWallpaper;
 import com.android.systemui.statusbar.phone.NotificationIconAreaController;
 import com.android.systemui.statusbar.phone.StatusBar;
+import com.android.systemui.statusbar.policy.KeyguardMonitor;
 import com.android.systemui.qs.QSTileHost;
 import com.android.systemui.statusbar.phone.ScrimController;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
@@ -103,8 +104,8 @@ public class SystemUIFactory {
     }
 
     public QSTileHost createQSTileHost(Context context, StatusBar statusBar,
-            StatusBarIconController iconController) {
-        return new QSTileHost(context, statusBar, iconController);
+            StatusBarIconController iconController,KeyguardMonitor keyguard) {
+        return new QSTileHost(context, statusBar, iconController,keyguard);
     }
 
     public <T> T createInstance(Class<T> classType) {

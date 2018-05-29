@@ -27,6 +27,7 @@ import android.provider.Settings.Secure;
 import android.service.quicksettings.Tile;
 import android.text.TextUtils;
 import android.util.Log;
+import com.android.systemui.statusbar.policy.KeyguardMonitor;
 
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
@@ -69,12 +70,14 @@ public class QSTileHost implements QSHost, Tunable, PluginListener<QSFactory> {
     private final StatusBarIconController mIconController;
     private final ArrayList<QSFactory> mQsFactories = new ArrayList<>();
     private int mCurrentUser;
+    private final KeyguardMonitor mKeyguard;
 
     public QSTileHost(Context context, StatusBar statusBar,
-            StatusBarIconController iconController) {
+            StatusBarIconController iconController,KeyguardMonitor keyguard) {
         mIconController = iconController;
         mContext = context;
         mStatusBar = statusBar;
+        mKeyguard = keyguard;
 
         mServices = new TileServices(this, Dependency.get(Dependency.BG_LOOPER));
 
@@ -88,6 +91,10 @@ public class QSTileHost implements QSHost, Tunable, PluginListener<QSFactory> {
 
     public StatusBarIconController getIconController() {
         return mIconController;
+    }
+
+    public KeyguardMonitor getKeyguardMonitor() {
+        return mKeyguard;
     }
 
     public void destroy() {

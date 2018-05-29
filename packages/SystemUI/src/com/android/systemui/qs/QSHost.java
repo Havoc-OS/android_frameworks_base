@@ -18,6 +18,7 @@ import android.content.Context;
 
 import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.qs.external.TileServices;
+import com.android.systemui.statusbar.policy.KeyguardMonitor;
 
 import java.util.Collection;
 
@@ -32,7 +33,7 @@ public interface QSHost {
     void removeCallback(Callback callback);
     TileServices getTileServices();
     void removeTile(String tileSpec);
-
+    KeyguardMonitor getKeyguardMonitor();
     int indexOf(String tileSpec);
 
     interface Callback {

@@ -1526,7 +1526,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                             .withDefault(() -> new QSFragment())
                             .build());
             final QSTileHost qsh = SystemUIFactory.getInstance().createQSTileHost(mContext, this,
-                    mIconController);
+                    mIconController,null);
             mBrightnessMirrorController = new BrightnessMirrorController(mStatusBarWindow,
                     mScrimController);
             fragmentHostManager.addTagListener(QS.TAG, (tag, f) -> {
