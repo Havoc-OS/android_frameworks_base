@@ -33,4 +33,7 @@
 
 	<color name="battery_level_good_color">#ff319111</color><!-- green -->
 	
+    <!-- Power menu wallpaper tint off color --> 
+    <color name="power_menu_wallpaper_tint_off_color">#80202020</color> 	
+	
 </resources>
