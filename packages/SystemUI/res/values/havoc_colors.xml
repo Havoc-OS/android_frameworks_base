@@ -36,7 +36,7 @@
     <color name="system_primary_color">@*android:color/primary_material_light</color> 
     <color name="system_accent_color">@*android:color/material_deep_teal_700</color> 
 
-        <!-- Pie colors --> 
+    <!-- Pie colors --> 
     <color name="pie_foreground">#ff8a8a8a</color> 
     <color name="pie_background">#ffffffff</color> 
     <color name="pie_icon">#4dffffff</color> 
@@ -53,9 +53,12 @@
     <color name="pie_battery_low">#f90028</color> 
     <color name="pie_shader_start">#FF4d4d4d</color> 
     <color name="pie_shader_end">#FF212121</color> 
- 
-	
+
     <!-- Power menu wallpaper tint off color --> 
-    <color name="power_menu_wallpaper_tint_off_color">#80202020</color> 	
-  
+    <color name="power_menu_wallpaper_tint_off_color">#80202020</color> 
+	
+    <!-- QSPanel Tiles Colors --> 
+    <color name="qs_tiles_inactive_color">#595959</color>
+    <color name="qs_tiles_unavailable_color">#706f6f</color> 
+    <color name="qs_tiles_circle_inactive">#dbdbdb</color>  
 </resources>

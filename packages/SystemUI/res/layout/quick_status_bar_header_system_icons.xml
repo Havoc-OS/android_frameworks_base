@@ -17,20 +17,20 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:systemui="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/qs_header_system_icons"
     android:layout_width="match_parent"
     android:layout_height="@dimen/qs_header_system_icons_area_height"
     android:layout_alignParentEnd="true"
     android:clipChildren="false"
     android:clipToPadding="false"
     android:gravity="center"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
     android:orientation="horizontal">
 
 
     <com.android.systemui.statusbar.policy.QSClockLeft
         android:id="@+id/qs_left_clock"
         android:textAppearance="@style/TextAppearance.StatusBar.Clock"
+		android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:singleLine="true"
@@ -40,7 +40,7 @@
         systemui:showDark="false"
         />
 
-    <com.android.systemui.havoc.carrierlabel.CarrierLabelQS
+    <com.android.keyguard.CarrierText
         android:id="@+id/qs_carrier_text"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -48,11 +48,11 @@
         android:gravity="center_vertical|start"
         android:ellipsize="marquee"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@android:color/white"
         android:textDirection="locale"
         android:singleLine="true" />
 
-    <com.android.systemui.BatteryMeterView android:id="@+id/battery"
+    <com.android.systemui.qs.BatteryMeterView android:id="@+id/battery"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
         />
@@ -60,6 +60,7 @@
     <com.android.systemui.statusbar.policy.QSClock
         android:id="@+id/qs_clock"
         android:textAppearance="@style/TextAppearance.StatusBar.Clock"
+		android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:singleLine="true"

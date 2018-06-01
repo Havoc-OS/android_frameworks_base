@@ -87,4 +87,6 @@
     <dimen name="pie_status_offset">20dp</dimen> 
     <dimen name="pie_status_text_top_margin">13dp</dimen> 
     <dimen name="pie_status_text_top_margin_land">9dp</dimen> 
+	
+    <dimen name="qs_corner_content_padding">8dp</dimen>
 </resources>

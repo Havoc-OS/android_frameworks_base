@@ -25,8 +25,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextClock;
 
+import com.android.keyguard.CarrierText;
 import com.android.settingslib.Utils;
-import com.android.systemui.BatteryMeterView;
+import com.android.systemui.qs.BatteryMeterView;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.R.id;
@@ -48,6 +49,8 @@ public class QuickStatusBarHeader extends RelativeLayout {
     protected QuickQSPanel mHeaderQsPanel;
     protected QSTileHost mHost;
 
+	private CarrierText mCarrierText;
+
     public QuickStatusBarHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -65,7 +68,7 @@ public class QuickStatusBarHeader extends RelativeLayout {
         updateResources();
 
         // Set the light/dark theming on the header status UI to match the current theme.
-        int colorForeground = Utils.getColorAttr(getContext(), android.R.attr.colorForeground);
+        int colorForeground = Color.parseColor("#ffffff");
         float intensity = colorForeground == Color.WHITE ? 0 : 1;
         Rect tintArea = new Rect(0, 0, 0, 0);
 
@@ -75,6 +78,8 @@ public class QuickStatusBarHeader extends RelativeLayout {
         applyDarkness(R.id.left_clock, tintArea, intensity, colorForeground);
         applyDarkness(R.id.qs_clock, tintArea, intensity, colorForeground);
         applyDarkness(R.id.qs_left_clock, tintArea, intensity, colorForeground);
+		
+		mCarrierText = findViewById(R.id.qs_carrier_text);
 
         BatteryMeterView battery = findViewById(R.id.battery);
         battery.setForceShowPercent(true);
