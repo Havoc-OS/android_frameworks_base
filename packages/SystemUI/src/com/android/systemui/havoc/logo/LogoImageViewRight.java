@@ -181,7 +181,21 @@ public class LogoImageViewRight extends ImageView implements
             drawable = mContext.getResources().getDrawable(R.drawable.ic_gender_male_female);
         } else if (mHavocLogoStyle == 32) {
             drawable = mContext.getResources().getDrawable(R.drawable.ic_guitar_electric);
-        }
+        } else if (mHavocLogoStyle == 33) { 
+            drawable = mContext.getResources().getDrawable(R.drawable.ic_batman); 
+        } else if (mHavocLogoStyle == 34) { 
+            drawable = mContext.getResources().getDrawable(R.drawable.ic_deadpool); 
+        } else if (mHavocLogoStyle == 35) { 
+            drawable = mContext.getResources().getDrawable(R.drawable.ic_decepticons); 
+        } else if (mHavocLogoStyle == 36) { 
+            drawable = mContext.getResources().getDrawable(R.drawable.ic_ironman); 
+        } else if (mHavocLogoStyle == 37) { 
+            drawable = mContext.getResources().getDrawable(R.drawable.ic_minions); 
+        } else if (mHavocLogoStyle == 38) { 
+            drawable = mContext.getResources().getDrawable(R.drawable.ic_spiderman); 
+        } else if (mHavocLogoStyle == 39) { 
+            drawable = mContext.getResources().getDrawable(R.drawable.ic_superman); 
+        } 
 
         setImageDrawable(null);
 
