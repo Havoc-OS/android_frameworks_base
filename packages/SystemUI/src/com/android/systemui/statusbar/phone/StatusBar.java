@@ -892,7 +892,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     public void triggerAmbientForMedia() {
-        if (mAmbientMediaPlaying == 2 || mAmbientMediaPlaying == 3) {
+        if (mAmbientMediaPlaying == 2 ) {
             mDozeServiceHost.fireNotificationMedia();
         }
     }
@@ -2219,6 +2219,14 @@ public class StatusBar extends SystemUI implements DemoMode,
         entry.row.setLowPriorityStateUpdated(false);
 
         if (mEntryToRefresh == entry) {
+            final Notification n = entry.notification.getNotification();
+            final int[] colors = {n.backgroundColor, n.foregroundColor,
+                    n.primaryTextColor, n.secondaryTextColor};
+            final String title = n.extras.getString(Notification.EXTRA_TITLE);
+                    final String text = n.extras.getString(Notification.EXTRA_TEXT);
+                    if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(text)) {
+                        notificationText = title + " - " + text;
+            }
             if (mNavigationBar != null) {
                 Notification n = entry.notification.getNotification();
                 int[] colors = {n.backgroundColor, n.foregroundColor,
@@ -6628,11 +6636,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                     callback.onPulseStarted();
                     Collection<HeadsUpManager.HeadsUpEntry> pulsingEntries =
                             mHeadsUpManager.getAllEntries();
-                    if (!pulsingEntries.isEmpty()) {
+                    if (!pulsingEntries.isEmpty() && reason != DozeLog.PULSE_REASON_FORCED_MEDIA_NOTIFICATION) {
                         // Only pulse the stack scroller if there's actually something to show.
                         // Otherwise just show the always-on screen.
                         setPulsing(pulsingEntries);
                     }
+                    setOnPulseEvent((mAmbientMediaPlaying == 2 ? reason : -1), true);
                 }
 
                 @Override
