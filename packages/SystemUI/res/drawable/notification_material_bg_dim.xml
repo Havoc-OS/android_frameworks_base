@@ -18,6 +18,7 @@
     <item>
         <shape>
             <solid android:color="@color/notification_material_background_dimmed_color" />
+	        <corners android:radius="8dp" />
         </shape>
     </item>
 </ripple>

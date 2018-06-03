@@ -35,7 +35,7 @@
 
     <!-- Whether to clip notification contents with a rounded rectangle. Might be expensive on
          certain GPU's and thus can be turned off with only minimal visual impact. -->
-    <bool name="config_notifications_round_rect_clipping">true</bool>
+    <bool name="config_notifications_round_rect_clipping">false</bool>
 
     <!-- Control whether status bar should distinguish HSPA data icon form UMTS
     data icon on devices -->
@@ -345,7 +345,7 @@
     <bool name="config_showNotificationGear">true</bool>
 
     <!-- Whether or not a background should be drawn behind a notification. -->
-    <bool name="config_drawNotificationBackground">true</bool>
+    <bool name="config_drawNotificationBackground">false</bool>
 
     <!-- Whether or the notifications can be shown and dismissed with a drag. -->
     <bool name="config_enableNotificationShadeDrag">true</bool>
@@ -361,7 +361,7 @@
     <bool name="config_showNotificationShelf">true</bool>
 
     <!-- Whether or not the notifications should always fade as they are dismissed. -->
-    <bool name="config_fadeNotificationsOnDismiss">false</bool>
+    <bool name="config_fadeNotificationsOnDismiss">true</bool>
 
     <!-- Whether or not the parent of the notification row itself is being translated when swiped or
          its children views. If true, then the contents are translated and vice versa. -->
@@ -381,7 +381,7 @@
     <!-- Whether or not the notification contents should be clipped to any background that is
          set on the notification container. For example, if this value is true and the background
          has rounded corners, then the contents will be clipped to those corners. -->
-    <bool name="config_clipNotificationsToOutline">false</bool>
+    <bool name="config_clipNotificationsToOutline">true</bool>
 
     <!-- Whether or not notifications that can be expanded will always be in their expanded state.
          This value only affects notifications that are not a group of notifications from the same
@@ -403,11 +403,11 @@
     <bool name="config_hideDividersDuringExpand">false</bool>
 
     <!-- Whether or not child notifications that are part of a group will have shadows. -->
-    <bool name="config_enableShadowOnChildNotifications">true</bool>
+    <bool name="config_enableShadowOnChildNotifications">false</bool>
 
     <!-- Whether or not a view containing child notifications will have a custom background when
          it has been expanded to reveal its children. -->
-    <bool name="config_showGroupNotificationBgWhenExpanded">false</bool>
+    <bool name="config_showGroupNotificationBgWhenExpanded">true</bool>
 
     <!-- Whether to artificially interpret all signal strengths as
          one bar higher than they actually are -->
