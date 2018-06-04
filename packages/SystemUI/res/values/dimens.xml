@@ -34,16 +34,22 @@
     <dimen name="status_bar_icon_size">@*android:dimen/status_bar_icon_size</dimen>
 
     <!-- Height of the battery icon in the status bar. -->
-    <dimen name="status_bar_battery_icon_height">15.5dp</dimen>
+    <dimen name="status_bar_battery_icon_height">14.5dp</dimen>
 
     <!-- Width of the battery icon in the status bar. -->
     <dimen name="status_bar_battery_icon_width">14.5dp</dimen>
+
+    <!-- Height of the battery circle icon in the status bar. -->
+    <dimen name="status_bar_battery_circle_icon_height">20.5dp</dimen>
+
+    <!-- Width of the battery circle icon in the status bar. -->
+    <dimen name="status_bar_battery_circle_icon_width">20.5dp</dimen>
 
     <!-- The font size for the clock in the status bar. -->
     <dimen name="status_bar_clock_size">14sp</dimen>
 
     <!-- The starting padding for the clock in the status bar. -->
-    <dimen name="status_bar_clock_starting_padding">3dp</dimen>
+    <dimen name="status_bar_clock_starting_padding">4dp</dimen>
 
     <!-- The end padding for the clock in the status bar. -->
     <dimen name="status_bar_clock_end_padding">0dp</dimen>
@@ -190,7 +196,7 @@
     <dimen name="close_handle_underlap">32dp</dimen>
 
     <!-- Height of the status bar header bar -->
-    <dimen name="status_bar_header_height">130dp</dimen>
+    <dimen name="status_bar_header_height">124dp</dimen>
 
     <!-- Height of the status bar header bar in the car setting. -->
     <dimen name="car_status_bar_header_height">128dp</dimen>
@@ -208,6 +214,9 @@
     <!-- The height of the quick settings footer that holds the user switcher, settings icon,
          etc. -->
     <dimen name="qs_footer_height">48dp</dimen>
+
+    <!-- Height of the status bar header bar when expanded -->
+    <dimen name="status_bar_header_height_expanded">124dp</dimen>
 
     <!-- Height of the status bar header bar when on Keyguard -->
     <dimen name="status_bar_header_height_keyguard">40dp</dimen>
@@ -573,7 +582,7 @@
     <!-- How much two taps can be apart to still be recognized as a double tap on the lockscreen -->
     <dimen name="double_tap_slop">32dp</dimen>
 
-    <dimen name="battery_margin_bottom">1dp</dimen>
+    <dimen name="battery_margin_bottom">0dp</dimen>
 
     <!-- Padding at the end of the view that displays the mobile signal icons. If the view is
          empty, then this padding will not be added to that view. -->
@@ -606,7 +615,7 @@
     <dimen name="signal_cluster_margin_start">2.5dp</dimen>
 
     <!-- Padding between signal cluster and battery icon -->
-    <dimen name="signal_cluster_battery_padding">2dp</dimen>
+    <dimen name="signal_cluster_battery_padding">4dp</dimen>
 
     <!-- Padding for signal cluster and battery icon when there are not icons in signal cluster -->
     <dimen name="no_signal_cluster_battery_padding">3dp</dimen>

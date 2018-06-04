@@ -437,15 +437,15 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     @Override
     public boolean onLongClick(View v) {
         if (v == mSettingsButton) {
-            HavocSettingsLayoutActivity();
+            HavocSettingsActivity();
         }
         return false;
     }
 
-    private void HavocSettingsLayoutActivity() {
+    private void HavocSettingsActivity() {
         Intent nIntent = new Intent(Intent.ACTION_MAIN);
         nIntent.setClassName("com.android.settings",
-            "com.android.settings.Settings$HavocSettingsLayoutActivity");
+            "com.android.settings.Settings$HavocSettingsActivity");
         mActivityStarter.startActivity(nIntent, true /* dismissShade */);
     }
 

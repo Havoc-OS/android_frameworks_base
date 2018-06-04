@@ -611,18 +611,6 @@ public class KeyguardStatusView extends GridLayout implements
         }
     }
 
-    private void updateClockColor() {
-        if (mClockView != null) {
-            mClockView.setTextColor(mLockColor);
-        }
-    }
-
-    private void updateClockDateColor() {
-        if (mDateView != null) {
-            mDateView.setTextColor(mDateColor);
-        }
-    }
-
     private int getTintColor() {
         return Color.WHITE;
         /*TypedArray array = mContext.obtainStyledAttributes(new int[]{android.R.attr.colorControlNormal});

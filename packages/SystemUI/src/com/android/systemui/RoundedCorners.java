@@ -54,9 +54,9 @@ public class RoundedCorners extends SystemUI implements Tunable {
     private View mOverlay;
     private View mBottomOverlay;
     private float mDensity;
-    private TunablePadding mQsPadding;
-    private TunablePadding mStatusBarPadding;
-    private TunablePadding mNavBarPadding;
+    // private TunablePadding mQsPadding;
+    // private TunablePadding mStatusBarPadding;
+    // private TunablePadding mNavBarPadding;
 
     @Override
     public void start() {
@@ -69,10 +69,12 @@ public class RoundedCorners extends SystemUI implements Tunable {
                 R.dimen.rounded_corner_content_padding);
         int padding_alt = mContext.getResources().getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding_alt);
+        int qsPadding = mContext.getResources().getDimensionPixelSize(
+                    R.dimen.qs_corner_content_padding);
         if (padding != 0 && Build.PRODUCT.equals("taimen")) {
-            setupPadding(padding);
+            setupPadding(padding, qsPadding);
         } else {
-            setupPadding(padding_alt);
+            setupPadding(padding_alt, qsPadding);
         }
     }
 
@@ -136,7 +138,7 @@ public class RoundedCorners extends SystemUI implements Tunable {
         });
     }
 
-    private void setupPadding(int padding) {
+    private void setupPadding(int padding, int qsPadding) {
         // Add some padding to all the content near the edge of the screen.
         StatusBar sb = getComponent(StatusBar.class);
         View statusBar = (sb != null ? sb.getStatusBarWindow() : null);

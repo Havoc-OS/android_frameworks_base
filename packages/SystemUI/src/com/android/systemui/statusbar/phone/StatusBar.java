@@ -446,17 +446,15 @@ public class StatusBar extends SystemUI implements DemoMode,
     private static final float SRC_MIN_ALPHA = 0.002f;
 
     private static final String[] DARK_OVERLAYS = {
-            "com.havoc.overlay.defaultdark.android",
-            "com.havoc.overlay.defaultdark.com.android.systemui",
-            "com.havoc.overlay.defaultdark.com.android.settings",
-            "com.havoc.overlay.defaultdark.org.lineageos.lineageparts",
+            "com.android.system.dark",
+            "com.android.systemui.dark",
+            "com.android.settings.dark",
     };
 
     private static final String[] BLACK_OVERLAYS = {
-            "com.havoc.overlay.defaultblack.android",
-            "com.havoc.overlay.defaultblack.com.android.systemui",
-            "com.havoc.overlay.defaultdark.com.android.settings",
-            "com.havoc.overlay.defaultdark.org.lineageos.lineageparts",
+            "com.android.system.black",
+            "com.android.systemui.black",
+            "com.android.settings.black",
     };
 
     private boolean mCustomMaxKeyguard;
@@ -5619,7 +5617,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         if (isUsingDarkTheme() != useDarkTheme) {
             try {
-                mOverlayManager.setEnabled("com.android.systemui.theme.dark",
+                mOverlayManager.setEnabled("com.android.systemui.dark",
                         false, mCurrentUserId);
             } catch (RemoteException e) {
                 Log.w(TAG, "Can't change theme", e);
@@ -9092,5 +9090,5 @@ public void setNewOverlayAlpha() {
          lp.setTitle("AppCircleSidebar");
  
          return lp;
-     }
-   }
+    }
+}	
