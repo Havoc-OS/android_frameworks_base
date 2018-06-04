@@ -295,7 +295,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     @Override
     public void onTuningChanged(String key, String newValue) {
         if (QS_SHOW_BRIGHTNESS_SLIDER.equals(key)) {
-            mBrightnessSlider = newValue == null ? 1 : Integer.parseInt(newValue);
+            mBrightnessSlider = newValue == null ? 2 : Integer.parseInt(newValue);
             mBrightnessView.setVisibility(mBrightnessSlider != 0 ? VISIBLE : GONE);
             restartQSPanel();
         } else if (QS_SHOW_AUTO_BRIGHTNESS.equals(key) && mIsAutomaticBrightnessAvailable) {
