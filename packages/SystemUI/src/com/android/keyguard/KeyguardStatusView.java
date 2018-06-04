@@ -298,15 +298,20 @@ public class KeyguardStatusView extends GridLayout implements
                R.dimen.bottom_text_spacing_digital);
        mDeadPoolClockView.setLayoutParams(deadpoollayoutParams);
 
-        mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
-        mDateView.setTypeface(tfMedium);
+       mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize( 
+       mDateSelection == 0 ? R.dimen.widget_label_font_size : R.dimen.widget_label_custom_font_size)); 
+       mDateView.setTypeface(tfMedium);
+
+        // AlarmStatusView 
+        mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize( 
+                mDateSelection == 0 ? R.dimen.widget_label_font_size : R.dimen.widget_label_custom_font_size)); 
+        mAlarmStatusView.setTypeface(tfMedium); 
+
         if (mOwnerInfo != null) {
             mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
            mOwnerInfo.setTypeface(tfMedium);
         }
-        mAlarmStatusView.setTypeface(tfMedium);
     }
 
     private int getLockClockFont() {
@@ -475,7 +480,7 @@ public class KeyguardStatusView extends GridLayout implements
 
     private void updateVisibilities() {
         switch (mClockSelection) {
-            case 0: // default digital
+            case 0: // default aosp 
             default:
                 mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE);
                 mAnalogClockView.setVisibility(View.GONE);
@@ -577,20 +582,41 @@ public class KeyguardStatusView extends GridLayout implements
         }
 
         switch (mDateSelection) {
-            case 0: // default
+            case 0: // default aosp
             default:
                 mDateView.setBackgroundResource(0);
                 mDateView.setTypeface(Typeface.DEFAULT);
+                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_font_size)); 
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_font_size)); 
+                mDateView.setPadding(0,0,0,0); 
+                break; 
+            case 1: // default but bigger size 
+                mDateView.setBackgroundResource(0); 
+                mDateView.setTypeface(Typeface.DEFAULT); 
+                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
                 mDateView.setPadding(0,0,0,0);
                 break;
-            case 1: // semi-transparent box
+            case 2: // semi-transparent box
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_box_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
+                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
                 mDateView.setPadding(40,20,40,20);
                 break;
-            case 2: // semi-transparent box (round)
+            case 3: // semi-transparent box (round)
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
+                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
                 mDateView.setPadding(40,20,40,20);
                 break;
         }
