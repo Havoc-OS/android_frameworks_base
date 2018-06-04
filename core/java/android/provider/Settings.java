@@ -4189,7 +4189,19 @@ public final class Settings {
         public static final String LOCKSCREEN_MAX_NOTIF_CONFIG = "lockscreen_max_notif_config";
 
         /**
-         * Whether to display VoLTE icon when VoLTE present
+         * Select which lockscreen date style to display
+         * @hide
+         */
+        public static final String LOCKSCREEN_DATE_SELECTION = "lockscreen_date_selection";
+
+        /**
+         * Select which lockscreen clock style to display
+         * @hide
+         */
+        public static final String LOCKSCREEN_CLOCK_SELECTION = "lockscreen_clock_selection";
+
+        /**
+         * Hide lockscreen clock
          * @hide
          */
         public static final String SHOW_VOLTE_ICON = "show_volte_icon";
