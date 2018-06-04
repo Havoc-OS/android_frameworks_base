@@ -147,10 +147,17 @@ public class RoundedCorners extends SystemUI implements Tunable {
                     padding, FLAG_END);
 
             FragmentHostManager fragmentHostManager = FragmentHostManager.get(statusBar);
-            fragmentHostManager.addTagListener(CollapsedStatusBarFragment.TAG,
-                    new TunablePaddingTagListener(padding, R.id.status_bar));
-            fragmentHostManager.addTagListener(QS.TAG,
-                    new TunablePaddingTagListener(padding, R.id.header));
+            if (padding != 0) {
+                TunablePadding.addTunablePadding(statusBar.findViewById(R.id.keyguard_header), PADDING,
+                        padding, FLAG_END);
+
+                fragmentHostManager.addTagListener(CollapsedStatusBarFragment.TAG,
+                        new TunablePaddingTagListener(padding, R.id.status_bar));
+            }
+            if (qsPadding != 0) {
+                fragmentHostManager.addTagListener(QS.TAG,
+                        new TunablePaddingTagListener(qsPadding, R.id.qs_header));
+            }
         }
     }
 

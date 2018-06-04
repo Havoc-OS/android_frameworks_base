@@ -49,6 +49,7 @@
     <dimen name="qs_panel_margin_top_header">85dp</dimen>
     <dimen name="qs_scroller_top_margin">40dp</dimen>
     <dimen name="qs_panel_footer_height">48dp</dimen>
+    <dimen name="qs_corner_content_padding">8dp</dimen> 
 	
 	<!-- Burn-in protection --> 
     <dimen name="horizontal_max_swift">3.0dp</dimen> 
