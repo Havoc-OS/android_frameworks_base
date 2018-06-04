@@ -34,9 +34,10 @@
           android:id="@+id/mobile_volte"
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
+          android:layout_gravity="center_vertical"
           android:visibility="gone"
-          android:paddingStart="4dp"
-          android:paddingEnd="4dp"/>
+          android:paddingStart="3dp"
+          android:paddingEnd="3dp"/>
         <ImageView
             android:id="@+id/mobile_type"
             android:layout_height="wrap_content"
