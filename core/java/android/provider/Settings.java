@@ -5481,13 +5481,6 @@ public final class Settings {
         public static final String HEADS_UP_BLACKLIST_VALUES = "heads_up_blacklist_values";
 
         /**
-         * Show Settings icon in QS Footer
-         *
-         * @hide
-         */
-        public static final String QSFOOTER_SHOW_SETTINGS = "qs_footer_show_settings";
-
-        /**
          *
          * Show Running Services icon in QS Footer.
          * @hide

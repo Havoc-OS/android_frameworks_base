@@ -75,8 +75,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         SignalCallback {
     private static final float EXPAND_INDICATOR_THRESHOLD = .93f;
 
-    private static final String QS_FOOTER_SHOW_SETTINGS =
-            "system:" + Settings.System.QSFOOTER_SHOW_SETTINGS;
     private static final String QS_FOOTER_SHOW_SERVICES =
             "system:" + Settings.System.QSFOOTER_SHOW_SERVICES;
 
@@ -96,7 +94,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     private boolean mExpanded;
     private boolean mAlarmShowing;
     private boolean mServicesButtonVisible = true;
-    private boolean mSettingsButtonVisible = true;
 
     protected ExpandableIndicator mExpandIndicator;
 
@@ -168,17 +165,12 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         Dependency.get(TunerService.class).addTunable(this,
-                        QS_FOOTER_SHOW_SETTINGS,
                         QS_FOOTER_SHOW_SERVICES);
         updateVisibilities();
     }
 
     public void onTuningChanged(String key, String newValue) {
         switch (key) {
-            case QS_FOOTER_SHOW_SETTINGS:
-                mSettingsButtonVisible =
-                          newValue != null && Integer.parseInt(newValue) != 0;
-                break;
             case QS_FOOTER_SHOW_SERVICES:
                 mServicesButtonVisible =
                           newValue != null && Integer.parseInt(newValue) != 0;
@@ -200,13 +192,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         mAnimator = new Builder()
                 .addFloat(mSettingsContainer, "translationX", -(remaining - defSpace), 0)
                 .addFloat(mSettingsButton, "rotation", -120, 0)
-                .addFloat(mRunningServicesButton, "translationX", (mSettingsButtonVisible
-                          ? - 2 : - 1) * (remaining - defSpace), 0)
-                .addFloat(mRunningServicesButton, "rotation", -120, 0)
-                .addFloat(mEdit, "translationX", (mServicesButtonVisible && mSettingsButtonVisible
-                          ? - 3 : (mServicesButtonVisible || mSettingsButtonVisible
-                          ? - 2 : -1)) * (remaining - defSpace), 0)
-                .addFloat(mEdit, "rotation", -120, 0)
                 .build();
         if (mAlarmShowing) {
             int translate = isLayoutRtl() ? mDate.getWidth() : -mDate.getWidth();            
@@ -369,8 +354,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         mEdit.setVisibility(isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE);
 
         mRunningServicesButton.setVisibility(mServicesButtonVisible ? (!isDemo && mExpanded ? View.VISIBLE : View.INVISIBLE) : View.GONE);
-
-        mSettingsContainer.setVisibility(mSettingsButtonVisible ? View.VISIBLE : View.GONE);
     }
 
     private void updateListeners() {
