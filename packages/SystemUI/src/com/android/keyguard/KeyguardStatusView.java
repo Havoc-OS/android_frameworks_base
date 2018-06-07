@@ -93,7 +93,7 @@ public class KeyguardStatusView extends GridLayout implements
     private TextClock mClockView;
     private TextView mOwnerInfo;
     private ViewGroup mClockContainer;
-    private ChargingView mBatteryDoze;
+    // private ChargingView mBatteryDoze;
     private View mKeyguardStatusArea;
     private Runnable mPendingMarqueeStart;
     private Handler mHandler;
@@ -249,9 +249,9 @@ public class KeyguardStatusView extends GridLayout implements
         mDeadPoolClockView = findViewById(R.id.deadpool_clock_view);
         mClockView.setShowCurrentUserTime(true);
         mOwnerInfo = findViewById(R.id.owner_info);
-        mBatteryDoze = findViewById(R.id.battery_doze);
+        // mBatteryDoze = findViewById(R.id.battery_doze);
         mKeyguardStatusArea = findViewById(R.id.keyguard_status_area);
-        mVisibleInDoze = new View[]{mBatteryDoze, mClockView, mAnalogClockView, mDeadPoolClockView, mKeyguardStatusArea};
+        mVisibleInDoze = new View[]{/*mBatteryDoze*/ mClockView, mAnalogClockView, mDeadPoolClockView, mKeyguardStatusArea};
         mTextColor = mClockView.getCurrentTextColor();
         mDateTextColor = mDateView.getCurrentTextColor();
         mAlarmTextColor = mAlarmStatusView.getCurrentTextColor();
@@ -322,7 +322,7 @@ public class KeyguardStatusView extends GridLayout implements
 
     private int getLockClockFont() {
         return Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.LOCK_CLOCK_FONTS, 0);
+                Settings.System.LOCK_CLOCK_FONTS, 29);
     }
 
     public void refreshTime() {
@@ -357,7 +357,7 @@ public class KeyguardStatusView extends GridLayout implements
         if (nextAlarm != null) {
             String alarm = formatNextAlarm(mContext, nextAlarm);
             mAlarmStatusView.setText(alarm);
-            mAlarmStatusView.setContentDescription(
+	    mAlarmStatusView.setContentDescription(
                     getResources().getString(R.string.keyguard_accessibility_next_alarm, alarm));
                     mAvailableAlarm = true;
             mAlarmStatusView.setTextColor(alarmColor);
@@ -365,7 +365,8 @@ public class KeyguardStatusView extends GridLayout implements
             mAvailableAlarm = false;
         }
         mAlarmStatusView.setVisibility(mDarkAmount != 1 ? (mShowAlarm && mAvailableAlarm ? View.VISIBLE : View.GONE)
-                        : mAvailableAlarm ? View.VISIBLE : View.GONE);
+                : mAvailableAlarm ? View.VISIBLE : View.GONE);
+	mAlarmStatusView.setTextColor(alarmColor);
     }
 
     public int getClockBottom() {
@@ -896,22 +897,6 @@ public class KeyguardStatusView extends GridLayout implements
                 break;
         }
 
-        if (!isDozeMode()) {
-            mClockView.setVisibility(mShowClock ? View.VISIBLE : View.GONE);
-        } else {
-            mClockView.setVisibility(View.VISIBLE);
-        }
-
-        if (!isDozeMode()) {
-            mDateView.setVisibility(mShowDate ? View.VISIBLE : View.GONE);
-        } else {
-            mDateView.setVisibility(View.VISIBLE);
-        }
-
-        if (!isDozeMode()) {
-            mAlarmStatusView.setVisibility(mShowAlarm && nextAlarm != null ? View.VISIBLE : View.GONE);
-        }
-
         if (mWeatherView != null) {
             mWeatherView.setVisibility(mShowWeather ?
                 View.VISIBLE : View.GONE);
@@ -1099,7 +1084,7 @@ public class KeyguardStatusView extends GridLayout implements
     private void refreshLockFont() {
         final Resources res = getContext().getResources();
         boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
-        int lockClockFont = isPrimary ? getLockClockFont() : 0;
+        int lockClockFont = isPrimary ? getLockClockFont() : 29;
 
         if (lockClockFont == 0) {
             mClockView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
@@ -1227,19 +1212,9 @@ public class KeyguardStatusView extends GridLayout implements
         }
 
         updateDozeVisibleViews();
-
-        if (mShowAmbientBattery) {
-            mBatteryDoze.setAlpha(dark ? 0 : 1);
-        } else {
-            mBatteryDoze.setDark(dark);
-        }
-        mClockView.setTextColor(ColorUtils.blendARGB(mTextColor, Color.RED, darkAmount));
-        mDateView.setTextColor(ColorUtils.blendARGB(mDateTextColor, Color.RED, darkAmount));
-        int blendedAlarmColor = ColorUtils.blendARGB(mAlarmTextColor, Color.RED, darkAmount);
-        mAlarmStatusView.setTextColor(blendedAlarmColor);
-        mAlarmStatusView.setCompoundDrawableTintList(ColorStateList.valueOf(blendedAlarmColor));
-        mAnalogClockView.setDark(dark);
-        mDeadPoolClockView.setDark(dark);
+        mAnalogClockView.setDark(dark); 
+        mDeadPoolClockView.setDark(dark); 
+        mWeatherView.setAlpha(dark ? 0 : 1);
         refresh();
         updateVisibilities();
     }
@@ -1426,24 +1401,5 @@ public class KeyguardStatusView extends GridLayout implements
           
            updateSettings(false);
          }
-    }
-
-    private boolean isDozeMode() {
-        IDreamManager dreamManager = getDreamManager();
-        PowerManager pm = (PowerManager) getContext().getSystemService(Context.POWER_SERVICE);
-        try {
-            //noinspection deprecation
-            if (dreamManager != null && dreamManager.isDozing() && pm != null && !pm.isScreenOn()) {
-                return true;
-            }
-        } catch (RemoteException e) {
-            return false;
-        }
-        return false;
-    }
-
-    static IDreamManager getDreamManager() {
-        return IDreamManager.Stub.asInterface(
-                ServiceManager.checkService(DreamService.DREAM_SERVICE));
     }
 }

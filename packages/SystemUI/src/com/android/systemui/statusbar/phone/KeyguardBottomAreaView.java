@@ -1011,6 +1011,10 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         ContentResolver resolver = getContext().getContentResolver();
         int color = Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_CAMERA_ICON_COLOR, 0x99FFFFFF);
+
+        if (mRightAffordanceView != null) {
+            mRightAffordanceView.setColorFilter(color);
+        }
     }
 
     public void updatePhoneIconColor() {

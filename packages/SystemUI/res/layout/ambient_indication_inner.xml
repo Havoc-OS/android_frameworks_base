@@ -47,3 +47,4 @@
         android:singleLine="true"
         android:forceHasOverlappingRendering="false" />
 </LinearLayout>
+

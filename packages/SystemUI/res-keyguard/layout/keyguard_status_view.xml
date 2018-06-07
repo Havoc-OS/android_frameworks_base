@@ -39,12 +39,12 @@
             android:layout_gravity="center_horizontal|top">
             <TextClock
                 android:id="@+id/clock_view"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
-                android:layout_alignParentTop="true"
-                android:textColor="?attr/wallpaperTextColor"
+		        android:layout_alignParentTop="true"
+		        android:textColor="?attr/wallpaperTextColor"
                 style="@style/widget_big_thin"
                 android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />
             <CustomAnalogClock
@@ -81,7 +81,7 @@
                 android:id="@+id/keyguard_status_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp" />
+                android:layout_marginTop="8dp" />
 
 
             <include layout="@layout/keyguard_weather_view"
