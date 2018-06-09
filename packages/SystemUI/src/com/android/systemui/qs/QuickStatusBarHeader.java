@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextClock;
 
-import com.android.keyguard.CarrierText;
+import com.android.systemui.havoc.carrierlabel.CarrierLabelQS;
 import com.android.settingslib.Utils;
 import com.android.systemui.qs.BatteryMeterView;
 import com.android.systemui.Dependency;
@@ -49,7 +49,7 @@ public class QuickStatusBarHeader extends RelativeLayout {
     protected QuickQSPanel mHeaderQsPanel;
     protected QSTileHost mHost;
 
-	private CarrierText mCarrierText;
+	private CarrierLabelQS mCarrierLabelQS;
 
     public QuickStatusBarHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -79,7 +79,7 @@ public class QuickStatusBarHeader extends RelativeLayout {
         applyDarkness(R.id.qs_clock, tintArea, intensity, colorForeground);
         applyDarkness(R.id.qs_left_clock, tintArea, intensity, colorForeground);
 		
-		mCarrierText = findViewById(R.id.qs_carrier_text);
+		mCarrierLabelQS = findViewById(R.id.qs_carrier_text);
 
         BatteryMeterView battery = findViewById(R.id.battery);
         battery.setForceShowPercent(true);

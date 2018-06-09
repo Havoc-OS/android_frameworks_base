@@ -15,10 +15,10 @@
 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<item android:top="8dip" android:bottom="8dip">
+	<item android:top="0dip" android:bottom="3dip">
 		<shape android:shape="rectangle">
 			<solid android:color="@color/qs_background_dark"/>
-			<corners android:radius="12.0dip" />
+			<corners android:radius="8.0dip" />
 		</shape>
 	</item>
 	

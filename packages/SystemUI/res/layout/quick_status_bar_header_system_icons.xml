@@ -40,7 +40,7 @@
         systemui:showDark="false"
         />
 
-    <com.android.keyguard.CarrierText
+    <com.android.systemui.havoc.carrierlabel.CarrierLabelQS
         android:id="@+id/qs_carrier_text"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -65,7 +65,6 @@
         android:layout_height="match_parent"
         android:singleLine="true"
         android:paddingStart="@dimen/status_bar_clock_starting_padding"
-        android:paddingEnd="@dimen/status_bar_clock_end_padding"
         android:gravity="center_vertical|start"
         systemui:showDark="false"
         />

@@ -17,10 +17,10 @@
 <ripple android:color="#00000000"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:top="3.0dip">
-        <inset android:insetRight="10.0dip">
+        <inset android:insetRight="8.0dip">
             <shape>
                 <solid android:color="@color/notification_guts_bg_color" />
-                <corners android:radius="10.0dip" />
+                <corners android:radius="8.0dip" />
             </shape>
         </inset>
     </item>

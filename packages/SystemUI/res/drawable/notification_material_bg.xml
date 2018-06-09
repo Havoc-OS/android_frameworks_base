@@ -19,7 +19,7 @@
     <item android:top="3.0dip">
         <shape>
             <solid android:color="@color/notification_material_background_color" />
-            <corners android:radius="10.0dip" />
+            <corners android:radius="8.0dip" />
         </shape>
     </item>
 </ripple>
