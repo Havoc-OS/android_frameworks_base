@@ -54,9 +54,9 @@ public class RoundedCorners extends SystemUI implements Tunable {
     private View mOverlay;
     private View mBottomOverlay;
     private float mDensity;
-    // private TunablePadding mQsPadding;
-    // private TunablePadding mStatusBarPadding;
-    // private TunablePadding mNavBarPadding;
+    /*private TunablePadding mQsPadding;
+    private TunablePadding mStatusBarPadding;
+    private TunablePadding mNavBarPadding;*/
 
     @Override
     public void start() {
@@ -70,7 +70,7 @@ public class RoundedCorners extends SystemUI implements Tunable {
         int padding_alt = mContext.getResources().getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding_alt);
         int qsPadding = mContext.getResources().getDimensionPixelSize(
-                    R.dimen.qs_corner_content_padding);
+                R.dimen.qs_corner_content_padding);
         if (padding != 0 && Build.PRODUCT.equals("taimen")) {
             setupPadding(padding, qsPadding);
         } else {
@@ -143,9 +143,6 @@ public class RoundedCorners extends SystemUI implements Tunable {
         StatusBar sb = getComponent(StatusBar.class);
         View statusBar = (sb != null ? sb.getStatusBarWindow() : null);
         if (statusBar != null) {
-            TunablePadding.addTunablePadding(statusBar.findViewById(R.id.keyguard_header), PADDING,
-                    padding, FLAG_END);
-
             FragmentHostManager fragmentHostManager = FragmentHostManager.get(statusBar);
             if (padding != 0) {
                 TunablePadding.addTunablePadding(statusBar.findViewById(R.id.keyguard_header), PADDING,
@@ -156,7 +153,7 @@ public class RoundedCorners extends SystemUI implements Tunable {
             }
             if (qsPadding != 0) {
                 fragmentHostManager.addTagListener(QS.TAG,
-                        new TunablePaddingTagListener(qsPadding, R.id.qs_header));
+                        new TunablePaddingTagListener(qsPadding, R.id.header));
             }
         }
     }

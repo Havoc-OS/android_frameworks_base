@@ -34,9 +34,6 @@
 
     <!-- Qs visibility -->
     <dimen name="qs_tile_height_wo_label">48dp</dimen>
-
-    <!-- Quick QS scroller -->
-    <dimen name="qs_scroller_margin">8dp</dimen>
     
     <!-- App circle sidebar -->  
     <dimen name="app_sidebar_trigger_width">12dip</dimen>  
@@ -46,20 +43,10 @@
 
     <!-- Custom Carrier Label -->
     <dimen name="status_bar_carrier_height">14dp</dimen>
-
-    <!-- Status bar header -->
-    <dimen name="qs_panel_margin_top">28dp</dimen>
-    <dimen name="qs_panel_margin_top_header">85dp</dimen>
-    <dimen name="qs_scroller_top_margin">40dp</dimen>
-    <dimen name="qs_panel_footer_height">48dp</dimen>
-    <dimen name="qs_corner_content_padding">8dp</dimen> 
 	
 	<!-- Burn-in protection --> 
     <dimen name="horizontal_max_swift">3.0dp</dimen> 
     <dimen name="vertical_max_swift">1.0dp</dimen>
-
-      <dimen name="crop_buttons">48dp</dimen> 
-     <dimen name="crop_buttons_inlet">32dp</dimen> 
 
       <!-- Pie controls dimensions --> 
     <dimen name="pie_line_length">142dp</dimen> 

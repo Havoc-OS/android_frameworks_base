@@ -43,20 +43,6 @@
     <!-- Content description of the system profiles  -->
     <string name="quick_settings_profiles">System profiles</string>
 
-      <!-- Screenshot Crop & Share --> 
-    <string name="action_delete_success">Deleted</string> 
-    <string name="action_delete_fault">Deleting was unsuccessful</string> 
-    <string name="action_save_success">Saved</string> 
-    <string name="action_save_fault">Saving was unsuccessful</string> 
-    <string name="pref_action_color_title">Action buttons color</string> 
-    <string name="pref_action_color_summary">Choose your favorite color for the action buttons</string> 
-    <string name="pref_category_main">Main Settings</string> 
-    <string name="pref_category_user">User Settings</string> 
-    <string name="pref_crop_behavior_title">Crop behavior</string> 
-    <string name="pref_crop_behavior_summary">Use the cropped image even if the original one hasn\'t actually been cropped with the crop action</string> 
-    <string name="action_ok">OK</string> 
-    <string name="action_edit">Edit</string> 
-
     <!-- Compass QS Tile -->
     <string name="quick_settings_compass_label">Compass</string>
     <string name="quick_settings_compass_value"><xliff:g id="degrees">%1$.0f</xliff:g>\u00b0 <xliff:g id="direction">%2$s</xliff:g></string>
