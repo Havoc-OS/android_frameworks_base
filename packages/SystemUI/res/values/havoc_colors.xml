@@ -58,7 +58,9 @@
     <color name="power_menu_wallpaper_tint_off_color">#80202020</color> 
 	
     <!-- QSPanel Tiles Colors --> 
-    <color name="qs_tiles_inactive_color">#595959</color>
-    <color name="qs_tiles_unavailable_color">#706f6f</color> 
-    <color name="qs_tiles_circle_inactive">#dbdbdb</color>  
+    <color name="qs_tiles_active_color">@*android:color/havoc_qs_active</color>
+    <color name="qs_tiles_inactive_color">@*android:color/havoc_qs_inactive</color>
+    <color name="qs_tiles_unavailable_color">@*android:color/havoc_qs_unavailable</color>
+    <color name="qs_tiles_circle_active">@*android:color/havoc_qs_circle_active</color>
+    <color name="qs_tiles_circle_inactive">@*android:color/havoc_qs_circle_inactive</color>
 </resources>

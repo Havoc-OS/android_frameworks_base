@@ -52,4 +52,10 @@
     <color name="generic_theme_primary">#4285f4</color>  
     <color name="generic_theme_primary_dark">#346AC3</color>  
     <color name="generic_theme_accent">#3B77DB</color>	
+	
+    <color name="havoc_qs_active">#ffffff</color> 
+    <color name="havoc_qs_inactive">#595959</color> 
+    <color name="havoc_qs_unavailable">#706f6f</color> 
+    <color name="havoc_qs_circle_active">?android:attr/colorAccent</color> 
+    <color name="havoc_qs_circle_inactive">#dbdbdb</color> 
 </resources>
