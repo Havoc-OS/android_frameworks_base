@@ -21,7 +21,7 @@
             android:scaleX="0.100000"
             android:scaleY="-0.100000">
         <path
-            android:fillColor="#70FFFFFF"
+            android:fillColor="#FFFFFFFF"
             android:strokeWidth="1"
             android:pathData="M1219 3109 c-105 -9 -175 -65 -205 -165 -21 -72 -21 -2217 1 -2290 19 -63 63 -116
 120 -144 44 -21 48 -21 764 -22 l719 -1 46 23 c58 27 102 81 121 144 22 74 22 2218
