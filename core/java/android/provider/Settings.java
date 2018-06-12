@@ -6884,6 +6884,18 @@ public final class Settings {
             }
         }
 
+         /** 
+         * Setting to allow setting rounded corner size and content padding 
+         */ 
+        public static final String SYSUI_ROUNDED_SIZE = "sysui_rounded_size"; 
+        public static final String SYSUI_ROUNDED_CONTENT_PADDING = "sysui_rounded_content_padding"; 
+ 
+        /** 
+          * Setting to disable rounded corner preferences and use frameworks values instead 
+          * @hide 
+          */ 
+         public static final String SYSUI_ROUNDED_FWVALS = "sysui_rounded_fwvals"; 
+
         /**
          * Convenience function for updating a single settings value as an
          * integer. This will either create a new entry in the table if the

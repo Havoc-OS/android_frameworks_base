@@ -3479,6 +3479,34 @@ public class StatusBar extends SystemUI implements DemoMode,
         return false;
     }
 
+    public boolean isCurrentRoundedSameAsFw() { 
+        Resources res = null; 
+        try { 
+            res = mContext.getPackageManager().getResourcesForApplication("com.android.systemui"); 
+        } catch (NameNotFoundException e) { 
+            e.printStackTrace(); 
+            // If we can't get resources, return true so that updateTheme doesn't attempt to 
+            // set corner values 
+            return true; 
+        } 
+
+        // Resource IDs for framework properties 
+        int resourceIdRadius = res.getIdentifier("com.android.systemui:dimen/rounded_corner_fuckedup_radius", null, null); 
+        int resourceIdPadding = res.getIdentifier("com.android.systemui:dimen/rounded_corner_content_padding", null, null); 
+
+        // Values on framework resources 
+        int cornerRadiusRes = res.getDimensionPixelSize(resourceIdRadius); 
+        int contentPaddingRes = res.getDimensionPixelSize(resourceIdPadding); 
+
+        // Values in Settings DBs 
+        int cornerRadius = Settings.Secure.getInt(mContext.getContentResolver(), 
+                Settings.Secure.SYSUI_ROUNDED_SIZE, cornerRadiusRes); 
+        int contentPadding = Settings.Secure.getInt(mContext.getContentResolver(), 
+                Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, contentPaddingRes); 
+
+        return (cornerRadiusRes == cornerRadius) && (contentPaddingRes == contentPadding); 
+    } 
+
     @Nullable
     public View getAmbientIndicationContainer() {
         return mAmbientIndicationContainer;
@@ -5616,6 +5644,29 @@ public class StatusBar extends SystemUI implements DemoMode,
         Trace.endSection();
     }
 
+    private void updateRoundedCorner(){ 
+        boolean sysuiRoundedFwvals = Settings.Secure.getIntForUser(mContext.getContentResolver(), 
+                     Settings.Secure.SYSUI_ROUNDED_FWVALS, 1, mCurrentUserId) == 1; 
+         if (sysuiRoundedFwvals && !isCurrentRoundedSameAsFw()) { 
+  
+             Resources res = null; 
+             try { 
+                 res = mContext.getPackageManager().getResourcesForApplication("com.android.systemui"); 
+             } catch (NameNotFoundException e) { 
+                 e.printStackTrace(); 
+             } 
+  
+             if (res != null) { 
+                 int resourceIdRadius = res.getIdentifier("com.android.systemui:dimen/rounded_corner_fuckedup_radius", null, null); 
+                 Settings.Secure.putInt(mContext.getContentResolver(), 
+                     Settings.Secure.SYSUI_ROUNDED_SIZE, res.getDimensionPixelSize(resourceIdRadius)); 
+                 int resourceIdPadding = res.getIdentifier("com.android.systemui:dimen/rounded_corner_content_padding", null, null); 
+                 Settings.Secure.putInt(mContext.getContentResolver(), 
+                     Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, res.getDimensionPixelSize(resourceIdPadding)); 
+             } 
+         } 
+    } 
+
     /**
      * Switches theme from light to dark and vice-versa.
      */
@@ -6977,6 +7028,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         resolver.registerContentObserver(Settings.System.getUriFor( 
              Settings.System.BLUR_MIXED_COLOR_PREFERENCE_KEY),  
              false, this); 
+        resolver.registerContentObserver(Settings.Secure.getUriFor( 
+                Settings.Secure.SYSUI_ROUNDED_FWVALS), 
+                false, this, UserHandle.USER_ALL);
         resolver.registerContentObserver(Settings.System.getUriFor( 
                 Settings.System.CLEAR_RECENTS_STYLE), 
                 false, this, UserHandle.USER_ALL); 
@@ -7064,6 +7118,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setHeadsUpBlacklist();
             setHeadsUpStoplist();
             updateBlurSettings();
+            updateRoundedCorner();
             setNewOverlayAlpha();
             setSecurityAlpha();
             updateKeyguardStatusSettings();
