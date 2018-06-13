@@ -37,7 +37,6 @@ import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.CustomAnalogClock;
-import android.widget.DeadPoolAnalogClock;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -480,7 +479,7 @@ public class KeyguardStatusView extends GridLayout implements
 
     private void updateVisibilities() {
         switch (mClockSelection) {
-            case 0: // default aosp 
+            case 0: // default digital
             default:
                 mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE);
                 mAnalogClockView.setVisibility(View.GONE);
@@ -1186,7 +1185,6 @@ public class KeyguardStatusView extends GridLayout implements
 
         updateDozeVisibleViews();
         mAnalogClockView.setDark(dark); 
-        mDeadPoolClockView.setDark(dark); 
         mWeatherView.setAlpha(dark ? 0 : 1);
         refresh();
         updateVisibilities();

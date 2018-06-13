@@ -35,6 +35,9 @@
   <java-symbol type="color" name="analog_clock_hand_hour_color" /> 
   <java-symbol type="color" name="analog_clock_hand_minute_color" /> 
 
+    <!-- Custom clocks --> 
+  <java-symbol type="string" name="custom_clock_styles" /> 
+
   <!-- Emergency button in power menu -->
   <java-symbol type="bool" name="config_showEmergencyButtonInPowerMenu" />
 
