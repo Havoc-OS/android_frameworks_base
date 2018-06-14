@@ -7943,12 +7943,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         return 0;
     }
 
-    private boolean isVolumeKey(KeyEvent event) {
-        return event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN
-                || event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP;
-
-    }
-
     private boolean shouldDispatchInputWhenNonInteractive(KeyEvent event) {
         final boolean displayOff = (mDisplay == null || mDisplay.getState() == STATE_OFF);
 
@@ -7984,6 +7978,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         // Otherwise, consume events since the user can't see what is being
         // interacted with.
         return false;
+    }
+
+    private boolean isVolumeKey(KeyEvent event) {
+        return event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN
+                || event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP;
     }
 
     private void dispatchDirectAudioEvent(KeyEvent event) {
