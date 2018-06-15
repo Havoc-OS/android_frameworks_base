@@ -133,7 +133,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.GraphicBuffer;
 import android.graphics.Rect;
@@ -354,9 +353,6 @@ final class ActivityRecord extends ConfigurationContainer implements AppWindowCo
 
     private boolean mShowWhenLocked;
     private boolean mTurnScreenOn;
-
-    private final float mFullScreenAspectRatio = Resources.getSystem().getFloat(
-                    org.lineageos.platform.internal.R.dimen.config_screenAspectRatio);
 
     /**
      * Temp configs used in {@link #ensureActivityConfigurationLocked(int, boolean)}
@@ -2347,9 +2343,7 @@ final class ActivityRecord extends ConfigurationContainer implements AppWindowCo
     // TODO(b/36505427): Consider moving this method and similar ones to ConfigurationContainer.
     private void computeBounds(Rect outBounds) {
         outBounds.setEmpty();
-        final float maxAspectRatio = (LineageSettings.System.getInt(service.mContext.
-                getContentResolver(), LineageSettings.System.FULL_SCREEN_ASPECT_RATIO, 0) != 0)
-                        ? mFullScreenAspectRatio : info.maxAspectRatio;
+        final float maxAspectRatio = info.maxAspectRatio;
         final ActivityStack stack = getStack();
         if (task == null || stack == null || !task.mFullscreen || maxAspectRatio == 0
                 || isInVrUiMode(getConfiguration())) {
@@ -2369,7 +2363,9 @@ final class ActivityRecord extends ConfigurationContainer implements AppWindowCo
         int maxActivityWidth = containingAppWidth;
         int maxActivityHeight = containingAppHeight;
 
-        if (containingAppWidth < containingAppHeight) {
+        if (service.shouldForceLongScreen(packageName)) {
+            // Use containingAppWidth/Height for maxActivityWidth/Height when force long screen
+        } else if (containingAppWidth < containingAppHeight) {
             // Width is the shorter side, so we use that to figure-out what the max. height
             // should be given the aspect ratio.
             maxActivityHeight = (int) ((maxActivityWidth * maxAspectRatio) + 0.5f);
