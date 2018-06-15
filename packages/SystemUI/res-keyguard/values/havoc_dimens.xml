@@ -16,9 +16,7 @@
 -->
 <resources>
 
-    <color name="default_shadow_color_no_alpha">#FF000000</color>
-
-    <!-- Sammy accented clock -->
-    <color name="sammy_minutes_accent">@*android:color/accent_device_default_light</color>
+    <!-- Our custom clock values -->
+    <dimen name="widget_sammy_accent_font_size">80dp</dimen>
 
 </resources>
