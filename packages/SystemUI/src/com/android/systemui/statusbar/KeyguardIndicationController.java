@@ -91,6 +91,7 @@ public class KeyguardIndicationController {
     private int mTransientTextColor;
     private int mInitialTextColor;
     private boolean mVisible;
+    private boolean mVisibleOverwrite;
 
     private boolean mPowerPluggedIn;
     private boolean mPowerPluggedInWired;
@@ -194,18 +195,27 @@ public class KeyguardIndicationController {
 
     public void setVisible(boolean visible) {
         mVisible = visible;
-        mIndicationArea.setVisibility(visible ? View.VISIBLE : View.GONE);
-        if (visible) {
+        mIndicationArea.setVisibility(isReallyVisible() ? View.VISIBLE : View.GONE);
+        if (isReallyVisible()) {
             // If this is called after an error message was already shown, we should not clear it.
             // Otherwise the error message won't be shown
             if  (!mHandler.hasMessages(MSG_HIDE_TRANSIENT)) {
                 hideTransientIndication();
             }
             updateIndication(false);
-        } else if (!visible) {
+        } else if (!isReallyVisible()) {
             // If we unlock and return to keyguard quickly, previous error should not be shown
             hideTransientIndication();
         }
+    }
+
+    private boolean isReallyVisible() {
+        return mVisible && mVisibleOverwrite;
+    }
+
+    public void setVisibleOverwrite(boolean value) {
+        mVisibleOverwrite = value;
+        setVisible(mVisible);
     }
 
     /**
@@ -294,7 +304,7 @@ public class KeyguardIndicationController {
             mWakeLock.setAcquired(false);
         }
 
-        if (mVisible) {
+        if (isReallyVisible()) {
             // Walk down a precedence-ordered list of what indication
             // should be shown based on user or device state
             if (mDozing) {
@@ -489,7 +499,7 @@ public class KeyguardIndicationController {
         @Override
         public void onReceive(Context context, Intent intent) {
             mHandler.post(() -> {
-                if (mVisible) {
+                if (isReallyVisible()) {
                     updateIndication(false);
                 }
             });
@@ -655,7 +665,7 @@ public class KeyguardIndicationController {
 
         @Override
         public void onUserUnlocked() {
-            if (mVisible) {
+            if (isReallyVisible()) {
                 updateIndication(false);
             }
         }

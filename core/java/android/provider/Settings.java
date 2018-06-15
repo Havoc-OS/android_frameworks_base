@@ -5149,11 +5149,25 @@ public final class Settings {
          */
         public static final String CLEAR_RECENTS_STYLE = "clear_recents_style";
 
-       /**
-         * Recents Clear All Button Style Switch
+         /**
+         * Change the color of the lockscreen bottom camera shortcut
          * @hide
          */
-        public static final String CLEAR_RECENTS_STYLE_ENABLE = "clear_recents_style_enable";
+        public static final String HIDE_LOCKSCREEN_STATUS_BAR = "hide_lockscreen_status_bar";
+
+        /**
+         * Hide lockscreen indicator text
+         *
+         * @hide
+         */
+        
+        public static final String HIDE_LOCKSCREEN_INDICATOR_DISPLAY = "hide_lockscreen_indicator_display";
+
+        /**
+         *
+         * @hide
+         */
+         public static final String CLEAR_RECENTS_STYLE_ENABLE = "clear_recents_style_enable";
 
        /**
          * Recents Clear All Button Color
@@ -5857,6 +5871,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NOTIFICATION_SOUND_VIB_SCREEN_ON);
             PRIVATE_SETTINGS.add(RECENTS_COMPONENT);
             PRIVATE_SETTINGS.add(STATUSBAR_HIDE_NOTCH);
+            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
+            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
         }
 
         /**
