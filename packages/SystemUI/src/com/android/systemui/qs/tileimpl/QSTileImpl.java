@@ -219,19 +219,19 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, TunerS
     public void click() {
         mMetricsLogger.write(populate(new LogMaker(ACTION_QS_CLICK).setType(TYPE_ACTION)));
         mHandler.sendEmptyMessage(H.CLICK);
-        vibrateTile(100);
+        vibrateTile(45);
     }
 
     public void secondaryClick() {
         mMetricsLogger.write(populate(new LogMaker(ACTION_QS_SECONDARY_CLICK).setType(TYPE_ACTION)));
         mHandler.sendEmptyMessage(H.SECONDARY_CLICK);
-        vibrateTile(100);
+        vibrateTile(45);
     }
 
     public void longClick() {
         mMetricsLogger.write(populate(new LogMaker(ACTION_QS_LONG_PRESS).setType(TYPE_ACTION)));
         mHandler.sendEmptyMessage(H.LONG_CLICK);
-        vibrateTile(100);
+        vibrateTile(45);
     }
 
     public LogMaker populate(LogMaker logMaker) {
