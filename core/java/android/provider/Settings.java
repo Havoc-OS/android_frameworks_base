@@ -5177,7 +5177,21 @@ public final class Settings {
          */
         public static final String STATUS_BAR_FILE_HEADER_IMAGE = "status_bar_file_header_image";
 
+         /**
+         * Change the color of the lockscreen bottom camera shortcut
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_STATUS_BAR = "hide_lockscreen_status_bar";
+
         /**
+         * Hide lockscreen indicator text
+         *
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_INDICATOR_DISPLAY = "hide_lockscreen_indicator_display";
+
+        /**
+         *
          * @hide
          */
         public static final String START_SCREEN_STATE_SERVICE = "start_screen_state_service";
@@ -6028,6 +6042,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ON_TOUCH_ONLY);
             PRIVATE_SETTINGS.add(RECENTS_OMNI_SWITCH_ENABLED);
             PRIVATE_SETTINGS.add(HEADSET_CONNECT_PLAYER);
+            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
+            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
         }
 
         /**
@@ -7811,11 +7827,6 @@ public final class Settings {
          */
         public static final String LOCK_SCREEN_ALLOW_REMOTE_INPUT =
                 "lock_screen_allow_remote_input";
-
-        /**
-         * @hide
-         */
-        public static final String LOCK_HIDE_STATUS_BAR = "lockscreen_hide_status_bar";
 
         /**
          * Set by the system to track if the user needs to see the call to action for
