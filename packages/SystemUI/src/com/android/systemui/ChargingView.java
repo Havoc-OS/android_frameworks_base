@@ -50,8 +50,8 @@ public class ChargingView extends ImageView implements
     private boolean mSuppressCharging;
     private boolean mShowAmbientBattery;
 
-    private static final String AMBIENT_BATTERY_PERCENT =
-            "system:" + Settings.System.AMBIENT_BATTERY_PERCENT;
+    // private static final String AMBIENT_BATTERY_PERCENT =
+    //         "system:" + Settings.System.AMBIENT_BATTERY_PERCENT;
 
     private void clearSuppressCharging() {
         mSuppressCharging = false;
@@ -82,8 +82,8 @@ public class ChargingView extends ImageView implements
         mBatteryController = Dependency.get(BatteryController.class);
         mBatteryController.addCallback(this);
         Dependency.get(ConfigurationController.class).addCallback(this);
-        Dependency.get(TunerService.class).addTunable(this,
-                AMBIENT_BATTERY_PERCENT);
+        Dependency.get(TunerService.class).addTunable(this
+                /*,AMBIENT_BATTERY_PERCENT*/);
     }
 
     @Override
@@ -98,11 +98,11 @@ public class ChargingView extends ImageView implements
     @Override
     public void onTuningChanged(String key, String newValue) {
         switch (key) {
-            case AMBIENT_BATTERY_PERCENT:
-                mShowAmbientBattery =
-                        newValue != null && Integer.parseInt(newValue) != 0;
-                updateVisibility();
-                break;
+            // case AMBIENT_BATTERY_PERCENT:
+            //     mShowAmbientBattery =
+            //             newValue != null && Integer.parseInt(newValue) != 0;
+            //     updateVisibility();
+            //     break;
             default:
                 break;
         }

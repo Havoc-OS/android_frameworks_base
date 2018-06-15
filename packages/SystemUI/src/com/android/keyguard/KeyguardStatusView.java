@@ -1219,6 +1219,11 @@ public class KeyguardStatusView extends GridLayout implements
 
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
+
+            // enable if not working
+            // int showAmbientBottomInfo = Settings.System.getIntForUser(mContext.getContentResolver(), 
+            // Settings.System.AMBIENT_BOTTOM_DISPLAY, 0, UserHandle.USER_CURRENT); 
+
             resolver.registerContentObserver(Settings.System.getUriFor(
                    Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -1228,17 +1233,6 @@ public class KeyguardStatusView extends GridLayout implements
             resolver.registerContentObserver(Settings.System.getUriFor(
                   Settings.System.OMNIJAWS_WEATHER_ICON_PACK), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                  Settings.System.AMBIENT_BATTERY_PERCENT), false, this, UserHandle.USER_ALL);
-            mShowWeather = Settings.System.getIntForUser(resolver,
-                  Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0, UserHandle.USER_CURRENT) == 1;
-            mShowConditionIcon = Settings.System.getIntForUser(resolver,
-                  Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
-            mShowLocation = Settings.System.getIntForUser(resolver,
-                  Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1, UserHandle.USER_CURRENT) == 1;
-            mShowAmbientBattery = Settings.System.getIntForUser(resolver,
-                  Settings.System.AMBIENT_BATTERY_PERCENT, 0, UserHandle.USER_CURRENT) == 1;
-            queryAndUpdateWeather();
-           resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR), false, this, UserHandle.USER_ALL);
@@ -1260,6 +1254,12 @@ public class KeyguardStatusView extends GridLayout implements
                      Settings.System.LOCKCLOCK_FONT_SIZE), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKDATE_FONT_SIZE), false, this, UserHandle.USER_ALL);
+         
+        //     if (showAmbientBottomInfo == AMBIENT_BOTTOM_DISPLAY_BATTERYPERCENT) { 
+        //         resolver.registerContentObserver(Settings.System.getUriFor(
+        //             Settings.System.AMBIENT_BATTERY_PERCENT), false, this, UserHandle.USER_ALL);
+        //    }              
+                
         }
  
 
@@ -1271,6 +1271,15 @@ public class KeyguardStatusView extends GridLayout implements
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             ContentResolver resolver = mContext.getContentResolver();
+            // enable if not working
+            // int showAmbientBottomInfo = Settings.System.getIntForUser(mContext.getContentResolver(), 
+            // Settings.System.AMBIENT_BOTTOM_DISPLAY, 0, UserHandle.USER_CURRENT); 
+
+       //    else if (showAmbientBottomInfo == AMBIENT_BOTTOM_DISPLAY_BATTERYPERCENT) { 
+        //        Settings.System.AMBIENT_BATTERY_PERCENT))) {
+        //        mShowAmbientBattery = Settings.System.getIntForUser(resolver,
+        //        Settings.System.AMBIENT_BATTERY_PERCENT, 0, UserHandle.USER_CURRENT) == 1;
+        //    }      
 
             if (uri.equals(Settings.System.getUriFor(
                    Settings.System.LOCK_SCREEN_SHOW_WEATHER))) {
@@ -1291,10 +1300,6 @@ public class KeyguardStatusView extends GridLayout implements
                    Settings.System.OMNIJAWS_WEATHER_ICON_PACK))) {
                 updateWeather();
             } else if (uri.equals(Settings.System.getUriFor(
-                   Settings.System.AMBIENT_BATTERY_PERCENT))) {
-                mShowAmbientBattery = Settings.System.getIntForUser(resolver,
-                    Settings.System.AMBIENT_BATTERY_PERCENT, 0, UserHandle.USER_CURRENT) == 1;
-             }  else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR))) {
                   updateSettings(false);
               } else if (uri.equals(Settings.System.getUriFor(

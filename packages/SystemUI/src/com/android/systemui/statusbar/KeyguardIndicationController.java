@@ -30,6 +30,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import com.android.systemui.havoc.omnijaws.OmniJawsClient; 
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -58,10 +59,12 @@ import java.text.NumberFormat;
 /**
  * Controls the indications and error messages shown on the Keyguard
  */
-public class KeyguardIndicationController {
+public class KeyguardIndicationController implements 
+        OmniJawsClient.OmniJawsObserver { 
 
     private static final String TAG = "KeyguardIndication";
     private static final boolean DEBUG_CHARGING_SPEED = false;
+    private static final boolean DEBUG = false; 
 
     private static final int MSG_HIDE_TRANSIENT = 1;
     private static final int MSG_CLEAR_FP_MSG = 2;
@@ -87,6 +90,9 @@ public class KeyguardIndicationController {
     private boolean mVisible;
     private boolean mVisibleOverwrite;
 
+    private static final int AMBIENT_BOTTOM_DISPLAY_BATTERYPERCENT = 1; 
+    private static final int AMBIENT_BOTTOM_DISPLAY_WEATHER = 2; 
+
     private boolean mPowerPluggedIn;
     private boolean mPowerCharged;
     private int mChargingSpeed;
@@ -101,6 +107,13 @@ public class KeyguardIndicationController {
 
     private final DevicePolicyManager mDevicePolicyManager;
     private boolean mDozing;
+
+    private OmniJawsClient mWeatherClient; 
+    private OmniJawsClient.WeatherInfo mWeatherData; 
+    private boolean mWeatherEnabled; 
+    private String mWeatherCurrentTemp; 
+    private String mWeatherConditionText; 
+ 
 
     /**
      * Creates a new KeyguardIndicationController and registers callbacks.
@@ -140,6 +153,11 @@ public class KeyguardIndicationController {
         mDevicePolicyManager = (DevicePolicyManager) context.getSystemService(
                 Context.DEVICE_POLICY_SERVICE);
 
+        mWeatherClient = new OmniJawsClient(mContext); 
+        mWeatherEnabled = mWeatherClient.isOmniJawsEnabled(); 
+        mWeatherClient.addObserver(this); 
+        queryAndUpdateWeather(); 
+
         updateDisclosure();
     }
 
@@ -167,6 +185,32 @@ public class KeyguardIndicationController {
         }
         return mUpdateMonitorCallback;
     }
+
+    @Override 
+    public void weatherUpdated() { 
+        queryAndUpdateWeather(); 
+    } 
+ 
+    @Override 
+    public void weatherError(int errorReason) { 
+        if (DEBUG) Log.d(TAG, "weatherError " + errorReason); 
+    } 
+ 
+    public void queryAndUpdateWeather() { 
+        try { 
+                if (mWeatherEnabled) { 
+                    mWeatherClient.queryWeather(); 
+                    mWeatherData = mWeatherClient.getWeatherInfo(); 
+                    mWeatherCurrentTemp = mWeatherData.temp + mWeatherData.tempUnits; 
+                    mWeatherConditionText = mWeatherData.condition; 
+                } else { 
+                    mWeatherCurrentTemp = ""; 
+                    mWeatherConditionText = ""; 
+                } 
+       } catch(Exception e) { 
+          // Do nothing 
+       } 
+    } 
 
     private void updateDisclosure() {
         if (mDevicePolicyManager == null) {
@@ -311,14 +355,20 @@ public class KeyguardIndicationController {
                 } else {
                     // Use the high voltage symbol ⚡ (u26A1 unicode) but prevent the system
                     // to load its emoji colored variant with the uFE0E flag
-                    boolean showAmbientBattery = Settings.System.getIntForUser(mContext.getContentResolver(),
-                        Settings.System.AMBIENT_BATTERY_PERCENT, 0, UserHandle.USER_CURRENT) != 0;
-                    if (showAmbientBattery) {
+                int showAmbientBottomInfo = Settings.System.getIntForUser(mContext.getContentResolver(), 
+                    Settings.System.AMBIENT_BOTTOM_DISPLAY, 0, UserHandle.USER_CURRENT); 
+                if (showAmbientBottomInfo == AMBIENT_BOTTOM_DISPLAY_BATTERYPERCENT) { 
                         String bolt = "\u26A1\uFE0E";
                         CharSequence chargeIndicator = (mPowerPluggedIn ? (bolt + " ") : "") +
                                 NumberFormat.getPercentInstance().format(mLevel / 100f);
                         mTextView.setTextColor(Color.WHITE);
                         mTextView.switchIndication(chargeIndicator);
+                    } else if (showAmbientBottomInfo == AMBIENT_BOTTOM_DISPLAY_WEATHER){ 
+                        if (mWeatherEnabled && !mPowerPluggedIn) { 
+                            CharSequence weatherIndicator = String.format(mContext.getResources().getString(R.string.ambient_weather_info), 
+                                  mWeatherCurrentTemp, mWeatherConditionText); 
+                            mTextView.switchIndication(weatherIndicator); 
+                        } 
                     } else {
                         mTextView.switchIndication(null);
                     }
