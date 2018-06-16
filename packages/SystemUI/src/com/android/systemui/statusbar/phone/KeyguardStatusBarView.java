@@ -97,8 +97,6 @@ public class KeyguardStatusBarView extends RelativeLayout
     private View mSystemIconsContainer;
     private TintedIconManager mIconManager;
 
-    private boolean mHideContents;
-
     private ContentObserver mObserver = new ContentObserver(new Handler()) {
         public void onChange(boolean selfChange, Uri uri) {
             updateVisibilities();

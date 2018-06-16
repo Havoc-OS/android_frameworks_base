@@ -73,14 +73,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp" />
-
-
+      
             <include layout="@layout/keyguard_weather_view"
                 android:id="@+id/keyguard_weather_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/keyguard_status_area" />
 
+            <include layout="@layout/keyguard_shortcuts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/keyguard_weather_view"
+                android:layout_gravity="center_horizontal"/>
+                
             <TextView
                 android:id="@+id/owner_info"
                 android:layout_marginLeft="16dp"
@@ -96,11 +101,7 @@
                 android:letterSpacing="0.05"
                 android:ellipsize="marquee"
                 android:singleLine="true" />
+     </RelativeLayout>
 				
-            <include layout="@layout/keyguard_shortcuts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"/>
-        </RelativeLayout>
     </LinearLayout>
 </com.android.keyguard.KeyguardStatusView>

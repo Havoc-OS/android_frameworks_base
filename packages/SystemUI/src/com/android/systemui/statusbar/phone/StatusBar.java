@@ -602,7 +602,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     private int mBlurDarkColorFilter;
     private int mBlurMixedColorFilter;
     private int mBlurLightColorFilter;
-
+    private String[] mNavMediaArrowsExcludeList;
+    
     // RemoteInputView to be activated after unlock
     private View mPendingRemoteInputView;
     private View mPendingWorkRemoteInputView;
@@ -771,7 +772,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     protected PorterDuffXfermode mSrcOverXferMode =
             new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER);
 
-    private String[] mNavMediaArrowsExcludeList;
     private VisualizerView mVisualizerView;
     private boolean mScreenOn;
     private boolean mKeyguardShowingMedia;
@@ -9005,8 +9005,8 @@ public void setNewOverlayAlpha() {
             case STATUS_BAR_BRIGHTNESS_CONTROL:
                 mBrightnessControl = newValue != null && Integer.parseInt(newValue) == 1;
                 break;
-            case LOCKSCREEN_MEDIA_METADATA:
-                mShowMediaMetadata = newValue == null || Integer.parseInt(newValue) == 1;
+            case LOCKSCREEN_MEDIA_METADATA: 
+                mShowMediaMetadata = newValue == null || Integer.parseInt(newValue) == 1; 
                 break;
             case LOCK_SCREEN_CUSTOM_NOTIF:
                 mCustomMaxKeyguard =
