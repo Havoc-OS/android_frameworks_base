@@ -24,6 +24,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -49,6 +50,8 @@ public class CPUInfoService extends Service {
     private String[] mCurrGov=null;
 
     private static final String NUM_OF_CPUS_PATH = "/sys/devices/system/cpu/present";
+    private int CPU_TEMP_DIVIDER = 1;
+    private String CPU_TEMP_SENSOR = "";
 
     private class CPUView extends View {
         private Paint mOnlinePaint;
@@ -59,9 +62,10 @@ public class CPUInfoService extends Service {
 
         private int mNeededWidth;
         private int mNeededHeight;
+        private String mCpuTemp;
+        private boolean mCpuTempAvail;
 
         private boolean mDataAvail;
-        private String mCPUTemp;
 
         private Handler mCurCPUHandler = new Handler() {
             public void handleMessage(Message msg) {
@@ -72,7 +76,7 @@ public class CPUInfoService extends Service {
                     String msgData = (String) msg.obj;
                     try {
                         String[] parts=msgData.split(";");
-                        mCPUTemp=parts[0];
+                        mCpuTemp=parts[0];
 
                         String[] cpuParts=parts[1].split("\\|");
                         for(int i=0; i<cpuParts.length; i++){
@@ -104,13 +108,17 @@ public class CPUInfoService extends Service {
 
             final int textSize = Math.round(12 * density);
 
+            Typeface typeface = Typeface.create("monospace", Typeface.NORMAL);
+
             mOnlinePaint = new Paint();
+            mOnlinePaint.setTypeface(typeface);
             mOnlinePaint.setAntiAlias(true);
             mOnlinePaint.setTextSize(textSize);
             mOnlinePaint.setColor(Color.WHITE);
             mOnlinePaint.setShadowLayer(5.0f, 0.0f, 0.0f, Color.BLACK);
 
             mOfflinePaint = new Paint();
+            mOfflinePaint.setTypeface(typeface);
             mOfflinePaint.setAntiAlias(true);
             mOfflinePaint.setTextSize(textSize);
             mOfflinePaint.setColor(Color.RED);
@@ -145,7 +153,16 @@ public class CPUInfoService extends Service {
         private String getCPUInfoString(int i) {
             String freq=mCurrFreq[i];
             String gov=mCurrGov[i];
-            return "cpu"+i+": "+gov+": "+freq;
+            return "cpu" + i + " " + gov + " " + String.format("%7s", freq);
+        }
+
+        private String getCpuTemp(String cpuTemp) {
+            if (CPU_TEMP_DIVIDER > 1) {
+                return String.format("%s",
+                        Integer.parseInt(cpuTemp) / CPU_TEMP_DIVIDER);
+            } else {
+                return cpuTemp;
+            }
         }
 
         @Override
@@ -164,8 +181,11 @@ public class CPUInfoService extends Service {
 
             int y = mPaddingTop - (int)mAscent;
 
-            canvas.drawText("temp: "+mCPUTemp, RIGHT-mPaddingRight-mMaxWidth,
-                y-1, mOnlinePaint);
+            if(!mCpuTemp.equals("0")) {
+                canvas.drawText("Temp " + getCpuTemp(mCpuTemp) + "°C",
+                        RIGHT-mPaddingRight-mMaxWidth, y-1, mOnlinePaint);
+                mCpuTempAvail = true;
+            }
             y += mFH;
 
             for(int i=0; i<mCurrFreq.length; i++){
@@ -186,10 +206,10 @@ public class CPUInfoService extends Service {
             if (!mDataAvail) {
                 return;
             }
-            final int NW = mNumCpus + 1;
+            final int NW = mNumCpus;
 
             int neededWidth = mPaddingLeft + mPaddingRight + mMaxWidth;
-            int neededHeight = mPaddingTop + mPaddingBottom + mFH * NW;
+            int neededHeight = mPaddingTop + mPaddingBottom + (mFH*((mCpuTempAvail?1:0)+NW));
             if (neededWidth != mNeededWidth || neededHeight != mNeededHeight) {
                 mNeededWidth = neededWidth;
                 mNeededHeight = neededHeight;
@@ -216,7 +236,6 @@ public class CPUInfoService extends Service {
         private static final String CPU_ROOT = "/sys/devices/system/cpu/cpu";
         private static final String CPU_CUR_TAIL = "/cpufreq/scaling_cur_freq";
         private static final String CPU_GOV_TAIL = "/cpufreq/scaling_governor";
-        private static final String CPU_TEMP = "/sys/class/thermal/thermal_zone0/temp";
 
         public CurCPUThread(Handler handler, int numCpus){
             mHandler=handler;
@@ -233,8 +252,7 @@ public class CPUInfoService extends Service {
                 while (!mInterrupt) {
                     sleep(500);
                     StringBuffer sb=new StringBuffer();
-
-                    String cpuTemp = CPUInfoService.readOneLine(CPU_TEMP);
+                    String cpuTemp = CPUInfoService.readOneLine(CPU_TEMP_SENSOR);
                     sb.append(cpuTemp == null ? "0" : cpuTemp);
                     sb.append(";");
 
@@ -266,6 +284,9 @@ public class CPUInfoService extends Service {
         mNumCpus = getNumOfCpus();
         mCurrFreq = new String[mNumCpus];
         mCurrGov = new String[mNumCpus];
+
+        CPU_TEMP_DIVIDER = getResources().getInteger(R.integer.config_cpuTempDivider);
+        CPU_TEMP_SENSOR = getResources().getString(R.string.config_cpuTempSensor);
 
         mView = new CPUView(this);
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
