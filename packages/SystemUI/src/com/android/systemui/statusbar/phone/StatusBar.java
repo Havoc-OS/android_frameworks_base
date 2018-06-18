@@ -2222,6 +2222,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             final Notification n = entry.notification.getNotification();
             final int[] colors = {n.backgroundColor, n.foregroundColor,
                     n.primaryTextColor, n.secondaryTextColor};
+            String notificationText = null;
             final String title = n.extras.getString(Notification.EXTRA_TITLE);
                     final String text = n.extras.getString(Notification.EXTRA_TEXT);
                     if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(text)) {
@@ -6641,13 +6642,14 @@ public class StatusBar extends SystemUI implements DemoMode,
                         // Otherwise just show the always-on screen.
                         setPulsing(pulsingEntries);
                     }
-                    setOnPulseEvent((mAmbientMediaPlaying == 2 ? reason : -1), true);
+                    setForcedMediaPulse((mAmbientMediaPlaying == 2 ? reason : -1));
                 }
 
                 @Override
                 public void onPulseFinished() {
                     callback.onPulseFinished();
                     setPulsing(null);
+                    setForcedMediaPulse(-1);
                 }
 
                 private void setPulsing(Collection<HeadsUpManager.HeadsUpEntry> pulsing) {
@@ -6664,6 +6666,14 @@ public class StatusBar extends SystemUI implements DemoMode,
                             mAmbientIndicationContainer != null) {
                         setCleanLayout(true);
                         ((AmbientIndicationContainer)mAmbientIndicationContainer).showIndication(mMediaMetadata);
+                    }
+                }
+
+                private void setForcedMediaPulse(int reason) {
+                    mNotificationPanel.setForcedMediaPulse(reason);
+                    mNotificationShelf.setForcedMediaPulse(reason);
+                    if (mAmbientIndicationContainer != null) {
+                        ((AmbientIndicationContainer)mAmbientIndicationContainer).setForcedMediaPulse(reason);
                     }
                 }
             }, reason);
@@ -7186,6 +7196,11 @@ public void setNewOverlayAlpha() {
         splitAndAddToArrayList(mStoplist, stopString, "\\|");
     }
 
+    private void setForceAmbient() {
+        mAmbientMediaPlaying = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.FORCE_AMBIENT_FOR_MEDIA, 0,
+                UserHandle.USER_CURRENT);
+    }
     private RemoteViews.OnClickHandler mOnClickHandler = new RemoteViews.OnClickHandler() {
 
         @Override

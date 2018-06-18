@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.doze.DozeReceiver;
 import com.android.systemui.R;
+import com.android.systemui.doze.DozeLog;
 import com.android.systemui.statusbar.phone.StatusBar;
 
 import com.android.systemui.ambientmusic.AmbientIndicationInflateListener;
@@ -93,6 +94,12 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) this.getLayoutParams();
         lp.gravity = mForcedMediaDoze ? Gravity.CENTER : Gravity.BOTTOM;
         this.setLayoutParams(lp);
+    }
+
+    public void setForcedMediaPulse(int reason) {
+        mForcedMediaDoze =
+                reason == DozeLog.PULSE_REASON_FORCED_MEDIA_NOTIFICATION;
+        updatePosition();
     }
 
     public void showIndication(MediaMetadata mediaMetaData) {

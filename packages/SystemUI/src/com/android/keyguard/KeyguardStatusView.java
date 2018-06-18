@@ -72,6 +72,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.systemui.ChargingView;
 import com.android.systemui.havoc.omnijaws.OmniJawsClient;
+import com.android.systemui.doze.DozeLog;
 import com.android.systemui.statusbar.policy.DateView;
 
 import java.util.Locale;
@@ -1756,6 +1757,11 @@ public class KeyguardStatusView extends GridLayout implements
 
     public void setPulsing(boolean pulsing) {
         mPulsing = pulsing;
+    }
+
+    public void setForcedMediaPulse(int reason) {
+        mForcedMediaDoze =
+                reason == DozeLog.PULSE_REASON_FORCED_MEDIA_NOTIFICATION;
         updateDozeVisibleViews();
     }
 
