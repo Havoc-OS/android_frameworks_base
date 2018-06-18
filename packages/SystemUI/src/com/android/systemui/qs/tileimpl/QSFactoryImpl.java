@@ -50,6 +50,7 @@ import com.android.systemui.qs.tiles.LocaleTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
+import com.android.systemui.qs.tiles.OnTheGoTile;
 import com.android.systemui.qs.tiles.PowerMenuTile;
 import com.android.systemui.qs.tiles.PowerShareTile;
 import com.android.systemui.qs.tiles.ReadingModeTile;
@@ -122,6 +123,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<VolumeTile> mVolumeTileProvider;
     private final Provider<ScreenshotTile> mScreenshotTileProvider;
     private final Provider<SleepModeTile> mSleepModeTileProvider;
+    private final Provider<OnTheGoTile> mOnTheGoTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
 
@@ -168,7 +170,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<PowerMenuTile> powerMenuTileProvider,
             Provider<VolumeTile> volumeTileProvider,
             Provider<ScreenshotTile> screenshotTileProvider,
-            Provider<SleepModeTile> sleepModeTileProvider) {
+            Provider<SleepModeTile> sleepModeTileProvider,
+            Provider<OnTheGoTile> onTheGoTileProvider) {
         mQsHostLazy = qsHostLazy;
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
@@ -212,6 +215,7 @@ public class QSFactoryImpl implements QSFactory {
         mVolumeTileProvider = volumeTileProvider;
         mScreenshotTileProvider = screenshotTileProvider;
         mSleepModeTileProvider = sleepModeTileProvider;
+        mOnTheGoTileProvider = onTheGoTileProvider;
     }
 
     public QSTile createTile(String tileSpec) {
@@ -307,6 +311,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mScreenshotTileProvider.get();
             case "sleep_mode":
                 return mSleepModeTileProvider.get();
+            case "onthego":
+                return mOnTheGoTileProvider.get();
         }
 
         // Custom tiles

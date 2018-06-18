@@ -249,4 +249,11 @@
     <string name="onthego_channel_name">Main</string>
     <string name="global_action_onthego">On-The-Go</string>
 
+    <!-- OnTheGo Tile -->
+    <string name="quick_settings_onthego_label">On-The-Go</string>
+    <string name="accessibility_quick_settings_onthego_off">On-The-Go off</string>
+    <string name="accessibility_quick_settings_onthego_on">On-The-Go on</string>
+    <string name="accessibility_quick_settings_onthego_changed_off">On-The-Go turned off</string>
+    <string name="accessibility_quick_settings_onthego_changed_on">On-The-Go turned on</string>
+
 </resources>
