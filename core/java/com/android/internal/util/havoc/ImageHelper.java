@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package com.android.internal.util.slim;
+package com.android.internal.util.havoc;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -58,8 +58,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.VectorDrawable;
 import android.graphics.drawable.Drawable;
 
-import com.android.internal.util.havoc.Converter;
-
 public class ImageHelper {
 
     private static final String TAG = "ImageHelper";
@@ -101,6 +99,38 @@ public class ImageHelper {
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
         return bitmap;
+    }
+
+    public static Drawable getResizedIconDrawable(Drawable source,
+            Context context, int iconSizeId, float scaleFactor) {
+        if (source == null) {
+            return null;
+        }
+
+        final int iconSize = (int) (context.getResources()
+                .getDimensionPixelSize(iconSizeId) * scaleFactor);
+
+        final Bitmap bitmap = drawableToBitmap(source);
+        final Bitmap scaledBitmap = Bitmap
+                .createBitmap(iconSize, iconSize, Config.ARGB_8888);
+
+        final float ratioX = iconSize / (float) bitmap.getWidth();
+        final float ratioY = iconSize / (float) bitmap.getHeight();
+        final float middleX = iconSize / 2.0f;
+        final float middleY = iconSize / 2.0f;
+
+        final Paint paint = new Paint(Paint.FILTER_BITMAP_FLAG);
+        paint.setAntiAlias(true);
+
+        final Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+
+        final Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2,
+                middleY - bitmap.getHeight() / 2, paint);
+
+        return new BitmapDrawable(context.getResources(), scaledBitmap);
     }
 
     public static Bitmap drawableToShortcutIconBitmap (
@@ -219,4 +249,5 @@ public class ImageHelper {
 
         return output;
     }
+
 }

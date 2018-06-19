@@ -14,11 +14,12 @@
 * limitations under the License.
 */
 
-package com.android.internal.util.slim;
+package com.android.internal.util.havoc;
 
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
@@ -28,7 +29,6 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.os.UserHandle;
 import android.util.Log;
-import com.android.internal.util.slim.ImageHelper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,35 +39,48 @@ public class ActionHelper {
 
     private static final String SYSTEMUI_METADATA_NAME = "com.android.systemui";
 
-    // get and set the lockcreen shortcut configs from provider and return propper arraylist objects
-    // @ActionConfig
-    public static ArrayList<ActionConfig> getLockscreenShortcutConfig(Context context) {
+    public static ArrayList<ActionConfig> getRecentAppSidebarConfig(Context context) {
+        return (ConfigSplitHelper.getActionConfigValues(context,
+                getRecentAppSidebarProvider(context), null, null, false));
+    }
+
+    public static ArrayList<ActionConfig> getRecentAppSidebarConfigWithDescription(
+            Context context, String values, String entries) {
+        return (ConfigSplitHelper.getActionConfigValues(context,
+                getRecentAppSidebarProvider(context), values, entries, false));
+    }
+
+    private static String getRecentAppSidebarProvider(Context context) {
         String config = Settings.System.getStringForUser(
-                    context.getContentResolver(),
-                    Settings.System.LOCKSCREEN_SHORTCUTS,
-                    UserHandle.USER_CURRENT);
+                context.getContentResolver(),
+                Settings.System.RECENT_APP_SIDEBAR_CONTENT,
+                UserHandle.USER_CURRENT);
         if (config == null) {
             config = "";
         }
-
-        return (ConfigSplitHelper.getActionConfigValues(context, config, null, null, true));
+        return config;
     }
 
-    public static void setLockscreenShortcutConfig(Context context,
-            ArrayList<ActionConfig> actionConfig, boolean reset) {
+    public static void setRecentAppSidebarConfig(
+            Context context, ArrayList<ActionConfig> actionConfig, boolean reset) {
         String config;
         if (reset) {
             config = "";
         } else {
-            config = ConfigSplitHelper.setActionConfig(actionConfig, true);
+            config = ConfigSplitHelper.setActionConfig(actionConfig, false);
         }
         Settings.System.putString(context.getContentResolver(),
-                    Settings.System.LOCKSCREEN_SHORTCUTS, config);
+                Settings.System.RECENT_APP_SIDEBAR_CONTENT, config);
     }
 
     // General methods to retrieve the correct icon for the respective action.
     public static Drawable getActionIconImage(Context context,
             String clickAction, String customIcon) {
+        return getActionIconImage(context, clickAction, customIcon, null);
+    }
+
+    public static Drawable getActionIconImage(Context context,
+            String clickAction, String customIcon, AbstractIconsHandler iconsHandler) {
         int resId = -1;
         Drawable d = null;
         PackageManager pm = context.getPackageManager();
@@ -94,6 +107,13 @@ public class ActionHelper {
                     }
                 }
                 if (d == null) {
+                    if (iconsHandler != null) {
+                        try {
+                            ActivityInfo info = pm.getActivityInfo(Intent.parseUri(clickAction, 0)
+                                    .getComponent(), 0);
+                            return iconsHandler.getIconFromHandler(context, info);
+                        } catch (PackageManager.NameNotFoundException e) {}
+                    }
                     d = pm.getActivityIcon(Intent.parseUri(clickAction, 0));
                 }
             } catch (NameNotFoundException e) {
@@ -164,6 +184,9 @@ public class ActionHelper {
         } else if (clickAction.equals(ActionConstants.ACTION_IME)) {
             resId = systemUiResources.getIdentifier(
                         SYSTEMUI_METADATA_NAME + ":drawable/ic_sysbar_ime_switcher", null, null);
+        } else if (clickAction.equals(ActionConstants.ACTION_KILL)) {
+            resId = systemUiResources.getIdentifier(
+                        SYSTEMUI_METADATA_NAME + ":drawable/ic_sysbar_killtask", null, null);
         } else if (clickAction.equals(ActionConstants.ACTION_POWER)) {
             resId = systemUiResources.getIdentifier(
                         SYSTEMUI_METADATA_NAME + ":drawable/ic_sysbar_power", null, null);

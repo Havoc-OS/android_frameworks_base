@@ -7102,9 +7102,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             //     updateClearAll(); 
             //     updateEmptyShadeView(); 
             } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.RECENTS_OMNI_SWITCH_ENABLED))) {
-                updateOmniSwitch();
-            } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_BLACKLIST_VALUES))) {
                 final String blackString = Settings.System.getString(mContext.getContentResolver(),
                         Settings.System.HEADS_UP_BLACKLIST_VALUES);
@@ -7128,7 +7125,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
 
         public void update() {
-            updateOmniSwitch();
             setHeadsUpBlacklist();
             setHeadsUpStoplist();
             updateRoundedCorner();
