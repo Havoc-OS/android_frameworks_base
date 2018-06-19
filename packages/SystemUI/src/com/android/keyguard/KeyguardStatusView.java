@@ -283,8 +283,7 @@ public class KeyguardStatusView extends GridLayout implements
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Typeface tfLight = Typeface.create(FONT_FAMILY_LIGHT, Typeface.NORMAL);
-        Typeface tfMedium = Typeface.create(FONT_FAMILY_MEDIUM, Typeface.NORMAL);
+        Typeface tf = Typeface.create(FONT_FAMILY_MEDIUM, Typeface.NORMAL);
 
         // Some layouts like burmese have a different margin for the clock
         MarginLayoutParams layoutParams = (MarginLayoutParams) mClockView.getLayoutParams();
@@ -302,9 +301,8 @@ public class KeyguardStatusView extends GridLayout implements
         if (mOwnerInfo != null) {
             mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
-           mOwnerInfo.setTypeface(tfMedium);
+           mOwnerInfo.setTypeface(tf);
         }
-        mAlarmStatusView.setTypeface(tfMedium);
     }
 
     private int getLockClockFont() {
@@ -337,8 +335,6 @@ public class KeyguardStatusView extends GridLayout implements
 
         refreshTime();
         refreshAlarmStatus(nextAlarm);
-        refreshLockFont();
-        updateSettings();
     }
 
     void refreshAlarmStatus(AlarmManager.AlarmClockInfo nextAlarm) {
@@ -354,7 +350,7 @@ public class KeyguardStatusView extends GridLayout implements
         mAlarmStatusView.setVisibility(mDarkAmount != 1 ? (mShowAlarm && mAvailableAlarm ? View.VISIBLE : View.GONE)
                 : mAvailableAlarm ? View.VISIBLE : View.GONE);
 	        if(mAvailableAlarm && mShowAlarm ){ 
-                    mAlarmStatusView.setTextColor(alarmColor); 
+               mAlarmStatusView.setTextColor(alarmColor); 
             } 
     }
 
@@ -1542,14 +1538,7 @@ public class KeyguardStatusView extends GridLayout implements
                 break;
         }
 
-        updateVisibilities();
-        updateclocksize();
-        refreshdatesize();
-        refreshalarmsize();
-        refreshtempsize();
-        refreshcitysize();
-        refreshconditionsize();
-  
+        updateVisibilities();  
         updateDozeVisibleViews();
     }
 
@@ -1744,7 +1733,6 @@ public class KeyguardStatusView extends GridLayout implements
         updateDozeVisibleViews();
         mAnalogClockView.setDark(dark); 
         mWeatherView.setAlpha(dark ? 0 : 1);
-        refresh();
         updateVisibilities();
     }
 
@@ -1771,7 +1759,6 @@ public class KeyguardStatusView extends GridLayout implements
             } else {
                 child.setAlpha(mDarkAmount == 1 ? 0 : 1);
             }
-            refreshTime();
         }
     }
 
@@ -1824,7 +1811,8 @@ public class KeyguardStatusView extends GridLayout implements
              resolver.registerContentObserver(Settings.System.getUriFor( 
                         Settings.System.LOCKCITY_FONT_SIZE), false, this, UserHandle.USER_ALL); 
              resolver.registerContentObserver(Settings.System.getUriFor( 
-                        Settings.System.LOCKCONDITION_FONT_SIZE), false, this, UserHandle.USER_ALL);              
+                        Settings.System.LOCKCONDITION_FONT_SIZE), false, this, UserHandle.USER_ALL);      
+            update();        
                 
         }
  
@@ -1878,26 +1866,35 @@ public class KeyguardStatusView extends GridLayout implements
                         updateClockColor();
              } else  if (uri.equals(Settings.System.getUriFor(
                 Settings.System.LOCK_SCREEN_SHOW_WEATHER))) {
-            queryAndUpdateWeather();
+                queryAndUpdateWeather();
                 } else if (uri.equals(Settings.System.getUriFor(
                         Settings.System.OMNIJAWS_WEATHER_ICON_PACK))) {
                     queryAndUpdateWeather();
                 }  else if (uri.equals(Settings.System.getUriFor(
                         Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION))) {
-                             queryAndUpdateWeather();
+                       queryAndUpdateWeather();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_DATE_FONTS))) {
-                 refreshdatesize();
+                    updateSettings();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCKCLOCK_FONT_SIZE))) {
                   updateclocksize();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCKDATE_FONT_SIZE))) {
-                  updateSettings();
+                        refreshdatesize();
                } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.LOCKALARM_FONT_SIZE))) {
-                updateSettings();
-           }
+                        refreshalarmsize();
+               } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKTEMP_FONT_SIZE))) {
+                        refreshtempsize();
+               } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKCITY_FONT_SIZE))) {
+                        refreshcitysize();
+               } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKCONDITION_FONT_SIZE))) {
+                        refreshconditionsize();
+               }
              update();
          }
 
@@ -1952,14 +1949,7 @@ public class KeyguardStatusView extends GridLayout implements
            mLockConditionFontSize = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKCONDITION_FONT_SIZE,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
-                UserHandle.USER_CURRENT);
-                updateclocksize();
-                refreshdatesize();
-                refreshalarmsize();
-                refreshtempsize();
-                refreshcitysize();
-                refreshconditionsize();
-          
+                UserHandle.USER_CURRENT);      
            updateSettings();
          }
     }

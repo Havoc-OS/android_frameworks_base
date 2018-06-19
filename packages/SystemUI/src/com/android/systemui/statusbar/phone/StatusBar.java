@@ -2094,23 +2094,19 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
         int dockSide = WindowManagerProxy.getInstance().getDockSide();
         if (dockSide == WindowManager.DOCKED_INVALID) {
-            if (!mOmniSwitchRecents) {
-                boolean isInLockTaskMode = false;
-                try {
-                   IActivityManager activityManager = ActivityManagerNative.getDefault();
-                    if (activityManager.isInLockTaskMode()) {
-                        isInLockTaskMode = true;
-                   }
-                } catch (RemoteException e) {}
-                if (mSlimRecents != null && !isInLockTaskMode) {
-                    mSlimRecents.startMultiWindow();
-                } else {
-                    return mRecents.dockTopTask(NavigationBarGestureHelper.DRAG_MODE_NONE,
-                            ActivityManager.DOCKED_STACK_CREATE_MODE_TOP_OR_LEFT, null, metricsDockAction);
-                }
-            } else {
-                TaskUtils.dockTopTask(mContext);
-            }
+            boolean isInLockTaskMode = false;
+                 try {
+                     IActivityManager activityManager = ActivityManagerNative.getDefault();
+                     if (activityManager.isInLockTaskMode()) {
+                         isInLockTaskMode = true;
+                     }
+                 } catch (RemoteException e) {}
+                 if (mSlimRecents != null && !isInLockTaskMode) {
+                     mSlimRecents.startMultiWindow();
+                 } else {
+                     return mRecents.dockTopTask(NavigationBarGestureHelper.DRAG_MODE_NONE,
+                             ActivityManager.DOCKED_STACK_CREATE_MODE_TOP_OR_LEFT, null, metricsDockAction);
+                 }
         } else {
             Divider divider = getComponent(Divider.class);
             if (divider != null && divider.isMinimized() && !divider.isHomeStackResizable()) {
