@@ -113,6 +113,7 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     private boolean mKeyguardShowing;
     private TouchAnimator mAlarmAnimator;
 	private TouchAnimator mDateTimeAnimator;
+    private boolean hasEdit;
 
     public QSFooterImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -338,11 +339,12 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         updateAlarmVisibilities();
         mSettingsContainer.findViewById(R.id.tuner_icon).setVisibility(View.INVISIBLE);
         final boolean isDemo = UserManager.isDeviceInDemoMode(mContext);
+        hasEdit = !isEditDisabled();
 
         mMultiUserSwitch.setVisibility(mExpanded && mMultiUserSwitch.hasMultipleUsers() && !isDemo
                 ? View.VISIBLE : View.INVISIBLE);
 
-        mEdit.setVisibility(isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE);
+        mEdit.setVisibility(hasEdit ?  isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE : View.GONE);
 
         mRunningServicesButton.setVisibility(mServicesButtonVisible ? (!isDemo && mExpanded ? View.VISIBLE : View.INVISIBLE) : View.GONE);
     }
@@ -363,6 +365,11 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         }
     }
 
+    public boolean isEditDisabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.QS_EDIT_TOGGLE, 0) == 1;
+    }
+  
     @Override
     public void setQSPanel(final QSPanel qsPanel) {
         mQsPanel = qsPanel;
