@@ -1263,7 +1263,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener,
     }
 
     private boolean shouldListenForFingerprint() {
-        if (!mFpWakeAndUnlock || isFpScreenOnOnlyEnabled()) {
+        if (!mFpWakeAndUnlock || isFpScreenOnOnlyEnable()) {
             return (mKeyguardIsVisible || mBouncer || shouldListenForFingerprintAssistant() ||
                     (mKeyguardOccluded && mIsDreaming)) && mDeviceInteractive && !mGoingToSleep
                     && !mSwitchingUser && !isFingerprintDisabled(getCurrentUser())
