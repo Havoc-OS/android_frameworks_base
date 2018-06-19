@@ -58,6 +58,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.VectorDrawable;
 import android.graphics.drawable.Drawable;
 
+import com.android.internal.util.havoc.Converter;
+
 public class ImageHelper {
 
     private static final String TAG = "ImageHelper";

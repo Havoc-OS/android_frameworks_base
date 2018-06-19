@@ -32,4 +32,5 @@
     <!-- Indicates wether device is a tablet or not --> 
     <bool name="config_isTablet">false</bool> 
 
+    <integer name="config_recentDefaultDur">150</integer>
 </resources>

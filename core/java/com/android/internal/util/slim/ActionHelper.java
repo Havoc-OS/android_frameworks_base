@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.os.UserHandle;
 import android.util.Log;
+import com.android.internal.util.slim.ImageHelper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
