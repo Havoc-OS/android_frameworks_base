@@ -854,6 +854,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 // pulse colors already set by titckTrackInfo
                 mNavigationBar.setMediaPlaying(true);
             }
+            if (mSlimRecents != null) {
+                mSlimRecents.setMediaPlaying(true, currentPkg);
+            }
         } else {
             isMediaPlaying = false;
             if (isAmbientContainerAvailable()) {
@@ -863,6 +866,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             mNoMan.setMediaPlaying(false);
             if (mNavigationBar != null) {
                 mNavigationBar.setMediaPlaying(false);
+            }
+            if (mSlimRecents != null) {
+                mSlimRecents.setMediaPlaying(false, "");
             }
         }
     }
@@ -880,6 +886,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 setCleanLayout(mAmbientMediaPlaying == 3 ? true : false);
                 if (isAmbientContainerAvailable()) {
                     ((AmbientIndicationContainer)mAmbientIndicationContainer).setIndication(mMediaMetadata);
+                }
+                if (mSlimRecents != null) {
+                    mSlimRecents.setMediaInfo(mMediaMetadata);
                 }
                 isMediaPlaying = true;
                 // NotificationInflater calls async MediaNotificationProcessoron to create notification
@@ -2222,17 +2231,11 @@ public class StatusBar extends SystemUI implements DemoMode,
             final Notification n = entry.notification.getNotification();
             final int[] colors = {n.backgroundColor, n.foregroundColor,
                     n.primaryTextColor, n.secondaryTextColor};
-            String notificationText = null;
-            final String title = n.extras.getString(Notification.EXTRA_TITLE);
-                    final String text = n.extras.getString(Notification.EXTRA_TEXT);
-                    if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(text)) {
-                        notificationText = title + " - " + text;
-            }
             if (mNavigationBar != null) {
-                Notification n = entry.notification.getNotification();
-                int[] colors = {n.backgroundColor, n.foregroundColor,
-                        n.primaryTextColor, n.secondaryTextColor};
                 mNavigationBar.setPulseColors(n.isColorizedMedia(), colors);
+            }
+            if (mSlimRecents != null) {
+                mSlimRecents.setMediaColors(n.isColorizedMedia(), colors);
             }
         }
     }
