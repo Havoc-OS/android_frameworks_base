@@ -65,8 +65,8 @@ import java.util.TimeZone;
 public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.Callbacks,
         DarkReceiver, ConfigurationListener {
 
-    private boolean mClockVisibleByPolicy = true;
-    private boolean mClockVisibleByUser = true;
+    protected boolean mClockVisibleByPolicy = true;
+    protected boolean mClockVisibleByUser = true;
 
     protected boolean mAttached;
     protected Calendar mCalendar;
@@ -231,10 +231,7 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
                     if (!newLocale.equals(mLocale)) {
                         mLocale = newLocale;
                     }
-                    mClockFormatString = ""; // force refresh
-                    updateClockVisibility();
-                    updateShowSeconds();
-                    updateClock();
+                    updateStatus();
                     return;
                 });
             }
@@ -250,6 +247,13 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
             }
         }
     };
+
+    private void updateStatus() {
+        if (mAttached) {
+            updateClock();
+            updateShowSeconds();
+        }
+    }
 
     public void setClockVisibleByUser(boolean visible) {
         mClockVisibleByUser = visible;
