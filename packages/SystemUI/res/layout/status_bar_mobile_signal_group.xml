@@ -37,28 +37,6 @@
           android:visibility="gone"
           android:paddingStart="4dp"
           android:paddingEnd="4dp"/>
-        <FrameLayout
-            android:id="@+id/inout_container"
-            android:layout_height="17dp"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center_vertical">
-            <ImageView
-                android:id="@+id/mobile_in"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:src="@drawable/ic_activity_down"
-                android:visibility="gone"
-                android:paddingEnd="2dp"
-            />
-            <ImageView
-                android:id="@+id/mobile_out"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:src="@drawable/ic_activity_up"
-                android:paddingEnd="2dp"
-                android:visibility="gone"
-            />
-        </FrameLayout>
         <ImageView
             android:id="@+id/mobile_type"
             android:layout_height="wrap_content"
@@ -97,6 +75,26 @@
                 android:contentDescription="@string/data_connection_roaming"
                 android:visibility="gone" />
         </FrameLayout>
+        <com.android.systemui.statusbar.StatusBarInoutContainer
+            android:id="@+id/inout_container"
+            android:layout_height="17dp"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical">
+            <ImageView
+                android:id="@+id/activity_in"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_activity_down"
+                android:paddingEnd="2dp"
+            />
+            <ImageView
+                android:id="@+id/activity_out"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_activity_up"
+                android:paddingEnd="2dp"
+            />
+        </com.android.systemui.statusbar.StatusBarInoutContainer>
     </com.android.keyguard.AlphaOptimizedLinearLayout>
 </com.android.systemui.statusbar.StatusBarMobileView>
 
