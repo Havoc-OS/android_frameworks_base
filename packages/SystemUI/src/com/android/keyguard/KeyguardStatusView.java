@@ -1536,6 +1536,30 @@ public class KeyguardStatusView extends GridLayout implements
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_border));
                 mDateView.setPadding(40,20,40,20);
                 break;
+            case 3: // white outline
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline));
+                mDateView.setPadding(40,20,40,20);
+                break;
+            case 4: // white outline (round)
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_border_outline));
+                mDateView.setPadding(40,20,40,20);
+                break;
+            case 5: // black outline
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline_black));
+                mDateView.setPadding(40,20,40,20);
+                break;
+            case 6: // black outline (round)
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_border_outline_black));
+                mDateView.setPadding(40,20,40,20);
+                break;
+            case 7: // accent outline
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline_accent));
+                mDateView.setPadding(40,20,40,20);
+                break;
+            case 8: // accent outline (round)
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_border_outline_accent));
+                mDateView.setPadding(40,20,40,20);
+                break;
         }
 
         updateVisibilities();  
