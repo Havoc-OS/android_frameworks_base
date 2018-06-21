@@ -148,8 +148,8 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
             mPasswordEntry.setQuickUnlockListener(null);
         }
 
-        boolean scramblePin = (Settings.System.getInt(getContext().getContentResolver(),
-                Settings.System.LOCKSCREEN_PIN_SCRAMBLE_LAYOUT, 0) == 1);
+        boolean scramblePin = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_PIN_SCRAMBLE_LAYOUT, 0, UserHandle.USER_CURRENT) == 1;
 
         if (scramblePin) {
             Collections.shuffle(sNumbers);
