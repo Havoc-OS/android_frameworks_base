@@ -819,7 +819,7 @@ public class TaskViewHeader extends FrameLayout
 
     private boolean killTask() { 
         boolean killed = false; 
-        if (getContext().checkCallingOrSelfPermission(android.Manifest.permission.FORCE_STOP_PACKAGES) 
+        if (mDeepClear && getContext().checkCallingOrSelfPermission(android.Manifest.permission.FORCE_STOP_PACKAGES) 
                 == PackageManager.PERMISSION_GRANTED) { 
             String packageName = mTask.key.getComponent().getPackageName(); 
             if (packageName != null) { 
@@ -837,25 +837,6 @@ public class TaskViewHeader extends FrameLayout
         } 
         return killed; 
     } 
-
-    private void killTask() {
-        if (mDeepClear && getContext().checkCallingOrSelfPermission(android.Manifest.permission.FORCE_STOP_PACKAGES)
-                == PackageManager.PERMISSION_GRANTED) {
-            String packageName = mTask.key.getComponent().getPackageName();
-            if (packageName != null) {
-                IActivityManager iam = ActivityManagerNative.getDefault();
-                try {
-                    iam.forceStopPackage(packageName, UserHandle.USER_CURRENT);
-                    Toast appKilled = Toast.makeText(getContext(), R.string.recents_app_killed,
-                            Toast.LENGTH_SHORT);
-                    appKilled.show();
-                } catch (RemoteException e) {
-                    return;
-                }
-            }
-        }
-        return;
-    }
 
     @Override
     public boolean onLongClick(View v) {
