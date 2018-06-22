@@ -9137,10 +9137,6 @@ public void setNewOverlayAlpha() {
         boolean omniSwitch  = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.RECENTS_OMNI_SWITCH_ENABLED, 0, mCurrentUserId) == 1;
          
-        if (!slimRecents && !omniSwitch) {
-             mRecents.addSbCallbacks();
-        }
-
         if (slimRecents || omniSwitch) {
             // Disable stock recents
             mRecents.evictAllCaches();
