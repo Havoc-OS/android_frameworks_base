@@ -186,6 +186,7 @@ public class KeyguardStatusView extends GridLayout implements
         @Override
         public void onFinishedGoingToSleep(int why) {
             setEnableMarquee(false);
+            mEnableRefresh = false;
         }
 
         @Override
@@ -257,13 +258,6 @@ public class KeyguardStatusView extends GridLayout implements
         mTextColor = mClockView.getCurrentTextColor();
         mDateTextColor = mDateView.getCurrentTextColor();
         mAlarmTextColor = mAlarmStatusView.getCurrentTextColor();
-        mWeatherView = findViewById(R.id.keyguard_weather_view);
-        weatherPanel = findViewById(R.id.weather_panel);
-        noWeatherInfo = (TextView) findViewById(R.id.no_weather_info_text);
-        mWeatherCity = (TextView) findViewById(R.id.city);
-        mWeatherConditionImage = (ImageView) findViewById(R.id.ls_weather_image);
-        mWeatherCurrentTemp = (TextView) findViewById(R.id.current_temp);
-        mWeatherConditionText = (TextView) findViewById(R.id.condition);
 
         updateSettings();
 
@@ -274,6 +268,16 @@ public class KeyguardStatusView extends GridLayout implements
         updateClockColor();
         updateClockDateColor();
         refreshLockFont();
+
+        
+        mWeatherView = findViewById(R.id.keyguard_weather_view);
+        weatherPanel = findViewById(R.id.weather_panel);
+        noWeatherInfo = (TextView) findViewById(R.id.no_weather_info_text);
+        mWeatherCity = (TextView) findViewById(R.id.city);
+        mWeatherConditionImage = (ImageView) findViewById(R.id.ls_weather_image);
+        mWeatherCurrentTemp = (TextView) findViewById(R.id.current_temp);
+        mWeatherConditionText = (TextView) findViewById(R.id.condition);
+
 
         mSettingsObserver = new SettingsObserver(new Handler());
     }
