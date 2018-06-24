@@ -6012,6 +6012,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     protected int getMaxKeyguardNotifications(boolean recompute) {
+        mCustomMaxKeyguard = Settings.System.getIntForUser(mContext.getContentResolver(),
+        Settings.System.LOCK_SCREEN_CUSTOM_NOTIF, 0, UserHandle.USER_CURRENT) == 1;
         if (mCustomMaxKeyguard) {
             return mMaxKeyguardNotifConfig;
         } else {

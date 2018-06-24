@@ -1517,10 +1517,12 @@ public class KeyguardStatusView extends GridLayout implements
                 break; 
             case 4: // analog 
                 params.addRule(RelativeLayout.BELOW, R.id.analog_clock_view); 
+                mClockView.setGravity(Gravity.CENTER);
                 mAnalogClockView.registerReceiver(); 
                 break; 
             default: // custom analog styles (int > 4) 
                 params.addRule(RelativeLayout.BELOW, R.id.analog_clock_view); 
+                mClockView.setGravity(Gravity.CENTER);
                 mAnalogClockView.registerReceiver(); 
                 break; 
         }

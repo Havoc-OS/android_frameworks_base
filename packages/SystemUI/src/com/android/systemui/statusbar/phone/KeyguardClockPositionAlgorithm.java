@@ -158,7 +158,7 @@ public class KeyguardClockPositionAlgorithm {
         float progress = distanceToScaleEnd / (startPadding - scaleEnd);
         progress = Math.max(0.0f, Math.min(progress, 1.0f));
         progress = mAccelerateInterpolator.getInterpolation(progress);
-        progress *= Math.pow(1 + mEmptyDragAmount / mDensity / 300, 0.3f);
+        progress *= Math.pow(1 + mEmptyDragAmount / mDensity / 300, 0.3f); 
         return interpolate(progress, 1, mDarkAmount);
     }
 
@@ -177,7 +177,7 @@ public class KeyguardClockPositionAlgorithm {
     private int getClockY() {
         // Dark: Align the bottom edge of the clock at one third:
         // clockBottomEdge = result - mKeyguardStatusHeight / 2 + mClockBottom
-        float clockYDark = ((mIsBigClock ? mBigClockPadding : 0.33f) * mHeight + (float) mKeyguardStatusHeight / 2 - mClockBottom)
+        float clockYDark = ((mIsBigClock ? mBigClockPadding : 0.4f) * mHeight + (float) mKeyguardStatusHeight / 2 - mClockBottom)
                 + burnInPreventionOffsetY();
         float clockYRegular = getClockYFraction() * mHeight;
         return (int) interpolate(clockYRegular, clockYDark, mDarkAmount);

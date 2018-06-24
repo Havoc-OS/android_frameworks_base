@@ -21,6 +21,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.service.quicksettings.Tile;
+import com.android.systemui.plugins.ActivityStarter;
+import android.content.ComponentName;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.systemui.Dependency;
@@ -32,9 +34,15 @@ import com.android.systemui.R;
 public class SoundSearchTIle extends QSTileImpl<BooleanState> {
 
     private final String soundSearchApp = "com.google.android.googlequicksearchbox";
+    private final ActivityStarter mActivityStarter;
+    static final int REQUEST_SS = 1;
+    
+    private static final Intent soundSearchIntent = new Intent().setComponent(new ComponentName(
+            "com.google.android.googlequicksearchbox.MUSIC_SEARCH","com.google.android.googlequicksearchbox.SearchActivity"));
 
     public SoundSearchTIle(QSHost host) {
         super(host);
+        mActivityStarter = Dependency.get(ActivityStarter.class);
     }
 
     @Override
@@ -43,11 +51,15 @@ public class SoundSearchTIle extends QSTileImpl<BooleanState> {
     }
 
     @Override
-    public void handleClick() {
+    protected void handleClick() {
         mHost.collapsePanels();
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setAction("com.google.android.googlequicksearchbox.MUSIC_SEARCH");
-        mContext.startActivity(intent);
+        dispatchSoundSearchIntent(mContext);
+    }
+
+    private void dispatchSoundSearchIntent(Context context) {
+        if (soundSearchIntent.resolveActivity(context.getPackageManager()) != null) {
+            mActivityStarter.postStartActivityDismissingKeyguard(soundSearchIntent, REQUEST_SS);
+        }
     }
 
     @Override
