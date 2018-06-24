@@ -24,6 +24,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextClock;
+import android.content.Intent;
+import android.provider.AlarmClock;
+import android.widget.TextView;
+import com.android.systemui.qs.TouchAnimator.Builder;
+import com.android.systemui.qs.TouchAnimator.Listener;
+import com.android.systemui.qs.TouchAnimator.ListenerAdapter;
 
 import com.android.systemui.havoc.carrierlabel.CarrierLabelQS;
 import com.android.settingslib.Utils;
@@ -48,8 +54,8 @@ public class QuickStatusBarHeader extends RelativeLayout {
 
     protected QuickQSPanel mHeaderQsPanel;
     protected QSTileHost mHost;
+    private View mDate;
 
-	private CarrierLabelQS mCarrierLabelQS;
 
     public QuickStatusBarHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -72,19 +78,27 @@ public class QuickStatusBarHeader extends RelativeLayout {
         float intensity = colorForeground == Color.WHITE ? 0 : 1;
         Rect tintArea = new Rect(0, 0, 0, 0);
 
+
+        BatteryMeterView battery = findViewById(R.id.battery);
+
+        battery.setForceShowPercent(true);
+        mDate = findViewById(R.id.date);
+        mActivityStarter = Dependency.get(ActivityStarter.class);
+        mDate.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+        	    mActivityStarter.postStartActivityDismissingKeyguard(new Intent(
+                           AlarmClock.ACTION_SHOW_ALARMS), 0);
+        	}
+           });
         applyDarkness(R.id.battery, tintArea, intensity, colorForeground);
         applyDarkness(R.id.clock, tintArea, intensity, colorForeground);
-        applyDarkness(R.id.center_clock, tintArea, intensity, colorForeground);
         applyDarkness(R.id.left_clock, tintArea, intensity, colorForeground);
+        applyDarkness(R.id.date, tintArea, intensity, colorForeground);
+        applyDarkness(R.id.center_clock, tintArea, intensity, colorForeground);
         applyDarkness(R.id.qs_clock, tintArea, intensity, colorForeground);
         applyDarkness(R.id.qs_left_clock, tintArea, intensity, colorForeground);
 		
-		mCarrierLabelQS = findViewById(R.id.qs_carrier_text);
-
-        BatteryMeterView battery = findViewById(R.id.battery);
-        battery.setForceShowPercent(true);
-
-        mActivityStarter = Dependency.get(ActivityStarter.class);
     }
 
     private void applyDarkness(int id, Rect tintArea, float intensity, int color) {
@@ -121,7 +135,6 @@ public class QuickStatusBarHeader extends RelativeLayout {
         if (mExpanded == expanded) return;
         mExpanded = expanded;
         mHeaderQsPanel.setExpanded(expanded);
-        updateEverything();
     }
 
     public void setExpansion(float headerExpansionFraction) {
