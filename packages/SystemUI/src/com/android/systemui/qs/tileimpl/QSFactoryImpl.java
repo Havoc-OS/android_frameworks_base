@@ -51,7 +51,6 @@ import com.android.systemui.qs.tiles.GoogleVoiceAssistTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HighBrightnessTile;
 import com.android.systemui.qs.tiles.HotspotTile;
-import com.android.systemui.qs.tiles.HWKeysTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LiveDisplayTile;
 import com.android.systemui.qs.tiles.LocationTile;
@@ -130,7 +129,6 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("voiceassist")) return new GoogleVoiceAssistTile(mHost);
         else if (tileSpec.equals("google")) return new GoogleNowTile(mHost);
         else if (tileSpec.equals("always_on_display")) return new AlwaysOnDisplayTile(mHost);
-        else if (tileSpec.equals("hw_keys")) return new HWKeysTile(mHost);
         else if (tileSpec.equals("soundsearch")) return new SoundSearchTIle(mHost);
         else if (tileSpec.equals("sleepscreen")) return new SleepScreenTile(mHost);
 		    else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
