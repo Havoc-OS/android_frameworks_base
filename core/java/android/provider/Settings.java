@@ -4818,6 +4818,13 @@ public final class Settings {
          */
         public static final String PA_PIE_STATUS = "pa_pie_status";
 
+        
+        /**
+         * Disable hw buttons
+         * @hide
+         */
+        public static final String HARDWARE_KEYS_DISABLE = "hardware_keys_disable";
+
         /**
          * @hide
          */
@@ -4933,6 +4940,11 @@ public final class Settings {
          * @hide
          */
         public static final String LOCK_SCREEN_SHOW_WEATHER_LOCATION = "lock_screen_show_weather_location";
+
+            /**
+         * @hide
+         */
+        public static final String SYSTEM_GAME_MODE_ENABLE = "system_game_mode_enable";
 
         /**
          * Whether to show the weather condition icon on lock screen
@@ -6152,6 +6164,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_ICON);
             PRIVATE_SETTINGS.add(RECENTS_OMNI_SWITCH_ENABLED);
+            PRIVATE_SETTINGS.add(SYSTEM_GAME_MODE_ENABLE);
         }
 
         /**
@@ -7791,12 +7804,6 @@ public final class Settings {
          * @hide
          */
         public static final String SMARTBAR_BUTTON_ANIMATION_STYLE = "smartbar_button_animation_style";
-
-        /**
-         * Disable hw buttons
-         * @hide
-         */
-        public static final String HARDWARE_KEYS_DISABLE = "hardware_keys_disable";
 
         /**
          * A flag containing settings used for biometric weak

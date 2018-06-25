@@ -1246,8 +1246,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 	    resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.THREE_FINGER_GESTURE), false, this,
                     UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.Secure.getUriFor(
-                    Settings.Secure.HARDWARE_KEYS_DISABLE), false, this,
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HARDWARE_KEYS_DISABLE), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ANBI_ENABLED), false, this,
@@ -3160,8 +3160,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 updateWakeGestureListenerLp();
             }
 
-            mHardwareKeysDisable = Settings.Secure.getIntForUser(resolver,
-                    Settings.Secure.HARDWARE_KEYS_DISABLE,
+            mHardwareKeysDisable = Settings.System.getIntForUser(resolver,
+                    Settings.System.HARDWARE_KEYS_DISABLE,
                     DUActionUtils.hasNavbarByDefault(mContext) ? 1 : 0,
                     UserHandle.USER_CURRENT) == 1;
 

@@ -92,6 +92,10 @@
     <string name="pie_battery_level">"BATTERY LEVEL "</string> 
     <string name="quick_settings_pie">Pie</string> 
 
+    <string name="quick_settings_game_mode_label">Game mode</string>
+    <string name="accessibility_quick_settings_game_mode_on">Game mode is on</string>
+    <string name="accessibility_quick_settings_game_mode_off">Game mode is off</string>
+
     <string name="systemui_tuner_lockscreen_bottom_shortcuts_title">Bottom shortcuts</string>
 
     <string name="recents_custom_android_n">CLEAR ALL</string> 

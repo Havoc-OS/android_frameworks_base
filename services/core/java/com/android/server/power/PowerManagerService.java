@@ -924,8 +924,8 @@ public final class PowerManagerService extends SystemService
         resolver.registerContentObserver(Settings.Secure.getUriFor(
                 Settings.Secure.HIGH_BRIGHTNESS_MODE),
                 false, mSettingsObserver, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.Secure.getUriFor(
-                Settings.Secure.HARDWARE_KEYS_DISABLE),
+        resolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.HARDWARE_KEYS_DISABLE),
                 false, mSettingsObserver, UserHandle.USER_ALL);
         resolver.registerContentObserver(Settings.System.getUriFor(
                 Settings.System.WAKELOCK_BLOCKING_ENABLED),
@@ -973,7 +973,7 @@ public final class PowerManagerService extends SystemService
                     Settings.System.getUriFor(Settings.System.BUTTON_BACKLIGHT_ENABLE),
                     false, mSettingsObserver, UserHandle.USER_ALL);
             resolver.registerContentObserver(
-                    Settings.Secure.getUriFor(Settings.Secure.HARDWARE_KEYS_DISABLE),
+                    Settings.System.getUriFor(Settings.System.HARDWARE_KEYS_DISABLE),
                     false, mSettingsObserver, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.BUTTON_BACKLIGHT_TIMEOUT),
@@ -1156,8 +1156,8 @@ public final class PowerManagerService extends SystemService
                 LineageSettings.System.BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED,
                 0, UserHandle.USER_CURRENT) == 1;
 
-        mHardwareKeysDisable = Settings.Secure.getIntForUser(resolver,
-                Settings.Secure.HARDWARE_KEYS_DISABLE,
+        mHardwareKeysDisable = Settings.System.getIntForUser(resolver,
+                Settings.System.HARDWARE_KEYS_DISABLE,
                 DUActionUtils.hasNavbarByDefault(mContext) ? 1 : 0,
                 UserHandle.USER_CURRENT) != 0;
 
@@ -5306,8 +5306,8 @@ public final class PowerManagerService extends SystemService
                     mContext.getContentResolver(), Settings.System.BUTTON_BACKLIGHT_ENABLE,
                     1, UserHandle.USER_CURRENT) != 0;
 
-            boolean hardwareKeysDisable = Settings.Secure.getIntForUser(
-                    mContext.getContentResolver(), Settings.Secure.HARDWARE_KEYS_DISABLE,
+            boolean hardwareKeysDisable = Settings.System.getIntForUser(
+                    mContext.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE,
                     0, UserHandle.USER_CURRENT) != 0;
 
             mButtonBacklightEnable = mButtonBacklightEnable && !hardwareKeysDisable;

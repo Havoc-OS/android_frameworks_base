@@ -144,6 +144,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("pie")) return new PieTile(mHost);
         else if (tileSpec.equals("desktop")) return new ExpandedDesktopTile(mHost);
         else if (tileSpec.equals("keydisable")) return new KeyDisableTile(mHost);
+        else if (tileSpec.equals("game")) return new GameModeTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);
