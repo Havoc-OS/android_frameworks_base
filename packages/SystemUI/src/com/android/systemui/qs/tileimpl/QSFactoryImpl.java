@@ -39,7 +39,7 @@ import com.android.systemui.qs.tiles.CompassTile;
 import com.android.systemui.qs.tiles.CPUInfoTile;
 import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DndTile;
-import com.android.systemui.qs.tiles.ExpandedDesktopTile;
+import com.android.systemui.qs.tiles.GameModeTile;
 import com.android.systemui.qs.tiles.AlarmTile;
 import com.android.systemui.qs.tiles.CallTile;
 import com.android.systemui.qs.tiles.CalendarTile;
@@ -120,7 +120,6 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("sound")) return new SoundTile(mHost);
         else if (tileSpec.equals("compass")) return new CompassTile(mHost);
         else if (tileSpec.equals("music")) return new MusicTile(mHost);
-        else if (tileSpec.equals("expanded_desktop")) return new ExpandedDesktopTile(mHost);
         else if (tileSpec.equals("cpuinfo")) return new CPUInfoTile(mHost);
         else if (tileSpec.equals("screenrecord")) return new ScreenrecordTile(mHost);
         else if (tileSpec.equals("screenshot")) return new ScreenshotTile(mHost);
