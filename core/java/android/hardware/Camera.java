@@ -621,9 +621,7 @@ public class Camera {
     /**
      * An empty Camera for testing purpose.
      */
-    Camera() {
-        initAppOps();
-    }
+    Camera() {}
 
     private void initAppOps() {
         boolean isAppAllowed = false;
