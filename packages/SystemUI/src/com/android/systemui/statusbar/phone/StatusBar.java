@@ -655,6 +655,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     private Ticker mTicker;
     private boolean mTicking;
     private int mTickerAnimationMode;
+    private int mTickerTickDuration;
 
     private int mAmbientMediaPlaying;
     private boolean isMediaPlaying;
@@ -4195,7 +4196,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         final boolean anim = !mNoAnimationOnNextBarModeChange && mDeviceInteractive
                 && windowState != WINDOW_STATE_HIDDEN && !powerSave;
         if (powerSave && getBarState() == StatusBarState.SHADE) {
-            mode = MODE_POWERSAVE_WARNING;
+            mode = MODE_WARNING;
         }
         if (mode == MODE_WARNING) {
             transitions.setWarningColor(mBatterySaverWarningColor);
@@ -4368,7 +4369,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         public View mTickerView;
 
         MyTicker(Context context, View sb) {
-            super(context, sb, mTickerAnimationMode);
+            super(context, sb, mTickerAnimationMode, mTickerTickDuration);
             if (mTickerEnabled == 0) {
                 Log.w(TAG, "MyTicker instantiated with mTickerEnabled=0", new Throwable());
             }
@@ -7090,6 +7091,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.RECENTS_OMNI_SWITCH_ENABLED),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TICKER_TICK_DURATION),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HIDE_LOCKSCREEN_ALARM),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -7125,6 +7129,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 final String stopString = Settings.System.getString(mContext.getContentResolver(),
                         Settings.System.HEADS_UP_STOPLIST_VALUES);
                 splitAndAddToArrayList(mStoplist, stopString, "\\|");
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_TICKER_TICK_DURATION))) {
+                updateTickerTickDuration();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.HIDE_LOCKSCREEN_ALARM)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.HIDE_LOCKSCREEN_CLOCK)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.HIDE_LOCKSCREEN_DATE)) ||
@@ -7147,6 +7154,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         public void update() {
             setHeadsUpStoplist();
             updateRoundedCorner();
+            updateTickerTickDuration();
             setNewOverlayAlpha();
             setSecurityAlpha();
             updateKeyguardStatusSettings();
@@ -7202,6 +7210,14 @@ public void setNewOverlayAlpha() {
                 UserHandle.USER_CURRENT);
         if (mBatterySaverWarningColor != 0) {
             mBatterySaverWarningColor = Utils.getColorAttr(mContext, android.R.attr.colorError);
+        }
+    }
+
+    private void updateTickerTickDuration() {
+        mTickerTickDuration = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_TICKER_TICK_DURATION, 3000, UserHandle.USER_CURRENT);
+        if (mTicker != null) {
+            mTicker.updateTickDuration(mTickerTickDuration);
         }
     }
 
