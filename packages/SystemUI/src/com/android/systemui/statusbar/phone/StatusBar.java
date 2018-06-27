@@ -5702,6 +5702,8 @@ public class StatusBar extends SystemUI implements DemoMode,
          if (!mRecognitionEnabled) return;
          if (mAmbientIndicationContainerPlay != null && recognitionKeyguard != 0) {
              mAmbientIndicationContainerPlay.setVisibility(View.VISIBLE);
+         } else {
+            mAmbientIndicationContainerPlay.setVisibility(View.GONE);
          }
      }
 
