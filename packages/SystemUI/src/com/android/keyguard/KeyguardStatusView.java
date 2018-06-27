@@ -114,7 +114,13 @@ public class KeyguardStatusView extends GridLayout implements
     private int mLockClockFontSize;
     private int mLockDateFontSize;
     private int mLockAlarmFontSize;
+    private int mLockTempFontSize;
+    private int mLockCityFontSize;
+    private int mLockConditionFontSize;
     private int dateFont;
+    private int tempFont;
+    private int cityFont;
+    private int conditionFont;
 
     private boolean mForcedMediaDoze;
 
@@ -300,6 +306,9 @@ public class KeyguardStatusView extends GridLayout implements
         updateclocksize();
         refreshdatesize();
         refreshalarmsize();
+        refreshtempsize();
+        refreshconditionsize();
+        refreshcitysize();
         if (mOwnerInfo != null) {
             mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
@@ -773,7 +782,91 @@ public class KeyguardStatusView extends GridLayout implements
         }
     }
 
-    public void refreshalarmsize() {
+    public void refreshtempsize() {
+        int size = mLockTempFontSize;
+            if (size == 0) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1));
+            } else if (size == 1) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1));
+            } else if (size == 2) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_2));
+            } else if (size == 3) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_3));
+            } else if (size == 4) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_4));
+            } else if (size == 5) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_5));
+            } else if (size == 6) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_6));
+            } else if (size == 7) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_7));
+            } else if (size == 8) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_8));
+            } else if (size == 9) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_9));
+            } else if (size == 10) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_10));
+            } else if (size == 11) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_11));
+            } else if (size == 12) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_12));
+            } else if (size == 13) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_13));
+            } else if (size == 14) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14));
+            }  else if (size == 15) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_15));
+            } else if (size == 16) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_16));
+            } else if (size == 17) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_17));
+            } else if (size == 18) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_18));
+            } else if (size == 19) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_19));
+            } else if (size == 20) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_20));
+            } else if (size == 21) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21));
+            } else if (size == 22) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_22));
+            } else if (size == 23) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_23));
+            } else if (size == 24) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_24));
+            } else if (size == 25) {
+                mWeatherCurrentTemp.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_25));
+            }
+        }
+
+    
+        public void refreshalarmsize() {
         int size = mLockAlarmFontSize;
             if (size == 0) {
                 mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
@@ -856,7 +949,174 @@ public class KeyguardStatusView extends GridLayout implements
             }
         }
 
-    private void updateSettings() {
+        public void refreshcitysize() {
+            int size = mLockCityFontSize;
+                if (size == 0) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1));
+                } else if (size == 1) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1));
+                } else if (size == 2) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_2));
+                } else if (size == 3) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_3));
+                } else if (size == 4) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_4));
+                } else if (size == 5) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_5));
+                } else if (size == 6) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_6));
+                } else if (size == 7) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_7));
+                } else if (size == 8) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_8));
+                } else if (size == 9) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_9));
+                } else if (size == 10) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_10));
+                } else if (size == 11) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_11));
+                } else if (size == 12) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_12));
+                } else if (size == 13) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_13));
+                } else if (size == 14) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14));
+                }  else if (size == 15) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_15));
+                } else if (size == 16) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_16));
+                } else if (size == 17) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_17));
+                } else if (size == 18) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_18));
+                } else if (size == 19) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_19));
+                } else if (size == 20) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_20));
+                } else if (size == 21) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21));
+                } else if (size == 22) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_22));
+                } else if (size == 23) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_23));
+                } else if (size == 24) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_24));
+                } else if (size == 25) {
+                    mWeatherCity.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_25));
+                }
+            }
+
+            public void refreshconditionsize() {
+                int size = mLockConditionFontSize;
+                    if (size == 0) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1));
+                    } else if (size == 1) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1));
+                    } else if (size == 2) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_2));
+                    } else if (size == 3) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_3));
+                    } else if (size == 4) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_4));
+                    } else if (size == 5) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_5));
+                    } else if (size == 6) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_6));
+                    } else if (size == 7) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_7));
+                    } else if (size == 8) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_8));
+                    } else if (size == 9) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_9));
+                    } else if (size == 10) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_10));
+                    } else if (size == 11) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_11));
+                    } else if (size == 12) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_12));
+                    } else if (size == 13) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_13));
+                    } else if (size == 14) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14));
+                    }  else if (size == 15) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_15));
+                    } else if (size == 16) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_16));
+                    } else if (size == 17) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_17));
+                    } else if (size == 18) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_18));
+                    } else if (size == 19) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_19));
+                    } else if (size == 20) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_20));
+                    } else if (size == 21) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21));
+                    } else if (size == 22) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_22));
+                    } else if (size == 23) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_23));
+                    } else if (size == 24) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_24));
+                    } else if (size == 25) {
+                        mWeatherConditionText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_25));
+                    }
+                }
+    
+    
+        private void updateSettings() {
         boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
         final ContentResolver resolver = getContext().getContentResolver();
         
@@ -984,6 +1244,8 @@ public class KeyguardStatusView extends GridLayout implements
             weatherPanel.setVisibility(mShowWeather ?
                 View.VISIBLE : View.GONE);
         }
+
+        // LS Date Font
         if (dateFont == 0) {
             mDateView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         }
@@ -1059,6 +1321,240 @@ public class KeyguardStatusView extends GridLayout implements
         if (dateFont == 24) {
                 mDateView.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
         }
+
+        // LS Temp Font
+        if (tempFont == 0) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        }
+        if (tempFont == 1) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+        }
+        if (tempFont == 2) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+        }
+        if (tempFont == 3) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
+        }
+        if (tempFont == 4) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
+        }
+        if (tempFont == 5) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
+        }
+        if (tempFont == 6) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));
+        }
+        if (tempFont == 7) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));
+        }
+        if (tempFont == 8) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
+        }
+        if (tempFont == 9) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));
+        }
+        if (tempFont == 10) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+        }
+        if (tempFont == 11) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
+        }
+        if (tempFont == 12) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        }
+        if (tempFont == 13) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));
+        }
+        if (tempFont == 14) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));
+        }
+        if (tempFont == 15) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));
+        }
+        if (tempFont == 16) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
+        }
+        if (tempFont == 17) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));
+        }
+        if (tempFont == 18) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("cursive", Typeface.NORMAL));
+        }
+        if (tempFont == 19) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("cursive", Typeface.BOLD));
+        }
+        if (tempFont == 20) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("casual", Typeface.NORMAL));
+        }
+        if (tempFont == 21) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("serif", Typeface.NORMAL));
+        }
+        if (tempFont == 22) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("serif", Typeface.ITALIC));
+        }
+        if (tempFont == 23) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("serif", Typeface.BOLD));
+        }
+        if (tempFont == 24) {
+            mWeatherCurrentTemp.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
+        }
+
+        // LS City font
+        
+        if (cityFont == 0) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        }
+        if (cityFont == 1) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+        }
+        if (cityFont == 2) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+        }
+        if (cityFont == 3) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
+        }
+        if (cityFont == 4) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
+        }
+        if (cityFont == 5) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
+        }
+        if (cityFont == 6) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));
+        }
+        if (cityFont == 7) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));
+        }
+        if (cityFont == 8) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
+        }
+        if (cityFont == 9) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));
+        }
+        if (cityFont == 10) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+        }
+        if (cityFont == 11) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
+        }
+        if (cityFont == 12) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        }
+        if (cityFont == 13) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));
+        }
+        if (cityFont == 14) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));
+        }
+        if (cityFont == 15) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));
+        }
+        if (cityFont == 16) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
+        }
+        if (cityFont == 17) {
+            mWeatherCity.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));
+        }
+        if (cityFont == 18) {
+            mWeatherCity.setTypeface(Typeface.create("cursive", Typeface.NORMAL));
+        }
+        if (cityFont == 19) {
+            mWeatherCity.setTypeface(Typeface.create("cursive", Typeface.BOLD));
+        }
+        if (cityFont == 20) {
+            mWeatherCity.setTypeface(Typeface.create("casual", Typeface.NORMAL));
+        }
+        if (cityFont == 21) {
+            mWeatherCity.setTypeface(Typeface.create("serif", Typeface.NORMAL));
+        }
+        if (cityFont == 22) {
+            mWeatherCity.setTypeface(Typeface.create("serif", Typeface.ITALIC));
+        }
+        if (cityFont == 23) {
+            mWeatherCity.setTypeface(Typeface.create("serif", Typeface.BOLD));
+        }
+        if (cityFont == 24) {
+            mWeatherCity.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
+        }
+
+        // LS Contiton font
+        
+        if (conditionFont == 0) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        }
+        if (conditionFont == 1) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+        }
+        if (conditionFont == 2) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+        }
+        if (conditionFont == 3) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
+        }
+        if (conditionFont == 4) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
+        }
+        if (conditionFont == 5) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
+        }
+        if (conditionFont == 6) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));
+        }
+        if (conditionFont == 7) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));
+        }
+        if (conditionFont == 8) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
+        }
+        if (conditionFont == 9) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));
+        }
+        if (conditionFont == 10) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+        }
+        if (conditionFont == 11) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
+        }
+        if (conditionFont == 12) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        }
+        if (conditionFont == 13) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));
+        }
+        if (conditionFont == 14) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));
+        }
+        if (conditionFont == 15) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));
+        }
+        if (conditionFont == 16) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
+        }
+        if (conditionFont == 17) {
+            mWeatherConditionText.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));
+        }
+        if (conditionFont == 18) {
+            mWeatherConditionText.setTypeface(Typeface.create("cursive", Typeface.NORMAL));
+        }
+        if (conditionFont == 19) {
+            mWeatherConditionText.setTypeface(Typeface.create("cursive", Typeface.BOLD));
+        }
+        if (conditionFont == 20) {
+            mWeatherConditionText.setTypeface(Typeface.create("casual", Typeface.NORMAL));
+        }
+        if (conditionFont == 21) {
+            mWeatherConditionText.setTypeface(Typeface.create("serif", Typeface.NORMAL));
+        }
+        if (conditionFont == 22) {
+            mWeatherConditionText.setTypeface(Typeface.create("serif", Typeface.ITALIC));
+        }
+        if (conditionFont == 23) {
+            mWeatherConditionText.setTypeface(Typeface.create("serif", Typeface.BOLD));
+        }
+        if (conditionFont == 24) {
+            mWeatherConditionText.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
+        }
+
         updateVisibilities();
         updateDozeVisibleViews();
     }
@@ -1324,15 +1820,15 @@ public class KeyguardStatusView extends GridLayout implements
                      Settings.System.LOCKDATE_FONT_SIZE), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor( 
                         Settings.System.LOCKALARM_FONT_SIZE), false, this, UserHandle.USER_ALL); 
-         
-        //     if (showAmbientBottomInfo == AMBIENT_BOTTOM_DISPLAY_BATTERYPERCENT) { 
-        //         resolver.registerContentObserver(Settings.System.getUriFor(
-        //             Settings.System.AMBIENT_BATTERY_PERCENT), false, this, UserHandle.USER_ALL);
-        //    }              
+             resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCKTEMP_FONT_SIZE), false, this, UserHandle.USER_ALL); 
+             resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCKCITY_FONT_SIZE), false, this, UserHandle.USER_ALL); 
+             resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCKCONDITION_FONT_SIZE), false, this, UserHandle.USER_ALL);              
                 
         }
  
-
         void unobserve() {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.unregisterContentObserver(this);
@@ -1341,15 +1837,6 @@ public class KeyguardStatusView extends GridLayout implements
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             ContentResolver resolver = mContext.getContentResolver();
-            // enable if not working
-            // int showAmbientBottomInfo = Settings.System.getIntForUser(mContext.getContentResolver(), 
-            // Settings.System.AMBIENT_BOTTOM_DISPLAY, 0, UserHandle.USER_CURRENT); 
-
-       //    else if (showAmbientBottomInfo == AMBIENT_BOTTOM_DISPLAY_BATTERYPERCENT) { 
-        //        Settings.System.AMBIENT_BATTERY_PERCENT))) {
-        //        mShowAmbientBattery = Settings.System.getIntForUser(resolver,
-        //        Settings.System.AMBIENT_BATTERY_PERCENT, 0, UserHandle.USER_CURRENT) == 1;
-        //    }      
 
             if (uri.equals(Settings.System.getUriFor(
                    Settings.System.LOCK_SCREEN_SHOW_WEATHER))) {
@@ -1437,6 +1924,12 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR, 0xFFFFFFFF);
            dateFont = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCK_DATE_FONTS, 8, UserHandle.USER_CURRENT);
+           tempFont = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCK_TEMP_FONTS, 8, UserHandle.USER_CURRENT);
+           cityFont = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCK_CITY_FONTS, 8, UserHandle.USER_CURRENT);
+           conditionFont = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCK_CONDITION_FONTS, 8, UserHandle.USER_CURRENT);
            mLockClockFontSize = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKCLOCK_FONT_SIZE,
                 getResources().getDimensionPixelSize(R.dimen.lock_clock_font_size_78),
@@ -1447,11 +1940,26 @@ public class KeyguardStatusView extends GridLayout implements
                 UserHandle.USER_CURRENT);
            mLockAlarmFontSize = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKALARM_FONT_SIZE,
-                getResources().getDimensionPixelSize(R.dimen.lock_alarm_font_size_14),
+                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
+                UserHandle.USER_CURRENT);
+           mLockTempFontSize = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCKTEMP_FONT_SIZE,
+                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
+                UserHandle.USER_CURRENT);
+           mLockCityFontSize = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCKCITY_FONT_SIZE,
+                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
+                UserHandle.USER_CURRENT);
+           mLockConditionFontSize = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCKCONDITION_FONT_SIZE,
+                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
                 UserHandle.USER_CURRENT);
                 updateclocksize();
                 refreshdatesize();
                 refreshalarmsize();
+                refreshtempsize();
+                refreshcitysize();
+                refreshconditionsize();
           
            updateSettings();
          }

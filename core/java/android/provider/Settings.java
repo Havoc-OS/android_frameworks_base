@@ -5856,6 +5856,51 @@ public final class Settings {
          */
         public static final String LOCK_DATE_FONTS = "lock_date_fonts";
 
+          /**
+         * Change fonts for the system lockscreen temp
+         *
+         * @hide
+         */
+        public static final String LOCK_TEMP_FONTS = "lock_temp_fonts";
+
+          /**
+         * Change fonts for the system lockscreen city
+         *
+         * @hide
+         */
+        public static final String LOCK_CITY_FONTS = "lock_city_fonts";
+
+        /**
+         * Change fonts for the system lockscreen condition
+         *
+         * @hide
+         */
+        public static final String LOCK_CONDITION_FONTS = "lock_condition_fonts";
+
+         /**
+         * Change font size for the system lockscreen temp
+         *
+         * @hide
+         */
+ 
+        public static final String LOCKTEMP_FONT_SIZE= "locktemp_font_size";
+
+         /**
+         * Change font size for the system lockscreen CITY
+         *
+         * @hide
+         */
+ 
+        public static final String LOCKCITY_FONT_SIZE= "lockcity_font_size";
+
+         /**
+         * Change font size for the system lockscreen condition
+         *
+         * @hide
+         */
+ 
+        public static final String LOCKCONDITION_FONT_SIZE= "lockcondition_font_size";
+
         /**
          * Whether to display music track title within the music qs tile
          * @hide

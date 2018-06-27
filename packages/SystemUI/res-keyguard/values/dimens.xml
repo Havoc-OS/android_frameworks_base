@@ -102,33 +102,6 @@
 <dimen name="lock_date_font_size_24">24sp</dimen>
 <dimen name="lock_date_font_size_25">25sp</dimen>
 
-<!-- Lock alarm font size parameters -->
-<dimen name="lock_alarm_font_size_1">1sp</dimen>
-<dimen name="lock_alarm_font_size_2">2sp</dimen>
-<dimen name="lock_alarm_font_size_3">3sp</dimen>
-<dimen name="lock_alarm_font_size_4">4sp</dimen>
-<dimen name="lock_alarm_font_size_5">5sp</dimen>
-<dimen name="lock_alarm_font_size_6">6sp</dimen>
-<dimen name="lock_alarm_font_size_7">7sp</dimen>
-<dimen name="lock_alarm_font_size_8">8sp</dimen>
-<dimen name="lock_alarm_font_size_9">9sp</dimen>
-<dimen name="lock_alarm_font_size_10">10sp</dimen>
-<dimen name="lock_alarm_font_size_11">11sp</dimen>
-<dimen name="lock_alarm_font_size_12">12sp</dimen>
-<dimen name="lock_alarm_font_size_13">13sp</dimen>
-<dimen name="lock_alarm_font_size_14">14sp</dimen>
-<dimen name="lock_alarm_font_size_15">15sp</dimen>
-<dimen name="lock_alarm_font_size_16">16sp</dimen>
-<dimen name="lock_alarm_font_size_17">17sp</dimen>
-<dimen name="lock_alarm_font_size_18">18sp</dimen>
-<dimen name="lock_alarm_font_size_19">19sp</dimen>
-<dimen name="lock_alarm_font_size_20">20sp</dimen>
-<dimen name="lock_alarm_font_size_21">21sp</dimen>
-<dimen name="lock_alarm_font_size_22">22sp</dimen>
-<dimen name="lock_alarm_font_size_23">23sp</dimen>
-<dimen name="lock_alarm_font_size_24">24sp</dimen>
-<dimen name="lock_alarm_font_size_25">25sp</dimen>
-
 <!-- Lock clock font size parameters -->
 <dimen name="lock_clock_font_size_50">50dp</dimen>
 <dimen name="lock_clock_font_size_51">51dp</dimen>
