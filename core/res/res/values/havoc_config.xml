@@ -23,9 +23,17 @@
         <item>com.google.android.apps.plus</item>   
         <item>com.google.android.apps.maps</item>   
         <item>ru.ok.android</item>   
+        <item>com.instagram.android.MainTabActivity</item> 
+         <item>com.facebook.orca</item> 
+        <item>com.facebook.orca.StartScreenActivity</item> 
+        <item>com.spotify.music</item> 
+        <item>com.spotify.music.MainActivity</item>
         <item>com.android.vending</item>   
         <item>com.trtf.blue</item>   
+         <item>com.facebook.katana.LoginActivity</item> 
         <item>com.google.android.youtube</item>   
+        <item>com.snapchat.android</item> 
+        <item>com.snapchat.android.LandingPageActivity</item> 
     </string-array>
 
       <!-- EdgeGesture service --> 
