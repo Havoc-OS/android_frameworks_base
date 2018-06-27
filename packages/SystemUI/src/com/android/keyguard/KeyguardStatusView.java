@@ -260,7 +260,7 @@ public class KeyguardStatusView extends GridLayout implements
         mWeatherCurrentTemp = (TextView) findViewById(R.id.current_temp);
         mWeatherConditionText = (TextView) findViewById(R.id.condition);
 
-        updateSettings(false);
+        updateSettings();
 
         boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive();
         setEnableMarquee(shouldMarquee);
@@ -293,16 +293,9 @@ public class KeyguardStatusView extends GridLayout implements
        customlayoutParams.bottomMargin = getResources().getDimensionPixelSize(
                R.dimen.bottom_text_spacing_digital);
        mAnalogClockView.setLayoutParams(customlayoutParams);
- 
-       mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize( 
-       mDateSelection == 0 ? R.dimen.widget_label_font_size : R.dimen.widget_label_custom_font_size)); 
-       mDateView.setTypeface(tfMedium);
-
-        // AlarmStatusView 
-        mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize( 
-                mDateSelection == 0 ? R.dimen.widget_label_font_size : R.dimen.widget_label_custom_font_size)); 
-        mAlarmStatusView.setTypeface(tfMedium); 
-
+        mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
+        mDateView.setTypeface(tfMedium);
         updateclocksize();
         refreshdatesize();
         if (mOwnerInfo != null) {
@@ -310,6 +303,7 @@ public class KeyguardStatusView extends GridLayout implements
                     getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
            mOwnerInfo.setTypeface(tfMedium);
         }
+        mAlarmStatusView.setTypeface(tfMedium);
     }
 
     private int getLockClockFont() {
@@ -343,6 +337,7 @@ public class KeyguardStatusView extends GridLayout implements
         refreshTime();
         refreshAlarmStatus(nextAlarm);
         refreshLockFont();
+        updateSettings();
     }
 
     void refreshAlarmStatus(AlarmManager.AlarmClockInfo nextAlarm) {
@@ -402,6 +397,7 @@ public class KeyguardStatusView extends GridLayout implements
         KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mInfoCallback);
         mWeatherClient.addObserver(this);
         mSettingsObserver.observe();
+        updateSettings();
     }
 
     @Override
@@ -441,13 +437,13 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherData = mWeatherClient.getWeatherInfo();
             // Weather data not available. Try later.
             if (mWeatherData == null) {
-                updateSettings(false);
+                updateSettings();
                 return;
             }
             mWeatherCity.setText(mWeatherData.city);
             mWeatherCurrentTemp.setText(mWeatherData.temp + mWeatherData.tempUnits);
             mWeatherConditionText.setText(mWeatherData.condition);
-            updateSettings(true);
+            updateSettings();
        } catch(Exception e) {
           // Do nothing
        }
@@ -466,7 +462,9 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherCity.setText(mWeatherData.city);
             mWeatherCurrentTemp.setText(mWeatherData.temp + mWeatherData.tempUnits);
             mWeatherConditionText.setText(mWeatherData.condition);
-            updateSettings(false);
+            updateSettings(
+                
+            );
        } catch(Exception e) {
           // Do nothing
        }
@@ -596,7 +594,7 @@ public class KeyguardStatusView extends GridLayout implements
                 getResources().getDimensionPixelSize(R.dimen.lock_clock_font_size_77));
         } else if (size == 78) {
         mClockView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.widget_big_font_size));
+                getResources().getDimensionPixelSize(R.dimen.lock_clock_font_size_78));
         } else if (size == 79) {
         mClockView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_clock_font_size_79));
@@ -736,7 +734,7 @@ public class KeyguardStatusView extends GridLayout implements
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_13));
         } else if (size == 14) {
         mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
+                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14));
         }  else if (size == 15) {
         mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_15));
@@ -773,7 +771,7 @@ public class KeyguardStatusView extends GridLayout implements
         }
     }
 
-    private void updateSettings(boolean forceHide) {
+    private void updateSettings() {
         boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
         final ContentResolver resolver = getContext().getContentResolver();
         
@@ -795,6 +793,9 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCKSCREEN_CLOCK_SELECTION, 0, UserHandle.USER_CURRENT);
         mDateSelection = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKSCREEN_DATE_SELECTION, 0, UserHandle.USER_CURRENT);
+        
+        mAlarmStatusView = (TextView) findViewById(R.id.alarm_status);
+        mAlarmStatusView.setVisibility(mShowAlarm && nextAlarm != null ? View.VISIBLE : View.GONE);
 
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mKeyguardStatusArea.getLayoutParams();
         switch (mClockSelection) {
@@ -830,41 +831,20 @@ public class KeyguardStatusView extends GridLayout implements
         }
 
         switch (mDateSelection) {
-            case 0: // default aosp
+            case 0: // default
             default:
                 mDateView.setBackgroundResource(0);
                 mDateView.setTypeface(Typeface.DEFAULT);
-                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
-                        getResources().getDimensionPixelSize(R.dimen.widget_label_font_size)); 
-                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
-                        getResources().getDimensionPixelSize(R.dimen.widget_label_font_size)); 
-                mDateView.setPadding(0,0,0,0); 
-                break; 
-            case 1: // default but bigger size 
-                mDateView.setBackgroundResource(0); 
-                mDateView.setTypeface(Typeface.DEFAULT); 
-                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
-                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
-                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
-                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
                 mDateView.setPadding(0,0,0,0);
                 break;
-            case 2: // semi-transparent box
+            case 1: // semi-transparent box
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_box_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
-                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
-                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
-                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
-                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
                 mDateView.setPadding(40,20,40,20);
                 break;
-            case 3: // semi-transparent box (round)
+            case 2: // semi-transparent box (round)
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
-                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
-                getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
-                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
-                getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size)); 
                 mDateView.setPadding(40,20,40,20);
                 break;
         }
@@ -999,7 +979,7 @@ public class KeyguardStatusView extends GridLayout implements
     }
 
     public void updateAll() {
-        updateSettings(false);
+        updateSettings();
         refresh();
     }
 
@@ -1108,7 +1088,7 @@ public class KeyguardStatusView extends GridLayout implements
     public void weatherError(int errorReason) {
         if (DEBUG) Log.d(TAG, "weatherError " + errorReason);
         if (mShowWeather && !mWeatherClient.isOmniJawsEnabled()) {
-            updateSettings(false);
+            updateSettings();
         }
     }
 
@@ -1145,7 +1125,10 @@ public class KeyguardStatusView extends GridLayout implements
             final Locale locale = Locale.getDefault();
             final Resources res = context.getResources();
 
-            dateViewSkel = res.getString(hasAlarm
+            final ContentResolver resolver = context.getContentResolver();
+            final boolean showAlarm = Settings.System.getIntForUser(resolver,
+                    Settings.System.HIDE_LOCKSCREEN_ALARM, 1, UserHandle.USER_CURRENT) == 1;
+            dateViewSkel = res.getString(hasAlarm && showAlarm
                     ? R.string.abbrev_wday_month_day_no_year_alarm
                     : R.string.abbrev_wday_month_day_no_year);
             final String clockView12Skel = res.getString(R.string.clock_12hr_format);
@@ -1301,16 +1284,16 @@ public class KeyguardStatusView extends GridLayout implements
                 updateWeather();
             } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR))) {
-                  updateSettings(false);
+                  updateSettings();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR))) {
-                  updateSettings(false);
+                  updateSettings();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR))) {
-                  updateSettings(false);
+                  updateSettings();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR))) {
-                  updateSettings(false);
+                  updateSettings();
              } else if (uri.equals(Settings.System.getUriFor(
                      Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR))) {
                  refresh();
@@ -1337,7 +1320,7 @@ public class KeyguardStatusView extends GridLayout implements
                   updateclocksize();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCKDATE_FONT_SIZE))) {
-                  updateSettings(false);
+                  updateSettings();
              }
              update();
          }
@@ -1366,16 +1349,16 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCK_DATE_FONTS, 8, UserHandle.USER_CURRENT);
            mLockClockFontSize = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKCLOCK_FONT_SIZE,
-                getResources().getDimensionPixelSize(R.dimen.widget_big_font_size),
+                getResources().getDimensionPixelSize(R.dimen.lock_clock_font_size_78),
                 UserHandle.USER_CURRENT);
            mLockDateFontSize = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKDATE_FONT_SIZE,
-                getResources().getDimensionPixelSize(R.dimen.widget_label_font_size),
+                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
                 UserHandle.USER_CURRENT);
                 updateclocksize();
                 refreshdatesize();
           
-           updateSettings(false);
+           updateSettings();
          }
     }
 }

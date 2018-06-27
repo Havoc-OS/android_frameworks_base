@@ -43,6 +43,7 @@
         android:id="@+id/ambient_indication_track_length"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="6.0dip"
         android:visibility="gone"
         android:singleLine="true"
         android:forceHasOverlappingRendering="false" />

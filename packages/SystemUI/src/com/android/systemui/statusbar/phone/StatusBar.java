@@ -7031,12 +7031,12 @@ public class StatusBar extends SystemUI implements DemoMode,
         resolver.registerContentObserver(Settings.Secure.getUriFor( 
                 Settings.Secure.SYSUI_ROUNDED_FWVALS), 
                 false, this, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-                Settings.System.CLEAR_RECENTS_STYLE), 
-                false, this, UserHandle.USER_ALL); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-                Settings.System.CLEAR_RECENTS_STYLE_ENABLE), 
-                false, this, UserHandle.USER_ALL); 
+        // resolver.registerContentObserver(Settings.System.getUriFor( 
+        //         Settings.System.CLEAR_RECENTS_STYLE), 
+        //         false, this, UserHandle.USER_ALL); 
+        // resolver.registerContentObserver(Settings.System.getUriFor( 
+        //         Settings.System.CLEAR_RECENTS_STYLE_ENABLE), 
+        //         false, this, UserHandle.USER_ALL); 
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_BLACKLIST_VALUES),
                     false, this, UserHandle.USER_ALL);
@@ -7078,15 +7078,15 @@ public class StatusBar extends SystemUI implements DemoMode,
                                     0, UserHandle.USER_CURRENT) == 1; 
                 RecentsActivity.startBlurTask(); 
                 updatePreferences(mContext); 
-            } else if (uri.equals(Settings.System.getUriFor( 
-                Settings.System.CLEAR_RECENTS_STYLE)) 
-                || uri.equals(Settings.System.getUriFor( 
-                Settings.System.CLEAR_RECENTS_STYLE_ENABLE))) { 
-                updateRowStates(); 
-                updateSpeedBumpIndex(); 
-                checkBarModes(); 
-                updateClearAll(); 
-                updateEmptyShadeView(); 
+            // } else if (uri.equals(Settings.System.getUriFor( 
+            //     Settings.System.CLEAR_RECENTS_STYLE)) 
+            //     || uri.equals(Settings.System.getUriFor( 
+            //     Settings.System.CLEAR_RECENTS_STYLE_ENABLE))) { 
+            //     updateRowStates(); 
+            //     updateSpeedBumpIndex(); 
+            //     checkBarModes(); 
+            //     updateClearAll(); 
+            //     updateEmptyShadeView(); 
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.RECENTS_OMNI_SWITCH_ENABLED))) {
                 updateOmniSwitch();
@@ -7117,11 +7117,11 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateOmniSwitch();
             setHeadsUpBlacklist();
             setHeadsUpStoplist();
-            updateBlurSettings();
             updateRoundedCorner();
             setNewOverlayAlpha();
             setSecurityAlpha();
             updateKeyguardStatusSettings();
+            updateBlurSettings();
         }
     }
 
@@ -7129,33 +7129,6 @@ public class StatusBar extends SystemUI implements DemoMode,
            mNotificationPanel.updateKeyguardStatusSettings();
        }
 
-    private void updateBlurSettings() { 
-        ContentResolver resolver = mContext.getContentResolver(); 
-        mBlurScale = Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.BLUR_SCALE_PREFERENCE_KEY, 10); 
-        mBlurRadius = Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.BLUR_RADIUS_PREFERENCE_KEY, 5); 
-        mBlurredStatusBarExpandedEnabled = Settings.System.getIntForUser(resolver, 
-                Settings.System.STATUS_BAR_EXPANDED_ENABLED_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1; 
-        mTranslucentNotifications = Settings.System.getIntForUser(resolver, 
-                Settings.System.TRANSLUCENT_NOTIFICATIONS_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1; 
-        mNotTranslucencyPercentage = Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY, 70); 
-       mBlurredRecents = Settings.System.getIntForUser(resolver, 
-                Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1; 
-        mScaleRecents = Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.RECENT_APPS_SCALE_PREFERENCE_KEY, 6); 
-        mRadiusRecents = Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.RECENT_APPS_RADIUS_PREFERENCE_KEY, 3); 
-        mBlurDarkColorFilter = Settings.System.getInt(mContext.getContentResolver(),  
-                Settings.System.BLUR_DARK_COLOR_PREFERENCE_KEY, Color.LTGRAY); 
-        mBlurMixedColorFilter = Settings.System.getInt(mContext.getContentResolver(),  
-                Settings.System.BLUR_MIXED_COLOR_PREFERENCE_KEY, Color.GRAY); 
-        mBlurLightColorFilter = Settings.System.getInt(mContext.getContentResolver(),  
-                Settings.System.BLUR_LIGHT_COLOR_PREFERENCE_KEY, Color.DKGRAY); 
-        RecentsActivity.updateBlurColors(mBlurDarkColorFilter,mBlurMixedColorFilter,mBlurLightColorFilter); 
-        RecentsActivity.updateRadiusScale(mScaleRecents,mRadiusRecents); 
-} 
 
 public void setNewOverlayAlpha() { 
     float overlayalpha = Settings.System.getFloatForUser(mContext.getContentResolver(), 

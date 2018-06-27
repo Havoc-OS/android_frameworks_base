@@ -23,7 +23,7 @@
     <dimen name="ticker_text_end_padding">10dp</dimen>
 
       <!-- Big clock dozing --> 
-    <dimen name="dozing_big_clock_padding" format="float">0.38</dimen> 
+    <dimen name="dozing_big_clock_padding" format="float">0.65</dimen> 
 
     <!-- Floating action button -->
     <dimen name="floating_action_button_height">56dp</dimen>

@@ -43,8 +43,7 @@
 
     <!-- Default clock parameters -->
     <dimen name="bottom_text_spacing_digital">-1dp</dimen>
-    <dimen name="widget_label_font_size">14sp</dimen>
-    <dimen name="widget_label_custom_font_size">20sp</dimen>
+    <dimen name="widget_label_font_size">20sp</dimen>
     <dimen name="widget_big_font_size">72dp</dimen>
 
     <!-- The y translation to apply at the start in appear animations. -->
@@ -73,7 +72,7 @@
     <dimen name="shortcut_seperater_width">8dp</dimen>
 
     <!-- Top margin for shortcuts. -->
-    <dimen name="shortcut_margin_top">25dp</dimen>
+    <dimen name="shortcut_margin_top">8dp</dimen>
 
 
 <!-- Lock date font size parameters -->
@@ -90,6 +89,7 @@
 <dimen name="lock_date_font_size_11">11sp</dimen>
 <dimen name="lock_date_font_size_12">12sp</dimen>
 <dimen name="lock_date_font_size_13">13sp</dimen>
+<dimen name="lock_date_font_size_14">14sp</dimen>
 <dimen name="lock_date_font_size_15">15sp</dimen>
 <dimen name="lock_date_font_size_16">16sp</dimen>
 <dimen name="lock_date_font_size_17">17sp</dimen>
