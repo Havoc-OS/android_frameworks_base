@@ -5797,6 +5797,13 @@ public final class Settings {
         public static final String LOCKDATE_FONT_SIZE= "lockdate_font_size";
 
         /**
+         * Change font size for the system lockscreen alarm
+         *
+         * @hide
+         */
+        public static final String LOCKALARM_FONT_SIZE= "lockalarm_font_size";
+
+        /**
          * Change font size for the system lockscreen clock widget
          *
          * @hide

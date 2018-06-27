@@ -113,6 +113,7 @@ public class KeyguardStatusView extends GridLayout implements
     private int mAlarmTextColor;
     private int mLockClockFontSize;
     private int mLockDateFontSize;
+    private int mLockAlarmFontSize;
     private int dateFont;
 
     private boolean mForcedMediaDoze;
@@ -298,6 +299,7 @@ public class KeyguardStatusView extends GridLayout implements
         mDateView.setTypeface(tfMedium);
         updateclocksize();
         refreshdatesize();
+        refreshalarmsize();
         if (mOwnerInfo != null) {
             mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                     getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
@@ -771,6 +773,89 @@ public class KeyguardStatusView extends GridLayout implements
         }
     }
 
+    public void refreshalarmsize() {
+        int size = mLockAlarmFontSize;
+            if (size == 0) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1));
+            } else if (size == 1) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1));
+            } else if (size == 2) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_2));
+            } else if (size == 3) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_3));
+            } else if (size == 4) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_4));
+            } else if (size == 5) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_5));
+            } else if (size == 6) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_6));
+            } else if (size == 7) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_7));
+            } else if (size == 8) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_8));
+            } else if (size == 9) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_9));
+            } else if (size == 10) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_10));
+            } else if (size == 11) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_11));
+            } else if (size == 12) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_12));
+            } else if (size == 13) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_13));
+            } else if (size == 14) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14));
+            }  else if (size == 15) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_15));
+            } else if (size == 16) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_16));
+            } else if (size == 17) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_17));
+            } else if (size == 18) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_18));
+            } else if (size == 19) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_19));
+            } else if (size == 20) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_20));
+            } else if (size == 21) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21));
+            } else if (size == 22) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_22));
+            } else if (size == 23) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_23));
+            } else if (size == 24) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_24));
+            } else if (size == 25) {
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_25));
+            }
+        }
+
     private void updateSettings() {
         boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
         final ContentResolver resolver = getContext().getContentResolver();
@@ -1237,6 +1322,8 @@ public class KeyguardStatusView extends GridLayout implements
                      Settings.System.LOCKCLOCK_FONT_SIZE), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKDATE_FONT_SIZE), false, this, UserHandle.USER_ALL);
+             resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCKALARM_FONT_SIZE), false, this, UserHandle.USER_ALL); 
          
         //     if (showAmbientBottomInfo == AMBIENT_BOTTOM_DISPLAY_BATTERYPERCENT) { 
         //         resolver.registerContentObserver(Settings.System.getUriFor(
@@ -1321,7 +1408,10 @@ public class KeyguardStatusView extends GridLayout implements
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCKDATE_FONT_SIZE))) {
                   updateSettings();
-             }
+               } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKALARM_FONT_SIZE))) {
+                updateSettings();
+           }
              update();
          }
 
@@ -1355,8 +1445,13 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCKDATE_FONT_SIZE,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
                 UserHandle.USER_CURRENT);
+           mLockAlarmFontSize = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCKALARM_FONT_SIZE,
+                getResources().getDimensionPixelSize(R.dimen.lock_alarm_font_size_14),
+                UserHandle.USER_CURRENT);
                 updateclocksize();
                 refreshdatesize();
+                refreshalarmsize();
           
            updateSettings();
          }
