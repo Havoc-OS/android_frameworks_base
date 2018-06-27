@@ -6410,12 +6410,10 @@ public final class ActivityThread {
                                                     UserHandle.myUserId());
             RuntimeInit.setApplicationObject(mAppThread.asBinder());
             final IActivityManager mgr = ActivityManager.getService();
-            if (mgr != null) {
-                try {
-                    mgr.attachApplication(mAppThread);
-                } catch (RemoteException ex) {
-                    throw ex.rethrowFromSystemServer();
-                }
+            try {
+                mgr.attachApplication(mAppThread);
+            } catch (RemoteException ex) {
+                throw ex.rethrowFromSystemServer();
             }
             // Watch for getting close to heap limit.
             BinderInternal.addGcWatcher(new Runnable() {
@@ -6564,10 +6562,8 @@ public final class ActivityThread {
         Looper.prepareMainLooper();
 
         ActivityThread thread = new ActivityThread();
-        if(thread != null ) {
-            thread.attach(false);
-        }
- 
+        thread.attach(false);
+
         if (sMainThreadHandler == null) {
             sMainThreadHandler = thread.getHandler();
         }
