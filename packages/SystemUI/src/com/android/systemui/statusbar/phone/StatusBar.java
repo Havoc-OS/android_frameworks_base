@@ -7285,7 +7285,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             setSecurityAlpha();
             updateKeyguardStatusSettings();
             updateRecentsMode();
-            rebuildRecentsScreen();
             updateBlurSettings();
             updateHeadsUpBlackList();
         }
@@ -9295,7 +9294,9 @@ public void setNewOverlayAlpha() {
             // Disable stock recents
             mRecents.evictAllCaches();
             mRecents.removeSbCallbacks();
-        } 
+        }  else {
+            mRecents.addSbCallbacks();
+        }
 
         if (slimRecents) {
             // Enable slim recents
