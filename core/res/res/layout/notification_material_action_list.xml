@@ -27,7 +27,7 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:visibility="gone"
-            android:background="@color/notification_action_list"
+            android:background="#00000000"
             >
         <!-- actions will be added here -->
     </com.android.internal.widget.NotificationActionListLayout>
