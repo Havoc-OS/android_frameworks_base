@@ -261,6 +261,8 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
         }
     });
 
+    protected boolean mUseSlimRecents; 
+
     public RecentsImpl(Context context) {
         mContext = context;
         mHandler = new Handler();
@@ -293,7 +295,7 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
     }
 
     public void onConfigurationChanged() {
-        if (Recents.mUseSlimRecents) {
+        if (mUseSlimRecents) {
             return;
         }
         reloadResources();
@@ -318,7 +320,7 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
      * {@link Recents#onBusEvent(ScreenPinningRequestEvent)}.
      */
     public void onStartScreenPinning(Context context, int taskId) {
-        if (Recents.mUseSlimRecents) {
+        if (mUseSlimRecents) {
             return;
         }
         SystemUIApplication app = (SystemUIApplication) context;
@@ -331,7 +333,7 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
     public void showRecents(boolean triggeredFromAltTab, boolean draggingInRecents,
             boolean animate, boolean launchedWhileDockingTask, boolean fromHome,
             int growTarget) {
-        if (Recents.mUseSlimRecents) {
+        if (mUseSlimRecents) {
             return;
         }
         mTriggeredFromAltTab = triggeredFromAltTab;
@@ -373,7 +375,7 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
     }
 
     public void hideRecents(boolean triggeredFromAltTab, boolean triggeredFromHomeKey) {
-        if (Recents.mUseSlimRecents) {
+        if (mUseSlimRecents) {
             return;
         }
         if (triggeredFromAltTab && mFastAltTabTrigger.isDozing()) {
@@ -403,7 +405,7 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
         if (mFastAltTabTrigger.isDozing()) {
             return;
         }
-        if (Recents.mUseSlimRecents) {
+        if (mUseSlimRecents) {
             return;
         }
 
@@ -479,7 +481,7 @@ public class RecentsImpl implements ActivityOptions.OnAnimationFinishedListener 
     }
 
     public void preloadRecents() {
-        if (Recents.mUseSlimRecents) {
+        if (mUseSlimRecents) {
             return;
         }
         // Skip preloading if the task is locked

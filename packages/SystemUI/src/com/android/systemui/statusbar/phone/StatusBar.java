@@ -462,7 +462,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     private boolean mCustomMaxKeyguard;
     private int mMaxKeyguardNotifConfig;
     private boolean mNavbarVisible;
-    private boolean mUseSlimRecents;
+    // private boolean mUseSlimRecents;
     private String[] mDarkOverlays = DARK_OVERLAYS;
     private int mBerryDarkShade;
 
@@ -480,8 +480,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             Settings.Secure.NAVIGATION_BAR_VISIBLE;
     private static final String RECENTS_ICON_PACK =
             "system:" + Settings.System.RECENTS_ICON_PACK;
-    private static final String USE_SLIM_RECENTS =
-            "system:" + Settings.System.USE_SLIM_RECENTS;
+    // private static final String USE_SLIM_RECENTS =
+    //         "system:" + Settings.System.USE_SLIM_RECENTS;
+    // private static final String RECENTS_OMNI_SWITCH_ENABLED =
+    //         "system:" + Settings.System.RECENTS_OMNI_SWITCH_ENABLED;
     private static final String NAVBAR_DYNAMIC =
             "system:" + Settings.System.NAVBAR_DYNAMIC;
     private static final String QS_ROWS_PORTRAIT =
@@ -1294,7 +1296,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                 LOCKSCREEN_MAX_NOTIF_CONFIG,
                 NAVIGATION_BAR_VISIBLE,
                 RECENTS_ICON_PACK,
-                USE_SLIM_RECENTS,
+                // USE_SLIM_RECENTS,
+                // RECENTS_OMNI_SWITCH_ENABLED,
                 NAVBAR_DYNAMIC,
                 QS_ROWS_PORTRAIT,
                 QS_ROWS_LANDSCAPE,
@@ -1674,7 +1677,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                 setMediaPlaying();
             }
             mNavigationBar.setCurrentSysuiVisibility(mSystemUiVisibility);
-            mNavigationBar.setOmniSwitchEnabled(mOmniSwitchRecents);
         });
     }
 
@@ -2094,18 +2096,22 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
         int dockSide = WindowManagerProxy.getInstance().getDockSide();
         if (dockSide == WindowManager.DOCKED_INVALID) {
-            boolean isInLockTaskMode = false;
-                 try {
-                     IActivityManager activityManager = ActivityManagerNative.getDefault();
-                     if (activityManager.isInLockTaskMode()) {
-                         isInLockTaskMode = true;
-                     }
-                 } catch (RemoteException e) {}
-                 if (mSlimRecents != null && !isInLockTaskMode) {
-                     mSlimRecents.startMultiWindow();
+            if (!mOmniSwitchRecents) {
+                   boolean isInLockTaskMode = false;
+                   try {
+                      IActivityManager activityManager = ActivityManagerNative.getDefault();
+                       if (activityManager.isInLockTaskMode()) {
+                           isInLockTaskMode = true;
+                      }
+                   } catch (RemoteException e) {}
+                   if (mSlimRecents != null && !isInLockTaskMode) {
+                       mSlimRecents.startMultiWindow();
+                   } else {
+                       return mRecents.dockTopTask(NavigationBarGestureHelper.DRAG_MODE_NONE,
+                               ActivityManager.DOCKED_STACK_CREATE_MODE_TOP_OR_LEFT, null, metricsDockAction);
+                   }
                  } else {
-                     return mRecents.dockTopTask(NavigationBarGestureHelper.DRAG_MODE_NONE,
-                             ActivityManager.DOCKED_STACK_CREATE_MODE_TOP_OR_LEFT, null, metricsDockAction);
+                    TaskUtils.dockTopTask(mContext);
                  }
         } else {
             Divider divider = getComponent(Divider.class);
@@ -6898,7 +6904,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     protected RecentsComponent mRecents;
 
-    protected RecentController mSlimRecents;
+    private RecentController mSlimRecents;
 
     protected int mZenMode;
 
@@ -7069,12 +7075,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         resolver.registerContentObserver(Settings.Secure.getUriFor( 
                 Settings.Secure.SYSUI_ROUNDED_FWVALS), 
                 false, this, UserHandle.USER_ALL);
-        // resolver.registerContentObserver(Settings.System.getUriFor( 
-        //         Settings.System.CLEAR_RECENTS_STYLE), 
-        //         false, this, UserHandle.USER_ALL); 
-        // resolver.registerContentObserver(Settings.System.getUriFor( 
-        //         Settings.System.CLEAR_RECENTS_STYLE_ENABLE), 
-        //         false, this, UserHandle.USER_ALL); 
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_BLACKLIST_VALUES),
                     false, this, UserHandle.USER_ALL);
@@ -7104,6 +7104,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_DATE_SELECTION),
                            false, this, UserHandle.USER_ALL);
+             resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.USE_SLIM_RECENTS), 
+                        false, this, UserHandle.USER_ALL); 
+             resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.RECENTS_OMNI_SWITCH_ENABLED), 
+                        false, this, UserHandle.USER_ALL); 
             }
 
         @Override
@@ -7115,16 +7121,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                                     Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY, 
                                     0, UserHandle.USER_CURRENT) == 1; 
                 RecentsActivity.startBlurTask(); 
-                updatePreferences(mContext); 
-            // } else if (uri.equals(Settings.System.getUriFor( 
-            //     Settings.System.CLEAR_RECENTS_STYLE)) 
-            //     || uri.equals(Settings.System.getUriFor( 
-            //     Settings.System.CLEAR_RECENTS_STYLE_ENABLE))) { 
-            //     updateRowStates(); 
-            //     updateSpeedBumpIndex(); 
-            //     checkBarModes(); 
-            //     updateClearAll(); 
-            //     updateEmptyShadeView(); 
+                updatePreferences(mContext); ; 
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_BLACKLIST_VALUES))) {
                 final String blackString = Settings.System.getString(mContext.getContentResolver(),
@@ -7145,6 +7142,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                 unloadClocks();
                 updateClocks();
                 updateKeyguardStatusSettings();
+            } else if (uri.equals(Settings.System.getUriFor(
+                Settings.System.USE_SLIM_RECENTS))) {
+            updateRecentsMode();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.RECENTS_OMNI_SWITCH_ENABLED))) {
+                updateRecentsMode();
             }
         }
 
@@ -7155,6 +7158,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             setNewOverlayAlpha();
             setSecurityAlpha();
             updateKeyguardStatusSettings();
+            updateRecentsMode();
+            rebuildRecentsScreen();
             updateBlurSettings();
         }
     }
@@ -7176,15 +7181,6 @@ public void setNewOverlayAlpha() {
         Settings.System.LOCKSCREEN_SECURITY_ALPHA, 0.75f, UserHandle.USER_CURRENT);
         if (mScrimController != null) {
         mScrimController.setSecurityOverlayAlpha(securityoverlayalpha);
-        }
-    }
-
-
-    private void updateOmniSwitch() {
-        mOmniSwitchRecents = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.RECENTS_OMNI_SWITCH_ENABLED, 0, mCurrentUserId) == 1;
-        if (mNavigationBar != null) {
-            mNavigationBar.setOmniSwitchEnabled(mOmniSwitchRecents);
         }
     }
 
@@ -7968,13 +7964,20 @@ public void setNewOverlayAlpha() {
 
     @Override
     public void preloadRecentApps() {
-        int msg = MSG_PRELOAD_RECENT_APPS;
-        mHandler.removeMessages(msg);
-        mHandler.sendEmptyMessage(msg);
+        if (mOmniSwitchRecents) { 
+                OmniSwitchConstants.preloadOmniSwitchRecents(mContext, UserHandle.CURRENT); 
+        } else { 
+            int msg = MSG_PRELOAD_RECENT_APPS;
+            mHandler.removeMessages(msg);
+            mHandler.sendEmptyMessage(msg);
+        }
     }
 
     @Override
     public void cancelPreloadRecentApps() {
+        if (mOmniSwitchRecents) { 
+            return; 
+        } 
         int msg = MSG_CANCEL_PRELOAD_RECENT_APPS;
         mHandler.removeMessages(msg);
         mHandler.sendEmptyMessage(msg);
@@ -8006,6 +8009,7 @@ public void setNewOverlayAlpha() {
         updateHideIconsForBouncer(true /* animate */);
     }
 
+   
     protected void sendCloseSystemWindows(String reason) {
         try {
             ActivityManager.getService().closeSystemDialogs(reason);
@@ -8977,6 +8981,15 @@ public void setNewOverlayAlpha() {
         });
     }
 
+    private static void sendCloseSystemWindows(Context context, String reason) {
+        if (ActivityManagerNative.isSystemReady()) {
+            try {
+                ActivityManagerNative.getDefault().closeSystemDialogs(reason);
+            } catch (RemoteException e) {
+            }
+        }
+    }
+
     public boolean isKeyguardSecure() {
         if (mStatusBarKeyguardViewManager == null) {
             // startKeyguard() hasn't been called yet, so we don't know.
@@ -9042,15 +9055,26 @@ public void setNewOverlayAlpha() {
                     String currentIconPack = (String) newValue;
                     mRecents.setCurrentIconPack(currentIconPack);
                 }
-                if (!mUseSlimRecents) {
+
+                boolean slimRecents = Settings.System.getIntForUser(mContext.getContentResolver(), 
+                Settings.System.USE_SLIM_RECENTS, 0, mCurrentUserId) == 1; 
+                boolean omniSwitch  = Settings.System.getIntForUser(mContext.getContentResolver(), 
+                Settings.System.RECENTS_OMNI_SWITCH_ENABLED, 0, mCurrentUserId) == 1; 
+
+                if (!slimRecents || !omniSwitch) {
                     mRecents.resetIconCache();
                 }
                 break;
-            case USE_SLIM_RECENTS:
-                mUseSlimRecents =
-                        newValue != null && Integer.parseInt(newValue) != 0;
-                updateRecentsMode();
-                break;
+            // case USE_SLIM_RECENTS:
+            //     mUseSlimRecents =
+            //             newValue != null && Integer.parseInt(newValue) != 0;
+            //     updateRecentsMode();
+            //     break;
+            // case RECENTS_OMNI_SWITCH_ENABLED:
+            //     mOmniSwitchRecents =
+            //             newValue != null && Integer.parseInt(newValue) != 0;
+            //     updateRecentsMode();
+            //     break;
             case NAVBAR_DYNAMIC:
                 if (mNavigationBar != null && mNavigationBarView != null) {
                     mNavigationBar.updateNavbarOverlay(mContext.getResources());
@@ -9102,23 +9126,63 @@ public void setNewOverlayAlpha() {
         }
     }
 
+
     private void updateRecentsMode() {
-        Recents.mUseSlimRecents = mUseSlimRecents;
-        if (Recents.mUseSlimRecents) {
+        boolean slimRecents = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.USE_SLIM_RECENTS, 0, mCurrentUserId) == 1;
+        boolean omniSwitch  = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.RECENTS_OMNI_SWITCH_ENABLED, 0, mCurrentUserId) == 1;
+         
+        if (!slimRecents && !omniSwitch) {
+             mRecents.addSbCallbacks();
+        }
+
+        if (slimRecents || omniSwitch) {
+            // Disable stock recents
             mRecents.evictAllCaches();
-            mSlimRecents = new RecentController(mContext);
-            if (mSlimRecents != null) {
-                mSlimRecents.rebuildRecentsScreen();
+            mRecents.removeSbCallbacks();
+        } 
+
+        if (slimRecents) {
+            // Enable slim recents
+            if (mSlimRecents == null) {
+                mSlimRecents = new RecentController(mContext);
+                rebuildRecentsScreen();
                 mSlimRecents.addSbCallbacks();
             }
         } else {
-            mRecents.resetIconCache();
+            // Disable slim recents
             if (mSlimRecents != null) {
                 mSlimRecents.evictAllCaches();
                 mSlimRecents.removeSbCallbacks();
                 mSlimRecents = null;
             }
         }
+
+        // En-/disable OmniSwitch
+        mOmniSwitchRecents = omniSwitch;
+    }
+
+
+
+    private void rebuildRecentsScreen() {
+        if (mSlimRecents != null) {
+            mSlimRecents.rebuildRecentsScreen();
+        }
+    }
+
+    @Override
+    public void hideRecentApps(boolean triggeredFromAltTab, boolean triggeredFromHomeKey) {
+        if (mOmniSwitchRecents) {
+           OmniSwitchConstants.hideOmniSwitchRecents(mContext, UserHandle.CURRENT);
+        } // else Recents does it from its callback
+    }
+
+    @Override
+    public void toggleRecentApps() {
+        if (mOmniSwitchRecents) {
+            OmniSwitchConstants.toggleOmniSwitchRecents(mContext, UserHandle.CURRENT);
+        } // else Recents does it from its callback
     }
 
     private void updateNavbarvisibility() {

@@ -51,7 +51,9 @@ public interface RecentsComponent {
     void resetIconCache();
 
     void evictAllCaches();
-
+    void removeSbCallbacks(); 
+    void addSbCallbacks(); 
+    
     IconsHandler getIconsHandler();
     void setCurrentIconPack(String currentIconPack);
 }

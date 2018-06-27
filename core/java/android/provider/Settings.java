@@ -5655,7 +5655,7 @@ public final class Settings {
          */
         public static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
 
-        /**
+        /*
          * change lockscreen alpha color
          * @hide
          */
@@ -6142,7 +6142,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(HEADSET_CONNECT_PLAYER);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
-	    PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_ICON);
+            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_ICON);
+            PRIVATE_SETTINGS.add(RECENTS_OMNI_SWITCH_ENABLED);
         }
 
         /**

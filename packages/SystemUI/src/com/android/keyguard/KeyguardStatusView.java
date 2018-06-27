@@ -162,8 +162,6 @@ public class KeyguardStatusView extends GridLayout implements
         public void onTimeChanged() {
             if (mEnableRefresh) {
                 refresh();
-                updateClockColor();
-                updateClockDateColor();
             }
         }
 
@@ -183,8 +181,6 @@ public class KeyguardStatusView extends GridLayout implements
             setEnableMarquee(true);
             mEnableRefresh = true;
             refresh();
-            updateClockColor();
-            updateClockDateColor();
         }
 
         @Override
@@ -198,6 +194,7 @@ public class KeyguardStatusView extends GridLayout implements
             updateOwnerInfo();
             updateClockColor();
             updateClockDateColor();
+            refreshLockFont();
         }
     };
 
@@ -276,6 +273,7 @@ public class KeyguardStatusView extends GridLayout implements
         updateOwnerInfo();
         updateClockColor();
         updateClockDateColor();
+        refreshLockFont();
 
         mSettingsObserver = new SettingsObserver(new Handler());
     }
@@ -290,7 +288,7 @@ public class KeyguardStatusView extends GridLayout implements
         layoutParams.bottomMargin = getResources().getDimensionPixelSize(
                 R.dimen.bottom_text_spacing_digital);
         mClockView.setLayoutParams(layoutParams);
-        mClockView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        // mClockView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
 
         // Custom analog clock
        MarginLayoutParams customlayoutParams = (MarginLayoutParams) mAnalogClockView.getLayoutParams();
@@ -335,6 +333,7 @@ public class KeyguardStatusView extends GridLayout implements
 
         refreshTime();
         refreshAlarmStatus(nextAlarm);
+        refreshLockFont();
     }
 
     void refreshAlarmStatus(AlarmManager.AlarmClockInfo nextAlarm) {

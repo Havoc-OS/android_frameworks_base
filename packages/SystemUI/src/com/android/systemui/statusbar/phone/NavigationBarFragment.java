@@ -71,8 +71,6 @@ import android.widget.FrameLayout;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.util.omni.OmniSwitchConstants;
-import com.android.internal.util.omni.TaskUtils;
 import com.android.internal.utils.du.DUActionUtils;
 import com.android.internal.utils.du.UserContentObserver;
 import com.android.internal.utils.du.ActionHandler.ActionIconResources;
@@ -159,9 +157,6 @@ public class NavigationBarFragment extends Fragment implements Callbacks, Naviga
 
     private boolean needsBarRefresh = false;
     private boolean mIsAttached;
-
-    // OmniSwitch
-    private boolean mOmniSwitchRecents;
 
     // ----- Fragment Lifecycle Callbacks -----
 
@@ -586,20 +581,12 @@ public class NavigationBarFragment extends Fragment implements Callbacks, Naviga
         }
         int action = event.getAction() & MotionEvent.ACTION_MASK;
         if (action == MotionEvent.ACTION_DOWN) {
-            if (mOmniSwitchRecents) {
-                OmniSwitchConstants.preloadOmniSwitchRecents(getContext(), UserHandle.CURRENT);
-            } else {
                 mCommandQueue.preloadRecentApps();
-            }
         } else if (action == MotionEvent.ACTION_CANCEL) {
-            if (!mOmniSwitchRecents) {
                 mCommandQueue.cancelPreloadRecentApps();
-            }
         } else if (action == MotionEvent.ACTION_UP) {
             if (!v.isPressed()) {
-                if (!mOmniSwitchRecents) {
                     mCommandQueue.cancelPreloadRecentApps();
-                }
             }
         }
         return false;
@@ -611,11 +598,8 @@ public class NavigationBarFragment extends Fragment implements Callbacks, Naviga
                     LatencyTracker.ACTION_TOGGLE_RECENTS);
         }
         mStatusBar.awakenDreams();
-        if (mOmniSwitchRecents) {
-            OmniSwitchConstants.toggleOmniSwitchRecents(getContext(), UserHandle.CURRENT);
-        } else {
-            mCommandQueue.toggleRecentApps();
-        }
+        mCommandQueue.toggleRecentApps();
+
     }
 
     /**
@@ -958,9 +942,5 @@ public class NavigationBarFragment extends Fragment implements Callbacks, Naviga
         if (mNavigationBarView != null) {
             mNavigationBarView.setPulseColors(colorizedMedia, colors);
         }
-    }
-
-    public void setOmniSwitchEnabled(boolean enabled) {
-        mOmniSwitchRecents = enabled;
     }
 }
