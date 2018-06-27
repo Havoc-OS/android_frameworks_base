@@ -41,6 +41,9 @@
     <dimen name="app_sidebar_icon_width">72dp</dimen>  
     <dimen name="app_sidebar_icon_height">72dp</dimen>  
 
+     <!-- Recents task buttons --> 
+    <dimen name="recents_task_view_header_kill_button_padding">44dp</dimen> 
+
     <!-- Custom Carrier Label -->
     <dimen name="status_bar_carrier_height">14dp</dimen>
 	
