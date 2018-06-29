@@ -5702,6 +5702,7 @@ public class StatusBar extends SystemUI implements DemoMode,
          if (!mRecognitionEnabled) return;
          if (mAmbientIndicationContainerPlay != null && recognitionKeyguard != 0) {
              mAmbientIndicationContainerPlay.setVisibility(View.VISIBLE);
+             ((AmbientIndicationContainerPlay) mAmbientIndicationContainerPlay).updateAmbientIndicationForKeyguard();
          } else {
             mAmbientIndicationContainerPlay.setVisibility(View.GONE);
          }
@@ -5753,6 +5754,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                 AMBIENT_RECOGNITION, 0) != 0;
         if (!mRecognitionEnabled) return;
         mRecognition = new RecoginitionObserverFactory(mContext);
+        ((AmbientIndicationContainerPlay) mAmbientIndicationContainerPlay).hideIndication();
         doAmbientRecognition();
     }
    
