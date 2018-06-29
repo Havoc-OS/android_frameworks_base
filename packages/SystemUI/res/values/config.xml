@@ -507,4 +507,7 @@
     <!-- CPUInfoService temperature sysfs path -->
     <string name="config_cpuinfoSysTemp" translatable="false"></string>
 
+
+    <!-- Whether to show VoLTE icon in the status bar -->
+    <bool name="config_display_volte">true</bool>
 </resources>
