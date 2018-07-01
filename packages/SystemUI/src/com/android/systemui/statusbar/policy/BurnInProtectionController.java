@@ -91,8 +91,11 @@ public class BurnInProtectionController {
 
     public void stopSwiftTimer() {
         if (!mSwiftEnabled) return;
-        mTimer.cancel();
-        mTimer.purge();
+
+        if(mTimer != null) {
+            mTimer.cancel();
+            mTimer.purge();
+        }
         mTimer = null;
         if (DEBUG) Log.d(TAG, "Canceled swift timer");
     }
