@@ -35,6 +35,9 @@
   <java-symbol type="color" name="analog_clock_hand_hour_color" /> 
   <java-symbol type="color" name="analog_clock_hand_minute_color" /> 
 
+    <!-- On-The-Go --> 
+  <java-symbol type="drawable" name="ic_lock_onthego" /> 
+
     <!-- Custom clocks --> 
   <java-symbol type="string" name="custom_clock_styles" /> 
 

@@ -49,6 +49,20 @@
    <string name="lockscreen_default">Default</string>
     <string name="recents_app_killed">App killed</string> 
 
+       <!-- On The Go --> 
+    <string name="global_action_onthego">On-The-Go Mode</string> 
+    <string name="onthego_notif_ticker">On-The-Go activated</string> 
+    <string name="onthego_notif_title">On-The-Go is active</string> 
+    <string name="onthego_notif_stop">Stop</string> 
+    <string name="onthego_notif_options">Options</string> 
+    <string name="onthego_notif_error">Unable to start On-The-Go</string> 
+    <string name="onthego_notif_restart">Restart On-The-Go</string> 
+    <string name="onthego_notif_camera_changed">Camera mode changed</string> 
+    <string name="onthego_transparency">Transparency</string> 
+    <string name="onthego_front_camera">Use front camera</string> 
+    <string name="onthego_service_toggle">Automatically restart service</string> 
+    <string name="onthego_channel_name">Main</string> 
+
      <!-- key disable QS Tile -->
     <string name="quick_settings_key_disable_label">Disable keys</string>
     <string name="accessibility_quick_settings_key_disable_on">Keys disabled.</string>

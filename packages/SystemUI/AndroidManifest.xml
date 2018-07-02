@@ -274,6 +274,12 @@
             </intent-filter>
         </receiver>
 
+        <!-- started from PhoneWindowManager
+             TODO: Should have an android:permission attribute -->
+        <service android:name=".havoc.onthego.OnTheGoService"
+            android:process=":onthego"
+            android:exported="false" />
+
         <receiver android:name=".SysuiRestartReceiver"
             android:exported="false">
             <intent-filter>
