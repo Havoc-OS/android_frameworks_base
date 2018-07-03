@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center"
+                android:layout_marginTop="8dp"
                 android:layout_centerHorizontal="true"
 		        android:layout_alignParentTop="true"
 		        android:textColor="?attr/wallpaperTextColor"
@@ -52,7 +52,7 @@
                 android:id="@+id/analog_clock_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center_horizontal|top"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true"
                 style="@style/widget_big_thin"
@@ -86,8 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/keyguard_weather_view"
-                android:layout_gravity="center_horizontal"
-                android:visibility="gone"/>
+                android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:id="@+id/owner_info"
@@ -104,6 +103,13 @@
                 android:letterSpacing="0.05"
                 android:ellipsize="marquee"
                 android:singleLine="true" />
+            
+         <include layout="@layout/ambient_indication_play"
+            android:layout_below="@+id/keyguard_status_area"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="18dp"
+            android:id="@+id/ambient_indication_container_play" />
+
 	   </RelativeLayout>
     </LinearLayout>
 </com.android.keyguard.KeyguardStatusView>
