@@ -258,18 +258,6 @@ public class KeyguardStatusView extends GridLayout implements
         mTextColor = mClockView.getCurrentTextColor();
         mDateTextColor = mDateView.getCurrentTextColor();
         mAlarmTextColor = mAlarmStatusView.getCurrentTextColor();
-
-        updateSettings();
-
-        boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive();
-        setEnableMarquee(shouldMarquee);
-        refresh();
-        updateOwnerInfo();
-        updateClockColor();
-        updateClockDateColor();
-        refreshLockFont();
-
-        
         mWeatherView = findViewById(R.id.keyguard_weather_view);
         weatherPanel = findViewById(R.id.weather_panel);
         noWeatherInfo = (TextView) findViewById(R.id.no_weather_info_text);
@@ -278,7 +266,14 @@ public class KeyguardStatusView extends GridLayout implements
         mWeatherCurrentTemp = (TextView) findViewById(R.id.current_temp);
         mWeatherConditionText = (TextView) findViewById(R.id.condition);
 
-
+        boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive();
+        setEnableMarquee(shouldMarquee);
+        refresh();
+        updateOwnerInfo();
+        updateClockColor();
+        updateClockDateColor();
+        refreshLockFont();
+        updateSettings(); 
         mSettingsObserver = new SettingsObserver(new Handler());
     }
 
@@ -398,8 +393,7 @@ public class KeyguardStatusView extends GridLayout implements
         KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mInfoCallback);
         mWeatherClient.addObserver(this);
         mSettingsObserver.observe();
-        updateSettings();
-        queryAndUpdateWeather();
+        updateSettings(); 
     }
 
     @Override
@@ -1109,18 +1103,15 @@ public class KeyguardStatusView extends GridLayout implements
     
     
         private void updateSettings() {
-        boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
         final ContentResolver resolver = getContext().getContentResolver();
         
+        boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
+
         if (mWeatherView == null || weatherPanel == null)
             return;
 
         mWeatherView.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
-       
-        if (mWeatherView != null) {
-            mWeatherView.setVisibility(mShowWeather ?
-                View.VISIBLE : View.GONE);
-        }
+
         if (noWeatherInfo != null) {
             noWeatherInfo.setVisibility(mShowWeather && !mWeatherClient.isOmniJawsEnabled() ?
                 View.VISIBLE : View.GONE);
@@ -1814,6 +1805,14 @@ public class KeyguardStatusView extends GridLayout implements
                   Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                   Settings.System.OMNIJAWS_WEATHER_ICON_PACK), false, this, UserHandle.USER_ALL);
+
+            mShowWeather = Settings.System.getIntForUser(resolver,
+                  Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0, UserHandle.USER_CURRENT) == 1;
+            mShowConditionIcon = Settings.System.getIntForUser(resolver,
+                  Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
+            mShowLocation = Settings.System.getIntForUser(resolver,
+                  Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1, UserHandle.USER_CURRENT) == 1;
+
             resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(

@@ -47,5 +47,6 @@
         android:gravity="center"
         style="@style/widget_label"
         android:layout_marginStart="6dp"
+        android:visibility="gone"
         />
 </LinearLayout>
