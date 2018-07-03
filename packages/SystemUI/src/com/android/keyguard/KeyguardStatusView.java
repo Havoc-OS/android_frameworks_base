@@ -262,6 +262,17 @@ public class KeyguardStatusView extends GridLayout implements
         mTextColor = mClockView.getCurrentTextColor();
         mDateTextColor = mDateView.getCurrentTextColor();
         mAlarmTextColor = mAlarmStatusView.getCurrentTextColor();
+       
+        updateSettings(); 
+ 
+        boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive(); 
+        setEnableMarquee(shouldMarquee); 
+        refresh(); 
+        updateOwnerInfo(); 
+        updateClockColor(); 
+        updateClockDateColor(); 
+        refreshLockFont(); 
+
         mWeatherView = findViewById(R.id.keyguard_weather_view);
         weatherPanel = findViewById(R.id.weather_panel);
         noWeatherInfo = (TextView) findViewById(R.id.no_weather_info_text);
@@ -269,15 +280,7 @@ public class KeyguardStatusView extends GridLayout implements
         mWeatherConditionImage = (ImageView) findViewById(R.id.ls_weather_image);
         mWeatherCurrentTemp = (TextView) findViewById(R.id.current_temp);
         mWeatherConditionText = (TextView) findViewById(R.id.condition);
-
-        boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive();
-        setEnableMarquee(shouldMarquee);
-        refresh();
-        updateOwnerInfo();
-        updateClockColor();
-        updateClockDateColor();
-        refreshLockFont();
-        updateSettings(); 
+ 
         mSettingsObserver = new SettingsObserver(new Handler());
     }
 
@@ -397,6 +400,7 @@ public class KeyguardStatusView extends GridLayout implements
         mWeatherClient.addObserver(this);
         mSettingsObserver.observe();
         updateSettings(); 
+        queryAndUpdateWeather();
     }
 
     @Override
