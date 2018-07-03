@@ -49,7 +49,7 @@ public class RecoginitionObserver {
     public RecoginitionObserver(Context context) {
         // We limit to 20 seconds of recording. We size our buffer to store 20 seconds of
         // audio at 11025 Hz, 16 bits (2 bytes) ; total of 430KB uploaded max
-        int bufferSize = SAMPLE_RATE * 15 * 2;
+        int bufferSize = SAMPLE_RATE * 20 * 2;
         mBuffer = new byte[bufferSize];
         final int minBufSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO,
                 AudioFormat.ENCODING_PCM_16BIT);

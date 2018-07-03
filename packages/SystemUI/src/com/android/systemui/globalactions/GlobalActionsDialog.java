@@ -117,7 +117,7 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
-import com.android.internal.util.crdroid.OnTheGoActions;
+import com.android.internal.util.havoc.OnTheGoActions;
 
 /**
  * Helper to show the global actions dialog.  Each item is an {@link Action} that

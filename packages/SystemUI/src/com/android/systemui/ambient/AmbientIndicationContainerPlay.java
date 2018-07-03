@@ -79,6 +79,7 @@ public class AmbientIndicationContainerPlay extends AutoReinflateContainer imple
         if (recognitionKeyguard == 1) {
             if (mSong != null && mArtist != null) {
                 mAmbientIndication.setVisibility(View.VISIBLE);
+                doMusicNoteAnimation(); 
             }
             return;
         }
@@ -92,14 +93,18 @@ public class AmbientIndicationContainerPlay extends AutoReinflateContainer imple
 
     public void setIndication(String song, String artist) {
         if (song != null && artist != null) {
-            mText.setText(String.format(mContext.getResources().getString( 
-                R.string.ambient_recognition_information), song, artist)); 
+            mText.setText("Song detected. Check notification for details."); 
             mIcon.setAnimation(R.raw.ambient_music_note);
         }
         mSong = song;
         mArtist = artist;
         mAmbientIndication.setClickable(false);
         updateAmbientIndicationForKeyguard();
+
+        if (song == null && artist == null) {
+            mAmbientIndication.setVisibility(View.INVISIBLE);
+            mAmbientIndication.setVisibility(View.GONE);
+        }
     }
 
    private void doMusicNoteAnimation() {

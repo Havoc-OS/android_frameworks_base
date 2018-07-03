@@ -22,25 +22,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:androidprv="http://schemas.android.com/apk/res-auto"
     android:id="@+id/presentation"
-    android:layout_width="match_parent"
+    android:layout_width="match_parent" 
+     android:layout_gravity="center_horizontal|bottom" 
     android:layout_height="match_parent">
 
     <com.android.keyguard.KeyguardStatusView
         android:id="@+id/clock"
         android:orientation="vertical"
         android:layout_width="wrap_content"
+         android:layout_gravity="center_horizontal|bottom" 
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|top"
+             android:layout_gravity="center_horizontal|bottom" 
             android:orientation="vertical"
             android:focusable="true">
             <TextClock
                 android:id="@+id/clock_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|top"
+                android:layout_gravity="center_horizontal|bottom" 
                 android:textColor="?attr/wallpaperTextColor"
                 style="@style/widget_big_thin"
                 android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />
@@ -50,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:layout_gravity="center_horizontal"
+                 android:layout_gravity="center_horizontal|bottom" 
                 android:src="@drawable/kg_security_lock_normal" />
         </LinearLayout>
     </com.android.keyguard.KeyguardStatusView>

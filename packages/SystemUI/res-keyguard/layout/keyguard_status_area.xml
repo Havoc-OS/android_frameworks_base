@@ -24,8 +24,8 @@
     android:id="@+id/keyguard_status_area"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="horizontal">
     <com.android.systemui.statusbar.policy.DateView
         android:id="@+id/date_view"
         android:layout_width="wrap_content"
@@ -44,9 +44,8 @@
         android:drawableTintMode="src_in"
         android:textColor="?attr/wallpaperTextColorSecondary"
         android:letterSpacing="0.05"
+        android:gravity="center"
         style="@style/widget_label"
         android:layout_marginStart="6dp"
-        android:gravity="center"
-        android:visibility="gone"
         />
 </LinearLayout>

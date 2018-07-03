@@ -27,7 +27,7 @@
     android:layout_height="wrap_content"
     androidprv:layout_maxWidth="@dimen/keyguard_security_width"
     androidprv:layout_maxHeight="@dimen/keyguard_security_height"
-    android:gravity="center_horizontal|top">
+    android:gravity="center_horizontal|bottom">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,14 +36,15 @@
             android:id="@+id/keyguard_clock_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|top">
+            android:gravity="center"
+            android:layout_gravity="center_horizontal|bottom">
             <TextClock
                 android:id="@+id/clock_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_gravity="center_horizontal|bottom"
                 android:layout_centerHorizontal="true"
+                android:gravity="bottom"
 		        android:layout_alignParentTop="true"
 		        android:textColor="?attr/wallpaperTextColor"
                 style="@style/widget_big_thin"
@@ -52,8 +53,9 @@
                 android:id="@+id/analog_clock_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|top"
+                android:layout_gravity="center_horizontal|bottom"
                 android:layout_centerHorizontal="true"
+                android:gravity="bottom"
                 android:layout_alignParentTop="true"
                 style="@style/widget_big_thin"
                 android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />
@@ -72,21 +74,13 @@
             <include layout="@layout/keyguard_status_area"
                 android:id="@+id/keyguard_status_area"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
+                android:layout_height="wrap_content" />
       
             <include layout="@layout/keyguard_weather_view"
                 android:id="@+id/keyguard_weather_view"
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/keyguard_status_area" />
-
-            <include layout="@layout/keyguard_shortcuts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/keyguard_weather_view"
-                android:layout_gravity="center_horizontal"/>
 
             <TextView
                 android:id="@+id/owner_info"
@@ -94,7 +88,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/keyguard_weather_view"
@@ -104,12 +98,19 @@
                 android:ellipsize="marquee"
                 android:singleLine="true" />
             
-         <include layout="@layout/ambient_indication_play"
-            android:layout_below="@+id/keyguard_status_area"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="18dp"
-            android:id="@+id/ambient_indication_container_play" />
+            <include layout="@layout/keyguard_shortcuts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@id/owner_info"/>
 
-	   </RelativeLayout>
+       </RelativeLayout>
+       
+         <include layout="@layout/ambient_indication_play"
+               android:layout_below="@id/keyguard_status_area"
+             android:layout_gravity="center_horizontal"
+              android:layout_marginTop="12dp"
+                android:layout_centerHorizontal="true"
+            android:id="@+id/ambient_indication_container_play" />
     </LinearLayout>
 </com.android.keyguard.KeyguardStatusView>

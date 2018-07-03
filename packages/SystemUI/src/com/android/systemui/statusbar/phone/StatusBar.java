@@ -1099,7 +1099,7 @@ public class StatusBar extends SystemUI implements DemoMode,
    private RecoginitionObserverFactory mRecognition;
    private boolean mRecognitionEnabled;
    /* Interval indicating when AP-Recogntion will run. Default is 2 minutes */
-   private static final int AMBIENT_RECOGNITION_INTERVAL = 120000;
+   private static final int AMBIENT_RECOGNITION_INTERVAL = 20000;
    /* Interval indicating the max recording time. Default is 19 seconds */
    private static final int AMBIENT_RECOGNITION_INTERVAL_MAX = 19000;
 
@@ -5703,6 +5703,8 @@ public class StatusBar extends SystemUI implements DemoMode,
          if (mAmbientIndicationContainerPlay != null && recognitionKeyguard != 0) {
              mAmbientIndicationContainerPlay.setVisibility(View.VISIBLE);
              ((AmbientIndicationContainerPlay) mAmbientIndicationContainerPlay).updateAmbientIndicationForKeyguard();
+         } else {
+            mAmbientIndicationContainerPlay.setVisibility(View.INVISIBLE);
          }
      }
 

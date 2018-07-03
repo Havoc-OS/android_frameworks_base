@@ -20,7 +20,7 @@
     android:id="@id/ambient_indication_container_play"
     android:layout="@layout/ambient_indication_inner_play"
     android:layout_width="fill_parent"
-    android:layout_marginBottom="48dp"
+    android:layout_marginBottom="6dp"
     android:layout_height="wrap_content"
     android:forceHasOverlappingRendering="false"
     xmlns:android="http://schemas.android.com/apk/res/android" />

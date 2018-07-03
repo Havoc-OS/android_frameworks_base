@@ -676,6 +676,7 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         if (D.BUG) Log.d(TAG, "updateRowsH");
         setVolumeStroke();
         setVolumeAlpha();
+        setVolumeDialogDim();
         if (!mShowing) {
             trimObsoleteH();
         }
