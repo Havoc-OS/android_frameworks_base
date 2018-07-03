@@ -5686,6 +5686,20 @@ public final class Settings {
          */
         public static final String ALERT_ON_CHARGED_LEVEL = "alert_on_charged_level";
 
+        /** 
+        ** Change fonts for the system lockscreen Owner info 
+        ** 
+        ** @hide 
+        **/ 
+        public static final String LOCK_OWNERINFO_FONTS = "lock_ownerinfo_fonts"; 
+        
+        /** 
+        ** Change font size for the system lockscreen owner 
+        ** 
+        ** @hide 
+        **/ 
+        public static final String LOCKOWNER_FONT_SIZE= "lockowner_font_size"; 
+
         /**
          * Whether to enable OmniSwitch as recents implementation.
          * @hide

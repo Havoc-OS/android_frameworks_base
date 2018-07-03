@@ -133,6 +133,8 @@ public class KeyguardStatusView extends GridLayout implements
     private int ownerInfoColor;
     private int mLockColor;
     private int mDateColor;
+    private int mLockOwnerInfoFontSize; 
+    private int ownerinfoFont; 
 
     private View mWeatherView;
     private View weatherPanel;
@@ -173,6 +175,7 @@ public class KeyguardStatusView extends GridLayout implements
                 updateOwnerInfo();
                 updateClockColor();
                 updateClockDateColor();
+                refreshOwnerInfoSize(); 
             }
         }
 
@@ -196,6 +199,7 @@ public class KeyguardStatusView extends GridLayout implements
             updateClockColor();
             updateClockDateColor();
             refreshLockFont();
+            refreshOwnerInfoSize(); 
         }
     };
 
@@ -297,8 +301,7 @@ public class KeyguardStatusView extends GridLayout implements
 
         if (mOwnerInfo != null) {
             mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                    getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
-           mOwnerInfo.setTypeface(tf);
+                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21)); 
         }
     }
 
@@ -502,6 +505,89 @@ public class KeyguardStatusView extends GridLayout implements
         mAlarmStatusView.setVisibility(mDarkAmount != 1 ? (mShowAlarm && mAvailableAlarm ? View.VISIBLE : View.GONE)
                 : mAvailableAlarm ? View.VISIBLE : View.GONE);
     }
+
+    public void refreshOwnerInfoSize() { 
+        int size = mLockOwnerInfoFontSize; 
+            if (size == 0) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1)); 
+            } else if (size == 1) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_1)); 
+            } else if (size == 2) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_2)); 
+            } else if (size == 3) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_3)); 
+            } else if (size == 4) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_4)); 
+            } else if (size == 5) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_5)); 
+            } else if (size == 6) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_6)); 
+            } else if (size == 7) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_7)); 
+            } else if (size == 8) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_8)); 
+            } else if (size == 9) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_9)); 
+            } else if (size == 10) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_10)); 
+            } else if (size == 11) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_11)); 
+            } else if (size == 12) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_12)); 
+            } else if (size == 13) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_13)); 
+            } else if (size == 14) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14)); 
+            }  else if (size == 15) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_15)); 
+            } else if (size == 16) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_16)); 
+            } else if (size == 17) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_17)); 
+            } else if (size == 18) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_18)); 
+            } else if (size == 19) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_19)); 
+            } else if (size == 20) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_20)); 
+            } else if (size == 21) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21)); 
+            } else if (size == 22) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_22)); 
+            } else if (size == 23) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_23)); 
+            } else if (size == 24) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_24)); 
+            } else if (size == 25) { 
+            mOwnerInfo.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
+                    getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_25)); 
+            } 
+        } 
 
     public void updateclocksize() {
         int size = mLockClockFontSize;
@@ -1469,6 +1555,103 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherConditionText.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
         }
 
+        if (ownerinfoFont == 0) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 1) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD)); 
+        } 
+        if (ownerinfoFont == 2) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC)); 
+        } 
+        if (ownerinfoFont == 3) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC)); 
+        } 
+        if (ownerinfoFont == 4) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC)); 
+        } 
+        if (ownerinfoFont == 5) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 6) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC)); 
+        } 
+        if (ownerinfoFont == 7) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 8) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 9) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC)); 
+        } 
+        if (ownerinfoFont == 10) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD)); 
+        } 
+        if (ownerinfoFont == 11) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC)); 
+        } 
+        if (ownerinfoFont == 12) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 13) { 
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC)); 
+        } 
+        if (ownerinfoFont == 14) { 
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 15) { 
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC)); 
+        } 
+        if (ownerinfoFont == 16) { 
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 17) { 
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC)); 
+        } 
+        if (ownerinfoFont == 18) { 
+                mOwnerInfo.setTypeface(Typeface.create("cursive", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 19) { 
+                mOwnerInfo.setTypeface(Typeface.create("cursive", Typeface.BOLD)); 
+        } 
+        if (ownerinfoFont == 20) { 
+                mOwnerInfo.setTypeface(Typeface.create("casual", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 21) { 
+                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 22) { 
+                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.ITALIC)); 
+        } 
+        if (ownerinfoFont == 23) { 
+                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.BOLD)); 
+        } 
+        if (ownerinfoFont == 24) { 
+                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC)); 
+        } 
+        if (ownerinfoFont == 25) { 
+            mOwnerInfo.setTypeface(Typeface.create("gobold-light-sys", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 26) { 
+            mOwnerInfo.setTypeface(Typeface.create("roadrage-sys", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 27) { 
+            mOwnerInfo.setTypeface(Typeface.create("snowstorm-sys", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 28) { 
+            mOwnerInfo.setTypeface(Typeface.create("googlesans-sys", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 29) { 
+            mOwnerInfo.setTypeface(Typeface.create("neoneon-sys", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 30) { 
+            mOwnerInfo.setTypeface(Typeface.create("themeable-sys", Typeface.NORMAL)); 
+        } 
+        if (ownerinfoFont == 31) { 
+            mOwnerInfo.setTypeface(Typeface.create("samsung-sys", Typeface.NORMAL)); 
+        } 
+
         AlarmManager.AlarmClockInfo nextAlarm = 
         mAlarmManager.getNextAlarmClock(UserHandle.USER_CURRENT); 
 
@@ -1842,7 +2025,11 @@ public class KeyguardStatusView extends GridLayout implements
              resolver.registerContentObserver(Settings.System.getUriFor( 
                         Settings.System.LOCKCITY_FONT_SIZE), false, this, UserHandle.USER_ALL); 
              resolver.registerContentObserver(Settings.System.getUriFor( 
-                        Settings.System.LOCKCONDITION_FONT_SIZE), false, this, UserHandle.USER_ALL);      
+                        Settings.System.LOCKCONDITION_FONT_SIZE), false, this, UserHandle.USER_ALL);    
+             resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCK_OWNERINFO_FONTS), false, this, UserHandle.USER_ALL); 
+             resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCKOWNER_FONT_SIZE), false, this, UserHandle.USER_ALL);   
             update();        
             queryAndUpdateWeather(); 
                 
@@ -1926,7 +2113,13 @@ public class KeyguardStatusView extends GridLayout implements
                } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.LOCKCONDITION_FONT_SIZE))) {
                         refreshconditionsize();
-               }
+                    } else if (uri.equals(Settings.System.getUriFor( 
+                        Settings.System.LOCK_OWNERINFO_FONTS))) { 
+                   refreshOwnerInfoSize(); 
+                } else if (uri.equals(Settings.System.getUriFor( 
+                    Settings.System.LOCKOWNER_FONT_SIZE))) { 
+                    updateSettings(); 
+                }
              update();
          }
 
@@ -1982,6 +2175,13 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCKCONDITION_FONT_SIZE,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
                 UserHandle.USER_CURRENT);      
+           ownerinfoFont = Settings.System.getIntForUser(resolver, 
+                Settings.System.LOCK_OWNERINFO_FONTS, 26, UserHandle.USER_CURRENT); 
+           mLockOwnerInfoFontSize = Settings.System.getIntForUser(resolver, 
+                Settings.System.LOCKOWNER_FONT_SIZE, 
+                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21), 
+                UserHandle.USER_CURRENT); 
+                refreshOwnerInfoSize(); 
            updateSettings();
          }
     }
