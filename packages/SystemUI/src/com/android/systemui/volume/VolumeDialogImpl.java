@@ -623,7 +623,8 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         if (D.BUG) Log.d(TAG, "updateExpandButtonH");
         mExpandButton.setClickable(!mExpandButtonAnimationRunning);
         if (!(mExpandButtonAnimationRunning && isAttached())) {
-            final int res = R.drawable.ic_volume_expand;
+            final int res = mExpanded ? R.drawable.ic_volume_collapse_animation
+                    : R.drawable.ic_volume_expand_animation;
             if (hasTouchFeature()) {
                 mExpandButton.setImageResource(res);
             } else {
@@ -635,12 +636,14 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
                     R.string.accessibility_volume_collapse : R.string.accessibility_volume_expand));
         }
         if (mExpandButtonAnimationRunning) {
-			if (mExpandButton.getContentDescription().toString() == mContext.getString(R.string.accessibility_volume_collapse)) {
-				rotate(mExpandButton, 180, 0);
-			} else if (mExpandButton.getContentDescription().toString() == mContext.getString(R.string.accessibility_volume_expand)) {
-				rotate(mExpandButton, 0, 180);
-			}
-            mHandler.postDelayed(new Runnable() {
+            final Drawable d = mExpandButton.getDrawable();
+            if (d instanceof AnimatedVectorDrawable) {
+                // workaround to reset drawable
+                final AnimatedVectorDrawable avd = (AnimatedVectorDrawable) d.getConstantState()
+                        .newDrawable();
+                mExpandButton.setImageDrawable(avd);
+                avd.start();
+                mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mExpandButtonAnimationRunning = false;
@@ -648,13 +651,8 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
                         rescheduleTimeoutH();
                     }
                 }, mExpandButtonAnimationDuration);
+            }
         }
-    }
-	
-	public static void rotate(View v, float from, float to) {
-        android.animation.ObjectAnimator mover = android.animation.ObjectAnimator.ofFloat(v, "rotation", from, to);
-        mover.setDuration(200);
-        mover.start();
     }
 
     private boolean shouldBeVisibleH(VolumeRow row, VolumeRow activeRow) {
