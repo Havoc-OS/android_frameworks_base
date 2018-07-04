@@ -67,20 +67,20 @@
             android:maxLines="1"
             android:visibility="gone"/>
 
-        <com.android.keyguard.AlphaOptimizedImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/volume_expand_button"
-            style="@style/VolumeButtons"
-            android:layout_width="@dimen/global_actions_panel_width"
-            android:layout_height="44dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ripple_drawable"
-            android:clickable="true"
-            android:gravity="center"
-            android:paddingBottom="8dp"
-            android:soundEffectsEnabled="false"
-            android:src="@drawable/ic_volume_collapse_animation"
-            tools:ignore="RtlHardcoded" />
+            <com.android.keyguard.AlphaOptimizedImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/volume_expand_button"
+                style="@style/VolumeButtons"
+                android:layout_width="@dimen/global_actions_panel_width"
+                android:layout_height="44dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ripple_drawable"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:soundEffectsEnabled="false"
+                android:src="@drawable/ic_volume_expand"
+                tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 </LinearLayout>
