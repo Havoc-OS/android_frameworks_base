@@ -69,6 +69,7 @@ public class VolumeDialogMotion {
             public void onShow(DialogInterface dialog) {
                 if (D.BUG) Log.d(TAG, "mDialog.onShow");
                 final int h = mDialogView.getHeight();
+                mDialogView.setTranslationY(-h);
                 startShowAnimation();
             }
         });
@@ -128,7 +129,7 @@ public class VolumeDialogMotion {
     private void startShowAnimation() {
         if (D.BUG) Log.d(TAG, "startShowAnimation");
         mDialogView.animate()
-                .translationX(0)
+                .translationY(0)
                 .setDuration(scaledDuration(300))
                 .setInterpolator(new LogDecelerateInterpolator())
                 .setListener(null)
@@ -173,7 +174,7 @@ public class VolumeDialogMotion {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float v = (Float) animation.getAnimatedValue();
-                //mContents.setTranslationY(v + -mDialogView.getTranslationY());
+                mContents.setTranslationY(v + -mDialogView.getTranslationY());
             }
         });
         mContentsPositionAnimator.setInterpolator(new LogDecelerateInterpolator());
@@ -217,13 +218,13 @@ public class VolumeDialogMotion {
             setShowing(false);
         }
         mDialogView.animate()
-                .translationX(mDialogView.getHeight())
+                .translationY(-mDialogView.getHeight())
                 .setDuration(scaledDuration(250))
                 .setInterpolator(new LogAccelerateInterpolator())
                 .setUpdateListener(new AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator animation) {
-                        //mContents.setTranslationY(-mDialogView.getTranslationY());
+                        mContents.setTranslationY(-mDialogView.getTranslationY());
                         final int posY = chevronPosY();
                         mChevron.setTranslationY(posY + -mDialogView.getTranslationY());
                     }

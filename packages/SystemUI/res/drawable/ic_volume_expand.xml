@@ -44,7 +44,7 @@
             android:rotation="45" >
             <group
                 android:name="left_pivot"
-                android:translateX="2" >
+                android:translateX="-4.242" >
                 <path
                     android:name="rectangle_path_2"
                     android:fillColor="#FFFFFFFF"
