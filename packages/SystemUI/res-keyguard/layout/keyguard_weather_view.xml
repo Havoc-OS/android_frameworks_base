@@ -22,11 +22,9 @@
     android:id="@+id/keyguard_weather_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="2dp"
+    android:paddingTop="4dp"
     android:layout_gravity="center"
-    android:orientation="vertical"
-    android:visibility="gone" >
-
+    android:orientation="vertical" >
     <TextView
         android:id="@+id/no_weather_info_text"
         android:layout_width="wrap_content"
@@ -68,15 +66,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/ls_weather_image"
-                android:layout_width="56dp"
+                 android:layout_width="56dp"
                 android:layout_height="42dp"
-                android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="true" />
         </LinearLayout>
@@ -95,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:includeFontPadding="false"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:textStyle="normal"
                 android:fontFamily="sans-serif-condensed"
                 android:textColor="?attr/wallpaperTextColor" />
@@ -111,6 +108,7 @@
         android:textStyle="normal"
         android:fontFamily="sans-serif-condensed"
         android:letterSpacing="0.15"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:textColor="?attr/wallpaperTextColor" />
+
 </LinearLayout>

@@ -26,10 +26,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     androidprv:layout_maxWidth="@dimen/keyguard_security_width"
+    android:layout_marginTop="32dp" 
     androidprv:layout_maxHeight="@dimen/keyguard_security_height"
     android:gravity="center_horizontal|top">
     <LinearLayout
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RelativeLayout
@@ -37,27 +39,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="10dp" 
             android:layout_gravity="center_horizontal|top">
             <TextClock
                 android:id="@+id/clock_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-		        android:gravity="center"
-                android:layout_centerHorizontal="true"
-		        android:layout_alignParentTop="true"
-		        android:textColor="?attr/wallpaperTextColor"
-                style="@style/widget_big_thin"
-                android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />
-            <CustomAnalogClock
-                android:id="@+id/analog_clock_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_marginTop="2dp" 
                 android:layout_alignParentTop="true"
+                android:textColor="?attr/wallpaperTextColor"
                 style="@style/widget_big_thin"
                 android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />
+             <CustomAnalogClock
+                android:id="@+id/analog_clock_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" 
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                style="@style/widget_big_thin"
+                android:layout_marginBottom="@dimen/bottom_text_spacing_analog" />
             <!--<com.android.systemui.ChargingView
                 android:id="@+id/battery_doze"
                 android:layout_width="wrap_content"
@@ -70,10 +76,9 @@
                 android:contentDescription="@string/accessibility_ambient_display_charging"
             /> -->
 
-            <include layout="@layout/keyguard_status_area"
+             <include layout="@layout/keyguard_status_area"
                 android:id="@+id/keyguard_status_area"
                 android:layout_width="match_parent"
-                android:layout_marginTop="8dp" 
                 android:layout_height="wrap_content" />
       
             <include layout="@layout/keyguard_weather_view"
@@ -81,14 +86,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/keyguard_status_area" />
-
-            <TextView
+            
+            <include layout="@layout/keyguard_shortcuts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/keyguard_weather_view"
+                android:layout_gravity="center_horizontal"
+                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="0dp"/>
+            
+              <TextView
                 android:id="@+id/owner_info"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/keyguard_weather_view"
@@ -97,20 +110,13 @@
                 android:letterSpacing="0.05"
                 android:ellipsize="marquee"
                 android:singleLine="true" />
-            
-            <include layout="@layout/keyguard_shortcuts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_below="@id/owner_info"/>
+            </RelativeLayout>
 
-       </RelativeLayout>
-       
          <include layout="@layout/ambient_indication_play"
-               android:layout_below="@id/keyguard_status_area"
-             android:layout_gravity="center_horizontal"
-              android:layout_marginTop="10dp"
+                android:layout_below="@id/owner_info"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
                 android:layout_centerHorizontal="true"
-            android:id="@+id/ambient_indication_container_play" />
+                android:id="@+id/ambient_indication_container_play" />
     </LinearLayout>
 </com.android.keyguard.KeyguardStatusView>

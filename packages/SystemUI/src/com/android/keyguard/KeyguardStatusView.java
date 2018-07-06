@@ -128,7 +128,6 @@ public class KeyguardStatusView extends GridLayout implements
     private int mTempColor;
     private int mConditionColor;
     private int mCityColor;
-    private int mIconColor;
     private int alarmColor;
     private int ownerInfoColor;
     private int mLockColor;
@@ -400,7 +399,6 @@ public class KeyguardStatusView extends GridLayout implements
         mWeatherClient.addObserver(this);
         mSettingsObserver.observe();
         updateSettings(); 
-        queryAndUpdateWeather();
     }
 
     @Override
@@ -1200,7 +1198,10 @@ public class KeyguardStatusView extends GridLayout implements
         if (mWeatherView == null || weatherPanel == null)
             return;
 
-        mWeatherView.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
+         if (mWeatherView != null) {
+             mWeatherView.setVisibility(mShowWeather ?
+                 View.VISIBLE : View.GONE);
+         }
 
         if (noWeatherInfo != null) {
             noWeatherInfo.setVisibility(mShowWeather && !mWeatherClient.isOmniJawsEnabled() ?
@@ -1942,7 +1943,6 @@ public class KeyguardStatusView extends GridLayout implements
 
         updateDozeVisibleViews();
         mAnalogClockView.setDark(dark); 
-        mWeatherView.setAlpha(dark ? 0 : 1);
         updateVisibilities();
     }
 
@@ -1992,14 +1992,6 @@ public class KeyguardStatusView extends GridLayout implements
                   Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                   Settings.System.OMNIJAWS_WEATHER_ICON_PACK), false, this, UserHandle.USER_ALL);
-
-            mShowWeather = Settings.System.getIntForUser(resolver,
-                  Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0, UserHandle.USER_CURRENT) == 1;
-            mShowConditionIcon = Settings.System.getIntForUser(resolver,
-                  Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
-            mShowLocation = Settings.System.getIntForUser(resolver,
-                  Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1, UserHandle.USER_CURRENT) == 1;
-
             resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2009,11 +2001,7 @@ public class KeyguardStatusView extends GridLayout implements
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_ALARM_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2049,38 +2037,11 @@ public class KeyguardStatusView extends GridLayout implements
             ContentResolver resolver = mContext.getContentResolver();
 
             if (uri.equals(Settings.System.getUriFor(
-                   Settings.System.LOCK_SCREEN_SHOW_WEATHER))) {
-                mShowWeather = Settings.System.getIntForUser(resolver,
-                    Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0, UserHandle.USER_CURRENT) == 1;
-                updateWeather();
-            } else if (uri.equals(Settings.System.getUriFor(
-                   Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON))) {
-                mShowConditionIcon = Settings.System.getIntForUser(resolver,
-                    Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
-                updateWeather();
-            } else if (uri.equals(Settings.System.getUriFor(
-                   Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION))) {
-                mShowLocation = Settings.System.getIntForUser(resolver,
-                    Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1, UserHandle.USER_CURRENT) == 1;
-                updateWeather();
-            } else if (uri.equals(Settings.System.getUriFor(
-                   Settings.System.OMNIJAWS_WEATHER_ICON_PACK))) {
-                updateWeather();
-            } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR))) {
-                  updateSettings();
-              } else if (uri.equals(Settings.System.getUriFor(
-                      Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR))) {
                   updateSettings();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR))) {
                   updateSettings();
-              } else if (uri.equals(Settings.System.getUriFor(
-                      Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR))) {
-                  updateSettings();
-             } else if (uri.equals(Settings.System.getUriFor(
-                     Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR))) {
-                 refresh();
              } else if (uri.equals(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR))) {
                  updateClockDateColor();
@@ -2131,14 +2092,17 @@ public class KeyguardStatusView extends GridLayout implements
            ContentResolver resolver = mContext.getContentResolver();
            int currentUserId = ActivityManager.getCurrentUser();
 
+           mShowWeather = Settings.System.getInt(resolver,
+           Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0) == 1;
+           mShowLocation = Settings.System.getInt(resolver,
+           Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1) == 1;
+            mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
+            queryAndUpdateWeather();
+
            mTempColor = Settings.System.getInt(resolver,
                 Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR, 0xFFFFFFFF);
-           mConditionColor = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR, 0xFFFFFFFF);
            mCityColor = Settings.System.getInt(resolver,
                 Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR, 0xFFFFFFFF);
-           mIconColor = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_WEATHER_ICON_COLOR, -2);
            alarmColor = Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_ALARM_COLOR, 0xFFFFFFFF);
            ownerInfoColor = Settings.System.getInt(resolver,
@@ -2183,7 +2147,7 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCK_OWNERINFO_FONTS, 26, UserHandle.USER_CURRENT); 
            mLockOwnerInfoFontSize = Settings.System.getIntForUser(resolver, 
                 Settings.System.LOCKOWNER_FONT_SIZE, 
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_21), 
+                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14), 
                 UserHandle.USER_CURRENT); 
                 refreshOwnerInfoSize(); 
            updateSettings();

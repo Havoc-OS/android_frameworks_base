@@ -24,6 +24,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.os.Handler;
+import android.os.Looper;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.graphics.drawable.Drawable;

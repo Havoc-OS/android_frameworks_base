@@ -17,27 +17,10 @@
 ** limitations under the License.
 */
 -->
-<HorizontalScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/header_bar_container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fadingEdgeLength="30dp"
-    android:requiresFadingEdge="horizontal"
-    android:scrollbars="none"
-    android:fillViewport="true">
-
-    <LinearLayout
-        android:id="@+id/header_bar_layout"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_height="wrap_content">
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+    android:layout_width="48dp"
+    android:layout_height="48dp">
 
         <com.android.keyguard.KeyguardShortcuts
             android:id="@+id/shortcuts"
@@ -46,10 +29,4 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/shortcut_margin_top" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-</HorizontalScrollView>
+</LinearLayout>
