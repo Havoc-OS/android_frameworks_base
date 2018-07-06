@@ -5692,6 +5692,13 @@ public final class Settings {
         ** @hide 
         **/ 
         public static final String LOCK_OWNERINFO_FONTS = "lock_ownerinfo_fonts"; 
+
+        /** 
+        ** Change fonts for the system lockscreen Alarm 
+        ** 
+        ** @hide 
+        **/ 
+        public static final String LOCK_ALARM_FONTS = "lock_alarm_fonts"; 
         
         /** 
         ** Change font size for the system lockscreen owner 

@@ -134,6 +134,7 @@ public class KeyguardStatusView extends GridLayout implements
     private int mDateColor;
     private int mLockOwnerInfoFontSize; 
     private int ownerinfoFont; 
+    private int alarmFont; 
 
     private View mWeatherView;
     private View weatherPanel;
@@ -1657,6 +1658,105 @@ public class KeyguardStatusView extends GridLayout implements
             mOwnerInfo.setTypeface(Typeface.create("samsung-sys", Typeface.NORMAL)); 
         } 
 
+        // alarm font
+
+        if (alarmFont == 0) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 1) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));  
+        }  
+        if (alarmFont == 2) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));  
+        }  
+        if (alarmFont == 3) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));  
+        }  
+        if (alarmFont == 4) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));  
+        }  
+        if (alarmFont == 5) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 6) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));  
+        }  
+        if (alarmFont == 7) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 8) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 9) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));  
+        }  
+        if (alarmFont == 10) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));  
+        }  
+        if (alarmFont == 11) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));  
+        }  
+        if (alarmFont == 12) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 13) {  
+            mOwnerInfo.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));  
+        }  
+        if (alarmFont == 14) {  
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 15) {  
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));  
+        }  
+        if (alarmFont == 16) {  
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 17) {  
+                mOwnerInfo.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));  
+        }  
+        if (alarmFont == 18) {  
+                mOwnerInfo.setTypeface(Typeface.create("cursive", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 19) {  
+                mOwnerInfo.setTypeface(Typeface.create("cursive", Typeface.BOLD));  
+        }  
+        if (alarmFont == 20) {  
+                mOwnerInfo.setTypeface(Typeface.create("casual", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 21) {  
+                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 22) {  
+                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.ITALIC));  
+        }  
+        if (alarmFont == 23) {  
+                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.BOLD));  
+        }  
+        if (alarmFont == 24) {  
+                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));  
+        }  
+        if (alarmFont == 25) {  
+            mOwnerInfo.setTypeface(Typeface.create("gobold-light-sys", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 26) {  
+            mOwnerInfo.setTypeface(Typeface.create("roadrage-sys", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 27) {  
+            mOwnerInfo.setTypeface(Typeface.create("snowstorm-sys", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 28) {  
+            mOwnerInfo.setTypeface(Typeface.create("googlesans-sys", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 29) {  
+            mOwnerInfo.setTypeface(Typeface.create("neoneon-sys", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 30) {  
+            mOwnerInfo.setTypeface(Typeface.create("themeable-sys", Typeface.NORMAL));  
+        }  
+        if (alarmFont == 31) {  
+            mOwnerInfo.setTypeface(Typeface.create("samsung-sys", Typeface.NORMAL));  
+        }  
+
         AlarmManager.AlarmClockInfo nextAlarm = 
         mAlarmManager.getNextAlarmClock(UserHandle.USER_CURRENT); 
 
@@ -2022,6 +2122,8 @@ public class KeyguardStatusView extends GridLayout implements
                         Settings.System.LOCK_OWNERINFO_FONTS), false, this, UserHandle.USER_ALL); 
              resolver.registerContentObserver(Settings.System.getUriFor( 
                         Settings.System.LOCKOWNER_FONT_SIZE), false, this, UserHandle.USER_ALL);   
+             resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCK_ALARM_FONTS), false, this, UserHandle.USER_ALL);   
             update();        
             queryAndUpdateWeather(); 
                 
@@ -2084,6 +2186,9 @@ public class KeyguardStatusView extends GridLayout implements
                 } else if (uri.equals(Settings.System.getUriFor( 
                     Settings.System.LOCKOWNER_FONT_SIZE))) { 
                     updateSettings(); 
+                } else if (uri.equals(Settings.System.getUriFor( 
+                    Settings.System.LOCK_ALARM_FONTS))) { 
+                    updateSettings(); 
                 }
              update();
          }
@@ -2096,7 +2201,7 @@ public class KeyguardStatusView extends GridLayout implements
            Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0) == 1;
            mShowLocation = Settings.System.getInt(resolver,
            Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1) == 1;
-            mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
+           boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
             queryAndUpdateWeather();
 
            mTempColor = Settings.System.getInt(resolver,
@@ -2145,6 +2250,8 @@ public class KeyguardStatusView extends GridLayout implements
                 UserHandle.USER_CURRENT);      
            ownerinfoFont = Settings.System.getIntForUser(resolver, 
                 Settings.System.LOCK_OWNERINFO_FONTS, 26, UserHandle.USER_CURRENT); 
+           alarmFont = Settings.System.getIntForUser(resolver, 
+                Settings.System.LOCK_ALARM_FONTS, 26, UserHandle.USER_CURRENT); 
            mLockOwnerInfoFontSize = Settings.System.getIntForUser(resolver, 
                 Settings.System.LOCKOWNER_FONT_SIZE, 
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14), 
