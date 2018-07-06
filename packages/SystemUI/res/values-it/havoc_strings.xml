@@ -48,7 +48,7 @@
   <string name="recents_app_killed">Termina app</string>
   <!-- Kill button in notification guts -->
   <string name="force_stop_dlg_title">Forzare l\'interruzione?</string>
-  <string name="force_stop_dlg_text">Se forzi l\'interruzione di un\'app, tale app potrebbe funzionare in modo anomalo.</string>
+  <string name="force_stop_dlg_text">Se forzi l\'interruzione di un\'app, questa potrebbe funzionare in modo anomalo.</string>
   <string name="dlg_ok">\@android: string/ok</string>
   <string name="dlg_cancel">@android:string/cancel</string>
   <string name="kill">Termina app</string>

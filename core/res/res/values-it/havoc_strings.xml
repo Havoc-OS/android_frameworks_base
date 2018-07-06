@@ -47,5 +47,5 @@
   <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
   <string name="permdesc_accessFontManager">Consenti ad un\'applicazione di accedere alla gestione dei caratteri.</string>
   <!-- App Blacklist -->
-  <string name="app_blacklist">Lista nera delle applicazioni</string>
+  <string name="app_blacklist">Blacklist delle applicazioni</string>
 </resources>
