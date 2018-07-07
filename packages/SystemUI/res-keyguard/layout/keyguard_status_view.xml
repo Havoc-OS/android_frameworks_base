@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="10dp" 
+            android:layout_marginTop="20dp" 
             android:layout_gravity="center_horizontal|top">
             <TextClock
                 android:id="@+id/clock_view"
@@ -94,7 +94,8 @@
                 android:layout_gravity="center_horizontal"
                  android:layout_marginTop="10dp"
                 android:layout_marginBottom="0dp"/>
-            
+            </RelativeLayout>
+
               <TextView
                 android:id="@+id/owner_info"
                 android:layout_marginLeft="16dp"
@@ -110,7 +111,6 @@
                 android:letterSpacing="0.05"
                 android:ellipsize="marquee"
                 android:singleLine="true" />
-            </RelativeLayout>
 
             <include layout="@layout/keyguard_shortcuts"
                 android:layout_width="wrap_content"
