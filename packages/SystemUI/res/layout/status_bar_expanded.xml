@@ -58,11 +58,6 @@
 			android:layout_marginEnd="8dp"
             android:layout_marginBottom="@dimen/close_handle_underlap" />
 
-
-        <!-- <include layout="@layout/ambient_indication_play"
-            android:layout_below="@+id/notification_stack_scroller"
-            android:id="@+id/ambient_indication_container_play" /> -->
-
         <include layout="@layout/ambient_indication"
             android:id="@+id/ambient_indication_container" />
 

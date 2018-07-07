@@ -106,11 +106,6 @@
     <string name="pie_battery_level">"BATTERY LEVEL "</string> 
     <string name="quick_settings_pie">Pie</string> 
 
-    <!-- AmbientPlay: The contents of the displayed recognition. -->
-    <string name="ambient_recognition_notification">Now Playing</string>
-    <string name="ambient_recognition_notification_channel">Recognized Music Notifications</string>
-    <string name="ambient_recognition_information">%1$s by %2$s</string>
-
     <string name="quick_settings_game_mode_label">Game mode</string>
     <string name="accessibility_quick_settings_game_mode_on">Game mode is on</string>
     <string name="accessibility_quick_settings_game_mode_off">Game mode is off</string>
