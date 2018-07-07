@@ -137,6 +137,7 @@ public class KeyguardStatusView extends GridLayout implements
     private int alarmFont; 
 
     private View mWeatherView;
+    private View mShortcut;
     private View weatherPanel;
     private TextView noWeatherInfo;
     private TextView mWeatherCity;

@@ -5647,7 +5647,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mKeyguardUserSwitcher.setKeyguard(true, fromShadeLocked);
             }
             if (mStatusBarView != null) mStatusBarView.removePendingHideExpandedRunnables();
-            updateAmbientIndicationForKeyguard();
         } else {
             if (mKeyguardUserSwitcher != null) {
                 mKeyguardUserSwitcher.setKeyguard(false,
@@ -7207,12 +7206,12 @@ public void setNewOverlayAlpha() {
         Settings.System.LOCKSCREEN_SECURITY_ALPHA, 0.75f, UserHandle.USER_CURRENT);
         if (mScrimController != null) {
         mScrimController.setSecurityOverlayAlpha(securityoverlayalpha);
+         }
     }
 
     private void updateBatterySaverColor() {
         mBatterySaverColor = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.STATUS_BAR_BATTERY_SAVER_COLOR, 0xfff4511e, UserHandle.USER_CURRENT);
-        }
     }
     
     private void updateBlurSettings() {

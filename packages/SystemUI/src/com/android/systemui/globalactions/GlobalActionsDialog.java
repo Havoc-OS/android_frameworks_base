@@ -133,9 +133,6 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener, DialogIn
 
     private static final boolean SHOW_SILENT_TOGGLE = false;
 
-    // Default scrim color
-    private static final int SCRIM_DEFAULT_COLOR = Color.BLACK;
-
     private final Context mContext;
     private final GlobalActionsManager mWindowManagerFuncs;
     private final AudioManager mAudioManager;
