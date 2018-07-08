@@ -135,7 +135,7 @@ public class KeyguardStatusView extends GridLayout implements
     private int mLockOwnerInfoFontSize; 
     private int ownerinfoFont; 
     private int alarmFont; 
-
+    private boolean mWeatherEnabled;
     private View mWeatherView;
     private View mShortcut;
     private View weatherPanel;
@@ -401,6 +401,7 @@ public class KeyguardStatusView extends GridLayout implements
         mWeatherClient.addObserver(this);
         mSettingsObserver.observe();
         updateSettings(); 
+        updateWeather();
     }
 
     @Override
@@ -1194,15 +1195,19 @@ public class KeyguardStatusView extends GridLayout implements
     
         private void updateSettings() {
         final ContentResolver resolver = getContext().getContentResolver();
+       
+        if (mWeatherData != null) {
+        mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
+
+        // if (mWeatherData != null) {
+        //     if (mWeatherView == null || weatherPanel == null)
+        //     return;
+        // }
         
-        boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
-
-        if (mWeatherView == null || weatherPanel == null)
-            return;
-
-        // if(mShortcut == null)
-        //   return;
-
+        if (mWeatherView != null) {
+            mWeatherView.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
+        }
+        
         if (noWeatherInfo != null) {
             noWeatherInfo.setVisibility(mShowWeather && !mWeatherClient.isOmniJawsEnabled() ?
                 View.VISIBLE : View.GONE);
@@ -1248,83 +1253,6 @@ public class KeyguardStatusView extends GridLayout implements
         } else {
             weatherPanel.setVisibility(mShowWeather ?
                 View.VISIBLE : View.GONE);
-        }
-
-        // LS Date Font
-        if (dateFont == 0) {
-            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
-        }
-        if (dateFont == 1) {
-            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
-        }
-        if (dateFont == 2) {
-            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
-        }
-        if (dateFont == 3) {
-            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
-        }
-        if (dateFont == 4) {
-            mDateView.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
-        }
-        if (dateFont == 5) {
-                mDateView.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
-        }
-        if (dateFont == 6) {
-            mDateView.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));
-        }
-        if (dateFont == 7) {
-                mDateView.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));
-        }
-        if (dateFont == 8) {
-            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
-        }
-        if (dateFont == 9) {
-            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));
-        }
-        if (dateFont == 10) {
-            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
-        }
-        if (dateFont == 11) {
-            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
-        }
-        if (dateFont == 12) {
-            mDateView.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
-        }
-        if (dateFont == 13) {
-            mDateView.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));
-        }
-        if (dateFont == 14) {
-                mDateView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));
-        }
-        if (dateFont == 15) {
-                mDateView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));
-        }
-        if (dateFont == 16) {
-                mDateView.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
-        }
-        if (dateFont == 17) {
-                mDateView.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));
-        }
-        if (dateFont == 18) {
-                mDateView.setTypeface(Typeface.create("cursive", Typeface.NORMAL));
-        }
-        if (dateFont == 19) {
-                mDateView.setTypeface(Typeface.create("cursive", Typeface.BOLD));
-        }
-        if (dateFont == 20) {
-                mDateView.setTypeface(Typeface.create("casual", Typeface.NORMAL));
-        }
-        if (dateFont == 21) {
-                mDateView.setTypeface(Typeface.create("serif", Typeface.NORMAL));
-        }
-        if (dateFont == 22) {
-                mDateView.setTypeface(Typeface.create("serif", Typeface.ITALIC));
-        }
-        if (dateFont == 23) {
-                mDateView.setTypeface(Typeface.create("serif", Typeface.BOLD));
-        }
-        if (dateFont == 24) {
-                mDateView.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
         }
 
         // LS Temp Font
@@ -1560,6 +1488,87 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherConditionText.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
         }
 
+    }
+
+        // LS Date Font
+        if (dateFont == 0) {
+            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+        }
+        if (dateFont == 1) {
+            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));
+        }
+        if (dateFont == 2) {
+            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));
+        }
+        if (dateFont == 3) {
+            mDateView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));
+        }
+        if (dateFont == 4) {
+            mDateView.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));
+        }
+        if (dateFont == 5) {
+                mDateView.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));
+        }
+        if (dateFont == 6) {
+            mDateView.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));
+        }
+        if (dateFont == 7) {
+                mDateView.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));
+        }
+        if (dateFont == 8) {
+            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));
+        }
+        if (dateFont == 9) {
+            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));
+        }
+        if (dateFont == 10) {
+            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+        }
+        if (dateFont == 11) {
+            mDateView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
+        }
+        if (dateFont == 12) {
+            mDateView.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        }
+        if (dateFont == 13) {
+            mDateView.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));
+        }
+        if (dateFont == 14) {
+                mDateView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));
+        }
+        if (dateFont == 15) {
+                mDateView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));
+        }
+        if (dateFont == 16) {
+                mDateView.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
+        }
+        if (dateFont == 17) {
+                mDateView.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));
+        }
+        if (dateFont == 18) {
+                mDateView.setTypeface(Typeface.create("cursive", Typeface.NORMAL));
+        }
+        if (dateFont == 19) {
+                mDateView.setTypeface(Typeface.create("cursive", Typeface.BOLD));
+        }
+        if (dateFont == 20) {
+                mDateView.setTypeface(Typeface.create("casual", Typeface.NORMAL));
+        }
+        if (dateFont == 21) {
+                mDateView.setTypeface(Typeface.create("serif", Typeface.NORMAL));
+        }
+        if (dateFont == 22) {
+                mDateView.setTypeface(Typeface.create("serif", Typeface.ITALIC));
+        }
+        if (dateFont == 23) {
+                mDateView.setTypeface(Typeface.create("serif", Typeface.BOLD));
+        }
+        if (dateFont == 24) {
+                mDateView.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
+        }
+
+        
+
         if (ownerinfoFont == 0) { 
             mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL)); 
         } 
@@ -1660,100 +1669,100 @@ public class KeyguardStatusView extends GridLayout implements
         // alarm font
 
         if (alarmFont == 0) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));  
         }  
         if (alarmFont == 1) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD));  
         }  
         if (alarmFont == 2) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif", Typeface.ITALIC));  
         }  
         if (alarmFont == 3) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif", Typeface.BOLD_ITALIC));  
         }  
         if (alarmFont == 4) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-light", Typeface.ITALIC));  
         }  
         if (alarmFont == 5) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-light", Typeface.NORMAL));  
         }  
         if (alarmFont == 6) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-thin", Typeface.ITALIC));  
         }  
         if (alarmFont == 7) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-thin", Typeface.NORMAL));  
         }  
         if (alarmFont == 8) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.NORMAL));  
         }  
         if (alarmFont == 9) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));  
         }  
         if (alarmFont == 10) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));  
         }  
         if (alarmFont == 11) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));  
         }  
         if (alarmFont == 12) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));  
         }  
         if (alarmFont == 13) {  
-            mOwnerInfo.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-medium", Typeface.ITALIC));  
         }  
         if (alarmFont == 14) {  
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));  
         }  
         if (alarmFont == 15) {  
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));  
         }  
         if (alarmFont == 16) {  
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));  
         }  
         if (alarmFont == 17) {  
-                mOwnerInfo.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("sans-serif-black", Typeface.ITALIC));  
         }  
         if (alarmFont == 18) {  
-                mOwnerInfo.setTypeface(Typeface.create("cursive", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("cursive", Typeface.NORMAL));  
         }  
         if (alarmFont == 19) {  
-                mOwnerInfo.setTypeface(Typeface.create("cursive", Typeface.BOLD));  
+            mAlarmStatusView.setTypeface(Typeface.create("cursive", Typeface.BOLD));  
         }  
         if (alarmFont == 20) {  
-                mOwnerInfo.setTypeface(Typeface.create("casual", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("casual", Typeface.NORMAL));  
         }  
         if (alarmFont == 21) {  
-                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("serif", Typeface.NORMAL));  
         }  
         if (alarmFont == 22) {  
-                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("serif", Typeface.ITALIC));  
         }  
         if (alarmFont == 23) {  
-                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.BOLD));  
+            mAlarmStatusView.setTypeface(Typeface.create("serif", Typeface.BOLD));  
         }  
         if (alarmFont == 24) {  
-                mOwnerInfo.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));  
+            mAlarmStatusView.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));  
         }  
         if (alarmFont == 25) {  
-            mOwnerInfo.setTypeface(Typeface.create("gobold-light-sys", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("gobold-light-sys", Typeface.NORMAL));  
         }  
         if (alarmFont == 26) {  
-            mOwnerInfo.setTypeface(Typeface.create("roadrage-sys", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("roadrage-sys", Typeface.NORMAL));  
         }  
         if (alarmFont == 27) {  
-            mOwnerInfo.setTypeface(Typeface.create("snowstorm-sys", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("snowstorm-sys", Typeface.NORMAL));  
         }  
         if (alarmFont == 28) {  
-            mOwnerInfo.setTypeface(Typeface.create("googlesans-sys", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("googlesans-sys", Typeface.NORMAL));  
         }  
         if (alarmFont == 29) {  
             mOwnerInfo.setTypeface(Typeface.create("neoneon-sys", Typeface.NORMAL));  
         }  
         if (alarmFont == 30) {  
-            mOwnerInfo.setTypeface(Typeface.create("themeable-sys", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("themeable-sys", Typeface.NORMAL));  
         }  
         if (alarmFont == 31) {  
-            mOwnerInfo.setTypeface(Typeface.create("samsung-sys", Typeface.NORMAL));  
+            mAlarmStatusView.setTypeface(Typeface.create("samsung-sys", Typeface.NORMAL));  
         }  
 
         AlarmManager.AlarmClockInfo nextAlarm = 
@@ -2145,11 +2154,12 @@ public class KeyguardStatusView extends GridLayout implements
              resolver.registerContentObserver(Settings.System.getUriFor( 
                         Settings.System.LOCK_ALARM_FONTS), false, this, UserHandle.USER_ALL);  
 
-            mShowConditionIcon = Settings.System.getIntForUser(resolver,
-                    Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
-            update();        
-            queryAndUpdateWeather(); 
-                
+            if (mWeatherData != null ) {
+                mShowConditionIcon = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
+            }
+            queryAndUpdateWeather();
+            update();                        
         }
  
         void unobserve() {
@@ -2175,13 +2185,13 @@ public class KeyguardStatusView extends GridLayout implements
                         updateClockColor();
              } else  if (uri.equals(Settings.System.getUriFor(
                 Settings.System.LOCK_SCREEN_SHOW_WEATHER))) {
-                queryAndUpdateWeather();
+                    updateWeather();
                 } else if (uri.equals(Settings.System.getUriFor(
                         Settings.System.OMNIJAWS_WEATHER_ICON_PACK))) {
-                    queryAndUpdateWeather();
+                            updateWeather();
                 }  else if (uri.equals(Settings.System.getUriFor(
                         Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION))) {
-                       queryAndUpdateWeather();
+                            updateWeather();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_DATE_FONTS))) {
                     updateSettings();
@@ -2214,9 +2224,11 @@ public class KeyguardStatusView extends GridLayout implements
                     updateSettings(); 
                 }  else if (uri.equals(Settings.System.getUriFor( 
                     Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON))) { 
+                    if(mWeatherData != null) {
                         mShowConditionIcon = Settings.System.getIntForUser(resolver,
-                    Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
-                 updateWeather(); 
+                        Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
+                        updateWeather(); 
+                    }  
                 }
              update();
          }
@@ -2225,16 +2237,7 @@ public class KeyguardStatusView extends GridLayout implements
            ContentResolver resolver = mContext.getContentResolver();
            int currentUserId = ActivityManager.getCurrentUser();
 
-           mShowWeather = Settings.System.getInt(resolver,
-           Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0) == 1;
-           mShowConditionIcon = Settings.System.getInt(resolver,
-           Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 0) == 1;
-           mShowLocation = Settings.System.getInt(resolver,
-           Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1) == 1;
-           boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
-            queryAndUpdateWeather();
-
-           mTempColor = Settings.System.getInt(resolver,
+            mTempColor = Settings.System.getInt(resolver,
                 Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR, 0xFFFFFFFF);
            mCityColor = Settings.System.getInt(resolver,
                 Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR, 0xFFFFFFFF);
@@ -2287,7 +2290,21 @@ public class KeyguardStatusView extends GridLayout implements
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14), 
                 UserHandle.USER_CURRENT); 
                 refreshOwnerInfoSize(); 
+        
+            if(mWeatherData != null) {
+                mShowWeather = Settings.System.getInt(resolver,
+                Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0) == 1;
+                mShowConditionIcon = Settings.System.getInt(resolver,
+                Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 0) == 1;
+                mShowLocation = Settings.System.getInt(resolver,
+                Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1) == 1;
+                mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
+                 queryAndUpdateWeather();
+            }
+            queryAndUpdateWeather();
            updateSettings();
+
+
          }
     }
 }

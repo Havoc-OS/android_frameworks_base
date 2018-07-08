@@ -34,7 +34,7 @@
     <dimen name="keyguard_security_max_height">450dp</dimen>
 
      <!-- Default clock parameters --> 
-    <dimen name="bottom_text_spacing_analog">12dp</dimen> 
+    <dimen name="bottom_text_spacing_analog">10dp</dimen> 
 
     <!-- Margin around the various security views -->
     <dimen name="keyguard_security_view_top_margin">8dp</dimen>
@@ -75,7 +75,7 @@
     <dimen name="shortcut_seperater_width">8dp</dimen>
 
     <!-- Top margin for shortcuts. -->
-    <dimen name="shortcut_margin_top">12dp</dimen>
+    <dimen name="shortcut_margin_top">10dp</dimen>
 
 
 <!-- Lock date font size parameters -->
