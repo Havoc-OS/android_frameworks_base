@@ -35,6 +35,7 @@ import com.android.systemui.qs.tiles.DataTile;
 import com.android.systemui.qs.tiles.CameraTile;
 import com.android.systemui.qs.tiles.SuspendActionTile;
 import com.android.systemui.qs.tiles.EdgeGestureTile;
+import com.android.systemui.qs.tiles.GestureAnywhereTile;
 import com.android.systemui.qs.tiles.ProfilesTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.CompassTile;
@@ -149,6 +150,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("keydisable")) return new KeyDisableTile(mHost);
         else if (tileSpec.equals("game")) return new GameModeTile(mHost);
         else if (tileSpec.equals("edgegesture")) return new EdgeGestureTile(mHost);
+        else if (tileSpec.equals("gestureanywhere")) return new GestureAnywhereTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);

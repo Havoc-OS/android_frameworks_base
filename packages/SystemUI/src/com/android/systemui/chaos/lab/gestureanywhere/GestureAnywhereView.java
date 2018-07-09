@@ -81,8 +81,8 @@ public class GestureAnywhereView extends TriggerOverlayView implements GestureOv
 
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.GESTURE_ANYWHERE_ENABLED), false, this);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.GESTURE_ANYWHERE_ENABLED), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.GESTURE_ANYWHERE_POSITION), false, this);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -110,8 +110,8 @@ public class GestureAnywhereView extends TriggerOverlayView implements GestureOv
         public void update() {
             ContentResolver resolver = mContext.getContentResolver();
 
-            boolean enabled = Settings.System.getInt(
-                    resolver, Settings.System.GESTURE_ANYWHERE_ENABLED, 0) == 1;
+            boolean enabled = Settings.Secure.getInt(
+                    resolver, Settings.Secure.GESTURE_ANYWHERE_ENABLED, 0) == 1;
             setVisibility(enabled ? View.VISIBLE : View.GONE);
 
             int position = Settings.System.getInt(
