@@ -207,6 +207,7 @@
     <string name="accessibility_quick_settings_hw_keys_enabled">HW Keys enabled.</string>
     <string name="quick_settings_sleepscreen_label">Sleep Screen</string>
     <string name="camera_title_tile">Camera</string>
+    <string name="suspend_title_tile">Suspend Action</string>
     <string name="alarm_title_tile">Alarm</string>
     <string name="calc_title_tile">Calculator</string>
     <string name="call_title_tile">Dialer</string>

@@ -5214,13 +5214,6 @@ public final class Settings {
         public static final String HIDE_LOCKSCREEN_ICON = "hide_lockscreen_icon";
 
         /**
-         * Hold current font name and name of the originating package Uses "|" as a delimiter
-         *
-         * @hide
-         */
-        public static final String START_SCREEN_STATE_SERVICE = "start_screen_state_service";
-
-        /**
          * @hide
          */
         public static final String SCREEN_STATE_TWOG = "screen_state_twog";
@@ -8134,6 +8127,13 @@ public final class Settings {
          */
         @Deprecated
         public static final String ACCESSIBILITY_SPEAK_PASSWORD = "speak_password";
+
+        /**
+         * Hold current font name and name of the originating package Uses "|" as a delimiter
+         *
+         * @hide
+         */
+        public static final String START_SCREEN_STATE_SERVICE = "start_screen_state_service";
 
         /**
          * Whether to draw text with high contrast while in accessibility mode.

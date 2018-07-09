@@ -33,6 +33,7 @@ import com.android.systemui.qs.tiles.CaffeineTile;
 import com.android.systemui.qs.tiles.CastTile;
 import com.android.systemui.qs.tiles.DataTile;
 import com.android.systemui.qs.tiles.CameraTile;
+import com.android.systemui.qs.tiles.SuspendActionTile;
 import com.android.systemui.qs.tiles.ProfilesTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.CompassTile;
@@ -135,6 +136,7 @@ public class QSFactoryImpl implements QSFactory {
 		    else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
         else if (tileSpec.equals("smartpixels")) return new SmartPixelsTile(mHost);
         else if (tileSpec.equals("camera")) return new CameraTile(mHost);
+        else if (tileSpec.equals("suspend_action")) return new SuspendActionTile(mHost);
         else if (tileSpec.equals("alarm")) return new AlarmTile(mHost);
         else if (tileSpec.equals("calc")) return new CalcTile(mHost);
         else if (tileSpec.equals("calendar")) return new CalendarTile(mHost);
