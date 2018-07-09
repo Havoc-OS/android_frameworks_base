@@ -35,6 +35,7 @@ import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.content.Intent;
 import android.provider.MediaStore;
+import android.service.quicksettings.Tile;
 import com.android.systemui.qs.SecureSetting; 
 
 import com.android.internal.logging.MetricsLogger;
@@ -56,6 +57,8 @@ import java.util.UUID;
 public class SuspendActionTile extends QSTileImpl<BooleanState> {
     private boolean mListening; 
     private final SecureSetting mSetting; 
+	
+    private final Icon mIcon = ResourceIcon.get(R.drawable.ic_qs_suspend);
        
     public SuspendActionTile(QSHost host) {
         super(host);
@@ -96,19 +99,24 @@ public class SuspendActionTile extends QSTileImpl<BooleanState> {
     @Override 
     protected void handleUpdateState(BooleanState state, Object arg) { 
         final int value = arg instanceof Integer ? (Integer)arg : mSetting.getValue(); 
-        final boolean enable = value != 0; 
-        state.value = enable; 
-        state.label = mContext.getString(R.string.suspend_title_tile); 
-        if (enable) { 
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_suspend); 
-            state.contentDescription =  mContext.getString( 
-                    R.string.suspend_title_tile); 
-        } else { 
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_suspend); 
-            state.contentDescription =  mContext.getString( 
-                    R.string.suspend_title_tile); 
-        } 
-    } 
+        final boolean suspend = value != 0; 
+        if (state.slash == null) {
+            state.slash = new SlashState();
+        }
+        state.icon = mIcon;
+        state.value = suspend;
+        state.slash.isSlashed = !state.value;
+        state.label = mContext.getString(R.string.suspend_title_tile);
+        if (suspend) {
+            state.contentDescription =  mContext.getString(
+                    R.string.suspend_title_tile);
+            state.state = Tile.STATE_ACTIVE;
+        } else {
+            state.contentDescription =  mContext.getString(
+                    R.string.suspend_title_tile);
+            state.state = Tile.STATE_INACTIVE;
+        }
+    }
  
     @Override 
     protected String composeChangeAnnouncement() { 
