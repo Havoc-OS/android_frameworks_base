@@ -275,13 +275,14 @@ public class KeyguardStatusView extends GridLayout implements
         refreshLockFont(); 
 
         mWeatherView = findViewById(R.id.keyguard_weather_view);
+        mWeatherContainer = findViewById(R.id.weather_container);
         weatherPanel = findViewById(R.id.weather_panel);
         noWeatherInfo = (TextView) findViewById(R.id.no_weather_info_text);
         mWeatherCity = (TextView) findViewById(R.id.city);
         mWeatherConditionImage = (ImageView) findViewById(R.id.ls_weather_image);
         mWeatherCurrentTemp = (TextView) findViewById(R.id.current_temp);
         mWeatherConditionText = (TextView) findViewById(R.id.condition);
- 
+        mShortcut = findViewById(R.id.keyguard_shortcuts);
         mSettingsObserver = new SettingsObserver(new Handler());
     }
 
@@ -506,7 +507,7 @@ public class KeyguardStatusView extends GridLayout implements
         }
     
         mDateView.setVisibility(mDarkAmount != 1 ? (mShowDate ? View.VISIBLE : View.GONE) : View.VISIBLE);
-    
+
         mAlarmStatusView.setVisibility(mDarkAmount != 1 ? (mShowAlarm && mAvailableAlarm ? View.VISIBLE : View.GONE)
                 : mAvailableAlarm ? View.VISIBLE : View.GONE);
     }
@@ -1195,19 +1196,15 @@ public class KeyguardStatusView extends GridLayout implements
     
         private void updateSettings() {
         final ContentResolver resolver = getContext().getContentResolver();
-       
+
         if (mWeatherData != null) {
         mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
 
-        // if (mWeatherData != null) {
-        //     if (mWeatherView == null || weatherPanel == null)
-        //     return;
-        // }
         
         if (mWeatherView != null) {
             mWeatherView.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
         }
-        
+
         if (noWeatherInfo != null) {
             noWeatherInfo.setVisibility(mShowWeather && !mWeatherClient.isOmniJawsEnabled() ?
                 View.VISIBLE : View.GONE);
@@ -1242,7 +1239,7 @@ public class KeyguardStatusView extends GridLayout implements
                 mWeatherCity != null && mWeatherCity.getText() != null) {
             mWeatherCity.setVisibility(View.VISIBLE);
         } else if (mWeatherCity != null) {
-            mWeatherCity.setVisibility(View.GONE);
+            mWeatherCity.setVisibility(View.INVISIBLE);
         }
         if (mWeatherConditionText.getVisibility() != View.VISIBLE &&
                 mWeatherConditionImage.getVisibility() != View.VISIBLE &&

@@ -25,10 +25,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
     androidprv:layout_maxWidth="@dimen/keyguard_security_width"
-    android:layout_marginTop="28dp" 
     androidprv:layout_maxHeight="@dimen/keyguard_security_height"
-    android:layout_gravity="center_horizontal|top">
+    android:layout_gravity="center_horizontal">
       <LinearLayout 
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
@@ -38,8 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="8dp" 
-            android:layout_gravity="center_horizontal|top">
+            android:layout_gravity="center_horizontal">
             <TextClock
                 android:id="@+id/clock_view"
                 android:layout_width="wrap_content"
@@ -81,13 +80,13 @@
             <include layout="@layout/keyguard_weather_view"
                 android:id="@+id/keyguard_weather_view"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/keyguard_status_area" />
             
             <include layout="@layout/keyguard_shortcuts"
-                android:id="@+id/keyguard_shortcuts"
                 android:layout_width="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/keyguard_weather_view"
                 android:layout_gravity="center_horizontal"/>
@@ -96,11 +95,12 @@
                 android:id="@+id/owner_info"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
+                android:visibility="gone" 
                 android:layout_below="@id/keyguard_shortcuts"
                 android:textColor="?attr/wallpaperTextColorSecondary"
                 android:textSize="@dimen/widget_label_font_size"

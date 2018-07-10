@@ -22,10 +22,12 @@
     android:id="@+id/keyguard_weather_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="2dp"
     android:layout_gravity="center"
     android:visibility="gone" 
+    android:layout_marginLeft="66dp"
+    android:layout_marginRight="66dp"
     android:orientation="vertical" >
+
     <TextView
         android:id="@+id/no_weather_info_text"
         android:layout_width="wrap_content"
@@ -36,80 +38,97 @@
         android:textSize="14sp"
         android:textColor="?attr/wallpaperTextColor" />
 
-    <LinearLayout
-        android:id="@+id/weather_panel"
+    <RelativeLayout
+        android:id="@+id/weather_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" >
+        android:layout_marginLeft="66dp"
+        android:layout_marginRight="66dp"
+        android:gravity="center">
 
         <LinearLayout
-            android:id="@+id/left_panel"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical" >
+            android:id="@+id/image_container"
+            android:layout_marginTop="18dp"
+            android:gravity="center">
 
-            <TextView
-                android:id="@+id/condition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:includeFontPadding="false"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                android:fontFamily="sans-serif-condensed"
-                android:textColor="?attr/wallpaperTextColor" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/center_panel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:orientation="vertical" >
-
-            <ImageView
+              <ImageView
                 android:id="@+id/ls_weather_image"
-                 android:layout_width="56dp"
-                android:layout_height="42dp"
-                android:scaleType="centerInside"
+                android:layout_width="58dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_height="44dp"
                 android:adjustViewBounds="true" />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/right_panel"
-            android:layout_width="0dp"
+        <RelativeLayout
+            android:id="@+id/weather_panel"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:orientation="vertical" >
+            android:gravity="center|bottom">
 
             <TextView
                 android:id="@+id/current_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:includeFontPadding="false"
-                android:textSize="14sp"
-                android:textStyle="normal"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="12dp"
+                android:gravity="center"
+                android:layout_toStartOf="@+id/city"
                 android:fontFamily="sans-serif-condensed"
-                android:textColor="?attr/wallpaperTextColor" />
-        </LinearLayout>
-    </LinearLayout>
+                android:includeFontPadding="false"
+                android:letterSpacing="0.15"
+                android:textSize="15sp"
+                android:textColor="?attr/wallpaperTextColor"
+                android:textStyle="normal" />
 
-    <TextView
-        android:id="@+id/city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:includeFontPadding="false"
-        android:textStyle="normal"
-        android:fontFamily="sans-serif-condensed"
-        android:letterSpacing="0.15"
-        android:textSize="15sp"
-        android:textColor="?attr/wallpaperTextColor" />
+              <View
+                android:layout_width="2dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/city"
+                android:background="@*android:color/accent_device_default_light" />
 
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.15"
+                android:textSize="15sp"
+                android:textColor="?attr/wallpaperTextColor"
+                android:textStyle="normal"/>
+
+              <View
+                android:layout_width="2dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="5dp"
+                android:layout_toStartOf="@+id/city"
+                android:background="@*android:color/accent_device_default_light" />
+
+            <TextView
+                android:id="@+id/condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@+id/city"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.15"
+                android:textSize="15sp"
+                android:textColor="?attr/wallpaperTextColor"
+                android:textStyle="normal" />
+
+        </RelativeLayout>
+     </RelativeLayout>
 </LinearLayout>
