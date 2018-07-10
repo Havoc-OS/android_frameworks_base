@@ -4208,6 +4208,14 @@ public final class Settings {
          */
         public static final String LOCKSCREEN_DATE_SELECTION = "lockscreen_date_selection";
 
+        
+        /**
+         * Select which lockscreen weather style to display
+         * @hide
+         */
+        public static final String LOCKSCREEN_WEATHER_SELECTION = "lockscreen_weather_selection";
+
+
         /**
          * Select which lockscreen clock style to display
          * @hide

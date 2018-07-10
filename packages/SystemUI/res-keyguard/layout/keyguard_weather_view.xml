@@ -67,6 +67,7 @@
             android:id="@+id/weather_panel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:gravity="center|bottom">
 
             <TextView

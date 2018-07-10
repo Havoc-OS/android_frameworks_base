@@ -105,6 +105,7 @@ public class KeyguardStatusView extends GridLayout implements
     private boolean mShowDate;
     private int mClockSelection;
     private int mDateSelection;
+    private int mWeatherSelection;
 
     private View[] mVisibleInDoze;
     private boolean mPulsing;
@@ -139,6 +140,7 @@ public class KeyguardStatusView extends GridLayout implements
     private View mWeatherView;
     private View mShortcut;
     private View weatherPanel;
+    private View mWeatherContainer;
     private TextView noWeatherInfo;
     private TextView mWeatherCity;
     private ImageView mWeatherConditionImage;
@@ -507,6 +509,10 @@ public class KeyguardStatusView extends GridLayout implements
         }
     
         mDateView.setVisibility(mDarkAmount != 1 ? (mShowDate ? View.VISIBLE : View.GONE) : View.VISIBLE);
+
+        if (mWeatherData != null) {
+            mWeatherContainer.setVisibility(mDarkAmount != 1 ? (mShowWeather ? View.VISIBLE : View.GONE) : View.VISIBLE);
+        }
 
         mAlarmStatusView.setVisibility(mDarkAmount != 1 ? (mShowAlarm && mAvailableAlarm ? View.VISIBLE : View.GONE)
                 : mAvailableAlarm ? View.VISIBLE : View.GONE);
@@ -1205,6 +1211,10 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherView.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
         }
 
+        if (mWeatherContainer != null) {
+            mWeatherContainer.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
+        }
+
         if (noWeatherInfo != null) {
             noWeatherInfo.setVisibility(mShowWeather && !mWeatherClient.isOmniJawsEnabled() ?
                 View.VISIBLE : View.GONE);
@@ -1483,6 +1493,48 @@ public class KeyguardStatusView extends GridLayout implements
         }
         if (conditionFont == 24) {
             mWeatherConditionText.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
+        }
+
+        mWeatherSelection = Settings.System.getIntForUser(resolver,
+        Settings.System.LOCKSCREEN_WEATHER_SELECTION, 0, UserHandle.USER_CURRENT);
+
+        switch (mWeatherSelection) {
+            case 0: // default
+            default:
+                mWeatherContainer.setBackgroundResource(0);
+                mWeatherContainer.setPadding(0,0,0,0);
+                break;
+            case 1: // semi-transparent box
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_str_border));
+                mWeatherContainer.setPadding(40,20,40,20);
+            case 2: // semi-transparent box (round)
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_str_border));
+                mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 3: // white outline
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline));
+                mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 4: // white outline (round)
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_border_outline));
+                mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 5: // black outline
+               mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline_black));
+               mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 6: // black outline (round)
+               mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_border_outline_black));
+               mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 7: // accent outline
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline_accent));
+                mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 8: // accent outline (round)
+               mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_border_outline_accent));
+               mWeatherContainer.setPadding(40,20,40,20);
+                break;
         }
 
     }
