@@ -145,6 +145,61 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         return mAreActiveLocationRequests;
     }
 
+    private boolean isNetworkLocationEnabled() {
+        ContentResolver resolver = mContext.getContentResolver();
+        // QuickSettings always runs as the owner, so specifically retrieve the settings
+        // for the current foreground user.
+        int mode = Settings.Secure.getIntForUser(resolver, Settings.Secure.LOCATION_MODE,
+                Settings.Secure.LOCATION_MODE_OFF, ActivityManager.getCurrentUser());
+        return
+            mode == Settings.Secure.LOCATION_MODE_BATTERY_SAVING || mode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
+    }
+
+    /**
+     * Returns true if GPS is enabled in settings
+     */
+    @Override
+    public boolean isGpsEnabled() {
+        ContentResolver resolver = mContext.getContentResolver();
+        // QuickSettings always runs as the owner, so specifically retrieve the settings
+        // for the current foreground user.
+        int mode = Settings.Secure.getIntForUser(resolver, Settings.Secure.LOCATION_MODE,
+                Settings.Secure.LOCATION_MODE_OFF, ActivityManager.getCurrentUser());
+        return
+            mode == Settings.Secure.LOCATION_MODE_SENSORS_ONLY || mode == Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
+    }
+
+    /**
+     * Enable or disable GPS
+     * Returns true if attempt to change setting was successful
+     */
+    @Override
+    public boolean setGpsEnabled(boolean enabled) {
+        final int currentUserId = ActivityManager.getCurrentUser();
+        if (isUserLocationRestricted(currentUserId)) {
+            return false;
+        }
+        
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        int mode;
+        if (isNetworkLocationEnabled()) {
+            mode =
+                enabled 
+                    ? Settings.Secure.LOCATION_MODE_HIGH_ACCURACY
+                    : Settings.Secure.LOCATION_MODE_BATTERY_SAVING;
+        } else {
+            mode = 
+                enabled
+                    ? Settings.Secure.LOCATION_MODE_SENSORS_ONLY
+                    : Settings.Secure.LOCATION_MODE_OFF;
+        }
+
+        // QuickSettings always runs as the owner, so specifically set the settings
+        // for the current foreground user.
+        return
+            Settings.Secure.putIntForUser(contentResolver, Settings.Secure.LOCATION_MODE, mode, currentUserId);
+    }
+
     /**
      * Returns true if the current user is restricted from using location.
      */
