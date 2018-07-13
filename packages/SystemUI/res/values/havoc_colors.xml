@@ -63,4 +63,6 @@
     <color name="qs_tiles_unavailable_color">@*android:color/havoc_qs_unavailable</color>
     <color name="qs_tiles_circle_active">@*android:color/havoc_qs_circle_active</color>
     <color name="qs_tiles_circle_inactive">@*android:color/havoc_qs_circle_inactive</color>
+	
+    <color name="vol_slider">#707070</color>
 </resources>
