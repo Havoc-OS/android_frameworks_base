@@ -2397,7 +2397,7 @@ public class KeyguardStatusView extends GridLayout implements
                 UserHandle.USER_CURRENT);
            mLockDateFontSize = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKDATE_FONT_SIZE,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
+                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_18),
                 UserHandle.USER_CURRENT);
            mLockAlarmFontSize = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKALARM_FONT_SIZE,
