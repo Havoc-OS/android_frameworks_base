@@ -155,6 +155,7 @@ public class KeyguardStatusView extends GridLayout implements
     private boolean mShowAmbientBattery;
 
     private SettingsObserver mSettingsObserver;
+    private HavocSettingsObserver mHavocSettingsObserver;
 
     //On the first boot, keygard will start to receiver TIME_TICK intent.
     //And onScreenTurnedOff will not get called if power off when keyguard is not started.
@@ -265,17 +266,6 @@ public class KeyguardStatusView extends GridLayout implements
         mTextColor = mClockView.getCurrentTextColor();
         mDateTextColor = mDateView.getCurrentTextColor();
         mAlarmTextColor = mAlarmStatusView.getCurrentTextColor();
-       
-        updateSettings(); 
- 
-        boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive(); 
-        setEnableMarquee(shouldMarquee); 
-        refresh(); 
-        updateOwnerInfo(); 
-        updateClockColor(); 
-        updateClockDateColor(); 
-        refreshLockFont(); 
-
         mWeatherView = findViewById(R.id.keyguard_weather_view);
         mWeatherContainer = findViewById(R.id.weather_container);
         weatherPanel = findViewById(R.id.weather_panel);
@@ -285,7 +275,17 @@ public class KeyguardStatusView extends GridLayout implements
         mWeatherCurrentTemp = (TextView) findViewById(R.id.current_temp);
         mWeatherConditionText = (TextView) findViewById(R.id.condition);
         mShortcut = findViewById(R.id.keyguard_shortcuts);
+ 
+        boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive(); 
+        setEnableMarquee(shouldMarquee); 
+        refresh(); 
+        updateOwnerInfo(); 
+        updateClockColor(); 
+        updateClockDateColor(); 
+        refreshLockFont(); 
+
         mSettingsObserver = new SettingsObserver(new Handler());
+        mHavocSettingsObserver = new HavocSettingsObserver(new Handler());
     }
 
     @Override
@@ -403,8 +403,7 @@ public class KeyguardStatusView extends GridLayout implements
         KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mInfoCallback);
         mWeatherClient.addObserver(this);
         mSettingsObserver.observe();
-        updateSettings(); 
-        updateWeather();
+        mHavocSettingsObserver.observe();
     }
 
     @Override
@@ -414,6 +413,7 @@ public class KeyguardStatusView extends GridLayout implements
         mWeatherClient.removeObserver(this);
         mWeatherClient.cleanupObserver();
         mSettingsObserver.unobserve();
+        mHavocSettingsObserver.unobserve();
     }
 
     private String getOwnerInfo() {
@@ -444,13 +444,13 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherData = mWeatherClient.getWeatherInfo();
             // Weather data not available. Try later.
             if (mWeatherData == null) {
-                updateSettings();
+                updateSettingsWeather();
                 return;
             }
             mWeatherCity.setText(mWeatherData.city);
             mWeatherCurrentTemp.setText(mWeatherData.temp + mWeatherData.tempUnits);
             mWeatherConditionText.setText(mWeatherData.condition);
-            updateSettings();
+            updateSettingsWeather();
        } catch(Exception e) {
           // Do nothing
        }
@@ -469,7 +469,7 @@ public class KeyguardStatusView extends GridLayout implements
             mWeatherCity.setText(mWeatherData.city);
             mWeatherCurrentTemp.setText(mWeatherData.temp + mWeatherData.tempUnits);
             mWeatherConditionText.setText(mWeatherData.condition);
-            updateSettings();
+            updateSettingsWeather();
        } catch(Exception e) {
           // Do nothing
        }
@@ -480,43 +480,6 @@ public class KeyguardStatusView extends GridLayout implements
         return false;
     }
 
-    private void updateVisibilities() {
-        switch (mClockSelection) {
-        case 0: // default digital 
-            mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
-            mAnalogClockView.setVisibility(View.GONE); 
-            break; 
-        case 1: // digital (bold) 
-            mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
-            mAnalogClockView.setVisibility(View.GONE); 
-            break; 
-        case 2: // sammy 
-            mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
-            mAnalogClockView.setVisibility(View.GONE); 
-            break; 
-        case 3: // sammy (bold) 
-            mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
-            mAnalogClockView.setVisibility(View.GONE); 
-            break; 
-        case 4: // analog 
-            mAnalogClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
-            mClockView.setVisibility(View.GONE); 
-            break; 
-        default: // custom analog styles (int > 4) 
-            mAnalogClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
-            mClockView.setVisibility(View.GONE); 
-            break; 
-        }
-    
-        mDateView.setVisibility(mDarkAmount != 1 ? (mShowDate ? View.VISIBLE : View.GONE) : View.VISIBLE);
-
-        if (mWeatherData != null) {
-            mWeatherContainer.setVisibility(mDarkAmount != 1 ? (mShowWeather ? View.VISIBLE : View.GONE) : View.VISIBLE);
-        }
-
-        mAlarmStatusView.setVisibility(mDarkAmount != 1 ? (mShowAlarm && mAvailableAlarm ? View.VISIBLE : View.GONE)
-                : mAvailableAlarm ? View.VISIBLE : View.GONE);
-    }
 
     public void refreshOwnerInfoSize() { 
         int size = mLockOwnerInfoFontSize; 
@@ -1199,17 +1162,13 @@ public class KeyguardStatusView extends GridLayout implements
                     }
                 }
     
-    
-        private void updateSettings() {
-        final ContentResolver resolver = getContext().getContentResolver();
+    private void updateSettingsWeather() { 
+        boolean mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
 
-        if (mWeatherData != null) {
-        mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
+        if (mWeatherView == null || weatherPanel == null)
+            return;
 
-        
-        if (mWeatherView != null) {
-            mWeatherView.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
-        }
+        mWeatherView.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
 
         if (mWeatherContainer != null) {
             mWeatherContainer.setVisibility(mShowWeather ? View.VISIBLE : View.GONE);
@@ -1255,6 +1214,7 @@ public class KeyguardStatusView extends GridLayout implements
                 mWeatherConditionImage.getVisibility() != View.VISIBLE &&
                 mWeatherCurrentTemp.getVisibility() != View.VISIBLE) {
             weatherPanel.setVisibility(View.GONE);
+            mWeatherContainer.setVisibility(View.GONE);
             noWeatherInfo.setVisibility(mShowWeather ?
                 View.VISIBLE : View.GONE);
         } else {
@@ -1262,8 +1222,8 @@ public class KeyguardStatusView extends GridLayout implements
                 View.VISIBLE : View.GONE);
         }
 
-        // LS Temp Font
-        if (tempFont == 0) {
+         // LS Temp Font
+         if (tempFont == 0) {
             mWeatherCurrentTemp.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         }
         if (tempFont == 1) {
@@ -1494,52 +1454,12 @@ public class KeyguardStatusView extends GridLayout implements
         if (conditionFont == 24) {
             mWeatherConditionText.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
         }
-
-        mWeatherSelection = Settings.System.getIntForUser(resolver,
-        Settings.System.LOCKSCREEN_WEATHER_SELECTION, 0, UserHandle.USER_CURRENT);
-
-        switch (mWeatherSelection) {
-            case 0: // default
-            default:
-                mWeatherContainer.setBackgroundResource(0);
-                mWeatherContainer.setPadding(0,0,0,0);
-                break;
-            case 1: // semi-transparent box
-                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_str_border));
-                mWeatherContainer.setPadding(40,20,40,20);
-            case 2: // semi-transparent box (round)
-                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_str_border));
-                mWeatherContainer.setPadding(40,20,40,20);
-                break;
-            case 3: // white outline
-                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline));
-                mWeatherContainer.setPadding(40,20,40,20);
-                break;
-            case 4: // white outline (round)
-                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_border_outline));
-                mWeatherContainer.setPadding(40,20,40,20);
-                break;
-            case 5: // black outline
-               mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline_black));
-               mWeatherContainer.setPadding(40,20,40,20);
-                break;
-            case 6: // black outline (round)
-               mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_border_outline_black));
-               mWeatherContainer.setPadding(40,20,40,20);
-                break;
-            case 7: // accent outline
-                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline_accent));
-                mWeatherContainer.setPadding(40,20,40,20);
-                break;
-            case 8: // accent outline (round)
-               mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_border_outline_accent));
-               mWeatherContainer.setPadding(40,20,40,20);
-                break;
-        }
-
     }
 
-        // LS Date Font
+    private void updateSettings() {
+        final ContentResolver resolver = getContext().getContentResolver();
+
+              // LS Date Font
         if (dateFont == 0) {
             mDateView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         }
@@ -1615,8 +1535,6 @@ public class KeyguardStatusView extends GridLayout implements
         if (dateFont == 24) {
                 mDateView.setTypeface(Typeface.create("serif", Typeface.BOLD_ITALIC));
         }
-
-        
 
         if (ownerinfoFont == 0) { 
             mOwnerInfo.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL)); 
@@ -1828,43 +1746,95 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCKSCREEN_CLOCK_SELECTION, 0, UserHandle.USER_CURRENT);
         mDateSelection = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKSCREEN_DATE_SELECTION, 0, UserHandle.USER_CURRENT);
+        updateClockVisibilities();
+        updateVisibilities();
+        updateDozeVisibleViews();
+    }
 
+    private void updateVisibilities() {
+        final ContentResolver resolver = getContext().getContentResolver();
+
+        switch (mClockSelection) {
+        case 0: // default digital 
+            mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
+            mAnalogClockView.setVisibility(View.GONE); 
+            break; 
+        case 1: // digital (bold) 
+            mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
+            mAnalogClockView.setVisibility(View.GONE); 
+            break; 
+        case 2: // sammy 
+            mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
+            mAnalogClockView.setVisibility(View.GONE); 
+            break; 
+        case 3: // sammy (bold) 
+            mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
+            mAnalogClockView.setVisibility(View.GONE); 
+            break; 
+        case 4: // analog 
+            mAnalogClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
+            mClockView.setVisibility(View.GONE); 
+            break; 
+        default: // custom analog styles (int > 4) 
+            mAnalogClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
+            mClockView.setVisibility(View.GONE); 
+            break; 
+        }
+    
+        mDateView.setVisibility(mDarkAmount != 1 ? (mShowDate ? View.VISIBLE : View.GONE) : View.VISIBLE);
+
+        mAlarmStatusView.setVisibility(mDarkAmount != 1 ? (mShowAlarm && mAvailableAlarm ? View.VISIBLE : View.GONE)
+                : mAvailableAlarm ? View.VISIBLE : View.GONE);
+    }
+
+    private void updateClockVisibilities() {
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mKeyguardStatusArea.getLayoutParams();
+        final ContentResolver resolver = getContext().getContentResolver(); 
+        
+        mShowClock = Settings.System.getIntForUser(resolver,
+        Settings.System.HIDE_LOCKSCREEN_CLOCK, 1, UserHandle.USER_CURRENT) == 1;
+        mShowDate = Settings.System.getIntForUser(resolver,
+        Settings.System.HIDE_LOCKSCREEN_DATE, 1, UserHandle.USER_CURRENT) == 1;
+        mClockSelection = Settings.System.getIntForUser(resolver,
+        Settings.System.LOCKSCREEN_CLOCK_SELECTION, 0, UserHandle.USER_CURRENT);
+        mDateSelection = Settings.System.getIntForUser(resolver,
+        Settings.System.LOCKSCREEN_DATE_SELECTION, 0, UserHandle.USER_CURRENT);
+
         switch (mClockSelection) {
             case 0: // default digital 
-                params.addRule(RelativeLayout.BELOW, R.id.clock_view); 
-                mClockView.setSingleLine(true); 
-                mClockView.setGravity(Gravity.CENTER); 
-                mAnalogClockView.unregisterReceiver(); 
-                break; 
-            case 1: // digital (bold) 
-                params.addRule(RelativeLayout.BELOW, R.id.clock_view); 
-                mClockView.setSingleLine(true); 
-                mClockView.setGravity(Gravity.CENTER); 
-                mAnalogClockView.unregisterReceiver(); 
-                break; 
-            case 2: // sammy 
-                params.addRule(RelativeLayout.BELOW, R.id.clock_view); 
-                mClockView.setSingleLine(false); 
-                mClockView.setGravity(Gravity.CENTER); 
-                mAnalogClockView.unregisterReceiver(); 
-                break; 
-            case 3: // sammy (bold) 
-                params.addRule(RelativeLayout.BELOW, R.id.clock_view); 
-                mClockView.setSingleLine(false); 
-                mClockView.setGravity(Gravity.CENTER); 
-                mAnalogClockView.unregisterReceiver(); 
-                break; 
-            case 4: // analog 
-                params.addRule(RelativeLayout.BELOW, R.id.analog_clock_view); 
-                mClockView.setGravity(Gravity.CENTER);
-                mAnalogClockView.registerReceiver(); 
-                break; 
-            default: // custom analog styles (int > 4) 
-                params.addRule(RelativeLayout.BELOW, R.id.analog_clock_view); 
-                mClockView.setGravity(Gravity.CENTER);
-                mAnalogClockView.registerReceiver(); 
-                break; 
+            params.addRule(RelativeLayout.BELOW, R.id.clock_view); 
+            mClockView.setSingleLine(true); 
+            mClockView.setGravity(Gravity.CENTER); 
+            mAnalogClockView.unregisterReceiver(); 
+            break; 
+        case 1: // digital (bold) 
+            params.addRule(RelativeLayout.BELOW, R.id.clock_view); 
+            mClockView.setSingleLine(true); 
+            mClockView.setGravity(Gravity.CENTER); 
+            mAnalogClockView.unregisterReceiver(); 
+            break; 
+        case 2: // sammy 
+            params.addRule(RelativeLayout.BELOW, R.id.clock_view); 
+            mClockView.setSingleLine(false); 
+            mClockView.setGravity(Gravity.CENTER); 
+            mAnalogClockView.unregisterReceiver(); 
+            break; 
+        case 3: // sammy (bold) 
+            params.addRule(RelativeLayout.BELOW, R.id.clock_view); 
+            mClockView.setSingleLine(false); 
+            mClockView.setGravity(Gravity.CENTER); 
+            mAnalogClockView.unregisterReceiver(); 
+            break; 
+        case 4: // analog 
+            params.addRule(RelativeLayout.BELOW, R.id.analog_clock_view); 
+            mClockView.setGravity(Gravity.CENTER);
+            mAnalogClockView.registerReceiver(); 
+            break; 
+        default: // custom analog styles (int > 4) 
+            params.addRule(RelativeLayout.BELOW, R.id.analog_clock_view); 
+            mClockView.setGravity(Gravity.CENTER);
+            mAnalogClockView.registerReceiver(); 
+            break; 
         }
 
         switch (mDateSelection) {
@@ -1907,8 +1877,54 @@ public class KeyguardStatusView extends GridLayout implements
                 break;
         }
 
+        switch (mWeatherSelection) {
+            case 0: // default
+            default:
+                mWeatherContainer.setBackgroundResource(0);
+                mWeatherContainer.setPadding(0,0,0,0);
+                break;
+            case 1: // semi-transparent box
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_str_border));
+                mWeatherContainer.setPadding(40,20,40,20);
+            case 2: // semi-transparent box (round)
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_str_border));
+                mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 3: // white outline
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline));
+                mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 4: // white outline (round)
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_border_outline));
+                mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 5: // black outline
+               mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline_black));
+               mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 6: // black outline (round)
+               mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_border_outline_black));
+               mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 7: // accent outline
+                mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_box_border_outline_accent));
+                mWeatherContainer.setPadding(40,20,40,20);
+                break;
+            case 8: // accent outline (round)
+               mWeatherContainer.setBackground(getResources().getDrawable(R.drawable.date_border_outline_accent));
+               mWeatherContainer.setPadding(40,20,40,20);
+                break;
+        }
+        mDateView.setVisibility(mDarkAmount != 1 ? (mShowDate ? View.VISIBLE : View.GONE) : View.VISIBLE);
+
+   
+        mAlarmStatusView.setVisibility(mDarkAmount != 1 ? (mShowAlarm && mAvailableAlarm ? View.VISIBLE : View.GONE)
+                : mAvailableAlarm ? View.VISIBLE : View.GONE);
+
+        
         updateVisibilities();  
         updateDozeVisibleViews();
+        refresh();
     }
 
     public void updateAll() {
@@ -2021,7 +2037,7 @@ public class KeyguardStatusView extends GridLayout implements
     public void weatherError(int errorReason) {
         if (DEBUG) Log.d(TAG, "weatherError " + errorReason);
         if (mShowWeather && !mWeatherClient.isOmniJawsEnabled()) {
-            updateSettings();
+            updateSettingsWeather();
         }
     }
 
@@ -2118,7 +2134,6 @@ public class KeyguardStatusView extends GridLayout implements
             mShortcut.setAlpha(dark ? 0 :1);
         }     
 
-
         updateDozeVisibleViews();
         mAnalogClockView.setDark(dark); 
         updateVisibilities();
@@ -2150,18 +2165,13 @@ public class KeyguardStatusView extends GridLayout implements
         }
     }
 
-    class SettingsObserver extends ContentObserver {
-        SettingsObserver(Handler handler) {
+    class HavocSettingsObserver extends ContentObserver {
+        HavocSettingsObserver(Handler handler) {
             super(handler);
         }
 
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
-
-            // enable if not working
-            // int showAmbientBottomInfo = Settings.System.getIntForUser(mContext.getContentResolver(), 
-            // Settings.System.AMBIENT_BOTTOM_DISPLAY, 0, UserHandle.USER_CURRENT); 
-
             resolver.registerContentObserver(Settings.System.getUriFor(
                    Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2171,15 +2181,142 @@ public class KeyguardStatusView extends GridLayout implements
             resolver.registerContentObserver(Settings.System.getUriFor(
                   Settings.System.OMNIJAWS_WEATHER_ICON_PACK), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.LOCKSCREEN_CLOCK_SELECTION), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.LOCKSCREEN_WEATHER_SELECTION), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.LOCKSCREEN_DATE_SELECTION), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR), false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCKTEMP_FONT_SIZE), false, this, UserHandle.USER_ALL); 
+            resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCKCITY_FONT_SIZE), false, this, UserHandle.USER_ALL); 
+            resolver.registerContentObserver(Settings.System.getUriFor( 
+                        Settings.System.LOCKCONDITION_FONT_SIZE), false, this, UserHandle.USER_ALL);   
+
+            mShowWeather = Settings.System.getIntForUser(resolver,
+                  Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0, UserHandle.USER_CURRENT) == 1;
+            mShowConditionIcon = Settings.System.getIntForUser(resolver,
+                  Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
+            mShowLocation = Settings.System.getIntForUser(resolver,
+                  Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1, UserHandle.USER_CURRENT) == 1;
+            mClockSelection = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCKSCREEN_CLOCK_SELECTION, 0, UserHandle.USER_CURRENT);
+            mDateSelection = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCKSCREEN_DATE_SELECTION, 0, UserHandle.USER_CURRENT);
+            mWeatherSelection = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCKSCREEN_WEATHER_SELECTION, 0, UserHandle.USER_CURRENT);
+            updateClockVisibilities();
+            queryAndUpdateWeather();
+            update();
+        }
+
+        void unobserve() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            ContentResolver resolver = mContext.getContentResolver();
+
+            if (uri.equals(Settings.System.getUriFor(
+                   Settings.System.LOCK_SCREEN_SHOW_WEATHER))) {
+                mShowWeather = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0, UserHandle.USER_CURRENT) == 1;
+                updateWeather();
+            } else if (uri.equals(Settings.System.getUriFor(
+                   Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON))) {
+                mShowConditionIcon = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
+                updateWeather();
+            } else if (uri.equals(Settings.System.getUriFor(
+                   Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION))) {
+                mShowLocation = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1, UserHandle.USER_CURRENT) == 1;
+                updateWeather();
+            } else if (uri.equals(Settings.System.getUriFor(
+                   Settings.System.OMNIJAWS_WEATHER_ICON_PACK))) {
+                updateWeather();
+            } else if (uri.equals(Settings.System.getUriFor(
+                   Settings.System.LOCKSCREEN_CLOCK_SELECTION))) {
+                mClockSelection = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCKSCREEN_CLOCK_SELECTION, 0, UserHandle.USER_CURRENT);
+                updateClockVisibilities();
+            } else if (uri.equals(Settings.System.getUriFor(
+                   Settings.System.LOCKSCREEN_DATE_SELECTION))) {
+                mDateSelection = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCKSCREEN_DATE_SELECTION, 0, UserHandle.USER_CURRENT);
+                updateClockVisibilities();
+            } else if (uri.equals(Settings.System.getUriFor(
+                   Settings.System.LOCKSCREEN_WEATHER_SELECTION))) {
+                mWeatherSelection = Settings.System.getIntForUser(resolver,
+                    Settings.System.LOCKSCREEN_WEATHER_SELECTION, 0, UserHandle.USER_CURRENT);
+                updateClockVisibilities();
+            }  else if (uri.equals(Settings.System.getUriFor(
+                Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR))) {
+                updateSettings();
+            } else if (uri.equals(Settings.System.getUriFor(
+                Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR))) {
+                updateSettings();
+            } else if (uri.equals(Settings.System.getUriFor(
+                Settings.System.LOCKTEMP_FONT_SIZE))) {
+                    refreshtempsize();
+           } else if (uri.equals(Settings.System.getUriFor(
+                Settings.System.LOCKCITY_FONT_SIZE))) {
+                    refreshcitysize();
+           } else if (uri.equals(Settings.System.getUriFor(
+                Settings.System.LOCKCONDITION_FONT_SIZE))) {
+                    refreshconditionsize();
+        }
+        update();
+    }
+
+    public void update() { 
+        ContentResolver resolver = mContext.getContentResolver();
+
+        mTempColor = Settings.System.getInt(resolver,
+            Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR, 0xFFFFFFFF);
+        mCityColor = Settings.System.getInt(resolver,
+            Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR, 0xFFFFFFFF);
+        tempFont = Settings.System.getIntForUser(resolver,
+            Settings.System.LOCK_TEMP_FONTS, 8, UserHandle.USER_CURRENT);
+        cityFont = Settings.System.getIntForUser(resolver,
+            Settings.System.LOCK_CITY_FONTS, 8, UserHandle.USER_CURRENT);
+        conditionFont = Settings.System.getIntForUser(resolver,
+            Settings.System.LOCK_CONDITION_FONTS, 8, UserHandle.USER_CURRENT);
+        mLockTempFontSize = Settings.System.getIntForUser(resolver,
+            Settings.System.LOCKTEMP_FONT_SIZE,
+            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
+            UserHandle.USER_CURRENT);
+       mLockCityFontSize = Settings.System.getIntForUser(resolver,
+            Settings.System.LOCKCITY_FONT_SIZE,
+            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
+            UserHandle.USER_CURRENT);
+       mLockConditionFontSize = Settings.System.getIntForUser(resolver,
+            Settings.System.LOCKCONDITION_FONT_SIZE,
+            getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
+            UserHandle.USER_CURRENT);      
+    }
+}
+
+    class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+
+            resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCK_DATE_FONTS), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR), false, this, UserHandle.USER_ALL);
-             resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_ALARM_COLOR), false, this, UserHandle.USER_ALL);
              resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2191,23 +2328,11 @@ public class KeyguardStatusView extends GridLayout implements
              resolver.registerContentObserver(Settings.System.getUriFor( 
                         Settings.System.LOCKALARM_FONT_SIZE), false, this, UserHandle.USER_ALL); 
              resolver.registerContentObserver(Settings.System.getUriFor( 
-                        Settings.System.LOCKTEMP_FONT_SIZE), false, this, UserHandle.USER_ALL); 
-             resolver.registerContentObserver(Settings.System.getUriFor( 
-                        Settings.System.LOCKCITY_FONT_SIZE), false, this, UserHandle.USER_ALL); 
-             resolver.registerContentObserver(Settings.System.getUriFor( 
-                        Settings.System.LOCKCONDITION_FONT_SIZE), false, this, UserHandle.USER_ALL);    
-             resolver.registerContentObserver(Settings.System.getUriFor( 
                         Settings.System.LOCK_OWNERINFO_FONTS), false, this, UserHandle.USER_ALL); 
              resolver.registerContentObserver(Settings.System.getUriFor( 
                         Settings.System.LOCKOWNER_FONT_SIZE), false, this, UserHandle.USER_ALL);   
              resolver.registerContentObserver(Settings.System.getUriFor( 
                         Settings.System.LOCK_ALARM_FONTS), false, this, UserHandle.USER_ALL);  
-
-            if (mWeatherData != null ) {
-                mShowConditionIcon = Settings.System.getIntForUser(resolver,
-                Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
-            }
-            queryAndUpdateWeather();
             update();                        
         }
  
@@ -2220,27 +2345,12 @@ public class KeyguardStatusView extends GridLayout implements
         public void onChange(boolean selfChange, Uri uri) {
             ContentResolver resolver = mContext.getContentResolver();
 
-            if (uri.equals(Settings.System.getUriFor(
-                      Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR))) {
-                  updateSettings();
-              } else if (uri.equals(Settings.System.getUriFor(
-                      Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR))) {
-                  updateSettings();
-             } else if (uri.equals(Settings.System.getUriFor(
+             if (uri.equals(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR))) {
                  updateClockDateColor();
              } else if (uri.equals(Settings.System.getUriFor(
                      Settings.System.LOCKSCREEN_CLOCK_COLOR))) {
                         updateClockColor();
-             } else  if (uri.equals(Settings.System.getUriFor(
-                Settings.System.LOCK_SCREEN_SHOW_WEATHER))) {
-                    updateWeather();
-                } else if (uri.equals(Settings.System.getUriFor(
-                        Settings.System.OMNIJAWS_WEATHER_ICON_PACK))) {
-                            updateWeather();
-                }  else if (uri.equals(Settings.System.getUriFor(
-                        Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION))) {
-                            updateWeather();
               } else if (uri.equals(Settings.System.getUriFor(
                       Settings.System.LOCK_DATE_FONTS))) {
                     updateSettings();
@@ -2253,32 +2363,16 @@ public class KeyguardStatusView extends GridLayout implements
                } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.LOCKALARM_FONT_SIZE))) {
                         refreshalarmsize();
-               } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.LOCKTEMP_FONT_SIZE))) {
-                        refreshtempsize();
-               } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.LOCKCITY_FONT_SIZE))) {
-                        refreshcitysize();
-               } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.LOCKCONDITION_FONT_SIZE))) {
-                        refreshconditionsize();
-                    } else if (uri.equals(Settings.System.getUriFor( 
+              } else if (uri.equals(Settings.System.getUriFor( 
                         Settings.System.LOCK_OWNERINFO_FONTS))) { 
                    refreshOwnerInfoSize(); 
-                } else if (uri.equals(Settings.System.getUriFor( 
+              } else if (uri.equals(Settings.System.getUriFor( 
                     Settings.System.LOCKOWNER_FONT_SIZE))) { 
                     updateSettings(); 
-                } else if (uri.equals(Settings.System.getUriFor( 
+              } else if (uri.equals(Settings.System.getUriFor( 
                     Settings.System.LOCK_ALARM_FONTS))) { 
                     updateSettings(); 
-                }  else if (uri.equals(Settings.System.getUriFor( 
-                    Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON))) { 
-                    if(mWeatherData != null) {
-                        mShowConditionIcon = Settings.System.getIntForUser(resolver,
-                        Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 1, UserHandle.USER_CURRENT) == 1;
-                        updateWeather(); 
-                    }  
-                }
+              }
              update();
          }
 
@@ -2286,10 +2380,7 @@ public class KeyguardStatusView extends GridLayout implements
            ContentResolver resolver = mContext.getContentResolver();
            int currentUserId = ActivityManager.getCurrentUser();
 
-            mTempColor = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_WEATHER_TEMP_COLOR, 0xFFFFFFFF);
-           mCityColor = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_WEATHER_CITY_COLOR, 0xFFFFFFFF);
+          
            alarmColor = Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_ALARM_COLOR, 0xFFFFFFFF);
            ownerInfoColor = Settings.System.getInt(resolver,
@@ -2300,12 +2391,6 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR, 0xFFFFFFFF);
            dateFont = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCK_DATE_FONTS, 8, UserHandle.USER_CURRENT);
-           tempFont = Settings.System.getIntForUser(resolver,
-                Settings.System.LOCK_TEMP_FONTS, 8, UserHandle.USER_CURRENT);
-           cityFont = Settings.System.getIntForUser(resolver,
-                Settings.System.LOCK_CITY_FONTS, 8, UserHandle.USER_CURRENT);
-           conditionFont = Settings.System.getIntForUser(resolver,
-                Settings.System.LOCK_CONDITION_FONTS, 8, UserHandle.USER_CURRENT);
            mLockClockFontSize = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKCLOCK_FONT_SIZE,
                 getResources().getDimensionPixelSize(R.dimen.lock_clock_font_size_78),
@@ -2318,18 +2403,6 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCKALARM_FONT_SIZE,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
                 UserHandle.USER_CURRENT);
-           mLockTempFontSize = Settings.System.getIntForUser(resolver,
-                Settings.System.LOCKTEMP_FONT_SIZE,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
-                UserHandle.USER_CURRENT);
-           mLockCityFontSize = Settings.System.getIntForUser(resolver,
-                Settings.System.LOCKCITY_FONT_SIZE,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
-                UserHandle.USER_CURRENT);
-           mLockConditionFontSize = Settings.System.getIntForUser(resolver,
-                Settings.System.LOCKCONDITION_FONT_SIZE,
-                getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14),
-                UserHandle.USER_CURRENT);      
            ownerinfoFont = Settings.System.getIntForUser(resolver, 
                 Settings.System.LOCK_OWNERINFO_FONTS, 26, UserHandle.USER_CURRENT); 
            alarmFont = Settings.System.getIntForUser(resolver, 
@@ -2339,21 +2412,7 @@ public class KeyguardStatusView extends GridLayout implements
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_14), 
                 UserHandle.USER_CURRENT); 
                 refreshOwnerInfoSize(); 
-        
-            if(mWeatherData != null) {
-                mShowWeather = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_SHOW_WEATHER, 0) == 1;
-                mShowConditionIcon = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_WEATHER_CONDITION_ICON, 0) == 1;
-                mShowLocation = Settings.System.getInt(resolver,
-                Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION, 1) == 1;
-                mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
-                 queryAndUpdateWeather();
-            }
-            queryAndUpdateWeather();
-           updateSettings();
-
-
+                updateSettings();
          }
     }
 }

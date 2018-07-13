@@ -28,7 +28,7 @@
     android:layout_marginTop="12dp"
     androidprv:layout_maxWidth="@dimen/keyguard_security_width"
     androidprv:layout_maxHeight="@dimen/keyguard_security_height"
-    android:layout_gravity="center_horizontal">
+    android:gravity="center_horizontal">
       <LinearLayout 
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
@@ -41,7 +41,7 @@
             android:layout_gravity="center_horizontal">
             <TextClock
                 android:id="@+id/clock_view"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_centerHorizontal="true"
@@ -52,7 +52,7 @@
                 android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />
              <CustomAnalogClock
                 android:id="@+id/analog_clock_view"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
@@ -103,7 +103,6 @@
                 android:visibility="gone" 
                 android:layout_below="@id/keyguard_shortcuts"
                 android:textColor="?attr/wallpaperTextColorSecondary"
-                android:textSize="@dimen/widget_label_font_size"
                 android:letterSpacing="0.05"
                 android:ellipsize="marquee"
                 android:singleLine="true" />
