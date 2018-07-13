@@ -140,7 +140,7 @@
 
     <color name="notification_progress_background_color">@color/secondary_text_material_light</color>
 
-    <color name="notification_action_list">@android:color/white</color>
+    <color name="notification_action_list">#00000000</color>
     <color name="notification_action_list_dark">@android:color/white</color>
 
     <!-- Keyguard colors -->
