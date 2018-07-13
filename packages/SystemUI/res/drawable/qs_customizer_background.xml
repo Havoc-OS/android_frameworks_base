@@ -16,5 +16,5 @@
 <transition xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/qs_detail_transition" />
     <item android:drawable="?android:attr/colorPrimary" />
-    <corners android:radius="8dp" />	
+    <corners android:radius="12dp" />	
 </transition>

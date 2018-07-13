@@ -21,5 +21,4 @@
     android:layout_width="match_parent"
     android:paddingStart="8dp"
     android:paddingEnd="8dp"
-    android:paddingTop="8dp"
     android:gravity="center" />

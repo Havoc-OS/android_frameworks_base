@@ -18,17 +18,22 @@
 <com.android.systemui.qs.QSDetail
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/qs_detail_background"
     android:clickable="true"
     android:orientation="vertical"
-    android:paddingBottom="8dp"
+    android:layout_marginLeft="8dp"
+	android:layout_marginRight="8dp"
+	android:layout_marginTop="40dp"
+    android:radius="8dp"
     android:visibility="invisible">
 
     <include
         android:id="@+id/qs_detail_header"
         layout="@layout/qs_detail_header"
         android:layout_width="match_parent"
+        android:layout_marginLeft="8dp"
+	    android:layout_marginRight="8dp"
         android:layout_height="wrap_content"
         />
 
@@ -37,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:alpha="0"
+        android:layout_marginBottom="10dp"
         android:background="@color/qs_detail_progress_track"
         android:src="@drawable/indeterminate_anim"
         android:scaleType="fitXY"
@@ -46,12 +52,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginBottom="10dp"
         android:fillViewport="true">
 
         <FrameLayout
             android:id="@android:id/content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"/>
     </com.android.systemui.qs.NonInterceptingScrollView>
 
     <include layout="@layout/qs_detail_buttons" />

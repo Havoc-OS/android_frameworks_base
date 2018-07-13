@@ -22,6 +22,7 @@
     android:paddingTop="@dimen/qs_tile_padding_top"
     android:paddingStart="@dimen/qs_footer_padding_start"
     android:paddingEnd="@dimen/qs_footer_padding_end"
+    android:layout_marginBottom="15dp"
     android:gravity="center_vertical" >
 
     <TextView

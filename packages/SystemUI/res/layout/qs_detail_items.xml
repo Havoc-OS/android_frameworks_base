@@ -21,7 +21,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="@dimen/qs_detail_padding_start"
-    android:paddingEnd="16dp">
+    android:paddingEnd="18dp">
 
     <com.android.systemui.qs.AutoSizingList
         android:id="@android:id/list"
