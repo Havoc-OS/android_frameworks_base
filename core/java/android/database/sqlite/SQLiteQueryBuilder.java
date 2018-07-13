@@ -16,17 +16,31 @@
 
 package android.database.sqlite;
 
+import static android.content.ContentResolver.QUERY_ARG_SQL_GROUP_BY;
+import static android.content.ContentResolver.QUERY_ARG_SQL_HAVING;
+import static android.content.ContentResolver.QUERY_ARG_SQL_LIMIT;
+import static android.content.ContentResolver.QUERY_ARG_SQL_SELECTION;
+import static android.content.ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS;
+import static android.content.ContentResolver.QUERY_ARG_SQL_SORT_ORDER;
+
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.OperationCanceledException;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
+
+import com.android.internal.util.ArrayUtils;
+
+import dalvik.system.VMRuntime;
 
 import libcore.util.EmptyArray;
 
@@ -42,8 +56,7 @@ import java.util.regex.Pattern;
  * This is a convenience class that helps build SQL queries to be sent to
  * {@link SQLiteDatabase} objects.
  */
-public class SQLiteQueryBuilder
-{
+public class SQLiteQueryBuilder {
     private static final String TAG = "SQLiteQueryBuilder";
     private static final Pattern sLimitPattern =
             Pattern.compile("\\s*\\d+\\s*(,\\s*\\d+\\s*)?");
@@ -51,6 +64,7 @@ public class SQLiteQueryBuilder
     private Map<String, String> mProjectionMap = null;
     private String mTables = "";
     private StringBuilder mWhereClause = null;  // lazily created
+    private String[] mWhereArgs = EmptyArray.STRING;
     private boolean mDistinct;
     private SQLiteDatabase.CursorFactory mFactory;
     private boolean mStrict;
@@ -90,37 +104,92 @@ public class SQLiteQueryBuilder
         mTables = inTables;
     }
 
+    /** {@hide} */
+    public @Nullable String getWhere() {
+        return (mWhereClause != null) ? mWhereClause.toString() : null;
+    }
+
+    /** {@hide} */
+    public String[] getWhereArgs() {
+        return mWhereArgs;
+    }
+
     /**
-     * Append a chunk to the WHERE clause of the query. All chunks appended are surrounded
-     * by parenthesis and ANDed with the selection passed to {@link #query}. The final
-     * WHERE clause looks like:
+     * Append a chunk to the {@code WHERE} clause of the query. All chunks
+     * appended are surrounded by parenthesis and {@code AND}ed with the
+     * selection passed to {@link #query}. The final {@code WHERE} clause looks
+     * like:
      *
+     * <pre>
      * WHERE (&lt;append chunk 1>&lt;append chunk2>) AND (&lt;query() selection parameter>)
+     * </pre>
      *
-     * @param inWhere the chunk of text to append to the WHERE clause.
+     * @param inWhere the chunk of text to append to the {@code WHERE} clause.
      */
-    public void appendWhere(CharSequence inWhere) {
+    public void appendWhere(@NonNull CharSequence inWhere) {
+        appendWhere(inWhere, EmptyArray.STRING);
+    }
+
+    /**
+     * Append a chunk to the {@code WHERE} clause of the query. All chunks
+     * appended are surrounded by parenthesis and {@code AND}ed with the
+     * selection passed to {@link #query}. The final {@code WHERE} clause looks
+     * like:
+     *
+     * <pre>
+     * WHERE (&lt;append chunk 1>&lt;append chunk2>) AND (&lt;query() selection parameter>)
+     * </pre>
+     *
+     * @param inWhere the chunk of text to append to the {@code WHERE} clause.
+     * @param inWhereArgs list of arguments to be bound to any '?' occurrences
+     *            in the where clause.
+     */
+    public void appendWhere(@NonNull CharSequence inWhere, String... inWhereArgs) {
         if (mWhereClause == null) {
             mWhereClause = new StringBuilder(inWhere.length() + 16);
         }
         mWhereClause.append(inWhere);
+        mWhereArgs = ArrayUtils.concat(String.class, mWhereArgs, inWhereArgs);
     }
 
     /**
-     * Append a chunk to the WHERE clause of the query. All chunks appended are surrounded
-     * by parenthesis and ANDed with the selection passed to {@link #query}. The final
-     * WHERE clause looks like:
+     * Append a chunk to the {@code WHERE} clause of the query. All chunks
+     * appended are surrounded by parenthesis and {@code AND}ed with the
+     * selection passed to {@link #query}. The final {@code WHERE} clause looks
+     * like this:
      *
+     * <pre>
      * WHERE (&lt;append chunk 1>&lt;append chunk2>) AND (&lt;query() selection parameter>)
+     * </pre>
      *
-     * @param inWhere the chunk of text to append to the WHERE clause. it will be escaped
-     * to avoid SQL injection attacks
+     * @param inWhere the chunk of text to append to the {@code WHERE} clause.
+     *            It will be escaped to avoid SQL injection attacks.
      */
-    public void appendWhereEscapeString(String inWhere) {
+    public void appendWhereEscapeString(@NonNull String inWhere) {
+        appendWhereEscapeString(inWhere, EmptyArray.STRING);
+    }
+
+    /**
+     * Append a chunk to the {@code WHERE} clause of the query. All chunks
+     * appended are surrounded by parenthesis and {@code AND}ed with the
+     * selection passed to {@link #query}. The final {@code WHERE} clause looks
+     * like this:
+     *
+     * <pre>
+     * WHERE (&lt;append chunk 1>&lt;append chunk2>) AND (&lt;query() selection parameter>)
+     * </pre>
+     *
+     * @param inWhere the chunk of text to append to the {@code WHERE} clause.
+     *            It will be escaped to avoid SQL injection attacks.
+     * @param inWhereArgs list of arguments to be bound to any '?' occurrences
+     *            in the where clause.
+     */
+    public void appendWhereEscapeString(@NonNull String inWhere, String... inWhereArgs) {
         if (mWhereClause == null) {
             mWhereClause = new StringBuilder(inWhere.length() + 16);
         }
         DatabaseUtils.appendEscapedSQLString(mWhereClause, inWhere);
+        mWhereArgs = ArrayUtils.concat(String.class, mWhereArgs, inWhereArgs);
     }
 
     /**
@@ -170,8 +239,8 @@ public class SQLiteQueryBuilder
      * </ul>
      * By default, this value is false.
      */
-    public void setStrict(boolean flag) {
-        mStrict = flag;
+    public void setStrict(boolean strict) {
+        mStrict = strict;
     }
 
     /**
@@ -265,7 +334,7 @@ public class SQLiteQueryBuilder
      * information passed into this method.
      *
      * @param db the database to query on
-     * @param projectionIn A list of which columns to return. Passing
+     * @param projection A list of which columns to return. Passing
      *   null will return all columns, which is discouraged to prevent
      *   reading data from storage that isn't going to be used.
      * @param selection A filter declaring which rows to return,
@@ -290,10 +359,14 @@ public class SQLiteQueryBuilder
      * @see android.content.ContentResolver#query(android.net.Uri, String[],
      *      String, String[], String)
      */
-    public Cursor query(SQLiteDatabase db, String[] projectionIn,
-            String selection, String[] selectionArgs, String groupBy,
-            String having, String sortOrder) {
-        return query(db, projectionIn, selection, selectionArgs, groupBy, having, sortOrder,
+    public @Nullable Cursor query(@NonNull SQLiteDatabase db,
+            @Nullable String[] projection,
+            @Nullable String selection,
+            @Nullable String[] selectionArgs,
+            @Nullable String groupBy,
+            @Nullable String having,
+            @Nullable String sortOrder) {
+        return query(db, projection, selection, selectionArgs, groupBy, having, sortOrder,
                 null /* limit */, null /* cancellationSignal */);
     }
 
@@ -302,7 +375,7 @@ public class SQLiteQueryBuilder
      * information passed into this method.
      *
      * @param db the database to query on
-     * @param projectionIn A list of which columns to return. Passing
+     * @param projection A list of which columns to return. Passing
      *   null will return all columns, which is discouraged to prevent
      *   reading data from storage that isn't going to be used.
      * @param selection A filter declaring which rows to return,
@@ -329,10 +402,15 @@ public class SQLiteQueryBuilder
      * @see android.content.ContentResolver#query(android.net.Uri, String[],
      *      String, String[], String)
      */
-    public Cursor query(SQLiteDatabase db, String[] projectionIn,
-            String selection, String[] selectionArgs, String groupBy,
-            String having, String sortOrder, String limit) {
-        return query(db, projectionIn, selection, selectionArgs,
+    public @Nullable Cursor query(@NonNull SQLiteDatabase db,
+            @Nullable String[] projection,
+            @Nullable String selection,
+            @Nullable String[] selectionArgs,
+            @Nullable String groupBy,
+            @Nullable String having,
+            @Nullable String sortOrder,
+            @Nullable String limit) {
+        return query(db, projection, selection, selectionArgs,
                 groupBy, having, sortOrder, limit, null);
     }
 
@@ -341,7 +419,42 @@ public class SQLiteQueryBuilder
      * information passed into this method.
      *
      * @param db the database to query on
-     * @param projectionIn A list of which columns to return. Passing
+     * @param projection A list of which columns to return. Passing
+     *   null will return all columns, which is discouraged to prevent
+     *   reading data from storage that isn't going to be used.
+     * @param selection A filter declaring which rows to return,
+     *   formatted as an SQL WHERE clause (excluding the WHERE
+     *   itself). Passing null will return all rows for the given URL.
+     * @param selectionArgs You may include ?s in selection, which
+     *   will be replaced by the values from selectionArgs, in order
+     *   that they appear in the selection. The values will be bound
+     *   as Strings.
+     * @param sortOrder How to order the rows, formatted as an SQL
+     *   ORDER BY clause (excluding the ORDER BY itself). Passing null
+     *   will use the default sort order, which may be unordered.
+     * @param cancellationSignal A signal to cancel the operation in progress, or null if none.
+     * If the operation is canceled, then {@link OperationCanceledException} will be thrown
+     * when the query is executed.
+     * @return a cursor over the result set
+     * @see android.content.ContentResolver#query(android.net.Uri, String[],
+     *      String, String[], String)
+     */
+    public @Nullable Cursor query(@NonNull SQLiteDatabase db,
+            @Nullable String[] projection,
+            @Nullable String selection,
+            @Nullable String[] selectionArgs,
+            @Nullable String sortOrder,
+            @Nullable CancellationSignal cancellationSignal) {
+        return query(db, projection, selection, selectionArgs, null, null, sortOrder, null,
+                cancellationSignal);
+    }
+
+    /**
+     * Perform a query by combining all current settings and the
+     * information passed into this method.
+     *
+     * @param db the database to query on
+     * @param projection A list of which columns to return. Passing
      *   null will return all columns, which is discouraged to prevent
      *   reading data from storage that isn't going to be used.
      * @param selection A filter declaring which rows to return,
@@ -371,19 +484,59 @@ public class SQLiteQueryBuilder
      * @see android.content.ContentResolver#query(android.net.Uri, String[],
      *      String, String[], String)
      */
-    public Cursor query(SQLiteDatabase db, String[] projectionIn,
-            String selection, String[] selectionArgs, String groupBy,
-            String having, String sortOrder, String limit, CancellationSignal cancellationSignal) {
-        if (mTables == null) {
+    public @Nullable Cursor query(@NonNull SQLiteDatabase db,
+            @Nullable String[] projection,
+            @Nullable String selection,
+            @Nullable String[] selectionArgs,
+            @Nullable String groupBy,
+            @Nullable String having,
+            @Nullable String sortOrder,
+            @Nullable String limit,
+            @Nullable CancellationSignal cancellationSignal) {
+        final Bundle queryArgs = new Bundle();
+        maybePutString(queryArgs, QUERY_ARG_SQL_SELECTION, selection);
+        maybePutStringArray(queryArgs, QUERY_ARG_SQL_SELECTION_ARGS, selectionArgs);
+        maybePutString(queryArgs, QUERY_ARG_SQL_GROUP_BY, groupBy);
+        maybePutString(queryArgs, QUERY_ARG_SQL_HAVING, having);
+        maybePutString(queryArgs, QUERY_ARG_SQL_SORT_ORDER, sortOrder);
+        maybePutString(queryArgs, QUERY_ARG_SQL_LIMIT, limit);
+        return query(db, projection, queryArgs, cancellationSignal);
+    }
+
+    /**
+     * Perform a query by combining all current settings and the information
+     * passed into this method.
+     *
+     * @param db the database to query on
+     * @param projection A list of which columns to return. Passing null will
+     *            return all columns, which is discouraged to prevent reading
+     *            data from storage that isn't going to be used.
+     * @param queryArgs A collection of arguments for the query, defined using
+     *            keys such as {@link ContentResolver#QUERY_ARG_SQL_SELECTION}
+     *            and {@link ContentResolver#QUERY_ARG_SQL_SELECTION_ARGS}.
+     * @param cancellationSignal A signal to cancel the operation in progress,
+     *            or null if none. If the operation is canceled, then
+     *            {@link OperationCanceledException} will be thrown when the
+     *            query is executed.
+     * @return a cursor over the result set
+     */
+    public Cursor query(@NonNull SQLiteDatabase db,
+            @Nullable String[] projection,
+            @Nullable Bundle queryArgs,
+            @Nullable CancellationSignal cancellationSignal) {
+        Objects.requireNonNull(db, "No database defined");
+
+        if (VMRuntime.getRuntime().getTargetSdkVersion() >= Build.VERSION_CODES.Q) {
+            Objects.requireNonNull(mTables, "No tables defined");
+        } else if (mTables == null) {
             return null;
         }
 
-        final String sql;
-        final String unwrappedSql = buildQuery(
-                projectionIn, selection, groupBy, having,
-                sortOrder, limit);
+        if (queryArgs == null) {
+            queryArgs = Bundle.EMPTY;
+        }
 
-        if (mStrict && selection != null && selection.length() > 0) {
+        if (mStrict) {
             // Validate the user-supplied selection to detect syntactic anomalies
             // in the selection string that could indicate a SQL injection attempt.
             // The idea is to ensure that the selection clause is a valid SQL expression
@@ -392,30 +545,31 @@ public class SQLiteQueryBuilder
             // would escape the SQL expression while maintaining balanced parentheses
             // in both the wrapped and original forms.
 
-            // NOTE: The ordering of the below operations is important; we must
-            // execute the wrapped query to ensure the untrusted clause has been
-            // fully isolated.
-
-            // Validate the unwrapped query
-            db.validateSql(unwrappedSql, cancellationSignal); // will throw if query is invalid
-
-            // Execute wrapped query for extra protection
-            final String wrappedSql = buildQuery(projectionIn, wrap(selection), groupBy,
-                    having, sortOrder, limit);
-            sql = wrappedSql;
-        } else {
-            // Execute unwrapped query
-            sql = unwrappedSql;
+            // TODO: decode SORT ORDER and LIMIT clauses, since they can contain
+            // "expr" inside that need to be validated
+            final String sql = buildQuery(projection,
+                    wrap(queryArgs.getString(QUERY_ARG_SQL_SELECTION)),
+                    wrap(queryArgs.getString(QUERY_ARG_SQL_GROUP_BY)),
+                    wrap(queryArgs.getString(QUERY_ARG_SQL_HAVING)),
+                    queryArgs.getString(QUERY_ARG_SQL_SORT_ORDER),
+                    queryArgs.getString(QUERY_ARG_SQL_LIMIT));
+            db.validateSql(sql, cancellationSignal); // will throw if query is invalid
         }
 
-        final String[] sqlArgs = selectionArgs;
-        if (Log.isLoggable(TAG, Log.DEBUG)) {
-            if (Build.IS_DEBUGGABLE) {
-                Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
-            } else {
-                Log.d(TAG, sql);
-            }
+        final String sql = buildQuery(projection,
+                queryArgs.getString(QUERY_ARG_SQL_SELECTION),
+                queryArgs.getString(QUERY_ARG_SQL_GROUP_BY),
+                queryArgs.getString(QUERY_ARG_SQL_HAVING),
+                queryArgs.getString(QUERY_ARG_SQL_SORT_ORDER),
+                queryArgs.getString(QUERY_ARG_SQL_LIMIT));
+
+        final String[] sqlArgs = ArrayUtils.concat(String.class,
+                queryArgs.getStringArray(QUERY_ARG_SQL_SELECTION_ARGS), mWhereArgs);
+
+        if (Build.IS_DEBUGGABLE && Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
         }
+
         return db.rawQueryWithFactory(
                 mFactory, sql, sqlArgs,
                 SQLiteDatabase.findEditTable(mTables),
@@ -435,16 +589,12 @@ public class SQLiteQueryBuilder
      *   that they appear in the selection. The values will be bound
      *   as Strings.
      * @return the number of rows updated
-     * @hide
      */
     public int update(@NonNull SQLiteDatabase db, @NonNull ContentValues values,
             @Nullable String selection, @Nullable String[] selectionArgs) {
         Objects.requireNonNull(mTables, "No tables defined");
         Objects.requireNonNull(db, "No database defined");
         Objects.requireNonNull(values, "No values defined");
-
-        final String sql;
-        final String unwrappedSql = buildUpdate(values, selection);
 
         if (mStrict) {
             // Validate the user-supplied selection to detect syntactic anomalies
@@ -454,42 +604,24 @@ public class SQLiteQueryBuilder
             // originally specified. An attacker cannot create an expression that
             // would escape the SQL expression while maintaining balanced parentheses
             // in both the wrapped and original forms.
-
-            // NOTE: The ordering of the below operations is important; we must
-            // execute the wrapped query to ensure the untrusted clause has been
-            // fully isolated.
-
-            // Validate the unwrapped query
-            db.validateSql(unwrappedSql, null); // will throw if query is invalid
-
-            // Execute wrapped query for extra protection
-            final String wrappedSql = buildUpdate(values, wrap(selection));
-            sql = wrappedSql;
-        } else {
-            // Execute unwrapped query
-            sql = unwrappedSql;
+            final String sql = buildUpdate(values, wrap(selection));
+            db.validateSql(sql, null); // will throw if query is invalid
         }
 
-        if (selectionArgs == null) {
-            selectionArgs = EmptyArray.STRING;
+        final ArrayMap<String, Object> rawValues = values.getValues();
+        final String[] updateArgs = new String[rawValues.size()];
+        for (int i = 0; i < updateArgs.length; i++) {
+            updateArgs[i] = String.valueOf(rawValues.valueAt(i));
         }
-        final String[] rawKeys = values.keySet().toArray(EmptyArray.STRING);
-        final int valuesLength = rawKeys.length;
-        final Object[] sqlArgs = new Object[valuesLength + selectionArgs.length];
-        for (int i = 0; i < sqlArgs.length; i++) {
-            if (i < valuesLength) {
-                sqlArgs[i] = values.get(rawKeys[i]);
-            } else {
-                sqlArgs[i] = selectionArgs[i - valuesLength];
-            }
+
+        final String sql = buildUpdate(values, selection);
+        final String[] sqlArgs = ArrayUtils.concat(String.class, updateArgs,
+                ArrayUtils.concat(String.class, selectionArgs, mWhereArgs));
+
+        if (Build.IS_DEBUGGABLE && Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
         }
-        if (Log.isLoggable(TAG, Log.DEBUG)) {
-            if (Build.IS_DEBUGGABLE) {
-                Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
-            } else {
-                Log.d(TAG, sql);
-            }
-        }
+
         return db.executeSql(sql, sqlArgs);
     }
 
@@ -506,15 +638,11 @@ public class SQLiteQueryBuilder
      *   that they appear in the selection. The values will be bound
      *   as Strings.
      * @return the number of rows deleted
-     * @hide
      */
     public int delete(@NonNull SQLiteDatabase db, @Nullable String selection,
             @Nullable String[] selectionArgs) {
         Objects.requireNonNull(mTables, "No tables defined");
         Objects.requireNonNull(db, "No database defined");
-
-        final String sql;
-        final String unwrappedSql = buildDelete(selection);
 
         if (mStrict) {
             // Validate the user-supplied selection to detect syntactic anomalies
@@ -524,30 +652,17 @@ public class SQLiteQueryBuilder
             // originally specified. An attacker cannot create an expression that
             // would escape the SQL expression while maintaining balanced parentheses
             // in both the wrapped and original forms.
-
-            // NOTE: The ordering of the below operations is important; we must
-            // execute the wrapped query to ensure the untrusted clause has been
-            // fully isolated.
-
-            // Validate the unwrapped query
-            db.validateSql(unwrappedSql, null); // will throw if query is invalid
-
-            // Execute wrapped query for extra protection
-            final String wrappedSql = buildDelete(wrap(selection));
-            sql = wrappedSql;
-        } else {
-            // Execute unwrapped query
-            sql = unwrappedSql;
+            final String sql = buildDelete(wrap(selection));
+            db.validateSql(sql, null); // will throw if query is invalid
         }
 
-        final String[] sqlArgs = selectionArgs;
-        if (Log.isLoggable(TAG, Log.DEBUG)) {
-            if (Build.IS_DEBUGGABLE) {
-                Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
-            } else {
-                Log.d(TAG, sql);
-            }
+        final String sql = buildDelete(selection);
+        final String[] sqlArgs = ArrayUtils.concat(String.class, selectionArgs, mWhereArgs);
+
+        if (Build.IS_DEBUGGABLE && Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
         }
+
         return db.executeSql(sql, sqlArgs);
     }
 
@@ -605,7 +720,7 @@ public class SQLiteQueryBuilder
 
     /** {@hide} */
     public String buildUpdate(ContentValues values, String selection) {
-        if (values == null || values.size() == 0) {
+        if (values == null || values.isEmpty()) {
             throw new IllegalArgumentException("Empty values");
         }
 
@@ -614,12 +729,12 @@ public class SQLiteQueryBuilder
         sql.append(mTables);
         sql.append(" SET ");
 
-        final String[] rawKeys = values.keySet().toArray(EmptyArray.STRING);
-        for (int i = 0; i < rawKeys.length; i++) {
+        final ArrayMap<String, Object> rawValues = values.getValues();
+        for (int i = 0; i < rawValues.size(); i++) {
             if (i > 0) {
                 sql.append(',');
             }
-            sql.append(rawKeys[i]);
+            sql.append(rawValues.keyAt(i));
             sql.append("=?");
         }
 
@@ -763,7 +878,7 @@ public class SQLiteQueryBuilder
         return query.toString();
     }
 
-    private String[] computeProjection(String[] projectionIn) {
+    private @Nullable String[] computeProjection(@Nullable String[] projectionIn) {
         if (projectionIn != null && projectionIn.length > 0) {
             if (mProjectionMap != null) {
                 String[] projection = new String[projectionIn.length];
@@ -786,7 +901,7 @@ public class SQLiteQueryBuilder
                     }
 
                     throw new IllegalArgumentException("Invalid column "
-                            + projectionIn[i]);
+                            + projectionIn[i] + " from tables " + mTables);
                 }
                 return projection;
             } else {
@@ -813,20 +928,20 @@ public class SQLiteQueryBuilder
         return null;
     }
 
-    private @Nullable String computeWhere(@Nullable String selection) {
-        final boolean hasInternal = !TextUtils.isEmpty(mWhereClause);
-        final boolean hasExternal = !TextUtils.isEmpty(selection);
+    private @NonNull String computeWhere(@Nullable String selection) {
+        final boolean hasUser = selection != null && selection.length() > 0;
+        final boolean hasInternal = mWhereClause != null && mWhereClause.length() > 0;
 
-        if (hasInternal || hasExternal) {
+        if (hasUser || hasInternal) {
             final StringBuilder where = new StringBuilder();
-            if (hasInternal) {
-                where.append('(').append(mWhereClause).append(')');
+            if (hasUser) {
+                where.append('(').append(selection).append(')');
             }
-            if (hasInternal && hasExternal) {
+            if (hasUser && hasInternal) {
                 where.append(" AND ");
             }
-            if (hasExternal) {
-                where.append('(').append(selection).append(')');
+            if (hasInternal) {
+                where.append('(').append(mWhereClause.toString()).append(')');
             }
             return where.toString();
         } else {
@@ -839,10 +954,26 @@ public class SQLiteQueryBuilder
      * {@code ()}, in which case return it verbatim.
      */
     private @Nullable String wrap(@Nullable String arg) {
-        if (TextUtils.isEmpty(arg)) {
+        if (arg == null) {
+            return null;
+        } else if (arg.equals("")) {
             return arg;
         } else {
             return "(" + arg + ")";
+        }
+    }
+
+    private static void maybePutString(@NonNull Bundle bundle, @NonNull String key,
+            @Nullable String value) {
+        if (value != null) {
+            bundle.putString(key, value);
+        }
+    }
+
+    private static void maybePutStringArray(@NonNull Bundle bundle, @NonNull String key,
+            @Nullable String[] value) {
+        if (value != null) {
+            bundle.putStringArray(key, value);
         }
     }
 }
