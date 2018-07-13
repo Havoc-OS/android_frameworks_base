@@ -71,7 +71,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/volume_expand_button"
             style="@style/VolumeButtons"
-            android:layout_width="92dp"
+            android:layout_width="@dimen/global_actions_panel_width"
             android:layout_height="44dp"
             android:layout_gravity="center"
             android:background="@drawable/ripple_drawable"
