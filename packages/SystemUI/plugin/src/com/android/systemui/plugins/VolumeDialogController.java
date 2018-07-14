@@ -99,7 +99,6 @@ public interface VolumeDialogController {
         public ComponentName effectsSuppressor;
         public String effectsSuppressorName;
         public int activeStream = NO_ACTIVE_STREAM;
-        public boolean linkedNotification;
 
         public State copy() {
             final State rt = new State();
@@ -114,7 +113,6 @@ public interface VolumeDialogController {
             }
             rt.effectsSuppressorName = effectsSuppressorName;
             rt.activeStream = activeStream;
-            rt.linkedNotification = linkedNotification;
             return rt;
         }
 
@@ -144,7 +142,6 @@ public interface VolumeDialogController {
             sep(sb, indent); sb.append("effectsSuppressor:").append(effectsSuppressor);
             sep(sb, indent); sb.append("effectsSuppressorName:").append(effectsSuppressorName);
             sep(sb, indent); sb.append("activeStream:").append(activeStream);
-            sep(sb, indent); sb.append("linkedNotification:").append(linkedNotification);
             if (indent > 0) sep(sb, indent);
             return sb.append('}').toString();
         }

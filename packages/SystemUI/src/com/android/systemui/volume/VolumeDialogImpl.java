@@ -277,13 +277,8 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
             addRow(AudioManager.STREAM_MUSIC,
                     R.drawable.ic_volume_media, R.drawable.ic_volume_media_mute, true);
             if (!AudioSystem.isSingleVolume(mContext)) {
-                if (Util.isVoiceCapable(mContext)) {
-                    addRow(AudioManager.STREAM_RING,
-                            R.drawable.ic_volume_ringer, R.drawable.ic_volume_ringer_mute, true);
-                } else {
-                    addRow(AudioManager.STREAM_RING,
-                            R.drawable.ic_volume_notification, R.drawable.ic_volume_notification_mute, true);
-                }
+                addRow(AudioManager.STREAM_RING,
+                        R.drawable.ic_volume_ringer, R.drawable.ic_volume_ringer_mute, true);
                 addRow(AudioManager.STREAM_ALARM,
                         R.drawable.ic_volume_alarm, R.drawable.ic_volume_alarm_mute, false);
                 addRow(AudioManager.STREAM_VOICE_CALL,
@@ -699,14 +694,10 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
             final VolumeRow row = mRows.get(i);
             if (row.ss == null || !row.ss.dynamic) continue;
             if (!mDynamic.get(row.stream)) {
-                removeRow(row);
+                mRows.remove(i);
+                mDialogRowsView.removeView(row.view);
             }
         }
-    }
-
-    private void removeRow(VolumeRow volumeRow) {
-        mRows.remove(volumeRow);
-        mDialogRowsView.removeView(volumeRow.view);
     }
 
     private void onStateChangedH(State state) {
@@ -730,10 +721,6 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
             }
         }
 
-        if (Util.isVoiceCapable(mContext)) {
-            updateNotificationRowH();
-        }
-
         if (mActiveStream != state.activeStream) {
             mPrevActiveStream = mActiveStream;
             mActiveStream = state.activeStream;
@@ -744,18 +731,6 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
             updateVolumeRowH(row);
         }
         updateFooterH();
-    }
-
-    private void updateNotificationRowH() {
-        VolumeRow notificationRow = findRow(AudioManager.STREAM_NOTIFICATION);
-        if (notificationRow != null) {
-            if (mState.linkedNotification) {
-                removeRow(notificationRow);
-            }
-        } else if (!mState.linkedNotification) {
-            addRow(AudioManager.STREAM_NOTIFICATION,
-                    R.drawable.ic_volume_notification, R.drawable.ic_volume_notification_mute, true);
-        }
     }
 
     private void updateFooterH() {
@@ -806,16 +781,14 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         final boolean isSystemStream = row.stream == AudioManager.STREAM_SYSTEM;
         final boolean isAlarmStream = row.stream == AudioManager.STREAM_ALARM;
         final boolean isMusicStream = row.stream == AudioManager.STREAM_MUSIC;
-        final boolean isNotificationStream = row.stream == AudioManager.STREAM_NOTIFICATION;
-        final boolean isVibrate = mState.ringerModeInternal == AudioManager.RINGER_MODE_VIBRATE;
-        final boolean isRingVibrate = isRingStream && isVibrate;
+        final boolean isRingVibrate = isRingStream
+                && mState.ringerModeInternal == AudioManager.RINGER_MODE_VIBRATE;
         final boolean isRingSilent = isRingStream
                 && mState.ringerModeInternal == AudioManager.RINGER_MODE_SILENT;
         final boolean isZenAlarms = mState.zenMode == Global.ZEN_MODE_ALARMS;
         final boolean isZenNone = mState.zenMode == Global.ZEN_MODE_NO_INTERRUPTIONS;
-        final boolean zenMuted = isZenAlarms ? (isRingStream || isSystemStream || isNotificationStream)
-                : isZenNone ? (isRingStream || isSystemStream || isAlarmStream || isMusicStream || isNotificationStream)
-                : isVibrate ? (isNotificationStream)
+        final boolean zenMuted = isZenAlarms ? (isRingStream || isSystemStream)
+                : isZenNone ? (isRingStream || isSystemStream || isAlarmStream || isMusicStream)
                 : false;
 
         // update slider max
