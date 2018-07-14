@@ -29,10 +29,6 @@
     androidprv:layout_maxWidth="@dimen/keyguard_security_width"
     androidprv:layout_maxHeight="@dimen/keyguard_security_height"
     android:gravity="center_horizontal">
-      <LinearLayout 
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:orientation="vertical"> 
         <RelativeLayout
             android:id="@+id/keyguard_clock_container"
             android:layout_width="match_parent"
@@ -107,5 +103,4 @@
                 android:ellipsize="marquee"
                 android:singleLine="true" />
         </RelativeLayout>
-      </LinearLayout> 
 </com.android.keyguard.KeyguardStatusView>
