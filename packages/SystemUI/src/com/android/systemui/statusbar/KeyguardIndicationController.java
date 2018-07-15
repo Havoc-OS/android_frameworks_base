@@ -368,7 +368,7 @@ public class KeyguardIndicationController implements
                         mTextView.switchIndication(chargeIndicator);
                     } else if (showAmbientBottomInfo == AMBIENT_BOTTOM_DISPLAY_WEATHER){ 
                         if (mWeatherEnabled && !mPowerPluggedIn) { 
-                            String weatherIcon = "\u26C5";
+                            String weatherIcon = "\u26C5\uFE0E";
                             CharSequence weatherIndicator = weatherIcon + "\n" +String.format(mContext.getResources().getString(R.string.ambient_weather_info), 
                                   mWeatherCurrentTemp, mWeatherConditionText); 
                             mTextView.setTextColor(Color.WHITE);
