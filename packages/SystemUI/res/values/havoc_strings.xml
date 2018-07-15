@@ -63,6 +63,13 @@
     <string name="onthego_service_toggle">Automatically restart service</string> 
     <string name="onthego_channel_name">Main</string> 
 
+        <!-- Log Tile --> 
+    <string name="quick_settings_logcat_label">LogCat</string> 
+    <string name="quick_settings_logcatradio_label">LogCatRadio</string> 
+    <string name="quick_settings_kmsg_label">Kmsg</string> 
+    <string name="quick_settings_dmesg_label">Dmsg</string> 
+    <string name="cannot_get_su">Action failed because of missing superuser access</string> 
+
      <!-- key disable QS Tile -->
     <string name="quick_settings_key_disable_label">Disable keys</string>
     <string name="accessibility_quick_settings_key_disable_on">Keys disabled.</string>

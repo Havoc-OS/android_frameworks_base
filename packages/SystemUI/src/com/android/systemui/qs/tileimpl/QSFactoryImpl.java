@@ -59,6 +59,7 @@ import com.android.systemui.qs.tiles.LiveDisplayTile;
 import com.android.systemui.qs.tiles.KeyDisableTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.MusicTile;
+import com.android.systemui.qs.tiles.LogTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.RebootTile;
@@ -151,6 +152,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("game")) return new GameModeTile(mHost);
         else if (tileSpec.equals("edgegesture")) return new EdgeGestureTile(mHost);
         else if (tileSpec.equals("gestureanywhere")) return new GestureAnywhereTile(mHost);
+        else if (tileSpec.equals("logtile")) return new LogTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);
