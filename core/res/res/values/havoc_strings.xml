@@ -50,6 +50,9 @@
         digital,digital_bold,sammy,sammy_bold,analog 
     </string> 
 
+       <!-- SU Shell --> 
+    <string name="cannot_get_su">Action failed because of missing superuser access</string> 
+
     <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_accessFontManager">access font manager</string>
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
