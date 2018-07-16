@@ -271,4 +271,7 @@
 
   <!-- Old QTI Blobs -->
   <java-symbol type="bool" name="config_oldQtiTelephony" />
+
+  <!-- Whether device ignores the RSSNR signal implementation -->
+  <java-symbol type="bool" name="config_ignoreRssnrSignalLevel" />
 </resources>
