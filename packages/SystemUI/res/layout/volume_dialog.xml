@@ -13,74 +13,88 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/volume_dialog"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="end"
-	android:layout_marginEnd="16dp"
+    android:layout_marginStart="14dp"
+    android:layout_marginEnd="14dp"
     android:background="@drawable/volume_background"
     android:focusableInTouchMode="false"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/volume_dialog_content"
-        android:layout_width="wrap_content"
+    <HorizontalScrollView
+        android:id="@+id/scroll_volume_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end"
-		android:layout_gravity="end"
-        android:orientation="vertical">
-
+        android:fadingEdgeLength="2dp"
+        android:background="@drawable/volume_background"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none"
+        android:fillViewport="true">
+    
         <LinearLayout
-            android:id="@+id/volume_dialog_rows"
-            android:layout_width="wrap_content"
-            android:layout_height="245dp"
-            android:orientation="horizontal">
-            <!-- volume rows added and removed here! :-) -->
+            android:id="@+id/volume_dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:layout_gravity="end"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/volume_dialog_rows"
+                android:layout_width="wrap_content"
+                android:layout_height="245dp"
+                android:orientation="horizontal">
+                <!-- volume rows added and removed here! :-) -->
+            </LinearLayout>
+
+            <include
+                layout="@layout/volume_zen_footer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+
+            <!-- Only shown from Tuner setting -->
+            <include
+                layout="@layout/tuner_zen_mode_panel"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+
         </LinearLayout>
 
-        <include
-            layout="@layout/volume_zen_footer"
-            android:layout_width="0dp"
-            android:layout_height="0dp"/>
+    </HorizontalScrollView>
+        <LinearLayout
+            android:id="@+id/volume_dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/volume_background"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:orientation="vertical">
 
-        <!-- Only shown from Tuner setting -->
-        <include
-            layout="@layout/tuner_zen_mode_panel"
-            android:layout_width="0dp"
-            android:layout_height="0dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:visibility="gone"/>
 
-    </LinearLayout>
+            <com.android.keyguard.AlphaOptimizedImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/volume_expand_button"
+                style="@style/VolumeButtons"
+                android:layout_width="@dimen/global_actions_panel_width"
+                android:layout_height="44dp"
+                android:layout_gravity="right"
+                android:background="@drawable/volume_background"
+                android:clickable="true"
+                android:gravity="right"
+                android:paddingBottom="8dp"
+                android:soundEffectsEnabled="false"
+                android:src="@drawable/ic_volume_collapse_animation"
+                tools:ignore="RtlHardcoded" />
 
-    <LinearLayout
-        android:id="@+id/volume_dialog_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:gravity="end"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:visibility="gone"/>
-
-        <com.android.keyguard.AlphaOptimizedImageButton xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/volume_expand_button"
-            style="@style/VolumeButtons"
-            android:layout_width="@dimen/global_actions_panel_width"
-            android:layout_height="44dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ripple_drawable"
-            android:clickable="true"
-            android:gravity="center"
-            android:paddingBottom="8dp"
-            android:soundEffectsEnabled="false"
-            android:src="@drawable/ic_volume_collapse_animation"
-            tools:ignore="RtlHardcoded" />
-
-    </LinearLayout>
+            </LinearLayout>
 </LinearLayout>
