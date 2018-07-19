@@ -4019,36 +4019,6 @@ public final class Settings {
         public static final String STABILIZATION_VELOCITY_AMPLITUDE = "stabilization_velocity_amplitude";
 		
         /**
-         * XOSP Blur personalization settings
-         * @hide
-         */
-        public static final String STATUS_BAR_EXPANDED_ENABLED_PREFERENCE_KEY = "blurred_status_bar_expanded_enabled_pref";
-   
-        public static final String BLUR_SCALE_PREFERENCE_KEY = "blurred_expanded_panel_scale_pref";
-   
-        public static final String BLUR_RADIUS_PREFERENCE_KEY = "blurred_expanded_panel_radius_pref";
-  
-        public static final String TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY = "translucent_notifications_percentage_pref";
-
-        public static final String TRANSLUCENT_QUICK_SETTINGS_PRECENTAGE_PREFERENCE_KEY = "translucent_quick_settings_percentage_pref";
-   
-        public static final String TRANSLUCENT_QUICK_SETTINGS_PREFERENCE_KEY = "translucent_quick_settings_pref";
-   
-        public static final String TRANSLUCENT_NOTIFICATIONS_PREFERENCE_KEY = "translucent_notifications_pref";
-
-        public static final String RECENT_APPS_ENABLED_PREFERENCE_KEY = "blurred_recent_app_enabled_pref";
-
-        public static final String RECENT_APPS_SCALE_PREFERENCE_KEY = "blurred_recent_app_scale_pref";
-
-        public static final String RECENT_APPS_RADIUS_PREFERENCE_KEY = "blurred_recent_app_radius_pref";
-
-        public static final String BLUR_DARK_COLOR_PREFERENCE_KEY = "blur_dark_color_pref";
-
-        public static final String BLUR_LIGHT_COLOR_PREFERENCE_KEY = "blur_light_color_pref";
-
-        public static final String BLUR_MIXED_COLOR_PREFERENCE_KEY = "blur_mixed_color_pref";
-
-        /**
          * Whether lock-to-app will be triggered by long-press on recents.
          * @hide
          */
@@ -6027,6 +5997,36 @@ public final class Settings {
          * @hide
          */
         public static final String BATTERY_SAVER_MODE_COLOR = "battery_save_mode_color";
+
+        /**
+         * Blur personalization settings
+         * @hide
+         */
+        public static final String BLUR_STATUSBAR_ENABLED = "blur_statusbar_enabled";
+
+        public static final String BLUR_STATUSBAR_SCALE = "blur_statusbar_scale";
+
+        public static final String BLUR_STATUSBAR_RADIUS = "blur_statusbar_radius";
+
+        public static final String BLUR_NOTIFICATIONS_ENABLED = "blur_notifications_enabled";
+
+        public static final String BLUR_NOTIFICATIONS_PERCENTAGE = "blur_notifications_percentage";
+
+        public static final String BLUR_QUICKSETTINGS_ENABLED = "blur_quicksettings_enabled";
+
+        public static final String BLUR_QUICKSETTINGS_PERCENTAGE = "blur_quicksettings_percentage";
+
+        public static final String BLUR_RECENT_ENABLED = "blur_recent_enabled";
+
+        public static final String BLUR_RECENT_SCALE = "blur_recent_scale";
+
+        public static final String BLUR_RECENT_RADIUS = "blur_recent_radius";
+
+        public static final String BLUR_DARK_COLOR = "blur_dark_color";
+
+        public static final String BLUR_LIGHT_COLOR = "blur_light_color";
+
+        public static final String BLUR_MIXED_COLOR = "blur_mixed_color";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings

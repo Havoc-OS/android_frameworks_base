@@ -18,8 +18,6 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.content.ContentResolver;
-import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
@@ -31,15 +29,15 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.util.AttributeSet;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
+import com.android.systemui.Dependency;
 import com.android.systemui.statusbar.phone.NotificationPanelView;
-import com.android.internal.utils.du.UserContentObserver;
+import com.android.systemui.tuner.TunerService;
 
 /**
  * A view that can be used for both the dimmed and normal background of an notification.
  */
-public class NotificationBackgroundView extends View {
+public class NotificationBackgroundView extends View implements TunerService.Tunable {
 
     private Drawable mBackground;
     private int mClipTopAmount;
@@ -50,11 +48,13 @@ public class NotificationBackgroundView extends View {
     private static int mTranslucencyPercentage;
     private static boolean mTranslucentNotifications;
 
-    private SettingsObserver mSettingsObserver;
+    private static final String BLUR_NOTIFICATIONS_ENABLED =
+            "system:" + Settings.System.BLUR_NOTIFICATIONS_ENABLED;
+    private static final String BLUR_NOTIFICATIONS_PERCENTAGE =
+            "system:" + Settings.System.BLUR_NOTIFICATIONS_PERCENTAGE;
 
     public NotificationBackgroundView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mSettingsObserver = new SettingsObserver(new Handler());
     }
 
     @Override
@@ -66,7 +66,6 @@ public class NotificationBackgroundView extends View {
         int bottom = mActualHeight - mClipBottomAmount;
         if (drawable != null && bottom > mClipTopAmount) {
             drawable.setBounds(0, mClipTopAmount, getWidth(), bottom);
-
             if (mTranslucentNotifications) {
                 if (drawable.getAlpha() != mTranslucencyPercentage)
                     drawable.setAlpha(mTranslucencyPercentage);
@@ -86,13 +85,15 @@ public class NotificationBackgroundView extends View {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mSettingsObserver.observe();
+        Dependency.get(TunerService.class).addTunable(this,
+                BLUR_NOTIFICATIONS_ENABLED,
+                BLUR_NOTIFICATIONS_PERCENTAGE);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mSettingsObserver.unobserve();
+        Dependency.get(TunerService.class).removeTunable(this);
     }
 
     @Override
@@ -118,50 +119,20 @@ public class NotificationBackgroundView extends View {
         }
     }
 
-    class SettingsObserver extends UserContentObserver {
-        SettingsObserver(Handler handler) {
-            super(handler);
-        }
-        
-        @Override
-        protected void observe() {
-            super.observe();
-            
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PREFERENCE_KEY), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY), false, this);
-            update();
-        }
-
-        @Override
-        protected void unobserve() {
-            super.unobserve();
-            
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            update();
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            update();
-        }
-
-        @Override
-        public void update() {
-            ContentResolver resolver = mContext.getContentResolver();
-            mTranslucentNotifications = Settings.System.getIntForUser(resolver,
-                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1;
-            mTranslucencyPercentage = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY, 70);
-            
-            mTranslucencyPercentage = 255 - ((mTranslucencyPercentage * 255) / 100);
+    @Override
+    public void onTuningChanged(String key, String newValue) {
+        switch (key) {
+            case BLUR_NOTIFICATIONS_ENABLED:
+                mTranslucentNotifications =
+                        newValue != null && Integer.parseInt(newValue) != 0;
+                break;
+            case BLUR_NOTIFICATIONS_PERCENTAGE:
+                int value =
+                        newValue == null ? 70 : Integer.parseInt(newValue);
+                mTranslucencyPercentage = 255 - ((value * 255) / 100);
+                break;
+            default:
+                break;
         }
     }
 

@@ -50,6 +50,7 @@ import android.app.ActivityOptions;
 import android.app.IActivityManager;
 import android.app.INotificationManager;
 import android.app.KeyguardManager;
+import android.graphics.drawable.Icon; 
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -66,6 +67,7 @@ import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.hardware.SensorManager;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
@@ -92,9 +94,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
-import android.hardware.display.DisplayManager;
-import android.hardware.SensorManager;
 import android.media.AudioAttributes;
 import android.media.MediaMetadata;
 import android.media.session.MediaController;
@@ -248,6 +247,7 @@ import com.android.systemui.statusbar.ExpandableNotificationRow;
 import com.android.systemui.statusbar.GestureRecorder;
 import com.android.systemui.statusbar.KeyboardShortcuts;
 import com.android.systemui.statusbar.KeyguardIndicationController;
+import com.android.systemui.statusbar.NotificationBackgroundView;
 import com.android.systemui.statusbar.NotificationData;
 import com.android.systemui.statusbar.NotificationData.Entry;
 import com.android.systemui.statusbar.appcirclesidebar.AppCircleSidebar;
@@ -295,9 +295,6 @@ import com.android.systemui.statusbar.stack.NotificationStackScrollLayout;
 import com.android.systemui.statusbar.stack.NotificationStackScrollLayout
         .OnChildLocationsChangedListener;
 import com.android.systemui.statusbar.stack.StackStateAnimator;
-import com.android.systemui.tuner.TunerService;
-import com.android.systemui.tuner.TunerService.Tunable;
-import com.android.systemui.statusbar.NotificationBackgroundView;
 import com.android.systemui.util.NotificationChannels;
 import com.android.systemui.util.leak.LeakDetector;
 import com.android.systemui.tuner.TunerService;
@@ -505,6 +502,29 @@ public class StatusBar extends SystemUI implements DemoMode,
             "system:" + Settings.System.BERRY_DARK_SHADE;
     private static final String FP_SWIPE_TO_DISMISS_NOTIFICATIONS =
             Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS;
+
+    private static final String BLUR_STATUSBAR_ENABLED =
+            "system:" + Settings.System.BLUR_STATUSBAR_ENABLED;
+    private static final String BLUR_STATUSBAR_SCALE =
+            "system:" + Settings.System.BLUR_STATUSBAR_SCALE;
+    private static final String BLUR_STATUSBAR_RADIUS =
+            "system:" + Settings.System.BLUR_STATUSBAR_RADIUS;
+    private static final String BLUR_NOTIFICATIONS_ENABLED =
+            "system:" + Settings.System.BLUR_NOTIFICATIONS_ENABLED;
+    private static final String BLUR_NOTIFICATIONS_PERCENTAGE =
+            "system:" + Settings.System.BLUR_NOTIFICATIONS_PERCENTAGE;
+    private static final String BLUR_DARK_COLOR =
+            "system:" + Settings.System.BLUR_DARK_COLOR;
+    private static final String BLUR_LIGHT_COLOR =
+            "system:" + Settings.System.BLUR_LIGHT_COLOR;
+    private static final String BLUR_MIXED_COLOR =
+            "system:" + Settings.System.BLUR_MIXED_COLOR;
+    private static final String BLUR_RECENT_ENABLED =
+            "system:" + Settings.System.BLUR_RECENT_ENABLED;
+    private static final String BLUR_RECENT_SCALE =
+            "system:" + Settings.System.BLUR_RECENT_SCALE;
+    private static final String BLUR_RECENT_RADIUS =
+            "system:" + Settings.System.BLUR_RECENT_RADIUS;
 
     static {
         boolean onlyCoreApps;
@@ -1186,8 +1206,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         // Connect in to the status bar manager service
         mCommandQueue = getComponent(CommandQueue.class);
         mCommandQueue.addCallbacks(this);
-        
-        mHavocSettingsObserver.observe();
+        mHavocSettingsObserver.observe(); 
 
         int[] switches = new int[9];
         ArrayList<IBinder> binders = new ArrayList<>();
@@ -1309,6 +1328,17 @@ public class StatusBar extends SystemUI implements DemoMode,
                 FORCE_AMBIENT_FOR_MEDIA,
                 STATUS_BAR_TICKER_ANIMATION_MODE,
                 BERRY_DARK_SHADE,
+                BLUR_STATUSBAR_ENABLED,
+                BLUR_STATUSBAR_SCALE,
+                BLUR_STATUSBAR_RADIUS,
+                BLUR_NOTIFICATIONS_ENABLED,
+                BLUR_NOTIFICATIONS_PERCENTAGE,
+                BLUR_DARK_COLOR,
+                BLUR_LIGHT_COLOR,
+                BLUR_MIXED_COLOR,
+                BLUR_RECENT_ENABLED,
+                BLUR_RECENT_SCALE,
+                BLUR_RECENT_RADIUS,
                 FP_SWIPE_TO_DISMISS_NOTIFICATIONS);
 
         // Lastly, call to the icon policy to install/update all the icons.
@@ -1643,13 +1673,14 @@ public class StatusBar extends SystemUI implements DemoMode,
                     }
                     String action = intent.getAction();
 
-               if (action.equals(Intent.ACTION_CONFIGURATION_CHANGED)) {
+                   if (action.equals(Intent.ACTION_CONFIGURATION_CHANGED)) {
                         if (NotificationPanelView.mKeyguardShowing) {
                             return;
                         }
-                        RecentsActivity.onConfigurationChanged();
+                        RecentsActivity.updatePreferences();
 
-                        if (mExpandedVisible && NotificationPanelView.mBlurredStatusBarExpandedEnabled && (!NotificationPanelView.mKeyguardShowing)) {
+                        if (mExpandedVisible && NotificationPanelView.mBlurredStatusBarExpandedEnabled
+                                && (!NotificationPanelView.mKeyguardShowing)) {
                             makeExpandedInvisible();
                         }
                     }
@@ -1662,9 +1693,9 @@ public class StatusBar extends SystemUI implements DemoMode,
 
             RecentsActivity.init(this.mContext);
 
-            updatePreferences(mContext);
-        } catch (Exception e){
-            Log.d("mango918", String.valueOf(e));
+            updatePreferences();
+        } catch (Exception e) {
+            Log.d(TAG, String.valueOf(e));
         }
     }
 
@@ -6843,7 +6874,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     protected IStatusBarService mBarService;
 
     // all notifications
-    public static NotificationData mNotificationData;
+    protected NotificationData mNotificationData;
     protected NotificationStackScrollLayout mStackScroller;
 
     protected NotificationGroupManager mGroupManager = new NotificationGroupManager();
@@ -7041,46 +7072,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         void observe() {
          ContentResolver resolver = mContext.getContentResolver();
-         resolver.registerContentObserver(Settings.System.getUriFor( 
-                Settings.System.BLUR_SCALE_PREFERENCE_KEY),  
-                false, this); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-                Settings.System.BLUR_RADIUS_PREFERENCE_KEY),  
-                false, this); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-                Settings.System.STATUS_BAR_EXPANDED_ENABLED_PREFERENCE_KEY),  
-                false, this); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-                Settings.System.TRANSLUCENT_NOTIFICATIONS_PREFERENCE_KEY),  
-                false, this); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-                Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY),  
-                false, this, UserHandle.USER_ALL); 
-       resolver.registerContentObserver(Settings.System.getUriFor( 
-             Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY),  
-             false, this, UserHandle.USER_ALL); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-             Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY),  
-             false, this, UserHandle.USER_ALL); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-             Settings.System.RECENT_APPS_SCALE_PREFERENCE_KEY),  
-             false, this); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-             Settings.System.RECENT_APPS_RADIUS_PREFERENCE_KEY),  
-             false, this); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-             Settings.System.RECENT_APPS_RADIUS_PREFERENCE_KEY), 
-             false, this); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-             Settings.System.BLUR_DARK_COLOR_PREFERENCE_KEY),  
-             false, this); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-             Settings.System.BLUR_LIGHT_COLOR_PREFERENCE_KEY),  
-             false, this); 
-        resolver.registerContentObserver(Settings.System.getUriFor( 
-             Settings.System.BLUR_MIXED_COLOR_PREFERENCE_KEY),  
-             false, this); 
-        resolver.registerContentObserver(Settings.Secure.getUriFor( 
+            resolver.registerContentObserver(Settings.System.getUriFor(
                 Settings.Secure.SYSUI_ROUNDED_FWVALS), 
                 false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -7125,15 +7117,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-          if (uri.equals(Settings.System.getUriFor( 
-                Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY))) { 
-                mBlurredRecents = Settings.System.getIntForUser( 
-                                    mContext.getContentResolver(), 
-                                    Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY, 
-                                    0, UserHandle.USER_CURRENT) == 1; 
-                RecentsActivity.startBlurTask(); 
-                updatePreferences(mContext); ; 
-            } else if (uri.equals(Settings.System.getUriFor(
+            if (uri.equals(Settings.System.getUriFor(
                     Settings.System.HEADS_UP_BLACKLIST_VALUES))) {
                         updateHeadsUpBlackList();  
             } else if (uri.equals(Settings.System.getUriFor(
@@ -7167,7 +7151,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             setSecurityAlpha();
             updateKeyguardStatusSettings();
             updateRecentsMode();
-            updateBlurSettings();
             updateHeadsUpBlackList();
             setBatterySaverWarning();
         }
@@ -7200,34 +7183,6 @@ public void setNewOverlayAlpha() {
         }
     }
     
-    private void updateBlurSettings() {
-        ContentResolver resolver = mContext.getContentResolver();
-        mBlurScale = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.BLUR_SCALE_PREFERENCE_KEY, 10);
-        mBlurRadius = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.BLUR_RADIUS_PREFERENCE_KEY, 5);
-        mBlurredStatusBarExpandedEnabled = Settings.System.getIntForUser(resolver,
-                Settings.System.STATUS_BAR_EXPANDED_ENABLED_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1;
-        mTranslucentNotifications = Settings.System.getIntForUser(resolver,
-                Settings.System.TRANSLUCENT_NOTIFICATIONS_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1;
-        mNotTranslucencyPercentage = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.TRANSLUCENT_NOTIFICATIONS_PRECENTAGE_PREFERENCE_KEY, 70);
-       mBlurredRecents = Settings.System.getIntForUser(resolver,
-                Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1;
-        mScaleRecents = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.RECENT_APPS_SCALE_PREFERENCE_KEY, 6);
-        mRadiusRecents = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.RECENT_APPS_RADIUS_PREFERENCE_KEY, 3);
-        mBlurDarkColorFilter = Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.BLUR_DARK_COLOR_PREFERENCE_KEY, Color.LTGRAY);
-        mBlurMixedColorFilter = Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.BLUR_MIXED_COLOR_PREFERENCE_KEY, Color.GRAY);
-        mBlurLightColorFilter = Settings.System.getInt(mContext.getContentResolver(), 
-                Settings.System.BLUR_LIGHT_COLOR_PREFERENCE_KEY, Color.DKGRAY);
-        RecentsActivity.updateBlurColors(mBlurDarkColorFilter,mBlurMixedColorFilter,mBlurLightColorFilter);
-        RecentsActivity.updateRadiusScale(mScaleRecents,mRadiusRecents);
-}
-
 
     private void setHeadsUpStoplist() {
         final String stopString = Settings.System.getString(mContext.getContentResolver(),
@@ -7346,7 +7301,7 @@ public void setNewOverlayAlpha() {
             return super.onClickHandler(view, pendingIntent, fillInIntent,
                     StackId.FULLSCREEN_WORKSPACE_STACK_ID);
         }
-        
+
         private boolean handleRemoteInput(View view, PendingIntent pendingIntent, Intent fillInIntent) {
             Object tag = view.getTag(com.android.internal.R.id.remote_input_tag);
             RemoteInput[] inputs = null;
@@ -9179,6 +9134,52 @@ public void setNewOverlayAlpha() {
                 mFpDismissNotifications =
                         newValue != null && Integer.parseInt(newValue) != 0;
                 break;
+            case BLUR_STATUSBAR_ENABLED:
+                mBlurredStatusBarExpandedEnabled =
+                        newValue != null && Integer.parseInt(newValue) == 1;
+                break;
+            case BLUR_STATUSBAR_SCALE:
+                mBlurScale =
+                        newValue == null ? 10 : Integer.parseInt(newValue);
+                break;
+            case BLUR_STATUSBAR_RADIUS:
+                mBlurRadius =
+                        newValue == null ? 5 : Integer.parseInt(newValue);
+                break;
+            case BLUR_NOTIFICATIONS_ENABLED:
+            case BLUR_NOTIFICATIONS_PERCENTAGE:
+                updatePreferences();
+                break;
+            case BLUR_DARK_COLOR:
+                mBlurDarkColorFilter =
+                        newValue == null ? Color.LTGRAY : Integer.parseInt(newValue);
+                RecentsActivity.updateBlurColors(mBlurDarkColorFilter, mBlurMixedColorFilter, mBlurLightColorFilter);
+                break;
+            case BLUR_LIGHT_COLOR:
+                mBlurLightColorFilter =
+                        newValue == null ? Color.DKGRAY : Integer.parseInt(newValue);
+                RecentsActivity.updateBlurColors(mBlurDarkColorFilter, mBlurMixedColorFilter, mBlurLightColorFilter);
+                break;
+            case BLUR_MIXED_COLOR:
+                mBlurMixedColorFilter =
+                        newValue == null ? Color.GRAY : Integer.parseInt(newValue);
+                RecentsActivity.updateBlurColors(mBlurDarkColorFilter, mBlurMixedColorFilter, mBlurLightColorFilter);
+                break;
+            case BLUR_RECENT_ENABLED:
+                mBlurredRecents =
+                        newValue != null && Integer.parseInt(newValue) == 1;
+                RecentsActivity.updatePreferences();
+                break;
+            case BLUR_RECENT_SCALE:
+                mScaleRecents =
+                        newValue == null ? 6 : Integer.parseInt(newValue);
+                RecentsActivity.updateRadiusScale(mScaleRecents, mRadiusRecents);
+                break;
+            case BLUR_RECENT_RADIUS:
+                mRadiusRecents =
+                        newValue == null ? 3 : Integer.parseInt(newValue);
+                RecentsActivity.updateRadiusScale(mScaleRecents, mRadiusRecents);
+                break;
             default:
                 break;
         }
@@ -9255,23 +9256,7 @@ public void setNewOverlayAlpha() {
         }
     };
 
-    public void updateEdgeGestures(boolean enabled) {
-        Log.d(TAG, "updateEdgeGestures: Updating edge gestures");
-        if (enabled) {
-            if (gesturesController == null) {
-                gesturesController = new ScreenGesturesController(mContext, mWindowManager, this);
-            }
-            gesturesController.reorient();
-        } else if (!enabled && gesturesController != null) {
-            gesturesController.stop();
-            gesturesController = null;
-        }
-    }
-
-
-
-    public static void updatePreferences(Context mContext) {
-        RecentsActivity.updatePreferences(mContext);
+    public void updatePreferences() {
         if (mNotificationData == null)
             return;
 
@@ -9337,6 +9322,19 @@ public void setNewOverlayAlpha() {
                 }
             }
             throw e;
+        }
+    }
+
+    public void updateEdgeGestures(boolean enabled) {
+        Log.d(TAG, "updateEdgeGestures: Updating edge gestures");
+        if (enabled) {
+            if (gesturesController == null) {
+                gesturesController = new ScreenGesturesController(mContext, mWindowManager, this);
+            }
+            gesturesController.reorient();
+        } else if (!enabled && gesturesController != null) {
+            gesturesController.stop();
+            gesturesController = null;
         }
     }
 

@@ -27,7 +27,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -46,14 +50,6 @@ import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ImageView;
 import android.widget.FrameLayout;
-
-import com.android.systemui.statusbar.BlurUtils;
-import com.android.systemui.statusbar.DisplayUtils;
-
-import java.lang.reflect.Field;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.android.internal.colorextraction.ColorExtractor;
 import com.android.internal.logging.MetricsLogger;
@@ -110,10 +106,16 @@ import com.android.systemui.recents.model.Task;
 import com.android.systemui.recents.model.TaskStack;
 import com.android.systemui.recents.views.RecentsView;
 import com.android.systemui.recents.views.SystemBarScrimViews;
+import com.android.systemui.statusbar.BlurUtils;
+import com.android.systemui.statusbar.DisplayUtils;
 import com.android.systemui.statusbar.phone.StatusBar;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -137,7 +139,7 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
     private boolean mIsVisible;
     private boolean mRecentsStartRequested;
     private Configuration mLastConfig;
-    
+
     //Blur Stuff
     public static boolean mBlurredRecentAppsEnabled;
     private static int mBlurScale;
@@ -148,7 +150,6 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
     private static int mBlurDarkColorFilter;
     private static int mBlurMixedColorFilter;
     private static int mBlurLightColorFilter;
-    private static RecentsActivity mRecentsActivity;
     private static FrameLayout mRecentsActivityRootView;
 
     // Top level views
@@ -169,7 +170,7 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
     private boolean mUsingDarkText;
 
     static RecentsTaskLoadPlan plan;
-    
+
     public static void startBlurTask() {
 
         if (mRecentsActivityRootView != null)
@@ -226,12 +227,6 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
         new BlurTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
     }
-
-    public static void onConfigurationChanged() {
-        RecentsActivity.startBlurTask();
-    }
-
-
 
     public static class BlurTask extends AsyncTask<Void, Void, Bitmap> {
         private static int[] mScreenDimens;
@@ -328,8 +323,8 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
             }
         }
     }
-    
-    
+
+
     private static void recycle() {
         if (mRecentsActivityRootView == null)
             return;
@@ -606,7 +601,7 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
 
         // Reload the stack view
         reloadStackView();
-        
+
         try {
             RecentsView mRecentsView = (RecentsView) getObjectField(this, "mRecentsView");
 
@@ -623,8 +618,7 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
         } catch (Exception e){
         }
     }
-    
-    //#################################################################################################
+
     public static Object getObjectField(Object obj, String fieldName) {
         try {
             return findField(obj.getClass(), fieldName).get(obj);
@@ -1274,7 +1268,7 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
             mRecentsView.dump(prefix, writer);
         }
     }
-    
+
     public static void init(Context context) {
         mContext = context;
         mBlurUtils = new BlurUtils(mContext);
@@ -1291,7 +1285,8 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
         mBlurLightColorFilter = mLightColorRecents;
     }
 
-    public static void updatePreferences(Context mContext) {
-        mBlurredRecentAppsEnabled = (Settings.System.getInt(mContext.getContentResolver(), Settings.System.RECENT_APPS_ENABLED_PREFERENCE_KEY, 0) == 1);
+    public static void updatePreferences() {
+        mBlurredRecentAppsEnabled = (Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.BLUR_RECENT_ENABLED, 0, UserHandle.USER_CURRENT) == 1);
     }
 }

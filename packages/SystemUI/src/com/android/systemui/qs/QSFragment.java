@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
@@ -31,6 +32,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout.LayoutParams;
 
+import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.R.id;
@@ -39,6 +41,7 @@ import com.android.systemui.qs.customize.QSCustomizer;
 import com.android.systemui.statusbar.phone.NotificationPanelView;
 import com.android.systemui.statusbar.phone.NotificationsQuickSettingsContainer;
 import com.android.systemui.statusbar.stack.StackStateAnimator;
+import com.android.systemui.tuner.TunerService;
 
 public class QSFragment extends Fragment implements QS {
     private static final String TAG = "QS";
@@ -61,10 +64,10 @@ public class QSFragment extends Fragment implements QS {
     protected QSPanel mQSPanel;
     private QSDetail mQSDetail;
     private boolean mListening;
-    public static QSContainerImpl mContainer;
+    private QSContainerImpl mContainer;
     private int mLayoutDirection;
     private QSFooter mFooter;
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
             Bundle savedInstanceState) {
@@ -106,6 +109,7 @@ public class QSFragment extends Fragment implements QS {
         if (mListening) {
             setListening(false);
         }
+
     }
 
     @Override
