@@ -19,27 +19,26 @@ package com.android.systemui.statusbar.phone;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
-import android.graphics.drawable.BitmapDrawable;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.app.Fragment;
 import android.app.StatusBarManager;
 import android.content.Context;
-import android.graphics.*;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
-import android.content.ContentResolver;
 import android.content.res.Resources;
-import android.database.ContentObserver;
-import android.os.AsyncTask;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.UserHandle;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.util.AttributeSet;
@@ -55,8 +54,8 @@ import android.view.ViewTreeObserver;
 import android.view.WindowInsets;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.view.animation.*;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -71,6 +70,8 @@ import com.android.systemui.classifier.FalsingManager;
 import com.android.systemui.fragments.FragmentHostManager;
 import com.android.systemui.fragments.FragmentHostManager.FragmentListener;
 import com.android.systemui.plugins.qs.QS;
+import com.android.systemui.statusbar.BlurUtils;
+import com.android.systemui.statusbar.DisplayUtils;
 import com.android.systemui.statusbar.ExpandableNotificationRow;
 import com.android.systemui.statusbar.ExpandableView;
 import com.android.systemui.statusbar.FlingAnimationUtils;
@@ -88,13 +89,6 @@ import com.android.systemui.statusbar.stack.NotificationStackScrollLayout;
 import com.android.systemui.statusbar.stack.StackStateAnimator;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.tuner.TunerServiceImpl;
-import com.android.systemui.statusbar.*;
-
-import com.android.systemui.qs.QSContainerImpl;
-import com.android.systemui.qs.QSFragment;
-
-import android.provider.Settings;
-import com.android.internal.utils.du.UserContentObserver;
 
 import lineageos.providers.LineageSettings;
 import android.content.Intent;
@@ -129,6 +123,18 @@ public class NotificationPanelView extends PanelView implements
             "system:" + Settings.System.QS_SMART_PULLDOWN;
     private static final String LOCKSCREEN_ENABLE_QS =
             "global:" + Settings.Global.LOCKSCREEN_ENABLE_QS;
+    private static final String BLUR_STATUSBAR_ENABLED =
+            "system:" + Settings.System.BLUR_STATUSBAR_ENABLED;
+    private static final String BLUR_STATUSBAR_SCALE =
+            "system:" + Settings.System.BLUR_STATUSBAR_SCALE;
+    private static final String BLUR_STATUSBAR_RADIUS =
+            "system:" + Settings.System.BLUR_STATUSBAR_RADIUS;
+    private static final String BLUR_DARK_COLOR =
+            "system:" + Settings.System.BLUR_DARK_COLOR;
+    private static final String BLUR_LIGHT_COLOR =
+            "system:" + Settings.System.BLUR_LIGHT_COLOR;
+    private static final String BLUR_MIXED_COLOR =
+            "system:" + Settings.System.BLUR_MIXED_COLOR;
 
     private static final Rect mDummyDirtyRect = new Rect(0, 0, 1, 1);
 
@@ -288,10 +294,8 @@ public class NotificationPanelView extends PanelView implements
     private boolean mIsLockscreenDoubleTapEnabled;
     private int mStatusBarHeaderHeight;
     private GestureDetector mDoubleTapGesture;
-    
-    public static boolean mBlurredStatusBarExpandedEnabled;
-    public static NotificationPanelView mNotificationPanelView;
 
+    public static boolean mBlurredStatusBarExpandedEnabled;
     private static int mBlurScale;
     private static int mBlurRadius;
     private static BlurUtils mBlurUtils;
@@ -300,13 +304,10 @@ public class NotificationPanelView extends PanelView implements
     private static int mBlurDarkColorFilter;
     private static int mBlurMixedColorFilter;
     private static int mBlurLightColorFilter;
-    private static int mTranslucencyPercentage;
     private static AlphaAnimation mAlphaAnimation;
     private static FrameLayout mInnerBlurredView;
-    private static QSContainerImpl mContainer;
-    private Handler mHandler = new Handler();
-    private SettingsObserver mSettingsObserver;
-    
+    public static NotificationPanelView mNotificationPanelView;
+
     private static Animation.AnimationListener mAnimationListener = new Animation.AnimationListener() {
 
         @Override
@@ -325,7 +326,6 @@ public class NotificationPanelView extends PanelView implements
     public NotificationPanelView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(!DEBUG);
-        mSettingsObserver = new SettingsObserver(mHandler);
         mFalsingManager = FalsingManager.getInstance(context);
         mPowerManager = context.getSystemService(PowerManager.class);
         mDoubleTapGesture = new GestureDetector(mContext,
@@ -364,7 +364,6 @@ public class NotificationPanelView extends PanelView implements
         mLastOrientation = getResources().getConfiguration().orientation;
         initBottomArea();
         initBlurPrefs();
-        mContainer = QSFragment.mContainer;
         mQsFrame = findViewById(R.id.qs_frame);
     }
 
@@ -372,19 +371,23 @@ public class NotificationPanelView extends PanelView implements
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         FragmentHostManager.get(this).addTagListener(QS.TAG, mFragmentListener);
-        mSettingsObserver.observe();
         Dependency.get(TunerService.class).addTunable(this,
                 STATUS_BAR_QUICK_QS_PULLDOWN,
                 DOUBLE_TAP_SLEEP_GESTURE,
                 DOUBLE_TAP_SLEEP_LOCKSCREEN,
                 QS_SMART_PULLDOWN,
-                LOCKSCREEN_ENABLE_QS);
+                LOCKSCREEN_ENABLE_QS,
+                BLUR_STATUSBAR_ENABLED,
+                BLUR_STATUSBAR_SCALE,
+                BLUR_STATUSBAR_RADIUS,
+                BLUR_DARK_COLOR,
+                BLUR_LIGHT_COLOR,
+                BLUR_MIXED_COLOR);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mSettingsObserver.unobserve();
         FragmentHostManager.get(this).removeTagListener(QS.TAG, mFragmentListener);
         Dependency.get(TunerService.class).removeTunable(this);
     }
@@ -520,13 +523,13 @@ public class NotificationPanelView extends PanelView implements
         mIsFullWidth = isFullWidth;
         mNotificationStackScroller.setIsFullWidth(isFullWidth);
     }
-    
+
     public static void recycle() {
 
         mBlurredView.setBackground(null);
 
         if (mInnerBlurredView != null && mInnerBlurredView.getBackground() != null) {
-            
+
             if (mInnerBlurredView.getBackground() instanceof BitmapDrawable) {
 
                 Bitmap bitmap = ((BitmapDrawable) mInnerBlurredView.getBackground()).getBitmap();
@@ -569,9 +572,9 @@ public class NotificationPanelView extends PanelView implements
 
             Context context = mNotificationPanelView.getContext();
             mScreenDimens = DisplayUtils.getRealScreenDimensions(context);
-            
+
             //We don't want SystemUI to crash for Arithmetic Exception
-            if(mBlurScale==0){
+            if (mBlurScale==0) { 
                 mBlurScale=1;
             }
 
@@ -588,10 +591,10 @@ public class NotificationPanelView extends PanelView implements
                 mCallback.dominantColor(DisplayUtils.getDominantColorByPixelsSampling(mScreenBitmap, 20, 20));
 
                 //We don't want SystemUI to crash for Arithmetic Exception
-                if(mBlurRadius == 0){
+                if (mBlurRadius == 0) {
                     mBlurRadius=1;
                 }
-                
+
                 mScreenBitmap = mBlurUtils.renderScriptBlur(mScreenBitmap, mBlurRadius);
                 return mScreenBitmap;
 
@@ -2945,6 +2948,30 @@ public class NotificationPanelView extends PanelView implements
                 mStatusBarAllowedOnSecureKeyguard =
                         newValue == null || Integer.parseInt(newValue) != 0;
                 break;
+            case BLUR_STATUSBAR_ENABLED:
+                mBlurredStatusBarExpandedEnabled =
+                        newValue != null && Integer.parseInt(newValue) == 1;
+                break;
+            case BLUR_STATUSBAR_SCALE:
+                mBlurScale =
+                        newValue == null ? 10 : Integer.parseInt(newValue);
+                break;
+            case BLUR_STATUSBAR_RADIUS:
+                mBlurRadius =
+                        newValue == null ? 5 : Integer.parseInt(newValue);
+                break;
+            case BLUR_DARK_COLOR:
+                mBlurDarkColorFilter =
+                        newValue == null ? Color.LTGRAY : Integer.parseInt(newValue);
+                break;
+            case BLUR_LIGHT_COLOR:
+                mBlurLightColorFilter =
+                        newValue == null ? Color.DKGRAY : Integer.parseInt(newValue);
+                break;
+            case BLUR_MIXED_COLOR:
+                mBlurMixedColorFilter =
+                        newValue == null ? Color.GRAY : Integer.parseInt(newValue);
+                break;
             default:
                 break;
         }
@@ -2960,10 +2987,10 @@ public class NotificationPanelView extends PanelView implements
         } catch (Exception e){
         }
         if (mNotificationPanelView == null)
-            return;  
+            return;
         if (mKeyguardShowing || mHeadsUpShowing || mHeadsUpAnimatingAway)
             return;
-       
+
         BlurTask.setBlurTaskCallback(new BlurUtils.BlurTaskCallback() {
 
             @Override
@@ -2972,7 +2999,6 @@ public class NotificationPanelView extends PanelView implements
                 if (blurredBitmap != null) {
 
                     if (mBlurredView.getLayoutParams().width != mNotificationPanelView.getWidth()) {
-                        
                         mBlurredView.getLayoutParams().width = mNotificationPanelView.getWidth();
                         mBlurredView.requestLayout();
                     }
@@ -3027,87 +3053,27 @@ public class NotificationPanelView extends PanelView implements
         new BlurTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
      }
 
-    class SettingsObserver extends UserContentObserver {
-        SettingsObserver(Handler handler) {
-            super(handler);
-        }
-
-        @Override
-        protected void observe() {
-            super.observe();
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.BLUR_SCALE_PREFERENCE_KEY), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.BLUR_RADIUS_PREFERENCE_KEY), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_EXPANDED_ENABLED_PREFERENCE_KEY), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.BLUR_DARK_COLOR_PREFERENCE_KEY), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.BLUR_LIGHT_COLOR_PREFERENCE_KEY), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.BLUR_MIXED_COLOR_PREFERENCE_KEY), false, this);
-            update();
-        }
-
-        @Override
-        protected void unobserve() {
-            super.unobserve();
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.unregisterContentObserver(this);
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            update();
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            update();
-        }
-
-        @Override
-        public void update() {
-            ContentResolver resolver = mContext.getContentResolver();
-            mBlurScale = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.BLUR_SCALE_PREFERENCE_KEY, 10);
-            mBlurRadius = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.BLUR_RADIUS_PREFERENCE_KEY, 5);
-            mBlurredStatusBarExpandedEnabled = Settings.System.getIntForUser(resolver,
-                    Settings.System.STATUS_BAR_EXPANDED_ENABLED_PREFERENCE_KEY, 0, UserHandle.USER_CURRENT) == 1;
-
-            mBlurDarkColorFilter = Settings.System.getInt(mContext.getContentResolver(), 
-                    Settings.System.BLUR_DARK_COLOR_PREFERENCE_KEY, Color.LTGRAY);
-            mBlurMixedColorFilter = Settings.System.getInt(mContext.getContentResolver(), 
-                    Settings.System.BLUR_MIXED_COLOR_PREFERENCE_KEY, Color.GRAY);
-            mBlurLightColorFilter = Settings.System.getInt(mContext.getContentResolver(), 
-                    Settings.System.BLUR_LIGHT_COLOR_PREFERENCE_KEY, Color.DKGRAY);
-            mTranslucencyPercentage = 255 - ((mTranslucencyPercentage * 255) / 100);
-        }
-    }
-
     public void initBlurPrefs() {
-            mNotificationPanelView = this;
+        mNotificationPanelView = this;
 
-            mBlurUtils = new BlurUtils(mNotificationPanelView.getContext());
+        mBlurUtils = new BlurUtils(mNotificationPanelView.getContext());
 
-            mAlphaAnimation = new AlphaAnimation(0.0f, 1.0f);
-            mAlphaAnimation.setDuration(75);
-            mAlphaAnimation.setAnimationListener(mAnimationListener);
+        mAlphaAnimation = new AlphaAnimation(0.0f, 1.0f);
+        mAlphaAnimation.setDuration(75);
+        mAlphaAnimation.setAnimationListener(mAnimationListener);
 
-            mBlurredView = new FrameLayout(mNotificationPanelView.getContext());
-            mInnerBlurredView = new FrameLayout(mNotificationPanelView.getContext());
+        mBlurredView = new FrameLayout(mNotificationPanelView.getContext());
+        mInnerBlurredView = new FrameLayout(mNotificationPanelView.getContext());
 
-            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT);
 
-            mBlurredView.addView(mInnerBlurredView, lp);
-            mNotificationPanelView.addView(mBlurredView, 0, lp);
-            mNotificationPanelView.requestLayout();
+        mBlurredView.addView(mInnerBlurredView, lp);
+        mNotificationPanelView.addView(mBlurredView, 0, lp);
+        mNotificationPanelView.requestLayout();
 
-            mBlurredView.setTag("ready_to_blur");
+        mBlurredView.setTag("ready_to_blur");
 
-            mBlurredView.setVisibility(View.INVISIBLE);
+        mBlurredView.setVisibility(View.INVISIBLE);
     }
 }

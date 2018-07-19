@@ -374,8 +374,9 @@ public class Recents extends SystemUI
         if (proxyToOverridePackage(ACTION_TOGGLE_RECENTS)) {
             return;
         }
+
         RecentsActivity.startBlurTask();
-        
+
         int growTarget = getComponent(Divider.class).getView().growsRecents();
 
         int currentUser = sSystemServicesProxy.getCurrentUser();
