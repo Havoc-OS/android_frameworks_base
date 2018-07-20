@@ -159,12 +159,12 @@ public class RecentsConfiguration {
     }
 
     public boolean isGridEnabled() {
-        return Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.RECENTS_LAYOUT_STYLE, isGridEnabled ? 1 : 0, UserHandle.USER_CURRENT) == 1;
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.RECENTS_LAYOUT_STYLE, isGridEnabled ? 1 : 0) == 1;
     }
     public boolean isGoLayoutEnabled() {
-        return Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.RECENTS_LAYOUT_STYLE, isLowRamDeviceDefault ? 2 : 0, UserHandle.USER_CURRENT) == 2;
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.RECENTS_LAYOUT_STYLE, isLowRamDeviceDefault ? 2 : 0) == 2;
     }
 
 }
