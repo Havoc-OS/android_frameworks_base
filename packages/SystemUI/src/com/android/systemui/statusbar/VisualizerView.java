@@ -20,6 +20,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -27,6 +28,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.audiofx.Visualizer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -63,8 +65,10 @@ public class VisualizerView extends View
     private boolean mDisplaying = false; // the state we're animating to
     private boolean mDozing = false;
     private boolean mOccluded = false;
+    private boolean mAmbientVisualizerEnabled = false;
 
     private boolean mUseCustomColor;
+    private int mColor;
     private int mColorToUse;
     private int mDefaultColor;
     private int mCustomColor;
@@ -229,6 +233,11 @@ public class VisualizerView extends View
                 Settings.Secure.LOCKSCREEN_VISUALIZER_ENABLED, 0) == 1;
     }
 
+    private void setAmbientVisualizerEnabled() {
+        mAmbientVisualizerEnabled = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.AMBIENT_VISUALIZER_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
+    }
+
     public void setVisible(boolean visible) {
         if (DEBUG) {
             Log.i(TAG, "setVisible() called with visible = [" + visible + "]");
@@ -344,11 +353,31 @@ public class VisualizerView extends View
 
     private void checkStateChanged() {
         boolean isVisible = getVisibility() == View.VISIBLE;
-        if (isVisible && mPlaying && !mDozing && !mPowerSaveMode
-                && mVisualizerEnabled && !mOccluded) {
+        if (isVisible && mPlaying && mDozing && mAmbientVisualizerEnabled && !mPowerSaveMode && mVisualizerEnabled && !mOccluded) {
             if (!mDisplaying) {
                 mDisplaying = true;
                 dolink();
+                animate()
+                        .alpha(0.40f)
+                        .withEndAction(null)
+                        .setDuration(800);
+            } else {
+                mPaint.setColor(mColorToUse);
+                animate()
+                        .alpha(0.40f)
+                        .withEndAction(null)
+                        .setDuration(800);
+            }
+        } else if (isVisible && mPlaying && !mDozing && !mPowerSaveMode && mVisualizerEnabled && !mOccluded) {
+            if (!mDisplaying) {
+                mDisplaying = true;
+                dolink();
+                animate()
+                        .alpha(1f)
+                        .withEndAction(null)
+                        .setDuration(800);
+            } else {
+                mPaint.setColor(mColorToUse);
                 animate()
                         .alpha(1f)
                         .withEndAction(null)
@@ -358,7 +387,7 @@ public class VisualizerView extends View
             if (mDisplaying) {
                 unlink();
                 mDisplaying = false;
-                if (isVisible) {
+                if (isVisible && !mAmbientVisualizerEnabled) {
                     animate()
                             .alpha(0f)
                             .setDuration(600);
@@ -393,6 +422,9 @@ public class VisualizerView extends View
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                 Settings.Secure.LOCKSCREEN_VISUALIZER_ENABLED),
                 false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                Settings.Secure.AMBIENT_VISUALIZER_ENABLED),
+                false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR),
                     false, this);
@@ -414,6 +446,11 @@ public class VisualizerView extends View
                 setVisualizerEnabled();
                 checkStateChanged();
                 updateViewVisibility();
+            } else if (uri.equals(Settings.Secure.getUriFor(
+                    Settings.Secure.AMBIENT_VISUALIZER_ENABLED))) {
+                setAmbientVisualizerEnabled();
+                checkStateChanged();
+                updateViewVisibility();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.LOCK_SCREEN_VISUALIZER_USE_CUSTOM_COLOR))
                 || uri.equals(Settings.System.getUriFor(
@@ -425,6 +462,7 @@ public class VisualizerView extends View
 
         protected void update() {
             setVisualizerEnabled();
+            setAmbientVisualizerEnabled();
             updateColorSettings();
             checkStateChanged();
             updateViewVisibility();
