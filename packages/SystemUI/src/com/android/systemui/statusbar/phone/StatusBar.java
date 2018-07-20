@@ -545,6 +545,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private VisualizerView mVisualizerView;
 
+    private boolean mAmbientVisualizer;
+
     private boolean mWallpaperSupportsAmbientMode;
     private final BroadcastReceiver mWallpaperChangedReceiver = new BroadcastReceiver() {
         @Override
@@ -3590,6 +3592,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         mVisualizerView.setDozing(mDozing);
         updateQsExpansionEnabled();
         Trace.endSection();
+
+        if (mAmbientVisualizer && mDozing) {
+            mVisualizerView.setVisible(true);
+        }
     }
 
     public void userActivity() {
@@ -4125,6 +4131,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.SHOW_BACK_ARROW_GESTURE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.Secure.AMBIENT_VISUALIZER_ENABLED),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4220,6 +4229,12 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (getNavigationBarView() != null) {
             getNavigationBarView().updateBackArrowForGesture();
         }
+    }
+
+    private void setAmbientVis() {
+        mAmbientVisualizer = Settings.Secure.getIntForUser(
+                mContext.getContentResolver(), Settings.Secure.AMBIENT_VISUALIZER_ENABLED, 0,
+                UserHandle.USER_CURRENT) == 1;
     }
 
     public int getWakefulnessState() {
