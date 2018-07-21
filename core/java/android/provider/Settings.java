@@ -6071,6 +6071,11 @@ public final class Settings {
         };
 
         /**
+         * @hide
+         */
+        public static final String USE_BOTTOM_GESTURE_NAVIGATION = "use_bottom_gesture_navigation";
+
+        /**
          * These are all public system settings
          *
          * @hide
@@ -6186,6 +6191,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_ICON);
             PRIVATE_SETTINGS.add(RECENTS_OMNI_SWITCH_ENABLED);
             PRIVATE_SETTINGS.add(SYSTEM_GAME_MODE_ENABLE);
+            PRIVATE_SETTINGS.add(USE_BOTTOM_GESTURE_NAVIGATION);
         }
 
         /**
