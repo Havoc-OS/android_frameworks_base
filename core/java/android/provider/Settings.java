@@ -4925,6 +4925,16 @@ public final class Settings {
          * @hide
          */
         public static final String LOCK_SCREEN_WEATHER_CONDITION_ICON = "lock_screen_weather_condition_icon";
+		
+		/**
+         * QS Tiles Circle Drawable
+		 * 0 - Disabled
+		 * 1 - Enabled [Default]
+         * @hide
+         */
+        public static final String QS_TILE_CIRCLE = "qs_tile_circle";
+
+		public static final String QS_TILE_ALPHA = "qs_tile_alpha";
 
         /**
          * Wheter to play notification sound and vibration if screen is ON
