@@ -131,8 +131,8 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
         setOrientation(VERTICAL);
 
-        LinearLayout mQSTopSpacer = new LinearLayout(context);
-		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, 16);
+		LinearLayout mQSTopSpacer = new LinearLayout(context);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, 12);
 		mQSTopSpacer.setLayoutParams(lp);
 		addView(mQSTopSpacer);
 
@@ -143,10 +143,13 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 R.layout.qs_page_indicator, this, false);
 
         mFooter = new QSSecurityFooter(this, context);
-
-        mTileLayout = (QSTileLayout) LayoutInflater.from(mContext).inflate(
-                R.layout.qs_paged_tile_layout, this, false);
-        mTileLayout.setListening(mListening);
+        addView(mFooter.getView());
+		
+		mQSFooter = LayoutInflater.from(context).inflate(
+                R.layout.qs_footer_impl, this, false);
+		addView(mQSFooter);
+		
+        updateResources();
 
         mIsAutomaticBrightnessAvailable = getResources().getBoolean(
                 com.android.internal.R.bool.config_automatic_brightness_available);
