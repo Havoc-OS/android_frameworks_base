@@ -94,4 +94,7 @@
     <dimen name="qs_panel_top_margin">52dp</dimen>	
 	
     <dimen name="qs_corner_content_padding">8dp</dimen>
+	
+    <!-- QS Left/Right Margin --> 
+    <dimen name="qs_container_margin">4dp</dimen> 
 </resources>
