@@ -111,17 +111,12 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     private ImageView mMirrorAutoBrightnessView;
     private View mDivider;
 	
-	private Drawable mQsPanelBackGround;
-	private int mQsBackGroundAlpha;
 	private View mQSFooter;
 
     private int mBrightnessSlider = 1;
 
     public QSPanel(Context context) {
         this(context, null);
-		Handler mHandler = new Handler();
-        SettingsObserver settingsObserver = new SettingsObserver(mHandler);
-        settingsObserver.observe();
     }
 
     public QSPanel(final Context context, AttributeSet attrs) {
@@ -167,128 +162,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         mBrightnessController = new BrightnessController(context,
                 findViewById(R.id.brightness_icon), 
                 findViewById(R.id.brightness_slider));
-
-        mAutoBrightnessView = (ImageView) findViewById(R.id.brightness_icon);
-	   
-        ImageView mMinBrightness = mBrightnessView.findViewById(R.id.brightness_left);
-        mMinBrightness.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean adaptive = isAdaptiveBrightness(context);
-                if (adaptive) {
-                    float currentValue = Settings.System.getFloat(resolver,
-                            Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0f);
-                    float brightness = currentValue - 0.04f;
-                    if (currentValue != -1.0f) {
-                        Settings.System.putFloat(resolver,
-                                Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, Math.max(-1.0f, brightness));
-                    }
-                } else {
-                    int currentValue = Settings.System.getInt(resolver,
-                            Settings.System.SCREEN_BRIGHTNESS, 0);
-                    int brightness = currentValue - 10;
-                    if (currentValue != 0) {
-                        Settings.System.putInt(resolver,
-                                Settings.System.SCREEN_BRIGHTNESS, Math.max(0, brightness));
-                    }
-                }
-            }
-        });
-        mMinBrightness.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                setBrightnessMin(context, isAdaptiveBrightness(context));
-                return false;
-            }
-        });
-
-        ImageView mMaxBrightness = mBrightnessView.findViewById(R.id.brightness_right);
-        mMaxBrightness.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean adaptive = isAdaptiveBrightness(context);
-                if (adaptive) {
-                    float currentValue = Settings.System.getFloat(resolver,
-                            Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0f);
-                    float brightness = currentValue + 0.04f;
-                    if (currentValue != 1.0f) {
-                        Settings.System.putFloat(resolver,
-                                Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, Math.min(1.0f, brightness));
-                    }
-                } else {
-                    int currentValue = Settings.System.getInt(resolver,
-                            Settings.System.SCREEN_BRIGHTNESS, 0);
-                    int brightness = currentValue + 10;
-                    if (currentValue != 255) {
-                        Settings.System.putInt(resolver,
-                                Settings.System.SCREEN_BRIGHTNESS, Math.min(255, brightness));
-                    }
-                }
-            }
-        });
-        mMaxBrightness.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                setBrightnessMax(context, isAdaptiveBrightness(context));
-                return false;
-            }
-        });
-        mQsPanelBackGround = context.getDrawable(R.drawable.qs_background_primary); 
-                setBackground(mQsPanelBackGround);   
-    } 
-  
-    private class SettingsObserver extends ContentObserver { 
-        SettingsObserver(Handler handler) { 
-            super(handler); 
-        } 
- 
-        void observe() { 
-            getContext().getContentResolver().registerContentObserver(Settings.System 
-                    .getUriFor(Settings.System.QS_PANEL_BG_ALPHA), false, 
-                    this, UserHandle.USER_ALL); 
-        } 
- 
-        @Override 
-        public void onChange(boolean selfChange) { 
-            updateAlpha(); 
-        } 
-    } 
- 
-    private void updateAlpha() { 
-        mQsBackGroundAlpha = Settings.System.getIntForUser(mContext.getContentResolver(), 
-                Settings.System.QS_PANEL_BG_ALPHA, 255, 
-                UserHandle.USER_CURRENT); 
-        mQsPanelBackGround.setAlpha(mQsBackGroundAlpha); 
-    }
-
-    private void addQSPanel() {
-        if (mBrightnessSlider == 1) {
-            addView(mBrightnessView);
-            addView((View) mTileLayout);
-        } else {
-            addView((View) mTileLayout);
-            addView(mBrightnessView);
-        }
-
-        addView(mPageIndicator);
-        if (mTileLayout instanceof PagedTileLayout) {
-            ((PagedTileLayout) mTileLayout).setPageIndicator((PageIndicator) mPageIndicator);
-        }
-
-        addDivider();
-        addView(mFooter.getView());
-		
-        updateResources();		
-    }
-
-    private void restartQSPanel() {
-        if (mFooter.getView() != null) removeView(mFooter.getView());
-        if (mDivider != null) removeView(mDivider);
-        if (mPageIndicator != null) removeView(mPageIndicator);
-        if ((View) mTileLayout != null) removeView((View) mTileLayout);
-        if (mBrightnessView != null) removeView(mBrightnessView);
-
-        addQSPanel();
+		setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
     }
 
     protected void addDivider() {
