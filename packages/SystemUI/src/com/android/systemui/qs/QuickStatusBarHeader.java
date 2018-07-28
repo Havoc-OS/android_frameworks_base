@@ -17,8 +17,12 @@ package com.android.systemui.qs;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.View;
@@ -56,6 +60,8 @@ public class QuickStatusBarHeader extends RelativeLayout {
     protected QSTileHost mHost;
     private View mDate;
 
+	private View mHeaderView;
+	private String mHeaderColor = "#00FFFFFF";
 
     public QuickStatusBarHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -77,6 +83,9 @@ public class QuickStatusBarHeader extends RelativeLayout {
         int colorForeground = Color.parseColor("#ffffff");
         float intensity = colorForeground == Color.WHITE ? 0 : 1;
         Rect tintArea = new Rect(0, 0, 0, 0);
+		
+		mHeaderView = findViewById(R.id.qs_top_background);
+		updateColor();
 
 
         BatteryMeterView battery = findViewById(R.id.battery);
@@ -99,6 +108,30 @@ public class QuickStatusBarHeader extends RelativeLayout {
         applyDarkness(R.id.qs_clock, tintArea, intensity, colorForeground);
         applyDarkness(R.id.qs_left_clock, tintArea, intensity, colorForeground);
 		
+    }
+	
+	private class ColorObserver extends ContentObserver {
+        ColorObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            getContext().getContentResolver().registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.QS_HEADER_COLOR), false,
+                    this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateColor();
+        }
+    }
+	
+	private void updateColor() {
+        mHeaderColor = Settings.System.getStringForUser(getContext().getContentResolver(),
+                Settings.System.QS_HEADER_COLOR,
+                UserHandle.USER_CURRENT);
+		mHeaderView.setBackgroundColor(Color.parseColor(mHeaderColor));
     }
 
     private void applyDarkness(int id, Rect tintArea, float intensity, int color) {

@@ -4944,6 +4944,12 @@ public final class Settings {
          * @hide
          */
         public static final String FORCE_AMBIENT_FOR_MEDIA = "force_ambient_for_media";
+		
+		/**
+         * QS Panel Header ARGB HEX Color
+         * @hide
+         */
+        public static final String QS_HEADER_COLOR = "qs_header_color";
 
         /**
          * Force an Ambient notification when a new media track is being played
