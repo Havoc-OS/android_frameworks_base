@@ -127,7 +127,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         setOrientation(VERTICAL);
 
 		LinearLayout mQSTopSpacer = new LinearLayout(context);
-		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, 12);
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, 16);
 		mQSTopSpacer.setLayoutParams(lp);
 		addView(mQSTopSpacer);
 
@@ -138,13 +138,10 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 R.layout.qs_page_indicator, this, false);
 
         mFooter = new QSSecurityFooter(this, context);
-        addView(mFooter.getView());
-		
-		mQSFooter = LayoutInflater.from(context).inflate(
-                R.layout.qs_footer_impl, this, false);
-		addView(mQSFooter);
-		
-        updateResources();
+
+        mTileLayout = (QSTileLayout) LayoutInflater.from(mContext).inflate(
+                R.layout.qs_paged_tile_layout, this, false);
+        mTileLayout.setListening(mListening);
 
         mIsAutomaticBrightnessAvailable = getResources().getBoolean(
                 com.android.internal.R.bool.config_automatic_brightness_available);
@@ -162,7 +159,105 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         mBrightnessController = new BrightnessController(context,
                 findViewById(R.id.brightness_icon), 
                 findViewById(R.id.brightness_slider));
+
+        mAutoBrightnessView = (ImageView) findViewById(R.id.brightness_icon);
+	   
+        ImageView mMinBrightness = mBrightnessView.findViewById(R.id.brightness_left);
+        mMinBrightness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean adaptive = isAdaptiveBrightness(context);
+                if (adaptive) {
+                    float currentValue = Settings.System.getFloat(resolver,
+                            Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0f);
+                    float brightness = currentValue - 0.04f;
+                    if (currentValue != -1.0f) {
+                        Settings.System.putFloat(resolver,
+                                Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, Math.max(-1.0f, brightness));
+                    }
+                } else {
+                    int currentValue = Settings.System.getInt(resolver,
+                            Settings.System.SCREEN_BRIGHTNESS, 0);
+                    int brightness = currentValue - 10;
+                    if (currentValue != 0) {
+                        Settings.System.putInt(resolver,
+                                Settings.System.SCREEN_BRIGHTNESS, Math.max(0, brightness));
+                    }
+                }
+            }
+        });
+        mMinBrightness.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setBrightnessMin(context, isAdaptiveBrightness(context));
+                return false;
+            }
+        });
+
+        ImageView mMaxBrightness = mBrightnessView.findViewById(R.id.brightness_right);
+        mMaxBrightness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean adaptive = isAdaptiveBrightness(context);
+                if (adaptive) {
+                    float currentValue = Settings.System.getFloat(resolver,
+                            Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0f);
+                    float brightness = currentValue + 0.04f;
+                    if (currentValue != 1.0f) {
+                        Settings.System.putFloat(resolver,
+                                Settings.System.SCREEN_AUTO_BRIGHTNESS_ADJ, Math.min(1.0f, brightness));
+                    }
+                } else {
+                    int currentValue = Settings.System.getInt(resolver,
+                            Settings.System.SCREEN_BRIGHTNESS, 0);
+                    int brightness = currentValue + 10;
+                    if (currentValue != 255) {
+                        Settings.System.putInt(resolver,
+                                Settings.System.SCREEN_BRIGHTNESS, Math.min(255, brightness));
+                    }
+                }
+            }
+        });
+        mMaxBrightness.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setBrightnessMax(context, isAdaptiveBrightness(context));
+                return false;
+            }
+        });
+
 		setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
+
+    }
+
+    private void addQSPanel() {
+        if (mBrightnessSlider == 1) {
+            addView(mBrightnessView);
+            addView((View) mTileLayout);
+        } else {
+            addView((View) mTileLayout);
+            addView(mBrightnessView);
+        }
+
+        addView(mPageIndicator);
+        if (mTileLayout instanceof PagedTileLayout) {
+            ((PagedTileLayout) mTileLayout).setPageIndicator((PageIndicator) mPageIndicator);
+        }
+
+        addDivider();
+        addView(mFooter.getView());
+		
+        updateResources();		
+    }
+
+    private void restartQSPanel() {
+        if (mFooter.getView() != null) removeView(mFooter.getView());
+        if (mDivider != null) removeView(mDivider);
+        if (mPageIndicator != null) removeView(mPageIndicator);
+        if ((View) mTileLayout != null) removeView((View) mTileLayout);
+        if (mBrightnessView != null) removeView(mBrightnessView);
+
+        addQSPanel();
     }
 
     protected void addDivider() {
