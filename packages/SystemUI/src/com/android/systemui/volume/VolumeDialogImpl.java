@@ -25,7 +25,6 @@ import android.annotation.NonNull;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.KeyguardManager;
-import android.provider.Settings; 
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
@@ -38,7 +37,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.media.AudioManager;
 import android.media.AudioSystem;
 import android.os.Debug;
@@ -154,17 +152,6 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
     private boolean mShowFullZen;
     private TunerZenModePanel mZenPanel;
 
-    // Volume dialog alpha
-    private int mVolumeDialogAlpha;
-
-    // Volume dialog stroke
-    private int mVolumeDialogStroke;
-    private int mCustomStrokeColor;
-    private int mCustomStrokeThickness;
-    private int mCustomCornerRadius;
-    private int mCustomDashWidth;
-    private int mCustomDashGap;
-
     public VolumeDialogImpl(Context context) {
         mContext = new ContextThemeWrapper(context, com.android.systemui.R.style.qs_theme);
         mZenModeController = Dependency.get(ZenModeController.class);
@@ -213,22 +200,20 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         mWindow = mDialog.getWindow();
         mWindow.requestFeature(Window.FEATURE_NO_TITLE);
         mWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mWindow.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         mWindow.addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
                 | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                 | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                 | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
-                | WindowManager.LayoutParams.FLAG_DIM_BEHIND
                 | WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
-        mDialog.getWindow().setDimAmount(setVolumeDialogDim()); 
         mDialog.setCanceledOnTouchOutside(true);
         final Resources res = mContext.getResources();
         final WindowManager.LayoutParams lp = mWindow.getAttributes();
         lp.type = mWindowType;
         lp.format = PixelFormat.TRANSLUCENT;
         lp.setTitle(VolumeDialogImpl.class.getSimpleName());
-        lp.gravity = Gravity.END;
-        lp.y = res.getDimensionPixelSize(R.dimen.volume_offset_top);
+        lp.gravity = Gravity.TOP | Gravity.END;
         lp.windowAnimations = -1;
         mWindow.setAttributes(lp);
         mWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -300,14 +285,6 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         mZenPanel.init(mZenModeController);
         mZenPanel.setCallback(mZenPanelCallback);
     }
-
-    private float setVolumeDialogDim() {  
-        int mVolumeDialogDim = Settings.System.getInt(mContext.getContentResolver(),  
-                Settings.System.TRANSPARENT_VOLUME_DIALOG_DIM, 50);  
-        double dDim = mVolumeDialogDim / 100.0;  
-        float dim = (float) dDim;  
-        return dim;  
-    }  
 
     @Override
     public void onTuningChanged(String key, String newValue) {
@@ -504,7 +481,6 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
 
     public void dismiss(int reason) {
         mHandler.obtainMessage(H.DISMISS, reason, 0).sendToTarget();
-        mDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
     }
 
     private void showH(int reason) {
@@ -672,9 +648,6 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
 
     private void updateRowsH(final VolumeRow activeRow) {
         if (D.BUG) Log.d(TAG, "updateRowsH");
-        setVolumeStroke();
-        setVolumeAlpha();
-        setVolumeDialogDim();
         if (!mShowing) {
             trimObsoleteH();
         }
@@ -1355,49 +1328,5 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         private ObjectAnimator anim;  // slider progress animation for non-touch-related updates
         private int animTargetProgress;
         private int lastAudibleLevel = 1;
-    }
-
-    private void setVolumeAlpha() {
-        mVolumeDialogAlpha = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.TRANSPARENT_VOLUME_DIALOG, 255);
-        if (mDialogView != null) {
-            mDialogView.getBackground().setAlpha(mVolumeDialogAlpha);
-        }
-    }
-
-    public void setVolumeStroke () {
-        mVolumeDialogStroke = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.VOLUME_DIALOG_STROKE, 0);
-        mCustomStrokeColor = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.VOLUME_DIALOG_STROKE_COLOR, mContext.getResources().getColor(R.color.system_accent_color));
-        mCustomStrokeThickness = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.VOLUME_DIALOG_STROKE_THICKNESS, 4);
-        mCustomCornerRadius = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.VOLUME_DIALOG_CORNER_RADIUS, 10);
-        mCustomDashWidth = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.VOLUME_DIALOG_STROKE_DASH_WIDTH, 0);
-        mCustomDashGap = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.VOLUME_DIALOG_STROKE_DASH_GAP, 10);
-
-        final GradientDrawable volumeDialogGd = new GradientDrawable();
-
-        if (mVolumeDialogStroke == 0) { // Disable by setting border thickness to 0
-            volumeDialogGd.setColor(mContext.getResources().getColor(R.color.system_primary_color));
-            volumeDialogGd.setStroke(0, mContext.getResources().getColor(R.color.system_accent_color));
-            volumeDialogGd.setCornerRadius(mCustomCornerRadius);
-            mDialogView.setBackground(volumeDialogGd);
-        } else if (mVolumeDialogStroke == 1) { // use accent color for border
-            volumeDialogGd.setColor(mContext.getResources().getColor(R.color.system_primary_color));
-            volumeDialogGd.setStroke(mCustomStrokeThickness, mContext.getResources().getColor(R.color.system_accent_color),
-                    mCustomDashWidth, mCustomDashGap);
-        } else if (mVolumeDialogStroke == 2) { // use custom border color
-            volumeDialogGd.setColor(mContext.getResources().getColor(R.color.system_primary_color));
-            volumeDialogGd.setStroke(mCustomStrokeThickness, mCustomStrokeColor, mCustomDashWidth, mCustomDashGap);
-        }
-
-        if (mVolumeDialogStroke != 0) {
-            volumeDialogGd.setCornerRadius(mCustomCornerRadius);
-            mDialogView.setBackground(volumeDialogGd);
-        }
     }
 }

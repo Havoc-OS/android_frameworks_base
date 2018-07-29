@@ -5416,64 +5416,8 @@ public final class Settings {
         */
         public static final String INCALL_NOTIFICATIONS_VIBRATE = "incall_notifications_vibrate";
 
-         /** 
-         * --- HAVOC System settings end 
-         * Dim volume dialog 
-         * @hide 
-         */ 
-        public static final String TRANSPARENT_VOLUME_DIALOG_DIM = "transparent_volume_dialog_dim"; 
-
         /**
          * --- HAVOC System settings end
-         * Transparent volume dialog
-         * @hide
-         */
-        public static final String TRANSPARENT_VOLUME_DIALOG = "transparent_volume_dialog";
-
-        /**
-         * Volume dialog stroke
-         * 0 = disabled
-         * 1 = use accent color (default)
-         * 2 = use custom color
-         * @hide
-         */
-        public static final String VOLUME_DIALOG_STROKE = "volume_dialog_stroke";
-
-        /**
-         * Volume dialog stroke custom color
-         * Accent color is used as default
-         * @hide
-         */
-        public static final String VOLUME_DIALOG_STROKE_COLOR = "volume_dialog_stroke_color";
-
-        /**
-         * Volume dialog stroke custom thickness
-         * 4dp is default for AICP
-         * @hide
-         */
-        public static final String VOLUME_DIALOG_STROKE_THICKNESS = "volume_dialog_stroke_thickness";
-
-        /**
-         * Volume dialog custom corner radius
-         * 10dp is system default for VolumeDialog
-         * @hide
-         */
-        public static final String VOLUME_DIALOG_CORNER_RADIUS = "volume_dialog_corner_radius";
-
-        /**
-         * Volume dialog custom stroke dash width
-         * Set 0 to disable (default)
-         * @hide
-         */
-        public static final String VOLUME_DIALOG_STROKE_DASH_WIDTH = "volume_dialog_stroke_dash_width";
-
-        /**
-         * Volume dialog custom stroke dash gap
-         * 10 is default for AICP
-         * @hide
-         */
-        public static final String VOLUME_DIALOG_STROKE_DASH_GAP = "volume_dialog_stroke_dash_gap";
-
         /**
          * Transparent power menu and dialogs
          * @hide
@@ -5487,7 +5431,6 @@ public final class Settings {
         public static final String TRANSPARENT_POWER_DIALOG_DIM = "transparent_power_dialog_dim";
 
         /**
-         * --- AICP System settings end
          *  Add new system settings above this comment
          */
         public static final String ALARM_BLOCKING_ENABLED = "alarm_blocking_enabled";
