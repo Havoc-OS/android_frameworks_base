@@ -71,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:singleLine="true"
+        android:paddingStart="@dimen/status_bar_clock_starting_padding"
         android:gravity="center_vertical|start"
         systemui:showDark="false"
         />

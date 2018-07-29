@@ -35,7 +35,7 @@
 
     <!-- Whether to clip notification contents with a rounded rectangle. Might be expensive on
          certain GPU's and thus can be turned off with only minimal visual impact. -->
-    <bool name="config_notifications_round_rect_clipping">false</bool>
+    <bool name="config_notifications_round_rect_clipping">true</bool>
 
     <!-- Control whether status bar should distinguish HSPA data icon form UMTS
     data icon on devices -->
@@ -361,7 +361,7 @@
     <bool name="config_showNotificationShelf">true</bool>
 
     <!-- Whether or not the notifications should always fade as they are dismissed. -->
-    <bool name="config_fadeNotificationsOnDismiss">true</bool>
+    <bool name="config_fadeNotificationsOnDismiss">false</bool>
 
     <!-- Whether or not the parent of the notification row itself is being translated when swiped or
          its children views. If true, then the contents are translated and vice versa. -->
