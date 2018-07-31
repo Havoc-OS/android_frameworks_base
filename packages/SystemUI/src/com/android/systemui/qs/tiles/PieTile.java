@@ -41,6 +41,8 @@ public class PieTile extends QSTileImpl<BooleanState> {
 
     private final SecureSetting mSetting;
 
+    private final Icon mIcon = ResourceIcon.get(R.drawable.ic_qs_pie_on);
+
     public PieTile(QSHost host) {
         super(host);
 
@@ -83,15 +85,20 @@ public class PieTile extends QSTileImpl<BooleanState> {
     protected void handleUpdateState(BooleanState state, Object arg) {
         final int value = arg instanceof Integer ? (Integer)arg : mSetting.getValue();
         final boolean enable = value != 0;
-        state.value = enable;
+        if (state.slash == null) {
+	    state.slash = new SlashState();
+	}
+	state.value = enable;
         state.label = mContext.getString(R.string.quick_settings_pie);
-        if (enable) {
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_pie_on);
+        state.icon = mIcon;
+        state.slash.isSlashed = !state.value;
+	if (enable) {
+            /*state.icon = ResourceIcon.get(R.drawable.ic_qs_pie_on);*/
             state.contentDescription =  mContext.getString(
                     R.string.quick_settings_pie);
             state.state = Tile.STATE_ACTIVE;
         } else {
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_pie_off);
+            /*state.icon = ResourceIcon.get(R.drawable.ic_qs_pie_off);*/
             state.contentDescription =  mContext.getString(
                     R.string.quick_settings_pie);
             state.state = Tile.STATE_INACTIVE;
