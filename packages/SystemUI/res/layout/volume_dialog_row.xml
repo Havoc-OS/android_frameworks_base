@@ -23,8 +23,8 @@
 
     <LinearLayout
         android:layout_width="@dimen/global_actions_panel_width"
-        android:layout_height="204dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="198dp"
+        android:layout_marginTop="6dp"
         android:orientation="vertical">
 
         <com.android.keyguard.AlphaOptimizedImageButton
@@ -38,7 +38,7 @@
 
         <SeekBar
             android:id="@+id/volume_row_slider"
-            android:layout_width="112dp"
+            android:layout_width="114dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="3dp"
         android:gravity="center"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.Volume.Header" />
