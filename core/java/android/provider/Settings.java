@@ -3162,6 +3162,13 @@ public final class Settings {
          * @hide
          */
         public static final String STATUS_BAR_IME_SWITCHER = "status_bar_ime_switcher";
+
+           /**
+         * Whether to enable status and navigation bar color in battery saver mode.
+         *
+         * @hide
+         */
+        public static final String BATTERY_SAVER_MODE_COLOR = "battery_save_mode_color";
        
         /**
          * Control whether the process CPU usage meter should be shown.
@@ -5949,13 +5956,6 @@ public final class Settings {
          * @hide
          */
         public static final String ON_THE_GO_CAMERA = "on_the_go_camera";
-
-        /**
-         * Whether to enable status and navigation bar color in battery saver mode.
-         *
-         * @hide
-         */
-        public static final String BATTERY_SAVER_MODE_COLOR = "battery_save_mode_color";
 
         /**
          * Blur personalization settings

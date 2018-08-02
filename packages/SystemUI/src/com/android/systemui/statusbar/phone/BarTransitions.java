@@ -231,6 +231,12 @@ public class BarTransitions {
             }
         }
 
+        public void setBatterySaverColor(int color) {
+            if (!DEBUG_COLORS) {
+                mWarning = color;
+            }
+        }
+
         public void applyModeBackground(int oldMode, int newMode, boolean animate) {
             if (mMode == newMode) return;
             mMode = newMode;
