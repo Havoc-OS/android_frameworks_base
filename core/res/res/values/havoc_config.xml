@@ -36,6 +36,9 @@
         <item>com.snapchat.android.LandingPageActivity</item> 
     </string-array>
 
+        <!-- Whether device has a notch --> 
+    <bool name="config_haveNotch">false</bool> 
+
       <!-- EdgeGesture service --> 
     <java-symbol type="dimen" name="edge_gesture_trigger_distance" /> 
     <java-symbol type="dimen" name="edge_gesture_perpendicular_distance" /> 

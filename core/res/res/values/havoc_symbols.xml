@@ -208,4 +208,7 @@
   
   <!-- SU Shell -->  
   <java-symbol type="string" name="cannot_get_su" />  
+  
+  <!-- Notch -->  
+  <java-symbol type="bool" name="config_haveNotch" /> 
 </resources>
