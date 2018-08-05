@@ -446,4 +446,6 @@ interface IWindowManager
      * @param displayId The id of the display.
      */
     void dontOverrideDisplayInfo(int displayId);
+
+    boolean isGestureButtonEnabled();
 }
