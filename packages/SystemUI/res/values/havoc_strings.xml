@@ -233,5 +233,12 @@
     <string name="battery_saver_qs_tile_fully_charged">Fully Charged</string>	
 
     <!-- Screenrecord Tile --> 
-    <string name="quick_settings_screenrecord">Screenrecord</string> 	
+    <string name="quick_settings_screenrecord">Screenrecord</string>
+    
+    <!-- GPS Tile -->
+    <string name="quick_settings_gps_label">GPS</string>
+    <string name="quick_settings_gps_on">GPS on</string>
+    <string name="quick_settings_gps_off">GPS off</string>
+    <string name="accessibility_quick_settings_gps_changed_on">GPS turned on.</string>
+    <string name="accessibility_quick_settings_gps_changed_off">GPS turned off.</string>
 </resources>

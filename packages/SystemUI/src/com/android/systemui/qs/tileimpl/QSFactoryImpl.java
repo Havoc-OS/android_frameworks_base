@@ -51,6 +51,7 @@ import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.GoogleAssistTile;
 import com.android.systemui.qs.tiles.GoogleNowTile;
 import com.android.systemui.qs.tiles.GoogleVoiceAssistTile;
+import com.android.systemui.qs.tiles.GpsTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HighBrightnessTile;
 import com.android.systemui.qs.tiles.HotspotTile;
@@ -135,7 +136,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("always_on_display")) return new AlwaysOnDisplayTile(mHost);
         else if (tileSpec.equals("soundsearch")) return new SoundSearchTIle(mHost);
         else if (tileSpec.equals("sleepscreen")) return new SleepScreenTile(mHost);
-		    else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
+		else if (tileSpec.equals("screenstabilization")) return new ScreenStabilizationTile(mHost);
         else if (tileSpec.equals("smartpixels")) return new SmartPixelsTile(mHost);
         else if (tileSpec.equals("camera")) return new CameraTile(mHost);
         else if (tileSpec.equals("suspend_action")) return new SuspendActionTile(mHost);
@@ -151,6 +152,7 @@ public class QSFactoryImpl implements QSFactory {
         else if (tileSpec.equals("game")) return new GameModeTile(mHost);
         else if (tileSpec.equals("edgegesture")) return new EdgeGestureTile(mHost);
         else if (tileSpec.equals("gestureanywhere")) return new GestureAnywhereTile(mHost);
+        else if (tileSpec.equals("gps")) return new GpsTile(mHost);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(mHost, tileSpec);
         else if (tileSpec.startsWith(CustomTile.PREFIX)) return CustomTile.create(mHost, tileSpec);
