@@ -79,16 +79,16 @@ public class GameModeTile extends QSTileImpl<BooleanState> {
             Settings.Global.putInt(mContext.getContentResolver(),
                     Settings.Global.OVERRIDE_POLICY_CONTROL, 0);
         }
-        needsChange = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.HARDWARE_KEYS_DISABLE, 0) == 0;
+        needsChange = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.HARDWARE_KEYS_DISABLE, 0) == 0;
         if (enabled && needsChange) {
             mChanged[1] = true;
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.HARDWARE_KEYS_DISABLE, 1);
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.HARDWARE_KEYS_DISABLE, 1);
         } else if (!enabled && mChanged[1]) {
             mChanged[1] = false;
-            Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.HARDWARE_KEYS_DISABLE, 0);
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.HARDWARE_KEYS_DISABLE, 0);
         }
         needsChange = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.HEADS_UP_NOTIFICATIONS_ENABLED, 1) == 1;

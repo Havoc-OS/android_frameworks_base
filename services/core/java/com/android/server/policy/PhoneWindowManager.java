@@ -1249,8 +1249,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.NAVIGATION_BAR_WIDTH), false, this,
                     UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.HARDWARE_KEYS_DISABLE), false, this,
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.HARDWARE_KEYS_DISABLE), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ANBI_ENABLED), false, this,
@@ -3145,8 +3145,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 updateWakeGestureListenerLp();
             }
 
-            mHardwareKeysDisable = Settings.System.getIntForUser(resolver,
-                    Settings.System.HARDWARE_KEYS_DISABLE,
+            mHardwareKeysDisable = Settings.Secure.getIntForUser(resolver,
+                    Settings.Secure.HARDWARE_KEYS_DISABLE,
                     DUActionUtils.hasNavbarByDefault(mContext) ? 1 : 0,
                     UserHandle.USER_CURRENT) == 1;
 
@@ -7303,6 +7303,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
+    private boolean isHwKeysDisabled() {
+        return mKeyHandler != null ? mKeyHandler.isHwKeysDisabled() : false;
+    }
+
     /** {@inheritDoc} */
     @Override
     public int interceptKeyBeforeQueueing(KeyEvent event, int policyFlags) {
@@ -7418,6 +7422,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         boolean useHapticFeedback = down
                 && (policyFlags & WindowManagerPolicy.FLAG_VIRTUAL) != 0
                 && event.getRepeatCount() == 0
+                && !isHwKeysDisabled()
                 && !keyguardOn();
 
         // Specific device key handling

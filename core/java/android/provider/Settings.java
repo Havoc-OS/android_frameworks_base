@@ -4813,13 +4813,6 @@ public final class Settings {
          */
         public static final String PA_PIE_STATUS = "pa_pie_status";
 
-        
-        /**
-         * Disable hw buttons
-         * @hide
-         */
-        public static final String HARDWARE_KEYS_DISABLE = "hardware_keys_disable";
-
         /**
          * @hide
          */
@@ -9026,6 +9019,12 @@ public final class Settings {
          * @hide
          */
         public static final String DOZE_PULSE_ON_DOUBLE_TAP = "doze_pulse_on_double_tap";
+
+        /**
+         * Disable hw buttons - actions, brightness, haptic feedback, overflow menu
+         * @hide
+         */
+        public static final String HARDWARE_KEYS_DISABLE = "hardware_keys_disable";
 
         /**
          * The current night mode that has been selected by the user.  Owned

@@ -20,7 +20,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
-import com.android.systemui.qs.SystemSetting;
+import com.android.systemui.qs.SecureSetting;
 
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
@@ -30,12 +30,12 @@ import com.android.systemui.R;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 public class KeyDisableTile extends QSTileImpl<BooleanState> {
-    private final SystemSetting mSetting;
+    private final SecureSetting mSetting;
     private final Icon mIcon = ResourceIcon.get(R.drawable.ic_qs_key_disable_on);
 
     public KeyDisableTile(QSHost host) {
         super(host);
-        mSetting = new SystemSetting(mContext, mHandler, Settings.System.HARDWARE_KEYS_DISABLE, 0) {
+        mSetting = new SecureSetting(mContext, mHandler, Settings.Secure.HARDWARE_KEYS_DISABLE, 0) {
             @Override
             protected void handleValueChanged(int value) {
                 handleRefreshState(value);
@@ -62,8 +62,8 @@ public class KeyDisableTile extends QSTileImpl<BooleanState> {
         }
 
     private void setEnabled(boolean enabled) {
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.HARDWARE_KEYS_DISABLE,
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.HARDWARE_KEYS_DISABLE,
                 enabled ? 1 : 0);
     }
 
