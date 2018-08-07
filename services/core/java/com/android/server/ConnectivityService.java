@@ -1628,7 +1628,7 @@ public class ConnectivityService extends IConnectivityManager.Stub
         @Override
         public void onRestrictBackgroundChanged(boolean restrictBackground) {
             // TODO: relocate this specific callback in Tethering.
-            if (restrictBackground) {
+            if (restrictBackground && isTetheringSupported()) {
                 log("onRestrictBackgroundChanged(true): disabling tethering");
                 mTethering.untetherAll();
             }
