@@ -37,6 +37,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.media.AudioManager;
 import android.media.AudioSystem;
 import android.os.Debug;
@@ -153,6 +154,17 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
     private boolean mShowFullZen;
     private TunerZenModePanel mZenPanel;
 
+    // Volume dialog alpha
+    private int mVolumeDialogAlpha;
+
+    // Volume dialog stroke
+    private int mVolumeDialogStroke;
+    private int mCustomStrokeColor;
+    private int mCustomStrokeThickness;
+    private int mCustomCornerRadius;
+    private int mCustomDashWidth;
+    private int mCustomDashGap;
+
     public VolumeDialogImpl(Context context) {
         mContext = new ContextThemeWrapper(context, com.android.systemui.R.style.qs_theme);
         mZenModeController = Dependency.get(ZenModeController.class);
@@ -215,7 +227,7 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         lp.format = PixelFormat.TRANSLUCENT;
         lp.setTitle(VolumeDialogImpl.class.getSimpleName());
         lp.gravity = Gravity.TOP | Gravity.END;
-        lp.windowAnimations = -1;
+        lp.y = res.getDimensionPixelSize(R.dimen.volume_offset_top);
         mWindow.setAttributes(lp);
         mWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
@@ -517,12 +529,12 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         if (mAccessibility.mFeedbackEnabled) return 20000;
         if (mHovering) return 16000;
         if (mSafetyWarning != null) return 5000;
-        if (mExpanded || mExpandButtonAnimationRunning) return 5000;
-        if (mActiveStream == AudioManager.STREAM_MUSIC) return 1500;
+        if (mExpanded || mExpandButtonAnimationRunning) return 5000; 
+        if (mActiveStream == AudioManager.STREAM_MUSIC) return 1500; 
         if (mZenFooter.shouldShowIntroduction()) {
             return 6000;
         }
-        return 3000;
+        return 3000; 
     }
 
     protected void dismissH(int reason) {
@@ -537,6 +549,7 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
             @Override
             public void run() {
                 updateExpandedH(false /* expanding */, true /* dismissing */);
+                rotate(mExpandButton, 180, 0);
             }
         });
         if (mAccessibilityMgr.isEnabled()) {
@@ -615,11 +628,11 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
                     R.string.accessibility_volume_collapse : R.string.accessibility_volume_expand));
         }
         if (mExpandButtonAnimationRunning) {
-			if (mExpandButton.getContentDescription().toString() == mContext.getString(R.string.accessibility_volume_collapse)) {
-				rotate(mExpandButton, 180, 0);
-			} else if (mExpandButton.getContentDescription().toString() == mContext.getString(R.string.accessibility_volume_expand)) {
-				rotate(mExpandButton, 0, 180);
-			}
+            if (mExpandButton.getContentDescription().toString() == mContext.getString(R.string.accessibility_volume_collapse)) {
+                rotate(mExpandButton, 180, 0);
+            } else if (mExpandButton.getContentDescription().toString() == mContext.getString(R.string.accessibility_volume_expand)) {
+                rotate(mExpandButton, 0, 180);
+            }
             mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -627,24 +640,24 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
                         updateExpandButtonH();
                         rescheduleTimeoutH();
                     }
-                }, mExpandButtonAnimationDuration);
+            }, mExpandButtonAnimationDuration);
         }
     }
-	
-	public static void rotate(View v, float from, float to) {
+
+    public static void rotate(View v, float from, float to) {
         android.animation.ObjectAnimator mover = android.animation.ObjectAnimator.ofFloat(v, "rotation", from, to);
         mover.setDuration(200);
         mover.start();
     }
 
     private boolean shouldBeVisibleH(VolumeRow row, VolumeRow activeRow) {
+        boolean isActive = row == activeRow;
         final boolean linkNotificationWithVolume = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.VOLUME_LINK_NOTIFICATION, 1) == 1;
         final boolean isNotificationStream = row.stream == AudioManager.STREAM_NOTIFICATION;
         if (linkNotificationWithVolume && isNotificationStream) {
             return false;
         }
-        boolean isActive = row == activeRow;
         if (row.stream == AudioSystem.STREAM_ACCESSIBILITY) {
             return mShowA11yStream;
         }
@@ -663,6 +676,8 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
 
     private void updateRowsH(final VolumeRow activeRow) {
         if (D.BUG) Log.d(TAG, "updateRowsH");
+        setVolumeStroke();
+        setVolumeAlpha();
         if (!mShowing) {
             trimObsoleteH();
         }
@@ -1348,5 +1363,49 @@ public class VolumeDialogImpl implements VolumeDialog, TunerService.Tunable {
         private ObjectAnimator anim;  // slider progress animation for non-touch-related updates
         private int animTargetProgress;
         private int lastAudibleLevel = 1;
+    }
+
+    private void setVolumeAlpha() {
+        mVolumeDialogAlpha = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.TRANSPARENT_VOLUME_DIALOG, 255);
+        if (mDialogView != null) {
+            mDialogView.getBackground().setAlpha(mVolumeDialogAlpha);
+        }
+    }
+
+    public void setVolumeStroke () {
+        mVolumeDialogStroke = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.VOLUME_DIALOG_STROKE, 0);
+        mCustomStrokeColor = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.VOLUME_DIALOG_STROKE_COLOR, Utils.getColorAccent(mContext));
+        mCustomStrokeThickness = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.VOLUME_DIALOG_STROKE_THICKNESS, 4);
+        mCustomCornerRadius = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.VOLUME_DIALOG_CORNER_RADIUS, 10);
+        mCustomDashWidth = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.VOLUME_DIALOG_STROKE_DASH_WIDTH, 0);
+        mCustomDashGap = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.VOLUME_DIALOG_STROKE_DASH_GAP, 10);
+
+        final GradientDrawable volumeDialogGd = new GradientDrawable();
+
+        if (mVolumeDialogStroke == 0) { // Disable by setting border thickness to 0
+            volumeDialogGd.setColor(mContext.getResources().getColor(R.color.system_primary_color));
+            volumeDialogGd.setStroke(0, Utils.getColorAccent(mContext));
+            volumeDialogGd.setCornerRadius(mCustomCornerRadius);
+            mDialogView.setBackground(volumeDialogGd);
+        } else if (mVolumeDialogStroke == 1) { // use accent color for border
+            volumeDialogGd.setColor(mContext.getResources().getColor(R.color.system_primary_color));
+            volumeDialogGd.setStroke(mCustomStrokeThickness, Utils.getColorAccent(mContext),
+                    mCustomDashWidth, mCustomDashGap);
+        } else if (mVolumeDialogStroke == 2) { // use custom border color
+            volumeDialogGd.setColor(mContext.getResources().getColor(R.color.system_primary_color));
+            volumeDialogGd.setStroke(mCustomStrokeThickness, mCustomStrokeColor, mCustomDashWidth, mCustomDashGap);
+        }
+
+        if (mVolumeDialogStroke != 0) {
+            volumeDialogGd.setCornerRadius(mCustomCornerRadius);
+            mDialogView.setBackground(volumeDialogGd);
+        }
     }
 }
