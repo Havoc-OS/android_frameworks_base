@@ -18,13 +18,13 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginBottom="8.0dip"
-        android:tint="?attr/wallpaperTextColorSecondary"
+        android:tint="#ffffff"
         android:tintMode="src_in"
         android:forceHasOverlappingRendering="false" />
 
     <TextView
         android:textSize="14.0sp"
-        android:textColor="?attr/wallpaperTextColorSecondary"
+        android:textColor="#ffffff"
         android:id="@+id/ambient_indication_text"
         android:layout_marginBottom="6.0dip"
         android:layout_width="wrap_content"
