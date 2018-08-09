@@ -1774,26 +1774,26 @@ public class KeyguardStatusView extends GridLayout implements
             break; 
         case 2: // sammy 
             mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
-            mClockView.setLineSpacing(0,1f);
+            mClockView.setLineSpacing(-40f,1f);
             mAnalogClockView.setVisibility(View.GONE); 
             break; 
         case 3: // sammy (bold) 
             mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
-            mClockView.setLineSpacing(0,1f); 
+            mClockView.setLineSpacing(-40f,1f); 
             mAnalogClockView.setVisibility(View.GONE); 
             break; 
         case 4: // sammy accent 
             mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
             mClockView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
             getResources().getDimensionPixelSize(R.dimen.widget_sammy_accent_font_size)); 
-            mClockView.setLineSpacing(0,1f); 
+            mClockView.setLineSpacing(-40f,1f); 
             mAnalogClockView.setVisibility(View.GONE); 
             break; 
         case 5: // sammy accent (alt) 
             mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE); 
             mClockView.setTextSize(TypedValue.COMPLEX_UNIT_PX, 
             getResources().getDimensionPixelSize(R.dimen.widget_sammy_accent_font_size)); 
-            mClockView.setLineSpacing(-60f,1f); 
+            mClockView.setLineSpacing(-40f,1f); 
             mAnalogClockView.setVisibility(View.GONE); 
             break; 
         case 6: // analog 
