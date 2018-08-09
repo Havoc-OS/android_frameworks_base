@@ -92,4 +92,7 @@
 
     <color name="system_primary_color">@*android:color/primary_material_light</color>
     <color name="system_accent_color">@*android:color/accent_device_default_light</color>
+
+    <!-- QS edit page background color -->
+    <color name="qs_edit_item_decoration_bg">@*android:color/secondary_device_default_settings_light</color>
 </resources>
