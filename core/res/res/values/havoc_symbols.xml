@@ -210,4 +210,8 @@
     <java-symbol type="anim" name="ethans_launch_task_behind_source" />
     <java-symbol type="anim" name="ethans_launch_task_behind_target" />
 
+    <!-- Alternative keyhandler -->
+    <java-symbol type="string" name="config_alternativeDeviceKeyHandlerLib" />
+    <java-symbol type="string" name="config_alternativeDeviceKeyHandlerClass" />
+
 </resources>
