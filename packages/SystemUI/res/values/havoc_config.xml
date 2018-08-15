@@ -28,4 +28,8 @@
      <!-- System icon area layout weight -->
     <item name="system_icon_area_weight" format="float" type="integer">1</item>
 
+    <!-- The default tiles to display in QuickSettings -->
+    <string name="quick_settings_tiles_extra" translatable="false">
+    </string>
+
 </resources>
