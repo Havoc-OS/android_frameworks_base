@@ -304,4 +304,8 @@
   <!-- Device keyhandlers -->
   <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
   <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
+
+  <!-- Alternative keyhandler -->
+  <java-symbol type="string" name="config_alternativeDeviceKeyHandlerLib" />
+  <java-symbol type="string" name="config_alternativeDeviceKeyHandlerClass" />
 </resources>
