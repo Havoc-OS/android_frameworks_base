@@ -5990,8 +5990,6 @@ public class WindowManagerService extends IWindowManager.Stub
 
     @Override
     public void setRecentsVisibility(boolean visible) {
-        mAmInternal.enforceCallerIsRecentsOrHasPermission(android.Manifest.permission.STATUS_BAR,
-                "setRecentsVisibility()");
         synchronized (mWindowMap) {
             mPolicy.setRecentsVisibilityLw(visible);
         }
@@ -6012,8 +6010,6 @@ public class WindowManagerService extends IWindowManager.Stub
 
     @Override
     public void setShelfHeight(boolean visible, int shelfHeight) {
-        mAmInternal.enforceCallerIsRecentsOrHasPermission(android.Manifest.permission.STATUS_BAR,
-                "setShelfHeight()");
         synchronized (mWindowMap) {
             getDefaultDisplayContentLocked().getPinnedStackController().setAdjustedForShelf(visible,
                     shelfHeight);
