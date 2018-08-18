@@ -259,6 +259,11 @@ public final class NotificationRecord {
                     light = new Light(userSetLightColor != 0 ? userSetLightColor : defaultLightColor,
                         userSetLightOnTime != 0 ? userSetLightOnTime : defaultLightOn,
                         userSetLightOffTime != 0 ? userSetLightOffTime : defaultLightOff);
+                } else if (light.color == 0) {
+                    // User has requested color 0.  However, lights interprets
+                    // color 0 as "supply a default" therefore adjust alpha to make
+                    // the color still black but non-zero.
+                    light = new Light(0x01000000, light.onMs, light.offMs);
                 }
             } else {
                 light = null;
