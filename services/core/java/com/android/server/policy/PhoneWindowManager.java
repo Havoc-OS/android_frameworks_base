@@ -6471,7 +6471,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     // Assume this is called from the Handler thread.
     private void takeScreenrecord() {
         synchronized (mScreenrecordLock) {
-            if (mScreenrecordConnection != null) {
+            if (mScreenrecordConnection != null || mPocketLockShowing) {
                 return;
             }
             ComponentName cn = new ComponentName("com.android.systemui",
