@@ -723,10 +723,10 @@ public class WindowManagerService extends IWindowManager.Stub
     PowerManager mPowerManager;
     PowerManagerInternal mPowerManagerInternal;
 
-    private float mWindowAnimationScaleSetting = 0.60f;
-    private float mTransitionAnimationScaleSetting = 0.60f;
-    private float mAnimatorDurationScaleSetting = 0.60f;
-    private boolean mAnimationsDisabled = false;
+    float mWindowAnimationScaleSetting = 0.5f;
+    float mTransitionAnimationScaleSetting = 0.5f;
+    float mAnimatorDurationScaleSetting = 0.5f;
+    boolean mAnimationsDisabled = false;
 
     final InputManagerService mInputManager;
     final DisplayManagerInternal mDisplayManagerInternal;
