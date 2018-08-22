@@ -64,6 +64,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.WorkSource;
 import android.os.WorkSource.WorkChain;
+import android.pocket.PocketManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.provider.Settings.SettingNotFoundException;
@@ -2106,6 +2107,8 @@ public final class PowerManagerService extends SystemService
                 final long screenDimDuration = getScreenDimDurationLocked(screenOffTimeout);
                 final boolean userInactiveOverride = mUserInactiveOverrideFromWindowManager;
                 final long nextProfileTimeout = getNextProfileTimeoutLocked(now);
+                final PocketManager pocketManager = (PocketManager) mContext.getSystemService(Context.POCKET_SERVICE);
+                final boolean isDeviceInPocket = pocketManager != null && pocketManager.isDeviceInPocket();
 
                 mUserActivitySummary = 0;
                 if (mLastUserActivityTime >= mLastWakeTime) {
