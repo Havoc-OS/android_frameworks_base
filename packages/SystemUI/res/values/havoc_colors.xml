@@ -18,6 +18,6 @@
 -->
 <resources>
     <!-- Floating action button -->
-    <color name="fab_color">@*android:attr/panelColorBackground</color>
-    <color name="floating_action_button_icon_color">@*android:attr/colorControlNormal</color>
+    <color name="fab_color">@*android:color/white</color>
+    <color name="floating_action_button_icon_color">@*android:color/accent_device_default_light</color>
 </resources>
