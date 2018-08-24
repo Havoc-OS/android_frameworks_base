@@ -128,12 +128,12 @@ public class ActionConstants {
 
               + dl(HOME_BUTTON_TAG)
               + dl(SystemAction.Home.mAction)        + dl(SystemAction.Home.mLabelRes)         + dl(EMPTY)
-              + dl(SystemAction.Overview.mAction)    + dl(SystemAction.Overview.mLabelRes)     + dl(EMPTY)
-              + dl(SystemAction.NoAction.mAction)    + dl(SystemAction.NoAction.mLabelRes)     + dl(EMPTY)
+              + dl(SystemAction.GoogleAssistant.mAction)    + dl(SystemAction.GoogleAssistant.mLabelRes)     + dl(EMPTY)
+              + dl(SystemAction.ScreenOff.mAction)    + dl(SystemAction.ScreenOff.mLabelRes)     + dl(EMPTY)
 
               + dl(OVERVIEW_BUTTON_TAG)
               + dl(SystemAction.Overview.mAction)    + dl(SystemAction.Overview.mLabelRes)     + dl(EMPTY)
-              + dl(SystemAction.NoAction.mAction)    + dl(SystemAction.NoAction.mLabelRes)     + dl(EMPTY)
+              + dl(SystemAction.SplitScreen.mAction)    + dl(SystemAction.SplitScreen.mLabelRes)     + dl(EMPTY)
               + dl(SystemAction.NoAction.mAction)    + dl(SystemAction.NoAction.mLabelRes)     + dl(EMPTY)
 
               + dl(MENU_BUTTON_TAG)
