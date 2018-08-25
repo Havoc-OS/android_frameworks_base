@@ -71,6 +71,7 @@
     <string name="keyguard_plugged_in_dash_charging">Dash Charging</string>
     
     <string name="camera_title_tile">Camera</string>
+    <string name="suspend_title_tile">Suspend Action</string>
     <string name="alarm_title_tile">Alarm</string>
     <string name="calc_title_tile">Calculator</string>
     <string name="call_title_tile">Dialer</string>

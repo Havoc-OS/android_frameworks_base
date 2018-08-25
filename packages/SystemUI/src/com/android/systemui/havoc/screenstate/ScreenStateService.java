@@ -93,8 +93,8 @@ public class ScreenStateService extends Service  {
         mContext = getApplicationContext();
 
         // firewall
-        int s = Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.START_SCREEN_STATE_SERVICE, 0, UserHandle.USER_CURRENT);
+        int s = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.START_SCREEN_STATE_SERVICE, 0, UserHandle.USER_CURRENT);
         if(s!=0)
             mEnabled = true;
         else
