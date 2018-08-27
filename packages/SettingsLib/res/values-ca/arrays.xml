@@ -178,33 +178,6 @@
     <item msgid="3873873912383879240">"Tot menys mem. interm. de registre de senyal mòbil"</item>
     <item msgid="8489661142527693381">"només memòria intermèdia del registre de kernel"</item>
   </string-array>
-  <string-array name="window_animation_scale_entries">
-    <item msgid="8134156599370824081">"Animació desactivada"</item>
-    <item msgid="6624864048416710414">"Escala d\'animació 0,5x"</item>
-    <item msgid="2219332261255416635">"Escala d\'animació 1x"</item>
-    <item msgid="3544428804137048509">"Escala d\'animació 1,5x"</item>
-    <item msgid="3110710404225974514">"Escala d\'animació 2x"</item>
-    <item msgid="4402738611528318731">"Escala d\'animació 5x"</item>
-    <item msgid="6189539267968330656">"Escala d\'animació 10x"</item>
-  </string-array>
-  <string-array name="transition_animation_scale_entries">
-    <item msgid="8464255836173039442">"Animació desactivada"</item>
-    <item msgid="3375781541913316411">"Escala d\'animació 0,5x"</item>
-    <item msgid="1991041427801869945">"Escala d\'animació 1x"</item>
-    <item msgid="4012689927622382874">"Escala d\'animació 1,5x"</item>
-    <item msgid="3289156759925947169">"Escala d\'animació 2x"</item>
-    <item msgid="7705857441213621835">"Escala d\'animació 5x"</item>
-    <item msgid="6660750935954853365">"Escala d\'animació 10x"</item>
-  </string-array>
-  <string-array name="animator_duration_scale_entries">
-    <item msgid="6039901060648228241">"Animació desactivada"</item>
-    <item msgid="1138649021950863198">"Escala d\'animació 0,5x"</item>
-    <item msgid="4394388961370833040">"Escala d\'animació 1x"</item>
-    <item msgid="8125427921655194973">"Escala d\'animació 1,5x"</item>
-    <item msgid="3334024790739189573">"Escala d\'animació 2x"</item>
-    <item msgid="3170120558236848008">"Escala d\'animació 5x"</item>
-    <item msgid="1069584980746680398">"Escala d\'animació 10x"</item>
-  </string-array>
   <string-array name="overlay_display_devices_entries">
     <item msgid="1606809880904982133">"Cap"</item>
     <item msgid="9033194758688161545">"480p"</item>
