@@ -153,6 +153,12 @@ public class QSFactoryImpl implements QSFactory {
                 return new SleepScreenTile(mHost);
             case "suspend_action":
                 return new SuspendActionTile(mHost);
+            case "lte":
+                return new LteTile(mHost);
+            case "sound":
+                return new SoundTile(mHost);
+            case "caffeine":
+                return new CaffeineTile(mHost);
         }
 
         // Intent tiles.

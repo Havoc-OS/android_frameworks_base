@@ -17,6 +17,7 @@
 package com.android.systemui.qs.tiles;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -26,17 +27,17 @@ import android.os.CountDownTimer;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.provider.Settings;
-
 import android.service.quicksettings.Tile;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-
-import com.android.systemui.R;
-import com.android.systemui.plugins.qs.QSTile.BooleanState;
 import com.android.systemui.qs.QSHost;
+import com.android.systemui.plugins.qs.QSTile.BooleanState;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
+import com.android.systemui.R;
 
 /** Quick settings tile: Caffeine **/
 public class CaffeineTile extends QSTileImpl<BooleanState> {
+
+    private final Icon mIcon = ResourceIcon.get(R.drawable.ic_qs_caffeine_on);
 
     private final PowerManager.WakeLock mWakeLock;
     private int mSecondsRemaining;
@@ -50,7 +51,6 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
     private CountDownTimer mCountdownTimer = null;
     public long mLastClickTime = -1;
     private final Receiver mReceiver = new Receiver();
-    private boolean mListening;
 
     public CaffeineTile(QSHost host) {
         super(host);
@@ -65,6 +65,10 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
+    public void handleSetListening(boolean listening) {
+    }
+
+    @Override
     protected void handleDestroy() {
         super.handleDestroy();
         stopCountDown();
@@ -75,7 +79,13 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
-    public void handleSetListening(boolean listening) {
+    public CharSequence getTileLabel() {
+        return mContext.getString(R.string.quick_settings_caffeine_label);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsEvent.HAVOC_SETTINGS;
     }
 
     @Override
@@ -118,17 +128,8 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
 
     @Override
     public Intent getLongClickIntent() {
-        return null;
-    }
-
-    @Override
-    public CharSequence getTileLabel() {
-        return mContext.getString(R.string.quick_settings_caffeine_label);
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return MetricsEvent.HAVOC_SETTINGS;
+        return new Intent().setComponent(new ComponentName(
+            "com.android.settings", "com.android.settings.Settings$DisplaySettingsActivity"));
     }
 
     private void startCountDown(long duration) {
@@ -173,16 +174,20 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        if (state.slash == null) {
+            state.slash = new SlashState();
+        }
+        state.icon = mIcon;
         state.value = mWakeLock.isHeld();
         if (state.value) {
             state.label = formatValueWithRemainingTime();
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_caffeine_on);
+            state.slash.isSlashed = false;
             state.contentDescription =  mContext.getString(
                     R.string.accessibility_quick_settings_caffeine_on);
             state.state = Tile.STATE_ACTIVE;
         } else {
             state.label = mContext.getString(R.string.quick_settings_caffeine_label);
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_caffeine_off);
+            state.slash.isSlashed = true;
             state.contentDescription =  mContext.getString(
                     R.string.accessibility_quick_settings_caffeine_off);
             state.state = Tile.STATE_INACTIVE;
