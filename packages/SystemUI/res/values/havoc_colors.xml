@@ -34,4 +34,5 @@
 
     <!-- Zen QS panel -->
     <color name="zen_qs_panel_close_button_color">@android:color/white</color>
+
 </resources>
