@@ -3413,4 +3413,7 @@
 
   <java-symbol type="integer" name="config_sms_authorization_timeout_ms" />
   <java-symbol type="bool" name="config_sms_authorization_enabled" />
+
+  <!-- Minimal height of bottom stack when IME is displayed -->
+  <java-symbol type="dimen" name="config_bottom_stack_minimal_height" />
 </resources>

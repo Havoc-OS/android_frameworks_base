@@ -3470,4 +3470,7 @@
 
     <!-- Enable sms authorization framework-->
     <bool name="config_sms_authorization_enabled">false</bool>
+
+    <!-- Minimal height of bottom stack when IME is displayed -->
+    <dimen name="config_bottom_stack_minimal_height">0dp</dimen>
 </resources>
