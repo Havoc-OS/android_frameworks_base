@@ -650,25 +650,25 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
         final ContentObserver observer = new ContentObserver(mHandler) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
-                mScreenOffAnimation = Settings.Global.getInt(cr,
-                        Settings.Global.SCREEN_OFF_ANIMATION, SCREEN_OFF_SIMPLE_FADE);
-                mScreenOnAnimation = Settings.Global.getInt(cr,
-                        Settings.Global.SCREEN_ON_ANIMATION, 0) != 0;
+                mScreenOffAnimation = Settings.System.getInt(cr,
+                        Settings.System.SCREEN_OFF_ANIMATION, SCREEN_OFF_SIMPLE_FADE);
+                mScreenOnAnimation = Settings.System.getInt(cr,
+                        Settings.System.SCREEN_ON_ANIMATION, 0) != 0;
                 if (mPowerState != null) {
                     mPowerState.setScreenStateAnimator(mScreenOffAnimation);
                 }
             }
         };
-        cr.registerContentObserver(Settings.Global.getUriFor(
-                Settings.Global.SCREEN_OFF_ANIMATION),
+        cr.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.SCREEN_OFF_ANIMATION),
                 false, observer, UserHandle.USER_ALL);
-        cr.registerContentObserver(Settings.Global.getUriFor(
-                Settings.Global.SCREEN_ON_ANIMATION),
+        cr.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.SCREEN_ON_ANIMATION),
                 false, observer, UserHandle.USER_ALL);
-        mScreenOffAnimation = Settings.Global.getInt(cr,
-                Settings.Global.SCREEN_OFF_ANIMATION, SCREEN_OFF_SIMPLE_FADE);
-        mScreenOnAnimation = Settings.Global.getInt(cr,
-                Settings.Global.SCREEN_ON_ANIMATION, 0) != 0;
+        mScreenOffAnimation = Settings.System.getInt(cr,
+                Settings.System.SCREEN_OFF_ANIMATION, SCREEN_OFF_SIMPLE_FADE);
+        mScreenOnAnimation = Settings.System.getInt(cr,
+                Settings.System.SCREEN_ON_ANIMATION, 0) != 0;
 
         mPowerState = new DisplayPowerState(mBlanker, mScreenOffAnimation);
 

@@ -677,7 +677,7 @@ public class WindowManagerService extends IWindowManager.Stub
         private final Uri mAnimationDurationScaleUri =
                 Settings.Global.getUriFor(Settings.Global.ANIMATOR_DURATION_SCALE);
         private final Uri mDisableAnimationsUri =
-                Settings.Global.getUriFor(Settings.Global.DISABLE_TRANSITION_ANIMATIONS);
+                Settings.System.getUriFor(Settings.System.DISABLE_TRANSITION_ANIMATIONS);
 
         public SettingsObserver() {
             super(new Handler());
@@ -703,8 +703,8 @@ public class WindowManagerService extends IWindowManager.Stub
             if (mDisplayInversionEnabledUri.equals(uri)) {
                 updateCircularDisplayMaskIfNeeded();
             } else if (mDisableAnimationsUri.equals(uri))  {
-                mAnimationsForceDisabled = Settings.Global.getInt(
-                    mContext.getContentResolver(), Settings.Global.DISABLE_TRANSITION_ANIMATIONS, 0) != 0;
+                mAnimationsForceDisabled = Settings.System.getInt(
+                    mContext.getContentResolver(), Settings.System.DISABLE_TRANSITION_ANIMATIONS, 0) != 0;
                 synchronized (mWindowMap) {
                     dispatchNewAnimatorScaleLocked(null);
                 }
