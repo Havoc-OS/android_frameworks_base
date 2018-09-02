@@ -2580,16 +2580,10 @@
     <string-array translatable="false" name="config_globalActionsList">
         <item>power</item>
         <item>restart</item>
-        <item>recovery</item>
-        <item>screenshot</item>
-        <item>torch</item>
-        <item>airplane</item>
-        <item>settings</item>
         <item>lockdown</item>
         <item>logout</item>
-        <item>users</item>
-        <item>silent</item>
-        <item>onthego</item>
+        <item>bugreport</item>
+        <item>screenshot</item>
     </string-array>
 
     <!-- Number of milliseconds to hold a wake lock to ensure that drawing is fully

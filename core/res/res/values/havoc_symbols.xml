@@ -18,6 +18,9 @@
 -->
 <resources>
  
+  <!-- Power menu -->
+  <java-symbol type="array" name="config_custom_globalActionsList" />
+
   <!-- Package Manager -->
   <java-symbol type="array" name="config_disabledComponents" />
 
