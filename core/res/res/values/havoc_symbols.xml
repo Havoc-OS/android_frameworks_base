@@ -159,4 +159,9 @@
   <java-symbol type="dimen" name="nav_gesture_swipe_min_length" />
   <java-symbol type="dimen" name="nav_gesture_long_press_max_length" />
 
+  <!-- ADB notification -->
+  <java-symbol type="string" name="adb_net_active_notification_title" />
+  <java-symbol type="string" name="adb_both_active_notification_title" />
+  <java-symbol type="string" name="adb_active_generic_notification_message" />
+
 </resources>
