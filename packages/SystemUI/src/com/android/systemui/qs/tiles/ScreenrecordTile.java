@@ -96,15 +96,14 @@ public class ScreenrecordTile extends QSTileImpl<BooleanState> {
     protected void handleUpdateState(BooleanState state, Object arg) {
         state.contentDescription =  mContext.getString(
                 R.string.quick_settings_screenrecord_label);
+        state.label = mContext.getString(R.string.quick_settings_screenrecord_label);
+        state.icon = ResourceIcon.get(R.drawable.ic_qs_screenrecord);
         if (mMode == SCREEN_RECORD_LOW_QUALITY) {
-            state.label = mContext.getString(R.string.quick_settings_screenrecord_lq_label);
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_screenrecord_lq);
+            state.secondaryLabel = mContext.getString(R.string.quick_settings_screenrecord_lq_label);
         } else if (mMode == SCREEN_RECORD_MID_QUALITY) {
-            state.label = mContext.getString(R.string.quick_settings_screenrecord_mq_label);
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_screenrecord_mq);
+            state.secondaryLabel = mContext.getString(R.string.quick_settings_screenrecord_mq_label);
         } else if (mMode == SCREEN_RECORD_HIGH_QUALITY) {
-            state.label = mContext.getString(R.string.quick_settings_screenrecord_hq_label);
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_screenrecord_hq);
+            state.secondaryLabel = mContext.getString(R.string.quick_settings_screenrecord_hq_label);
         }
     }
 }
