@@ -18,6 +18,48 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- Heads Up QS Tile -->
+    <string name="quick_settings_heads_up_label">Heads Up</string>
+    <string name="accessibility_quick_settings_heads_up_off">Heads Up</string>
+    <string name="accessibility_quick_settings_heads_up_on">Heads Up</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Heads up turned off</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Heads up turned on</string>
+	
+    <!-- HW Keys Tile -->
+    <string name="accessibility_quick_settings_hwkeys_on">HW Keys</string>
+    <string name="accessibility_quick_settings_hwkeys_off">HW Keys</string>
+    <string name="quick_settings_hwkeys_label">HW Keys</string>
+
+    <!-- Screenrecord Tile --> 
+    <string name="quick_settings_screenrecord">Screenrecord</string> 	
+	
+    <!-- Ambient display QS tile -->
+    <string name="quick_settings_ambient_display_label">Ambient Display</string>
+	
+    <!-- ADB over network QS tile -->
+    <string name="quick_settings_network_adb_label">ADB-Over-Network</string>
+
+    <!-- Screenrecord QS tile -->
+    <string name="quick_settings_screenrecord_label">Screenrecord</string>
+    <string name="quick_settings_screenrecord_lq_label">480p</string>
+    <string name="quick_settings_screenrecord_mq_label">720p</string>
+    <string name="quick_settings_screenrecord_hq_label">1080p</string>
+    <string name="screenrecord_hide_hint">Hide hint</string>
+    <string name="screenrecord_show_hint">Show hint</string>
+
+    <string name="status_bar_vpn">VPN</string>
+
+    <string name="status_bar_roaming">Roaming</string>
+
+    <string name="status_bar_data_saver">Data saver</string>
+
+    <!-- QuickSettings: ScreenStabilization tile [CHAR LIMIT=NONE] -->
+    <string name="quick_settings_stabilization_label">Screen Stabilization</string>
+    <!-- QuickSettings: ScreenStabilization (off) [CHAR LIMIT=NONE] -->
+    <string name="quick_settings_stabilization_off">Screen Stabilization</string>
+    <!-- QuickSettings: ScreenStabilization (on) [CHAR LIMIT=NONE] -->
+    <string name="quick_settings_stabilization_on">Screen Stabilization</string>
+
     <!-- Advanced powermenu -->
     <string name="global_action_restart_system">Reboot</string>
     <string name="global_action_restart_advanced">Advanced Reboot</string>
@@ -159,66 +201,4 @@
     <string name="quick_settings_compass_NW">NW</string>
 
     <string name="quick_settings_sleepscreen_label">Sleep Screen</string>
-
-    <!-- QS Config -->
-    <string name="qs_menu_item_columns">Columns</string>
-    <string name="qs_menu_item_columns_landscape">Columns landscape</string>
-    <string name="qs_menu_item_columns_three">3</string>
-    <string name="qs_menu_item_columns_four">4</string>
-    <string name="qs_menu_item_columns_five">5</string>
-    <string name="qs_menu_item_columns_six">6</string>
-    <string name="qs_menu_item_columns_seven">7</string>
-    <string name="qs_menu_item_columns_eight">8</string>
-    <string name="qs_menu_item_columns_nine">9</string>
-    <string name="qs_menu_item_reset">Reset</string>
-    <string name="qs_menu_item_titles">Show labels</string>
-    <string name="qs_menu_item_rows">Rows</string>
-    <string name="qs_menu_item_rows_landscape">Rows landscape</string>
-    <string name="qs_menu_item_rows_one">1</string>
-    <string name="qs_menu_item_rows_two">2</string>
-    <string name="qs_menu_item_rows_three">3</string>
-    <string name="qs_menu_item_rows_four">4</string>
-
-    <!-- Heads Up QS Tile -->
-    <string name="quick_settings_heads_up_label">Heads Up</string>
-    <string name="accessibility_quick_settings_heads_up_off">Heads Up</string>
-    <string name="accessibility_quick_settings_heads_up_on">Heads Up</string>
-    <string name="accessibility_quick_settings_heads_up_changed_off">Heads up turned off</string>
-    <string name="accessibility_quick_settings_heads_up_changed_on">Heads up turned on</string>
-	
-    <!-- HW Keys Tile -->
-    <string name="accessibility_quick_settings_hwkeys_on">HW Keys</string>
-    <string name="accessibility_quick_settings_hwkeys_off">HW Keys</string>
-    <string name="quick_settings_hwkeys_label">HW Keys</string>
-
-    <!-- Screenrecord Tile --> 
-    <string name="quick_settings_screenrecord">Screenrecord</string> 	
-	
-    <!-- Ambient display QS tile -->
-    <string name="quick_settings_ambient_display_label">Ambient Display</string>
-	
-    <!-- ADB over network QS tile -->
-    <string name="quick_settings_network_adb_label">ADB-Over-Network</string>
-
-    <!-- Screenrecord QS tile -->
-    <string name="quick_settings_screenrecord_label">Screenrecord</string>
-    <string name="quick_settings_screenrecord_lq_label">480p</string>
-    <string name="quick_settings_screenrecord_mq_label">720p</string>
-    <string name="quick_settings_screenrecord_hq_label">1080p</string>
-    <string name="screenrecord_hide_hint">Hide hint</string>
-    <string name="screenrecord_show_hint">Show hint</string>
-
-    <string name="status_bar_vpn">VPN</string>
-
-    <string name="status_bar_roaming">Roaming</string>
-
-    <string name="status_bar_data_saver">Data saver</string>
-	
-
-    <!-- QuickSettings: ScreenStabilization tile [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_stabilization_label">Screen Stabilization</string>
-    <!-- QuickSettings: ScreenStabilization (off) [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_stabilization_off">Screen Stabilization</string>
-    <!-- QuickSettings: ScreenStabilization (on) [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_stabilization_on">Screen Stabilization</string>
 </resources>

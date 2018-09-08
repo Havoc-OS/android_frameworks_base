@@ -1,6 +1,5 @@
 package com.android.systemui.qs;
 
-import android.content.ContentResolver;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -9,8 +8,6 @@ import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.UserHandle;
-import android.provider.Settings;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -366,7 +363,7 @@ public class PagedTileLayout extends ViewPager implements QSTileLayout {
             };
 
     public static class TilePage extends TileLayout {
-        private int mRows;
+        private int mMaxRows = 3;
         public TilePage(Context context, AttributeSet attrs) {
             super(context, attrs);
             updateResources();
@@ -375,33 +372,24 @@ public class PagedTileLayout extends ViewPager implements QSTileLayout {
         @Override
         public boolean updateResources() {
             final int rows = getRows();
-            boolean changed = rows != mRows;
+            boolean changed = rows != mMaxRows;
             if (changed) {
-                mRows = rows;
+                mMaxRows = rows;
                 requestLayout();
             }
             return super.updateResources() || changed;
         }
 
         private int getRows() {
-            final Resources res = getContext().getResources();
-            final ContentResolver resolver = mContext.getContentResolver();
+            return Math.max(1, getResources().getInteger(R.integer.quick_settings_num_rows));
+        }
 
-            int defaultRows = Math.max(1, res.getInteger(R.integer.quick_settings_num_rows));
-
-            if (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                return Settings.System.getIntForUser(resolver,
-                        Settings.System.OMNI_QS_LAYOUT_ROWS, defaultRows,
-                        UserHandle.USER_CURRENT);
-            }
-
-            return Settings.System.getIntForUser(resolver,
-                        Settings.System.OMNI_QS_LAYOUT_ROWS_LANDSCAPE, defaultRows,
-                        UserHandle.USER_CURRENT);
+        public void setMaxRows(int maxRows) {
+            mMaxRows = maxRows;
         }
 
         public boolean isFull() {
-            return mRecords.size() >= mColumns * mRows;
+            return mRecords.size() >= mColumns * mMaxRows;
         }
     }
 
@@ -438,24 +426,5 @@ public class PagedTileLayout extends ViewPager implements QSTileLayout {
 
     public interface PageListener {
         void onPageChanged(boolean isFirst);
-    }
-
-    @Override
-    public void updateSettings() {
-        for (int i = 0; i < mPages.size(); i++) {
-            mPages.get(i).updateSettings();
-            mPages.get(i).updateResources();
-        }
-        postDistributeTiles();
-    }
-
-    @Override
-    public int getNumColumns() {
-        return mPages.get(0).getNumColumns();
-    }
-
-    @Override
-    public boolean isShowTitles() {
-        return mPages.get(0).isShowTitles();
     }
 }
