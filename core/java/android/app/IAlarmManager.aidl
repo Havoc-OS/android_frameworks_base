@@ -41,4 +41,7 @@ interface IAlarmManager {
     @UnsupportedAppUsage
     AlarmManager.AlarmClockInfo getNextAlarmClock(int userId);
     long currentNetworkTimeMillis();
+
+    // Alarm blocker
+    String getSeenAlarms();
 }
