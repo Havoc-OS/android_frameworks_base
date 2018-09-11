@@ -130,13 +130,14 @@ cc_defaults {
     },
 }
 
-// Build hwui library with ThinLTO by default.
+// Do not build hwui library with ThinLTO by default.
 cc_defaults {
     name: "hwui_lto",
     target: {
         android: {
             lto: {
-                thin: true,
+                thin: false,
+                full: true,
             },
         },
     },
