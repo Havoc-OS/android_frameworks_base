@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
@@ -46,6 +47,8 @@ import android.widget.Toast;
 
 import com.android.internal.R;
 import com.android.internal.statusbar.IStatusBarService;
+
+import java.util.Locale;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 import static android.content.Context.VIBRATOR_SERVICE;
@@ -391,5 +394,11 @@ public class Utils {
     // Check if device has a notch
     public static boolean hasNotch(Context context) {
         return context.getResources().getBoolean(com.android.internal.R.bool.config_haveNotch);
+    }
+
+    // Check for Chinese language
+    public static boolean isChineseLanguage() {
+       return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(
+               Locale.CHINESE.getLanguage());
     }
 }
