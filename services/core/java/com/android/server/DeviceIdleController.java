@@ -248,6 +248,12 @@ public class DeviceIdleController extends SystemService
     private final ArrayMap<String, Integer> mPowerSaveWhitelistApps = new ArrayMap<>();
 
     /**
+     * Original unchanged package names the system has white-listed to opt out of power save
+     * restrictions for all modes.
+     */
+    private final ArrayMap<String, Integer> mPowerSaveWhitelistAppsOriginal = new ArrayMap<>();
+
+    /**
      * Package names the user has white-listed to opt out of power save restrictions.
      */
     private final ArrayMap<String, Integer> mPowerSaveWhitelistUserApps = new ArrayMap<>();
@@ -1349,6 +1355,32 @@ public class DeviceIdleController extends SystemService
                 FileDescriptor err, String[] args, ShellCallback callback, ResultReceiver resultReceiver) {
             (new Shell()).exec(this, in, out, err, args, callback, resultReceiver);
         }
+
+        @Override public void addSystemPowerSaveWhitelistApp(String name) {
+            getContext().enforceCallingOrSelfPermission(android.Manifest.permission.DEVICE_POWER,
+                    null);
+            long ident = Binder.clearCallingIdentity();
+            try {
+                addSystemPowerSaveWhitelistAppInternal(name);
+            } finally {
+                Binder.restoreCallingIdentity(ident);
+            }
+        }
+
+        @Override public void removeSystemPowerSaveWhitelistApp(String name) {
+            getContext().enforceCallingOrSelfPermission(android.Manifest.permission.DEVICE_POWER,
+                    null);
+            long ident = Binder.clearCallingIdentity();
+            try {
+                removeSystemPowerSaveWhitelistAppInternal(name);
+            } finally {
+                Binder.restoreCallingIdentity(ident);
+            }
+        }
+
+        @Override public String[] getSystemPowerWhitelistOriginal() {
+            return getSystemPowerWhitelistOriginalInternal();
+        }
     }
 
     public class LocalService {
@@ -1468,6 +1500,7 @@ public class DeviceIdleController extends SystemService
                     mPowerSaveWhitelistAppsExceptIdle.put(ai.packageName, appid);
                     mPowerSaveWhitelistSystemAppIdsExceptIdle.put(appid, true);
                     mPowerSaveWhitelistApps.put(ai.packageName, appid);
+                    mPowerSaveWhitelistAppsOriginal.put(ai.packageName, appid);
                     mPowerSaveWhitelistSystemAppIds.put(appid, true);
                 } catch (PackageManager.NameNotFoundException e) {
                 }
@@ -1622,6 +1655,35 @@ public class DeviceIdleController extends SystemService
         return false;
     }
 
+    public boolean addSystemPowerSaveWhitelistAppInternal(String name) {
+        synchronized (this) {
+            try {
+                ApplicationInfo ai = getContext().getPackageManager().getApplicationInfo(name,
+                        PackageManager.MATCH_UNINSTALLED_PACKAGES);
+                if (mPowerSaveWhitelistApps.put(name, UserHandle.getAppId(ai.uid)) == null) {
+                    reportPowerSaveWhitelistChangedLocked();
+                    updateWhitelistAppIdsLocked();
+                    writeConfigFileLocked();
+                }
+                return true;
+            } catch (PackageManager.NameNotFoundException e) {
+                return false;
+            }
+        }
+    }
+
+    public boolean removeSystemPowerSaveWhitelistAppInternal(String name) {
+        synchronized (this) {
+            if (mPowerSaveWhitelistApps.remove(name) != null) {
+                reportPowerSaveWhitelistChangedLocked();
+                updateWhitelistAppIdsLocked();
+                writeConfigFileLocked();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean getPowerSaveWhitelistAppInternal(String name) {
         synchronized (this) {
             return mPowerSaveWhitelistUserApps.containsKey(name);
@@ -1735,6 +1797,17 @@ public class DeviceIdleController extends SystemService
             final String[] apps = new String[size];
             for (int i = 0; i < size; i++) {
                 apps[i] = mRemovedFromSystemWhitelistApps.keyAt(i);
+            }
+            return apps;
+        }
+    }
+
+    public String[] getSystemPowerWhitelistOriginalInternal() {
+        synchronized (this) {
+            int size = mPowerSaveWhitelistAppsOriginal.size();
+            String[] apps = new String[size];
+            for (int i = 0; i < size; i++) {
+                apps[i] = mPowerSaveWhitelistAppsOriginal.keyAt(i);
             }
             return apps;
         }
@@ -2737,6 +2810,22 @@ public class DeviceIdleController extends SystemService
                             }
                         }
                         break;
+                    case "wls":
+                        if (mPowerSaveWhitelistApps.size() != 0) {
+                            mPowerSaveWhitelistApps.clear();
+                        }
+			name = parser.getAttributeValue(null, "n");
+                        // using special placeholder empty just clear the whitelist list for system apps
+                        if (name != null && !name.equals("empty")) {
+                            try {
+                                 ApplicationInfo ai = pm.getApplicationInfo(name,
+                                        PackageManager.MATCH_UNINSTALLED_PACKAGES);
+                                mPowerSaveWhitelistApps.put(ai.packageName,
+                                        UserHandle.getAppId(ai.uid));
+                            } catch (PackageManager.NameNotFoundException e) {
+                            }
+                        }
+                        break;
                     case "un-wl":
                         final String packageName = parser.getAttributeValue(null, "n");
                         if (mPowerSaveWhitelistApps.containsKey(packageName)) {
@@ -2808,6 +2897,22 @@ public class DeviceIdleController extends SystemService
             out.startTag(null, "wl");
             out.attribute(null, "n", name);
             out.endTag(null, "wl");
+        }
+        if (mPowerSaveWhitelistApps.size() == 0) {
+            // placeholder entry to indicate that ALL system apps are removed from the whitelist
+            out.startTag(null, "wls");
+            out.attribute(null, "n", "empty");
+            out.endTag(null, "wls");
+        } else {
+            // no need to store anything if whitelist is the same as initially
+            if (!mPowerSaveWhitelistApps.equals(mPowerSaveWhitelistAppsOriginal)) {
+                for (int i=0; i<mPowerSaveWhitelistApps.size(); i++) {
+                    String name = mPowerSaveWhitelistApps.keyAt(i);
+                    out.startTag(null, "wls");
+                    out.attribute(null, "n", name);
+                    out.endTag(null, "wls");
+                }
+            }
         }
         for (int i = 0; i < mRemovedFromSystemWhitelistApps.size(); i++) {
             out.startTag(null, "un-wl");
