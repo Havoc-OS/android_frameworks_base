@@ -21,9 +21,6 @@
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false"></string>
 
-    <!-- Navigation keys swaped layout -->
-    <string name="config_navBarLayoutSwapped" translatable="false">left[.5W],recent[1WC];home;back[1WC],right[.5W]</string>
-
     <!-- The min animation duration for animating the fab in. -->
     <integer name="recents_animate_fab_enter_duration">225</integer>
     <!-- The animation delay for animating the fab in. This should roughly be the animation

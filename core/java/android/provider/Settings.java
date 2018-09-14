@@ -4511,12 +4511,6 @@ public final class Settings {
         public static final String FORMAL_TEXT_INPUT = "formal_text_input";
 
         /**
-         * Whether to swap the back and recent keys
-         * @hide
-         */
-        public static final String SWAP_NAVIGATION_KEYS = "swap_navigation_keys";
-
-        /**
          * Allow all rotations.
          * @hide
          */
@@ -5354,7 +5348,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(EGG_MODE);
             PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE);
-            PRIVATE_SETTINGS.add(SWAP_NAVIGATION_KEYS);
             PRIVATE_SETTINGS.add(SWAP_VOLUME_BUTTONS);
             PRIVATE_SETTINGS.add(TOAST_ICON);
             PRIVATE_SETTINGS.add(STATUS_BAR_CLOCK);

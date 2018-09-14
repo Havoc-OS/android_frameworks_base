@@ -408,9 +408,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     // settings
     private QSPanel mQSPanel;
 
-    // Swap naviagtion keys
-    protected boolean mUseSwapKey = false;
-
     private boolean mAutomaticBrightness;
     private boolean mBrightnessControl;
     private boolean mBrightnessChanged;
@@ -567,22 +564,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
     private NavigationBarObserver mNavigationBarObserver = new NavigationBarObserver(mHandler);
-
-    final private ContentObserver mSwapNavKeyObserver = new ContentObserver(mHandler) {
-        @Override
-        public void onChange(boolean selfChange) {
-            boolean wasUsing = mUseSwapKey;
-            mUseSwapKey = Settings.System.getIntForUser(
-                    mContext.getContentResolver(), Settings.System.SWAP_NAVIGATION_KEYS, 0,
-                    UserHandle.USER_CURRENT) != 0;
-            Log.d(TAG, "navbar is " + (mUseSwapKey ? "swapped" : "regular"));
-            if (wasUsing != mUseSwapKey) {
-                if (mNavigationBarView != null) {
-                    toggleNavigationBar();
-                }
-            }
-        }
-    };
 
     private int mInteractingWindows;
     private boolean mAutohideSuspended;
@@ -909,8 +890,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         mScreenPinningRequest = new ScreenPinningRequest(mContext);
         mFalsingManager = FalsingManager.getInstance(mContext);
 
-        mSwapNavKeyObserver.onChange(true);
-
         Dependency.get(ActivityStarterDelegate.class).setActivityStarterImpl(this);
 
         Dependency.get(ConfigurationController.class).addCallback(this);
@@ -1203,9 +1182,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         ThreadedRenderer.overrideProperty("ambientRatio", String.valueOf(1.5f));
 
         mFlashlightController = Dependency.get(FlashlightController.class);
-
-        // listen for SWAP_NAVIGATION_KEYS
-        resetSwapNavKeyObserver();
     }
 
     protected void createNavigationBar() {
@@ -3525,7 +3501,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     public void onUserSwitched(int newUserId) {
         // Begin old BaseStatusBar.userSwitched
         setHeadsUpUser(newUserId);
-        resetSwapNavKeyObserver();
         // End old BaseStatusBar.userSwitched
         if (MULTIUSER_DEBUG) mNotificationPanelDebugText.setText("USER " + newUserId);
         animateCollapsePanels();
@@ -3557,14 +3532,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         mLockscreenWallpaper.setCurrentUser(newUserId);
         mScrimController.setCurrentUser(newUserId);
         updateMediaMetaData(true, false);
-    }
-
-    private void resetSwapNavKeyObserver() {
-        mContext.getContentResolver().unregisterContentObserver(mSwapNavKeyObserver);
-        mSwapNavKeyObserver.onChange(false);
-        mContext.getContentResolver().registerContentObserver(
-                Settings.System.getUriFor(Settings.System.SWAP_NAVIGATION_KEYS), true,
-                mSwapNavKeyObserver, mLockscreenUserManager.getCurrentUserId());
     }
 
     /**
@@ -5772,24 +5739,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
         }
     };
-
-    private void toggleNavigationBar() {
-        if (mNavigationBarView != null){
-            mWindowManager.removeViewImmediate(mNavigationBarView);
-            mNavigationBarView = null;
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-            }
-            if (mNavigationBarView == null) {
-                    mNavigationBarView =
-                        (NavigationBarView) View.inflate(mContext, R.layout.navigation_bar, null);
-                createNavigationBar();
-                checkBarModes();
-                notifyUiVisibilityChanged(mSystemUiVisibility);
-            }
-        }
-    }
 
     // Begin Extra BaseStatusBar methods.
 
