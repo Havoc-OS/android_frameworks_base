@@ -51,8 +51,8 @@ import com.android.internal.statusbar.IStatusBarService;
  */
 public class HavocUtils {
 
-    public static final String INTENT_SCREENSHOT = "action_take_screenshot";
-    public static final String INTENT_REGION_SCREENSHOT = "action_take_region_screenshot";
+    public static final String INTENT_SCREENSHOT = "action_handler_screenshot";
+    public static final String INTENT_REGION_SCREENSHOT = "action_handler_region_screenshot";
 
     public static void switchScreenOff(Context ctx) {
         PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
