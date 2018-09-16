@@ -63,7 +63,6 @@ public class CurrentWeatherView extends FrameLayout implements OmniJawsClient.Om
 
     private ImageView mCurrentImage;
     private OmniJawsClient mWeatherClient;
-    private TextView mLeftText;
     private TextView mRightText;
     private int mTextColor;
     private float mDarkAmount;
@@ -112,9 +111,8 @@ public class CurrentWeatherView extends FrameLayout implements OmniJawsClient.Om
     protected void onFinishInflate() {
         super.onFinishInflate();
         mCurrentImage  = (ImageView) findViewById(R.id.current_image);
-        mLeftText = (TextView) findViewById(R.id.left_text);
         mRightText = (TextView) findViewById(R.id.right_text);
-        mTextColor = mLeftText.getCurrentTextColor();
+        mTextColor = mRightText.getCurrentTextColor();
     }
 
     private void updateWeatherData(OmniJawsClient.WeatherInfo weatherData) {
@@ -129,7 +127,6 @@ public class CurrentWeatherView extends FrameLayout implements OmniJawsClient.Om
         updateTint(d);
         mCurrentImage.setImageDrawable(d);
         mRightText.setText(weatherData.temp + " " + weatherData.tempUnits);
-        mLeftText.setText(weatherData.city);
     }
 
     private int getTintColor() {
@@ -140,7 +137,6 @@ public class CurrentWeatherView extends FrameLayout implements OmniJawsClient.Om
         Drawable d = mContext.getResources().getDrawable(R.drawable.ic_qs_weather_default_off_white);
         updateTint(d);
         mCurrentImage.setImageDrawable(d);
-        mLeftText.setText("");
         mRightText.setText("");
     }
 
@@ -181,7 +177,6 @@ public class CurrentWeatherView extends FrameLayout implements OmniJawsClient.Om
 
     public void blendARGB(float darkAmount) {
         mDarkAmount = darkAmount;
-        mLeftText.setTextColor(ColorUtils.blendARGB(mTextColor, Color.WHITE, darkAmount));
         mRightText.setTextColor(ColorUtils.blendARGB(mTextColor, Color.WHITE, darkAmount));
 
         if (mWeatherClient != null) {
@@ -200,8 +195,6 @@ public class CurrentWeatherView extends FrameLayout implements OmniJawsClient.Om
     }
 
     public void onDensityOrFontScaleChanged() {
-        mLeftText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
         mRightText.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
         mCurrentImage.getLayoutParams().height =
