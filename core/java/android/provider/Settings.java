@@ -4715,9 +4715,6 @@ public final class Settings {
         public static final String SENSOR_BLOCK = "sensor_block";
 
         /**
-         * --- AICP System settings end
-         * custom carrier label. The value is
-         * String.
          * @hide
          */
         public static final String VOLUME_ROCKER_WAKE = "volume_rocker_wake";
@@ -5102,6 +5099,18 @@ public final class Settings {
          * @hide
          */
         public static final String CUSTOM_CARRIER_LABEL = "custom_carrier_label";
+
+        /**
+         * Settings for carrier label font size
+         * @hide
+         */
+        public static final String STATUS_BAR_CARRIER_FONT_SIZE = "status_bar_carrier_font_size";
+
+        /**
+         * Custom carrier label font style
+         * @hide
+         */
+        public static final String STATUS_BAR_CARRIER_FONT_STYLE = "status_bar_carrier_font_style";
 
         /**
          * @hide

@@ -71,7 +71,6 @@
         android:gravity="center_vertical"
         android:ellipsize="marquee"
         android:textDirection="locale"
-        android:textAppearance="@style/TextAppearance.StatusBar.CarrierLabel"
         android:singleLine="true" />
 
 </com.android.systemui.statusbar.phone.KeyguardStatusBarView>
