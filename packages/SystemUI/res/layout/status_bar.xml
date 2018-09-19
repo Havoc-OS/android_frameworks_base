@@ -139,8 +139,10 @@
 
         <com.android.systemui.havoc.statusbarweather.StatusBarWeatherImage
             android:id="@+id/weather_image"
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:paddingTop="6dp"
             android:paddingStart="2dp"
             android:paddingEnd="2dp" />
 
