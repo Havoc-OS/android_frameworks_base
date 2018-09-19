@@ -499,7 +499,7 @@ public class KeyguardStatusView extends GridLayout implements
         final ContentResolver resolver = getContext().getContentResolver();
         final Resources res = getContext().getResources();
         mShowWeather = Settings.System.getIntForUser(resolver,
-                Settings.System.OMNI_LOCKSCREEN_WEATHER_ENABLED, 0,
+                Settings.System.OMNI_LOCKSCREEN_WEATHER_ENABLED, 1,
                 UserHandle.USER_CURRENT) == 1;
 
         if (mWeatherView != null) {

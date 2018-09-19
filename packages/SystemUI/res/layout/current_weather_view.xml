@@ -30,8 +30,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" >
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="1dp" >
 
         <ImageView
             android:id="@+id/current_image"
