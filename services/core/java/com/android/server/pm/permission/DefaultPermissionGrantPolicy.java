@@ -974,6 +974,11 @@ public final class DefaultPermissionGrantPolicy {
         if (pixelwallsPackage != null) {
             grantRuntimePermissions(pixelwallsPackage, STORAGE_PERMISSIONS, true, userId);
         }
+        // OmniJaws
+        PackageParser.Package omnijawspackage = getSystemPackage("org.omnirom.omnijaws");
+        if (omnijawspackage != null && doesPackageSupportRuntimePermissions(omnijawspackage)) {
+            grantRuntimePermissions(omnijawspackage, LOCATION_PERMISSIONS, userId);
+        }
 
         if (mPermissionGrantedCallback != null) {
             mPermissionGrantedCallback.onDefaultRuntimePermissionsGranted(userId);
