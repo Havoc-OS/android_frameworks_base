@@ -4232,9 +4232,6 @@ public final class Settings {
         */
         public static final String MEDIA_SCANNER_ON_BOOT = "media_scanner_on_boot";
         
-        public static final String POCKET_JUDGE = "pocket_judge";
-
-
         /**
          * Whether to show the battery info on the lockscreen while charging
          * @hide
@@ -4342,6 +4339,13 @@ public final class Settings {
          * @hide
          */
         public static final String POWERMENU_LOGOUT = "powermenu_logout";
+
+        /**
+         * Whether to display lock in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_LOCKDOWN = "powermenu_lockdown";
 
         /** some devices have a extra hw button e.g. n3 on the back on the
          * fingerprint sensor. allow mapping button to key
@@ -5285,6 +5289,14 @@ public final class Settings {
          * @hide
          */
         public static final String SHOW_FOURG_ICON = "show_fourg_icon";
+
+        /**
+         * Whether allowing pocket service to register sensors and dispatch informations.
+         * 0 = disabled
+         * 1 = enabled
+         * @hide
+         */
+        public static final String POCKET_JUDGE = "pocket_judge";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings

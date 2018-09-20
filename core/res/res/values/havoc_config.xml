@@ -23,6 +23,7 @@
         <item>power</item>
         <item>restart</item>
         <item>advanced</item>
+        <item>lockdown</item>
         <item>screenshot</item>
         <item>airplane</item>
         <item>torch</item>

@@ -6726,7 +6726,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     // Assume this is called from the Handler thread.
     private void takeScreenrecord(final int mode) {
         synchronized (mScreenrecordLock) {
-            if (mScreenrecordConnection != null || mPocketLockShowing) {
+            if (mScreenrecordConnection != null) {
                 return;
             }
             ComponentName cn = new ComponentName("com.android.systemui",
@@ -6835,9 +6835,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 keyCode != KeyEvent.KEYCODE_MEDIA_STOP &&
                 keyCode != KeyEvent.KEYCODE_MEDIA_NEXT &&
                 keyCode != KeyEvent.KEYCODE_MEDIA_PREVIOUS &&
-                keyCode != KeyEvent.KEYCODE_VOLUME_MUTE) {
+                keyCode != KeyEvent.KEYCODE_VOLUME_MUTE)
                 return 0;
-            }
         }
 
         if (mANBIHandler != null && mANBIEnabled && mANBIHandler.isScreenTouched()

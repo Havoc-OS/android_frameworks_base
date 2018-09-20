@@ -1564,8 +1564,6 @@ public final class SystemServer {
             traceBeginAndSlog("StartLauncherAppsService");
             mSystemServiceManager.startService(LauncherAppsService.class);
             traceEnd();
-            Slog.i(TAG, "Starting PocketService");
-            mSystemServiceManager.startService(PocketService.class);
 
             traceBeginAndSlog("StartCrossProfileAppsService");
             mSystemServiceManager.startService(CrossProfileAppsService.class);
@@ -1574,6 +1572,10 @@ public final class SystemServer {
             traceBeginAndSlog("Starting ScreenStabilization Service");
             mSystemServiceManager.startService(ScreenStabilization.class);
             traceEnd();	    
+
+            Slog.i(TAG, "Starting PocketService");
+            mSystemServiceManager.startService(PocketService.class);
+
         }
 
         if (!isWatch) {

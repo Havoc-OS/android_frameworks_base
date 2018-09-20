@@ -72,11 +72,11 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, OnCo
     /**
      * General scrim animation duration.
      */
-    public static final long ANIMATION_DURATION = 200;
+    public static final long ANIMATION_DURATION = 220;
     /**
      * Longer duration, currently only used when going to AOD.
      */
-    public static final long ANIMATION_DURATION_LONG = 800;
+    public static final long ANIMATION_DURATION_LONG = 1000;
     /**
      * When both scrims have 0 alpha.
      */

@@ -89,11 +89,6 @@ public class PocketService extends SystemService implements IBinder.DeathRecipie
     private static final int PROXIMITY_NEGATIVE = 2;
 
     /**
-     * The rate light sensor events are delivered at.
-     */
-    private static final int LIGHT_SENSOR_DELAY = 400000;
-
-    /**
      * Wheater we don't have yet a valid light sensor event or pocket service not running.
      */
     private static final int LIGHT_UNKNOWN = 0;
@@ -473,7 +468,7 @@ public class PocketService extends SystemService implements IBinder.DeathRecipie
 
         if (!mLightRegistered) {
             mSensorManager.registerListener(mLightListener, mLightSensor,
-                    LIGHT_SENSOR_DELAY, mHandler);
+                    SensorManager.SENSOR_DELAY_NORMAL, mHandler);
             mLightRegistered = true;
         }
     }

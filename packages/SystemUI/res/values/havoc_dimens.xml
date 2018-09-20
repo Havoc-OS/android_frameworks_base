@@ -52,4 +52,7 @@
     <dimen name="horizontal_max_swift">3.0dp</dimen>
     <dimen name="vertical_max_swift">1.0dp</dimen>
 
+    <!-- Height of the status bar header bar -->
+    <dimen name="status_bar_header_height">130dp</dimen>
+
 </resources>
