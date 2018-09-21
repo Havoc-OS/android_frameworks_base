@@ -817,6 +817,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     // The volume key answer
     boolean mVolumeAnswer;
 
+    // The home button wake
+    boolean mHomeWakeButton;
+
     Display mDisplay;
 
     int mLandscapeRotation = 0;  // default landscape rotation
@@ -1333,6 +1336,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.PIE_STATE), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HOME_WAKE_BUTTON), false, this,
                     UserHandle.USER_ALL);
             updateSettings();
         }
@@ -3303,6 +3309,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mTorchTimeout = Settings.System.getIntForUser(
                     resolver, Settings.System.TORCH_LONG_PRESS_POWER_TIMEOUT, 0,
                     UserHandle.USER_CURRENT);
+
+	        // home wake button
+            mHomeWakeButton = Settings.System.getIntForUser(resolver,
+                    Settings.System.HOME_WAKE_BUTTON, 0, UserHandle.USER_CURRENT) != 0;
 
             // Configure wake gesture.
             boolean wakeGestureEnabledSetting = Settings.Secure.getIntForUser(resolver,
@@ -7575,7 +7585,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             }
 
             case KeyEvent.KEYCODE_HOME:
-                if (down && !interactive) {
+                if (down && !interactive && mHomeWakeButton) {
                     isWakeKey = true;
                 }
                 break;
