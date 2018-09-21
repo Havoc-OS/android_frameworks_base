@@ -5190,6 +5190,21 @@ public final class Settings {
          */
         public static final String ANSWER_VOLUME_BUTTON_BEHAVIOR_ANSWER = "call_volume_answer";
 
+         /**
+	  ** Whether the use proximity sensor for answering incoming ring
+	  **/
+        public static final String PROXIMITY_AUTO_ANSWER_INCALL_ONLY = "proximity_auto_answer_incall_only";
+
+         /**
+	  ** Time delay to activate auto answer on ring when headset is plugged
+	  * */
+        public static final String AUTO_ANSWER_DELAY = "auto_answer_delay";
+
+         /**
+	  ** Whether to enable auto answer on ring when headset is plugged
+	  **/
+        public static final String AUTO_ANSWER_CALL_KEY = "auto_answer_call_key";
+
         /**
          * Whether to blink flashlight for incoming calls
          * 0 = Disabled (Default)
