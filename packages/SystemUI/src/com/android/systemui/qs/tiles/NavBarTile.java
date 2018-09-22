@@ -24,7 +24,7 @@ import android.service.quicksettings.Tile;
 import com.android.systemui.R;
 import com.android.systemui.plugins.qs.QSTile.BooleanState;
 import com.android.systemui.qs.QSHost;
-import com.android.systemui.qs.SystemSetting;
+import com.android.systemui.qs.SecureSetting;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -32,15 +32,15 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 /** Quick settings tile: NavBarTile **/
 public class NavBarTile extends QSTileImpl<BooleanState> {
 
-    private final SystemSetting mSetting;
+    private final SecureSetting mSetting;
 
     public NavBarTile(QSHost host) {
         super(host);
 
-        mSetting = new SystemSetting(mContext, mHandler,
-                   Settings.System.NAVIGATION_BAR_SHOW) {
+        mSetting = new SecureSetting(mContext, mHandler,
+                   Settings.Secure.NAVIGATION_BAR_VISIBLE) {
             @Override
-            protected void handleValueChanged(int value) {
+            protected void handleValueChanged(int value, boolean observedChange) {
                 handleRefreshState(value);
             }
         };
