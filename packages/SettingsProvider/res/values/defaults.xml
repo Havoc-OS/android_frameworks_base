@@ -200,7 +200,7 @@
     <string name="def_backup_manager_constants"></string>
 
     <!-- Default setting for Settings.Global.MOBILE_DATA_ALWAYS_ON -->
-    <bool name="def_mobile_data_always_on">true</bool>
+    <bool name="def_mobile_data_always_on">false</bool>
 
     <!-- Default for Settings.Secure.BACKUP_LOCAL_TRANSPORT_PARAMETERS -->
     <string name="def_backup_local_transport_parameters"></string>
