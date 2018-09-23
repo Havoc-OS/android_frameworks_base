@@ -32,14 +32,14 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
+import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.qs.QSTile.BooleanState;
-import com.android.systemui.statusbar.phone.UnlockMethodCache;
-import com.android.systemui.statusbar.policy.KeyguardMonitor;
 import com.android.systemui.qs.GlobalSetting;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
+import com.android.systemui.statusbar.policy.KeyguardMonitor;
 
 import javax.inject.Inject;
 
@@ -50,16 +50,15 @@ public class AirplaneModeTile extends QSTileImpl<BooleanState> {
     private final ActivityStarter mActivityStarter;
 
     private boolean mListening;
-    private final KeyguardMonitor mKeyguardMonitor;
-    private final UnlockMethodCache mUnlockMethodCache;
+
+    private final KeyguardMonitor mKeyguard;
+    private final KeyguardCallback mKeyguardCallback = new KeyguardCallback();
 
     @Inject
-    public AirplaneModeTile(QSHost host, ActivityStarter activityStarter,
-            KeyguardMonitor keyguardMonitor) {
+    public AirplaneModeTile(QSHost host, ActivityStarter activityStarter) {
         super(host);
         mActivityStarter = activityStarter;
-        mKeyguardMonitor = keyguardMonitor;
-        mUnlockMethodCache = UnlockMethodCache.getInstance(mContext);
+        mKeyguard = Dependency.get(KeyguardMonitor.class);
 
         mSetting = new GlobalSetting(mContext, mHandler, Global.AIRPLANE_MODE_ON) {
             @Override
@@ -74,8 +73,7 @@ public class AirplaneModeTile extends QSTileImpl<BooleanState> {
         return new BooleanState();
     }
 
-    @Override
-    public void handleClick() {
+    private void handleClickInner() {
         boolean airplaneModeEnabled = mState.value;
         MetricsLogger.action(mContext, getMetricsCategory(), !airplaneModeEnabled);
         if (!airplaneModeEnabled && Boolean.parseBoolean(
@@ -84,14 +82,19 @@ public class AirplaneModeTile extends QSTileImpl<BooleanState> {
                     new Intent(TelephonyIntents.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS), 0);
             return;
         }
-        if (mKeyguardMonitor.isSecure() && !mUnlockMethodCache.canSkipBouncer()) {
-            mActivityStarter.postQSRunnableDismissingKeyguard(() -> {
-                setEnabled(!mState.value);
+        setEnabled(!airplaneModeEnabled);
+    }
+
+    @Override
+    public void handleClick() {
+        if (mKeyguard.isSecure() && mKeyguard.isShowing()) {
+            Dependency.get(ActivityStarter.class).postQSRunnableDismissingKeyguard(() -> {
+                mHost.openPanels();
+                handleClickInner();
             });
             return;
         }
-        // no secure keyguard
-        setEnabled(!airplaneModeEnabled);
+        handleClickInner();
     }
 
     private void setEnabled(boolean enabled) {
@@ -141,6 +144,7 @@ public class AirplaneModeTile extends QSTileImpl<BooleanState> {
         }
     }
 
+    @Override
     public void handleSetListening(boolean listening) {
         if (mListening == listening) return;
         mListening = listening;
@@ -148,8 +152,10 @@ public class AirplaneModeTile extends QSTileImpl<BooleanState> {
             final IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
             mContext.registerReceiver(mReceiver, filter);
+            mKeyguard.addCallback(mKeyguardCallback);
         } else {
             mContext.unregisterReceiver(mReceiver);
+            mKeyguard.removeCallback(mKeyguardCallback);
         }
         mSetting.setListening(listening);
     }
@@ -163,7 +169,7 @@ public class AirplaneModeTile extends QSTileImpl<BooleanState> {
         }
     };
 
-    private final class Callback implements KeyguardMonitor.Callback {
+    private final class KeyguardCallback implements KeyguardMonitor.Callback {
         @Override
         public void onKeyguardShowingChanged() {
             refreshState();
