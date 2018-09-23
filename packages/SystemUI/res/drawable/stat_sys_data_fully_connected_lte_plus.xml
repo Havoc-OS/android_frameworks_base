@@ -17,7 +17,7 @@
         android:width="11.08dp"
         android:height="@dimen/signal_icon_size"
         android:viewportWidth="19.0"
-        android:viewportHeight="24.0">
+        android:viewportHeight="26.0">
     <path
         android:fillColor="#FFFFFFFF"
         android:pathData="M2.0,9.7l2.0,0.0L4.0,11.0L0.4,11.0L0.4,2.5L2.0,2.5L2.0,9.7z"/>
