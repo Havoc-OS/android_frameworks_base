@@ -77,6 +77,12 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
     public static final String QS_SHOW_HEADER = "qs_show_header";
     public static final String QS_BRIGHTNESS_POSITION_BOTTOM = "qs_brightness_position_bottom";
+    public static final String ANIM_TILE_STYLE =
+            "system:" + Settings.System.ANIM_TILE_STYLE;
+    public static final String ANIM_TILE_DURATION =
+            "system:" + Settings.System.ANIM_TILE_DURATION;
+    public static final String ANIM_TILE_INTERPOLATOR =
+            "system:" + Settings.System.ANIM_TILE_INTERPOLATOR;
 
     protected final Context mContext;
     protected final ArrayList<TileRecord> mRecords = new ArrayList<>();
@@ -110,6 +116,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     private View mDivider;
 
     private boolean mBrightnessBottom;
+    private int animStyle, animDuration, interpolatorType;
 
     public QSPanel(Context context) {
         this(context, null);
@@ -185,6 +192,10 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         mSettingObserver.update();
         final TunerService tunerService = Dependency.get(TunerService.class);
         tunerService.addTunable(this, QS_BRIGHTNESS_POSITION_BOTTOM);
+        tunerService.addTunable(this, ANIM_TILE_STYLE);
+        tunerService.addTunable(this, ANIM_TILE_DURATION);
+        tunerService.addTunable(this, ANIM_TILE_INTERPOLATOR);
+
         if (mHost != null) {
             setTiles(mHost.getTiles());
         }
@@ -225,6 +236,21 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 removeView(mBrightnessView);
                 addView(mBrightnessView, getBrightnessViewPositionBottom());
                 mBrightnessBottom = true;
+            }
+        } else if (ANIM_TILE_STYLE.equals(key)) {
+            animStyle = newValue == null ? 0 : Integer.parseInt(newValue);
+            if (mHost != null) {
+                setTiles(mHost.getTiles());
+            }
+        } else if (ANIM_TILE_DURATION.equals(key)) {
+            animDuration = newValue == null ? 0 : Integer.parseInt(newValue);
+            if (mHost != null) {
+                setTiles(mHost.getTiles());
+            }
+        } else if (ANIM_TILE_INTERPOLATOR.equals(key)) {
+            interpolatorType = newValue == null ? 0 : Integer.parseInt(newValue);
+            if (mHost != null) {
+                setTiles(mHost.getTiles());
             }
         }
     }
@@ -560,6 +586,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
         if (mTileLayout != null) {
             mTileLayout.addTile(r);
+            configureTile(r.tile, r.tileView);
         }
 
         return r;
@@ -759,12 +786,6 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
     private void setAnimationTile(QSTileView v) {
         ObjectAnimator animTile = null;
-        int animStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.ANIM_TILE_STYLE, 0, UserHandle.USER_CURRENT);
-        int animDuration = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.ANIM_TILE_DURATION, 2000, UserHandle.USER_CURRENT);
-        int interpolatorType = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.ANIM_TILE_INTERPOLATOR, 0, UserHandle.USER_CURRENT);
         if (animStyle == 0) {
             //No animation
         }
