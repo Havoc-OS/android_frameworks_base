@@ -23,6 +23,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.service.quicksettings.Tile;
 import android.widget.ImageView;
 
 import com.android.internal.logging.MetricsLogger;
@@ -32,12 +33,9 @@ import com.android.systemui.plugins.qs.QSIconView;
 import com.android.systemui.plugins.qs.QSTile.BooleanState;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
-import android.service.quicksettings.Tile;
 
 public class CompassTile extends QSTileImpl<BooleanState> implements SensorEventListener {
     private final static float ALPHA = 0.97f;
-
-    private final Icon mIcon = ResourceIcon.get(R.drawable.ic_qs_compass_on);
 
     private boolean mActive = false;
 
@@ -116,13 +114,12 @@ public class CompassTile extends QSTileImpl<BooleanState> implements SensorEvent
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
         Float degrees = arg == null ? 0 :(float) arg;
-        if (state.slash == null) {
-            state.slash = new SlashState();
-        }
 
         state.value = mActive;
-        state.icon = mIcon;
+
         if (state.value) {
+            state.state = Tile.STATE_ACTIVE;
+            state.icon = ResourceIcon.get(R.drawable.ic_qs_compass_on);
             if (arg != null) {
                 state.label = formatValueWithCardinalDirection(degrees);
 
@@ -137,21 +134,17 @@ public class CompassTile extends QSTileImpl<BooleanState> implements SensorEvent
                 mImage.setRotation(0);
             }
             state.contentDescription = mContext.getString(
-                    R.string.accessibility_quick_settings_compass_on);	    
-            state.value = true;
+                    R.string.accessibility_quick_settings_compass_on);
         } else {
-            /*state.icon = ResourceIcon.get(R.drawable.ic_qs_compass_off);*/
+            state.icon = ResourceIcon.get(R.drawable.ic_qs_compass_off);
             state.label = mContext.getString(R.string.quick_settings_compass_label);
             state.contentDescription = mContext.getString(
-                    R.string.quick_settings_compass_label);
-	    state.value = false;
+                    R.string.accessibility_quick_settings_compass_off);
+            state.state = Tile.STATE_INACTIVE;
             if (mImage != null) {
                 mImage.setRotation(0);
             }
-            state.state = Tile.STATE_INACTIVE;
         }
-        state.slash.isSlashed = !state.value;
-        state.state = state.value ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE;
     }
 
     @Override
