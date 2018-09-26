@@ -113,15 +113,16 @@
 
             <com.android.keyguard.AlphaOptimizedImageButton
                 android:id="@+id/running_services_button"
-                style="@android:style/Widget.Material.Button.Borderless"
                 android:layout_width="46dp"
-                android:layout_height="match_parent"
+                android:layout_height="48dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
+                android:clipToPadding="false"
+                android:contentDescription="@string/accessibility_quick_settings_running_services"
                 android:focusable="true"
-                android:background="@drawable/ripple_drawable"
+                android:padding="15dp"
                 android:src="@drawable/ic_settings_memory"
-                android:tint="?android:attr/colorForeground"
-                android:contentDescription="@string/accessibility_quick_settings_running_services" />
+                android:tint="?android:attr/colorForeground"/>
 
             <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
                 android:id="@+id/settings_button_container"
