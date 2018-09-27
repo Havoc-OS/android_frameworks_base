@@ -16,17 +16,14 @@
 
 package com.android.systemui.qs.tiles;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.om.IOverlayManager;
-import android.content.om.OverlayInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -37,7 +34,10 @@ import android.widget.ListView;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
- import com.android.systemui.Prefs;
+import com.android.internal.statusbar.ThemeAccentUtils;
+import com.android.internal.util.havoc.HavocUtils;
+
+import com.android.systemui.Prefs;
 import com.android.systemui.R;
 import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.plugins.qs.QSTile;
@@ -48,17 +48,13 @@ import com.android.systemui.qs.QSDetailItemsList;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
- import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class ThemeTile extends QSTileImpl<BooleanState> {
 
-    private final String substratum = "projekt.substratum";
+    private final String SUBS_PACKAGE = "projekt.substratum";
 
     static final List<ThemeTileItem> sThemeItems = new ArrayList<ThemeTileItem>();
     static {
@@ -122,12 +118,14 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
     }
 
     private IOverlayManager mOverlayManager;
+    private int mCurrentUserId;
     private Mode mMode;
 
     public ThemeTile(QSHost host) {
         super(host);
         mOverlayManager = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService(Context.OVERLAY_SERVICE));
+        mCurrentUserId = ActivityManager.getCurrentUser();
         mMode = Mode.ACCENT;
     }
 
@@ -340,17 +338,7 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
 
     @Override
     public boolean isAvailable() {
-        return !isPackageInstalled();
-    }
-
-    private boolean isPackageInstalled() {
-        try {
-            PackageInfo info = mContext.getPackageManager()
-                    .getPackageInfo(substratum, PackageManager.GET_META_DATA);
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-        return true;
+        return !HavocUtils.isPackageInstalled(mContext, SUBS_PACKAGE);
     }
 
     @Override
