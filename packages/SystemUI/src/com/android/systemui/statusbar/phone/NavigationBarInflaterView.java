@@ -45,6 +45,8 @@ import com.android.systemui.tuner.TunerService;
 import com.android.systemui.tuner.TunerService.Tunable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -258,13 +260,21 @@ public class NavigationBarInflaterView extends FrameLayout
         }
     }
 
+    private String[] swapLeftAndRight(String[] set) {
+        for (int i = 0; i < set.length; i++) {
+            if (set.equals(LEFT)) {
+                set[i] = RIGHT;
+            } else if (set[i].equals(RIGHT)) {
+                set[i] = LEFT;
+            }
+        }
+        return set;
+    }
+
     protected void inflateLayout(String newLayout) {
         mCurrentLayout = newLayout;
         if (newLayout == null) {
             newLayout = getDefaultLayout();
-        }
-        if (mInverseLayout) {
-            newLayout = newLayout.replace("recent", "back").replaceFirst("back", "recent");
         }
         String[] sets = newLayout.split(GRAVITY_SEPARATOR, 3);
         if (sets.length != 3) {
@@ -275,6 +285,18 @@ public class NavigationBarInflaterView extends FrameLayout
         String[] start = sets[0].split(BUTTON_SEPARATOR);
         String[] center = sets[1].split(BUTTON_SEPARATOR);
         String[] end = sets[2].split(BUTTON_SEPARATOR);
+        // Invert start, center and end if needed.
+        if (mInverseLayout) {
+            List<String> newStart = Arrays.asList(end);
+            List<String> newCenter = Arrays.asList(center);
+            List<String> newEnd = Arrays.asList(start);
+            Collections.reverse(newStart);
+            Collections.reverse(newCenter);
+            Collections.reverse(newEnd);
+            start = swapLeftAndRight((String[]) newStart.toArray());
+            center = swapLeftAndRight((String[]) newCenter.toArray());
+            end = swapLeftAndRight((String[]) newEnd.toArray());
+        }
         // Inflate these in start to end order or accessibility traversal will be messed up.
         inflateButtons(start, mRot0.findViewById(R.id.ends_group), isRot0Landscape, true);
         inflateButtons(start, mRot90.findViewById(R.id.ends_group), !isRot0Landscape, true);
