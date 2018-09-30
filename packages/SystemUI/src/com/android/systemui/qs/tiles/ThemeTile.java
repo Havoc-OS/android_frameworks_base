@@ -98,6 +98,20 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
                 R.string.quick_settings_theme_tile_color_grey));
         sThemeItems.add(new ThemeTileItem(19, R.color.quick_settings_theme_tile_blue_grey,
                 R.string.quick_settings_theme_tile_color_blue_grey));
+        sThemeItems.add(new ThemeTileItem(22, R.color.quick_settings_theme_tile_user_one,
+                R.string.quick_settings_theme_tile_color_user_one));
+        sThemeItems.add(new ThemeTileItem(23, R.color.quick_settings_theme_tile_user_two,
+                R.string.quick_settings_theme_tile_color_user_two));
+        sThemeItems.add(new ThemeTileItem(24, R.color.quick_settings_theme_tile_user_three,
+                R.string.quick_settings_theme_tile_color_user_three));
+        sThemeItems.add(new ThemeTileItem(25, R.color.quick_settings_theme_tile_user_four,
+                R.string.quick_settings_theme_tile_color_user_four));
+        sThemeItems.add(new ThemeTileItem(26, R.color.quick_settings_theme_tile_user_five,
+                R.string.quick_settings_theme_tile_color_user_five));
+        sThemeItems.add(new ThemeTileItem(27, R.color.quick_settings_theme_tile_user_six,
+                R.string.quick_settings_theme_tile_color_user_six));
+        sThemeItems.add(new ThemeTileItem(28, R.color.quick_settings_theme_tile_user_seven,
+                R.string.quick_settings_theme_tile_color_user_seven));
     }
 
     static final List<ThemeTileItem> sStyleItems = new ArrayList<ThemeTileItem>();
