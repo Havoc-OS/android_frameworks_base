@@ -15,10 +15,12 @@
      limitations under the License.
 -->
 <!-- Extends LinearLayout -->
+
 <com.android.systemui.qs.QSDetail
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@*android:dimen/quick_qs_offset_height"
     android:background="@drawable/qs_detail_background"
     android:clickable="true"
     android:orientation="vertical"
