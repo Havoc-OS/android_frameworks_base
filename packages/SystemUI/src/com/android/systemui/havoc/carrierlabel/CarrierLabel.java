@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Handler;
@@ -54,6 +55,8 @@ public class CarrierLabel extends TextView implements DarkReceiver {
     private boolean mAttached;
     private static boolean isCN;
     private int mCarrierFontSize = 14;
+    private int mCarrierColor = 0xffffffff;
+    private int mTintColor = Color.WHITE;
 
     private int mCarrierLabelFontStyle = FONT_NORMAL;
     public static final int FONT_NORMAL = 0;
@@ -85,6 +88,8 @@ public class CarrierLabel extends TextView implements DarkReceiver {
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.STATUS_BAR_CARRIER_COLOR), false, this);
+            resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.System.STATUS_BAR_CARRIER_FONT_SIZE), false, this);
             resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.System.STATUS_BAR_CARRIER_FONT_STYLE), false, this);
@@ -92,6 +97,7 @@ public class CarrierLabel extends TextView implements DarkReceiver {
 
         @Override
         public void onChange(boolean selfChange) {
+	        updateColor();
 	        updateSize();
 	        updateStyle();
         }
@@ -112,6 +118,7 @@ public class CarrierLabel extends TextView implements DarkReceiver {
         mHandler = new Handler();
         SettingsObserver settingsObserver = new SettingsObserver(mHandler);
         settingsObserver.observe();
+        updateColor();
         updateSize();
         updateStyle();
     }
@@ -141,7 +148,12 @@ public class CarrierLabel extends TextView implements DarkReceiver {
 
     @Override
     public void onDarkChanged(Rect area, float darkIntensity, int tint) {
-        setTextColor(DarkIconDispatcher.getTint(area, this, tint));
+        mTintColor = DarkIconDispatcher.getTint(area, this, tint);
+        if (mCarrierColor == 0xFFFFFFFF) {
+            setTextColor(mTintColor);
+        } else {
+            setTextColor(mCarrierColor);
+        }
     }
 
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
@@ -274,6 +286,16 @@ public class CarrierLabel extends TextView implements DarkReceiver {
                 setTypeface(Typeface.create("sans-serif-black",
                     Typeface.ITALIC));
                 break;
+        }
+    }
+
+    private void updateColor() {
+        mCarrierColor = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_CARRIER_COLOR, 0xffffffff);
+        if (mCarrierColor == 0xFFFFFFFF) {
+            setTextColor(mTintColor);
+        } else {
+            setTextColor(mCarrierColor);
         }
     }
 
