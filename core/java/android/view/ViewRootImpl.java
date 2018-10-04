@@ -4294,17 +4294,18 @@ public final class ViewRootImpl implements ViewParent,
                 case MSG_DRAW_FINISHED: {
                     pendingDrawFinished();
                 } break;
-            case MSG_GESTURE_MOTION_DOWN: {
-                int k = 0;
-                while (k < ViewRootImpl.this.mBackupEventList.size()) {
-                    try {
-                        boolean ishandled = ViewRootImpl.this.mView.dispatchPointerEvent((MotionEvent) ViewRootImpl.this.mBackupEventList.get(k));
-                        k++;
-                    } catch (NullPointerException e) {
-                        Log.e(ViewRootImpl.TAG, "mView does not exist, so discard the remaining points. " + e);
+                case MSG_GESTURE_MOTION_DOWN: {
+                    int k = 0;
+                    while (k < ViewRootImpl.this.mBackupEventList.size()) {
+                        try {
+                            boolean ishandled = ViewRootImpl.this.mView.dispatchPointerEvent((MotionEvent) ViewRootImpl.this.mBackupEventList.get(k));
+                            k++;
+                        } catch (NullPointerException e) {
+                            Log.e(ViewRootImpl.TAG, "mView does not exist, so discard the remaining points. " + e);
+                            break;
+                        }
                     }
-                }
-            } break;
+                } break;
             }
         }
     }
