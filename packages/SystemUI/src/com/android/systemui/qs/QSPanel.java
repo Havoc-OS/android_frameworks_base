@@ -81,6 +81,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     public static final String QS_SHOW_BRIGHTNESS = "qs_show_brightness";
     public static final String QS_SHOW_HEADER = "qs_show_header";
     public static final String QS_BRIGHTNESS_POSITION_BOTTOM = "qs_brightness_position_bottom";
+    public static final String QS_SHOW_SECURITY = "qs_show_secure";
 
     protected final Context mContext;
     protected final ArrayList<TileRecord> mRecords = new ArrayList<>();
@@ -232,6 +233,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         final TunerService tunerService = Dependency.get(TunerService.class);
         tunerService.addTunable(this, QS_SHOW_BRIGHTNESS);
         tunerService.addTunable(this, QS_BRIGHTNESS_POSITION_BOTTOM);
+        tunerService.addTunable(this, QS_SHOW_SECURITY);
         if (mHost != null) {
             setTiles(mHost.getTiles());
         }
@@ -275,6 +277,9 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 addView(mBrightnessView, getBrightnessViewPositionBottom());
                 mBrightnessBottom = true;
             }
+        }
+        if (QS_SHOW_SECURITY.equals(key)) {
+            mFooter.setForceHide(newValue != null && Integer.parseInt(newValue) == 0);
         }
     }
 
