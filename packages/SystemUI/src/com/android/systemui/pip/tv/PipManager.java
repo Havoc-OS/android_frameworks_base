@@ -246,7 +246,8 @@ public class PipManager implements BasePipManager {
         ActivityManagerWrapper.getInstance().registerTaskStackListener(mTaskStackListener);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_MEDIA_RESOURCE_GRANTED);
-        mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+        mContext.registerReceiverAsUser(mBroadcastReceiver, UserHandle.ALL, intentFilter,
+                null, null);
 
         if (sSettingsPackageAndClassNamePairList == null) {
             String[] settings = mContext.getResources().getStringArray(
