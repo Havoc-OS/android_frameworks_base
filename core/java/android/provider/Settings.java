@@ -5248,6 +5248,30 @@ public final class Settings {
         public static final String SYSTEM_UI_THEME = "system_ui_theme";
 
         /**
+         * SYSTEM_THEME_STYLE value for wallpaper mode.
+         * @hide
+         */
+        public static final int SYSTEM_THEME_STYLE_WALLPAPER = 0;
+
+        /**
+         * SYSTEM_THEME_STYLE value for light theme mode.
+         * @hide
+         */
+        public static final int SYSTEM_THEME_STYLE_LIGHT = 1;
+
+        /**
+         * SYSTEM_THEME_STYLE value for dark theme mode.
+         * @hide
+         */
+        public static final int SYSTEM_THEME_STYLE_DARK = 2;
+
+        /**
+         * SYSTEM_THEME_STYLE value for black theme mode.
+         * @hide
+         */
+        public static final int SYSTEM_THEME_STYLE_BLACK = 3;
+
+        /**
          * Whether to show Brightness Icon On Brightness Slider
          * @hide
          */
