@@ -929,7 +929,7 @@ public class Build {
     public static final String FINGERPRINT = deriveFingerprint();
 
     /** @hide */
-    public static final String HAVOC_FINGERPRINT = SystemProperties.get("org.havoc.fingerprint",
+    public static final String HAVOC_FINGERPRINT = SystemProperties.get("ro.havoc.fingerprint",
             deriveFingerprint());
 
     /**
