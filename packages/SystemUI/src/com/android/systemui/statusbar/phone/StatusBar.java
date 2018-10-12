@@ -38,6 +38,7 @@ import static com.android.systemui.statusbar.phone.BarTransitions.MODE_TRANSLUCE
 import static com.android.systemui.statusbar.phone.BarTransitions.MODE_TRANSPARENT;
 import static com.android.systemui.statusbar.phone.BarTransitions.MODE_WARNING;
 
+import android.view.Gravity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.NonNull;
@@ -136,6 +137,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.DateTimeView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.graphics.PixelFormat;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.colorextraction.ColorExtractor;
@@ -217,6 +219,7 @@ import com.android.systemui.statusbar.NotificationData;
 import com.android.systemui.statusbar.NotificationData.Entry;
 import com.android.systemui.statusbar.NotificationEntryManager;
 import com.android.systemui.statusbar.NotificationGutsManager;
+import com.android.systemui.statusbar.appcirclesidebar.AppCircleSidebar;
 import com.android.systemui.statusbar.NotificationInfo;
 import com.android.systemui.statusbar.NotificationListener;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
@@ -475,6 +478,8 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
      * fully locked mode we only show that unlocking is blocked.
      */
     private ScreenPinningNotify mScreenPinningNotify;
+
+    protected AppCircleSidebar mAppCircleSidebar;
 
     // for disabling the status bar
     private int mDisabled1 = 0;
@@ -1013,6 +1018,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             createNavigationBar();
         }
 
+        addAppCircleSidebar();
         mScreenPinningNotify = new ScreenPinningNotify(mContext);
         mStackScroller.setLongPressListener(mEntryManager.getNotificationLongClicker());
         mStackScroller.setStatusBar(this);
@@ -6209,4 +6215,40 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                     saveImportance.run();
                 }
             };
-}
+
+
+   protected void addAppCircleSidebar() {
+        if (mAppCircleSidebar == null) {
+            mAppCircleSidebar = (AppCircleSidebar) View.inflate(mContext, R.layout.app_circle_sidebar, null);
+            mWindowManager.addView(mAppCircleSidebar, getAppCircleSidebarLayoutParams());
+        }
+    }
+
+    protected void removeAppCircleSidebar() {
+         if (mAppCircleSidebar != null) {
+             mWindowManager.removeView(mAppCircleSidebar);
+         }
+     }
+ 
+    protected WindowManager.LayoutParams getAppCircleSidebarLayoutParams() {
+         int maxWidth =
+                 mContext.getResources().getDimensionPixelSize(R.dimen.app_sidebar_trigger_width);
+ 
+         WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
+                 maxWidth,
+                 ViewGroup.LayoutParams.MATCH_PARENT,
+                 WindowManager.LayoutParams.TYPE_STATUS_BAR_SUB_PANEL,
+                 0
+                 | WindowManager.LayoutParams.FLAG_TOUCHABLE_WHEN_WAKING
+                 | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                 | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                 | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
+                 | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
+                 PixelFormat.TRANSLUCENT);
+         lp.privateFlags |= WindowManager.LayoutParams.PRIVATE_FLAG_NO_MOVE_ANIMATION;
+         lp.gravity = Gravity.TOP | Gravity.RIGHT;
+         lp.setTitle("AppCircleSidebar");
+ 
+         return lp;
+     }
+   }
