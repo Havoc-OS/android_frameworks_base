@@ -28,16 +28,16 @@ public class ThemeAccentUtils {
     private static final String STOCK_DARK_THEME = "com.android.systemui.theme.dark";
 
     private static final String[] DARK_THEMES = {
-        "com.android.system.theme.dark", // 0
-        "com.android.settings.theme.dark", // 1
-        "com.android.systemui.theme.dark", // 2
+        "com.android.system.theme.dark.havoc", // 0
+        "com.android.settings.theme.dark.havoc", // 1
+        "com.android.systemui.theme.dark.havoc", // 2
     };
 
     // Dark themes
     private static final String[] BLACK_THEMES = {
-        "com.android.system.theme.black", // 0
-        "com.android.settings.theme.black", // 1
-        "com.android.systemui.theme.black", // 2
+        "com.android.system.theme.black.havoc", // 0
+        "com.android.settings.theme.black.havoc", // 1
+        "com.android.systemui.theme.black.havoc", // 2
     };
 
     // Accents
