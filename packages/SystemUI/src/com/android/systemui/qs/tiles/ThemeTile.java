@@ -17,6 +17,7 @@
 package com.android.systemui.qs.tiles;
 
 import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,7 +36,6 @@ import android.widget.ListView;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.statusbar.ThemeAccentUtils;
-import com.android.internal.util.havoc.HavocUtils;
 
 import com.android.systemui.Prefs;
 import com.android.systemui.R;
@@ -53,8 +53,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ThemeTile extends QSTileImpl<BooleanState> {
-
-    private final String SUBS_PACKAGE = "projekt.substratum";
 
     static final List<ThemeTileItem> sThemeItems = new ArrayList<ThemeTileItem>();
     static {
@@ -273,7 +271,8 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
 
         @Override
         public Intent getSettingsIntent() {
-            return new Intent(Settings.ACTION_DISPLAY_SETTINGS);
+            return new Intent().setComponent(new ComponentName(
+                "com.android.settings", "com.android.settings.Settings$InterfaceSettingsActivity"));
         }
 
         @Override
@@ -348,11 +347,6 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.HAVOC_SETTINGS;
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return !HavocUtils.isPackageInstalled(mContext, SUBS_PACKAGE);
     }
 
     @Override
