@@ -17,6 +17,7 @@
 
 package com.android.systemui.qs.tiles;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -172,8 +173,8 @@ public class WeatherTile extends QSTileImpl<BooleanState> implements OmniJawsCli
 
     @Override
     public Intent getLongClickIntent() {
-        if (DEBUG) Log.d(TAG, "getLongClickIntent");
-        return mWeatherClient.getSettingsIntent();
+        return new Intent().setComponent(new ComponentName(
+            "com.android.settings", "com.android.settings.Settings$WeatherActivity"));
     }
 
     @Override

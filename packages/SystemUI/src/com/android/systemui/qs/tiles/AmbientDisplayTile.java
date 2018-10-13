@@ -17,6 +17,7 @@
 
 package com.android.systemui.qs.tiles;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Build;
 import android.os.SystemProperties;
@@ -73,7 +74,8 @@ public class AmbientDisplayTile extends QSTileImpl<BooleanState> {
 
     @Override
     public Intent getLongClickIntent() {
-        return DISPLAY_SETTINGS;
+        return new Intent().setComponent(new ComponentName(
+            "com.android.settings", "com.android.settings.Settings$AmbientDisplayActivity"));
     }
 
     private void setEnabled(boolean enabled) {
@@ -105,7 +107,6 @@ public class AmbientDisplayTile extends QSTileImpl<BooleanState> {
     public CharSequence getTileLabel() {
         return mContext.getString(R.string.quick_settings_ambient_display_label);
     }
-
 
     @Override
     public int getMetricsCategory() {

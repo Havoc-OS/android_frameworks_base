@@ -94,10 +94,14 @@ public class CalcTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
+    public void handleLongClick() {
+       // do nothing
+    }
+
+    @Override
     public Intent getLongClickIntent() {
         return null;
     }
-
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {

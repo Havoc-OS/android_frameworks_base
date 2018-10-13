@@ -71,6 +71,11 @@ public class CPUInfoTile extends QSTileImpl<BooleanState> {
     }
 
     @Override
+    public void handleLongClick() {
+       // do nothing
+    }
+
+    @Override
     public Intent getLongClickIntent() {
         return null;
     }

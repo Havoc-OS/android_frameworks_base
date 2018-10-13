@@ -73,7 +73,7 @@ public class ExpandedDesktopTile extends QSTileImpl<BooleanState> {
     @Override
     public Intent getLongClickIntent() {
         return new Intent().setComponent(new ComponentName(
-            "com.android.settings", "com.android.settings.Settings$ExpandedDesktopSettingsActivity"));
+            "com.android.settings", "com.android.settings.Settings$ExpandedDesktopActivity"));
     }
 
     @Override

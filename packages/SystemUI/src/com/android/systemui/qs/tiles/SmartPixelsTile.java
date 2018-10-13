@@ -103,7 +103,8 @@ public class SmartPixelsTile extends QSTileImpl<BooleanState> implements
 
     @Override
     public Intent getLongClickIntent() {
-        return SMART_PIXELS_SETTINGS;
+        return new Intent().setComponent(new ComponentName(
+            "com.android.settings", "com.android.settings.Settings$SmartPixelsActivity"));
     }
 
     @Override
