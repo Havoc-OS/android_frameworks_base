@@ -17,8 +17,10 @@
 package com.android.systemui;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -27,6 +29,10 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.service.dreams.DreamService;
+import android.service.dreams.IDreamManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -39,6 +45,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.lang.StringBuffer;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CPUInfoService extends Service {
     private View mView;
@@ -51,6 +61,7 @@ public class CPUInfoService extends Service {
     private static final String NUM_OF_CPUS_PATH = "/sys/devices/system/cpu/present";
     private int CPU_TEMP_DIVIDER = 1;
     private String CPU_TEMP_SENSOR = "";
+    private IDreamManager mDreamManager;
 
     private class CPUView extends View {
         private Paint mOnlinePaint;
@@ -294,10 +305,13 @@ public class CPUInfoService extends Service {
         params.gravity = Gravity.RIGHT | Gravity.TOP;
         params.setTitle("CPU Info");
 
-        mCurCPUThread = new CurCPUThread(mView.getHandler(), mNumCpus);
-        mCurCPUThread.start();
+        startThread();
 
-        Log.d(TAG, "started CurCPUThread");
+        mDreamManager = IDreamManager.Stub.asInterface(
+                ServiceManager.checkService(DreamService.DREAM_SERVICE));
+        IntentFilter screenStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        registerReceiver(mScreenStateReceiver, screenStateFilter);
 
         WindowManager wm = (WindowManager)getSystemService(WINDOW_SERVICE);
         wm.addView(mView, params);
@@ -306,16 +320,10 @@ public class CPUInfoService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mCurCPUThread.isAlive()) {
-            mCurCPUThread.interrupt();
-            try {
-                mCurCPUThread.join();
-            } catch (InterruptedException e) {
-            }
-        }
-        Log.d(TAG, "stopped CurCPUThread");
+        stopThread();
         ((WindowManager)getSystemService(WINDOW_SERVICE)).removeView(mView);
         mView = null;
+        unregisterReceiver(mScreenStateReceiver);
     }
 
     @Override
@@ -339,6 +347,21 @@ public class CPUInfoService extends Service {
         return line;
     }
 
+    private BroadcastReceiver mScreenStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+                if (!isDozeMode()) {
+                    startThread();
+                    mView.setVisibility(View.VISIBLE);
+                }
+            } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+                mView.setVisibility(View.GONE);
+                stopThread();
+            }
+        }
+    };
+
     private static int getNumOfCpus() {
         int numOfCpu = 1;
         String numOfCpus = readOneLine(NUM_OF_CPUS_PATH);
@@ -357,5 +380,32 @@ public class CPUInfoService extends Service {
             }
         }
         return numOfCpu;
+    }
+
+    private boolean isDozeMode() {
+        try {
+            if (mDreamManager != null && mDreamManager.isDozing()) {
+                return true;
+            }
+        } catch (RemoteException e) {
+            return false;
+        }
+        return false;
+    }
+
+    private void startThread() {
+        mCurCPUThread = new CurCPUThread(mView.getHandler(), mNumCpus);
+        mCurCPUThread.start();
+    }
+
+    private void stopThread() {
+        if (mCurCPUThread != null && mCurCPUThread.isAlive()) {
+            mCurCPUThread.interrupt();
+            try {
+                mCurCPUThread.join();
+            } catch (InterruptedException e) {
+            }
+        }
+        mCurCPUThread = null;
     }
 }
