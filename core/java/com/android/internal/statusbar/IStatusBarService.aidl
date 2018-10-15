@@ -113,4 +113,5 @@ interface IStatusBarService
     void cancelPreloadRecentApps();
     void startAssist(in Bundle args);
     void restartUI();
+    void toggleOrientationListener(boolean enable);
 }
