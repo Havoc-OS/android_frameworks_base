@@ -28,6 +28,7 @@ import android.widget.ImageView;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.util.havoc.HavocUtils;
 import com.android.systemui.R;
 import com.android.systemui.plugins.qs.QSIconView;
 import com.android.systemui.plugins.qs.QSTile.BooleanState;
@@ -74,6 +75,11 @@ public class CompassTile extends QSTileImpl<BooleanState> implements SensorEvent
         QSIconView iconView = super.createTileView(context);
         mImage = (ImageView) iconView.findViewById(android.R.id.icon);
         return iconView;
+    }
+	
+	@Override
+    public boolean isAvailable() {
+        return HavocUtils.deviceHasCompass(mContext);
     }
 
     @Override
