@@ -107,6 +107,7 @@ interface IStatusBarService
      * Havoc
      */
     void setAutoRotate(boolean enabled);
+    void toggleOrientationListener(boolean enable);
 
     // Start SmartNav methods
     void toggleRecentApps();

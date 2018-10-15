@@ -60,6 +60,7 @@ import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
 import com.android.systemui.qs.tiles.OnTheGoTile;
 import com.android.systemui.qs.tiles.RebootTile;
+import com.android.systemui.qs.tiles.PieTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenrecordTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
@@ -206,6 +207,8 @@ public class QSFactoryImpl implements QSFactory {
                 return new SoundSearchTile(mHost);
             case "app_picker":
                 return new AppPickerTile(mHost);
+            case "pie":
+                return new PieTile(mHost);
         }
 
         // Intent tiles.

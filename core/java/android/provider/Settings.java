@@ -10887,6 +10887,72 @@ public final class Settings {
          */
         public static final String FLING_LONGSWIPE_THRESHOLD_LEFT_PORT = "fling_longswipe_threshold_left_port";
 
+        /*
+         * Whether to show PIE controls on the screen.
+         * 0 = OFF
+         * 1 = ON
+         * Changes aspect depends on status bar visibility.
+         * @hide
+         */
+        public static final String PIE_STATE = "pie_state";
+
+        /**
+         * PIE controls current location.
+         * Gravity.BOTTOM (default)
+         * Gravity.LEFT
+         * Gravity.RIGHT
+         * @hide
+         */
+        public static final String PIE_GRAVITY = "pie_gravity";
+
+        /**
+         * Whether to show battery circle in PIE controls.
+         * 0 = Text only
+         * 1 = Circle only
+         * 2 = Text and circle
+         * @hide
+         */
+        public static final String PIE_BATTERY_MODE = "pie_battery_mode";
+
+        /**
+         * PIE controls theme mode.
+         * 0 = AUTO
+         * 1 = WHITE
+         * 2 = DARK
+         * @hide
+         */
+        public static final String PIE_THEME_MODE = "pie_theme_mode";
+
+        /**
+         * PIE controls status indicator mode.
+         * 0 = BOTH
+         * 1 = WIFI ONLY
+         * 2 = MOBILE NETWORK ONLY
+         * 3 = NONE
+         * @hide
+         */
+        public static final String PIE_STATUS_INDICATOR = "pie_status_indicator";
+
+        /**
+         * Setting to record how the look and feel of the system should be tweaked. This
+         * should be used in combination with magic.
+         *
+         * @see android.view.View#SYSTEM_DESIGN_FLAG_IMMERSIVE_NAV
+         * @see android.view.View#SYSTEM_DESIGN_FLAG_IMMERSIVE_STATUS
+         * @hide
+         */
+        public static final String SYSTEM_DESIGN_FLAGS = "system_design_flags";
+
+        /**
+         * Settings to reset on user request. They will fall back to their default value (0).
+         *
+         * @hide
+         */
+        public static final String[] SETTINGS_TO_RESET = {
+            PIE_STATE,
+            PIE_GRAVITY
+        };
+
         /**
          * distance to swipe right when device is in landscape orientation to
          * trigger action. Apples to a horizontal layout (tablet/phablet)
