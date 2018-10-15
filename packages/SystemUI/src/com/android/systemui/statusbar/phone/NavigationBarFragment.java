@@ -313,8 +313,8 @@ public class NavigationBarFragment extends Fragment implements Callbacks, Keygua
 
         mNavigationBarView.setPulseController(mPulse);
         mNavigationBarView.setLeftInLandscape(mLeftInLandscape);
-        mNavigationBarView.setDisabledFlags(mDisabledFlags1);
         mNavigationBarView.setComponents(mRecents, mDivider, mStatusBar.getPanel());
+        mNavigationBarView.setDisabledFlags(mDisabledFlags1);
         mNavigationBarView.setOnVerticalChangedListener(this::onVerticalChanged);
         mNavigationBarView.setOnTouchListener(this::onNavigationTouch);
         mNavigationBarView.setMediaPlaying(mMediaManager.isPlaybackActive());
