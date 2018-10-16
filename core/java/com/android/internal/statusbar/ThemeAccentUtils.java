@@ -73,6 +73,13 @@ public class ThemeAccentUtils {
         "com.accents.userseven", // 28
     };
 
+    private static final String[] QS_TILE_THEMES = {
+        "com.android.systemui.qstile.default", // 0
+        "com.android.systemui.qstile.circletrim", // 1
+        "com.android.systemui.qstile.dualtonecircletrim", // 2
+        "com.android.systemui.qstile.squircletrim", // 3
+    };
+
     // Check for the dark system theme
     public static boolean isUsingDarkTheme(IOverlayManager om, int userId) {
         OverlayInfo themeInfo = null;
@@ -203,6 +210,34 @@ public class ThemeAccentUtils {
             String accent = ACCENTS[i];
             try {
                 om.setEnabled(accent,
+                        false /*disable*/, userId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Switches qs tile style to user selected.
+    public static void updateTileStyle(IOverlayManager om, int userId, int qsTileStyle) {
+        if (qsTileStyle == 0) {
+            stockTileStyle(om, userId);
+        } else {
+            try {
+                om.setEnabled(QS_TILE_THEMES[qsTileStyle],
+                        true, userId);
+            } catch (RemoteException e) {
+                Log.w(TAG, "Can't change qs tile icon", e);
+            }
+        }
+    }
+
+    // Switches qs tile style back to stock.
+    public static void stockTileStyle(IOverlayManager om, int userId) {
+        // skip index 0
+        for (int i = 1; i < QS_TILE_THEMES.length; i++) {
+            String qstiletheme = QS_TILE_THEMES[i];
+            try {
+                om.setEnabled(qstiletheme,
                         false /*disable*/, userId);
             } catch (RemoteException e) {
                 e.printStackTrace();
