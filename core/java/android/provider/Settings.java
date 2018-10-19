@@ -4968,25 +4968,6 @@ public final class Settings {
          */
         public static final String DOUBLE_TAP_SLEEP_LOCKSCREEN = "double_tap_sleep_lockscreen";
 
-        
-        /**
-         * Defines the screen-off animation to display
-         * @hide
-         */
-        public static final String SCREEN_OFF_ANIMATION = "screen_off_animation";
-
-        /**
-         * Whether to show a screen-on animation
-         * @hide
-         */
-        public static final String SCREEN_ON_ANIMATION = "screen_on_animation";
-
-        /**
-         * Disabled Transition animations of the android system
-         * @hide
-         */
-        public static final String DISABLE_TRANSITION_ANIMATIONS = "disable_transition_animations";
-
         /**
          * Three Finger Gesture from Oppo
          * @hide
@@ -13985,6 +13966,18 @@ public final class Settings {
                 "location_settings_link_to_permissions_enabled";
 
         /**
+         * Defines the screen-off animation to display
+         * @hide
+         */
+        public static final String SCREEN_OFF_ANIMATION = "screen_off_animation";
+
+        /**
+         * Whether to show a screen-on animation
+         * @hide
+         */
+        public static final String SCREEN_ON_ANIMATION = "screen_on_animation";
+
+        /**
          * Flag to set the waiting time for euicc factory reset inside System > Settings
          * Type: long
          *
@@ -14125,6 +14118,12 @@ public final class Settings {
          * @hide
          */
         public static final String ALLOW_SIGNATURE_FAKE = "allow_signature_fake";
+
+        /**
+         * Disabled Transition animations of the android system
+         * @hide
+         */
+        public static final String DISABLE_TRANSITION_ANIMATIONS = "disable_transition_animations";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
