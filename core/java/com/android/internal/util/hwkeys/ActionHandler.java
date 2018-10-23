@@ -142,12 +142,17 @@ public class ActionHandler {
     public static final String INTENT_SCREENSHOT = "action_handler_screenshot";
     public static final String INTENT_REGION_SCREENSHOT = "action_handler_region_screenshot";
 
+    //one handed mode
+    private static final String EXTRA_ALIGNMENT_STATE = "alignment_state";
+    private static final int EXTRA_ALIGNMENT_STATE_LEFT = 0;
+    private static final int EXTRA_ALIGNMENT_STATE_RIGHT = 1;
+    private static final String ACTION_ONEHAND_TRIGGER_EVENT =
+            "com.android.server.wm.onehand.intent.action.ONEHAND_TRIGGER_EVENT";
+
     // remove actions from here as they come back on deck
     static final Set<String> sDisabledActions = new HashSet<String>();
     static {
         sDisabledActions.add(SYSTEMUI_TASK_SCREENRECORD);
-        sDisabledActions.add(SYSTEMUI_TASK_ONE_HANDED_MODE_LEFT);
-        sDisabledActions.add(SYSTEMUI_TASK_ONE_HANDED_MODE_RIGHT);
         // we need to make this more reliable when the user tap the partial screenshot button
         // quickly and more times 
         sDisabledActions.add(SYSTEMUI_TASK_REGION_SCREENSHOT);
@@ -658,11 +663,11 @@ public class ActionHandler {
             StatusBarHelper.splitScreen();
             return;
         } else if (action.equals(SYSTEMUI_TASK_ONE_HANDED_MODE_LEFT)) {
-//            toggleOneHandedMode(context, "left");
+            toggleOneHandedMode(context, EXTRA_ALIGNMENT_STATE_LEFT);
             return;
         } else if (action.equals(SYSTEMUI_TASK_ONE_HANDED_MODE_RIGHT)) {
-//            toggleOneHandedMode(context, "right");
-            return;
+            toggleOneHandedMode(context, EXTRA_ALIGNMENT_STATE_RIGHT);
+	    return;
         } else if (action.equals(SYSTEMUI_TASK_ASSISTANT_SOUND_SEARCH)) {
             startAssistantSoundSearch(context);
             return;
@@ -1058,16 +1063,13 @@ public class ActionHandler {
         am.adjustVolume(AudioManager.ADJUST_SAME, AudioManager.FLAG_SHOW_UI);
     }
 
-/*
-    private static void toggleOneHandedMode(Context context, String direction) {
-        String str = Settings.Global.getString(context.getContentResolver(), Settings.Global.SINGLE_HAND_MODE);
 
-        if (TextUtils.isEmpty(str))
-            Settings.Global.putString(context.getContentResolver(), Settings.Global.SINGLE_HAND_MODE, direction);
-        else
-            Settings.Global.putString(context.getContentResolver(), Settings.Global.SINGLE_HAND_MODE, "");
+    private static void toggleOneHandedMode(Context context, int direction) {
+	Intent intent = new Intent();
+        intent.setAction(ACTION_ONEHAND_TRIGGER_EVENT);
+        intent.putExtra(EXTRA_ALIGNMENT_STATE, direction);
+        context.sendBroadcast(intent);
     }
-    */
 
     public static void startAssistantSoundSearch(Context context) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
