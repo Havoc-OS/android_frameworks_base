@@ -61,7 +61,7 @@ public class StatusBarSignalPolicy implements NetworkControllerImpl.SignalCallba
     private final String mSlotVpn;
     private final String mSlotRoaming;
 
-    private final Context mContext;
+    private static Context mContext;
     private final StatusBarIconController mIconController;
     private final NetworkController mNetworkController;
     private final SecurityController mSecurityController;
@@ -105,7 +105,6 @@ public class StatusBarSignalPolicy implements NetworkControllerImpl.SignalCallba
         mSecurityController.addCallback(this);
 
         TelephonyExtUtils.getInstance(context).addListener(this);
-        extTelephony = TelephonyExtUtils.getInstance(context);
 
         Dependency.get(TunerService.class).addTunable(this, StatusBarIconController.ICON_BLACKLIST);
     }
@@ -441,9 +440,10 @@ public class StatusBarSignalPolicy implements NetworkControllerImpl.SignalCallba
         private MobileIconState(int subId) {
             super();
             this.subId = subId;
-            if (extTelephony.hasService()) {
+	    extTelephony = TelephonyExtUtils.getInstance(mContext);
+    	    if (extTelephony.hasService()) {
                 mProvisioned = extTelephony.isSubProvisioned(subId);
-            }
+    	    }
         }
 
         @Override
