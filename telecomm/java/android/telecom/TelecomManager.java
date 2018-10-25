@@ -175,7 +175,7 @@ public class TelecomManager {
      * @see #EXTRA_CALL_TYPE_CS
      */
     public static final String ACTION_CALL_TYPE =
-            "codeaurora.telecom.action.CALL_TYPE";
+            "android.telecom.action.CALL_TYPE";
 
 
     /**
