@@ -22,10 +22,15 @@ import static com.android.systemui.statusbar.StatusBarIconView.STATE_ICON;
 import static com.android.systemui.statusbar.policy.DarkIconDispatcher.getTint;
 import static com.android.systemui.statusbar.policy.DarkIconDispatcher.getDarkIntensity;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.database.ContentObserver;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -68,6 +73,26 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
 
     private ContextThemeWrapper mDarkContext;
     private ContextThemeWrapper mLightContext;
+
+    private boolean mShowWifiActivity;
+    private final Handler mHandler = new Handler();
+
+     private class SettingsObserver extends ContentObserver {
+         SettingsObserver(Handler handler) {
+             super(handler);
+         }
+
+         void observe() {
+             getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                 Settings.System.STATUSBAR_SHOW_WIFI_ACTIVITY), false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateSettings();
+        }
+    }
+    private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
 
     public static StatusBarWifiView fromContext(Context context, String slot) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -177,6 +202,8 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
         mAirplaneSpacer = findViewById(R.id.wifi_airplane_spacer);
         mInoutContainer = findViewById(R.id.inout_container);
 
+        mSettingsObserver.observe();
+        updateSettings();
         initDotView();
     }
 
@@ -216,10 +243,10 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
             mWifiIcon.setImageDrawable(drawable);
         }
 
-        mIn.setVisibility(state.activityIn ? View.VISIBLE : View.GONE);
-        mOut.setVisibility(state.activityOut ? View.VISIBLE : View.GONE);
+        mIn.setVisibility((mShowWifiActivity && state.activityIn) ? View.VISIBLE : View.GONE);
+        mOut.setVisibility((mShowWifiActivity && state.activityOut) ? View.VISIBLE : View.GONE);
         mInoutContainer.setVisibility(
-                (state.activityIn || state.activityOut) ? View.VISIBLE : View.GONE);
+                (mShowWifiActivity && (state.activityIn || state.activityOut)) ? View.VISIBLE : View.GONE);
         mAirplaneSpacer.setVisibility(state.airplaneSpacerVisible ? View.VISIBLE : View.GONE);
         mSignalSpacer.setVisibility(state.signalSpacerVisible ? View.VISIBLE : View.GONE);
         if (mState.visible != state.visible) {
@@ -238,10 +265,10 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
             mWifiIcon.setImageDrawable(drawable);
         }
 
-        mIn.setVisibility(mState.activityIn ? View.VISIBLE : View.GONE);
-        mOut.setVisibility(mState.activityOut ? View.VISIBLE : View.GONE);
+        mIn.setVisibility((mShowWifiActivity && mState.activityIn) ? View.VISIBLE : View.GONE);
+        mOut.setVisibility((mShowWifiActivity && mState.activityOut) ? View.VISIBLE : View.GONE);
         mInoutContainer.setVisibility(
-                (mState.activityIn || mState.activityOut) ? View.VISIBLE : View.GONE);
+                (mShowWifiActivity && (mState.activityIn || mState.activityOut)) ? View.VISIBLE : View.GONE);
         mAirplaneSpacer.setVisibility(mState.airplaneSpacerVisible ? View.VISIBLE : View.GONE);
         mSignalSpacer.setVisibility(mState.signalSpacerVisible ? View.VISIBLE : View.GONE);
         setVisibility(mState.visible ? View.VISIBLE : View.GONE);
@@ -265,5 +292,10 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
     @Override
     public String toString() {
         return "StatusBarWifiView(slot=" + mSlot + " state=" + mState + ")";
+    }
+
+    public void updateSettings() {
+        mShowWifiActivity = Settings.System.getIntForUser(getContext().getContentResolver(),
+            Settings.System.STATUSBAR_SHOW_WIFI_ACTIVITY, 1, UserHandle.USER_CURRENT) == 1;
     }
 }

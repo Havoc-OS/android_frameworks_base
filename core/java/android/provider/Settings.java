@@ -5918,6 +5918,15 @@ public final class Settings {
         public static final String GESTURE_ANYWHERE_SHOW_TRIGGER = "gesture_anywhere_show_trigger";
 
         /**
+         * Enable or disable wifi data activity indicators
+         * @hide
+         */
+        public static final String STATUSBAR_SHOW_WIFI_ACTIVITY = "statusbar_show_wifi_activity";
+
+        /** @hide */
+        private static final Validator STATUSBAR_SHOW_WIFI_ACTIVITY_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5994,6 +6003,7 @@ public final class Settings {
             RECENTS_COMPONENT,
             STATUSBAR_HIDE_NOTCH,
             ONE_HAND_MODE_ENABLED,
+            STATUSBAR_SHOW_WIFI_ACTIVITY,
         };
 
         /**
@@ -6145,6 +6155,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);       
             PRIVATE_SETTINGS.add(ONE_HAND_MODE_ENABLED);
             PRIVATE_SETTINGS.add(TOAST_ICON);
+            PRIVATE_SETTINGS.add(STATUSBAR_SHOW_WIFI_ACTIVITY);
         }
 
         /**
@@ -6260,6 +6271,7 @@ public final class Settings {
             VALIDATORS.put(RECENTS_COMPONENT,RECENTS_COMPONENT_VALIDATOR);
             VALIDATORS.put(STATUSBAR_HIDE_NOTCH, STATUSBAR_HIDE_NOTCH_VALIDATOR);
             VALIDATORS.put(ONE_HAND_MODE_ENABLED, ONE_HAND_MODE_ENABLED_VALIDATOR);
+            VALIDATORS.put(STATUSBAR_SHOW_WIFI_ACTIVITY, STATUSBAR_SHOW_WIFI_ACTIVITY_VALIDATOR);
         }
 
         /**
