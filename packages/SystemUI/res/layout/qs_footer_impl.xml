@@ -60,7 +60,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="24dp"
                 android:ellipsize="marquee"
                 android:textAppearance="@style/TextAppearance.QS.TileLabel"
                 android:textColor="?android:attr/textColorPrimary"
@@ -88,7 +88,8 @@
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/ripple_drawable"
-                android:focusable="true">
+                android:focusable="true"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/multi_user_avatar"
