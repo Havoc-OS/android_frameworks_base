@@ -324,4 +324,9 @@
     <string name="quick_settings_anbi_label">Accidental Touch</string>
     <string name="accessibility_quick_settings_anbi_changed_off">Accidental touch turned off</string>
     <string name="accessibility_quick_settings_anbi_changed_on">Accidental touch turned on</string>
+
+    <!-- Music tile -->
+    <string name="quick_settings_music_label">Music</string>
+    <string name="quick_settings_music_play">Play</string>
+    <string name="quick_settings_music_pause">Pause</string>
 </resources>
