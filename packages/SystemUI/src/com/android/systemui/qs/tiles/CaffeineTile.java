@@ -180,16 +180,17 @@ public class CaffeineTile extends QSTileImpl<BooleanState> {
         if (state.slash == null) {
             state.slash = new SlashState();
         }
+        state.label = mContext.getString(R.string.quick_settings_caffeine_label);
         state.icon = mIcon;
         state.value = mWakeLock.isHeld();
         if (state.value) {
-            state.label = formatValueWithRemainingTime();
+            state.secondaryLabel = formatValueWithRemainingTime();
             state.slash.isSlashed = false;
             state.contentDescription =  mContext.getString(
                     R.string.accessibility_quick_settings_caffeine_on);
             state.state = Tile.STATE_ACTIVE;
         } else {
-            state.label = mContext.getString(R.string.quick_settings_caffeine_label);
+            state.secondaryLabel = mContext.getString(R.string.quick_settings_caffeine_label_off);
             state.slash.isSlashed = true;
             state.contentDescription =  mContext.getString(
                     R.string.accessibility_quick_settings_caffeine_off);
