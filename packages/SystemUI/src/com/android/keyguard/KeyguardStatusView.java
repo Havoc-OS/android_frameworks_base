@@ -441,16 +441,16 @@ public class KeyguardStatusView extends GridLayout implements
             mClockView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.ITALIC));
         }
         if (lockClockFont == 10) {
-            mClockView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
-        }
-        if (lockClockFont == 11) {
-            mClockView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
-        }
-        if (lockClockFont == 12) {
             mClockView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.NORMAL));
         }
-        if (lockClockFont == 13) {
+        if (lockClockFont == 11) {
             mClockView.setTypeface(Typeface.create("sans-serif-condensed-light", Typeface.ITALIC));
+        }
+        if (lockClockFont == 12) {
+            mClockView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD));
+        }
+        if (lockClockFont == 13) {
+            mClockView.setTypeface(Typeface.create("sans-serif-condensed", Typeface.BOLD_ITALIC));
         }
         if (lockClockFont == 14) {
             mClockView.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
