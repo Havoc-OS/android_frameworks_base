@@ -35,7 +35,8 @@
           android:layout_height="wrap_content"
           android:layout_width="wrap_content"
           android:visibility="gone"
-          android:paddingEnd="2dp"/>
+          android:paddingStart="4dp"
+          android:paddingEnd="4dp"/>
         <FrameLayout
             android:id="@+id/inout_container"
             android:layout_height="17dp"
@@ -63,7 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingEnd="1dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="3dp"
             android:visibility="gone" />
         <Space
             android:id="@+id/mobile_roaming_space"
