@@ -80,6 +80,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.android.internal.util.weather.WeatherClient;
+
 /**
  * This class is the policy for granting runtime permissions to
  * platform components and default handlers in the system such
@@ -978,6 +980,12 @@ public final class DefaultPermissionGrantPolicy {
         PackageParser.Package omnijawspackage = getSystemPackage("org.omnirom.omnijaws");
         if (omnijawspackage != null && doesPackageSupportRuntimePermissions(omnijawspackage)) {
             grantRuntimePermissions(omnijawspackage, LOCATION_PERMISSIONS, userId);
+        }
+
+        // Weather client
+        PackageParser.Package weatherClientPackage = getSystemPackage(WeatherClient.SERVICE_PACKAGE);
+        if (weatherClientPackage != null && doesPackageSupportRuntimePermissions(weatherClientPackage)) {
+            grantRuntimePermissions(weatherClientPackage, LOCATION_PERMISSIONS, userId);
         }
 
         if (mPermissionGrantedCallback != null) {

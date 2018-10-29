@@ -5843,6 +5843,16 @@ public final class Settings {
         private static final Validator ONE_HAND_MODE_ENABLED_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * Weather lockscreen temperature scale
+         * @hide
+         */
+        public static final String WEATHER_LOCKSCREEN_UNIT = "weather_lockscreen_unit";
+
+        /** @hide */
+        private static final Validator WEATHER_LOCKSCREEN_UNIT_VALIDATOR =
+               BOOLEAN_VALIDATOR;
+
+        /**
          * Toast icon
          * @hide
          */
@@ -6135,6 +6145,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(TOAST_ICON);
             PRIVATE_SETTINGS.add(STATUSBAR_SHOW_WIFI_ACTIVITY);
 	        PRIVATE_SETTINGS.add(BATTERY_SAVER_DARK_MODE);
+            PRIVATE_SETTINGS.add(WEATHER_LOCKSCREEN_UNIT);
         }
 
         /**
@@ -6248,6 +6259,7 @@ public final class Settings {
             VALIDATORS.put(STATUSBAR_HIDE_NOTCH, STATUSBAR_HIDE_NOTCH_VALIDATOR);
             VALIDATORS.put(ONE_HAND_MODE_ENABLED, ONE_HAND_MODE_ENABLED_VALIDATOR);
             VALIDATORS.put(STATUSBAR_SHOW_WIFI_ACTIVITY, STATUSBAR_SHOW_WIFI_ACTIVITY_VALIDATOR);
+            VALIDATORS.put(WEATHER_LOCKSCREEN_UNIT, WEATHER_LOCKSCREEN_UNIT_VALIDATOR);
         }
 
         /**
