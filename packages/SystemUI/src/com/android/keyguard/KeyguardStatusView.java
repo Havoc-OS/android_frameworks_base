@@ -118,7 +118,6 @@ public class KeyguardStatusView extends GridLayout implements
             refreshFormat();
             updateOwnerInfo();
             updateLogoutView();
-            updateSettings();
             refreshLockFont();
         }
 
