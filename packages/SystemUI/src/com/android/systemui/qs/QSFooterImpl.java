@@ -72,6 +72,7 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
 
     private static final String QS_FOOTER_SHOW_SETTINGS = "qs_footer_show_settings";
     private static final String QS_FOOTER_SHOW_SERVICES = "qs_footer_show_services";
+    public static final String QS_SHOW_DRAG_HANDLE = "qs_show_drag_handle";
 
     private ActivityStarter mActivityStarter;
     private UserInfoController mUserInfoController;
@@ -168,9 +169,13 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         super.onAttachedToWindow();
         Dependency.get(TunerService.class).addTunable(this, QS_FOOTER_SHOW_SETTINGS);
         Dependency.get(TunerService.class).addTunable(this, QS_FOOTER_SHOW_SERVICES);
+        Dependency.get(TunerService.class).addTunable(this, QS_SHOW_DRAG_HANDLE);
     }
 
     public void onTuningChanged(String key, String newValue) {
+        if (QS_SHOW_DRAG_HANDLE.equals(key)) {
+            setHideDragHandle(newValue != null && Integer.parseInt(newValue) == 0);
+        }
         updateVisibilities();
     }
 
@@ -268,6 +273,7 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     @Override
     @VisibleForTesting
     public void onDetachedFromWindow() {
+        Dependency.get(TunerService.class).removeTunable(this);
         setListening(false);
         Dependency.get(TunerService.class).removeTunable(this);
         super.onDetachedFromWindow();
@@ -505,5 +511,9 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         public String contentDescription;
         String typeContentDescription;
         boolean roaming;
+    }
+
+    private void setHideDragHandle(boolean hide) {
+        mDragHandle.setVisibility(hide ? View.GONE : View.VISIBLE);
     }
 }
