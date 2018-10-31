@@ -31,7 +31,7 @@
             android:pathData="M15.77,1.064V15.94h3V1.064Z"
             android:fillColor="#4DFFFFFF"/>
         <path
-            android:pathData="M15.77,1.064V15.94h3V1.064Z"
+            android:pathData="M15.77,6.8V15.94h3V6.8Z"
             android:fillColor="#FFFFFF"/>
     </group>
 </vector>
