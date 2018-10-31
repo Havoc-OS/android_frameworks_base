@@ -5331,6 +5331,11 @@ public final class Settings {
         public static final String SCREENRECORD_QUALITY_MODE = "screenrecord_quality_mode";
 
         /**
+         * @hide
+         */
+        public static final String FULL_GESTURE_NAVBAR = "full_gesture_navbar";
+
+        /**
          *  Weather to use a custom color for the visualizer on the lock screen
          * @hide
          */
