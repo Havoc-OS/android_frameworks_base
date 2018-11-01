@@ -24,6 +24,7 @@ import static com.android.systemui.OverviewProxyService.DEBUG_OVERVIEW_PROXY;
 import static com.android.systemui.OverviewProxyService.TAG_OPS;
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_DEAD_ZONE;
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_HOME;
+import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_ROTATION;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -232,9 +233,13 @@ public class QuickStepController implements GestureHelper {
                 mAllowGestureDetection = true;
 
                 // don't check double tap or navbar home action if full gesture mode or dt2s are disabled
-                // or if we tap on the home button
+                // or if we tap on the home or rotation button
                 if (!mNavigationBarView.isFullGestureMode()
-                        || mNavigationBarView.getDownHitTarget() == HIT_TARGET_HOME) break;
+                        || mNavigationBarView.getDownHitTarget() == HIT_TARGET_HOME
+                        || mNavigationBarView.getDownHitTarget() == HIT_TARGET_ROTATION) {
+                        wasConsumed = true;
+                        break;
+                }
                 if (mNavigationBarView.isDt2s() && isDoubleTapPending) {
                     // this is the 2nd tap, so let's trigger the double tap action
                     isDoubleTapPending = false;
