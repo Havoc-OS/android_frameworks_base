@@ -276,6 +276,18 @@ public class ThemeAccentUtils {
         }
     }
 
+    // Check for any QS tile styles overlay
+    public static boolean isUsingQsTileStyles(IOverlayManager om, int userId, int qsstyle) {
+        OverlayInfo themeInfo = null;
+        try {
+            themeInfo = om.getOverlayInfo(QS_TILE_THEMES[qsstyle],
+                    userId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return themeInfo != null && themeInfo.isEnabled();
+    }
+
     // Switches notification style to user selected.
     public static void updateNotificationStyle(IOverlayManager om, int userId, int notificationStyle) {
         if (notificationStyle == 0) {
