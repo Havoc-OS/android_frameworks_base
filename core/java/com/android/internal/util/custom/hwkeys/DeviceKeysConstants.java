@@ -35,6 +35,7 @@ public class DeviceKeysConstants {
         SLEEP,
         SPLIT_SCREEN,
         CLOSE_APP,
+        TORCH,
         SCREENSHOT;
 
         public static Action fromIntSafe(int id) {
