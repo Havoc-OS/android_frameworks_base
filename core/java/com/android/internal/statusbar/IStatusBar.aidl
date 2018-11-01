@@ -158,4 +158,5 @@ oneway interface IStatusBar
      * Havoc
      */
     void toggleCameraFlash();
+    void leftInLandscapeChanged(boolean isLeft);
 }
