@@ -219,6 +219,7 @@ public class QuickStepController implements GestureHelper {
                 mNavigationBarView.transformMatrixToGlobal(mTransformGlobalMatrix);
                 mNavigationBarView.transformMatrixToLocal(mTransformLocalMatrix);
                 mQuickStepStarted = false;
+                mBackActionScheduled = false;
                 mAllowGestureDetection = true;
                 break;
             }
@@ -262,11 +263,6 @@ public class QuickStepController implements GestureHelper {
                     break;
                 }
 
-                // Do not handle quick scrub if disabled
-                if (!mNavigationBarView.isQuickScrubEnabled()) {
-                    break;
-                }
-
                 if (!mDragPositive) {
                     offset -= mIsVertical ? mTrackRect.height() : mTrackRect.width();
                 }
@@ -282,6 +278,10 @@ public class QuickStepController implements GestureHelper {
                     break;
                 }
 
+                // Do not handle quick scrub if disabled
+                if (!mNavigationBarView.isQuickScrubEnabled()) {
+                    break;
+                }
                 final boolean allowDrag = !mDragPositive
                         ? offset < 0 && pos < touchDown : offset >= 0 && pos > touchDown;
                 float scrubFraction = Utilities.clamp(Math.abs(offset) * 1f / trackSize, 0, 1);
@@ -306,11 +306,9 @@ public class QuickStepController implements GestureHelper {
                 break;
             }
             case MotionEvent.ACTION_CANCEL:
-                mBackActionScheduled = false;
                 break;
             case MotionEvent.ACTION_UP:
                 if (mBackActionScheduled) {
-                    mBackActionScheduled = false;
                     Utils.sendKeycode(KeyEvent.KEYCODE_BACK);
                 } else {
                     endQuickScrub(true /* animate */);
@@ -318,13 +316,14 @@ public class QuickStepController implements GestureHelper {
                 break;
         }
 
-        // Proxy motion events to launcher if not handled by quick scrub
+        // Proxy motion events to launcher if not handled by quick scrub or back action
         // Proxy motion events up/cancel that would be sent after long press on any nav button
-        if (!mQuickScrubActive && (mAllowGestureDetection || action == MotionEvent.ACTION_CANCEL
+        if (!mQuickScrubActive && !mBackActionScheduled
+                && (mAllowGestureDetection || action == MotionEvent.ACTION_CANCEL
                 || action == MotionEvent.ACTION_UP)) {
             proxyMotionEvents(event);
         }
-        return mQuickScrubActive || mQuickStepStarted;
+        return mQuickScrubActive || mQuickStepStarted || mBackActionScheduled;
     }
 
     @Override
