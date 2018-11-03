@@ -288,11 +288,6 @@
 
     <string name="recents_custom_android_n">Clear All</string>
 
-    <!-- AmbientPlay: The contents of the displayed recognition. -->
-    <string name="ambient_recognition_notification">Now Playing</string>
-    <string name="ambient_recognition_notification_channel">Recognized Music Notifications</string>
-    <string name="ambient_recognition_information">%1$s by %2$s</string>
-
     <!-- Pie controls -->  
     <string name="pie_date_format">EEEE, dd MMMM yyyy</string>
     <string name="pie_hour_format_12">hh:mm</string>

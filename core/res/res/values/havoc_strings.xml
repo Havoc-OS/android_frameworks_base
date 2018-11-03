@@ -74,4 +74,8 @@
     <!-- SystemUI Restart -->
     <string name="systemui_restart_title">SystemUI restart required</string>
     <string name="systemui_restart_message">For all changes to take effect, a SystemUI restart is required. Restart SystemUI now?</string>
+
+    <!-- Ambient play --> 
+    <string name="ambient_recognition_notification">Now Playing</string> 
+    <string name="ambient_recognition_information">%1$s by %2$s</string> 
 </resources>
