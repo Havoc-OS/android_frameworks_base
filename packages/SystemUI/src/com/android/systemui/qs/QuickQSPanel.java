@@ -316,5 +316,10 @@ public class QuickQSPanel extends QSPanel {
                         R.id.expand_indicator);
             }
         }
+
+        @Override
+        public boolean isShowTitles() {
+            return false;
+        }
     }
 }

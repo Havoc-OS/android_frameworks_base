@@ -812,6 +812,8 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         void setListening(boolean listening);
 
         default void setExpansion(float expansion) {}
+
+        boolean isShowTitles();
     }
 
     private void setAnimationTile(QSTileView v) {
@@ -867,10 +869,21 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
     private void configureTile(QSTile t, QSTileView v) {
         if (mTileLayout != null) {
-            v.setOnClickListener(view -> {
-                    t.click();
-                    setAnimationTile(v);
-            });
+            if (t.isDualTarget()) {
+                if (!mTileLayout.isShowTitles()) {
+                    v.setOnLongClickListener(view -> {
+                        t.secondaryClick();
+                        return true;
+                    });
+                } else {
+                    v.setOnLongClickListener(view -> {
+                        t.click();
+                        setAnimationTile(v);
+                        t.longClick();
+                        return true;
+                    });
+                }
+            }
         }
     }
 
