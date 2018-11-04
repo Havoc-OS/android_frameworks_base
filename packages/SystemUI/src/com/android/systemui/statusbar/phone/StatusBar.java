@@ -5215,6 +5215,9 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                      Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.PULSE_APPS_BLACKLIST),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5242,10 +5245,13 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
 	        } else if (uri.equals(Settings.Secure.getUriFor(
                     Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS))) {
 	            setFpToDismissNotifications();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.PULSE_APPS_BLACKLIST))) {
+                setPulseBlacklist();
             } 
         }
 
-         public void update() {
+        public void update() {
             ContentResolver resolver = mContext.getContentResolver();
             USE_OLD_MOBILETYPE = Settings.System.getIntForUser(mContext.getContentResolver(),
                     Settings.System.USE_OLD_MOBILETYPE, 0,
@@ -5257,13 +5263,14 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             setQsPanelOptions();
             setQsRowsColumns();
 	        setFpToDismissNotifications();
+            setPulseBlacklist();
         }
     }
 
-         private void setQsRowsColumns() {
-            if (mQSPanel != null) {
-                mQSPanel.updateResources();
-         }
+    private void setQsRowsColumns() {
+        if (mQSPanel != null) {
+            mQSPanel.updateResources();
+        }
     }
 
     private void setHeadsUpStoplist() {
@@ -5860,6 +5867,12 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         mFpDismissNotifications = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS, 0,
                 UserHandle.USER_CURRENT) == 1;
+    }
+
+    private void setPulseBlacklist() {
+        String blacklist = Settings.System.getStringForUser(mContext.getContentResolver(),
+                Settings.System.PULSE_APPS_BLACKLIST, UserHandle.USER_CURRENT);
+        getMediaManager().setPulseBlacklist(blacklist);
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {
