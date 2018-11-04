@@ -30,19 +30,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" >
-
-        <TextView
-            android:id="@+id/left_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?attr/wallpaperTextColor"
-            android:gravity="center"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:paddingEnd="8dp"
-            style="@style/TextAppearance.Keyguard" />
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="1dp" >
 
         <ImageView
             android:id="@+id/current_image"

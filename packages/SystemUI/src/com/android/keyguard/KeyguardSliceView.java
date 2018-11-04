@@ -30,7 +30,6 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.text.Layout;
 import android.text.TextUtils;
-import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -444,19 +443,6 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
             setLayoutTransition(transition);
         }
 
-        @Override
-        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            int width = MeasureSpec.getSize(widthMeasureSpec);
-            int childCount = getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                View child = getChildAt(i);
-                if (child instanceof KeyguardSliceButton) {
-                    ((KeyguardSliceButton) child).setMaxWidth(width / childCount);
-                }
-            }
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        }
-
         public void setDarkAmount(float darkAmount) {
             boolean isAwake = darkAmount != 0;
             boolean wasAwake = mDarkAmount != 0;
@@ -484,7 +470,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
             super(context, null /* attrs */, 0 /* styleAttr */,
                     com.android.keyguard.R.style.TextAppearance_Keyguard_Secondary);
             onDensityOrFontScaleChanged();
-            setEllipsize(TruncateAt.END);
+            setEllipsize(null);
         }
 
         @Override
@@ -563,23 +549,6 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         public TitleView(Context context, AttributeSet attrs, int defStyleAttr,
                 int defStyleRes) {
             super(context, attrs, defStyleAttr, defStyleRes);
-        }
-
-        @Override
-        protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-            Layout layout = getLayout();
-            int lineCount = layout.getLineCount();
-            boolean ellipsizing = layout.getEllipsisCount(lineCount - 1) != 0;
-            if (lineCount > 0 && !ellipsizing) {
-                CharSequence title = getText();
-                CharSequence bestLineBreak = findBestLineBreak(title);
-                if (!TextUtils.equals(title, bestLineBreak)) {
-                    setText(bestLineBreak);
-                    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-                }
-            }
         }
     }
 

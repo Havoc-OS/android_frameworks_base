@@ -60,9 +60,9 @@
     <dimen name="widget_vertical_padding">26dp</dimen>
     <dimen name="widget_icon_bottom_padding">14dp</dimen>
     <!-- Subtitle paddings -->
-    <dimen name="widget_horizontal_padding">8dp</dimen>
+    <dimen name="widget_horizontal_padding">4dp</dimen>
     <dimen name="widget_icon_size">16dp</dimen>
-    <dimen name="widget_icon_padding">8dp</dimen>
+    <dimen name="widget_icon_padding">4dp</dimen>
     <!-- Space between notification shelf and dash above it -->
     <dimen name="widget_bottom_separator_padding">28dp</dimen>
 
