@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.phone;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_BACK;
+import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_DEAD_ZONE;
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_HOME;
 import static com.android.systemui.shared.system.NavigationBarCompat.HIT_TARGET_NONE;
 
@@ -356,15 +357,15 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
         if (onehandedEnabled) {
             mSlideTouchEvent.handleTouchEvent(event);
         }
-        if (shouldDeadZoneConsumeTouchEvents(event)) {
-            return true;
-        }
+        final boolean deadZoneConsumed = shouldDeadZoneConsumeTouchEvents(event);
         switch (event.getActionMasked()) {
             case ACTION_DOWN:
                 int x = (int) event.getX();
                 int y = (int) event.getY();
                 mDownHitTarget = HIT_TARGET_NONE;
-                if (getBackButton().isVisible() && mBackButtonBounds.contains(x, y)) {
+                if (deadZoneConsumed) {
+                    mDownHitTarget = HIT_TARGET_DEAD_ZONE;
+                } else if (getBackButton().isVisible() && mBackButtonBounds.contains(x, y)) {
                     mDownHitTarget = HIT_TARGET_BACK;
                 } else if (getHomeButton().isVisible() && mHomeButtonBounds.contains(x, y)) {
                     mDownHitTarget = HIT_TARGET_HOME;
@@ -386,9 +387,7 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
         if (onehandEnabled) {
             mSlideTouchEvent.handleTouchEvent(event);
         }
-        if (shouldDeadZoneConsumeTouchEvents(event)) {
-            return true;
-        }
+        shouldDeadZoneConsumeTouchEvents(event);
         if (mGestureHelper.onTouchEvent(event)) {
             return true;
         }
@@ -820,7 +819,7 @@ public class NavigationBarView extends FrameLayout implements PluginListener<Nav
                 showSwipeUpUI ? mQuickStepAccessibilityDelegate : null);
     }
 
-    private void updateSlippery() {
+    public void updateSlippery() {
         setSlippery(!isQuickStepSwipeUpEnabled() ||
                 (mPanelView != null && mPanelView.isFullyExpanded()));
     }
