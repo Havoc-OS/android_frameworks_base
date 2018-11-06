@@ -76,24 +76,11 @@
                 android:background="#f00"
                 android:layout_centerHorizontal="true" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <include layout="@layout/keyguard_status_area"
+                android:id="@+id/keyguard_status_area"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/clock_separator">
-                <include layout="@layout/keyguard_status_area"
-                    android:id="@+id/keyguard_status_area"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <include layout="@layout/current_weather_view"
-                    android:id="@+id/weather_container"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/keyguard_status_area"
-                    android:visibility="gone"/>
-            </RelativeLayout>
-
+                android:layout_below="@id/clock_separator" />
         </RelativeLayout>
 
         <TextView
@@ -106,8 +93,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_centerHorizontal="true"
             android:textColor="?attr/wallpaperTextColorSecondary"
+            android:textSize="@dimen/widget_label_font_size"
+            android:letterSpacing="0.05"
             android:ellipsize="marquee"
-            android:singleLine="true"
-            style="@style/TextAppearance.Keyguard" />
+            android:singleLine="true" />
     </LinearLayout>
 </com.android.keyguard.KeyguardStatusView>

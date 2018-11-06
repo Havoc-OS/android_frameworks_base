@@ -46,8 +46,6 @@
     <!-- QS tile text visibility -->
     <dimen name="qs_tile_height_wo_label">64dp</dimen>
 
-    <dimen name="current_weather_image_size">16dp</dimen>
-    
     <!-- App circle sidebar -->  
     <dimen name="app_sidebar_trigger_width">12dip</dimen>  
     <dimen name="app_sidebar_listview_width">160dp</dimen>  
