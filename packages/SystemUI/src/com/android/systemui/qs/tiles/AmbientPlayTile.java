@@ -19,9 +19,9 @@ package com.android.systemui.qs.tiles;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.provider.Settings;
-import android.provider.Settings.Secure;
+import android.provider.Settings.System;
 import android.service.quicksettings.Tile;
-import com.android.systemui.qs.SecureSetting; 
+import com.android.systemui.qs.SystemSetting; 
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
@@ -33,13 +33,13 @@ import com.android.systemui.R;
 
 public class AmbientPlayTile extends QSTileImpl<BooleanState> {
     private boolean mListening; 
-    private final SecureSetting mSetting; 
+    private final SystemSetting mSetting; 
 	
     private final Icon mIcon = ResourceIcon.get(R.drawable.ic_music_note_24dp);
        
     public AmbientPlayTile(QSHost host) {
         super(host);
-        mSetting = new SecureSetting(mContext, mHandler, Secure.AMBIENT_RECOGNITION) { 
+        mSetting = new SystemSetting(mContext, mHandler, System.AMBIENT_RECOGNITION) { 
             @Override 
             protected void handleValueChanged(int value, boolean observedChange) { 
                 handleRefreshState(value); 
@@ -71,7 +71,7 @@ public class AmbientPlayTile extends QSTileImpl<BooleanState> {
  
     @Override 
     public CharSequence getTileLabel() { 
-        return mContext.getString(R.string.ambient_recognition_notification); 
+        return mContext.getString(com.android.internal.R.string.ambient_recognition_notification); 
     } 
  
     @Override 
@@ -84,14 +84,10 @@ public class AmbientPlayTile extends QSTileImpl<BooleanState> {
         state.icon = mIcon;
         state.value = play;
         state.slash.isSlashed = !state.value;
-        state.label = mContext.getString(R.string.ambient_recognition_notification);
+        state.label = mContext.getString(com.android.internal.R.string.ambient_recognition_notification);
         if (play) {
-            state.contentDescription =  mContext.getString(
-                    R.string.ambient_recognition_notification);
             state.state = Tile.STATE_ACTIVE;
         } else {
-            state.contentDescription =  mContext.getString(
-                    R.string.ambient_recognition_notification);
             state.state = Tile.STATE_INACTIVE;
         }
     }
