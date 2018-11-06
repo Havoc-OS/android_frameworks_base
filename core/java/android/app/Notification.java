@@ -4463,6 +4463,11 @@ public class Notification implements Parcelable
         private CharSequence processTextSpans(CharSequence text) {
             if (hasForegroundColor()) {
                 return NotificationColorUtil.clearColorSpans(text);
+            } else if (mContext.getResources()
+                .getBoolean(R.bool.config_useDarkBgNotificationIconTinting)) {
+                // Some notifications have color spans, assuming a dark background,
+                // so let's remove them
+                return NotificationColorUtil.clearColorSpans(text);
             }
             return text;
         }
