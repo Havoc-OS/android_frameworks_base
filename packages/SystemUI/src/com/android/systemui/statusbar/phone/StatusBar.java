@@ -4665,15 +4665,13 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
      */
     protected void updateTheme() {
         final boolean inflated = mStackScroller != null && mStatusBarWindowManager != null;
-        int userThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.SYSTEM_UI_THEME, 0, mLockscreenUserManager.getCurrentUserId());
         boolean useBlackTheme = false;
         boolean useDarkTheme = false;
 	    final boolean wallpaperWantsDarkTheme;
         haltTicker();
-        if (userThemeSetting == 0 || userThemeSetting == 1) {
+        if (mCurrentTheme == 0 || mCurrentTheme == 1) {
             // The system wallpaper defines if QS should be light or dark.
-	        if (userThemeSetting == 0) {
+	        if (mCurrentTheme == 0) {
                 WallpaperColors systemColors = mColorExtractor
                         .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
                 wallpaperWantsDarkTheme = systemColors != null
