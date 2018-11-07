@@ -65,6 +65,34 @@
     <color name="quick_settings_theme_tile_user_five">#0EE898</color>
     <color name="quick_settings_theme_tile_user_six">#FFC27B</color>
     <color name="quick_settings_theme_tile_user_seven">#FFCC00</color>
+    <color name="quick_settings_theme_tile_candy_red">#FF1744</color>
+    <color name="quick_settings_theme_tile_pale_red">#F05361</color>
+    <color name="quick_settings_theme_tile_extended_green">#21ef8b</color>
+    <color name="quick_settings_theme_tile_pale_blue">#A1B6ED</color>
+    <color name="quick_settings_theme_tile_jade_green">#9ABC98</color>
+    <color name="quick_settings_theme_tile_color_holillusion_cyan">#0ac8ff</color>
+    <color name="quick_settings_theme_tile_color_stock">#009688</color>
+    <color name="quick_settings_theme_tile_color_seaside_mint">#01c18c</color>
+    <color name="quick_settings_theme_tile_color_move_mint">#46ff99</color>
+    <color name="quick_settings_theme_tile_color_diff_day_green">#97f456</color>
+    <color name="quick_settings_theme_tile_color_obfuscated_bleu">#0042ba</color>
+    <color name="quick_settings_theme_tile_color_french_bleu">#2856ff</color>
+    <color name="quick_settings_theme_tile_color_cold_bleu">#2e86cd</color>
+    <color name="quick_settings_theme_tile_color_heirloom_bleu">#327ccb</color>
+    <color name="quick_settings_theme_tile_color_not_impressive_purple">#8522ff</color>
+    <color name="quick_settings_theme_tile_color_footprint_purple">#3c5ae0</color>
+    <color name="quick_settings_theme_tile_color_dusk_purple">#b7095a</color>
+    <color name="quick_settings_theme_tile_color_illusions_purple">#a02963</color>
+    <color name="quick_settings_theme_tile_color_dreamy_purple">#7278e5</color>
+    <color name="quick_settings_theme_tile_color_spooked_purple">#822b6b</color>
+    <color name="quick_settings_theme_tile_color_tru_fil_pink">#ae2463</color>
+    <color name="quick_settings_theme_tile_color_bubblegum_pink">#e52c5f</color>
+    <color name="quick_settings_theme_tile_color_hazed_pink">#c83c64</color>
+    <color name="quick_settings_theme_tile_color_burning_red">#f21a48</color>
+    <color name="quick_settings_theme_tile_color_new_house_orange">#f25555</color>
+    <color name="quick_settings_theme_tile_color_warmth_orange">#ff6f20</color>
+    <color name="quick_settings_theme_tile_color_mania_amber">#f6ca11</color>
+    <color name="quick_settings_theme_tile_color_cold_yellow">#efe3a8</color>
 
     <!-- Recents membar text color -->
     <color name="recents_membar_text_color">@android:color/white</color>

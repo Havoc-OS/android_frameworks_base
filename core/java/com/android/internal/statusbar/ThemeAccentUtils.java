@@ -78,6 +78,34 @@ public class ThemeAccentUtils {
         "com.accents.userfive", // 26
         "com.accents.usersix", // 27
         "com.accents.userseven", // 28
+        "com.accents.maniaamber", // 29
+        "com.accents.coldyellow", // 30
+        "com.accents.newhouseorange", // 31
+        "com.accents.warmthorange", // 32
+        "com.accents.burningred", // 33
+        "com.accents.candyred", // 34
+        "com.accents.palered", // 35
+        "com.accents.hazedpink", // 36
+        "com.accents.bubblegumpink", // 37
+        "com.accents.trufilpink", // 38
+        "com.accents.duskpurple", // 39
+        "com.accents.illusionspurple", // 40
+        "com.accents.spookedpurple", // 41
+        "com.accents.notimppurple", // 42
+        "com.accents.dreamypurple", // 43
+        "com.accents.footprintpurple", // 44
+        "com.accents.obfusbleu", // 45
+        "com.accents.frenchbleu", // 46
+        "com.accents.coldbleu", // 47
+        "com.accents.heirloombleu", // 48
+        "com.accents.paleblue", // 49
+        "com.accents.holillusion", // 50
+        "com.accents.stock", // 51
+        "com.accents.seasidemint", // 52
+        "com.accents.movemint", // 53
+        "com.accents.extendedgreen", // 54
+        "com.accents.diffdaygreen", // 55
+        "com.accents.jadegreen", // 56
     };
 
     private static final String[] QS_TILE_THEMES = {
