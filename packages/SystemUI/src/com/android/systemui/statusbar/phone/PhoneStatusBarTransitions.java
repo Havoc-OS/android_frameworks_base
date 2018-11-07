@@ -34,7 +34,7 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
 
     private View mLeftSide, mStatusIcons, mBattery, mCenterClock;
     private View mHavocLogo, mHavocLogoRight;
-    private View mBatteryBar;
+    private View mBatteryBars[] = new View[2];
 
     private Animator mCurrentAnimation;
 
@@ -49,7 +49,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
         mLeftSide = mView.findViewById(R.id.status_bar_left_side);
         mStatusIcons = mView.findViewById(R.id.statusIcons);
         mBattery = mView.findViewById(R.id.battery);
-        mBatteryBar = mView.findViewById(R.id.battery_bar);
+        mBatteryBars[0] = mView.findViewById(R.id.battery_bar);
+        mBatteryBars[1] = mView.findViewById(R.id.battery_bar_1);
         mCenterClock = mView.findViewById(R.id.center_clock);
         mHavocLogo = mView.findViewById(R.id.havoc_logo);
         mHavocLogoRight = mView.findViewById(R.id.havoc_logo_right);
@@ -96,7 +97,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
                     animateTransitionTo(mLeftSide, newAlpha),
                     animateTransitionTo(mStatusIcons, newAlpha),
 		            animateTransitionTo(mBattery, newAlphaBC),
-                    animateTransitionTo(mBatteryBar, newAlphaBC)
+                    animateTransitionTo(mBatteryBars[0], newAlphaBC),
+                    animateTransitionTo(mBatteryBars[1], newAlphaBC),
                     animateTransitionTo(mCenterClock, newAlphaBC),
                     animateTransitionTo(mHavocLogo, newAlpha),
                     animateTransitionTo(mHavocLogoRight, newAlpha)
@@ -110,7 +112,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             mLeftSide.setAlpha(newAlpha);
             mStatusIcons.setAlpha(newAlpha);
             mBattery.setAlpha(newAlphaBC);
-            mBatteryBar.setAlpha(newAlphaBC);
+            mBatteryBars[0].setAlpha(newAlphaBC);
+            mBatteryBars[1].setAlpha(newAlphaBC);
             mCenterClock.setAlpha(newAlphaBC);
             mHavocLogo.setAlpha(newAlpha);
             mHavocLogoRight.setAlpha(newAlpha);
