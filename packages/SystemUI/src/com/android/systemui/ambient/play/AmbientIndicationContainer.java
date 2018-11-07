@@ -21,6 +21,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import havoc.support.lottie.LottieAnimationView;
+
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.StatusBar;
@@ -28,7 +30,7 @@ import com.android.systemui.statusbar.phone.StatusBar;
 public class AmbientIndicationContainer extends AutoReinflateContainer {
     private View mAmbientIndication;
     private boolean mDozing;
-    private ImageView mIcon;
+    private LottieAnimationView mIcon;
     private CharSequence mIndication;
     private StatusBar mStatusBar;
     private TextView mText;
@@ -54,6 +56,8 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
             mAmbientIndication.setClickable(false);
             mText.setText(String.format(mContext.getResources().getString(
                     com.android.internal.R.string.ambient_recognition_information), mSong, mArtist));
+            mIcon.setAnimation(R.raw.ambient_music_note);
+            mIcon.playAnimation();
         }
     }
 
@@ -65,7 +69,7 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
     public void updateAmbientIndicationView(View view) {
         mAmbientIndication = findViewById(R.id.ambient_indication);
         mText = (TextView) findViewById(R.id.ambient_indication_text);
-        mIcon = (ImageView) findViewById(R.id.ambient_indication_icon);
+        mIcon = (LottieAnimationView) findViewById(R.id.ambient_indication_icon);
         setIndication(mSong, mArtist);
     }
 
