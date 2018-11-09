@@ -25,6 +25,8 @@ import android.os.Process;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.android.internal.util.havoc.HavocUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -57,10 +59,12 @@ public class RecognitionObserver implements AmbientIndicationManagerCallback {
     private boolean isRecording = false;
     private AmbientIndicationManager mManager;
     private boolean isRecognitionEnabled;
+    private Context mContext;
 
     RecognitionObserver(Context context, AmbientIndicationManager manager) {
         this.mManager = manager;
         manager.registerCallback(this);
+        mContext = context;
     }
 
     @Override
@@ -167,6 +171,10 @@ public class RecognitionObserver implements AmbientIndicationManagerCallback {
         }
 
         private String sendAudioData(byte[] inputBuffer, int length) {
+            if (!HavocUtils.isConnectionAvailable(mContext)) {
+                Log.d(TAG, "Cannot send audio data while being disconnected, aborting..");
+                return "";
+            }
             if (!isRecognitionEnabled){
                 return "";
             }
@@ -254,6 +262,10 @@ public class RecognitionObserver implements AmbientIndicationManagerCallback {
     }
 
     void startRecording() {
+        if (!HavocUtils.isConnectionAvailable(mContext)) {
+            Log.d(TAG, "Cannot observe while being disconnected, aborting..");
+            return;
+        }
         if (!isRecognitionEnabled || isRecording){
             return;
         }
