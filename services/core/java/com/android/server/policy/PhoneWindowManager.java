@@ -7019,11 +7019,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 return 0;
         }
 
-        // Disable hw keys in Ambient and when screen off
-        if ((isDozeMode() || !isScreenOn()) && (appSwitchKey || homeKey || menuKey || backKey)) {
-            return 0;
-        }
-
         if (mANBIHandler != null && mANBIEnabled && mANBIHandler.isScreenTouched()
                 && !navBarKey && (appSwitchKey || homeKey || menuKey || backKey)) {
             return 0;
