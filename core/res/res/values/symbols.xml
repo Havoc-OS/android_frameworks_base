@@ -3444,4 +3444,6 @@
   <java-symbol type="string" name="config_misprovisionedBrandValue" />
  
   <java-symbol type="string" name="config_defaultAssistantComponentName" />
+
+  <java-symbol type="drawable" name="adaptive_icon_drawable_wrapper" />
 </resources>
