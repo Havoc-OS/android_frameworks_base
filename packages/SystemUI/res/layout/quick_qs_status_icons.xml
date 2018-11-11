@@ -36,7 +36,8 @@
         android:layout_gravity="start|center_vertical"
         android:gravity="center_vertical"
         android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.QS.Status"
+        android:textAppearance="@style/TextAppearance.StatusBar.Clock"
+        android:textColor="@color/qs_date_color"
         systemui:datePattern="@string/abbrev_wday_month_day_no_year_alarm" />
 
     <com.android.systemui.statusbar.phone.StatusIconContainer
@@ -50,7 +51,6 @@
         android:id="@+id/batteryRemainingIcon"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        systemui:textAppearance="@style/TextAppearance.QS.Status"
-        android:paddingEnd="2dp" />
+        systemui:textAppearance="@style/TextAppearance.StatusBar.Clock" />
 
 </LinearLayout>
