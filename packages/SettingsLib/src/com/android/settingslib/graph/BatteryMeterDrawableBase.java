@@ -370,6 +370,9 @@ public class BatteryMeterDrawableBase extends Drawable {
         final int left = mPadding.left + bounds.left;
         final int top = bounds.bottom - mPadding.bottom - height;
 
+        mFrame.set(left, top, width + left, height + top);
+        mFrame.offset(px, 0);
+
         mFramePaint.setStrokeWidth(0);
         mFramePaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mBatteryPaint.setStrokeWidth(0);
@@ -397,12 +400,8 @@ public class BatteryMeterDrawableBase extends Drawable {
             drawFrac = 0f;
         }
 
-        final float levelTop;
-        if (drawFrac == 1f) {
-            levelTop = mButtonFrame.top;
-        } else {
-            levelTop = (mFrame.top + (mFrame.height() * (1f - drawFrac)));
-        }
+        final float levelTop = drawFrac == 1f ? mButtonFrame.top
+                : (mFrame.top + (mFrame.height() * (1f - drawFrac)));
 
         // define the battery shape
         mShapePath.reset();
@@ -419,10 +418,11 @@ public class BatteryMeterDrawableBase extends Drawable {
         if (mCharging) {
             // define the bolt shape
             // Shift right by 1px for maximal bolt-goodness
-            final float bl = mFrame.left + mFrame.width() / (4f + 1);
+            final float bl = mFrame.left + mFrame.width() / 4f + 1;
             final float bt = mFrame.top + mFrame.height() / 6f;
-            final float br = mFrame.right - mFrame.width() / (4f + 1);
+            final float br = mFrame.right - mFrame.width() / 4f + 1;
             final float bb = mFrame.bottom - mFrame.height() / 10f;
+
             if (mBoltFrame.left != bl || mBoltFrame.top != bt
                     || mBoltFrame.right != br || mBoltFrame.bottom != bb) {
                 mBoltFrame.set(bl, bt, br, bb);
