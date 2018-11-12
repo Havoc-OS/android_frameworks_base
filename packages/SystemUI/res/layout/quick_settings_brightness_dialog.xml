@@ -18,13 +18,12 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:layout_gravity="center_vertical"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
+    android:paddingLeft="28dp"
+    android:paddingRight="28dp"
     style="@style/BrightnessDialogContainer">
 
     <ImageButton
         android:id="@+id/brightness_left"
-        android:layout_marginEnd="6.0dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -38,13 +37,14 @@
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
+        android:paddingLeft="-10dp"
+        android:paddingRight="-10dp"
         android:contentDescription="@string/accessibility_brightness"
         android:importantForAccessibility="no"
         systemui:text="@string/status_bar_settings_auto_brightness_label" />
 
     <ImageButton
         android:id="@+id/brightness_right"
-        android:layout_marginStart="6.0dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -60,6 +60,7 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_qs_brightness_auto_off"
         android:contentDescription="@null"
-        android:layout_marginStart="25.0dip" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp" />
 
 </LinearLayout>
