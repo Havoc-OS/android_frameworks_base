@@ -277,7 +277,7 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
             ((NeutralGoodDrawable)d).setDarkIntensity(mDarkIntensity);
         }
         int areaTint = getTint(area, this, tint);
-        mInoutContainer.setDarkIntensity(darkIntensity);
+        mInoutContainer.setDarkIntensity(getDarkIntensity(area, this, darkIntensity));
         mDotView.setDecorColor(areaTint);
         mDotView.setIconColor(areaTint, false);
     }
