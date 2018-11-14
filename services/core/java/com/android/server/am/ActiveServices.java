@@ -324,7 +324,11 @@ public final class ActiveServices {
                 }
                 r.delayed = false;
                 try {
-                    startServiceInnerLocked(this, r.pendingStarts.get(0).intent, r, false, true);
+                    /// should check the size first
+                    if (r.pendingStarts.size() > 0) {
+                        startServiceInnerLocked(this, r.pendingStarts.get(0).intent, r,
+                               false, true);
+                    }
                 } catch (TransactionTooLargeException e) {
                     // Ignore, nobody upstack cares.
                 }
