@@ -4693,7 +4693,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             final boolean nightModeWantsDarkTheme = DARK_THEME_IN_NIGHT_MODE
                     && (config.uiMode & Configuration.UI_MODE_NIGHT_MASK)
                         == Configuration.UI_MODE_NIGHT_YES;
-            useDarkTheme = wallpaperWantsDarkTheme || nightModeWantsDarkTheme;
+            useDarkTheme = nightModeWantsDarkTheme;
             // Check for black and white accent so we don't end up
             // with white on white or black on black
             unfuckBlackWhiteAccent();
