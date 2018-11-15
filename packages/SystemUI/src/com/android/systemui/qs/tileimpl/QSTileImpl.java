@@ -44,7 +44,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.Utils;
-import com.android.systemui.R;
 import com.android.systemui.Dependency;
 import com.android.systemui.Prefs;
 import com.android.systemui.plugins.ActivityStarter;
@@ -399,11 +398,11 @@ public abstract class QSTileImpl<TState extends State> implements QSTile {
         switch (state) {
             case Tile.STATE_UNAVAILABLE:
                 return Utils.getDisabled(context,
-                        context.getColor(R.color.qs_disabled_color));
+                        Utils.getColorAttr(context, android.R.attr.textColorSecondary));
             case Tile.STATE_INACTIVE:
-			    return context.getColor(R.color.qs_inactive_color);
+                return Utils.getColorAttr(context, android.R.attr.textColorSecondary);
             case Tile.STATE_ACTIVE:
-			    return context.getColor(R.color.qs_active_color);
+                return Utils.getColorAttr(context, android.R.attr.colorPrimary);
             default:
                 Log.e("QSTile", "Invalid state " + state);
                 return 0;

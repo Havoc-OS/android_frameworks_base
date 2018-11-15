@@ -96,11 +96,6 @@
     <!-- QS edit page background color -->
     <color name="qs_edit_item_decoration_bg">@*android:color/secondary_device_default_settings_light</color>
 
-    <!-- QS Tiles Colors --> 
-    <color name="qs_disabled_color">@*android:color/qs_disabled</color>
-    <color name="qs_inactive_color">@*android:color/qs_inactive</color> 
-    <color name="qs_active_color">@*android:color/qs_active</color>  
-
     <!-- Quicksettings main QS background-->
     <color name="quick_settings_status_bar_background_color">#ff000000</color>
 </resources>

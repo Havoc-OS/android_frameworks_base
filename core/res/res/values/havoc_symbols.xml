@@ -213,14 +213,6 @@
 
   <java-symbol type="string" name="config_comboNetworkLocationProvider" />
 
-  <!-- QS Tiles Colors -->
-  <java-symbol type="color" name="qs_disabled" />
-  <java-symbol type="color" name="qs_inactive" />
-  <java-symbol type="color" name="qs_active" />
-  <java-symbol type="color" name="qs_tile_disabled" />
-  <java-symbol type="color" name="qs_tile_inactive" />
-  <java-symbol type="color" name="qs_tile_active" />
-
   <!-- Weather icons -->
   <java-symbol type="drawable" name="weather_clear_night" />
   <java-symbol type="drawable" name="weather_cloudy" />
