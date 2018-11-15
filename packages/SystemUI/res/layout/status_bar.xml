@@ -125,7 +125,7 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:singleLine="false"
-            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="@*android:style/TextAppearance.StatusBar"
             android:gravity="right|center_vertical"/>
 
             <include layout="@layout/system_icons" />
