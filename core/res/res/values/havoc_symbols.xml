@@ -255,6 +255,8 @@
   <java-symbol type="layout" name="permission_confirmation_dialog" />
   <java-symbol type="array" name="app_ops_labels" />
 
+  <java-symbol type="bool" name="config_oldQtiTelephony" />
+
     <!-- Powermenu animations -->
   <java-symbol type="style" name="GlobalActionsAnimation" />
   <java-symbol type="style" name="GlobalActionsAnimationTop" />
