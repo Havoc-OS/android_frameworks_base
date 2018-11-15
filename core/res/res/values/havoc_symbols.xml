@@ -271,4 +271,7 @@
 
   <!-- Power menu -->
   <java-symbol type="drawable" name="ic_lock_screenrecord" />
+
+  <!-- Old QTI Blobs -->
+  <java-symbol type="bool" name="config_oldQtiTelephony" />
 </resources>
