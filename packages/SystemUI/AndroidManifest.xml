@@ -260,7 +260,7 @@
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
 
     <!-- Weather on lockscreen -->
-    <uses-permission android:name="org.pixelexperience.weather.client.READ_WEATHER" />
+    <uses-permission android:name="com.android.providers.weather.READ_WEATHER" />
 
     <application
         android:name=".SystemUIApplication"
