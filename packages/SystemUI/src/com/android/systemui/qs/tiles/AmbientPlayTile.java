@@ -66,7 +66,7 @@ public class AmbientPlayTile extends QSTileImpl<BooleanState> {
     @Override 
     public Intent getLongClickIntent() { 
         return new Intent().setComponent(new ComponentName(
-            "com.android.settings", "com.android.settings.Settings$AmbientPlayActivity"));
+            "com.android.settings", "com.android.settings.Settings$AmbientPlayHistoryActivity"));
     } 
  
     @Override 
