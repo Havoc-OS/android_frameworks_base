@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AmbientPlayHistoryManager {
-    private static final String AUTHORITY = "org.pixelexperience.ambient.play.history.provider";
+    private static final String AUTHORITY = "com.ambient.play.history.provider";
     private static final Uri CONTENT_URI =
             Uri.parse("content://" + AUTHORITY + "/songs");
     private static final String KEY_ID = "_id";
@@ -37,7 +37,7 @@ public class AmbientPlayHistoryManager {
     private static final String[] PROJECTION = {KEY_ID, KEY_TIMESTAMP, KEY_SONG, KEY_ARTIST};
     private static String ACTION_SONG_MATCH = "com.android.internal.util.ambient.play.AMBIENT_PLAY_SONG_MATCH";
     public static Intent INTENT_SONG_MATCH = new Intent(ACTION_SONG_MATCH);
-    public static final String SERVICE_PACKAGE = "org.pixelexperience.ambient.play.history";
+    public static final String SERVICE_PACKAGE = "com.ambient.play.history";
 
     private static boolean isAvailable(Context context) {
         final PackageManager pm = context.getPackageManager();
