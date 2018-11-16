@@ -433,6 +433,16 @@ public class AppOpsService extends IAppOpsService.Stub {
         public int ignoredCount;
         int delayedCount;
 
+        Op(UidState _uidState, String _packageName, int _op) {
+            uidState = _uidState;
+            uid = _uidState.uid;
+            packageName = _packageName;
+            op = _op;
+            mode = AppOpsManager.opToDefaultMode(op);
+            dialogReqQueue = new PermissionDialogReqQueue();
+            clientTokens = new ArrayList<IBinder>();
+        }
+
         Op(UidState _uidState, String _packageName, int _op, int _mode) {
             uidState = _uidState;
             uid = _uidState.uid;
@@ -657,17 +667,10 @@ public class AppOpsService extends IAppOpsService.Stub {
                     } catch (RemoteException ignored) {
                     }
                     if (curUid != ops.uidState.uid) {
-                        // Do not prune apps that are not currently present in the device
-                        // (like SDcard ones). While booting, SDcards are not available but
-                        // must not be purged from AppOps, because they are still present
-                        // in the Android app database.
-                        String pkgName = mContext.getPackageManager().getNameForUid(ops.uidState.uid);
-                        if (curUid != -1 || pkgName == null || !pkgName.equals(ops.packageName)) {
-                            Slog.i(TAG, "Pruning old package " + ops.packageName
-                                    + "/" + ops.uidState + ": new uid=" + curUid);
-                            it.remove();
-                            changed = true;
-                        }
+                        Slog.i(TAG, "Pruning old package " + ops.packageName
+                                + "/" + ops.uidState + ": new uid=" + curUid);
+                        it.remove();
+                        changed = true;
                     }
                 }
 
@@ -1747,7 +1750,6 @@ public class AppOpsService extends IAppOpsService.Stub {
                 op.allowedCount++;
                 return AppOpsManager.MODE_ALLOWED;
             }
-
         }
 
         int result = req.get();
@@ -1832,78 +1834,56 @@ public class AppOpsService extends IAppOpsService.Stub {
             }
             final int switchCode = AppOpsManager.opToSwitch(code);
             final UidState uidState = ops.uidState;
-/*
-            // If there is a non-default per UID policy (we set UID op mode only if
-            // non-default) it takes over, otherwise use the per package policy.
-            if (uidState.opModes != null && uidState.opModes.indexOfKey(switchCode) >= 0) {
-                final int uidMode = uidState.evalMode(uidState.opModes.get(switchCode));
-                if (uidMode != AppOpsManager.MODE_ALLOWED
-                        && (!startIfModeDefault || uidMode != AppOpsManager.MODE_DEFAULT)) {
+            if (uidState.opModes != null) {
+                final int uidMode = uidState.opModes.get(switchCode);
+                if (uidMode != AppOpsManager.MODE_ALLOWED) {
                     if (DEBUG) Slog.d(TAG, "noteOperation: uid reject #" + uidMode + " for code "
                             + switchCode + " (" + code + ") uid " + uid + " package "
                             + resolvedPackageName);
                     op.rejectTime[uidState.state] = System.currentTimeMillis();
                     return uidMode;
                 }
+            }
+            final Op switchOp = switchCode != code ? getOpLocked(ops, switchCode, true) : op;
+            final int mode = switchOp.getMode();
+            if (mode != AppOpsManager.MODE_ALLOWED && mode != AppOpsManager.MODE_ASK) {
+                if (DEBUG) Slog.d(TAG, "startOperation: reject #" + op.mode + " for code "
+                        + switchCode + " (" + code + ") uid " + uid + " package "
+                        + resolvedPackageName);
+                op.rejectTime[uidState.state] = System.currentTimeMillis();
+                op.ignoredCount++;
+                return mode;
+            } else if (mode == AppOpsManager.MODE_ALLOWED) {
+                if (DEBUG) Slog.d(TAG, "startOperation: allowing code " + code + " uid " + uid
+                        + " package " + resolvedPackageName);
+                if (op.startNesting == 0) {
+                    op.time[uidState.state] = System.currentTimeMillis();
+                    op.rejectTime[uidState.state] = 0;
+                    op.duration = -1;
+                    op.allowedCount++;
+                }
+                op.startNesting++;
+                if (client.mStartedOps != null) {
+                    client.mStartedOps.add(op);
+                }
+                broadcastOpIfNeeded(code);
+                return AppOpsManager.MODE_ALLOWED;
             } else {
-*/
-            if (uidState.opModes != null) {
-                final int uidMode = uidState.opModes.get(switchCode);
-                if (uidMode != AppOpsManager.MODE_ALLOWED) {
-                    if (DEBUG) Slog.d(TAG, "noteOperation: reject #" + op.mode + " for code "
-                            + switchCode + " (" + code + ") uid " + uid + " package "
-                            + resolvedPackageName);
-                    op.rejectTime[uidState.state] = System.currentTimeMillis();
-                    return uidMode;
-                }
-            }
-
-                final Op switchOp = switchCode != code ? getOpLocked(ops, switchCode, true) : op;
-                final int mode = switchOp.getMode();
-                if (mode != AppOpsManager.MODE_ALLOWED && mode != AppOpsManager.MODE_ASK
-                        && (!startIfModeDefault || mode != AppOpsManager.MODE_DEFAULT)) {
-                    if (DEBUG) Slog.d(TAG, "startOperation: reject #" + mode + " for code "
-                            + switchCode + " (" + code + ") uid " + uid + " package "
-                            + resolvedPackageName);
-                    op.rejectTime[uidState.state] = System.currentTimeMillis();
-                    op.ignoredCount++;
+                if (Looper.myLooper() == mLooper) {
+                    Slog.e(TAG, "startOperation: this method will deadlock if called" +
+                            " from the main thread. (Code: " + code + " uid: " + uid +
+                            " package: " + resolvedPackageName + ")");
                     return mode;
-                } else if (mode == AppOpsManager.MODE_ALLOWED) {
-                    if (DEBUG) Slog.d(TAG, "startOperation: allowing code " + code + " uid " + uid
-                            + " package " + resolvedPackageName);
-                    if (op.startNesting == 0) {
-                        op.startRealtime = SystemClock.elapsedRealtime();
-                        op.time[uidState.state] = System.currentTimeMillis();
-                        op.rejectTime[uidState.state] = 0;
-                        op.duration = -1;
-                        op.allowedCount++;
-//                        scheduleOpActiveChangedIfNeededLocked(code, uid, packageName, true);
-                    }
-                    op.startNesting++;
-                    uidState.startNesting++;
-                    if (client.mStartedOps != null) {
-                        client.mStartedOps.add(op);
-                    }
-                    broadcastOpIfNeeded(code);
-                    return AppOpsManager.MODE_ALLOWED;
-                } else {
-                    if (Looper.myLooper() == mLooper) {
-                        Slog.e(TAG, "startOperation: this method will deadlock if called" +
-                                " from the main thread. (Code: " + code + " uid: " + uid +
-                                " package: " + resolvedPackageName + ")");
-                        return mode;
-                    }
-                    op.startOpCount++;
-                    IBinder clientToken = client.mAppToken;
-                    op.clientTokens.add(clientToken);
-                    req = askOperationLocked(code, uid, resolvedPackageName, switchOp);
                 }
+                op.startOpCount++;
+                IBinder clientToken = client.mAppToken;
+                op.clientTokens.add(clientToken);
+                req = askOperationLocked(code, uid, resolvedPackageName, switchOp);
             }
-
-            int result = req.get();
-            broadcastOpIfNeeded(code);
-            return result;
-//        }
+        }
+        int result = req.get();
+        broadcastOpIfNeeded(code);
+        return result;
     }
 
     @Override
@@ -2202,14 +2182,12 @@ public class AppOpsService extends IAppOpsService.Stub {
     }
 
     private Op getOpLocked(Ops ops, int code, boolean edit) {
-        int mode;
         Op op = ops.get(code);
         if (op == null) {
             if (!edit) {
                 return null;
             }
-            mode = AppOpsManager.opToDefaultMode(code);
-            op = new Op(ops.uidState, ops.packageName, code, mode);
+            op = new Op(ops.uidState, ops.packageName, code);
             ops.put(code, op);
         }
         if (edit) {
@@ -2344,7 +2322,7 @@ public class AppOpsService extends IAppOpsService.Stub {
                     final Op op = ops.get(AppOpsManager.OP_RUN_IN_BACKGROUND);
                     if (op != null && op.mode != AppOpsManager.opToDefaultMode(op.op)) {
                         final Op copy = new Op(op.uidState, op.packageName,
-                                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, AppOpsManager.MODE_ALLOWED);
+                                AppOpsManager.OP_RUN_ANY_IN_BACKGROUND);
                         copy.mode = op.mode;
                         ops.put(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, copy);
                         changed = true;
