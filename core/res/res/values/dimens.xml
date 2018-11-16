@@ -62,7 +62,7 @@
     <dimen name="status_bar_edge_ignore">5dp</dimen>
 
     <!-- Default radius of the software rounded corners. -->
-    <dimen name="rounded_corner_radius">0dp</dimen>
+    <dimen name="rounded_corner_radius">1dp</dimen>
     <!-- Radius of the software rounded corners at the top of the display in its natural
         orientation. If zero, the value of rounded_corner_radius is used. -->
     <dimen name="rounded_corner_radius_top">0dp</dimen>
