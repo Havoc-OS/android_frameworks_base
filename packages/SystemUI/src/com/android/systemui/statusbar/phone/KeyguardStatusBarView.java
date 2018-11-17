@@ -23,9 +23,11 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.ColorInt;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.database.ContentObserver;
@@ -101,6 +103,9 @@ public class KeyguardStatusBarView extends RelativeLayout
     private View mCutoutSpace;
     private ViewGroup mStatusIconArea;
     private int mLayoutState = LAYOUT_NONE;
+    private boolean mImmerseMode;
+    private Handler mHandler = new Handler();
+    private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
 
     /**
      * Draw this many pixels into the left/right side of the cutout to optimally use the space
@@ -140,6 +145,8 @@ public class KeyguardStatusBarView extends RelativeLayout
 
         loadDimens();
         updateUserSwitcher();
+        updateCutout();
+        mCustomSettingsObserver.observe();
     }
 
     @Override
@@ -173,10 +180,18 @@ public class KeyguardStatusBarView extends RelativeLayout
         lp.setMarginStart(
                 getResources().getDimensionPixelSize(R.dimen.keyguard_carrier_text_margin));
         mCarrierLabel.setLayoutParams(lp);
+        updateCutout();
+    }
 
-        lp = (MarginLayoutParams) getLayoutParams();
-        lp.height =  getResources().getDimensionPixelSize(
-                R.dimen.status_bar_header_height_keyguard);
+    private void updateStatusBarHeight() {
+        MarginLayoutParams lp = (MarginLayoutParams) getLayoutParams();
+        if (mImmerseMode) {
+            lp.height =  getResources().getDimensionPixelSize(
+                    R.dimen.status_bar_height);
+        } else {
+            lp.height =  getResources().getDimensionPixelSize(
+                    R.dimen.status_bar_header_height_keyguard);
+        }
         setLayoutParams(lp);
     }
 
@@ -497,6 +512,36 @@ public class KeyguardStatusBarView extends RelativeLayout
         if (mBatteryView != null) {
             mBatteryView.dump(fd, pw, args);
         }
+    }
+
+    private class CustomSettingsObserver extends ContentObserver {
+        CustomSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DISPLAY_CUTOUT_MODE), false, this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.System.getUriFor(Settings.System.DISPLAY_CUTOUT_MODE))) {
+                updateCutout();
+            }
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateCutout();
+        }
+    }
+
+    private void updateCutout() {
+        mImmerseMode = Settings.System.getIntForUser(mContext.getContentResolver(),
+                        Settings.System.DISPLAY_CUTOUT_MODE, 0, UserHandle.USER_CURRENT) == 1;
+        updateStatusBarHeight();
     }
 
     public void toggleContents(boolean hideContents) {
