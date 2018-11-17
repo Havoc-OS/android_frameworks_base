@@ -254,4 +254,9 @@
   <java-symbol type="string" name="deny" />
   <java-symbol type="layout" name="permission_confirmation_dialog" />
   <java-symbol type="array" name="app_ops_labels" />
+
+    <!-- Powermenu animations -->
+  <java-symbol type="style" name="GlobalActionsAnimation" />
+  <java-symbol type="style" name="GlobalActionsAnimationTop" />
+  <java-symbol type="style" name="GlobalActionsAnimationEnter" />
 </resources>
