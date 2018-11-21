@@ -109,6 +109,7 @@ java_library {
         "core/java/android/app/usage/IUsageStatsManager.aidl",
         ":libbluetooth-binder-aidl",
         "core/java/android/content/IClipboard.aidl",
+	    "core/java/android/content/IFontService.aidl",
         "core/java/android/service/gesture/IEdgeGestureService.aidl",
 	    "core/java/android/service/gesture/IEdgeGestureActivationListener.aidl",
 	    "core/java/android/service/gesture/IEdgeGestureHostCallback.aidl",

@@ -184,4 +184,8 @@
         <!-- OP_DATA_CONNECT_CHANGE -->
         <item>@string/app_ops_toggle_mobile_data</item>
     </string-array>
+
+    <!-- System font packages (overlay in vendor) -->
+    <string-array name="config_fontPackages" translatable="false">
+    </string-array>
 </resources>

@@ -303,4 +303,6 @@
   <java-symbol type="drawable" name="ic_shortcut_action_screenshot" />
   <java-symbol type="drawable" name="ic_shortcut_action_search" />
 
+    <!-- System fonts -->
+    <java-symbol type="array" name="config_fontPackages" />
 </resources>
