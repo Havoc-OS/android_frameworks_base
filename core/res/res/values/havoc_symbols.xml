@@ -255,7 +255,7 @@
   <java-symbol type="layout" name="permission_confirmation_dialog" />
   <java-symbol type="array" name="app_ops_labels" />
 
-    <!-- Powermenu animations -->
+  <!-- Powermenu animations -->
   <java-symbol type="style" name="GlobalActionsAnimation" />
   <java-symbol type="style" name="GlobalActionsAnimationTop" />
   <java-symbol type="style" name="GlobalActionsAnimationEnter" />
@@ -265,4 +265,7 @@
   <java-symbol type="style" name="GlobalActionsAnimationXylon" />
   <java-symbol type="style" name="GlobalActionsAnimationCard" />
   <java-symbol type="style" name="GlobalActionsAnimationRotate" />
+
+  <!-- System fonts -->
+  <java-symbol type="array" name="config_fontPackages" />
 </resources>
