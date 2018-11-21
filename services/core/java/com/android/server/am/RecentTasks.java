@@ -66,6 +66,7 @@ import android.util.ArraySet;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
+import android.util.BoostFramework;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.server.am.TaskRecord.TaskActivitiesReport;
@@ -179,6 +180,7 @@ class RecentTasks {
     private final HashMap<String, ApplicationInfo> mTmpAvailAppCache = new HashMap<>();
     private final SparseBooleanArray mTmpQuietProfileUserIds = new SparseBooleanArray();
     private final TaskActivitiesReport mTmpReport = new TaskActivitiesReport();
+    private final BoostFramework mUxPerf = new BoostFramework();
 
     @VisibleForTesting
     RecentTasks(ActivityManagerService service, TaskPersister taskPersister,
@@ -1025,6 +1027,13 @@ class RecentTasks {
      */
     void remove(TaskRecord task) {
         mTasks.remove(task);
+        if (task != null) {
+            final String taskPkgName =
+                   task.getBaseIntent().getComponent().getPackageName();
+            if (mUxPerf != null) {
+                mUxPerf.perfUXEngine_events(BoostFramework.UXE_EVENT_KILL, 0, taskPkgName, 0);
+            }
+        }
         notifyTaskRemoved(task, !TRIMMED);
     }
 
