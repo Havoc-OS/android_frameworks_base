@@ -67,7 +67,6 @@ public interface QSTile {
     CharSequence getTileLabel();
 
     State getState();
-    boolean isDualTarget();
 
     default LogMaker populate(LogMaker logMaker) {
         return logMaker;
