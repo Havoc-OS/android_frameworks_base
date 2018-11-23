@@ -55,7 +55,6 @@ import com.android.systemui.statusbar.policy.IconLogger;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.tuner.TunerService.Tunable;
 import com.android.systemui.util.Utils.DisableStateTracker;
-import com.android.systemui.R;
 
 import java.text.NumberFormat;
 
@@ -72,7 +71,6 @@ public class BatteryMeterView extends LinearLayout implements
     private int mTextColor;
     private int mLevel;
     private boolean mForceShowPercent;
-    private boolean mShowPercentAvailable;
 
     private int mDarkModeBackgroundColor;
     private int mDarkModeFillColor;
@@ -117,9 +115,6 @@ public class BatteryMeterView extends LinearLayout implements
         atts.recycle();
 
         mSettingObserver = new SettingObserver(new Handler(context.getMainLooper()));
-        mShowPercentAvailable = context.getResources().getBoolean(
-                com.android.internal.R.bool.config_battery_percentage_setting_available);
-
 
         addOnAttachStateChangeListener(
                 new DisableStateTracker(DISABLE_NONE, DISABLE2_SYSTEM_ICONS));
@@ -261,41 +256,47 @@ public class BatteryMeterView extends LinearLayout implements
     }
 
     private void updateShowPercent() {
-        final boolean hideText = Settings.Secure.getIntForUser(
-                getContext().getContentResolver(), STATUS_BAR_BATTERY_STYLE, 0, mUser) == 4;
-        final boolean showingText = Settings.Secure.getIntForUser(
-                getContext().getContentResolver(), STATUS_BAR_BATTERY_STYLE, 0, mUser) == 3;
-        final boolean showingInside = Settings.System.getIntForUser(
-                getContext().getContentResolver(), SHOW_BATTERY_PERCENT, 0, mUser) == 2;
-        final boolean showingOutside = mBatteryPercentView != null;
-        if (0 != Settings.System.getIntForUser(getContext().getContentResolver(),
-                SHOW_BATTERY_PERCENT, 0, mUser) || mForceShowPercent || showingText || hideText) {
-            if (!showingOutside) {
+        final boolean showing = mBatteryPercentView != null;
+        int style = Settings.System.getIntForUser(getContext().getContentResolver(),
+                SHOW_BATTERY_PERCENT, 0, mUser);
+        if (mForceShowPercent) {
+            style = 1; // Default view
+        }
+        switch (style) {
+            case 1:
+                if (!showing) {
+                    mBatteryPercentView = loadPercentView();
+                    if (mTextColor != 0) mBatteryPercentView.setTextColor(mTextColor);
+                    updatePercentText();
+                    addView(mBatteryPercentView,
+                            //0,
+                            new ViewGroup.LayoutParams(
+                                    LayoutParams.WRAP_CONTENT,
+                                    LayoutParams.MATCH_PARENT));
+                }
                 mDrawable.setShowPercent(false);
-                mBatteryPercentView = loadPercentView();
-                if (mTextColor != 0) mBatteryPercentView.setTextColor(mTextColor);
-                updatePercentText();
-                addView(mBatteryPercentView,
-                        new ViewGroup.LayoutParams(
-                                LayoutParams.WRAP_CONTENT,
-                                LayoutParams.MATCH_PARENT));
-            }
-            if (showingInside && !showingText && !mForceShowPercent) {
+                break;
+            case 2:
+                if (showing) {
+                    removeView(mBatteryPercentView);
+                    mBatteryPercentView = null;
+                }
                 mDrawable.setShowPercent(true);
-                removeView(mBatteryPercentView);
-                mBatteryPercentView = null;
-            }
-            if (hideText && !showingText && !mForceShowPercent) {
+                break;
+            default:
+                if (showing) {
+                    removeView(mBatteryPercentView);
+                    mBatteryPercentView = null;
+                }
                 mDrawable.setShowPercent(false);
-                removeView(mBatteryPercentView);
-                mBatteryPercentView = null;
-            }
-        } else {
-            if (showingOutside || !showingInside) {
-                mDrawable.setShowPercent(false);
-                removeView(mBatteryPercentView);
-                mBatteryPercentView = null;
-            }
+                break;
+        }
+
+        if (mBatteryPercentView != null) {
+            final Resources res = getContext().getResources();
+            final int startPadding = res.getDimensionPixelSize(R.dimen.battery_level_padding_start);
+            mBatteryPercentView.setPaddingRelative(startPadding, 0,
+                    /*(mDrawable.getMeterStyle() != BatteryMeterDrawableBase.BATTERY_STYLE_TEXT ? endPadding : */0/*)*/, 0);
         }
     }
 
@@ -308,6 +309,14 @@ public class BatteryMeterView extends LinearLayout implements
      * Looks up the scale factor for status bar icons and scales the battery view by that amount.
      */
     private void scaleBatteryMeterViews() {
+        if (mBatteryPercentView != null) {
+            FontSizeUtils.updateFontSize(mBatteryPercentView, R.dimen.qs_time_expanded_size);
+        }
+
+        if (mBatteryIconView == null) {
+            return;
+        }
+
         Resources res = getContext().getResources();
         TypedValue typedValue = new TypedValue();
 
@@ -322,11 +331,7 @@ public class BatteryMeterView extends LinearLayout implements
                 (int) (batteryWidth * iconScaleFactor), (int) (batteryHeight * iconScaleFactor));
         scaledLayoutParams.setMargins(0, 0, 0, marginBottom);
 
-        if (mBatteryIconView != null) {
-            mBatteryIconView.setLayoutParams(scaledLayoutParams);
-        }
-
-        FontSizeUtils.updateFontSize(mBatteryPercentView, R.dimen.qs_time_expanded_size);
+        mBatteryIconView.setLayoutParams(scaledLayoutParams);
     }
 
     @Override
@@ -380,8 +385,16 @@ public class BatteryMeterView extends LinearLayout implements
         final int style = styleStr == null ?
                 BatteryMeterDrawableBase.BATTERY_STYLE_PORTRAIT : Integer.parseInt(styleStr);
 
+        mForceShowPercent = false;
+
         switch (style) {
             case BatteryMeterDrawableBase.BATTERY_STYLE_TEXT:
+                if (mBatteryIconView != null) {
+                    removeView(mBatteryIconView);
+                    mBatteryIconView = null;
+                }
+                mForceShowPercent = true;
+                break;
             case BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN:
                 if (mBatteryIconView != null) {
                     removeView(mBatteryIconView);
@@ -389,22 +402,23 @@ public class BatteryMeterView extends LinearLayout implements
                 }
                 break;
             default:
+                if (mBatteryPercentView != null) {
+                    removeView(mBatteryPercentView);
+                    mBatteryPercentView = null;
+                }
                 mDrawable.setMeterStyle(style);
                 if (mBatteryIconView == null) {
                     mBatteryIconView = new ImageView(mContext);
                     mBatteryIconView.setImageDrawable(mDrawable);
                     final MarginLayoutParams mlp = new MarginLayoutParams(
-                            getResources().getDimensionPixelSize(
-                                    R.dimen.status_bar_battery_icon_width),
-                            getResources().getDimensionPixelSize(
-                                    R.dimen.status_bar_battery_icon_height));
-                    mlp.setMargins(0, 0, 0, getResources().getDimensionPixelOffset(
-                                    R.dimen.battery_margin_bottom));
+                            getResources().getDimensionPixelSize(R.dimen.status_bar_battery_icon_width),
+                            getResources().getDimensionPixelSize(R.dimen.status_bar_battery_icon_height));
+                    mlp.setMargins(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.battery_margin_bottom));
                     addView(mBatteryIconView, mlp);
                 }
                 break;
         }
         updateShowPercent();
-        onDensityOrFontScaleChanged();
+        scaleBatteryMeterViews();
     }
 }
