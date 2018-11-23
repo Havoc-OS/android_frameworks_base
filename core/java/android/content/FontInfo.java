@@ -22,7 +22,7 @@ import android.text.TextUtils;
 
 public class FontInfo implements Parcelable, Comparable<FontInfo> {
     public static final String DEFAULT_FONT_PACKAGE = "android";
-    public static final String DEFAULT_FONT_NAME = "Roboto";
+    public static final String DEFAULT_FONT_NAME = "Google Sans";
     public static final String DEFAULT_FONT_PATH = "/system/fonts/Roboto-Regular.ttf";
 
     private static final FontInfo sDefaultInfo = new FontInfo(DEFAULT_FONT_PACKAGE, DEFAULT_FONT_NAME,
