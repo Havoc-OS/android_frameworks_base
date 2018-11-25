@@ -354,4 +354,7 @@
 
     <!-- Label for item that screenrecords in power menu options dialog -->
     <string name="global_action_screenrecord">Screenrecord</string>
+
+    <!-- Screenshot Delete Toast -->
+    <string name="delete_screenshot_toast">Screenshot deleted</string>
 </resources>
