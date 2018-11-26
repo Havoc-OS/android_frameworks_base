@@ -17,6 +17,7 @@
 package com.android.internal.statusbar;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.hardware.biometrics.IBiometricPromptReceiver;
 import android.os.Bundle;
@@ -154,9 +155,10 @@ oneway interface IStatusBar
     // Used to hide the fingerprint dialog when the authenticationclient is stopped
     void hideFingerprintDialog();
 
-    /**
-     * Havoc
-     */
-    void toggleCameraFlash();
+    // Start SmartNav API
+    void screenPinningStateChanged(boolean enabled);
     void leftInLandscapeChanged(boolean isLeft);
+    void toggleCameraFlash();
+    void toggleNavigationEditor();
+    void dispatchNavigationEditorResults(in Intent intent);
 }

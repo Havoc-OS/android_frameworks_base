@@ -29,6 +29,7 @@ import android.view.View;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.PhoneStatusBarView;
 import com.android.systemui.statusbar.phone.NavigationBarView;
+import com.android.systemui.navigation.Navigator;
 import com.android.systemui.statusbar.phone.StatusBar;
 
 import java.util.Timer;
@@ -124,11 +125,12 @@ public class BurnInProtectionController {
             mVerticalDirection *= -1;
         }
 
+        // As now we have DUI, so enable burn-in shit for StatusBar items only
         mPhoneStatusBarView.swiftStatusBarItems(mHorizontalShift, mVerticalShift);
-        NavigationBarView mNavigationBarView = mStatusBar.getNavigationBarView();
+        /*NavigationBarView mNavigationBarView = mStatusBar.getNavigationBarView();
         if (mNavigationBarView != null) {
             mNavigationBarView.swiftNavigationBarItems(mHorizontalShift, mVerticalShift);
-        }
+        }*/
 
         if (DEBUG) Log.d(TAG, "Swifting items..");
     }

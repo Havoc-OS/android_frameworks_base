@@ -17,6 +17,7 @@
 package com.android.internal.statusbar;
 
 import android.content.ComponentName;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
@@ -105,8 +106,9 @@ interface IStatusBarService
     /**
      * Havoc
      */
-    void toggleCameraFlash();
     void setAutoRotate(boolean enabled);
+
+    // Start SmartNav methods
     void toggleRecentApps();
     void toggleSplitScreen();
     void preloadRecentApps();
@@ -114,5 +116,9 @@ interface IStatusBarService
     void startAssist(in Bundle args);
     void restartUI();
     void toggleOrientationListener(boolean enable);
+    void screenPinningStateChanged(boolean enabled);
     void leftInLandscapeChanged(boolean isLeft);
+    void toggleCameraFlash();
+    void toggleNavigationEditor();
+    void dispatchNavigationEditorResults(in Intent intent);
 }
