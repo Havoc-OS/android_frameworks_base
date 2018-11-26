@@ -43,7 +43,6 @@ enum {
 
 struct fields_t {
     jfieldID    context;
-    jfieldID    metadata_ptr;
     jfieldID    facing;
     jfieldID    orientation;
     jfieldID    canDisableShutterSound;
@@ -79,7 +78,6 @@ struct fields_t {
 
 static fields_t fields;
 static Mutex sLock;
-static CameraMetadata* mMeta_ptr;
 
 // provides persistent context for calls from native code to Java
 class JNICameraContext: public CameraListener
@@ -299,10 +297,6 @@ void JNICameraContext::copyAndPost(JNIEnv* env, const sp<IMemory>& dataPtr, int 
                         return;
                     }
                 }
-            } else if (msgType == 0x40000) {
-                camera_metadata_t * cMetaData = reinterpret_cast<camera_metadata_t*>(heapBase + offset);
-                *mMeta_ptr = (const camera_metadata_t*)cMetaData;
-                mMeta_ptr->sort();
             } else {
                 ALOGV("Allocating callback buffer");
                 obj = env->NewByteArray(size);
@@ -510,7 +504,6 @@ void JNICameraContext::setCallbackMode(JNIEnv *env, bool installed, bool manualM
 static void android_hardware_Camera_setLongshot(JNIEnv *env, jobject thiz, jboolean enable)
 {
     ALOGV("setLongshot");
-#ifdef QCOM_HARDWARE
     JNICameraContext* context;
     status_t rc;
     sp<Camera> camera = get_native_camera(env, thiz, &context);
@@ -525,7 +518,6 @@ static void android_hardware_Camera_setLongshot(JNIEnv *env, jobject thiz, jbool
     if (rc != NO_ERROR) {
        jniThrowException(env, "java/lang/RuntimeException", "enabling longshot mode failed");
     }
-#endif
 }
 
 static void android_hardware_Camera_stopLongshot(JNIEnv *env, jobject thiz)
@@ -546,7 +538,6 @@ static void android_hardware_Camera_stopLongshot(JNIEnv *env, jobject thiz)
 static void android_hardware_Camera_sendHistogramData(JNIEnv *env, jobject thiz)
  {
    ALOGV("sendHistogramData" );
-#ifdef QCOM_HARDWARE
    JNICameraContext* context;
    status_t rc;
    sp<Camera> camera = get_native_camera(env, thiz, &context);
@@ -557,12 +548,10 @@ static void android_hardware_Camera_sendHistogramData(JNIEnv *env, jobject thiz)
    if (rc != NO_ERROR) {
       jniThrowException(env, "java/lang/RuntimeException", "send histogram data failed");
     }
-#endif
  }
  static void android_hardware_Camera_setHistogramMode(JNIEnv *env, jobject thiz, jboolean mode)
  {
    ALOGV("setHistogramMode: mode:%d", (int)mode);
-#ifdef QCOM_HARDWARE
    JNICameraContext* context;
    status_t rc;
    sp<Camera> camera = get_native_camera(env, thiz, &context);
@@ -576,7 +565,6 @@ static void android_hardware_Camera_sendHistogramData(JNIEnv *env, jobject thiz)
    if (rc != NO_ERROR) {
       jniThrowException(env, "java/lang/RuntimeException", "set histogram mode failed");
      }
-#endif
  }
 void JNICameraContext::addCallbackBuffer(
         JNIEnv *env, jbyteArray cbb, int msgType)
@@ -959,7 +947,6 @@ static void android_hardware_Camera_takePicture(JNIEnv *env, jobject thiz, jint 
     JNICameraContext* context;
     sp<Camera> camera = get_native_camera(env, thiz, &context);
     if (camera == 0) return;
-    mMeta_ptr = reinterpret_cast<android::CameraMetadata*>(env->GetLongField(thiz,fields.metadata_ptr));
 
     /*
      * When CAMERA_MSG_RAW_IMAGE is requested, if the raw image callback
@@ -1165,7 +1152,7 @@ static void android_hardware_Camera_sendVendorCommand(JNIEnv *env, jobject thiz,
 //-------------------------------------------------
 
 static const JNINativeMethod camMethods[] = {
-  { "native_getNumberOfCameras",
+  { "_getNumberOfCameras",
     "()I",
     (void *)android_hardware_Camera_getNumberOfCameras },
   { "_getCameraInfo",
@@ -1288,7 +1275,6 @@ int register_android_hardware_Camera(JNIEnv *env)
 {
     field fields_to_find[] = {
         { "android/hardware/Camera", "mNativeContext",   "J", &fields.context },
-        { "android/hardware/Camera", "mMetadataPtr",   "J", &fields.metadata_ptr },
         { "android/hardware/Camera$CameraInfo", "facing",   "I", &fields.facing },
         { "android/hardware/Camera$CameraInfo", "orientation",   "I", &fields.orientation },
         { "android/hardware/Camera$CameraInfo", "canDisableShutterSound",   "Z",

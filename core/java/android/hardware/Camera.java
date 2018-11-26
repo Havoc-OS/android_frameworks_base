@@ -28,9 +28,6 @@ import android.graphics.ImageFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.impl.CameraMetadataNative;
-import android.hardware.camera2.CaptureResult;
 import android.media.AudioAttributes;
 import android.media.IAudioService;
 import android.os.Handler;
@@ -50,7 +47,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
-import android.os.SystemProperties;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.IAppOpsCallback;
@@ -214,68 +210,6 @@ public class Camera {
     private CameraMetaDataCallback mCameraMetaDataCallback;
     /* ### QC ADD-ONS: END */
 
-    private static final int CAMERA_MSG_AEC = 0x10000;
-    private static final int CAMERA_MSG_DNG_IMAGE= 0x20000;
-    private static final int CAMERA_MSG_DNG_META_DATA = 0x40000;
-    private static final int CAMERA_MSG_IN_PROCESSING = 0x80000;
-    private static final int CAMERA_MSG_STATE_CALLBACK = 0x100000;
-    private static final int CAMERA_MSG_RAW_IMAGE_DUMMY = 0x120000;
-
-    private static CameraMetadataNative mMetadata;
-    private long mMetadataPtr; 
-    private CameraCharacteristics mCharacteristics;
-    private android.hardware.Camera.AECallback mAECallback;
-    private android.hardware.Camera.OneplusCallback mOneplusCallback;
-    private android.hardware.Camera.ProcessCallback mProcessCallback;
-    private boolean mIsOPService = false;
-    private android.hardware.Camera.PictureCallback mOPServiceJpegCallback = null;
-    private android.hardware.Camera.CameraStateCallback mCameraStateCallback;
-
-    public interface AECallback {
-        public abstract void onAeStateChanged(int[] p1);
-    }
-
-    public interface OneplusCallback {
-        public abstract void onDngImageReceived(byte[] p1, Camera p2);
-        public abstract void onDngMetadataReceived(CameraCharacteristics p1, CaptureResult p2, Camera p3);
-    }
-
-    public interface ProcessCallback {
-        public abstract void onProcessReceived();
-    }
-
-    public interface CameraStateCallback {
-        public abstract void onCameraStateChanged(byte[] p1);
-    }
-
-    public void setAECallback(AECallback cb) {
-        mAECallback = cb;
-    }
-    
-    public final void setOneplusCallback(OneplusCallback cb) {
-        mOneplusCallback = cb;
-    }
-    
-    public final void setProcessCallback(ProcessCallback cb) {
-        mProcessCallback = cb;
-    }
-    
-    public void setOPJpegCallback(PictureCallback cb) {
-        mOPServiceJpegCallback = cb;
-    }
-    
-    public final void addDngImageCallbackBuffer(byte[] cb) {
-        addRawImageCallbackBuffer(cb);
-    }
-
-    public final void setCameraStateCallback(CameraStateCallback cb) {
-        mCameraStateCallback = cb;
-    }
-    
-    public static Camera openOPService() {
-        return new Camera(0, -0x64);
-    }
-
     /**
      * Broadcast Action:  A new picture is taken by the camera, and the entry of
      * the picture has been added to the media store.
@@ -356,51 +290,46 @@ public class Camera {
      *   cameras or an error was encountered enumerating them.
      */
     public static int getNumberOfCameras() {
+        boolean exposeAuxCamera = true;
+        String packageName = ActivityThread.currentOpPackageName();
         /* Force to expose only two cameras
          * if the package name does not falls in this bucket
          */
-        int numberOfCameras = native_getNumberOfCameras();
-        if ((numberOfCameras > 2) && !shouldExposeAuxCamera()) {
+        String packageList = SystemProperties.get("vendor.camera.aux.packagelist");
+        String packageBlacklist = SystemProperties.get("vendor.camera.aux.packageblacklist");
+        if (packageList.length() > 0) {
+            TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
+            splitter.setString(packageList);
+            exposeAuxCamera = false;
+            for (String str : splitter) {
+                if (packageName.equals(str)) {
+                    exposeAuxCamera = true;
+                    break;
+                }
+            }
+        } else if (packageBlacklist.length() > 0) {
+            TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
+            splitter.setString(packageBlacklist);
+            exposeAuxCamera = true;
+            for (String str : splitter) {
+                if (packageName.equals(str)) {
+                    exposeAuxCamera = false;
+                    break;
+                }
+            }
+        }
+        int numberOfCameras = _getNumberOfCameras();
+        if (exposeAuxCamera == false && (numberOfCameras > 2)) {
             numberOfCameras = 2;
         }
         return numberOfCameras;
     }
 
     /**
-     * Wether to expose Aux cameras
-     */
-    /** @hide */
-    public static boolean shouldExposeAuxCamera() {
-        String packageName = ActivityThread.currentOpPackageName();
-        // This should be .packagewhitelist but we shouldn't change qualcomm's default
-        String packageList = SystemProperties.get("vendor.camera.aux.packagelist");
-        String packageBlacklist = SystemProperties.get("vendor.camera.aux.packageblacklist");
-        if (packageList.length() > 0) {
-            TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
-            splitter.setString(packageList);
-            for (String str : splitter) {
-                if (packageName.equals(str)) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (packageBlacklist.length() > 0) {
-            TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
-            splitter.setString(packageBlacklist);
-            for (String str : splitter) {
-                if (packageName.equals(str)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
      * Returns the number of physical cameras available on this device.
      */
     /** @hide */
-    public native static int native_getNumberOfCameras();
+    public native static int _getNumberOfCameras();
 
     /**
      * Returns the information about a particular camera.
@@ -411,7 +340,7 @@ public class Camera {
      *    low-level failure).
      */
     public static void getCameraInfo(int cameraId, CameraInfo cameraInfo) {
-        if (cameraId >= getNumberOfCameras()) {
+        if(cameraId >= getNumberOfCameras()){
             throw new RuntimeException("Unknown camera ID");
         }
         try {
@@ -651,8 +580,6 @@ public class Camera {
         mCameraDataCallback = null;
         mCameraMetaDataCallback = null;
         /* ### QC ADD-ONS: END */
-        mOneplusCallback = null;
-        mProcessCallback = null;
 
         Looper looper;
         if ((looper = Looper.myLooper()) != null) {
@@ -662,21 +589,6 @@ public class Camera {
         } else {
             mEventHandler = null;
         }
-
-        String packageName = ActivityThread.currentOpPackageName();
-
-        //Force HAL1 if the package name falls in this bucket
-        String packageList = SystemProperties.get("camera.hal1.packagelist", "");
-        if (packageList.length() > 0) {
-            TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
-            splitter.setString(packageList);
-            for (String str : splitter) {
-                if (packageName.equals(str)) {
-                    halVersion = CAMERA_HAL_API_VERSION_1_0;
-                    break;
-                }
-            }
-	    }
 
         return native_setup(new WeakReference<Camera>(this), cameraId, halVersion,
                 ActivityThread.currentOpPackageName());
@@ -706,8 +618,8 @@ public class Camera {
 
     /** used by Camera#open, Camera#open(int) */
     Camera(int cameraId) {
-        if (cameraId >= getNumberOfCameras()) {
-            throw new RuntimeException("Unknown camera ID");
+        if(cameraId >= getNumberOfCameras()){
+             throw new RuntimeException("Unknown camera ID");
         }
         int err = cameraInitNormal(cameraId);
         if (checkInitErrors(err)) {
@@ -743,22 +655,6 @@ public class Camera {
     Camera() {}
 
     private void initAppOps() {
-        boolean isAppAllowed = false;
-        String packageName = ActivityThread.currentOpPackageName();
-        String packageList = SystemProperties.get("camera.shutter_sound.blacklist", "");
-        if (packageList.length() > 0) {
-            TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
-            splitter.setString(packageList);
-            for (String str : splitter) {
-                if (packageName.equals(str)) {
-                    isAppAllowed = true;
-                    break;
-                }
-            }
-        }
-        if (isAppAllowed){
-            return;
-        }
         IBinder b = ServiceManager.getService(Context.APP_OPS_SERVICE);
         mAppOps = IAppOpsService.Stub.asInterface(b);
         // initialize mHasAppOpsPlayAudio
@@ -1010,7 +906,6 @@ public class Camera {
         mRawImageCallback = null;
         mPostviewCallback = null;
         mJpegCallback = null;
-        mProcessCallback = null;
         synchronized (mAutoFocusCallbackLock) {
             mAutoFocusCallback = null;
         }
@@ -1360,13 +1255,7 @@ public class Camera {
 
         @Override
         public void handleMessage(Message msg) {
-            int msgID = msg.what;
-
-            if (mOneplusCallback != null && msgID == CAMERA_MSG_RAW_IMAGE) {
-                msgID = CAMERA_MSG_DNG_IMAGE;
-            }
-
-            switch(msgID) {
+            switch(msg.what) {
             case CAMERA_MSG_SHUTTER:
                 if (mShutterCallback != null) {
                     mShutterCallback.onShutter();
@@ -1382,9 +1271,6 @@ public class Camera {
             case CAMERA_MSG_COMPRESSED_IMAGE:
                 if (mJpegCallback != null) {
                     mJpegCallback.onPictureTaken((byte[])msg.obj, mCamera);
-                } else if (mIsOPService && mOPServiceJpegCallback != null) {
-                    Log.d(TAG,"op jpeg callback");
-                    mOPServiceJpegCallback.onPictureTaken((byte[])msg.obj, mCamera);
                 }
                 return;
 
@@ -1470,51 +1356,6 @@ public class Camera {
                 }
                 return;
             /* ### QC ADD-ONS: END */
-
-            case CAMERA_MSG_RAW_IMAGE_DUMMY:
-                Log.d(TAG,"CAMERA_MSG_RAW_IMAGE_DUMMY");
-                return;
-
-            case CAMERA_MSG_AEC:
-                Log.d(TAG,"CAMERA_MSG_AEC");
-                if (mAECallback != null) {
-                    int [] states=new int[2];
-                    states[0]=msg.arg1;
-                    states[1]=msg.arg2;
-                    mAECallback.onAeStateChanged(states);
-                }
-                return;
-                
-            case CAMERA_MSG_DNG_IMAGE:
-                Log.d(TAG,"CAMERA_MSG_DNG_IMAGE");
-                if (mOneplusCallback != null) {
-                    mOneplusCallback.onDngImageReceived((byte[])msg.obj, mCamera);
-                }
-                return;
-                
-            case CAMERA_MSG_DNG_META_DATA:
-                Log.d(TAG,"CAMERA_MSG_DNG_META_DATA");
-                if (mOneplusCallback != null && mMetadata!=null) {
-                    mCharacteristics = new CameraCharacteristics(new CameraMetadataNative(mMetadata));
-                    CaptureResult result=new CaptureResult(new CameraMetadataNative(mMetadata),-1);
-                    mOneplusCallback.onDngMetadataReceived(mCharacteristics, result, mCamera);
-                }    
-            return;
-            
-            case CAMERA_MSG_IN_PROCESSING:
-                Log.d(TAG,"CAMERA_MSG_IN_PROCESSING");
-                if (mProcessCallback != null) {
-                    mProcessCallback.onProcessReceived();
-                }
-                return;
-
-            case CAMERA_MSG_STATE_CALLBACK:
-                Log.d(TAG,"CAMERA_MSG_STATE_CALLBACK");
-                if (mCameraStateCallback != null) {
-		    mCameraStateCallback.onCameraStateChanged((byte[])msg.obj);
-		}
-                return;
-
             default:
                 Log.e(TAG, "Unknown message type " + msg.what);
                 return;
@@ -1797,32 +1638,14 @@ public class Camera {
         if (mShutterCallback != null) {
             msgType |= CAMERA_MSG_SHUTTER;
         }
+        if (mRawImageCallback != null) {
+            msgType |= CAMERA_MSG_RAW_IMAGE;
+        }
         if (mPostviewCallback != null) {
             msgType |= CAMERA_MSG_POSTVIEW_FRAME;
         }
         if (mJpegCallback != null) {
             msgType |= CAMERA_MSG_COMPRESSED_IMAGE;
-        }
-        //oneplus camera mod
-        if (mOneplusCallback != null) {
-            msgType |= CAMERA_MSG_DNG_META_DATA;
-            msgType |= CAMERA_MSG_DNG_IMAGE;
-            mMetadata = new CameraMetadataNative();
-
-            try {
-                java.lang.reflect.Field ptrField = CameraMetadataNative.class.  
-                getDeclaredField("mMetadataPtr");  
-                ptrField.setAccessible(true);
-                mMetadataPtr = (long) ptrField.get(mMetadata);
-            } catch (Exception e) {
-                    Log.e(TAG, "Error oneplus callback in takePicture ", e);
-            };
-        } else if (mRawImageCallback != null) {
-            msgType |= CAMERA_MSG_RAW_IMAGE;
-        }
-
-        if (mProcessCallback != null) {
-            msgType |= CAMERA_MSG_IN_PROCESSING;
         }
 
         native_takePicture(msgType);
@@ -2044,7 +1867,11 @@ public class Camera {
                     } catch (RemoteException e) {
                         Log.e(TAG, "Audio service is unavailable for queries");
                     }
-                    _enableShutterSound(false);
+                    try {
+                        _enableShutterSound(false);
+                    } catch (Exception e) {
+                        Log.e(TAG, "Couldn't disable shutter sound");
+                    }
                 } else {
                     enableShutterSound(mShutterSoundEnabledFromApp);
                 }
@@ -4119,7 +3946,6 @@ public class Camera {
          * @see #getSceneMode()
          */
         public void setSceneMode(String value) {
-            if(getSupportedSceneModes() == null) return;
             set(KEY_SCENE_MODE, value);
         }
 
@@ -4157,7 +3983,6 @@ public class Camera {
          * @see #getFlashMode()
          */
         public void setFlashMode(String value) {
-	    if(getSupportedFlashModes() == null) return;
             set(KEY_FLASH_MODE, value);
         }
 
@@ -4913,7 +4738,7 @@ public class Camera {
         // Example string: "(10000,26623),(10000,30000)". Return null if the
         // passing string is null or the size is 0.
         private ArrayList<int[]> splitRange(String str) {
-            if (str == null || str.charAt(0) != '('
+            if (str == null || str.isEmpty() || str.charAt(0) != '('
                     || str.charAt(str.length() - 1) != ')') {
                 Log.e(TAG, "Invalid range list string=" + str);
                 return null;
@@ -4938,7 +4763,7 @@ public class Camera {
         // Example string: "(-10,-10,0,0,300),(0,0,10,10,700)". Return null if
         // the passing string is null or the size is 0 or (0,0,0,0,0).
         private ArrayList<Area> splitArea(String str) {
-            if (str == null || str.charAt(0) != '('
+            if (str == null || str.isEmpty() || str.charAt(0) != '('
                     || str.charAt(str.length() - 1) != ')') {
                 Log.e(TAG, "Invalid area string=" + str);
                 return null;
