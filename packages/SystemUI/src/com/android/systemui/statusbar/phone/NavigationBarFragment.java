@@ -50,12 +50,14 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.inputmethodservice.InputMethodService;
+import android.media.AudioManager;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
@@ -342,9 +344,8 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
         mNavigationBarView.setOnVerticalChangedListener(this::onVerticalChanged);
         if (isUsingStockNav()) {
             mNavigationBarView.getBaseView().setOnTouchListener(this::onNavigationTouch);
-        } else {
-            mNavigationBarView.setMediaPlaying(mMediaManager.isPlaybackActive());
         }
+        mNavigationBarView.setMediaPlaying(mMediaManager.isPlaybackActive());
         if (savedInstanceState != null) {
             mNavigationBarView.getLightTransitionsController().restoreState(savedInstanceState);
         }
@@ -357,6 +358,9 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_USER_SWITCHED);
+        filter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGING);
+        filter.addAction(AudioManager.STREAM_MUTE_CHANGED_ACTION);
+        filter.addAction(AudioManager.VOLUME_CHANGED_ACTION);
         getContext().registerReceiverAsUser(mBroadcastReceiver, UserHandle.ALL, filter, null, null);
         notifyNavigationBarScreenOn();
         mOverviewProxyService.addCallback(mOverviewProxyListener);
@@ -1226,14 +1230,17 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (Intent.ACTION_SCREEN_OFF.equals(action)
-                    || Intent.ACTION_SCREEN_ON.equals(action)) {
+            if (Intent.ACTION_SCREEN_OFF.equals(action)) {
                 notifyNavigationBarScreenOn();
-            }
-            if (Intent.ACTION_USER_SWITCHED.equals(action)) {
+                notifyPulseScreenOn(false);
+            } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
+                notifyNavigationBarScreenOn();
+                notifyPulseScreenOn(true);
+            } else if (Intent.ACTION_USER_SWITCHED.equals(action)) {
                 // The accessibility settings may be different for the new user
                 updateAccessibilityServicesState(mAccessibilityManager);
-            };
+            }
+            sendIntentToPulse(intent);
         }
     };
 
@@ -1391,6 +1398,15 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
         return mBarMode == NAVIGATION_MODE_DEFAULT || mScreenPinningEnabled;
     }
 
+
+    private void notifyPulseScreenOn(boolean on) {
+        mNavigationBarView.notifyPulseScreenOn(on);
+    }
+
+    private void sendIntentToPulse(Intent intent) {
+        mNavigationBarView.sendIntentToPulse(intent);
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -1439,8 +1455,8 @@ Navigator.OnVerticalChangedListener, KeyguardMonitor.Callback, NotificationMedia
                 mNavigationBarView.getBaseView().setOnTouchListener(this::onNavigationTouch);
             } else {
                 ((NavigationBarFrame) vg).disableDeadZone();
-                mNavigationBarView.setMediaPlaying(mMediaManager.isPlaybackActive());
             }
+            mNavigationBarView.setMediaPlaying(mMediaManager.isPlaybackActive());
             vg.addView(mNavigationBarView.getBaseView());
             prepareNavigationBarView();
             checkNavBarModes();
