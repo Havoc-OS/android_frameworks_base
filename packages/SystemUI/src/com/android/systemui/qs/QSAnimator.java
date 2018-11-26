@@ -268,7 +268,6 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
         View brightness = mQsPanel.getBrightnessView();
         if (mAllowFancy) {
             // Make brightness appear static position and alpha in through second half.
-            /*View brightness = mQsPanel.getBrightnessView();
             if (brightness != null) {
                 firstPageBuilder.addFloat(brightness, "translationY", heightDiff, 0);
                 mBrightnessAnimator = new TouchAnimator.Builder()
@@ -278,7 +277,7 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
                 mAllViews.add(brightness);
             } else {
                 mBrightnessAnimator = null;
-            }*/
+            }
             mFirstPageAnimator = firstPageBuilder
                     .setListener(this)
                     .build();
@@ -288,15 +287,13 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
                     .addFloat(tileLayout, "alpha", 0, 1)
                     .addFloat(mQsPanel.getDivider(), "alpha", 0, 1)
                     .addFloat(mQsPanel.getFooter().getView(), "alpha", 0, 1);
-            if (brightness != null) {
-                builder.addFloat(mQsPanel.getBrightnessView(), "alpha", 0, 1);
-            }
-            mFirstPageDelayedAnimator = builder.build();
             mAllViews.add(mQsPanel.getDivider());
             mAllViews.add(mQsPanel.getFooter().getView());
             if (brightness != null) {
+                builder.addFloat(mQsPanel.getBrightnessView(), "alpha", 0, 1);
                 mAllViews.add(mQsPanel.getBrightnessView());
             }
+            mFirstPageDelayedAnimator = builder.build();
             float px = 0;
             float py = 1;
             if (tiles.size() <= 3) {
@@ -365,9 +362,9 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
             mFirstPageDelayedAnimator.setPosition(position);
             mTranslationXAnimator.setPosition(position);
             mTranslationYAnimator.setPosition(position);
-            /*if (mBrightnessAnimator != null) {
+            if (mBrightnessAnimator != null) {
                 mBrightnessAnimator.setPosition(position);
-            }*/
+            }
         } else {
             mNonfirstPageAnimator.setPosition(position);
             mNonfirstPageDelayedAnimator.setPosition(position);

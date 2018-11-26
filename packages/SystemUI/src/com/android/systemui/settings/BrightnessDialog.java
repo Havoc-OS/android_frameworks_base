@@ -18,6 +18,7 @@ package com.android.systemui.settings;
 
 import static com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -37,12 +38,21 @@ import android.provider.Settings;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.systemui.Dependency;
+import com.android.systemui.qs.QSPanel;
 import com.android.systemui.R;
+import com.android.systemui.tuner.TunerService;
+import com.android.systemui.tuner.TunerService.Tunable;
 
 /** A dialog that provides controls for adjusting the screen brightness. */
-public class BrightnessDialog extends Activity {
+public class BrightnessDialog extends Activity implements Tunable {
 
     private BrightnessController mBrightnessController;
+
+    private ImageView mMinBrightness;
+    private ImageView mMaxBrightness;
+    private ImageView mAdaptiveBrightness;
+    private boolean mAutoBrightnessEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +73,12 @@ public class BrightnessDialog extends Activity {
                 R.layout.quick_settings_brightness_dialog, null);
         setContentView(mBrightnessView);
 
-        final ImageView icon = findViewById(R.id.brightness_icon);
+        mAdaptiveBrightness = findViewById(R.id.brightness_icon);
         final ToggleSliderView slider = findViewById(R.id.brightness_slider);
 
-        mBrightnessController = new BrightnessController(this, icon, slider);
+        mBrightnessController = new BrightnessController(this, mAdaptiveBrightness, slider);
 
-        ImageView mMinBrightness = mBrightnessView.findViewById(R.id.brightness_left);
+        mMinBrightness = mBrightnessView.findViewById(R.id.brightness_left);
         mMinBrightness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +102,7 @@ public class BrightnessDialog extends Activity {
             }
         });
 
-        ImageView mMaxBrightness = mBrightnessView.findViewById(R.id.brightness_right);
+        mMaxBrightness = mBrightnessView.findViewById(R.id.brightness_right);
         mMaxBrightness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +136,10 @@ public class BrightnessDialog extends Activity {
         super.onStart();
         mBrightnessController.registerCallbacks();
         MetricsLogger.visible(this, MetricsEvent.BRIGHTNESS_DIALOG);
+
+        final TunerService tunerService = Dependency.get(TunerService.class);
+        tunerService.addTunable(this, QSPanel.QS_SHOW_AUTO_BRIGHTNESS);
+        tunerService.addTunable(this, QSPanel.QS_SHOW_BRIGHTNESS_BUTTONS);
     }
 
     @Override
@@ -133,6 +147,8 @@ public class BrightnessDialog extends Activity {
         super.onStop();
         MetricsLogger.hidden(this, MetricsEvent.BRIGHTNESS_DIALOG);
         mBrightnessController.unregisterCallbacks();
+
+        Dependency.get(TunerService.class).removeTunable(this);
     }
 
     @Override
@@ -153,5 +169,25 @@ public class BrightnessDialog extends Activity {
         if (!hasFocus) {
             finish();
         }
+    }
+
+    @Override
+    public void onTuningChanged(String key, String newValue) {
+        if (QSPanel.QS_SHOW_AUTO_BRIGHTNESS.equals(key)) {
+            mAutoBrightnessEnabled = newValue == null || Integer.parseInt(newValue) != 0;
+            updateAutoBrightnessVisibility();
+        } else if (QSPanel.QS_SHOW_BRIGHTNESS_BUTTONS.equals(key)) {
+            updateViewVisibilityForTuningValue(mMinBrightness, newValue);
+            updateViewVisibilityForTuningValue(mMaxBrightness, newValue);
+        }
+    }
+
+    private void updateAutoBrightnessVisibility() {
+        mAdaptiveBrightness.setVisibility(mAutoBrightnessEnabled ? View.VISIBLE : View.GONE);
+    }
+
+    private void updateViewVisibilityForTuningValue(View view, @Nullable String newValue) {
+        view.setVisibility(newValue == null || Integer.parseInt(newValue) != 0
+                ? View.VISIBLE : View.GONE);
     }
 }
