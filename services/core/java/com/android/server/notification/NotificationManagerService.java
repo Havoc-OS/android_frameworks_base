@@ -334,8 +334,6 @@ public class NotificationManagerService extends SystemService {
 
     private long[] mFallbackVibrationPattern;
     private boolean mUseAttentionLight;
-    boolean mHasLight = true;
-    boolean mLightEnabled;
     boolean mSystemReady;
 
     private boolean mDisableNotificationEffects;
@@ -350,9 +348,9 @@ public class NotificationManagerService extends SystemService {
     private int mInterruptionFilter = NotificationListenerService.INTERRUPTION_FILTER_UNKNOWN;
 
     // for enabling and disabling notification pulse behavior
-    boolean mScreenOn = true;
+    private boolean mScreenOn = true;
     protected boolean mInCall = false;
-    boolean mNotificationPulseEnabled;
+    private boolean mNotificationPulseEnabled;
 
     private boolean mSoundVibScreenOn;
 
@@ -1525,8 +1523,6 @@ public class NotificationManagerService extends SystemService {
         mInCallNotificationVolume = resources.getFloat(R.dimen.config_inCallNotificationVolume);
 
         mUseAttentionLight = resources.getBoolean(R.bool.config_useAttentionLight);
-        mHasLight =
-                resources.getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed);
 
         // Don't start allowing notifications until the setup wizard has run once.
         // After that, including subsequent boots, init with notifications turned on.
@@ -3910,7 +3906,6 @@ public class NotificationManagerService extends SystemService {
                         pw.println("  ");
                     }
                     pw.println("  mUseAttentionLight=" + mUseAttentionLight);
-                    pw.println("  mHasLight=" + mHasLight);
                     pw.println("  mNotificationPulseEnabled=" + mNotificationPulseEnabled);
                     pw.println("  mSoundNotificationKey=" + mSoundNotificationKey);
                     pw.println("  mVibrateNotificationKey=" + mVibrateNotificationKey);
@@ -4925,7 +4920,9 @@ public class NotificationManagerService extends SystemService {
         // light
         // release the light
         boolean wasShowLights = mLights.remove(key);
-        if (canShowLightsLocked(record, aboveThreshold)) {
+        if (record.getLight() != null && aboveThreshold
+                && ((record.getSuppressedVisualEffects() & SUPPRESSED_EFFECT_LIGHTS) == 0)
+                && (!record.isIntercepted() || (record.isIntercepted() && record.shouldLightOnZen()))) {
             mLights.add(key);
             updateLightsLocked();
             if (mUseAttentionLight) {
@@ -4936,19 +4933,7 @@ public class NotificationManagerService extends SystemService {
             updateLightsLocked();
         }
         if (buzz || beep || blink) {
-            // Ignore summary updates because we don't display most of the information.
-            if (record.sbn.isGroup() && record.sbn.getNotification().isGroupSummary()) {
-                if (DEBUG_INTERRUPTIVENESS) {
-                    Log.v(TAG, "INTERRUPTIVENESS: "
-                            + record.getKey() + " is not interruptive: summary");
-                }
-            } else {
-                if (DEBUG_INTERRUPTIVENESS) {
-                    Log.v(TAG, "INTERRUPTIVENESS: "
-                            + record.getKey() + " is interruptive: alerted");
-                }
-                record.setInterruptive(true);
-            }
+            record.setInterruptive(true);
             MetricsLogger.action(record.getLogMaker()
                     .setCategory(MetricsEvent.NOTIFICATION_ALERT)
                     .setType(MetricsEvent.TYPE_OPEN)
@@ -4976,50 +4961,11 @@ public class NotificationManagerService extends SystemService {
     }
 
     @GuardedBy("mNotificationLock")
-    boolean canShowLightsLocked(final NotificationRecord record, boolean aboveThreshold) {
-        // device lacks light
-        if (!mHasLight) {
-            return false;
-        }
-        // user turned lights off globally
-        if (!mNotificationPulseEnabled) {
-            return false;
-        }
-        // the notification/channel has no light
-        if (record.getLight() == null) {
-            return false;
-        }
-        // unimportant notification
-        if (!aboveThreshold) {
-            return false;
-        }
-        // suppressed due to DND
-        if ((record.getSuppressedVisualEffects() & SUPPRESSED_EFFECT_LIGHTS) != 0
-            && (record.isIntercepted() || (!record.isIntercepted() && !record.shouldLightOnZen()))) {
-            return false;
-        }
-        // Suppressed because it's a silent update
-        final Notification notification = record.getNotification();
-        if (record.isUpdate && (notification.flags & Notification.FLAG_ONLY_ALERT_ONCE) != 0) {
-            return false;
-        }
-        // Suppressed because another notification in its group handles alerting
-        if (record.sbn.isGroup() && record.getNotification().suppressAlertingDueToGrouping()) {
-            return false;
-        }
-        // not if in call or the screen's on
-        if (mInCall || mScreenOn) {
-            return false;
-        }
-
-        return true;
-    }
-
-    @GuardedBy("mNotificationLock")
     boolean shouldMuteNotificationLocked(final NotificationRecord record) {
         // Suppressed because it's a silent update
         final Notification notification = record.getNotification();
-        if (record.isUpdate && (notification.flags & Notification.FLAG_ONLY_ALERT_ONCE) != 0) {
+        if(record.isUpdate
+                && (notification.flags & Notification.FLAG_ONLY_ALERT_ONCE) != 0) {
             return true;
         }
 
