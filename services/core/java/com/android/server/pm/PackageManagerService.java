@@ -580,6 +580,8 @@ public class PackageManagerService extends IPackageManager.Stub
 
     private static final String[] PACKAGE_OVERLAY_DIRS = { "/system/overlay", "/vendor/overlay" };
 
+    private static final String VENDOR_OVERLAY_DIR = "/vendor/overlay";
+
     private static final String PRODUCT_OVERLAY_DIR = "/product/overlay";
 
     private static final String THEME_OVERLAY_DIR = "/data/system/theme";
@@ -8535,6 +8537,12 @@ public class PackageManagerService extends IPackageManager.Stub
         }
     }
 
+    private String[] systemOverlayPackages = {"SysuiDarkTheme",
+                                              "DisplayCutoutEmulationCorner",
+                                              "DisplayCutoutEmulationDouble",
+                                              "DisplayCutoutEmulationNarrow",
+                                              "DisplayCutoutEmulationWide"};
+
     private void scanDirLI(File scanDir, int parseFlags, int scanFlags, long currentTime) {
         final File[] files = scanDir.listFiles();
         if (ArrayUtils.isEmpty(files)) {
@@ -8556,6 +8564,11 @@ public class PackageManagerService extends IPackageManager.Stub
                         && !PackageInstallerService.isStageName(file.getName());
                 if (!isPackage) {
                     // Ignore entries which are not packages
+                    continue;
+                }
+                // Ignore vendor overlays that should live on system/app
+                if ((scanDir.getPath() == VENDOR_OVERLAY_DIR || scanDir.getPath() == PRODUCT_OVERLAY_DIR)
+                        && Arrays.asList(systemOverlayPackages).contains(file.getName())){
                     continue;
                 }
                 parallelPackageParser.submit(file, parseFlags);
