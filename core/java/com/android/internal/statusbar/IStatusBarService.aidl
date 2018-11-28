@@ -115,7 +115,6 @@ interface IStatusBarService
     void cancelPreloadRecentApps();
     void startAssist(in Bundle args);
     void restartUI();
-    void toggleOrientationListener(boolean enable);
     void screenPinningStateChanged(boolean enabled);
     void leftInLandscapeChanged(boolean isLeft);
     void toggleCameraFlash();

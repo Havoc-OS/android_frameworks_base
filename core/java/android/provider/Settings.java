@@ -33,8 +33,6 @@ import android.annotation.IntRange;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.annotation.RequiresPermission;
-import android.annotation.ChaosLab;
-import android.annotation.ChaosLab.Classification;
 import android.annotation.SdkConstant;
 import android.annotation.SdkConstant.SdkConstantType;
 import android.annotation.SystemApi;
@@ -4317,14 +4315,6 @@ public final class Settings {
         public static final String VOLUME_ADJUST_SOUNDS_ENABLED = "volume_adjust_sounds_enabled";
 
         /**
-         * @hide
-         */
-        public static final String OMNI_NAVIGATION_BAR_RECENTS = "navigation_bar_recents";
-
-        /** @hide */
-        private static final Validator OMNI_NAVIGATION_BAR_RECENTS_VALIDATOR = BOOLEAN_VALIDATOR;
-
-        /**
          * Whether to show the battery info on the lockscreen while charging
          * @hide
          */
@@ -4629,81 +4619,6 @@ public final class Settings {
          * @hide
          */
         public static final String LOCKSCREEN_PIN_RIPPLE = "lockscreen_pin_ripple";
-
-        /**
-         * Pie toggles torch
-         * @hide
-         */
-        public static final String PA_PIE_TORCH = "pa_pie_torch";
-
-        /**
-         * Pie power menu
-         * @hide
-         */
-        public static final String PA_PIE_POWER_MENU = "pa_pie_power_menu";
-
-        /**
-         * Pie expanded desktop
-         * @hide
-         */
-        public static final String PA_PIE_EXPANDED_DESKTOP = "pa_pie_expanded_desktop";
-
-       // PIE COLORS EVERYWHERE! //
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_ENABLE_COLOR = "pa_pie_enable_color";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_JUICE = "pa_pie_juice";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_BUTTON_COLOR = "pa_pie_button_color";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_SNAP_BACKGROUND = "pa_pie_snap_background";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_BACKGROUND = "pa_pie_background";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_SELECT = "pa_pie_select";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_OUTLINES = "pa_pie_outlines";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_STATUS_CLOCK = "pa_pie_status_clock";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_STATUS = "pa_pie_status";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_CHEVRON = "pa_pie_chevron";
-
-        /**
-         * @hide
-         */
-        public static final String PA_PIE_ALWAYS_RIGHT = "pa_pie_always_right";
 
         /**
          * Whether to show the battery bar
@@ -5181,6 +5096,10 @@ public final class Settings {
          * @hide
          */
         public static final String USE_BOTTOM_GESTURE_NAVIGATION = "use_bottom_gesture_navigation";
+
+        /** @hide */
+        private static final Validator USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR =
+                BOOLEAN_VALIDATOR;
 
         /**
          * Whether to display the reboot option in the power menu
@@ -5761,47 +5680,6 @@ public final class Settings {
         /** @hide */
         public static final Validator RECENTS_COMPONENT_VALIDATOR =
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 1);
-                
-        /**
-         * Whether to display app circle sidebar
-         * @hide
-         */
-        public static final String ENABLE_APP_CIRCLE_BAR = "enable_app_circle_bar";
-
-        /**
-         * A list of packages to include in app circle bar.
-         * This should be a string of packages separated by |
-         * @hide
-         */
-        public static final String WHITELIST_APP_CIRCLE_BAR = "whitelist_app_circle_bar";
-
-        /**
-         * Width of the app circle bar trigger
-         *
-         * @hide
-         */
-        public static final String APP_CIRCLE_BAR_TRIGGER_WIDTH = "app_circle_bar_trigger_width";
-
-        /**
-         * Position of app circle bar trigger
-         *
-         * @hide
-         */
-        public static final String APP_CIRCLE_BAR_TRIGGER_TOP = "app_circle_bar_trigger_top";
-
-        /**
-         * Height of the app circle bar trigger
-         *
-         * @hide
-         */
-        public static final String APP_CIRCLE_BAR_TRIGGER_HEIGHT = "app_circle_bar_trigger_height";
-
-        /**
-         * Whether to display the trigger region or not
-         *
-         * @hide
-         */
-        public static final String APP_CIRCLE_BAR_SHOW_TRIGGER = "app_circle_bar_show_trigger";
 
         /**
          * @hide
@@ -5826,12 +5704,6 @@ public final class Settings {
          * @hide
          */
         public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
-
-        /**
-         * Use EdgeGesture Service for system gestures in PhoneWindowManager
-         * @hide
-         */
-        public static final String USE_EDGE_SERVICE_FOR_GESTURES = "edge_service_for_gestures";
 
         /**
          * enable or disable single handed mode
@@ -5890,57 +5762,6 @@ public final class Settings {
          * @hide
          */
         public static final String TOAST_ICON = "toast_icon";
-
-        /**
-         * Whether to use gesture anywhere feature.
-         * @hide
-         */
-        @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
-        public static final String GESTURE_ANYWHERE_ENABLED = "gesture_anywhere_enabled";
-
-        /**
-         * Position of gesture anywhere trigger.  Value is either Gravity.LEFT or Gravity.RIGHT
-         * @hide
-         */
-        @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
-        public static final String GESTURE_ANYWHERE_POSITION = "gesture_anywhere_position";
-
-        /**
-         * Last time gestures were altered.
-         * Used to determine if gestures should be reloaded by the view.
-         * @hide
-         */
-        @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
-        public static final String GESTURE_ANYWHERE_CHANGED = "gesture_anywhere_changed";
-
-        /**
-         * Width of the gesture anywhere trigger.
-         * @hide
-         */
-        @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
-        public static final String GESTURE_ANYWHERE_TRIGGER_WIDTH = "gesture_anywhere_trigger_width";
-
-        /**
-         * Position of gesture anywhere trigger.
-         * @hide
-         */
-        @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
-        public static final String GESTURE_ANYWHERE_TRIGGER_TOP = "gesture_anywhere_trigger_top";
-
-        /**
-         * Height of the gesture anywhere trigger.
-         * @hide
-         */
-        @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
-        public static final String GESTURE_ANYWHERE_TRIGGER_HEIGHT = "gesture_anywhere_trigger_height";
-
-        /**
-         * Whether to display the gesture anywhere trigger region or not.
-         * Used internally for showing the trigger in settings so user can see its placement
-         * @hide
-         */
-        @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
-        public static final String GESTURE_ANYWHERE_SHOW_TRIGGER = "gesture_anywhere_show_trigger";
 
         /**
          * Enable or disable wifi data activity indicators
@@ -6134,7 +5955,6 @@ public final class Settings {
             BURN_IN_PROTECTION,
             BURN_IN_PROTECTION_INTERVAL,
             USE_OLD_MOBILETYPE,
-            OMNI_NAVIGATION_BAR_RECENTS,
             DEVICE_FEATURE_SETTINGS,
             NOTIFICATION_SOUND_VIB_SCREEN_ON,
             RECENTS_COMPONENT,
@@ -6146,7 +5966,8 @@ public final class Settings {
             STATUS_BAR_TICKER_TICK_DURATION,
             VOLUME_DIALOG_TIMEOUT,
             GLOBAL_ACTIONS_SCREENRECORD,
-            VOLUME_KEYS_CONTROL_RING_TONE
+            VOLUME_KEYS_CONTROL_RING_TONE,
+            USE_BOTTOM_GESTURE_NAVIGATION
         };
 
         /**
@@ -6288,7 +6109,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(PROXIMITY_AUTO_SPEAKER);
             PRIVATE_SETTINGS.add(PROXIMITY_AUTO_SPEAKER_DELAY);
             PRIVATE_SETTINGS.add(PROXIMITY_AUTO_SPEAKER_INCALL_ONLY);
-            PRIVATE_SETTINGS.add(OMNI_NAVIGATION_BAR_RECENTS);
             PRIVATE_SETTINGS.add(NOTIFICATION_SOUND_VIB_SCREEN_ON);
             PRIVATE_SETTINGS.add(RECENTS_COMPONENT);
             PRIVATE_SETTINGS.add(STATUSBAR_HIDE_NOTCH);
@@ -6424,7 +6244,6 @@ public final class Settings {
             VALIDATORS.put(BURN_IN_PROTECTION, BURN_IN_PROTECTION_VALIDATOR);
             VALIDATORS.put(BURN_IN_PROTECTION_INTERVAL, BURN_IN_PROTECTION_INTERVAL_VALIDATOR);
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
-            VALIDATORS.put(OMNI_NAVIGATION_BAR_RECENTS, OMNI_NAVIGATION_BAR_RECENTS_VALIDATOR);
             VALIDATORS.put(DEVICE_FEATURE_SETTINGS, DEVICE_FEATURE_SETTINGS_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_SOUND_VIB_SCREEN_ON, NOTIFICATION_SOUND_VIB_SCREEN_ON_VALIDATOR);
             VALIDATORS.put(RECENTS_COMPONENT,RECENTS_COMPONENT_VALIDATOR);
@@ -6441,6 +6260,7 @@ public final class Settings {
             VALIDATORS.put(VOLUME_DIALOG_TIMEOUT,VOLUME_DIALOG_TIMEOUT_VALIDATOR);
             VALIDATORS.put(GLOBAL_ACTIONS_SCREENRECORD,GLOBAL_ACTIONS_SCREENRECORD_VALIDATOR);
             VALIDATORS.put(VOLUME_KEYS_CONTROL_RING_TONE,VOLUME_KEYS_CONTROL_RING_TONE_VALIDATOR);
+            VALIDATORS.put(USE_BOTTOM_GESTURE_NAVIGATION, USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR);
         }
 
         /**
@@ -9852,116 +9672,8 @@ public final class Settings {
         public static final String MANAGED_PROFILE_CONTACT_REMOTE_SEARCH =
                 "managed_profile_contact_remote_search";
 
-        /*
-         * Whether to show PIE controls on the screen.
-         * 0 = OFF
-         * 1 = ON
-         * Changes aspect depends on status bar visibility.
-         * @hide
-         */
-        public static final String PIE_STATE = "pie_state";
-
-        /**
-         * PIE controls current location.
-         * Gravity.BOTTOM (default)
-         * Gravity.LEFT
-         * Gravity.RIGHT
-         * @hide
-         */
-        public static final String PIE_GRAVITY = "pie_gravity";
-
-        /**
-         * Whether to show battery circle in PIE controls.
-         * 0 = Text only
-         * 1 = Circle only
-         * 2 = Text and circle
-         * @hide
-         */
-        public static final String PIE_BATTERY_MODE = "pie_battery_mode";
-
-        /**
-         * PIE controls theme mode.
-         * 0 = AUTO
-         * 1 = WHITE
-         * 2 = DARK
-         * @hide
-         */
-        public static final String PIE_THEME_MODE = "pie_theme_mode";
-
-        /**
-         * PIE controls status indicator mode.
-         * 0 = BOTH
-         * 1 = WIFI ONLY
-         * 2 = MOBILE NETWORK ONLY
-         * 3 = NONE
-         * @hide
-         */
-        public static final String PIE_STATUS_INDICATOR = "pie_status_indicator";
-
-        /**
-         * Used to store the last used system ui flags to make qs settings stick after reboot
-         * @hide
-         */
-        public static final String LAST_SYSTEM_DESIGN_FLAGS = "last_system_design_flags";
-
-        /**
-         * Setting to record how the look and feel of the system should be tweaked. This
-         * should be used in combination with magic.
-         *
-         * @see android.view.View#SYSTEM_DESIGN_FLAG_IMMERSIVE_NAV
-         * @see android.view.View#SYSTEM_DESIGN_FLAG_IMMERSIVE_STATUS
-         * @hide
-         */
-        public static final String SYSTEM_DESIGN_FLAGS = "system_design_flags";
-
-        /**
-         * Settings to reset on user request. They will fall back to their default value (0).
-         *
-         * @hide
-         */
-        public static final String[] SETTINGS_TO_RESET = {
-            PIE_STATE,
-            PIE_GRAVITY
-        };
-
 
 	    /**
-         * Whether to use edge gestures to navigate.
-         * @hide
-         */
-        public static final String EDGE_GESTURES_ENABLED = "edge_gestures_enabled";
-
-        /**
-         * Haptic feedback duration on edge gesture navigation.
-         * @hide
-         */
-        public static final String EDGE_GESTURES_FEEDBACK_DURATION = "edge_gestures_feedback_duration";
-
-        /**
-         * Long press duration on edge gesture navigation.
-         * @hide
-         */
-        public static final String EDGE_GESTURES_LONG_PRESS_DURATION = "edge_gestures_long_press_duration";
-
-        /**
-         * Back gesture active on this edges.
-         * @hide
-         */
-        public static final String EDGE_GESTURES_BACK_EDGES = "edge_gestures_back_edges";
-
-        /**
-         * Back gesture active on this edges when on landscape.
-         * @hide
-         */
-        public static final String EDGE_GESTURES_LANDSCAPE_BACK_EDGES = "edge_gestures_landscape_back_edges";
-
-        /**
-         * Activate back gestures only when Y position > than this % of screen.
-         * @hide
-         */
-        public static final String EDGE_GESTURES_BACK_SCREEN_PERCENT = "edge_gestures_back_screen_percent";
-
-        /**
          * Whether or not the automatic storage manager is enabled and should run on the device.
          *
          * @hide
@@ -10322,12 +10034,6 @@ public final class Settings {
         public static final String HIDE_LOCK_SHORTCUTS = "hide_lock_shortcuts";
 
         /**
-         * Show UI feedback when using back gesture.
-         * @hide
-         */
-        public static final String EDGE_GESTURES_BACK_SHOW_UI_FEEDBACK = "edge_gestures_back_show_ui_feedback";
-
-        /**
          * Force authorize Substratum (or equivalent) frontend calling packages by ThemeInterfacer
          * The value is boolean (1 or 0).
          * @hide
@@ -10650,6 +10356,12 @@ public final class Settings {
          * @hide
          */
         public static final String SMARTBAR_BUTTON_ANIMATION_STYLE = "smartbar_button_animation_style";
+
+        /**
+         * Use black arrow theme instead of the white version.
+         * @hide
+         */
+        public static final String EDGE_GESTURES_BACK_USE_BLACK_ARROW = "edge_gestures_back_use_black_arrow";
 
         /**
          * This are the settings to be backed up.

@@ -22,7 +22,4 @@
         <attr name="viewLocation" format="integer" />
     </declare-styleable>
 
-    <declare-styleable name="BackArrowView"> 
-        <attr name="reversed" format="boolean" /> 
-    </declare-styleable> 
 </resources>

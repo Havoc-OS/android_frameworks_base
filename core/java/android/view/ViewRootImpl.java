@@ -5201,11 +5201,8 @@ public final class ViewRootImpl implements ViewParent,
                                     mQueueMotionConsumed = true;
                                     mCheckForGestureButton = false;
                                     mGestureButtonActive = false;
-                                    break;
                                 }
-                                else {
-                                    break;
-                                }
+                                break;
                             }
                             mCheckForGestureButton = false;
                             mGestureButtonActive = false;

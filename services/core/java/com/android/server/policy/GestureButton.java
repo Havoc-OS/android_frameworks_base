@@ -18,7 +18,6 @@ package com.android.server.policy;
 import android.content.Context;
 import android.content.res.Resources;
 import android.hardware.input.InputManager;
-import android.hardware.input.InputManager.InputDeviceListener;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -27,6 +26,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.provider.Settings.System;
 import android.util.DisplayMetrics;
 import android.util.Slog;
@@ -44,11 +44,8 @@ import android.view.inputmethod.InputMethodManagerInternal;
 
 import com.android.internal.R;
 import com.android.internal.util.havoc.HavocUtils;
+import com.android.internal.util.havoc.TaskUtils;
 import com.android.server.LocalServices;
-import com.android.server.policy.WindowManagerPolicy.WindowState;
-import com.android.server.statusbar.StatusBarManagerInternal;
-import com.android.server.wm.DisplayFrames;
-import com.android.server.wm.WindowManagerInternal.AppTransitionListener;
 
 public class GestureButton implements PointerEventListener {
     private static final String TAG = "GestureButton";
@@ -82,6 +79,7 @@ public class GestureButton implements PointerEventListener {
     private boolean mDismissInputMethod;
     private int mSwipeMinLength;
     private int mLongPressMaxLength;
+    private Context mContext;
 
     private class GestureButtonHandler extends Handler {
 
@@ -106,7 +104,8 @@ public class GestureButton implements PointerEventListener {
                 case MSG_SEND_LONG_PRESS:
                     if (DEBUG) Slog.i(TAG, "MSG_SEND_LONG_PRESS");
                     mKeyEventHandled = true;
-                    mPwm.handleLongPressOnHome(mEventDeviceId);
+                    mPwm.performHapticFeedbackLw(null, HapticFeedbackConstants.LONG_PRESS, false);
+                    TaskUtils.toggleLastApp(mContext, UserHandle.USER_CURRENT);
                     break;
             }
         }
@@ -114,6 +113,7 @@ public class GestureButton implements PointerEventListener {
 
     public GestureButton(Context context, PhoneWindowManager pwm) {
         Slog.i(TAG, "GestureButton init");
+        mContext = context;
         mPwm = pwm;
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) context.getSystemService("window");
@@ -271,11 +271,8 @@ public class GestureButton implements PointerEventListener {
         HavocUtils.sendKeycode(keyCode);
     }
 
-    void navigationBarPosition(DisplayFrames displayFrames) {
+    void navigationBarPosition(int displayWidth, int displayHeight, int displayRotation) {
         int navigationBarPosition = 0;
-        final int displayRotation = displayFrames.mRotation;
-        final int displayHeight = displayFrames.mDisplayHeight;
-        final int displayWidth = displayFrames.mDisplayWidth;
         if (displayWidth > displayHeight) {
             if (displayRotation == 3) {
                 navigationBarPosition = 2;

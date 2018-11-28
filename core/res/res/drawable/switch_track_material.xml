@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
-     Copyright (C) 2018 Havoc-OS
+<!-- Copyright (C) 2015 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,21 +13,16 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true">
-        <shape android:visible="true" android:shape="rectangle" android:useLevel="false">
-            <solid android:color="@android:color/transparent" />
-            <corners android:radius="25dp" />
-            <size android:height="18dp" android:width="25dp" />
-            <stroke android:width="2dp" android:color="?android:attr/colorAccent" />
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center_vertical|fill_horizontal"
+          android:start="4dp"
+          android:end="4dp">
+        <shape android:shape="rectangle"
+               android:tint="@color/switch_track_material">
+            <corners android:radius="7dp" />
+            <solid android:color="@color/white_disabled_material" />
+            <size android:height="14dp" />
         </shape>
     </item>
-    <item android:state_checked="false">
-        <shape android:visible="true" android:shape="rectangle" android:useLevel="false">
-            <solid android:color="@android:color/transparent" />
-            <corners android:radius="25dp" />
-            <size android:height="18dp" android:width="25dp" />
-            <stroke android:width="2dp" android:color="?android:attr/textColorSecondary" />
-        </shape>
-    </item>
-</selector>
+</layer-list>

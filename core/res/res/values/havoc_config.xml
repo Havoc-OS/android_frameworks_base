@@ -196,11 +196,6 @@
     <!-- Component name of the combo network location provider. -->
     <string name="config_comboNetworkLocationProvider" translatable="false">@null</string>
 
-     <!-- EdgeGesture service -->
-    <java-symbol type="dimen" name="edge_gesture_trigger_distance" />
-    <java-symbol type="dimen" name="edge_gesture_perpendicular_distance" />
-    <java-symbol type="dimen" name="edge_gesture_trigger_thickness" />
-
     <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
     <bool name="config_cleanupUnusedFingerprints">true</bool>
 </resources>

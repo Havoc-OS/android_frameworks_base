@@ -45,11 +45,6 @@ import com.android.systemui.ambient.play.AmbientIndicationContainer;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.annotation.ChaosLab;
-import android.annotation.ChaosLab.Classification;
-import android.app.Activity;
-import android.animation.TimeInterpolator;
-import com.android.systemui.chaos.lab.gestureanywhere.GestureAnywhereView;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
@@ -86,7 +81,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
-import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
@@ -127,12 +121,6 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.EventLog;
 import android.util.Log;
-import android.util.Pair;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.animation.AccelerateInterpolator;
@@ -142,18 +130,15 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.view.Display;
 import android.view.HapticFeedbackConstants;
-import android.view.Gravity;
 import android.view.IWindowManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.RemoteAnimationAdapter;
-import android.view.OrientationEventListener;
 import android.view.ThreadedRenderer;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
@@ -165,7 +150,6 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.graphics.PixelFormat;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.colorextraction.ColorExtractor;
@@ -249,7 +233,6 @@ import com.android.systemui.statusbar.NotificationData;
 import com.android.systemui.statusbar.NotificationData.Entry;
 import com.android.systemui.statusbar.NotificationEntryManager;
 import com.android.systemui.statusbar.NotificationGutsManager;
-import com.android.systemui.statusbar.appcirclesidebar.AppCircleSidebar;
 import com.android.systemui.statusbar.NotificationInfo;
 import com.android.systemui.statusbar.NotificationListener;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
@@ -287,7 +270,6 @@ import com.android.systemui.statusbar.policy.KeyguardMonitor;
 import com.android.systemui.statusbar.policy.KeyguardMonitorImpl;
 import com.android.systemui.statusbar.policy.KeyguardUserSwitcher;
 import com.android.systemui.statusbar.policy.NetworkController;
-import com.android.systemui.statusbar.pie.PieController;
 import com.android.systemui.statusbar.policy.OnHeadsUpChangedListener;
 import com.android.systemui.statusbar.policy.PreviewInflater;
 import com.android.systemui.statusbar.policy.RemoteInputQuickSettingsDisabler;
@@ -296,12 +278,9 @@ import com.android.systemui.statusbar.policy.UserInfoController;
 import com.android.systemui.statusbar.policy.UserInfoControllerImpl;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
 import com.android.systemui.statusbar.policy.ZenModeController;
-import com.android.systemui.statusbar.screen_gestures.ScreenGesturesController;
 import com.android.systemui.statusbar.stack.NotificationStackScrollLayout;
 import com.android.systemui.tuner.TunerService;
 import com.android.systemui.volume.VolumeComponent;
-import android.graphics.drawable.Icon;
-import android.hardware.SensorManager;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -529,18 +508,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
      * fully locked mode we only show that unlocking is blocked.
      */
     private ScreenPinningNotify mScreenPinningNotify;
-
-    protected AppCircleSidebar mAppCircleSidebar;
-    // Full Screen Gestures
-    protected ScreenGesturesController gesturesController;
-
-    // Tracking finger for opening/closing.
-    boolean mTracking;
-
-   // Pie controls
-    public int mOrientation = 0;
-    protected PieController mPieController;
-    private OrientationEventListener mOrientationListener;
 
     // status bar notification ticker
     private int mTickerEnabled;
@@ -845,7 +812,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         mAppOpsListener.setUpWithPresenter(this, mEntryManager);
         mZenController = Dependency.get(ZenModeController.class);
         mKeyguardViewMediator = getComponent(KeyguardViewMediator.class);
-        mNotificationData = new NotificationData(this);
 
         mColorExtractor = Dependency.get(SysuiColorExtractor.class);
         mColorExtractor.addOnColorsChangedListener(this);
@@ -983,15 +949,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
 
         // end old BaseStatusBar.start().
 
-        mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
-                Settings.Secure.EDGE_GESTURES_ENABLED), false,
-                mEdgeGesturesSettingsObserver);
-
-        mPieSettingsObserver.onChange(false);
-        mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
-                Settings.Secure.PIE_STATE), false, mPieSettingsObserver);
-        mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
-                Settings.Secure.PIE_GRAVITY), false, mPieSettingsObserver);
 
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mIconController);
@@ -1024,7 +981,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     // ================================================================================
     // Constructing the view
     // ================================================================================
-    @ChaosLab(name="GestureAnywhere", classification=Classification.CHANGE_CODE)
     protected void makeStatusBarView() {
         final Context context = mContext;
 
@@ -1137,12 +1093,8 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             createNavigationBar();
         }
 
-        addAppCircleSidebar();
         mScreenPinningNotify = new ScreenPinningNotify(mContext);
         mStackScroller.setLongPressListener(mEntryManager.getNotificationLongClicker());
-
-        addGestureAnywhereView();
-
         mStackScroller.setStatusBar(this);
         mStackScroller.setGroupManager(mGroupManager);
         mStackScroller.setHeadsUpManager(mHeadsUpManager);
@@ -1480,10 +1432,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         mNotificationShelf.setStatusBarState(mState);
     }
 
-    public NetworkController getNetworkController() {
-        return mNetworkController;
-    }
-
     public void onDensityOrFontScaleChanged() {
         MessagingMessage.dropCache();
         MessagingGroup.dropCache();
@@ -1510,16 +1458,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         mHeadsUpManager.onDensityOrFontScaleChanged();
 
         reevaluateStyles();
-        
-        boolean pieEnabled = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.PIE_STATE, 0, UserHandle.USER_CURRENT) == 1;
-        updatePieControls(!pieEnabled);
-
-        ContentResolver resolver = mContext.getContentResolver();
-
-        boolean edgeGesturesEnabled = Settings.Secure.getIntForUser(resolver,
-                Settings.Secure.EDGE_GESTURES_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
-        updateEdgeGestures(edgeGesturesEnabled);
     }
 
     private void onThemeChanged() {
@@ -1794,10 +1732,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             // We were showing a pulse for a notification, but no notifications are pulsing anymore.
             // Finish the pulse.
             mDozeScrimController.pulseOutNow();
-        }
-
-        if (mPieController != null) {
-            mPieController.updateNotifications();
         }
     }
 
@@ -3827,8 +3761,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                 mScreenOn = false;
                 finishBarAnimations();
                 resetUserExpandedStates();
-                // detach pie when screen is turned off
-                if (mPieController != null) mPieController.detachPie();
             }
             else if (Intent.ACTION_SCREEN_ON.equals(action)) {
                 mScreenOn = true;
@@ -3925,12 +3857,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
 
         mViewHierarchyManager.updateRowStates();
         mScreenPinningRequest.onConfigurationChanged();
-
-       int rotation = mDisplay.getRotation();
-        if (rotation != mOrientation) {
-            if (mPieController != null) mPieController.detachPie();
-            mOrientation = rotation;
-        }
     }
 
     @Override
@@ -4715,7 +4641,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             final boolean nightModeWantsDarkTheme = DARK_THEME_IN_NIGHT_MODE
                     && (config.uiMode & Configuration.UI_MODE_NIGHT_MASK)
                         == Configuration.UI_MODE_NIGHT_YES;
-            useDarkTheme = nightModeWantsDarkTheme;
+            useDarkTheme = wallpaperWantsDarkTheme || nightModeWantsDarkTheme;
             // Check for black and white accent so we don't end up
             // with white on white or black on black
             unfuckBlackWhiteAccent();
@@ -6165,7 +6091,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     protected IStatusBarService mBarService;
 
     // all notifications
-    public static NotificationData mNotificationData;
     protected NotificationStackScrollLayout mStackScroller;
 
     protected NotificationGroupManager mGroupManager;
@@ -6206,9 +6131,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
 
     protected RecentsComponent mRecents;
 
-    @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
-    protected GestureAnywhereView mGestureAnywhereView;
-
     protected NotificationShelf mNotificationShelf;
     protected FooterView mFooterView;
     protected EmptyShadeView mEmptyShadeView;
@@ -6220,37 +6142,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     public boolean isDeviceInteractive() {
         return mDeviceInteractive;
     }
-
-    private final ContentObserver mEdgeGesturesSettingsObserver = new ContentObserver(mHandler) {
-        @Override
-        public void onChange(boolean selfChange) {
-            ContentResolver resolver = mContext.getContentResolver();
-            boolean edgeGesturesEnabled = Settings.Secure.getIntForUser(resolver,
-                    Settings.Secure.EDGE_GESTURES_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
-
-            updateEdgeGestures(edgeGesturesEnabled);
-        }
-    };
-
-    public ArrayList<Pair<StatusBarNotification, Icon>> getNotifications() {
-        ArrayList<Pair<StatusBarNotification, Icon>> notifs
-                = new ArrayList<Pair<StatusBarNotification, Icon>>();
-        for (Entry entry : mNotificationData.getActiveNotifications()) {
-            StatusBarNotification sbn = entry.notification;
-            Icon icon = entry.notification.getNotification().getSmallIcon();
-            notifs.add(new Pair<StatusBarNotification, Icon>(sbn, icon));
-        }
-        return notifs;
-    }
-
-    private final ContentObserver mPieSettingsObserver = new ContentObserver(mHandler) {
-         @Override
-         public void onChange(boolean selfChange) {		  
-            boolean pieEnabled = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                    Settings.Secure.PIE_STATE, 0, UserHandle.USER_CURRENT) == 1;
-            updatePieControls(!pieEnabled);
-        }
-    };
 
     @Override  // NotificationData.Environment
     public boolean isDeviceProvisioned() {
@@ -6686,7 +6577,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         return true;
     }
 
-    public Bundle getActivityOptions(@Nullable RemoteAnimationAdapter animationAdapter) {
+    protected Bundle getActivityOptions(@Nullable RemoteAnimationAdapter animationAdapter) {
         ActivityOptions options;
         if (animationAdapter != null) {
             options = ActivityOptions.makeRemoteAnimation(animationAdapter);
@@ -6873,123 +6764,4 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                     saveImportance.run();
                 }
             };
-
-    protected void addAppCircleSidebar() {
-        if (mAppCircleSidebar == null) {
-            mAppCircleSidebar = (AppCircleSidebar) View.inflate(mContext, R.layout.app_circle_sidebar, null);
-            mWindowManager.addView(mAppCircleSidebar, getAppCircleSidebarLayoutParams());
-        }
-    }
-
-    protected void removeAppCircleSidebar() {
-        if (mAppCircleSidebar != null) {
-            mWindowManager.removeView(mAppCircleSidebar);
-        }
-    }
-
-    protected WindowManager.LayoutParams getAppCircleSidebarLayoutParams() {
-        int maxWidth =
-                mContext.getResources().getDimensionPixelSize(R.dimen.app_sidebar_trigger_width);
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
-                maxWidth,
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.TYPE_STATUS_BAR_SUB_PANEL,
-                0
-                | WindowManager.LayoutParams.FLAG_TOUCHABLE_WHEN_WAKING
-                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
-                | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
-                PixelFormat.TRANSLUCENT);
-        lp.privateFlags |= WindowManager.LayoutParams.PRIVATE_FLAG_NO_MOVE_ANIMATION;
-        lp.gravity = Gravity.TOP | Gravity.RIGHT;
-        lp.setTitle("AppCircleSidebar");
- 
-        return lp;
-    }
-
-    public void updateEdgeGestures(boolean enabled) {
-        Log.d(TAG, "updateEdgeGestures: Updating edge gestures");
-        if (enabled) {
-            if (gesturesController == null) {
-                gesturesController = new ScreenGesturesController(mContext, mWindowManager, this);
-            }
-            gesturesController.reorient();
-        } else if (!enabled && gesturesController != null) {
-            gesturesController.stop();
-            gesturesController = null;
-        }
-    }
-
-    public void updatePieControls(boolean reset) {
-        ContentResolver resolver = mContext.getContentResolver();
- 
-        if (reset) {
-            Settings.Secure.putIntForUser(resolver,
-                    Settings.Secure.PIE_GRAVITY, 0, UserHandle.USER_CURRENT);
-            toggleOrientationListener(false);
-        } else {
-            getOrientationListener();
-            toggleOrientationListener(true);
-        }
- 
-        if (mPieController == null) {
-            mPieController = PieController.getInstance();
-            mPieController.init(mContext, mWindowManager, this);
-        }
- 
-        int gravity = Settings.Secure.getInt(resolver,
-                Settings.Secure.PIE_GRAVITY, 0);
-        mPieController.resetPie(!reset, gravity);
-    }
-
-    private void getOrientationListener() {
-        if (mOrientationListener == null)
-            mOrientationListener = new OrientationEventListener(mContext,
-                    SensorManager.SENSOR_DELAY_NORMAL) {
-                @Override
-                public void onOrientationChanged(int orientation) {
-                    int rotation = mDisplay.getRotation();
-                    if (rotation != mOrientation) {
-                        if (mPieController != null) mPieController.detachPie();
-                        mOrientation = rotation;
-                    }
-                }
-            };
-    }
-
-    @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
-    protected void addGestureAnywhereView() {
-        mGestureAnywhereView = (GestureAnywhereView)View.inflate(
-                mContext, R.layout.gesture_anywhere_overlay, null);
-        mWindowManager.addView(mGestureAnywhereView, getGestureAnywhereViewLayoutParams(Gravity.LEFT));
-        mGestureAnywhereView.setStatusBar(this);
-    }
-
-    @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
-    protected void removeGestureAnywhereView() {
-        if (mGestureAnywhereView != null)
-            mWindowManager.removeView(mGestureAnywhereView);
-    }
-
-    @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
-    protected WindowManager.LayoutParams getGestureAnywhereViewLayoutParams(int gravity) {
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
-                LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.TYPE_STATUS_BAR_SUB_PANEL,
-                0
-                | WindowManager.LayoutParams.FLAG_TOUCHABLE_WHEN_WAKING
-                | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
-                | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
-                PixelFormat.TRANSLUCENT);
-        lp.privateFlags |= WindowManager.LayoutParams.PRIVATE_FLAG_NO_MOVE_ANIMATION;
-        lp.gravity = Gravity.TOP | gravity;
-        lp.setTitle("GestureAnywhereView");
-
-        return lp;
-    }
 }
