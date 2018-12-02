@@ -115,11 +115,11 @@ public class RecentsConfiguration {
         }
 
         public void update() {
-            mIsGridEnabled = Settings.System.getIntForUser(mAppContext.getContentResolver(),
-                    Settings.System.RECENTS_LAYOUT_STYLE, isGridEnabledDefault ? 2 : 0,
-                    UserHandle.USER_CURRENT) == 2;
             mIsGoLayoutEnabled = Settings.System.getIntForUser(mAppContext.getContentResolver(),
-                    Settings.System.RECENTS_LAYOUT_STYLE, isLowRamDeviceDefault ? 3 : 0,
+                    Settings.System.RECENTS_LAYOUT_STYLE, isLowRamDeviceDefault ? 2 : 0,
+                    UserHandle.USER_CURRENT) == 2;
+            mIsGridEnabled = Settings.System.getIntForUser(mAppContext.getContentResolver(),
+                    Settings.System.RECENTS_LAYOUT_STYLE, isGridEnabledDefault ? 3 : 0,
                     UserHandle.USER_CURRENT) == 3;
         }
     }
