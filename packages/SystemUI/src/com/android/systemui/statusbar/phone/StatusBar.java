@@ -4739,6 +4739,18 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         ThemeAccentUtils.stockQSHeaderStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
+    // Switches ui style from stock to custom
+    public void updateUIStyle() {
+        int uiStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.UI_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
+        ThemeAccentUtils.updateUIStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), uiStyle);
+    }
+
+    // Unload all ui styles back to stock
+    public void stockUIStyle() {
+        ThemeAccentUtils.stockUIStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
     private void updateDozingState() {
         Trace.traceCounter(Trace.TRACE_TAG_APP, "dozing", mDozing ? 1 : 0);
         Trace.beginSection("StatusBar#updateDozingState");
@@ -5470,6 +5482,9 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LESS_BORING_HEADS_UP),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.UI_STYLE),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5525,6 +5540,10 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL)) ||
                 uri.equals(Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS_MODE))) {
                 setBrightnessSlider();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.UI_STYLE))) {
+                stockUIStyle();
+                updateUIStyle();
             }
         }
 

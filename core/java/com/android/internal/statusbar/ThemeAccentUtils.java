@@ -139,6 +139,12 @@ public class ThemeAccentUtils {
         "com.android.systemui.qsheader.transparent", // 4
     };
 
+    // UI themes
+    private static final String[] UI_THEMES = {
+        "com.android.system.pixel", // 0
+        "com.android.system.aosp", // 1
+    };
+
     // Check for the dark system theme
     public static boolean isUsingDarkTheme(IOverlayManager om, int userId) {
         OverlayInfo themeInfo = null;
@@ -365,6 +371,34 @@ public class ThemeAccentUtils {
             String qsheadertheme = QS_HEADER_THEMES[i];
             try {
                 om.setEnabled(qsheadertheme,
+                        false /*disable*/, userId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Switches ui style to user selected.
+    public static void updateUIStyle(IOverlayManager om, int userId, int uiStyle) {
+        if (uiStyle == 0) {
+            stockUIStyle(om, userId);
+        } else {
+            try {
+                om.setEnabled(UI_THEMES[uiStyle],
+                        true, userId);
+            } catch (RemoteException e) {
+                Log.w(TAG, "Can't change ui theme", e);
+            }
+        }
+    }
+
+    // Switches ui style back to stock.
+    public static void stockUIStyle(IOverlayManager om, int userId) {
+        // skip index 0
+        for (int i = 1; i < UI_THEMES.length; i++) {
+            String uitheme = UI_THEMES[i];
+            try {
+                om.setEnabled(uitheme,
                         false /*disable*/, userId);
             } catch (RemoteException e) {
                 e.printStackTrace();
