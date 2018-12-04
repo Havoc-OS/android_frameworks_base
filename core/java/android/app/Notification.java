@@ -3301,6 +3301,8 @@ public class Notification implements Parcelable
             // UI_MODE_NIGHT doesnt seem to be ready, so just listen to config
             mInNightMode = getColorUtil().getNightModeNotification(mContext);
 
+            mInNightMode = mInNightMode || res.getBoolean(R.bool.config_useDarkBgNotificationIconTinting);
+
             if (toAdopt == null) {
                 mN = new Notification();
                 if (context.getApplicationInfo().targetSdkVersion < Build.VERSION_CODES.N) {
@@ -5517,10 +5519,8 @@ public class Notification implements Parcelable
                 ensureColors();
                 color = NotificationColorUtil.resolveDefaultColor(mThemeContext, background);
             } else {
-                boolean isDark = mInNightMode || mThemeContext.getResources()
-                        .getBoolean(R.bool.config_useDarkBgNotificationIconTinting);
                 color = NotificationColorUtil.resolveContrastColor(mThemeContext, mN.color,
-                        background, isDark);
+                        background, mInNightMode);
             }
             if (Color.alpha(color) < 255) {
                 // alpha doesn't go well for color filters, so let's blend it manually
