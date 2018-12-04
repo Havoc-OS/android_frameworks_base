@@ -18,6 +18,8 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:layout_gravity="center_vertical"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
     android:paddingLeft="28dp"
     android:paddingRight="28dp"
     style="@style/BrightnessDialogContainer">
@@ -30,7 +32,8 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_qs_brightness_auto_off"
         android:contentDescription="@null"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
         android:visibility="gone" />
 
     <ImageButton
