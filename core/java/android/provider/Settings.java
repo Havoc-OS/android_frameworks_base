@@ -4122,12 +4122,6 @@ public final class Settings {
         public static final String DESK_DOCK_SOUND = Global.DESK_DOCK_SOUND;
 
         /**
-        * Whether to show Qs panel footer warnings like for active VPN
-        * @hide
-        */
-       public static final String QS_FOOTER_WARNINGS = "qs_footer_warnings";
-
-        /**
          * @deprecated Use {@link android.provider.Settings.Global#DESK_UNDOCK_SOUND}
          * instead
          * @hide
@@ -5455,12 +5449,6 @@ public final class Settings {
          * @hide
          */
         public static final String QS_TILE_STYLE = "qs_tile_style";
-
-        /**
-         * Whether to show Brightness Icon On Brightness Slider
-         * @hide
-         */
-        public static final String QS_SHOW_BRIGHTNESS_ICON = "qs_show_brightness_icon";
 
         /**
          * Whether to display qs tile titles in the qs panel
@@ -10016,12 +10004,6 @@ public final class Settings {
          * @hide
          */
         public static final String DEVICE_HOSTNAME = "device_hostname";
-
-        /**
-         * Whether to show the brightness slider in quick settings panel
-         * @hide
-         */
-        public static final String QS_SHOW_BRIGHTNESS_SLIDER = "qs_show_brightness_slider";
 
         /**
          * Display style of the status bar battery information
