@@ -213,7 +213,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             if ((state1 & DISABLE_NOTIFICATION_ICONS) != 0) {
                 hideNotificationIconArea(animate);
                 hideCarrierName(animate);
-                animateHide(mClockView, animate, false);
+                animateHide(mClockView, animate);
             } else {
                 showNotificationIconArea(animate);
                 updateClockStyle(animate);
@@ -252,11 +252,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void hideSystemIconArea(boolean animate) {
-        animateHide(mSystemIconArea, animate, true);
+        animateHide(mSystemIconArea, animate);
         animateShow(mClockView, animate);
-        animateHide(mCenterClockLayout, animate, true);
+        animateHide(mCenterClockLayout, animate);
         if (mClockStyle == 2) {
-            animateHide(mRightClock, animate, true);
+            animateHide(mRightClock, animate);
         }
     }
 
@@ -270,8 +270,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void hideNotificationIconArea(boolean animate) {
-        animateHide(mNotificationIconAreaInner, animate, true);
-        animateHide(mCenterClockLayout, animate, true);
+        animateHide(mNotificationIconAreaInner, animate);
+        animateHide(mCenterClockLayout, animate);
     }
 
     public void showNotificationIconArea(boolean animate) {
@@ -281,7 +281,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     public void hideOperatorName(boolean animate) {
         if (mOperatorNameFrame != null) {
-            animateHide(mOperatorNameFrame, animate, true);
+            animateHide(mOperatorNameFrame, animate);
         }
     }
 
@@ -293,7 +293,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     public void hideCarrierName(boolean animate) {
         if (mCustomCarrierLabel != null) {
-            animateHide(mCustomCarrierLabel, animate, false);
+            animateHide(mCustomCarrierLabel, animate);
         }
     }
 
@@ -304,15 +304,13 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     /**
-     * Hides a view.
+     * Animate a view to INVISIBLE or GONE
      */
-    private void animateHide(final View v, boolean animate, final boolean invisible) {
-        if (v.getVisibility() == View.GONE)
-            return;
+    private void animateHiddenState(final View v, int state, boolean animate) {
         v.animate().cancel();
         if (!animate) {
             v.setAlpha(0f);
-            v.setVisibility(invisible ? View.INVISIBLE : View.GONE);
+            v.setVisibility(state);
             return;
         }
 
@@ -321,7 +319,16 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                 .setDuration(160)
                 .setStartDelay(0)
                 .setInterpolator(Interpolators.ALPHA_OUT)
-                .withEndAction(() -> v.setVisibility(invisible ? View.INVISIBLE : View.GONE));
+                .withEndAction(() -> v.setVisibility(state));
+    }
+
+    /**
+     * Hides a view.
+     */
+    private void animateHide(final View v, boolean animate) {
+        if (v.getVisibility() == View.GONE)
+            return;
+        animateHiddenState(v, View.INVISIBLE, animate);
     }
 
     /**
@@ -393,7 +400,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     private void updateClockStyle(boolean animate) {
         if (mClockStyle == 1 || mClockStyle == 2) {
-            animateHide(mClockView, animate, false);
+            animateHide(mClockView, animate);
         } else {
             animateShow(mClockView, animate);
         }
@@ -403,7 +410,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (mShowCarrierLabel == 2 || mShowCarrierLabel == 3) {
             animateShow(mCustomCarrierLabel, animate);
         } else {
-            animateHide(mCustomCarrierLabel, animate, false);
+            animateHide(mCustomCarrierLabel, animate);
         }
     }
 
