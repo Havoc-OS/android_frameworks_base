@@ -6139,9 +6139,9 @@ public class NotificationManagerService extends SystemService {
             return false;
         }*/
         // not if the screen's on
-        if (/*isInCall() || */mScreenOn) {
+        /*if (isInCall() || mScreenOn) {
             return false;
-        }
+        }*/
         // check current user
         if (!isNotificationForCurrentUser(record)) {
             return false;
