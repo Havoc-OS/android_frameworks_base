@@ -7059,9 +7059,9 @@ public class NotificationManagerService extends SystemService {
         // Suppressed because another notification in its group handles alerting
         if (record.getSbn().isGroup() && record.getNotification().suppressAlertingDueToGrouping()) {
             return false;
-        }
-        // not if in call or the screen's on
-        if (isInCall() || mScreenOn) {
+        }*/
+        // not if the screen's on
+        /*if (isInCall() || mScreenOn) {
             return false;
         }*/
 
