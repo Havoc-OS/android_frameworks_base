@@ -5094,8 +5094,23 @@ public final class Settings {
         public static final String USE_BOTTOM_GESTURE_NAVIGATION = "use_bottom_gesture_navigation";
 
         /** @hide */
-        private static final Validator USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR =
-                BOOLEAN_VALIDATOR;
+        private static final Validator USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
+         * @hide
+         */
+        public static final String BOTTOM_GESTURE_TRIGGER_TIMEOUT = "bottom_gesture_navigation_trigger_timeout";
+
+        /** @hide */
+        private static final Validator BOTTOM_GESTURE_TRIGGER_TIMEOUT_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
+         * @hide
+         */
+        public static final String BOTTOM_GESTURE_SWIPE_LIMIT = "bottom_gesture_navigation_swipe_limit";
+
+        /** @hide */
+        private static final Validator BOTTOM_GESTURE_SWIPE_LIMIT_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
          * Whether to display the reboot option in the power menu
@@ -6001,6 +6016,8 @@ public final class Settings {
             GLOBAL_ACTIONS_SCREENRECORD,
             VOLUME_KEYS_CONTROL_RING_TONE,
             USE_BOTTOM_GESTURE_NAVIGATION,
+            BOTTOM_GESTURE_TRIGGER_TIMEOUT,
+            BOTTOM_GESTURE_SWIPE_LIMIT,
             THEMING_SETTINGS_DASHBOARD_ICONS,
         };
 
@@ -6127,6 +6144,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_FORMAT);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_POSITION);
             PRIVATE_SETTINGS.add(USE_BOTTOM_GESTURE_NAVIGATION);
+            PRIVATE_SETTINGS.add(BOTTOM_GESTURE_TRIGGER_TIMEOUT);
+            PRIVATE_SETTINGS.add(BOTTOM_GESTURE_SWIPE_LIMIT);
             PRIVATE_SETTINGS.add(STATUS_BAR_BRIGHTNESS_CONTROL);
             PRIVATE_SETTINGS.add(SCREENSHOT_DEFAULT_MODE);
             PRIVATE_SETTINGS.add(DEVICE_FEATURE_SETTINGS);
@@ -6295,6 +6314,8 @@ public final class Settings {
             VALIDATORS.put(GLOBAL_ACTIONS_SCREENRECORD,GLOBAL_ACTIONS_SCREENRECORD_VALIDATOR);
             VALIDATORS.put(VOLUME_KEYS_CONTROL_RING_TONE,VOLUME_KEYS_CONTROL_RING_TONE_VALIDATOR);
             VALIDATORS.put(USE_BOTTOM_GESTURE_NAVIGATION, USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR);
+            VALIDATORS.put(BOTTOM_GESTURE_TRIGGER_TIMEOUT, BOTTOM_GESTURE_TRIGGER_TIMEOUT_VALIDATOR);
+            VALIDATORS.put(BOTTOM_GESTURE_SWIPE_LIMIT, BOTTOM_GESTURE_SWIPE_LIMIT_VALIDATOR);
             VALIDATORS.put(THEMING_SETTINGS_DASHBOARD_ICONS, THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR);
         }
 
