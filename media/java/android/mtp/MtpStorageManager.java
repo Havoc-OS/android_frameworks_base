@@ -57,7 +57,7 @@ public class MtpStorageManager {
 
         MtpObjectObserver(MtpObject object) {
             super(object.getPath().toString(),
-                    MOVED_FROM | MOVED_TO | DELETE | CREATE | IN_ONLYDIR);
+                    MOVED_FROM | MOVED_TO | DELETE | CREATE | IN_ONLYDIR | CLOSE_WRITE);
             mObject = object;
         }
 
@@ -69,7 +69,9 @@ public class MtpStorageManager {
                     Log.e(TAG, "Received Inotify overflow event!");
                 }
                 MtpObject obj = mObject.getChild(path);
-                if ((event & MOVED_TO) != 0 || (event & CREATE) != 0) {
+                if (((event & IN_ISDIR) != 0 && (event & CREATE) != 0) ||
+                    ((event & IN_ISDIR) == 0 && (event & CLOSE_WRITE) != 0) ||
+                    ((event & MOVED_TO) != 0)) {
                     if (sDebug)
                         Log.i(TAG, "Got inotify added event for " + path + " " + event);
                     handleAddedObject(mObject, path, (event & IN_ISDIR) != 0);
