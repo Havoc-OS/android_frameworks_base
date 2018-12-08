@@ -2148,7 +2148,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private final ScreenshotRunnable mScreenshotRunnable = new ScreenshotRunnable();
 
     private class ScreenrecordRunnable implements Runnable {
-        private int mMode = SCREEN_RECORD_LOW_QUALITY;
+        private int mMode = SCREEN_RECORD_HIGH_QUALITY;
          public void setMode(int mode) {
             mMode = mode;
         }
