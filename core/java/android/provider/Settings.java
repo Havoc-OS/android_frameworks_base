@@ -4385,6 +4385,16 @@ public final class Settings {
         public static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
 
         /**
+         * Wheter to show network traffic indicator in statusbar
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE =
+                "network_traffic_expanded_status_bar_state";
+
+        /** @hide */
+        private static final Validator NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * What to show in network traffic indicator in statusbar
          * @hide
          */
@@ -6344,6 +6354,7 @@ public final class Settings {
             SLIM_RECENTS_CORNER_RADIUS,
             SLIM_RECENTS_BLACKLIST_VALUES,
             QS_PANEL_BG_ALPHA,
+            NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE,
         };
 
         /**
@@ -6542,6 +6553,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(SLIM_RECENTS_CORNER_RADIUS);
             PRIVATE_SETTINGS.add(SLIM_RECENTS_BLACKLIST_VALUES);
             PRIVATE_SETTINGS.add(QS_PANEL_BG_ALPHA);
+            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE);
         }
 
         /**
@@ -6696,6 +6708,7 @@ public final class Settings {
             VALIDATORS.put(SLIM_RECENTS_CORNER_RADIUS, SLIM_RECENTS_CORNER_RADIUS_VALIDATOR);
             VALIDATORS.put(SLIM_RECENTS_BLACKLIST_VALUES, SLIM_RECENTS_BLACKLIST_VALUES_VALIDATOR);
             VALIDATORS.put(QS_PANEL_BG_ALPHA, QS_PANEL_BG_ALPHA_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE, NETWORK_TRAFFIC_EXPANDED_STATUS_BAR_STATE_VALIDATOR);
         }
 
         /**
