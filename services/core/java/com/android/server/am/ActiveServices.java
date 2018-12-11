@@ -1623,6 +1623,12 @@ public final class ActiveServices {
                 clist = new ArrayList<ConnectionRecord>();
                 s.connections.put(binder, clist);
             }
+            for (int i = clist.size() - 1; i >= 0; i--) {
+                ConnectionRecord item = clist.get(i);
+                if (item.equals(c)) {
+                    clist.remove(item);
+                }
+            }
             clist.add(c);
             b.connections.add(c);
             if (activity != null) {
