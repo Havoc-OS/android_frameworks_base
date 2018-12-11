@@ -222,7 +222,7 @@ public class BoostFramework {
                     sIsLoaded = true;
                 }
                 catch(Exception e) {
-                    Log.e(TAG,"BoostFramework() : Exception_1 = " + e);
+                //    Log.e(TAG,"BoostFramework() : Exception_1 = " + e);
                 }
                 // Load UXE Class now Adding new try/catch block to avoid
                 // any interference with Qperformance
