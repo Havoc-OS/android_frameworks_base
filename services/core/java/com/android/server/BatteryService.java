@@ -67,6 +67,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.DumpUtils;
+import com.android.internal.util.havoc.HavocUtils;
 import com.android.server.am.BatteryStatsService;
 import com.android.server.lights.Light;
 import com.android.server.lights.LightsManager;
@@ -202,6 +203,10 @@ public final class BatteryService extends SystemService {
     private boolean mFastChargingLedSupported;
     private boolean mFastBatteryLightEnabled;
     private int mFastBatteryARGB;
+    private boolean mBatteryBlend = false;
+    private int mBatteryBlendFullColor = 0xff00ff00;
+    private int mBatteryBlendEmptyColor = 0xffff0000;
+    private boolean mBatteryBlendReverse = false;
     // TODO - thats a resource constant in SystemUI - maybe better
     // move those into core context
     private static final int FAST_CHARGING_ENABLED_THRESHOLD = 7500000;
@@ -339,6 +344,18 @@ public final class BatteryService extends SystemService {
                 resolver.registerContentObserver(Settings.System.getUriFor(
                         Settings.System.BATTERY_LIGHT_REALLYFULL_COLOR),
                         false, this, UserHandle.USER_ALL);
+                resolver.registerContentObserver(Settings.System.getUriFor(
+                        Settings.System.BATTERY_LIGHT_BLEND),
+                        false, this, UserHandle.USER_ALL);
+                resolver.registerContentObserver(Settings.System.getUriFor(
+                        Settings.System.BATTERY_LIGHT_BLEND_FULL_COLOR),
+                        false, this, UserHandle.USER_ALL);
+                resolver.registerContentObserver(Settings.System.getUriFor(
+                        Settings.System.BATTERY_LIGHT_BLEND_EMPTY_COLOR),
+                        false, this, UserHandle.USER_ALL);
+                resolver.registerContentObserver(Settings.System.getUriFor(
+                        Settings.System.BATTERY_LIGHT_BLEND_REVERSE),
+                        false, this, UserHandle.USER_ALL);
                 if (mFastChargingLedSupported) {
                     //Fast Charging LED
                     resolver.registerContentObserver(Settings.System.getUriFor(
@@ -390,6 +407,18 @@ public final class BatteryService extends SystemService {
             mLightOnlyFullyCharged = Settings.System.getIntForUser(resolver,
                     Settings.System.BATTERY_LIGHT_ONLY_FULLY_CHARGED, 0,
                     UserHandle.USER_CURRENT) == 1;
+            mBatteryBlend = Settings.System.getIntForUser(resolver,
+                    Settings.System.BATTERY_LIGHT_BLEND, 0,
+                    UserHandle.USER_CURRENT) != 0;
+            mBatteryBlendFullColor = Settings.System.getIntForUser(resolver,
+                    Settings.System.BATTERY_LIGHT_BLEND_FULL_COLOR, 0xff00ff00,
+                    UserHandle.USER_CURRENT);
+            mBatteryBlendEmptyColor = Settings.System.getIntForUser(resolver,
+                    Settings.System.BATTERY_LIGHT_BLEND_EMPTY_COLOR, 0xffff0000,
+                    UserHandle.USER_CURRENT);
+            mBatteryBlendReverse = Settings.System.getIntForUser(resolver,
+                    Settings.System.BATTERY_LIGHT_BLEND_REVERSE, 0,
+                    UserHandle.USER_CURRENT) != 0;
             updateLed();
         }
     }
@@ -1249,6 +1278,13 @@ public final class BatteryService extends SystemService {
             boolean fastLightEnabled = mFastBatteryLightEnabled & mIsFastCharging;
             if (!mLightEnabled || (mIsDndActive && !mAllowBatteryLightOnDnd)) {
                 mBatteryLight.turnOff();
+            } else if (mBatteryBlend && !mLightOnlyFullyCharged &&
+                    (status == BatteryManager.BATTERY_STATUS_CHARGING
+                        || status == BatteryManager.BATTERY_STATUS_FULL)) {
+                lightEnabled = true;
+                int mLightBlendColor = HavocUtils.getBlendColorForPercent(mBatteryBlendFullColor,
+                        mBatteryBlendEmptyColor, mBatteryBlendReverse, level);
+		        mBatteryLight.setColor(mLightBlendColor);
             } else if (level < mLowBatteryWarningLevel) {
                 if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
                     // Battery is charging and low
