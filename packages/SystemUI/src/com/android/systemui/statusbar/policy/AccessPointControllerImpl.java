@@ -29,7 +29,6 @@ import android.util.Log;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTracker.WifiListener;
-import com.android.systemui.R;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -46,13 +45,7 @@ public class AccessPointControllerImpl
     private static final String ENCRYPTING_STATE = "trigger_restart_min_framework";
     private static final String ENCRYPTED_STATE = "1";
 
-    private static final int[] ICONS = {
-        R.drawable.ic_qs_wifi_full_0,
-        R.drawable.ic_qs_wifi_full_1,
-        R.drawable.ic_qs_wifi_full_2,
-        R.drawable.ic_qs_wifi_full_3,
-        R.drawable.ic_qs_wifi_full_4,
-    };
+    private static final int[] ICONS = WifiIcons.WIFI_FULL_ICONS;
 
     private final Context mContext;
     private final ArrayList<AccessPointCallback> mCallbacks = new ArrayList<AccessPointCallback>();
