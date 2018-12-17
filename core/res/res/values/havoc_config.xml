@@ -202,4 +202,9 @@
 
     <!-- Whether device ignores the RSSNR signal implementation -->
     <bool name="config_ignoreRssnrSignalLevel">false</bool>
+
+    <!-- Does the device supports fast charging -->
+    <bool name="config_FastChargingLedSupported">false</bool>
+    <!-- Default value for led color when fast charging is active -->
+    <integer name="config_notificationsFastBatteryARGB">0xFF0000FF</integer>
 </resources>

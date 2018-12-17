@@ -5934,6 +5934,39 @@ public final class Settings {
         public static final String SEEK_BAR_BATTERY_CHARGE_LEVEL_SOUND = "battery_level_charge_seek_bar";
 
         /**
+         * Whether the battery light should only be enabled on fully charged battery.
+         * The value is boolean (1 or 0).
+         * @hide
+         */
+        public static final String BATTERY_LIGHT_ONLY_FULLY_CHARGED =
+                "battery_light_only_fully_charged";
+
+        /** @hide */
+        private static final Validator BATTERY_LIGHT_ONLY_FULLY_CHARGED_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * What color to use for the battery LED while charging - low
+         * @hide
+         */
+        public static final String FAST_BATTERY_LIGHT_COLOR = "fast_battery_light_color";
+
+        /** @hide */
+        private static final Validator FAST_BATTERY_LIGHT_COLOR_VALIDATOR =
+                ANY_STRING_VALIDATOR;
+
+        /**
+         * Whether the fast charging battery light is enabled
+         * The value is boolean (1 or 0).
+         * @hide
+         */
+        public static final String FAST_CHARGING_LED_ENABLED = "fast_charging_led_enabled";
+
+        /** @hide */
+        private static final Validator FAST_CHARGING_LED_ENABLED_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -6019,6 +6052,9 @@ public final class Settings {
             BOTTOM_GESTURE_TRIGGER_TIMEOUT,
             BOTTOM_GESTURE_SWIPE_LIMIT,
             THEMING_SETTINGS_DASHBOARD_ICONS,
+            FAST_BATTERY_LIGHT_COLOR,
+            FAST_CHARGING_LED_ENABLED,
+            BATTERY_LIGHT_ONLY_FULLY_CHARGED,
         };
 
         /**
@@ -6190,6 +6226,9 @@ public final class Settings {
             PRIVATE_SETTINGS.add(VOLUME_KEYS_CONTROL_RING_TONE);
             PRIVATE_SETTINGS.add(THEMING_SETTINGS_DASHBOARD_ICONS);
             PRIVATE_SETTINGS.add(UI_STYLE);
+            PRIVATE_SETTINGS.add(FAST_BATTERY_LIGHT_COLOR);
+            PRIVATE_SETTINGS.add(FAST_CHARGING_LED_ENABLED);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_ONLY_FULLY_CHARGED);
         }
 
         /**
@@ -6317,6 +6356,9 @@ public final class Settings {
             VALIDATORS.put(BOTTOM_GESTURE_TRIGGER_TIMEOUT, BOTTOM_GESTURE_TRIGGER_TIMEOUT_VALIDATOR);
             VALIDATORS.put(BOTTOM_GESTURE_SWIPE_LIMIT, BOTTOM_GESTURE_SWIPE_LIMIT_VALIDATOR);
             VALIDATORS.put(THEMING_SETTINGS_DASHBOARD_ICONS, THEMING_SETTINGS_DASHBOARD_ICONS_VALIDATOR);
+            VALIDATORS.put(FAST_BATTERY_LIGHT_COLOR, FAST_BATTERY_LIGHT_COLOR_VALIDATOR);
+            VALIDATORS.put(FAST_CHARGING_LED_ENABLED, FAST_CHARGING_LED_ENABLED_VALIDATOR);
+            VALIDATORS.put(BATTERY_LIGHT_ONLY_FULLY_CHARGED, BATTERY_LIGHT_ONLY_FULLY_CHARGED_VALIDATOR);
         }
 
         /**
