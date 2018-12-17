@@ -502,6 +502,8 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     private ArrayList<String> mStoplist = new ArrayList<String>();
     private ArrayList<String> mBlacklist = new ArrayList<String>();
 
+    private int mNotificationStyle;
+
     /**
      * Helper that is responsible for showing the right toast when a disallowed activity operation
      * occurred. In pinned mode, we show instructions on how to break out of this mode, whilst in
@@ -992,6 +994,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         updateDisplaySize(); // populates mDisplayMetrics
         updateResources();
         getCurrentThemeSetting();
+        getNotificationStyleSetting();
         updateTheme();
 
         inflateStatusBarWindow(context);
@@ -2519,6 +2522,16 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     // Check for black and white accent overlays
     public void unfuckBlackWhiteAccent() {
         ThemeAccentUtils.unfuckBlackWhiteAccent(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
+    // Check for the dark notification theme
+    public boolean isUsingDarkNotificationTheme() {
+        return ThemeAccentUtils.isUsingDarkNotificationTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
+    // Check for the black notification theme
+    public boolean isUsingBlackNotificationTheme() {
+        return ThemeAccentUtils.isUsingBlackNotificationTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
     @Nullable
@@ -4624,6 +4637,11 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                 Settings.System.SYSTEM_UI_THEME, 0, mLockscreenUserManager.getCurrentUserId());
     }
 
+    private void getNotificationStyleSetting() {
+        mNotificationStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.NOTIFICATION_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
+    }
+
     /**
      * Switches theme from light to dark and vice-versa.
      */
@@ -4667,6 +4685,16 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             // with white on white or black on black
             unfuckBlackWhiteAccent();
             ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlackTheme);
+        }
+
+        boolean useDarkNotificationTheme = (mNotificationStyle == 0 && useDarkTheme && !useBlackTheme) || mNotificationStyle == 2;
+        boolean useBlackNotificationTheme = (mNotificationStyle == 0 && !useDarkTheme && useBlackTheme) || mNotificationStyle == 3;
+
+        if ((isUsingDarkNotificationTheme() != useDarkNotificationTheme) ||
+                (isUsingBlackNotificationTheme() != useBlackNotificationTheme)) {
+            ThemeAccentUtils.setNotificationTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(),
+	        useDarkTheme, useBlackTheme, mNotificationStyle);
+            onOverlayChanged();
         }
 
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
@@ -4719,18 +4747,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     // Unload all qs tile styles back to stock
     public void stockTileStyle() {
         ThemeAccentUtils.stockTileStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
-    }
-
-    // Switches notification style from stock to custom
-    public void updateNotificationStyle() {
-         int notificationStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
-                 Settings.System.NOTIFICATION_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
-        ThemeAccentUtils.updateNotificationStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), notificationStyle);
-    }
-
-    // Unload all notification styles back to stock
-    public void stockNotificationStyle() {
-        ThemeAccentUtils.stockNotificationStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
     // Switches qs header style from stock to custom
@@ -5530,8 +5546,8 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                 updateTickerTickDuration();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.NOTIFICATION_STYLE))) {
-                stockNotificationStyle();
-                updateNotificationStyle();
+                getNotificationStyleSetting();
+                updateTheme();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.QS_HEADER_STYLE))) {
                 stockQSHeaderStyle();

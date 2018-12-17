@@ -37,13 +37,14 @@ public class ThemeAccentUtils {
     // Stock dark theme package
     private static final String STOCK_DARK_THEME = "com.android.systemui.theme.dark";
 
+    // Dark themes
     private static final String[] DARK_THEMES = {
         "com.android.system.theme.dark.havoc", // 0
         "com.android.settings.theme.dark.havoc", // 1
         "com.android.systemui.theme.dark.havoc", // 2
     };
 
-    // Dark themes
+    // Black themes
     private static final String[] BLACK_THEMES = {
         "com.android.system.theme.black.havoc", // 0
         "com.android.settings.theme.black.havoc", // 1
@@ -51,11 +52,8 @@ public class ThemeAccentUtils {
     };
 
     // Notification themes
-    private static final String[] NOTIFICATION_THEMES = {
-        "com.android.system.notification.light", // 0
-        "com.android.system.notification.dark", // 1
-        "com.android.system.notification.black", // 2
-    };
+    private static final String NOTIFICATION_DARK_THEME = "com.android.system.notification.dark";
+    private static final String NOTIFICATION_BLACK_THEME = "com.android.system.notification.black";
 
     // Accents
     private static final String[] ACCENTS = {
@@ -155,6 +153,22 @@ public class ThemeAccentUtils {
         "com.android.system.aosp", // 1
     };
 
+    // Unloads dark notification theme
+    private static void unloadDarkNotificationTheme(IOverlayManager om, int userId) {
+        try {
+            om.setEnabled(NOTIFICATION_DARK_THEME, false, userId);
+        } catch (RemoteException e) {
+        }
+    }
+
+    // Unloads black notification theme
+    private static void unloadBlackNotificationTheme(IOverlayManager om, int userId) {
+        try {
+            om.setEnabled(NOTIFICATION_BLACK_THEME, false, userId);
+        } catch (RemoteException e) {
+        }
+    }
+
     // Check for the dark system theme
     public static boolean isUsingDarkTheme(IOverlayManager om, int userId) {
         OverlayInfo themeInfo = null;
@@ -173,6 +187,28 @@ public class ThemeAccentUtils {
         try {
             themeInfo = om.getOverlayInfo(BLACK_THEMES[0],
                     userId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return themeInfo != null && themeInfo.isEnabled();
+    }
+
+    // Check for the dark notification theme
+    public static boolean isUsingDarkNotificationTheme(IOverlayManager om, int userId) {
+        OverlayInfo themeInfo = null;
+        try {
+            themeInfo = om.getOverlayInfo(NOTIFICATION_DARK_THEME, userId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return themeInfo != null && themeInfo.isEnabled();
+    }
+
+    // Check for the black notification theme
+    public static boolean isUsingBlackNotificationTheme(IOverlayManager om, int userId) {
+        OverlayInfo themeInfo = null;
+        try {
+            themeInfo = om.getOverlayInfo(NOTIFICATION_BLACK_THEME, userId);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -202,6 +238,27 @@ public class ThemeAccentUtils {
                 } catch (RemoteException e) {
                     Log.w(TAG, "Can't change theme", e);
                 }
+        }
+    }
+
+    // Set light / dark notification theme
+    public static void setNotificationTheme(IOverlayManager om, int userId,
+                boolean useDarkTheme, boolean useBlackTheme, int notificationStyle) {
+        if (notificationStyle == 1 || (notificationStyle == 0 && !useDarkTheme && !useBlackTheme)) {
+            unloadDarkNotificationTheme(om, userId);
+            unloadBlackNotificationTheme(om, userId);
+        } else if (notificationStyle == 2 || (notificationStyle == 0 && useDarkTheme && !useBlackTheme)) {
+            unloadBlackNotificationTheme(om, userId);
+            try {
+                om.setEnabled(NOTIFICATION_DARK_THEME, true, userId);
+            } catch (RemoteException e) {
+            }
+        } else if (notificationStyle == 3 || (notificationStyle == 0 && !useDarkTheme && useBlackTheme)) {
+            unloadDarkNotificationTheme(om, userId);
+            try {
+                om.setEnabled(NOTIFICATION_BLACK_THEME, true, userId);
+            } catch (RemoteException e) {
+            }
         }
     }
 
@@ -330,34 +387,6 @@ public class ThemeAccentUtils {
             e.printStackTrace();
         }
         return themeInfo != null && themeInfo.isEnabled();
-    }
-
-    // Switches notification style to user selected.
-    public static void updateNotificationStyle(IOverlayManager om, int userId, int notificationStyle) {
-        if (notificationStyle == 0) {
-            stockNotificationStyle(om, userId);
-        } else {
-            try {
-                om.setEnabled(NOTIFICATION_THEMES[notificationStyle],
-                        true, userId);
-            } catch (RemoteException e) {
-                Log.w(TAG, "Can't change notification theme", e);
-            }
-        }
-    }
-
-    // Switches notification style back to stock.
-    public static void stockNotificationStyle(IOverlayManager om, int userId) {
-        // skip index 0
-        for (int i = 1; i < NOTIFICATION_THEMES.length; i++) {
-            String notificationtheme = NOTIFICATION_THEMES[i];
-            try {
-                om.setEnabled(notificationtheme,
-                        false /*disable*/, userId);
-            } catch (RemoteException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     // Switches qs header style to user selected.
