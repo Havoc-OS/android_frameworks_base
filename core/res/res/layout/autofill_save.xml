@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@android:color/autofill_autofill_save_custom_subtitle_color"
                 android:visibility="gone"/>
 
         </LinearLayout>
