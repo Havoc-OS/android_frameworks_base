@@ -50,4 +50,7 @@
     <!-- Whether to dim the FOD icon -->
     <bool name="config_fodIconDim">false</bool>
 
+    <!-- Allow devices override audio panel location to the left side -->
+    <bool name="config_audioPanelOnLeftSide">false</bool>
+
 </resources>
