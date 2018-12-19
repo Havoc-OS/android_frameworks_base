@@ -4628,6 +4628,9 @@ public final class Settings {
         /** @hide */
         public static final String AUDIO_PANEL_VIEW_BT_SCO = "audio_panel_view_bt_sco";
 
+        /** @hide */
+        public static final String AUDIO_PANEL_VIEW_POSITION = "audio_panel_view_position";
+
         /**
          * Whether to disable ripple on lockscreen pin entry
          * @hide
