@@ -2055,7 +2055,15 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     && now <= mScreenshotChordPowerKeyTime + SCREENSHOT_CHORD_DEBOUNCE_DELAY_MILLIS) {
                 mScreenrecordChordVolumeUpKeyConsumed = true;
                 cancelPendingPowerKeyAction();
-
+				int recordQuality = Settings.System.getInt(mContext.getContentResolver(),
+                                            Settings.System.SCREENRECORD_QUALITY_MODE, 2);
+                if (recordQuality == 0) {
+                    mScreenrecordRunnable.setMode(SCREEN_RECORD_LOW_QUALITY);
+                } else if (recordQuality == 1) {
+                    mScreenrecordRunnable.setMode(SCREEN_RECORD_MID_QUALITY);
+                } else if (recordQuality == 2) {
+                    mScreenrecordRunnable.setMode(SCREEN_RECORD_HIGH_QUALITY);
+                }
                 mHandler.postDelayed(mScreenrecordRunnable, getScreenshotChordLongPressDelay());
             }
         }
@@ -2149,13 +2157,13 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
         @Override
         public void run() {
-	    if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_SHOT_SHORTCUT_SWITCH, 1) == 1) {
-            mScreenshotHelper.takeScreenshot(mScreenshotType,
-                    mStatusBar != null && mStatusBar.isVisibleLw(),
-                    mNavigationBar != null && mNavigationBar.isVisibleLw(), mHandler);
+	        if (Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.SCREEN_SHOT_SHORTCUT_SWITCH, 1) == 1) {
+                mScreenshotHelper.takeScreenshot(mScreenshotType,
+                mStatusBar != null && mStatusBar.isVisibleLw(),
+                mNavigationBar != null && mNavigationBar.isVisibleLw(), mHandler);
             } else {
-             Slog.d(TAG, "ScreenShot Shortcut Disabled");
+                Slog.d(TAG, "ScreenShot Shortcut Disabled");
 	        }
         }
     }
@@ -2164,17 +2172,18 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     private class ScreenrecordRunnable implements Runnable {
         private int mMode = SCREEN_RECORD_HIGH_QUALITY;
-         public void setMode(int mode) {
+
+        public void setMode(int mode) {
             mMode = mode;
         }
 
         @Override
         public void run() {
             if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_RECORD_SHORTCUT_SWITCH, 1) == 1) {
-            takeScreenrecord(mMode);
+                    Settings.System.SCREEN_RECORD_SHORTCUT_SWITCH, 1) == 1) {
+                takeScreenrecord(mMode);
             } else {
-             Slog.d(TAG, "ScreenRecord Shortcut Disabled");
+                Slog.d(TAG, "ScreenRecord Shortcut Disabled");
             }
         }
     }
