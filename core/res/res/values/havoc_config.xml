@@ -145,15 +145,6 @@
         <item>org.telegram.messenger.Telegram</item>
     </string-array> 
 
-        <integer name="config_LTE_antenna_bar_quantity_metric">0</integer>
-
-    <!-- Flag indicating whether strict threshold is used, or lenient threshold is used,
-          when evaluating RSRP for LTE antenna bar display
-           0. Strict threshold
-           1. Lenient threshold
-    -->
-    <integer name="config_LTE_RSRP_threshold_type">0</integer>
-	
     <!-- Does the notification LED support multiple colors?
          Used to decide if the user can change the colors -->
     <bool name="config_multiColorNotificationLed">true</bool>
