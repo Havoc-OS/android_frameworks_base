@@ -37,7 +37,8 @@ public class DeviceKeysConstants {
         CLOSE_APP,
         TORCH,
         SCREENSHOT,
-        VOLUME_PANEL;
+        VOLUME_PANEL,
+        CLEAR_ALL_NOTIFICATIONS;
 
         public static Action fromIntSafe(int id) {
             if (id < NOTHING.ordinal() || id > Action.values().length) {
