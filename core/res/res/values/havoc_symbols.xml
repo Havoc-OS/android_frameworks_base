@@ -339,4 +339,7 @@
   <java-symbol type="bool" name="config_waitForMpctlOnBoot" />
 
   <java-symbol type="bool" name="config_show_vendor_mismatch_message" />
+
+  <!-- Available icon mask paths for the adaptive icon shape setting -->
+  <java-symbol type="array" name="system_icon_masks" />
 </resources>
