@@ -233,10 +233,6 @@
   <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
   <java-symbol type="bool" name="config_cleanupUnusedFingerprints" />
 
-  <!-- Ambient play -->
-  <java-symbol type="string" name="ambient_recognition_notification" />
-  <java-symbol type="string" name="ambient_recognition_information" />
-
   <!-- Privacy Guard -->
   <java-symbol type="drawable" name="stat_notify_privacy_guard" />
   <java-symbol type="string" name="privacy_guard_notification" />

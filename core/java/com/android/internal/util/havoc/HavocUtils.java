@@ -357,13 +357,6 @@ public class HavocUtils {
         return SystemProperties.getBoolean("ro.build.ab_update", false);
     }
 
-    public static boolean isConnectionAvailable(Context context) {
-        ConnectivityManager connManager =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo network = (connManager != null) ? connManager.getActiveNetworkInfo() : null;
-        return network != null;
-    }
-
     public static int getBlendColorForPercent(int fullColor, int emptyColor, boolean reversed,
                                               int percentage) {
         float[] newColor = new float[3];

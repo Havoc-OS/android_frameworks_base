@@ -5753,39 +5753,6 @@ public final class Settings {
                BOOLEAN_VALIDATOR;
 
         /**
-         * Whether Ambient Play enabled/disabled
-         *
-         * @hide
-         */
-        public static final String AMBIENT_RECOGNITION = "ambient_recognition";
-
-        /** @hide */
-        private static final Validator AMBIENT_RECOGNITION_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
-         * Whether Ambient Play is shown on the lockscreen
-         *
-         * @hide
-         */
-        public static final String AMBIENT_RECOGNITION_KEYGUARD = "ambient_recognition_keyguard";
-
-        /** @hide */
-        private static final Validator AMBIENT_RECOGNITION_KEYGUARD_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
-         * Whether Ambient Play notification is enabled
-         *
-         * @hide
-         */
-        public static final String AMBIENT_RECOGNITION_NOTIFICATION = "ambient_recognition_notification";
-
-        /** @hide */
-        private static final Validator AMBIENT_RECOGNITION_NOTIFICATION_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
          * Toast icon
          * @hide
          */
@@ -6508,9 +6475,6 @@ public final class Settings {
 	        PRIVATE_SETTINGS.add(BATTERY_SAVER_DARK_MODE);
             PRIVATE_SETTINGS.add(WEATHER_LOCKSCREEN_UNIT);
             PRIVATE_SETTINGS.add(DEVICE_PROXI_CHECK_ENABLED);
-            PRIVATE_SETTINGS.add(AMBIENT_RECOGNITION);
-            PRIVATE_SETTINGS.add(AMBIENT_RECOGNITION_KEYGUARD);
-            PRIVATE_SETTINGS.add(AMBIENT_RECOGNITION_NOTIFICATION);
             PRIVATE_SETTINGS.add(STATUS_BAR_SHOW_TICKER);
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_ANIMATION_MODE);
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_TICK_DURATION);
@@ -6667,9 +6631,6 @@ public final class Settings {
             VALIDATORS.put(ONE_HAND_MODE_ENABLED, ONE_HAND_MODE_ENABLED_VALIDATOR);
             VALIDATORS.put(STATUSBAR_SHOW_WIFI_ACTIVITY, STATUSBAR_SHOW_WIFI_ACTIVITY_VALIDATOR);
             VALIDATORS.put(WEATHER_LOCKSCREEN_UNIT, WEATHER_LOCKSCREEN_UNIT_VALIDATOR);
-            VALIDATORS.put(AMBIENT_RECOGNITION, AMBIENT_RECOGNITION_VALIDATOR);
-            VALIDATORS.put(AMBIENT_RECOGNITION_KEYGUARD, AMBIENT_RECOGNITION_KEYGUARD_VALIDATOR);
-            VALIDATORS.put(AMBIENT_RECOGNITION_NOTIFICATION, AMBIENT_RECOGNITION_NOTIFICATION_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_SHOW_TICKER, STATUS_BAR_SHOW_TICKER_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_TICKER_ANIMATION_MODE, STATUS_BAR_TICKER_ANIMATION_MODE_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_TICKER_TICK_DURATION, STATUS_BAR_TICKER_TICK_DURATION_VALIDATOR);
