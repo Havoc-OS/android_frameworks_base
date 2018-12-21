@@ -9075,6 +9075,8 @@ Ljava/util/UUID;->mostSigBits:J
 Ljava/util/Vector;->elementData(I)Ljava/lang/Object;
 Ljava/util/zip/Adler32;->update(II)I
 Ljava/util/zip/CRC32;->update(II)I
+Ljava/util/zip/CRC32;->updateByteBuffer(IJII)I
+Ljava/util/zip/CRC32;->updateBytes(I[BII)I
 Ljava/util/zip/Deflater;->buf:[B
 Ljava/util/zip/Deflater;->finish:Z
 Ljava/util/zip/Deflater;->finished:Z
