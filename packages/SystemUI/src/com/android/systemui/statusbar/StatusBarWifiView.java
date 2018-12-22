@@ -290,6 +290,6 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
 
     public void updateSettings() {
         mShowWifiActivity = Settings.System.getIntForUser(getContext().getContentResolver(),
-            Settings.System.STATUSBAR_SHOW_WIFI_ACTIVITY, 1, UserHandle.USER_CURRENT) == 1;
+            Settings.System.STATUSBAR_SHOW_WIFI_ACTIVITY, 0, UserHandle.USER_CURRENT) == 1;
     }
 }
