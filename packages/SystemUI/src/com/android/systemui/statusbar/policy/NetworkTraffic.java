@@ -108,13 +108,13 @@ public class NetworkTraffic extends TextView {
                 }
                 // Update view if there's anything new to show
                 if (! output.contentEquals(getText())) {
-                    setTextSize(TypedValue.COMPLEX_UNIT_PX, (float)txtSize);
                     setGravity(Gravity.RIGHT | Gravity.CENTER_VERTICAL);
                     setText(output);
                 }
                 mTrafficVisible = true;
             }
             updateVisibility();
+            updateTextSize();
 
             // Post delayed message to refresh in ~1000ms
             totalRxBytes = newTotalRxBytes;
@@ -208,9 +208,6 @@ public class NetworkTraffic extends TextView {
     public NetworkTraffic(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         final Resources resources = getResources();
-        txtSize = resources.getDimensionPixelSize((mTrafficType == BOTH)
-					          ? R.dimen.net_traffic_multi_text_size
-						  : R.dimen.net_traffic_single_text_size);
         txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
         mTintColor = resources.getColor(android.R.color.white);
         setTextColor(mTintColor);
@@ -270,10 +267,8 @@ public class NetworkTraffic extends TextView {
     }
 
     private void updateSettings() {
-        mHideArrow = Settings.System.getIntForUser(mContext.
-                getContentResolver(), Settings.System.NETWORK_TRAFFIC_HIDEARROW,
-                0, UserHandle.USER_CURRENT) == 1;
         updateVisibility();
+        updateTextSize();
         if (mIsEnabled) {
             if (getConnectAvailable()) {
                 if (mAttached) {
@@ -300,6 +295,9 @@ public class NetworkTraffic extends TextView {
         mAutoHideThreshold = Settings.System.getIntForUser(resolver,
                 Settings.System.NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD, 1,
                 UserHandle.USER_CURRENT);
+        mHideArrow = Settings.System.getIntForUser(resolver,
+                Settings.System.NETWORK_TRAFFIC_HIDEARROW, 1,
+                UserHandle.USER_CURRENT) == 1;
     }
 
     protected String getSystemSettingKey() {
@@ -314,7 +312,7 @@ public class NetworkTraffic extends TextView {
 
     protected void updateTrafficDrawable() {
         int intTrafficDrawable;
-        if (mIsEnabled && !mHideArrow) {
+        if (mIsEnabled && mHideArrow) {
             if (mTrafficType == UP) {
                 intTrafficDrawable = R.drawable.stat_sys_network_traffic_up;
             } else if (mTrafficType == DOWN) {
@@ -325,7 +323,7 @@ public class NetworkTraffic extends TextView {
         } else {
             intTrafficDrawable = 0;
         }
-        if (intTrafficDrawable != 0 && !mHideArrow) {
+        if (intTrafficDrawable != 0 && mHideArrow) {
             Drawable d = getContext().getDrawable(intTrafficDrawable);
             d.setColorFilter(mTintColor, Mode.MULTIPLY);
             setCompoundDrawablePadding(txtImgPadding);
@@ -335,14 +333,21 @@ public class NetworkTraffic extends TextView {
         }
     }
 
+    protected void updateTextSize() {
+        int txtSize;
+        if (mTrafficType == BOTH) {
+            txtSize = getResources().getDimensionPixelSize(R.dimen.net_traffic_multi_text_size);
+        } else {
+            txtSize = getResources().getDimensionPixelSize(R.dimen.net_traffic_single_text_size);
+        }
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, (float)txtSize);
+    }
+
     public void onDensityOrFontScaleChanged() {
         final Resources resources = getResources();
-        txtSize = resources.getDimensionPixelSize((mTrafficType == BOTH)
-						  ? R.dimen.net_traffic_multi_text_size
-						  : R.dimen.net_traffic_single_text_size);
         txtImgPadding = resources.getDimensionPixelSize(R.dimen.net_traffic_txt_img_padding);
-        setTextSize(TypedValue.COMPLEX_UNIT_PX, (float)txtSize);
         setCompoundDrawablePadding(txtImgPadding);
+        updateTextSize();
     }
 
     protected void updateVisibility() {
