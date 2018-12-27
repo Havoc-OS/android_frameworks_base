@@ -2452,12 +2452,13 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     public boolean isCurrentRoundedSameAsFw() {
+        float density = Resources.getSystem().getDisplayMetrics().density;
         Resources res = null;
         try {
             res = mContext.getPackageManager().getResourcesForApplication("com.android.systemui");
         } catch (NameNotFoundException e) {
             e.printStackTrace();
-            // If we can't get resources, return true so that updateTheme doesn't attempt to
+            // If we can't get resources, return true so that updateCorners doesn't attempt to
             // set corner values
             return true;
         }
@@ -2467,8 +2468,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         int resourceIdPadding = res.getIdentifier("com.android.systemui:dimen/rounded_corner_content_padding", null, null);
 
         // Values on framework resources
-        int cornerRadiusRes = res.getDimensionPixelSize(resourceIdRadius);
-        int contentPaddingRes = res.getDimensionPixelSize(resourceIdPadding);
+        int cornerRadiusRes = (int) (res.getDimension(resourceIdRadius) / density);
+        int contentPaddingRes = (int) (res.getDimension(resourceIdPadding) / density);
 
         // Values in Settings DBs
         int cornerRadius = Settings.Secure.getInt(mContext.getContentResolver(),
@@ -4763,7 +4764,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         boolean sysuiRoundedFwvals = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                     Settings.Secure.SYSUI_ROUNDED_FWVALS, 1, UserHandle.USER_CURRENT) == 1;
         if (sysuiRoundedFwvals && !isCurrentRoundedSameAsFw()) {
-
+            float density = Resources.getSystem().getDisplayMetrics().density;
             Resources res = null;
             try {
                 res = mContext.getPackageManager().getResourcesForApplication("com.android.systemui");
@@ -4774,10 +4775,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             if (res != null) {
                 int resourceIdRadius = res.getIdentifier("com.android.systemui:dimen/rounded_corner_radius", null, null);
                 Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.SYSUI_ROUNDED_SIZE, res.getDimensionPixelSize(resourceIdRadius));
+                    Settings.Secure.SYSUI_ROUNDED_SIZE, (int) (res.getDimension(resourceIdRadius) / density));
                 int resourceIdPadding = res.getIdentifier("com.android.systemui:dimen/rounded_corner_content_padding", null, null);
                 Settings.Secure.putInt(mContext.getContentResolver(),
-                    Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, res.getDimensionPixelSize(resourceIdPadding));
+                    Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, (int) (res.getDimension(resourceIdPadding) / density));
             }
         }
     }
