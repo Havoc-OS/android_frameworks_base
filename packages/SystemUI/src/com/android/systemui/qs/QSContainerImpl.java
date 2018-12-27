@@ -18,20 +18,32 @@ package com.android.systemui.qs;
 
 import static android.app.StatusBarManager.DISABLE2_QUICK_SETTINGS;
 
+import android.app.ActivityManager;
+import android.app.WallpaperColors;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.om.IOverlayManager;
+import android.content.om.OverlayInfo;
 import android.database.ContentObserver;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.android.systemui.R;
 import com.android.systemui.SysUiServiceProvider;
+import com.android.systemui.colorextraction.SysuiColorExtractor;
+import com.android.systemui.Dependency;
 import com.android.systemui.qs.customize.QSCustomizer;
 import com.android.systemui.statusbar.CommandQueue;
 
@@ -39,6 +51,8 @@ import com.android.systemui.statusbar.CommandQueue;
  * Wrapper view with background which contains {@link QSPanel} and {@link BaseStatusBarHeader}
  */
 public class QSContainerImpl extends FrameLayout {
+
+    private static final String TAG = "QSContainerImpl";
 
     private final Point mSizePoint = new Point();
 
@@ -59,9 +73,22 @@ public class QSContainerImpl extends FrameLayout {
 
     private Drawable mQsBackGround;
     private int mQsBackGroundAlpha;
+    private int mQsBackGroundColor;
+    private int mQsBackGroundColorWall;
+    private int mCurrentColor;
+    private int mUserThemeSetting;
+    private boolean mSetQsFromWall;
+    private boolean mUseBlackTheme = false;
+    private boolean mUseDarkTheme = false;
+    private boolean mSetQsFromResources;
+    private SysuiColorExtractor mColorExtractor;
+
+    private IOverlayManager mOverlayManager;
 
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mOverlayManager = IOverlayManager.Stub.asInterface(
+                ServiceManager.getService(Context.OVERLAY_SERVICE));
         Handler handler = new Handler();
         SettingsObserver settingsObserver = new SettingsObserver(handler);
         settingsObserver.observe();
@@ -80,6 +107,7 @@ public class QSContainerImpl extends FrameLayout {
         mBackgroundGradient = findViewById(R.id.quick_settings_gradient_view);
         mSideMargins = getResources().getDimensionPixelSize(R.dimen.notification_side_paddings);
         mQsBackGround = getContext().getDrawable(R.drawable.qs_background_primary);
+        mColorExtractor = Dependency.get(SysuiColorExtractor.class);
         updateSettings();
 
         setClickable(true);
@@ -113,6 +141,21 @@ public class QSContainerImpl extends FrameLayout {
             getContext().getContentResolver().registerContentObserver(Settings.System
                             .getUriFor(Settings.System.QS_PANEL_BG_ALPHA), false,
                     this, UserHandle.USER_ALL);
+            getContext().getContentResolver().registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.QS_PANEL_BG_COLOR), false,
+                    this, UserHandle.USER_ALL);
+            getContext().getContentResolver().registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.QS_PANEL_BG_COLOR_WALL), false,
+                    this, UserHandle.USER_ALL);
+            getContext().getContentResolver().registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.QS_PANEL_BG_USE_WALL), false,
+                    this, UserHandle.USER_ALL);
+            getContext().getContentResolver().registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.QS_PANEL_BG_USE_FW), false,
+                    this, UserHandle.USER_ALL);
+            getContext().getContentResolver().registerContentObserver(Settings.Secure
+                    .getUriFor(Settings.System.SYSTEM_UI_THEME), false,
+                    this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -122,15 +165,53 @@ public class QSContainerImpl extends FrameLayout {
     }
 
     private void updateSettings() {
+        int userQsWallColorSetting = Settings.System.getIntForUser(getContext().getContentResolver(),
+                    Settings.System.QS_PANEL_BG_USE_WALL, 0, UserHandle.USER_CURRENT);
+        mSetQsFromWall = userQsWallColorSetting == 1;
+        int userQsFwSetting = Settings.System.getIntForUser(getContext().getContentResolver(),
+                    Settings.System.QS_PANEL_BG_USE_FW, 1, UserHandle.USER_CURRENT);
+        mSetQsFromResources = userQsFwSetting == 1;
         mQsBackGroundAlpha = Settings.System.getIntForUser(getContext().getContentResolver(),
                 Settings.System.QS_PANEL_BG_ALPHA, 255,
                 UserHandle.USER_CURRENT);
+        mQsBackGroundColor = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.QS_PANEL_BG_COLOR, Color.WHITE,
+                UserHandle.USER_CURRENT);
+        mQsBackGroundColorWall = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.QS_PANEL_BG_COLOR_WALL, Color.WHITE,
+                UserHandle.USER_CURRENT);
+        mUserThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.SYSTEM_UI_THEME, 0, ActivityManager.getCurrentUser());
+        if (mUserThemeSetting == 0) {
+            // The system wallpaper defines if system theme should be light or dark.
+            WallpaperColors systemColors = null;
+            if (mColorExtractor != null)
+                 systemColors = mColorExtractor.getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
+            mUseDarkTheme = systemColors != null
+                    && (systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
+        } else {
+            mUseDarkTheme = mUserThemeSetting == 2;
+            mUseBlackTheme = mUserThemeSetting == 3;
+            // Make sure we turn off dark theme if we plan using black
+            if (mUseBlackTheme)
+                mUseDarkTheme = false;
+        }
+        mCurrentColor = mSetQsFromWall ? mQsBackGroundColorWall : mQsBackGroundColor;
         setQsBackground();
+        setQsOverlay();
     }
 
     private void setQsBackground() {
-        if (mQsBackGround != null) {
-            mQsBackGround.setAlpha(mQsBackGroundAlpha);
+
+        if (mSetQsFromResources) {
+            mQsBackGround = getContext().getDrawable(R.drawable.qs_background_primary);
+        } else {
+            if (mQsBackGround != null) {
+                mQsBackGround.setColorFilter(mCurrentColor, PorterDuff.Mode.SRC_ATOP);
+                mQsBackGround.setAlpha(mQsBackGroundAlpha);
+            }
+        }
+        if (mQsBackGround != null && mBackground != null) {
             mBackground.setBackground(mQsBackGround);
         }
     }
@@ -236,5 +317,55 @@ public class QSContainerImpl extends FrameLayout {
             getDisplay().getRealSize(mSizePoint);
         }
         return mSizePoint.y;
+    }
+
+    private boolean isColorDark(int color) {
+        double darkness = 1 - ( 0.299 * Color.red(color) + 0.587 * Color.green(color)
+                + 0.114 * Color.blue(color))/255;
+        if (darkness < 0.5) {
+            return false; // It's a light color
+        } else {
+            return true; // It's a dark color
+        }
+    }
+
+    public void setQsOverlay() {
+
+        // This is being done here so that we don't have issues with one class
+        // enabling and other disabling the same function. We can manage QS
+        // in one place entirely. Let's not bother StatusBar.java at all
+        //
+        // TODO: Commonise isUsingDarkTheme and isUsingDarkTheme to a new class.
+        // Perhaps even more checks if necessary.
+
+        String qsthemeDark = "com.android.systemui.theme.dark.havoc";
+        String qsthemeBlack = "com.android.systemui.theme.black.havoc";
+        String qsAccentBlack = "com.android.system.theme.qs_black";
+        String qsAccentWhite = "com.android.system.theme.qs_white";
+        String qstheme = null;
+
+        if (mSetQsFromResources) {
+            try {
+                mOverlayManager.setEnabled(qsthemeDark, mUseDarkTheme, ActivityManager.getCurrentUser());
+                mOverlayManager.setEnabled(qsthemeBlack, mUseBlackTheme, ActivityManager.getCurrentUser());
+                mOverlayManager.setEnabled(qsAccentBlack, false, ActivityManager.getCurrentUser());
+                mOverlayManager.setEnabled(qsAccentWhite, false, ActivityManager.getCurrentUser());
+            } catch (RemoteException e) {
+                Log.w(TAG, "Can't change dark/black qs overlays", e);
+            }
+        } else {
+            // Only set black qs for black themes
+            if (mUseBlackTheme)
+                qstheme = qsthemeBlack;
+            else
+                qstheme = qsthemeDark;
+            try {
+                mOverlayManager.setEnabled(qstheme, isColorDark(mCurrentColor), ActivityManager.getCurrentUser());
+                mOverlayManager.setEnabled(qsAccentBlack, !isColorDark(mCurrentColor), ActivityManager.getCurrentUser());
+                mOverlayManager.setEnabled(qsAccentWhite, isColorDark(mCurrentColor), ActivityManager.getCurrentUser());
+            } catch (RemoteException e) {
+                Log.w(TAG, "Can't change qs theme", e);
+            }
+        }
     }
 }

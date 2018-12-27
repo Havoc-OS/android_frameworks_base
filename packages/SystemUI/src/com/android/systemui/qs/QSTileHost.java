@@ -111,10 +111,7 @@ public class QSTileHost implements QSHost, Tunable, PluginListener<QSFactory> {
     @Override
     public void onPluginDisconnected(QSFactory plugin) {
         mQsFactories.remove(plugin);
-        // Force remove and recreate of all tiles.
-        String value = Dependency.get(TunerService.class).getValue(TILES_SETTING);
-        onTuningChanged(TILES_SETTING, "");
-        onTuningChanged(TILES_SETTING, value);
+        reloadAllTiles();
     }
 
     @Override
@@ -164,6 +161,13 @@ public class QSTileHost implements QSHost, Tunable, PluginListener<QSFactory> {
 
     public int indexOf(String spec) {
         return mTileSpecs.indexOf(spec);
+    }
+
+    public void reloadAllTiles() {
+        // Force remove and recreate of all tiles.
+        String value = Dependency.get(TunerService.class).getValue(TILES_SETTING);
+        onTuningChanged(TILES_SETTING, "");
+        onTuningChanged(TILES_SETTING, value);
     }
 
     @Override

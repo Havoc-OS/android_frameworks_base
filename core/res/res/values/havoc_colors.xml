@@ -59,4 +59,7 @@
 
     <!-- Fastscroller -->
     <color name="fastscroller_text_color">#FFFFFFFF</color>
+
+    <!-- QS Accent -->
+    <color name="qs_accent">@color/accent_device_default_light</color>
 </resources>
