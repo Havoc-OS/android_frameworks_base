@@ -354,6 +354,14 @@ public class QSCustomizer extends LinearLayout implements OnMenuItemClickListene
                 Settings.System.putIntForUser(mContext.getContentResolver(),
                         Settings.System.QS_LAYOUT_ROWS, 4, UserHandle.USER_CURRENT);
                 break;
+            case R.id.menu_item_rows_five:
+                Settings.System.putIntForUser(mContext.getContentResolver(),
+                        Settings.System.QS_LAYOUT_ROWS, 5, UserHandle.USER_CURRENT);
+                break;
+            case R.id.menu_item_rows_six:
+                Settings.System.putIntForUser(mContext.getContentResolver(),
+                        Settings.System.QS_LAYOUT_ROWS, 6, UserHandle.USER_CURRENT);
+                break;
             case R.id.menu_item_rows_landscape_one:
                 Settings.System.putIntForUser(mContext.getContentResolver(),
                         Settings.System.QS_LAYOUT_ROWS_LANDSCAPE, 1, UserHandle.USER_CURRENT);
@@ -551,6 +559,10 @@ public class QSCustomizer extends LinearLayout implements OnMenuItemClickListene
         menuItemThree.setChecked(rows == 3);
         menuItemFour = mToolbar.getMenu().findItem(R.id.menu_item_rows_four);
         menuItemFour.setChecked(rows == 4);
+        menuItemFive = mToolbar.getMenu().findItem(R.id.menu_item_rows_five);
+        menuItemFive.setChecked(rows == 5);
+        menuItemSix = mToolbar.getMenu().findItem(R.id.menu_item_rows_six);
+        menuItemSix.setChecked(rows == 6);
 
         int rowsLandscape = Settings.System.getIntForUser(
                 mContext.getContentResolver(), Settings.System.QS_LAYOUT_ROWS_LANDSCAPE, defaultRows,
