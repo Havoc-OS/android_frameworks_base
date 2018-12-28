@@ -5395,30 +5395,6 @@ public final class Settings {
         public static final String HEADSET_CONNECT_PLAYER = "headset_connect_player";
 
         /**
-         * How many rows to show in the qs panel when in portrait
-         * @hide
-         */
-        public static final String QS_ROWS_PORTRAIT = "qs_rows_portrait";
-
-        /**
-         * How many rows to show in the qs panel when in landscape
-         * @hide
-         */
-        public static final String QS_ROWS_LANDSCAPE = "qs_rows_landscape";
-
-        /**
-         * How many columns to show in the qs panel when in portrait
-         * @hide
-         */
-        public static final String QS_COLUMNS_PORTRAIT = "qs_columns_portrait";
-
-        /**
-         * How many columns to show in the qs panel when in landscape
-         * @hide
-         */
-        public static final String QS_COLUMNS_LANDSCAPE = "qs_columns_landscape";
-
-        /**
          * Select various accents to go along with system themes
          *
          * @hide
@@ -5497,12 +5473,6 @@ public final class Settings {
          * @hide
          */
         public static final String QS_TILE_STYLE = "qs_tile_style";
-
-        /**
-         * Whether to display qs tile titles in the qs panel
-         * @hide
-         */
-        public static final String QS_TILE_TITLE_VISIBILITY = "qs_tile_title_visibility";
 
         /**
 	 ** Whether to use partial screenshot when using volume keys
@@ -6534,10 +6504,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(FINGERPRINT_SUCCESS_VIB);
             PRIVATE_SETTINGS.add(LOCKSCREEN_ROTATION);
             PRIVATE_SETTINGS.add(MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD);
-            PRIVATE_SETTINGS.add(QS_ROWS_PORTRAIT);
-            PRIVATE_SETTINGS.add(QS_ROWS_LANDSCAPE);
-            PRIVATE_SETTINGS.add(QS_COLUMNS_PORTRAIT);
-            PRIVATE_SETTINGS.add(QS_COLUMNS_LANDSCAPE);
             PRIVATE_SETTINGS.add(BURN_IN_PROTECTION);
             PRIVATE_SETTINGS.add(BURN_IN_PROTECTION_INTERVAL);
             PRIVATE_SETTINGS.add(USE_OLD_MOBILETYPE);
@@ -8261,14 +8227,6 @@ public final class Settings {
          */
         @Deprecated
         public static final String LOCK_SCREEN_OWNER_INFO = "lock_screen_owner_info";
-
-                
-        /**
-        * Count of small QS tiles.
-        * @hide
-        */
-       public static final String QQS_COUNT = "sysui_qqs_count";
-
 
         /**
          * Ids of the user-selected appwidgets on the lockscreen (comma-delimited).
