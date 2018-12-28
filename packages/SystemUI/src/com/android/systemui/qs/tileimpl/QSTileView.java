@@ -20,6 +20,7 @@ import android.service.quicksettings.Tile;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ import java.util.Objects;
 /** View that represents a standard quick settings tile. **/
 public class QSTileView extends QSTileBaseView {
     private static final int MAX_LABEL_LINES = 2;
-    private static final boolean DUAL_TARGET_ALLOWED = false;
+    private static final boolean DUAL_TARGET_ALLOWED = true;
     private View mDivider;
     protected TextView mLabel;
     protected TextView mSecondLine;
@@ -126,8 +127,8 @@ public class QSTileView extends QSTileBaseView {
                     : View.VISIBLE);
         }
         boolean dualTarget = DUAL_TARGET_ALLOWED && state.dualTarget;
-        mExpandIndicator.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
-        mExpandSpace.setVisibility(dualTarget ? View.VISIBLE : View.GONE);
+        mExpandIndicator.setVisibility(View.GONE);
+        mExpandSpace.setVisibility(View.GONE);
         mLabelContainer.setContentDescription(dualTarget ? state.dualLabelContentDescription
                 : null);
         if (dualTarget != mLabelContainer.isClickable()) {
@@ -147,5 +148,9 @@ public class QSTileView extends QSTileBaseView {
         mLabelContainer.setOnLongClickListener(longClick);
         mLabelContainer.setClickable(false);
         mLabelContainer.setLongClickable(false);
+    }
+
+    public void setHideLabel(boolean value) {
+        mLabelContainer.setVisibility(value ? View.GONE : View.VISIBLE);
     }
 }

@@ -144,6 +144,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 R.layout.qs_paged_tile_layout, this, false);
         mTileLayout.setListening(mListening);
         addView((View) mTileLayout);
+        updateSettings();
 
         mPanelPageIndicator = (PageIndicator) LayoutInflater.from(context).inflate(
                 R.layout.qs_page_indicator, this, false);
@@ -792,6 +793,9 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         int getOffsetTop(TileRecord tile);
 
         boolean updateResources();
+        void updateSettings();
+        int getNumColumns();
+        boolean isShowTitles();
 
         void setListening(boolean listening);
 
@@ -851,6 +855,20 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
     private void configureTile(QSTile t, QSTileView v) {
         if (mTileLayout != null) {
+            v.setHideLabel(!mTileLayout.isShowTitles());
+            if (t.isDualTarget()) {
+                if (!mTileLayout.isShowTitles()) {
+                    v.setOnLongClickListener(view -> {
+                        t.secondaryClick();
+                        return true;
+                    });
+                } else {
+                    v.setOnLongClickListener(view -> {
+                        t.longClick();
+                        return true;
+                    });
+                }
+            }
             v.setOnClickListener(view -> {
                     t.click();
                     setAnimationTile(v);
@@ -863,6 +881,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             for (TileRecord r : mRecords) {
                 configureTile(r.tile, r.tileView);
             }
+            mTileLayout.updateSettings();
         }
     }
 
@@ -872,5 +891,9 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
     private void setBrightnessMinMax(boolean min) {
         mBrightnessController.setBrightnessFromSliderButtons(min ? 0 : GAMMA_SPACE_MAX);
+    }
+
+    public int getNumColumns() {
+        return mTileLayout.getNumColumns();
     }
 }
