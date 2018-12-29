@@ -6301,6 +6301,11 @@ public final class Settings {
         private static final Validator QS_QUICKBAR_COLUMNS_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * @hide
+         */
+        public static final String SWITCH_STYLE = "switch_style";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
