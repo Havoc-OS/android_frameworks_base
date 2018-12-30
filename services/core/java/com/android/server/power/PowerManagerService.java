@@ -846,7 +846,7 @@ public final class PowerManagerService extends SystemService
             }
 
             // Initialize proximity sensor
-            mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
+            mSensorManager = mContext.getSystemService(SensorManager.class);
             mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
             // Go.
@@ -999,7 +999,7 @@ public final class PowerManagerService extends SystemService
         mProximityWakeEnabledByDefaultConfig = resources.getBoolean(
                 com.android.internal.R.bool.config_proximityCheckOnWakeEnabledByDefault);
         if (mProximityWakeSupported) {
-            mProximityWakeLock = ((PowerManager) mContext.getSystemService(Context.POWER_SERVICE))
+            mProximityWakeLock = mContext.getSystemService(PowerManager.class)
                     .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ProximityWakeLock");
         }
     }
@@ -1077,9 +1077,10 @@ public final class PowerManagerService extends SystemService
                 Settings.Secure.HARDWARE_KEYS_DISABLE, 0,
                 UserHandle.USER_CURRENT) != 0;
 
-        mProximityWakeEnabled = Settings.System.getInt(resolver,
+        mProximityWakeEnabled = (Settings.System.getIntForUser(resolver,
                 Settings.System.PROXIMITY_ON_WAKE,
-                mProximityWakeEnabledByDefaultConfig ? 1 : 0) == 1;
+                mProximityWakeEnabledByDefaultConfig ? 1 : 0,
+                UserHandle.USER_CURRENT) != 0);
 
         mDirty |= DIRTY_SETTINGS;
     }
@@ -5118,7 +5119,8 @@ public final class PowerManagerService extends SystemService
         final TelephonyManager tm =
                 (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
         final boolean hasIncomingCall = tm.getCallState() == TelephonyManager.CALL_STATE_RINGING;
-         if (mProximityWakeSupported && mProximityWakeEnabled
+
+        if (mProximityWakeSupported && mProximityWakeEnabled
                 && mProximitySensor != null && !hasIncomingCall) {
             final Message msg = mHandler.obtainMessage(MSG_WAKE_UP);
             msg.obj = r;
@@ -5153,6 +5155,7 @@ public final class PowerManagerService extends SystemService
                         Slog.w(TAG, "Not waking up. Proximity sensor is blocked.");
                     }
                 }
+
                 @Override
                 public void onAccuracyChanged(Sensor sensor, int accuracy) {
                     // Do nothing
