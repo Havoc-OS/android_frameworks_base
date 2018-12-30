@@ -200,6 +200,8 @@ public class KeyguardStatusView extends GridLayout implements
         mKeyguardSlice.setContentChangeListener(this::onSliceContentChanged);
         onSliceContentChanged();
 
+        updateSettings();
+
         boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive();
         setEnableMarquee(shouldMarquee);
         refreshFormat();
@@ -885,6 +887,21 @@ public class KeyguardStatusView extends GridLayout implements
         mKeyguardSlice.setViewsTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.lock_date_font_size_40));
         }
+    }
+
+    private void updateSettings() {
+        final ContentResolver resolver = getContext().getContentResolver();
+
+        boolean showClock = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCKSCREEN_CLOCK, 1, UserHandle.USER_CURRENT) == 1;
+
+        mClockView = (TextClock) findViewById(R.id.clock_view);
+        mClockView.setVisibility(showClock ? View.VISIBLE : View.GONE);
+    }
+
+    public void updateAll() {
+        updateSettings();
+        mKeyguardSlice.refresh();
     }
 
     // DateFormat.getBestDateTimePattern is extremely expensive, and refresh is called often.
