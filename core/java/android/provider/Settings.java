@@ -6656,6 +6656,12 @@ public final class Settings {
         public static final String SHOW_BATTERY_ESTIMATE = "show_battery_estimate";
 
         /**
+         * Whether to show weather on lockscreen
+         * @hide
+         */
+        public static final String WEATHER_LOCKSCREEN_ENABLED = "weather_lockscreen_enabled";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
