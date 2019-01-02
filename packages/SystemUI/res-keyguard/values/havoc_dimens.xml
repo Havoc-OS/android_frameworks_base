@@ -134,4 +134,10 @@
     <dimen name="lock_clock_font_size_118">118dp</dimen>
     <dimen name="lock_clock_font_size_119">119dp</dimen>
     <dimen name="lock_clock_font_size_120">120dp</dimen>
+
+    <!-- The seperater between the shorcuts. -->
+    <dimen name="shortcut_seperater_width">8dp</dimen>
+
+    <!-- Top margin for shortcuts. -->
+    <dimen name="shortcut_margin_top">25dp</dimen>
 </resources>
