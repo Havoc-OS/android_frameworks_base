@@ -99,7 +99,6 @@ import com.android.server.oemlock.OemLockService;
 import com.android.server.om.OverlayManagerService;
 import com.android.server.os.DeviceIdentifiersPolicyService;
 import com.android.server.os.SchedulingPolicyService;
-import com.android.server.pocket.PocketService;
 import com.android.server.pm.BackgroundDexOptService;
 import com.android.server.pm.CrossProfileAppsService;
 import com.android.server.pm.Installer;
@@ -1620,10 +1619,7 @@ public final class SystemServer {
 
             traceBeginAndSlog("Starting ScreenStabilization Service");
             mSystemServiceManager.startService(ScreenStabilization.class);
-            traceEnd();	    
-
-            Slog.i(TAG, "Starting PocketService");
-            mSystemServiceManager.startService(PocketService.class);
+            traceEnd();
 
         }
 

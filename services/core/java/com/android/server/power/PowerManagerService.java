@@ -67,7 +67,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.WorkSource;
 import android.os.WorkSource.WorkChain;
-import android.pocket.PocketManager;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.provider.Settings.SettingNotFoundException;
@@ -2159,9 +2158,6 @@ public final class PowerManagerService extends SystemService
                 final long screenDimDuration = getScreenDimDurationLocked(screenOffTimeout);
                 final boolean userInactiveOverride = mUserInactiveOverrideFromWindowManager;
                 final long nextProfileTimeout = getNextProfileTimeoutLocked(now);
-                final PocketManager pocketManager = (PocketManager) mContext.getSystemService(Context.POCKET_SERVICE);
-                final boolean isDeviceInPocket = pocketManager != null && pocketManager.isDeviceInPocket();
-                final boolean buttonPressed = mEvent == PowerManager.USER_ACTIVITY_EVENT_BUTTON;
 
                 mUserActivitySummary = 0;
                 if (mLastUserActivityTime >= mLastWakeTime) {
@@ -2188,10 +2184,10 @@ public final class PowerManagerService extends SystemService
                                 mButtonOn = false;
                             } else {
                                 if ((!mButtonBacklightOnTouchOnly || mButtonPressed) &&
-                                        !mProximityPositive && !isDeviceInPocket) {
+                                        !mProximityPositive) {
                                     mButtonsLight.setBrightness(buttonBrightness);
                                     mButtonPressed = false;
-                                    if (buttonBrightness != 0 && mButtonTimeout != 0 && buttonPressed) {
+                                    if (buttonBrightness != 0 && mButtonTimeout != 0) {
                                         mButtonOn = true;
                                         if (now + mButtonTimeout < nextTimeout) {
                                             nextTimeout = now + mButtonTimeout;
