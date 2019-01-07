@@ -4441,20 +4441,6 @@ public final class Settings {
          */
         public static final String POWERMENU_LOCKDOWN = "powermenu_lockdown";
 
-        /** some devices have a extra hw button e.g. n3 on the back on the
-         * fingerprint sensor. allow mapping button to key
-         *
-         * @hide
-         */
-        public static final String BUTTON_EXTRA_KEY_MAPPING = "button_extra_mapping";
-
-        /**
-         * Enable proxi check for wake keys - must be implemented in a device
-         * KeyHandler
-         * @hide
-         */
-        public static final String DEVICE_PROXI_CHECK_ENABLED = "device_proxi_check_enabled";
-
         /**
          * Indicates whether ANBI (Accidental navigation button interaction) is enabled.
          *
@@ -4692,14 +4678,6 @@ public final class Settings {
          * @hide
          */
         public static final String BATTERY_BAR_LOW_COLOR = "battery_bar_low_color";
-
-        /**
-         * @hide
-         */
-        public static final String DEVICE_FEATURE_SETTINGS = "device_feature_settings";
-
-        /** @hide */
-        private static final Validator DEVICE_FEATURE_SETTINGS_VALIDATOR = ANY_STRING_VALIDATOR;
 
         /**
          * Show or hide clock
@@ -6391,7 +6369,6 @@ public final class Settings {
             BURN_IN_PROTECTION,
             BURN_IN_PROTECTION_INTERVAL,
             USE_OLD_MOBILETYPE,
-            DEVICE_FEATURE_SETTINGS,
             NOTIFICATION_SOUND_VIB_SCREEN_ON,
             STATUSBAR_HIDE_NOTCH,
             ONE_HAND_MODE_ENABLED,
@@ -6576,7 +6553,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BOTTOM_GESTURE_SWIPE_LIMIT);
             PRIVATE_SETTINGS.add(STATUS_BAR_BRIGHTNESS_CONTROL);
             PRIVATE_SETTINGS.add(SCREENSHOT_DEFAULT_MODE);
-            PRIVATE_SETTINGS.add(DEVICE_FEATURE_SETTINGS);
             PRIVATE_SETTINGS.add(FINGERPRINT_SUCCESS_VIB);
             PRIVATE_SETTINGS.add(LOCKSCREEN_ROTATION);
             PRIVATE_SETTINGS.add(MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD);
@@ -6760,7 +6736,6 @@ public final class Settings {
             VALIDATORS.put(BURN_IN_PROTECTION, BURN_IN_PROTECTION_VALIDATOR);
             VALIDATORS.put(BURN_IN_PROTECTION_INTERVAL, BURN_IN_PROTECTION_INTERVAL_VALIDATOR);
             VALIDATORS.put(USE_OLD_MOBILETYPE, USE_OLD_MOBILETYPE_VALIDATOR);
-            VALIDATORS.put(DEVICE_FEATURE_SETTINGS, DEVICE_FEATURE_SETTINGS_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_SOUND_VIB_SCREEN_ON, NOTIFICATION_SOUND_VIB_SCREEN_ON_VALIDATOR);
             VALIDATORS.put(STATUSBAR_HIDE_NOTCH, STATUSBAR_HIDE_NOTCH_VALIDATOR);
             VALIDATORS.put(ONE_HAND_MODE_ENABLED, ONE_HAND_MODE_ENABLED_VALIDATOR);
