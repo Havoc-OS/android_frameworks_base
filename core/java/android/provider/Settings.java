@@ -5067,9 +5067,6 @@ public final class Settings {
          */
         public static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
 
-        
-        public static final String CHOOSER_ACTIVITY_BLACKLIST = "chooser_activity_blacklist";
-
         /**
          * Disable dashboard conditions in settings
          * @hide

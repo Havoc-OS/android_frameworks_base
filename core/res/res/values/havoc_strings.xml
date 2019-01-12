@@ -54,9 +54,6 @@
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Unable to record screen</string>
     <string name="notification_channel_screenrecord">Screenrecords</string>
-
-    <!-- App Blacklist -->
-    <string name="app_blacklist">Blacklist app</string>
 	
     <!-- ADB over network -->
     <string name="adb_net_active_notification_title">ADB over network enabled</string>
