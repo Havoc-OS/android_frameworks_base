@@ -409,7 +409,7 @@ applications that come with the platform
         <permission name="android.permission.REBOOT"/>
         <permission name="android.permission.RECOVERY"/>
         <permission name="android.permission.READ_CALL_LOG"/>
-        <permission name="org.omnirom.omnijaws.READ_WEATHER"/>
+        <permission name="com.android.providers.weather.READ_WEATHER"/>
     </privapp-permissions>
 
     <privapp-permissions package="com.android.tv">
