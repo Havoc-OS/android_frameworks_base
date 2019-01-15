@@ -110,6 +110,17 @@
                 analog:custom_hand_hour="@drawable/dot_clock_hand_hour"
                 analog:custom_hand_minute="@drawable/dot_clock_hand_minute"
                 analog:custom_clock_dial_ambient="@drawable/dot_clock_dial_ambient"/>
+            <com.android.keyguard.clocks.CustomAnalogClock
+                android:id="@+id/spectrum_clock_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                analog:custom_dial="@drawable/spectrum_clock_dial"
+                analog:custom_hand_hour="@drawable/spectrum_clock_hand_hour"
+                analog:custom_hand_minute="@drawable/spectrum_clock_hand_minute"
+                analog:custom_clock_dial_ambient="@drawable/spectrum_clock_dial_ambient"/>
             <View
                 android:id="@+id/clock_separator"
                 android:layout_width="@dimen/widget_separator_width"
