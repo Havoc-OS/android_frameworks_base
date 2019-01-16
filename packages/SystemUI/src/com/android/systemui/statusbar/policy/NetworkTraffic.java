@@ -11,6 +11,7 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
 import android.graphics.PorterDuff.Mode;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.TrafficStats;
@@ -50,6 +51,8 @@ public class NetworkTraffic extends TextView {
         decimalFormat.setMaximumIntegerDigits(3);
         decimalFormat.setMaximumFractionDigits(1);
     }
+
+    private static final String FONT_FAMILY_MEDIUM = "sans-serif-medium";
 
     protected boolean mIsEnabled;
     private boolean mAttached;
@@ -339,6 +342,8 @@ public class NetworkTraffic extends TextView {
             txtSize = getResources().getDimensionPixelSize(R.dimen.net_traffic_single_text_size);
         }
         setTextSize(TypedValue.COMPLEX_UNIT_PX, (float)txtSize);
+        Typeface tf = Typeface.create(FONT_FAMILY_MEDIUM, Typeface.NORMAL);
+        setTypeface(tf);
     }
 
     public void onDensityOrFontScaleChanged() {

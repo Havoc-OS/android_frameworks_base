@@ -101,7 +101,7 @@ public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
     public static final int STYLE_CLOCK_CENTER = 1;
     public static final int STYLE_CLOCK_RIGHT = 2;
 
-    private int mClockFontStyle = FONT_NORMAL;
+    private int mClockFontStyle = FONT_MEDIUM;
     public static final int FONT_NORMAL = 0;
     public static final int FONT_ITALIC = 1;
     public static final int FONT_BOLD = 2;
@@ -683,7 +683,7 @@ public class Clock extends TextView implements DemoMode, CommandQueue.Callbacks,
 
     private void updateClockFontStyle() {
         mClockFontStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_CLOCK_FONT_STYLE, FONT_NORMAL,
+                Settings.System.STATUS_BAR_CLOCK_FONT_STYLE, FONT_MEDIUM,
 		UserHandle.USER_CURRENT);
         getClockFontStyle(mClockFontStyle);
         updateClock();
