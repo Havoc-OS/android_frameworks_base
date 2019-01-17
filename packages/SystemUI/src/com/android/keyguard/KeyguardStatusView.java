@@ -991,11 +991,13 @@ public class KeyguardStatusView extends GridLayout implements
                 params.addRule(RelativeLayout.BELOW, R.id.clock_view);
                 mClockView.setSingleLine(false);
                 mClockView.setGravity(Gravity.CENTER);
+                mClockView.setLineSpacing(0, 0.8f);
                 break;
             case 4: // sammy (bold)
                 params.addRule(RelativeLayout.BELOW, R.id.clock_view);
                 mClockView.setSingleLine(false);
                 mClockView.setGravity(Gravity.CENTER);
+                mClockView.setLineSpacing(0, 0.8f);
                 break;
         }
 
