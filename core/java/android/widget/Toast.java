@@ -393,7 +393,7 @@ public class Toast {
             params.height = WindowManager.LayoutParams.WRAP_CONTENT;
             params.width = WindowManager.LayoutParams.WRAP_CONTENT;
             params.format = PixelFormat.TRANSLUCENT;
-            params.windowAnimations = com.android.internal.R.style.Animation_Toast;
+            params.windowAnimations = com.android.internal.R.style.Animation_Toast_Material;
             params.type = WindowManager.LayoutParams.TYPE_TOAST;
             params.setTitle("Toast");
             params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
