@@ -3755,7 +3755,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         attrs.windowAnimations = -1;
                         break;
                 case 1:
-                        attrs.windowAnimations = com.android.internal.R.style.Animation_Toast;
+                        attrs.windowAnimations = com.android.internal.R.style.Animation_Toast_Material;
                         break;
                 case 2:
                         attrs.windowAnimations = com.android.internal.R.style.Animation_Toast_Fade;

@@ -94,6 +94,7 @@
   <java-symbol type="anim" name="slide_out_right_no_fade" />
 
   <!-- Toast Animation -->
+  <java-symbol type="style" name="Animation.Toast.Material" />
   <java-symbol type="style" name="Animation.Toast.Fade" />
   <java-symbol type="style" name="Animation.Toast.SlideRight" />
   <java-symbol type="style" name="Animation.Toast.SlideLeft" />
