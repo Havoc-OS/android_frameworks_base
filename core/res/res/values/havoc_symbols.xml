@@ -20,4 +20,7 @@
     <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
     <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
 
+    <!-- Toast animation -->
+    <java-symbol type="style" name="Animation.Toast.Material" />
+
 </resources>
