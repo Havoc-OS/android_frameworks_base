@@ -258,6 +258,9 @@
     <!-- Kill app from slim recents -->
     <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
 
+    <!-- DayNight mode -->
+    <uses-permission android:name="android.permission.MODIFY_DAY_NIGHT_MODE" />
+
     <application
         android:name=".SystemUIApplication"
         android:persistent="true"
