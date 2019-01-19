@@ -19,19 +19,22 @@
 
 package com.android.server;
 
+import android.app.ActivityThread;
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PermissionDialogReqQueue {
-    public PermissionDialog getDialog() {
-        return mDialog;
-    }
-
-    public void setDialog(PermissionDialog mDialog) {
-        this.mDialog = mDialog;
-    }
-
     public final static class PermissionDialogReq {
+        boolean mHasResult = false;
+        int mResult;
+        final AppOpsService.Op mOp;
+
+        public PermissionDialogReq(final AppOpsService.Op op) {
+            mOp = op;
+        }
+
         public void set(int res) {
             synchronized (this) {
                 mHasResult = true;
@@ -52,25 +55,32 @@ public class PermissionDialogReqQueue {
             return mResult;
         }
 
-        boolean mHasResult = false;
-        int mResult;
     }
 
-    private PermissionDialog mDialog;
-    private List<PermissionDialogReq> resultList;
+    private PermissionDialog mDialog = null;
+    private List<PermissionDialogReq> resultList = new ArrayList<>();
 
-    public PermissionDialogReqQueue() {
-        mDialog = null;
-        resultList = new ArrayList<PermissionDialogReq>();
-    }
-
-    public void register(PermissionDialogReq res) {
+    public void register(AppOpsService service, PermissionDialogReq req) {
         synchronized (this) {
-            resultList.add(res);
+            resultList.add(req);
+        }
+        if (mDialog == null) {
+            final Context context = ActivityThread.currentActivityThread().getSystemUiContext();
+            mDialog = new PermissionDialog(context, service,
+                    req.mOp.op, req.mOp.uid, req.mOp.packageName);
         }
     }
 
-    public void notifyAll(int mode) {
+    public void showDialog() {
+        if (mDialog != null) {
+            mDialog.show();
+        }
+    }
+
+    public void dismissAndNotify(int mode) {
+        if (mDialog == null) {
+            return;
+        }
         synchronized (this) {
             while (resultList.size() != 0) {
                 PermissionDialogReq res = resultList.get(0);
@@ -78,6 +88,10 @@ public class PermissionDialogReqQueue {
                 resultList.remove(0);
             }
         }
+        if (mDialog.isShowing()) {
+            mDialog.dismiss();
+        }
+        mDialog = null;
     }
 
     public void ignore() {

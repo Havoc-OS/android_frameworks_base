@@ -404,9 +404,7 @@ public class ActivityStackSupervisor extends ConfigurationContainer implements D
     /** Set when a power hint has started, but not ended. */
     private boolean mPowerHintSent;
 
-    /**
-     * Is the privacy guard currently enabled? Shared between ActivityStacks
-     */
+    /** Is Privacy Guard currently enabled? Shared between ActivityStacks. */
     String mPrivacyGuardPackageName = null;
 
     /**

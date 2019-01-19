@@ -903,8 +903,8 @@ class BluetoothManagerService extends IBluetoothManager.Stub {
         }
 
         AppOpsManager appOps = mContext.getSystemService(AppOpsManager.class);
-        if (appOps.noteOp(AppOpsManager.OP_BLUETOOTH_CHANGE, callingUid,
-                packageName) != AppOpsManager.MODE_ALLOWED) {
+        if (appOps.noteOp(AppOpsManager.OP_BLUETOOTH_CHANGE, callingUid, packageName)
+                != AppOpsManager.MODE_ALLOWED) {
             return false;
         }
 
