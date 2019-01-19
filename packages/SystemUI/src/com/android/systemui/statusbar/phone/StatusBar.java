@@ -5680,6 +5680,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.THEME_PICKER),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.KEYGUARD_MULTIUSER_SWITCH),
+                    false, this, UserHandle.USER_ALL);
 	    }
 
         @Override
@@ -5775,6 +5778,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 // Keeps us from overloading the system by performing these tasks every time.
                 unloadThemes();
                 updateThemes();
+            } else if (uri.equals(Settings.Secure.getUriFor(
+                    Settings.Secure.KEYGUARD_MULTIUSER_SWITCH))) {
+                updateKeyguardStatusBarSettings();
             }
         }
 
@@ -5799,6 +5805,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateCorners();
             updateKeyguardStatusSettings();
             handleCutout(null);
+            updateKeyguardStatusBarSettings();
         }
     }
 
@@ -5935,6 +5942,10 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private void updateKeyguardStatusSettings() {
         mNotificationPanel.updateKeyguardStatusSettings();
+    }
+
+    private void updateKeyguardStatusBarSettings() {
+        mKeyguardStatusBar.updateSettings();
     }
 
     public int getWakefulnessState() {

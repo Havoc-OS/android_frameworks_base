@@ -107,6 +107,8 @@ public class KeyguardStatusBarView extends RelativeLayout
     private Handler mHandler = new Handler();
     private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
 
+    private boolean mMultiSwitchEnabled;
+
     /**
      * Draw this many pixels into the left/right side of the cutout to optimally use the space
      */
@@ -212,23 +214,30 @@ public class KeyguardStatusBarView extends RelativeLayout
     }
 
     private void updateVisibilities() {
-        if (mMultiUserSwitch.getParent() != mStatusIconArea && !mKeyguardUserSwitcherShowing) {
-            if (mMultiUserSwitch.getParent() != null) {
-                getOverlay().remove(mMultiUserSwitch);
+        if (mMultiSwitchEnabled) {
+            if (mMultiUserSwitch.getParent() != mStatusIconArea &&
+                    !mKeyguardUserSwitcherShowing) {
+                if (mMultiUserSwitch.getParent() != null) {
+                    getOverlay().remove(mMultiUserSwitch);
+                }
+                mStatusIconArea.addView(mMultiUserSwitch, 0);
+            } else if (mMultiUserSwitch.getParent() == mStatusIconArea &&
+                    mKeyguardUserSwitcherShowing) {
+                mStatusIconArea.removeView(mMultiUserSwitch);
             }
-            mStatusIconArea.addView(mMultiUserSwitch, 0);
-        } else if (mMultiUserSwitch.getParent() == mStatusIconArea && mKeyguardUserSwitcherShowing) {
-            mStatusIconArea.removeView(mMultiUserSwitch);
-        }
-        if (mKeyguardUserSwitcher == null) {
-            // If we have no keyguard switcher, the screen width is under 600dp. In this case,
-            // we don't show the multi-user avatar unless there is more than 1 user on the device.
-            if (mUserSwitcherController != null
-                    && mUserSwitcherController.getSwitchableUserCount() > 1) {
-                mMultiUserSwitch.setVisibility(mHideContents ? View.INVISIBLE : View.VISIBLE);
-            } else {
-                mMultiUserSwitch.setVisibility(View.GONE);
+            if (mKeyguardUserSwitcher == null) {
+                // If we have no keyguard switcher, the screen width is under 600dp.
+                // In this case, we don't show the multi-user avatar unless there is
+                // more than 1 user on the device.
+                if (mUserSwitcherController != null
+                        && mUserSwitcherController.getSwitchableUserCount() > 1) {
+                    mMultiUserSwitch.setVisibility(mHideContents ? View.INVISIBLE : View.VISIBLE);
+                } else {
+                    mMultiUserSwitch.setVisibility(View.GONE);
+                }
             }
+        } else {
+            mMultiUserSwitch.setVisibility(View.GONE);
         }
         if (mCarrierLabel != null) {
             if (mShowCarrierLabel == 1 || mShowCarrierLabel == 3) {
@@ -240,6 +249,12 @@ public class KeyguardStatusBarView extends RelativeLayout
             }
         }
         mBatteryView.setForceShowPercent(mBatteryCharging && mShowPercentAvailable);
+    }
+
+    public void updateSettings() {
+        mMultiSwitchEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.KEYGUARD_MULTIUSER_SWITCH, 1) == 1;
+        updateVisibilities();
     }
 
     private void updateSystemIconsLayoutParams() {

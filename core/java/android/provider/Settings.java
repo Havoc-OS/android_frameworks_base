@@ -11312,6 +11312,13 @@ public final class Settings {
         public static final String SQUEEZE_SELECTION = "squeeze_selection";
 
         /**
+         * Whether to show or hide the keyguard multiuser switch
+         *
+         * @hide
+         */
+        public static final String KEYGUARD_MULTIUSER_SWITCH = "keyguard_multiuser_switch";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
