@@ -4658,18 +4658,15 @@ public class StatusBar extends SystemUI implements DemoMode,
         final boolean inflated = mStackScroller != null && mStatusBarWindowManager != null;
         boolean useBlackTheme = false;
         boolean useDarkTheme = false;
-	    final boolean wallpaperWantsDarkTheme;
+
         haltTicker();
-        if (mCurrentTheme == 0 || mCurrentTheme == 1) {
-            // The system wallpaper defines if QS should be light or dark.
-	        if (mCurrentTheme == 0) {
-                WallpaperColors systemColors = mColorExtractor
-                        .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
-                wallpaperWantsDarkTheme = systemColors != null
-                        && (systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
-	        } else {
-	            wallpaperWantsDarkTheme = false;
-	        }
+
+        if (mCurrentTheme == 0) {
+           // The system wallpaper defines if QS should be light or dark.
+            WallpaperColors systemColors = mColorExtractor
+                    .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
+            final boolean wallpaperWantsDarkTheme = systemColors != null
+                    && (systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
 	        final Configuration config = mContext.getResources().getConfiguration();
             final boolean nightModeWantsDarkTheme = DARK_THEME_IN_NIGHT_MODE
                     && (config.uiMode & Configuration.UI_MODE_NIGHT_MASK)
@@ -4679,9 +4676,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             // with white on white or black on black
             unfuckBlackWhiteAccent();
         } else {
-            useBlackTheme = mCurrentTheme == 3;
             useDarkTheme = mCurrentTheme == 2;
+            useBlackTheme = mCurrentTheme == 3;
         }
+
         if (isUsingDarkTheme() != useDarkTheme) {
             // Check for black and white accent so we don't end up
             // with white on white or black on black
