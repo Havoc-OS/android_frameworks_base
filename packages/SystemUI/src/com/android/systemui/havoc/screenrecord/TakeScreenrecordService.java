@@ -45,6 +45,7 @@ import android.view.WindowManager;
 public class TakeScreenrecordService extends Service {
     private static final String TAG = "TakeScreenrecordService";
 
+    public static final String ACTION_START = "start";
     public static final String ACTION_STOP = "stop";
     public static final String ACTION_TOGGLE_POINTER = "toggle_pointer";
     public static final String ACTION_TOGGLE_HINT = "toggle_hint";
