@@ -203,12 +203,17 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
         boolean wasDeviceInteractive = mUpdateMonitor.isDeviceInteractive();
         mMode = mode;
         mHasScreenTurnedOnSinceAuthenticating = false;
-        if (pulsingOrAod()) {
-            // If we are waking the device up while we are pulsing the clock and the
-            // notifications would light up first, creating an unpleasant animation.
-            // Defer changing the screen brightness by forcing doze brightness on our window
-            // until the clock and the notifications are faded out.
-            mStatusBarWindowManager.setForceDozeBrightness(true);
+        if (mMode == MODE_WAKE_AND_UNLOCK_PULSING && pulsingOrAod()) {
+            if (mStatusBar.wallpaperSupportsAmbientMode()) {
+                // Don't show any animation when live wallpaper is showing
+                mMode = MODE_WAKE_AND_UNLOCK;
+            }else{
+                // If we are waking the device up while we are pulsing the clock and the
+                // notifications would light up first, creating an unpleasant animation.
+                // Defer changing the screen brightness by forcing doze brightness on our window
+                // until the clock and the notifications are faded out.
+                mStatusBarWindowManager.setForceDozeBrightness(true);
+            }
         }
         // During wake and unlock, we need to draw black before waking up to avoid abrupt
         // brightness changes due to display state transitions.
@@ -240,13 +245,6 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
                 Trace.endSection();
                 break;
             case MODE_UNLOCK:
-                if (pulsingOrAod()) {
-                    mKeyguardViewMediator.onWakeAndUnlocking();
-                    if (mStatusBar.getNavigationBarView() != null) {
-                        mStatusBar.getNavigationBarView().setWakeAndUnlocking(true);
-                    }
-                    break;
-                }
             case MODE_SHOW_BOUNCER:
                 Trace.beginSection("MODE_UNLOCK or MODE_SHOW_BOUNCER");
                 if (!wasDeviceInteractive) {
@@ -339,8 +337,8 @@ public class FingerprintUnlockController extends KeyguardUpdateMonitorCallback {
         if (!mUpdateMonitor.isDeviceInteractive()) {
             if (!mStatusBarKeyguardViewManager.isShowing()) {
                 return MODE_ONLY_WAKE;
-            } else if (pulsingOrAod() && unlockingAllowed) {
-                return MODE_UNLOCK;
+            } else if (mDozeScrimController.isPulsing() && unlockingAllowed) {
+                return MODE_WAKE_AND_UNLOCK_PULSING;
             } else if (unlockingAllowed || !mUnlockMethodCache.isMethodSecure()) {
                 return MODE_WAKE_AND_UNLOCK;
             } else {
