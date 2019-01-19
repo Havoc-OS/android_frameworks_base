@@ -36,4 +36,7 @@
     <!-- Vendor signatures -->
     <java-symbol type="array" name="config_vendorPlatformSignatures" />
 
+    <!-- Toast animation -->
+    <java-symbol type="style" name="Animation.Toast.Material" />
+
 </resources>
