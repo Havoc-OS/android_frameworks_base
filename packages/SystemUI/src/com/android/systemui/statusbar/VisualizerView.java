@@ -352,8 +352,10 @@ public class VisualizerView extends View
     }
 
     private void checkStateChanged() {
+        setColor(mUseCustomColor ? mCustomColor : mDefaultColor);
         boolean isVisible = getVisibility() == View.VISIBLE;
         if (isVisible && mPlaying && mDozing && mAmbientVisualizerEnabled && !mPowerSaveMode && mVisualizerEnabled && !mOccluded) {
+            if (!mUseCustomColor) setColor(Color.WHITE);
             if (!mDisplaying) {
                 mDisplaying = true;
                 dolink();
