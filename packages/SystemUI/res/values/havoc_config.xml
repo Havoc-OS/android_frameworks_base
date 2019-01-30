@@ -66,4 +66,7 @@
     <!-- Whether SystemUI ignores notch -->
     <bool name="hide_view_behind_notch">false</bool>
 
+    <!-- Whether the qs statusbar is hidden -->
+    <bool name="qs_status_bar_hidden">false</bool>
+
 </resources>
