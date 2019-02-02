@@ -431,10 +431,6 @@ public class NotificationPanelView extends PanelView implements
         }
     }
 
-    public void setLockscreenClockTheme(boolean useDarkTheme) {
-        mKeyguardStatusView.onThemeChanged(useDarkTheme);
-    }
-
     public void onThemeChanged() {
         // Re-inflate the status view group.
         int index = indexOfChild(mKeyguardStatusView);
