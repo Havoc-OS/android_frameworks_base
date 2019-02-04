@@ -1202,6 +1202,11 @@ public class KeyguardStatusView extends GridLayout implements
             mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE :
                     View.GONE) : View.VISIBLE);
             mCustomClockView.setVisibility(View.GONE);
+            mSpideyClockView.setVisibility(View.GONE);
+            mCustomNumClockView.setVisibility(View.GONE);
+            mDotClockView.setVisibility(View.GONE);
+            mSpectrumClockView.setVisibility(View.GONE);
+            mSneekyClockView.setVisibility(View.GONE);
         } else {
             setStyle();
             refreshTime();
