@@ -361,7 +361,6 @@ public class VisualizerView extends View
                 dolink();
                 animate()
                         .alpha(0.40f)
-                        .withEndAction(null)
                         .setDuration(800);
             } else {
                 mPaint.setColor(mColorToUse);
@@ -376,7 +375,6 @@ public class VisualizerView extends View
                 dolink();
                 animate()
                         .alpha(1f)
-                        .withEndAction(null)
                         .setDuration(800);
             } else {
                 mPaint.setColor(mColorToUse);
