@@ -86,6 +86,7 @@ import static com.android.server.wm.WindowManagerDebugConfig.DEBUG_FOCUS;
 import static com.android.server.wm.WindowManagerDebugConfig.DEBUG_FOCUS_LIGHT;
 import static com.android.server.wm.WindowManagerDebugConfig.DEBUG_INPUT_METHOD;
 import static com.android.server.wm.WindowManagerDebugConfig.DEBUG_LAYOUT;
+import static com.android.server.wm.WindowManagerDebugConfig.DEBUG_LAYOUT_REPEATS;
 import static com.android.server.wm.WindowManagerDebugConfig.DEBUG_ORIENTATION;
 import static com.android.server.wm.WindowManagerDebugConfig.DEBUG_POWER;
 import static com.android.server.wm.WindowManagerDebugConfig.DEBUG_RESIZE;
@@ -4259,10 +4260,15 @@ class WindowState extends WindowContainer<WindowState> implements WindowManagerP
         }
         if (!mWinAnimator.mLastHidden || wasDeferred) {
             mWinAnimator.hide(reason);
+            getDisplayContent().mWallpaperController.mDeferredHideWallpaper = null;
             dispatchWallpaperVisibility(false);
             final DisplayContent displayContent = getDisplayContent();
             if (displayContent != null) {
                 displayContent.pendingLayoutChanges |= FINISH_LAYOUT_REDO_WALLPAPER;
+                if (DEBUG_LAYOUT_REPEATS) {
+                    mService.mWindowPlacerLocked.debugLayoutRepeats("hideWallpaperWindow " + this,
+                            displayContent.pendingLayoutChanges);
+                }
             }
         }
     }
