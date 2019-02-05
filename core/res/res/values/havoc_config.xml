@@ -29,6 +29,7 @@
         <item>airplane</item>
         <item>torch</item>
         <item>onthego</item>
+        <item>emergency</item>
     </string-array>
 
     <!-- The list of components which should be automatically disabled. -->
