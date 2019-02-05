@@ -59,4 +59,7 @@
 
     <bool name="config_relocatePieOnRotation">true</bool>
     <bool name="config_forcePieCentered">false</bool>
+
+    <!-- Whether to show HD icon in the status bar for volte -->
+    <bool name="config_display_hd_volte">false</bool>
 </resources>
