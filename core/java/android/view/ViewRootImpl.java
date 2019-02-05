@@ -5197,15 +5197,12 @@ public final class ViewRootImpl implements ViewParent,
 
             IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
             boolean isGestureButtonEnabled = false;
-            boolean isKeyguardOn = false;
             try {
                 isGestureButtonEnabled = wm.isGestureButtonEnabled();
-                isKeyguardOn = wm.isKeyguardShowingAndNotOccluded();
             } catch (RemoteException ex) {
                 isGestureButtonEnabled = false;
-                isKeyguardOn = false;
             }
-            if (isGestureButtonEnabled && !isKeyguardOn) {
+            if (isGestureButtonEnabled) {
                 if (event.getPointerCount() == 1) {
                     action = event.getActionMasked();
                     rotation = 0;
