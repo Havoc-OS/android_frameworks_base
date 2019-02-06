@@ -11304,6 +11304,13 @@ public final class Settings {
         public static final String EDGE_GESTURES_BACK_USE_BLACK_ARROW = "edge_gestures_back_use_black_arrow";
 
         /**
+         * Select various actions for squeeze gesture
+         *
+         * @hide
+         */
+        public static final String SQUEEZE_SELECTION = "squeeze_selection";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
