@@ -383,4 +383,14 @@
     <string name="pie_state_summary">Use pie controls while in immersive mode</string>
     <string name="pie_battery_level">"BATTERY LEVEL "</string>
     <string name="quick_settings_pie">Pie Control</string>
+
+    <string-array name="nav_bar_layouts_new">
+        <item>Normal</item>
+        <item>Compact</item>
+    </string-array>
+
+    <string-array name="nav_bar_layouts_values_new" translatable="false">
+        <item>default</item>
+        <item>space;left,back,home,recent,right;space</item>
+    </string-array>
 </resources>
