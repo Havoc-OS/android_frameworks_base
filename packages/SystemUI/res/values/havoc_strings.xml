@@ -324,4 +324,8 @@
         <item>default</item>
         <item>space;left,back,home,recent,right;space</item>
     </string-array>
+
+    <!-- Elmyra -->
+    <string name="elmyra_raw_sensor_string_type">com.google.sensor.elmyra.raw</string>
+    <string name="google_camera_app_package_name">com.google.android.GoogleCamera</string>
 </resources>

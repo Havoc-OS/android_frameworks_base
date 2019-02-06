@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2018 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources>
+    <!-- Elmyra -->
+    <integer name="elmyra_charging_gate_duration">500</integer>
+    <integer name="elmyra_false_prime_window">50</integer>
+    <integer name="elmyra_gesture_cooldown_time">450</integer>
+    <integer name="elmyra_keyguard_proximity_threshold">5</integer>
+    <integer name="elmyra_snapshot_gesture_delay_ms">100</integer>
+    <integer name="elmyra_snapshot_logger_gesture_size">10</integer>
+    <integer name="elmyra_snapshot_logger_incomplete_gesture_size">10</integer>
+    <integer name="elmyra_system_key_gate_duration">500</integer>
+    <integer name="elmyra_usb_gate_duration">500</integer>
+
+</resources>
