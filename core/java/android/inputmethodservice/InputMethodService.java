@@ -1278,10 +1278,10 @@ public class InputMethodService extends AbstractInputMethodService {
      */
     public void updateFullscreenMode() {
         boolean fullScreenOverride = Settings.System.getIntForUser(getContentResolver(),
-                Settings.System.DISABLE_FULLSCREEN_KEYBOARD, 0,
+                Settings.System.ENABLE_FULLSCREEN_KEYBOARD, 1,
                 UserHandle.USER_CURRENT_OR_SELF) != 0;
         boolean isFullscreen;
-        if (fullScreenOverride) {
+        if (!fullScreenOverride) {
             isFullscreen = false;
         } else {
             isFullscreen = mShowInputRequested && onEvaluateFullscreenMode();

@@ -180,7 +180,6 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     private boolean mIsPowerCameraGesture;
     private String mPreviousSource;
 
-    // omni additions
     private boolean mShowIndicator = true;
     private boolean mShowLockicon;
 
@@ -856,7 +855,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
 
     public void onKeyguardShowingChanged() {
         mShowIndicator = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.HIDE_LOCKSCREEN_INDICATOR_DISPLAY, 0, UserHandle.USER_CURRENT) == 0;
+                Settings.System.SHOW_LOCKSCREEN_INDICATOR_DISPLAY, 1, UserHandle.USER_CURRENT) == 1;
         updateLeftAffordance();
         updateRightAffordance();
         inflateCameraPreview();
@@ -882,7 +881,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
     public void setDozing(boolean dozing, boolean animate) {
         mDozing = dozing;
         boolean mShowLockicon = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.HIDE_LOCKSCREEN_ICON, 0, UserHandle.USER_CURRENT) == 0;
+                Settings.System.SHOW_LOCKSCREEN_ICON, 1, UserHandle.USER_CURRENT) == 1;
 
         updateCameraVisibility();
         updateLeftAffordanceIcon();
@@ -927,7 +926,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
             final boolean showAffordance =
                     getResources().getBoolean(R.bool.config_keyguardShowLeftAffordance);
             if (mLeftIsVoiceAssist) {
-                mIconState.isVisible = mUserSetupComplete && showAffordance && !hideShortcuts();
+                mIconState.isVisible = mUserSetupComplete && showAffordance && showShortcuts();
                 if (mLeftAssistIcon == null) {
                     mIconState.drawable = mContext.getDrawable(R.drawable.ic_mic_26dp);
                 } else {
@@ -936,7 +935,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
                 mIconState.contentDescription = mContext.getString(
                         R.string.accessibility_voice_assist_button);
             } else {
-                mIconState.isVisible = mUserSetupComplete && showAffordance && isPhoneVisible() && !hideShortcuts();
+                mIconState.isVisible = mUserSetupComplete && showAffordance && isPhoneVisible() && showShortcuts();
                 mIconState.drawable = mContext.getDrawable(R.drawable.ic_phone_24dp);
                 mIconState.contentDescription = mContext.getString(
                         R.string.accessibility_phone_button);
@@ -961,7 +960,7 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
             mIconState.isVisible = !isCameraDisabled && resolved != null
                     && getResources().getBoolean(R.bool.config_keyguardShowCameraAffordance)
                     && mUserSetupComplete
-                    && !hideShortcuts();
+                    && showShortcuts();
             mIconState.drawable = mContext.getDrawable(R.drawable.ic_camera_alt_24dp);
             mIconState.contentDescription =
                     mContext.getString(R.string.accessibility_camera_button);
@@ -993,10 +992,10 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         boolean secure = mLockPatternUtils.isSecure(KeyguardUpdateMonitor.getCurrentUser());
         return (secure && !canSkipBouncer) ? SECURE_CAMERA_INTENT : INSECURE_CAMERA_INTENT;
     }
-     private boolean hideShortcuts() {
+     private boolean showShortcuts() {
         boolean secure = mLockPatternUtils.isSecure(KeyguardUpdateMonitor.getCurrentUser());
         return secure && Settings.Secure.getIntForUser(
-                mContext.getContentResolver(), Settings.Secure.HIDE_LOCK_SHORTCUTS, 0,
+                mContext.getContentResolver(), Settings.Secure.SHOW_LOCK_SHORTCUTS, 1,
                 KeyguardUpdateMonitor.getCurrentUser()) != 0;
     }
 }

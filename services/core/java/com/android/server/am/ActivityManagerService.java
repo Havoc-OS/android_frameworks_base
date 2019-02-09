@@ -2084,7 +2084,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                     AppErrorResult res = (AppErrorResult) data.get("result");
                     if (mShowDialogs && !mSleeping && !mShuttingDown) {
                         if (Settings.System.getInt(mContext.getContentResolver(),
-                                Settings.System.DISABLE_FC_NOTIFICATIONS, 0) != 1) {;
+                                Settings.System.ENABLE_FC_NOTIFICATIONS, 1) != 0) {;
                             d = new StrictModeViolationDialog(mUiContext,
                                     ActivityManagerService.this, res, proc);
                             proc.crashDialog = d;

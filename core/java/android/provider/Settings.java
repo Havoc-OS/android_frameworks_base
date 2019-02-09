@@ -4007,10 +4007,10 @@ public final class Settings {
         public static final Validator POINTER_LOCATION_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
-         * Disable FC Notifications
+         * Enable FC Notifications
          * @hide
          */
-        public static final String DISABLE_FC_NOTIFICATIONS = "disable_fc_notifications";
+        public static final String ENABLE_FC_NOTIFICATIONS = "enable_fc_notifications";
 
         /**
          * Show touch positions on screen?
@@ -4038,10 +4038,10 @@ public final class Settings {
         public static final Validator WINDOW_ORIENTATION_LISTENER_LOG_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
-         * Disable Immersive Message
+         * Enable Immersive Message
          * @hide
          */
-        public static final String DISABLE_IMMERSIVE_MESSAGE = "disable_immersive_message";
+        public static final String ENABLE_IMMERSIVE_MESSAGE = "enable_immersive_message";
 
         /**
          * @deprecated Use {@link android.provider.Settings.Global#POWER_SOUNDS_ENABLED}
@@ -4580,7 +4580,7 @@ public final class Settings {
          * Override and forcefully disable the fullscreen keyboard
          * @hide
          */
-        public static final String DISABLE_FULLSCREEN_KEYBOARD = "disable_fullscreen_keyboard";
+        public static final String ENABLE_FULLSCREEN_KEYBOARD = "enable_fullscreen_keyboard";
 
         /**
          * Automatic keyboard rotation timeout.  0 to disable completely.
@@ -5225,27 +5225,28 @@ public final class Settings {
         public static final String CLEAR_RECENTS_STYLE = "clear_recents_style";
 
          /**
-         * Change the color of the lockscreen bottom camera shortcut
+         * Show statusbar on lockscreen
          * @hide
          */
-        public static final String HIDE_LOCKSCREEN_STATUS_BAR = "hide_lockscreen_status_bar";
+        public static final String SHOW_LOCKSCREEN_STATUS_BAR = "show_lockscreen_status_bar";
 
         /**
-         * Hide lockscreen indicator text
-         *
+         * Show lockscreen indicator text
          * @hide
          */
-        
-        public static final String HIDE_LOCKSCREEN_INDICATOR_DISPLAY = "hide_lockscreen_indicator_display";
+        public static final String SHOW_LOCKSCREEN_INDICATOR_DISPLAY = "show_lockscreen_indicator_display";
 
         /**
-         * Hide lockscreen icon
-         *
+         * Show lockscreen icon
+         * @hide
+         */   
+        public static final String SHOW_LOCKSCREEN_ICON = "show_lockscreen_icon";
+
+        /**
+         * Recents Clear All Button
          * @hide
          */
-         public static final String CLEAR_RECENTS_STYLE_ENABLE = "clear_recents_style_enable";
-         
-         public static final String HIDE_LOCKSCREEN_ICON = "hide_lockscreen_icon";
+        public static final String CLEAR_RECENTS_STYLE_ENABLE = "clear_recents_style_enable";
 
        /**
          * Recents Clear All Button Color
@@ -6432,6 +6433,18 @@ public final class Settings {
         public static final String CUSTOM_AMBIENT_POCKETMODE_GESTURE = "custom_ambient_pocketmode_gesture";
 
         /**
+         * Brightness slider location
+         * @hide
+         */
+        public static final String BRIGHTNESS_SLIDER_LOCATION = "brightness_slider_location";
+
+        /**
+         * Brightness icon location
+         * @hide
+         */
+        public static final String BRIGHTNESS_ICON_LOCATION = "brightness_icon_location";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -6706,9 +6719,9 @@ public final class Settings {
             PRIVATE_SETTINGS.add(PROXIMITY_AUTO_SPEAKER_INCALL_ONLY);
             PRIVATE_SETTINGS.add(NOTIFICATION_SOUND_VIB_SCREEN_ON);
             PRIVATE_SETTINGS.add(STATUSBAR_HIDE_NOTCH);
-            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
-            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
-	        PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_ICON);
+            PRIVATE_SETTINGS.add(SHOW_LOCKSCREEN_STATUS_BAR);
+            PRIVATE_SETTINGS.add(SHOW_LOCKSCREEN_INDICATOR_DISPLAY);
+	        PRIVATE_SETTINGS.add(SHOW_LOCKSCREEN_ICON);
             PRIVATE_SETTINGS.add(QS_TILE_STYLE);       
             PRIVATE_SETTINGS.add(ONE_HAND_MODE_ENABLED);
             PRIVATE_SETTINGS.add(TOAST_ICON);
@@ -10649,8 +10662,7 @@ public final class Settings {
          * Whether user is allowed to pull down quick settings on secure keyguard.
          * @hide
          */
-        public static final String STATUS_BAR_LOCKED_ON_SECURE_KEYGUARD =
-                "status_bar_locked_on_secure_keyguard";
+        public static final String STATUS_BAR_ON_SECURE_KEYGUARD = "status_bar_on_secure_keyguard";
 
         /**
          * Whether to set a lower brightness level when enabling night mode
@@ -10720,12 +10732,12 @@ public final class Settings {
          */
         public static final String LOCKSCREEN_VISUALIZER_ENABLED = "lockscreen_visualizer_enabled";
 
-	/*
-         * Hide lockscreen shortcuts on secure lock screens
+	    /**
+         * Show lockscreen shortcuts on lock screens
          *
          * @hide
          */
-        public static final String HIDE_LOCK_SHORTCUTS = "hide_lock_shortcuts";
+        public static final String SHOW_LOCK_SHORTCUTS = "show_lock_shortcuts";
 
         /**
          * Force authorize Substratum (or equivalent) frontend calling packages by ThemeInterfacer
@@ -15451,10 +15463,10 @@ public final class Settings {
         public static final String ALLOW_SIGNATURE_FAKE = "allow_signature_fake";
 
         /**
-         * Disabled Transition animations of the android system
+         * Enable Transition animations of the android system
          * @hide
          */
-        public static final String DISABLE_TRANSITION_ANIMATIONS = "disable_transition_animations";
+        public static final String ENABLE_TRANSITION_ANIMATIONS = "enable_transition_animations";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
