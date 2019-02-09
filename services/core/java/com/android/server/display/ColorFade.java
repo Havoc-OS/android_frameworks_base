@@ -57,7 +57,7 @@ import com.android.server.policy.WindowManagerPolicy;
  * that belongs to the {@link DisplayPowerController}.
  * </p>
  */
-final class ColorFade implements ScreenStateAnimator {
+final class ColorFade {
     private static final String TAG = "ColorFade";
 
     private static final boolean DEBUG = false;
