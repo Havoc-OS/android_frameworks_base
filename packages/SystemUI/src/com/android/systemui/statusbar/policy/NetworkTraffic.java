@@ -29,6 +29,8 @@ import android.widget.TextView;
 
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.DarkIconDispatcher.DarkReceiver;
+import com.android.settingslib.Utils;
+
 /*
  *
  * Seeing how an Integer object in java requires at least 16 Bytes, it seemed awfully wasteful
@@ -359,5 +361,16 @@ public class NetworkTraffic extends TextView {
         } else {
             setVisibility(View.GONE);
         }
+    }
+
+    public void useWallpaperTextColor(boolean shouldUseWallpaperTextColor) {
+        if (shouldUseWallpaperTextColor) {
+            mTintColor = Utils.getColorAttr(mContext, R.attr.wallpaperTextColor);
+	        updateTrafficDrawable();
+        } else {
+	        final Resources resources = getResources();
+	        mTintColor = resources.getColor(android.R.color.white);
+	        updateTrafficDrawable();
+	    }
     }
 }
