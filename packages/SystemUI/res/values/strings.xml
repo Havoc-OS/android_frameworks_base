@@ -2015,7 +2015,7 @@
     <string name="tuner_doze_always_on" translatable="false">Always on</string>
 
     <!-- SysUI Tuner: Section to customize lockscreen shortcuts [CHAR LIMIT=60] -->
-    <string name="tuner_lock_screen">Lock screen</string>
+    <string name="tuner_lock_screen">Bottom shortcuts</string>
 
     <!-- Making the PIP fullscreen [CHAR LIMIT=25] -->
     <string name="pip_phone_expand">Expand</string>
