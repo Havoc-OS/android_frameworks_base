@@ -5442,12 +5442,6 @@ public final class Settings {
         public static final int SYSTEM_THEME_STYLE_DARK = 2;
 
         /**
-         * SYSTEM_THEME_STYLE value for black theme mode.
-         * @hide
-         */
-        public static final int SYSTEM_THEME_STYLE_BLACK = 3;
-
-        /**
          * 0 - Default
          * 1 - Round with ring
          * 2 - Two-toned round with ring
@@ -5785,14 +5779,6 @@ public final class Settings {
          * @hide
          */
         public static final String LOCK_DATE_FONTS = "lock_date_fonts";
-
-        /**
-         * 0 - Light
-         * 1 - Dark
-         * 2 - Black
-         * @hide
-         */
-        public static final String NOTIFICATION_STYLE = "notification_style";
 
         /**
          * @hide
@@ -6742,7 +6728,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUS_BAR_SHOW_TICKER);
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_ANIMATION_MODE);
             PRIVATE_SETTINGS.add(STATUS_BAR_TICKER_TICK_DURATION);
-            PRIVATE_SETTINGS.add(NOTIFICATION_STYLE); 
             PRIVATE_SETTINGS.add(QS_HEADER_STYLE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_STATE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_TYPE);

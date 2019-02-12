@@ -513,7 +513,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     private ArrayList<String> mStoplist = new ArrayList<String>();
     private ArrayList<String> mBlacklist = new ArrayList<String>();
 
-    private int mNotificationStyle;
     private boolean mAmbientMediaPlaying;
     KeyguardShortcuts mKeyguardShortcuts;
 
@@ -1015,7 +1014,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateDisplaySize(); // populates mDisplayMetrics
         updateResources();
         getCurrentThemeSetting();
-        getNotificationStyleSetting();
         updateTheme();
 
         inflateStatusBarWindow(context);
@@ -2510,24 +2508,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         return ThemeAccentUtils.isUsingDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
-    // Check for the black system theme
-    public boolean isUsingBlackTheme() {
-        return ThemeAccentUtils.isUsingBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
-    }
-
     // Check for black and white accent overlays
     public void unfuckBlackWhiteAccent() {
         ThemeAccentUtils.unfuckBlackWhiteAccent(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
-    }
-
-    // Check for the dark notification theme
-    public boolean isUsingDarkNotificationTheme() {
-        return ThemeAccentUtils.isUsingDarkNotificationTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
-    }
-
-    // Check for the black notification theme
-    public boolean isUsingBlackNotificationTheme() {
-        return ThemeAccentUtils.isUsingBlackNotificationTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
     public boolean isCurrentRoundedSameAsFw() {
@@ -4702,17 +4685,11 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Settings.System.SYSTEM_UI_THEME, 0, mLockscreenUserManager.getCurrentUserId());
     }
 
-    private void getNotificationStyleSetting() {
-        mNotificationStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.NOTIFICATION_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
-    }
-
     /**
      * Switches theme from light to dark and vice-versa.
      */
     protected void updateTheme() {
         final boolean inflated = mStackScroller != null && mStatusBarWindowManager != null;
-        boolean useBlackTheme = false;
         boolean useDarkTheme = false;
 
         haltTicker();
@@ -4733,7 +4710,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             unfuckBlackWhiteAccent();
         } else {
             useDarkTheme = mCurrentTheme == 2;
-            useBlackTheme = mCurrentTheme == 3;
         }
 
         if (isUsingDarkTheme() != useDarkTheme) {
@@ -4741,23 +4717,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             // with white on white or black on black
             unfuckBlackWhiteAccent();
             ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDarkTheme);
-        }
-
-        if (isUsingBlackTheme() != useBlackTheme) {
-            // Check for black and white accent so we don't end up
-            // with white on white or black on black
-            unfuckBlackWhiteAccent();
-            ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlackTheme);
-        }
-
-        boolean useDarkNotificationTheme = (mNotificationStyle == 0 && useDarkTheme && !useBlackTheme) || mNotificationStyle == 2;
-        boolean useBlackNotificationTheme = (mNotificationStyle == 0 && !useDarkTheme && useBlackTheme) || mNotificationStyle == 3;
-
-        if ((isUsingDarkNotificationTheme() != useDarkNotificationTheme) ||
-                (isUsingBlackNotificationTheme() != useBlackNotificationTheme)) {
-            ThemeAccentUtils.setNotificationTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(),
-	        useDarkTheme, useBlackTheme, mNotificationStyle);
-            onOverlayChanged();
         }
 
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
@@ -5599,9 +5558,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.STATUS_BAR_TICKER_TICK_DURATION),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.NOTIFICATION_STYLE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_HEADER_STYLE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -5705,10 +5661,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_TICKER_TICK_DURATION))) {
                 updateTickerTickDuration();
-            } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.NOTIFICATION_STYLE))) {
-                getNotificationStyleSetting();
-                updateTheme();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.QS_HEADER_STYLE))) {
                 stockQSHeaderStyle();

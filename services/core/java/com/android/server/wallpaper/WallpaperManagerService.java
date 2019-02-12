@@ -401,7 +401,6 @@ public class WallpaperManagerService extends IWallpaperManager.Stub
                 }
                 break;
             case Settings.System.SYSTEM_THEME_STYLE_DARK:
-            case Settings.System.SYSTEM_THEME_STYLE_BLACK:
                 if (mThemeMode == Settings.System.SYSTEM_THEME_STYLE_WALLPAPER) {
                     result = !supportDarkTheme;
                 }
@@ -600,7 +599,7 @@ public class WallpaperManagerService extends IWallpaperManager.Stub
         boolean supportDarkTheme = (colorHints & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
         if (mThemeMode == Settings.System.SYSTEM_THEME_STYLE_WALLPAPER ||
                 (mThemeMode == Settings.System.SYSTEM_THEME_STYLE_LIGHT && !supportDarkTheme) ||
-                ((mThemeMode == Settings.System.SYSTEM_THEME_STYLE_DARK && supportDarkTheme) || (mThemeMode == Settings.System.SYSTEM_THEME_STYLE_BLACK && supportDarkTheme))) {
+                (mThemeMode == Settings.System.SYSTEM_THEME_STYLE_DARK && supportDarkTheme)) {
             return colors;
         }
 
@@ -609,7 +608,7 @@ public class WallpaperManagerService extends IWallpaperManager.Stub
 
         if (mThemeMode == Settings.System.SYSTEM_THEME_STYLE_LIGHT) {
             colorHints &= ~WallpaperColors.HINT_SUPPORTS_DARK_THEME;
-        } else if (mThemeMode == Settings.System.SYSTEM_THEME_STYLE_DARK || mThemeMode == Settings.System.SYSTEM_THEME_STYLE_BLACK) {
+        } else if (mThemeMode == Settings.System.SYSTEM_THEME_STYLE_DARK) {
             colorHints |= WallpaperColors.HINT_SUPPORTS_DARK_THEME;
         }
         themeColors.setColorHints(colorHints);
