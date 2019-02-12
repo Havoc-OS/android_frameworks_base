@@ -114,8 +114,8 @@ public class NetworkMonitor extends StateMachine {
                                                       + "AppleWebKit/537.36 (KHTML, like Gecko) "
                                                       + "Chrome/60.0.3112.32 Safari/537.36";
 
-    private static final String DEFAULT_HTTPS_URL_CN     = "https://captive.v2ex.co/generate_204";
-    private static final String DEFAULT_HTTP_URL_CN      = "http://captive.v2ex.co/generate_204";
+    private static final String DEFAULT_HTTPS_URL_CN     = "https://connect.rom.miui.com/generate_204";
+    private static final String DEFAULT_HTTP_URL_CN      = "http://connect.rom.miui.com/generate_204";
     private static final String DEFAULT_FALLBACK_URL_CN  = "http://g.cn/generate_204";
 
     private static final int SOCKET_TIMEOUT_MS = 10000;
