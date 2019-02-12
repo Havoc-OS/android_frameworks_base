@@ -184,6 +184,9 @@ public final class ViewRootImpl implements ViewParent,
     private final boolean SCROLL_BOOST_SS_ENABLE =
                     SystemProperties.getBoolean("vendor.perf.gestureflingboost.enable", false);
 
+    private final int mSwipeStartThreshold =
+                    SystemProperties.getInt("ro.bottom_gesture.swipe_start.threshold", 20);
+
     /**
      * Maximum time we allow the user to roll the trackball enough to generate
      * a key event, before resetting the counters.
@@ -5206,10 +5209,10 @@ public final class ViewRootImpl implements ViewParent,
                                 raw = event.getRawY();
                             }
                             if (rotation == 0 || rotation == 1) {
-                                mGestureButtonZone = mScreenHeight - 20;
+                                mGestureButtonZone = mScreenHeight - mSwipeStartThreshold;
                                 hit = raw > ((float) mGestureButtonZone);
                             } else {
-                                mGestureButtonZone = 20;
+                                mGestureButtonZone = mSwipeStartThreshold;
                                 hit = raw < ((float) mGestureButtonZone);
                             }
                             if (hit) {
