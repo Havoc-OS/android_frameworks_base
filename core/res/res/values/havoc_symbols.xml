@@ -216,4 +216,7 @@
     <!-- Power button fingerprint -->
     <java-symbol type="bool" name="config_powerButtonFingerprint" />
 
+    <!-- Whether to enable OnePlus Camera hack -->
+    <java-symbol type="bool" name="config_enableOnePlusCameraHack" />
+
 </resources>
