@@ -5442,6 +5442,18 @@ public final class Settings {
         public static final int SYSTEM_THEME_STYLE_DARK = 2;
 
         /**
+         * SYSTEM_THEME_STYLE value for shady theme mode.
+         * @hide
+         */
+        public static final int SYSTEM_THEME_STYLE_SHADY = 3;
+
+        /**
+         * SYSTEM_THEME_STYLE value for glassy theme mode.
+         * @hide
+         */
+        public static final int SYSTEM_THEME_STYLE_GLASSY = 4;
+
+        /**
          * 0 - Default
          * 1 - Round with ring
          * 2 - Two-toned round with ring
@@ -6439,6 +6451,12 @@ public final class Settings {
          * @hide
          */
         public static final String DOZE_ON_CHARGE_NOW = "doze_on_charge_now";
+
+        /**
+         * Select various themes colors
+         * @hide
+         */
+        public static final String THEME_PICKER = "theme_picker";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings

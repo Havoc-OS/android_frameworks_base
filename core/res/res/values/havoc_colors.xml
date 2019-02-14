@@ -62,4 +62,9 @@
 
     <!-- QS Accent -->
     <color name="qs_accent">@color/accent_device_default_light</color>
+
+    <!-- Havoc Themes  -->
+    <color name="theme_background_shady">#000000</color>
+    <color name="theme_background_glassy">#ae000000</color>
+    <color name="theme_notification_background_shady">#ff000000</color>
 </resources>

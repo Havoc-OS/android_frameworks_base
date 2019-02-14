@@ -2508,6 +2508,16 @@ public class StatusBar extends SystemUI implements DemoMode,
         return ThemeAccentUtils.isUsingDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
+    // Check for the shady system theme
+    public boolean isUsingShadyTheme() {
+        return ThemeAccentUtils.isUsingShadyTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
+    // Check for the glassy system theme
+    public boolean isUsingGlassyTheme() {
+        return ThemeAccentUtils.isUsingGlassyTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
     // Check for black and white accent overlays
     public void unfuckBlackWhiteAccent() {
         ThemeAccentUtils.unfuckBlackWhiteAccent(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
@@ -4691,6 +4701,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     protected void updateTheme() {
         final boolean inflated = mStackScroller != null && mStatusBarWindowManager != null;
         boolean useDarkTheme = false;
+        boolean useShadyTheme = false;
+        boolean useGlassyTheme = false;
 
         haltTicker();
 
@@ -4710,6 +4722,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             unfuckBlackWhiteAccent();
         } else {
             useDarkTheme = mCurrentTheme == 2;
+            useShadyTheme = mCurrentTheme == 3;
+            useGlassyTheme = mCurrentTheme == 4;
         }
 
         if (isUsingDarkTheme() != useDarkTheme) {
@@ -4717,6 +4731,20 @@ public class StatusBar extends SystemUI implements DemoMode,
             // with white on white or black on black
             unfuckBlackWhiteAccent();
             ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDarkTheme);
+        }
+
+        if (isUsingShadyTheme() != useShadyTheme) {
+            // Check for black and white accent so we don't end up
+            // with white on white or black on black
+            unfuckBlackWhiteAccent();
+            ThemeAccentUtils.setShadyTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useShadyTheme);
+        }
+
+        if (isUsingGlassyTheme() != useGlassyTheme) {
+            // Check for black and white accent so we don't end up
+            // with white on white or black on black
+            unfuckBlackWhiteAccent();
+            ThemeAccentUtils.setGlassyTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useGlassyTheme);
         }
 
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
@@ -4760,6 +4788,18 @@ public class StatusBar extends SystemUI implements DemoMode,
     // Unload all the theme accents
     public void unloadAccents() {
         ThemeAccentUtils.unloadAccents(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
+    // Switches theme from to another or back to stock
+    public void updateThemes() {
+        int themeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.THEME_PICKER, 0, mLockscreenUserManager.getCurrentUserId());
+        ThemeAccentUtils.updateThemes(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), themeSetting);
+    }
+
+    // Unload all the themes
+    public void unloadThemes() {
+        ThemeAccentUtils.unloadThemes(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
     // Switches qs tile style from stock to custom
@@ -5626,6 +5666,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STOCK_STATUSBAR_IN_HIDE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.THEME_PICKER),
+                    false, this, UserHandle.USER_ALL);
 	    }
 
         @Override
@@ -5714,6 +5757,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.DISPLAY_CUTOUT_MODE)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.STOCK_STATUSBAR_IN_HIDE))) {
                 handleCutout(null);
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.THEME_PICKER))) {
+                // Unload the themes and update the theme only when the user asks.
+                // Keeps us from overloading the system by performing these tasks every time.
+                unloadThemes();
+                updateThemes();
             }
         }
 
