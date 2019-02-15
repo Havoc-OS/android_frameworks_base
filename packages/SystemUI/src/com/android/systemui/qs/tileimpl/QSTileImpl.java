@@ -413,6 +413,8 @@ public abstract class QSTileImpl<TState extends State> implements QSTile {
                     Settings.System.QS_PANEL_BG_USE_WALL, 0, UserHandle.USER_CURRENT) == 1;
         boolean setQsFromResources = Settings.System.getIntForUser(context.getContentResolver(),
                     Settings.System.QS_PANEL_BG_USE_FW, 1, UserHandle.USER_CURRENT) == 1;
+        boolean setQsFromAccent = Settings.System.getIntForUser(context.getContentResolver(),
+                    Settings.System.QS_PANEL_BG_USE_ACCENT, 1, UserHandle.USER_CURRENT) == 1;
 
         int qsBackGroundColor = Settings.System.getIntForUser(context.getContentResolver(),
                 Settings.System.QS_PANEL_BG_COLOR, activeDefault, UserHandle.USER_CURRENT);
@@ -439,10 +441,14 @@ public abstract class QSTileImpl<TState extends State> implements QSTile {
                     if (setQsFromResources) {
                         return Utils.getColorAttr(context, android.R.attr.colorPrimary);
                     } else {
-                        if (setQsFromWall)
-                            return qsBackGroundColorWall;
-                        else
-                            return qsBackGroundColor;
+                        if (setQsFromAccent) {
+                            return context.getResources().getColor(R.color.accent_device_default_light);
+                        } else {
+                            if (setQsFromWall)
+                                return qsBackGroundColorWall;
+                            else
+                                return qsBackGroundColor;
+                        }
                     }
                 } else {
                     return context.getColor(R.color.qs_tiles_active_tint);

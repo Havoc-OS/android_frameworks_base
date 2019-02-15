@@ -86,6 +86,7 @@ public class QSContainerImpl extends FrameLayout implements
     private int mCurrentColor;
     private int mUserThemeSetting;
     private boolean mSetQsFromWall;
+    private boolean mSetQsFromAccent;
     private boolean mUseBlackTheme = false;
     private boolean mUseDarkTheme = false;
     private boolean mSetQsFromResources;
@@ -183,6 +184,9 @@ public class QSContainerImpl extends FrameLayout implements
                     .getUriFor(Settings.System.QS_PANEL_BG_USE_WALL), false,
                     this, UserHandle.USER_ALL);
             getContext().getContentResolver().registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.QS_PANEL_BG_USE_ACCENT), false,
+                    this, UserHandle.USER_ALL);
+            getContext().getContentResolver().registerContentObserver(Settings.System
                     .getUriFor(Settings.System.QS_PANEL_BG_USE_FW), false,
                     this, UserHandle.USER_ALL);
             getContext().getContentResolver().registerContentObserver(Settings.Secure
@@ -203,6 +207,8 @@ public class QSContainerImpl extends FrameLayout implements
         int userQsFwSetting = Settings.System.getIntForUser(getContext().getContentResolver(),
                     Settings.System.QS_PANEL_BG_USE_FW, 1, UserHandle.USER_CURRENT);
         mSetQsFromResources = userQsFwSetting == 1;
+        mSetQsFromAccent = Settings.System.getIntForUser(getContext().getContentResolver(),
+                    Settings.System.QS_PANEL_BG_USE_ACCENT, 0, UserHandle.USER_CURRENT) == 1;
         mQsBackGroundAlpha = Settings.System.getIntForUser(getContext().getContentResolver(),
                 Settings.System.QS_PANEL_BG_ALPHA, 255,
                 UserHandle.USER_CURRENT);
@@ -228,7 +234,9 @@ public class QSContainerImpl extends FrameLayout implements
             if (mUseBlackTheme)
                 mUseDarkTheme = false;
         }
-        mCurrentColor = mSetQsFromWall ? mQsBackGroundColorWall : mQsBackGroundColor;
+        mCurrentColor = mSetQsFromAccent
+                ? getContext().getResources().getColor(R.color.accent_device_default_light)
+                : mSetQsFromWall ? mQsBackGroundColorWall : mQsBackGroundColor;
         setQsBackground();
         setQsOverlay();
     }

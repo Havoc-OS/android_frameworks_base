@@ -67,4 +67,7 @@
     <color name="pie_battery_low">#f90028</color>
     <color name="pie_shader_start">#FF4d4d4d</color>
     <color name="pie_shader_end">#FF212121</color>
+
+    <!-- Device accent -->
+    <color name="accent_device_default_light">@*android:color/accent_device_default_light</color>
 </resources>
