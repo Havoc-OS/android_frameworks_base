@@ -197,4 +197,13 @@ public class BrightnessDialog extends Activity implements Tunable {
         view.setVisibility(newValue == null || Integer.parseInt(newValue) != 0
                 ? View.VISIBLE : View.GONE);
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        // If the BrightnessDialog loses focus, dismiss it.
+        if (!hasFocus) {
+            finish();
+        }
+    }
 }
