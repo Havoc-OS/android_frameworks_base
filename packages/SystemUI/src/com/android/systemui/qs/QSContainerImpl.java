@@ -156,7 +156,7 @@ public class QSContainerImpl extends FrameLayout implements
         // Hide the backgrounds when in landscape mode.
         if (mLandscape) {
             mBackgroundGradient.setVisibility(View.INVISIBLE);
-        } else if (!mQsBackgroundAlpha) {
+        } else if (!mQsBackgroundAlpha || !mLandscape) {
             mBackgroundGradient.setVisibility(View.VISIBLE);
         }
 
