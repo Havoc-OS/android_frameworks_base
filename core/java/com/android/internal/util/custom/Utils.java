@@ -93,15 +93,7 @@ public class Utils {
     public static void switchScreenOn(Context context) {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         if (pm == null) return;
-        PowerManager.WakeLock wakeLock = pm.newWakeLock((
-                PowerManager.SCREEN_BRIGHT_WAKE_LOCK |
-                        PowerManager.ACQUIRE_CAUSES_WAKEUP), "wakeup:device");
-        boolean isScreenOn = pm.isScreenOn();
-        /* Wake up the device only when screen is off.
-         * Otherwise don't bother to do anything. */
-        if (!wakeLock.isHeld() && !isScreenOn) {
-            wakeLock.acquire();
-        }
+        pm.wakeUp(SystemClock.uptimeMillis(), "com.android.systemui:CAMERA_GESTURE_PREVENT_LOCK");
     }
 
     public static boolean deviceHasFlashlight(Context ctx) {
