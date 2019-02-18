@@ -115,6 +115,7 @@ public class StatusBarNetworkTraffic extends NetworkTraffic implements StatusIco
         if (mIsEnabled && mTrafficVisible && mSystemIconVisible) {
             setVisibility(View.VISIBLE);
         } else {
+            setText("");
             setVisibility(View.GONE);
         }
     }
