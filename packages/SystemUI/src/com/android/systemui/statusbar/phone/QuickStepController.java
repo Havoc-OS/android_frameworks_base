@@ -45,7 +45,6 @@ import android.os.RemoteException;
 import android.util.FloatProperty;
 import android.util.Log;
 import android.util.Slog;
-import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -271,7 +270,6 @@ public class QuickStepController implements GestureHelper {
                     int deltaY = (int) mPreviousUpEventY - (int) event.getY();
                     boolean isDoubleTapReally = deltaX * deltaX + deltaY * deltaY < sDoubleTapSquare;
                     if (isDoubleTapReally) {
-                        mNavigationBarView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                         HavocUtils.switchScreenOff(mContext);
                     }
                 } else {
@@ -402,7 +400,6 @@ public class QuickStepController implements GestureHelper {
                     }
                     if (mBackActionScheduled) {
                         endQuickScrub(true /* animate */);
-                        mNavigationBarView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                         HavocUtils.sendKeycode(KeyEvent.KEYCODE_BACK, mHandler);
                     } else {
                         endQuickScrub(true /* animate */);
@@ -430,7 +427,6 @@ public class QuickStepController implements GestureHelper {
             isDoubleTapPending = false;
             // it was a single tap, let's trigger the home button action
             mHandler.removeCallbacksAndMessages(null);
-            mNavigationBarView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             HavocUtils.sendKeycode(KeyEvent.KEYCODE_HOME, mHandler);
         }
     };
@@ -446,7 +442,6 @@ public class QuickStepController implements GestureHelper {
 
         @Override
         public void run() {
-            mNavigationBarView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             moveKbCursor(isRight, true);
         }
     }
