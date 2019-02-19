@@ -11312,6 +11312,20 @@ public final class Settings {
         public static final String SQUEEZE_SELECTION = "squeeze_selection";
 
         /**
+         * Launch custom application when using the squeeze feature (active edge)
+         *
+         * @hide
+         */
+        public static final String SQUEEZE_CUSTOM_APP = "squeeze_custom_app";
+
+        /**
+         * Display friendly name of custom application launched when
+         * using the squeeze feature (active edge)
+         * @hide
+         */
+        public static final String SQUEEZE_CUSTOM_APP_FR_NAME = "squeeze_custom_app_fr_name";
+
+        /**
          * Whether to show or hide the keyguard multiuser switch
          *
          * @hide

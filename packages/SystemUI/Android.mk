@@ -93,6 +93,7 @@ LOCAL_SRC_FILES += $(call all-java-files-under, ../../../../$(SLIM_RECENT_DIR)/s
 LOCAL_RESOURCE_DIR += $(SLIM_RECENT_DIR)/res
 
 include frameworks/base/packages/SettingsLib/common.mk
+include vendor/support/common.mk
 
 LOCAL_AAPT_FLAGS := --extra-packages com.android.keyguard
 
