@@ -2020,6 +2020,8 @@ public class ActivityManagerService extends IActivityManager.Stub
 
     private static String sTheRealBuildSerial = Build.UNKNOWN;
 
+    final boolean mAllowAppBroadcast;
+
     /**
      * Current global configuration information. Contains general settings for the entire system,
      * also corresponds to the merged configuration of the default display.
@@ -3138,6 +3140,7 @@ public class ActivityManagerService extends IActivityManager.Stub
         mIntentFirewall = null;
         mKeyguardController = null;
         mPermissionReviewRequired = false;
+        mAllowAppBroadcast = false;
         mProcessCpuThread = null;
         mProcessStats = null;
         mProviderMap = null;
@@ -3171,6 +3174,9 @@ public class ActivityManagerService extends IActivityManager.Stub
 
         mPermissionReviewRequired = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_permissionReviewRequired);
+
+        mAllowAppBroadcast = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_allowActivePackageBroadcast);
 
         mHandlerThread = new ServiceThread(TAG,
                 THREAD_PRIORITY_FOREGROUND, false /*allowIo*/);
@@ -27634,6 +27640,10 @@ public class ActivityManagerService extends IActivityManager.Stub
 
     Context getContext() {
         return mContext;
+    }
+
+    public boolean isAppBroadcastAllowed() {
+        return mAllowAppBroadcast;
     }
 
 }

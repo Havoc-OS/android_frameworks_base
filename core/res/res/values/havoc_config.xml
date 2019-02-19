@@ -236,4 +236,7 @@
 
     <!-- True if the home button has the ability to wake up phone from lockscreen-->
     <bool name="config_HomeWakeButton">false</bool>
+
+    <!-- Whether to allow sending active app broadcast -->
+    <bool name="config_allowActivePackageBroadcast">false</bool>
 </resources>
