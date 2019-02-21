@@ -396,6 +396,20 @@ public class Config {
             return new ActionConfig(ctx, action, iconUri);
         }
 
+        public static String getActionFromDelimitedString(Context ctx, String delimited) {
+            ActionConfig actionConfig = new ActionConfig(ctx);
+            actionConfig.fromDelimitedString(delimited);
+            return actionConfig.action;
+        }
+
+        public static String getActionFromDelimitedString(Context ctx, String delimited,
+                String defaultAction) {
+            if (delimited == null) {
+                return defaultAction;
+            }
+            return getActionFromDelimitedString(ctx, delimited);
+        }
+
         public ActionConfig(Context ctx) {
             label = ActionUtils.getFriendlyNameForUri(ctx, action);
         }
@@ -508,6 +522,14 @@ public class Config {
 
         public boolean isActionRecents() {
             return TextUtils.equals(action, ActionHandler.SYSTEMUI_TASK_RECENTS);
+        }
+
+        public void fromDelimitedString(String delimited) {
+            ArrayList<String> items = new ArrayList<String>();
+            items.addAll(Arrays.asList(delimited.split("\\|")));
+            action = items.get(0);
+            label = items.get(1);
+            iconUri = items.get(2);
         }
 
         @Override
