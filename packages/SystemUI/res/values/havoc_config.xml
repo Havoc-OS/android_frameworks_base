@@ -89,4 +89,7 @@
         <!-- Google's service for Elmyra -->
         <item>com.google.android.systemui.GoogleServices</item>
     </string-array>
+
+    <!-- System icon area layout weight -->
+    <item name="system_icon_area_weight" format="float" type="integer">1</item>
 </resources>
