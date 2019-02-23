@@ -332,7 +332,7 @@ public final class ColorDisplayService extends SystemService
                 mCurrentUser);
         mIsAdaptiveBrightness = currentBrightnessMode != Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
         mNightModeBrightnessLevel = Settings.Secure.getIntForUser(cr,
-                Settings.Secure.NIGHT_BRIGHTNESS_VALUE, 2,
+                Settings.Secure.NIGHT_BRIGHTNESS_VALUE, 0,
                 mCurrentUser);
         switch (mNightModeBrightnessLevel) {
             case 1: //lower
