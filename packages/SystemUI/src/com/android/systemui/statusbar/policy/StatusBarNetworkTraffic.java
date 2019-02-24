@@ -60,7 +60,7 @@ public class StatusBarNetworkTraffic extends NetworkTraffic implements StatusIco
         }
         mTintColor = DarkIconDispatcher.getTint(area, this, tint);
         setTextColor(mTintColor);
-        updateTrafficDrawable();
+        if (mAttached) updateTrafficDrawable();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class StatusBarNetworkTraffic extends NetworkTraffic implements StatusIco
         mColorIsStatic = true;
         mTintColor = color;
         setTextColor(mTintColor);
-        updateTrafficDrawable();
+        if (mAttached) updateTrafficDrawable();
     }
 
     @Override
@@ -113,10 +113,10 @@ public class StatusBarNetworkTraffic extends NetworkTraffic implements StatusIco
 
     @Override
     protected void updateVisibility() {
-        if (!HavocUtils.hasNotch(mContext) && mIsEnabled && mTrafficVisible && mSystemIconVisible) {
+        if (!HavocUtils.hasNotch(mContext) && mIsEnabled && mTrafficVisible && mSystemIconVisible && !blank.contentEquals(getText())) {
             setVisibility(View.VISIBLE);
         } else {
-            setText("");
+            setText(blank);
             setVisibility(View.GONE);
         }
     }

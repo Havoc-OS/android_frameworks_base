@@ -111,8 +111,6 @@ public class StatusBarIconHolder {
                 return mWifiState.visible;
             case TYPE_MOBILE:
                 return mMobileState.visible;
-            case TYPE_NETWORK_TRAFFIC:
-                return true;
 
             default: return true;
         }

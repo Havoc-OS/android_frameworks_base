@@ -39,7 +39,6 @@ import com.android.settingslib.Utils;
  */
 public class NetworkTraffic extends TextView {
 
-    private static final int INTERVAL = 1500; //ms
     private static final int BOTH = 0;
     private static final int UP = 1;
     private static final int DOWN = 2;
@@ -57,7 +56,7 @@ public class NetworkTraffic extends TextView {
     private static final String FONT_FAMILY_MEDIUM = "sans-serif-medium";
 
     protected boolean mIsEnabled;
-    private boolean mAttached;
+    protected boolean mAttached;
     private boolean mHideArrow;
     private long totalRxBytes;
     private long totalTxBytes;
@@ -68,15 +67,18 @@ public class NetworkTraffic extends TextView {
     private int mAutoHideThreshold;
     protected int mTintColor;
     protected boolean mTrafficVisible = false;
+    private int mRefreshInterval = 2;
 
     private boolean mScreenOn = true;
+
+    protected static final String blank = "";
 
     private Handler mTrafficHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             long timeDelta = SystemClock.elapsedRealtime() - lastUpdateTime;
 
-            if (timeDelta < INTERVAL * .95) {
+            if (timeDelta < mRefreshInterval * 1000 * 0.95f) {
                 if (msg.what != 1) {
                     // we just updated the view, nothing further to do
                     return;
@@ -95,7 +97,7 @@ public class NetworkTraffic extends TextView {
             long txData = newTotalTxBytes - totalTxBytes;
 
             if (shouldHide(rxData, txData, timeDelta)) {
-                setText("");
+                setText(blank);
                 mTrafficVisible = false;
             } else {
                 String output;
@@ -125,7 +127,7 @@ public class NetworkTraffic extends TextView {
             totalRxBytes = newTotalRxBytes;
             totalTxBytes = newTotalTxBytes;
             clearHandlerCallbacks();
-            mTrafficHandler.postDelayed(mRunnable, INTERVAL);
+            mTrafficHandler.postDelayed(mRunnable, mRefreshInterval * 1000);
         }
 
         private String formatOutput(long timeDelta, long data, String symbol) {
@@ -180,6 +182,9 @@ public class NetworkTraffic extends TextView {
                     this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System
                     .getUriFor(Settings.System.NETWORK_TRAFFIC_HIDEARROW), false,
+                    this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System
+                    .getUriFor(Settings.System.NETWORK_TRAFFIC_REFRESH_INTERVAL), false,
                     this, UserHandle.USER_ALL);
         }
 
@@ -301,6 +306,9 @@ public class NetworkTraffic extends TextView {
         mHideArrow = Settings.System.getIntForUser(resolver,
                 Settings.System.NETWORK_TRAFFIC_HIDEARROW, 1,
                 UserHandle.USER_CURRENT) == 1;
+        mRefreshInterval = Settings.System.getIntForUser(resolver,
+                Settings.System.NETWORK_TRAFFIC_REFRESH_INTERVAL, 2,
+                UserHandle.USER_CURRENT);
     }
 
     protected String getSystemSettingKey() {
@@ -359,6 +367,7 @@ public class NetworkTraffic extends TextView {
         if (mIsEnabled && mTrafficVisible) {
             setVisibility(View.VISIBLE);
         } else {
+            setText(blank);
             setVisibility(View.GONE);
         }
     }
