@@ -64,7 +64,7 @@
     <dimen name="keyguard_charging_indication_height">64dp</dimen>
     <dimen name="keyguard_charging_indication_width">32dp</dimen>
 
-    <dimen name="quick_status_bar_margin">14dp</dimen>
+    <dimen name="quick_status_bar_margin">4dp</dimen>
 
     <!-- Hide header -->
     <dimen name="quick_status_bar_system_icons_margin_top">8dp</dimen>
