@@ -36,6 +36,8 @@ public class ScreenrecordTile extends QSTileImpl<BooleanState> {
     private static final int SCREEN_RECORD_MID_QUALITY = WindowManager.SCREEN_RECORD_MID_QUALITY;
     private static final int SCREEN_RECORD_HIGH_QUALITY = WindowManager.SCREEN_RECORD_HIGH_QUALITY;
 
+    private static final String SERVICE_NAME = "com.android.systemui.havoc.screenrecord.TakeScreenrecordService";
+
     private int mMode;
 
     public ScreenrecordTile(QSHost host) {
@@ -100,8 +102,8 @@ public class ScreenrecordTile extends QSTileImpl<BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        state.contentDescription =  mContext.getString(
-                R.string.quick_settings_screenrecord_label);
+        state.value = HavocUtils.isServiceRunning(mContext, SERVICE_NAME);
+        state.state = state.value ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE;
         state.label = mContext.getString(R.string.quick_settings_screenrecord_label);
         state.icon = ResourceIcon.get(R.drawable.ic_qs_screenrecord);
         if (mMode == SCREEN_RECORD_LOW_QUALITY) {
