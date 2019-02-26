@@ -427,4 +427,24 @@ public class HavocUtils {
         float px = 24 * (metrics.densityDpi / 160f);
         return result > Math.round(px);
     }
+
+    // Check if a service is running
+    public static boolean isServiceRunning(Context context, String serviceName) {
+        ActivityManager activityManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> services = activityManager
+                .getRunningServices(Integer.MAX_VALUE);
+
+        if (services != null) {
+            for (ActivityManager.RunningServiceInfo info : services) {
+                if (info.service != null) {
+                    if (info.service.getClassName() != null && info.service.getClassName()
+                            .equalsIgnoreCase(serviceName)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
