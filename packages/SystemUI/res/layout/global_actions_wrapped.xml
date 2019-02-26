@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="@integer/hardware_ui_align"
+    android:layout_marginTop="@dimen/global_actions_top_padding"
     android:layout_marginBottom="@dimen/global_actions_top_padding"
     android:orientation="vertical"
-    android:paddingTop="@dimen/global_actions_top_padding"
     android:clipToPadding="false"
     android:theme="@style/qs_theme"
     android:clipChildren="true">
