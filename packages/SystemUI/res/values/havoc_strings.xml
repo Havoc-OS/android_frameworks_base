@@ -328,4 +328,7 @@
     <!-- Elmyra -->
     <string name="elmyra_raw_sensor_string_type">com.google.sensor.elmyra.raw</string>
     <string name="google_camera_app_package_name">com.google.android.GoogleCamera</string>
+
+    <!-- OneHand mode QS tile -->
+    <string name="qs_onehand_label">One Handed mode</string>
 </resources>
