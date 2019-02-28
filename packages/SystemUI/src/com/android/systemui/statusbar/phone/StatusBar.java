@@ -1017,7 +1017,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateDisplaySize(); // populates mDisplayMetrics
         updateResources();
         getCurrentThemeSetting();
-        updateTheme();
+        updateTheme(false, themeNeedsRefresh());
 
         inflateStatusBarWindow(context);
         mStatusBarWindow.setService(this);
@@ -1179,7 +1179,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                 }
 
                 if (NIGHT_MODE_IN_BATTERY_SAVER) {
-                    updateTheme(true);
+                    updateTheme(true, false);
                 }
             }
 
@@ -4698,6 +4698,13 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Settings.System.SYSTEM_UI_THEME, 0, mLockscreenUserManager.getCurrentUserId());
     }
 
+    /**
+     * Switches theme from light to dark and vice-versa.
+     */
+    protected void updateTheme() {
+        updateTheme(false, false);
+    }
+
     private boolean themeNeedsRefresh(){
         if (mContext.getSharedPreferences("systemui_theming", 0).getString("build_fingerprint", "").equals(Build.HAVOC_FINGERPRINT)){
             return false;
@@ -4706,14 +4713,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         return true;
     }
 
-    /**
-     * Switches theme from light to dark and vice-versa.
-     */
-    protected void updateTheme() {
-        updateTheme(false);
-    }
-
-    protected void updateTheme(boolean fromPowerSaveCallback) {
+    protected void updateTheme(boolean fromPowerSaveCallback, boolean themeNeedsRefresh) {
         final boolean inflated = mStackScroller != null && mStatusBarWindowManager != null;
         final UiModeManager umm = mContext.getSystemService(UiModeManager.class);
         boolean useDarkTheme = false;
@@ -4745,7 +4745,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             });
         }
 
-        if (themeNeedsRefresh() || isUsingDarkTheme() != useDarkTheme) {
+        if (themeNeedsRefresh || isUsingDarkTheme() != useDarkTheme) {
             final boolean useDark = useDarkTheme;
             // Check for black and white accent so we don't end up
             // with white on white or black on black
@@ -4756,7 +4756,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             });
         }
 
-        if (themeNeedsRefresh() || isUsingShadyTheme() != useShadyTheme) {
+        if (themeNeedsRefresh || isUsingShadyTheme() != useShadyTheme) {
             final boolean useShady = useShadyTheme;
             // Check for black and white accent so we don't end up
             // with white on white or black on black
@@ -4767,7 +4767,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             });
         }
 
-        if (themeNeedsRefresh() || isUsingGlassyTheme() != useGlassyTheme) {
+        if (themeNeedsRefresh || isUsingGlassyTheme() != useGlassyTheme) {
             final boolean useGlassy = useGlassyTheme;
             // Check for black and white accent so we don't end up
             // with white on white or black on black
