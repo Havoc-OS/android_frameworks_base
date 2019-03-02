@@ -43,6 +43,7 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+import android.os.Vibrator;
 import android.net.ConnectivityManager;
 import android.os.Looper;
 import android.util.DisplayMetrics;
@@ -446,5 +447,25 @@ public class HavocUtils {
             }
         }
         return false;
+    }
+
+    public static void vibrateResourcePattern(Context context, int resId) {
+        if (DeviceUtils.deviceSupportsVibrator(context)) {
+            int[] pattern = context.getResources().getIntArray(resId);
+            if (pattern == null) {
+                return;
+            }
+            long[] out = new long[pattern.length];
+            for (int i=0; i<pattern.length; i++) {
+                out[i] = pattern[i];
+            }
+            ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(out, -1);
+        }
+    }
+
+    public static void vibratePattern(Context context, long[] pattern) {
+        if (DeviceUtils.deviceSupportsVibrator(context)) {
+            ((Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE)).vibrate(pattern, -1);
+        }
     }
 }
