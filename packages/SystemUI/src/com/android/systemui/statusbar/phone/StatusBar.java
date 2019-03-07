@@ -4739,26 +4739,43 @@ public class StatusBar extends SystemUI implements DemoMode,
             useGlassyTheme = mCurrentTheme == 4;
         }
 
+        if (isUsingDarkTheme() == false && isUsingShadyTheme() == false && isUsingGlassyTheme() == false) {
+            mUiOffloadThread.submit(() -> {
+                umm.setNightMode(UiModeManager.MODE_NIGHT_NO);
+            });
+        }
+
         if (themeNeedsRefresh() || isUsingDarkTheme() != useDarkTheme) {
+            final boolean useDark = useDarkTheme;
             // Check for black and white accent so we don't end up
             // with white on white or black on black
             unfuckBlackWhiteAccent();
-            umm.setNightMode(useDarkTheme ? UiModeManager.MODE_NIGHT_YES : UiModeManager.MODE_NIGHT_NO);
-            ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDarkTheme);
+            mUiOffloadThread.submit(() -> {
+                ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDark);
+                umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
+            });
         }
 
         if (themeNeedsRefresh() || isUsingShadyTheme() != useShadyTheme) {
+            final boolean useShady = useShadyTheme;
             // Check for black and white accent so we don't end up
             // with white on white or black on black
             unfuckBlackWhiteAccent();
-            ThemeAccentUtils.setShadyTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useShadyTheme);
+            mUiOffloadThread.submit(() -> {
+                ThemeAccentUtils.setShadyTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useShady);
+                umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
+            });
         }
 
         if (themeNeedsRefresh() || isUsingGlassyTheme() != useGlassyTheme) {
+            final boolean useGlassy = useGlassyTheme;
             // Check for black and white accent so we don't end up
             // with white on white or black on black
             unfuckBlackWhiteAccent();
-            ThemeAccentUtils.setGlassyTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useGlassyTheme);
+            mUiOffloadThread.submit(() -> {
+                ThemeAccentUtils.setGlassyTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useGlassy);
+                umm.setNightMode(UiModeManager.MODE_NIGHT_YES);
+            });
         }
 
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
