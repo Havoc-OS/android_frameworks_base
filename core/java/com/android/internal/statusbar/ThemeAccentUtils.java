@@ -36,32 +36,29 @@ public class ThemeAccentUtils {
 
     // Dark themes
     private static final String[] DARK_THEMES = {
-        "com.android.gboard.overlay.dark",
-        "com.android.system.overlay.dark",
-        "com.android.systemui.overlay.dark",
-        "com.android.settings.overlay.dark",
-        "com.android.settings.intelligence.overlay.dark",
-        "com.android.wellbeing.overlay.dark",
+        "com.android.system.overlay.dark", // 0
+        "com.android.systemui.overlay.dark", // 1
+        "com.android.settings.overlay.dark", // 2
+        "com.android.settings.intelligence.overlay.dark", // 3
+        "com.android.wellbeing.overlay.dark", // 4
     };
 
     // Shady themes
     private static final String[] SHADY_THEMES = {
-        "com.android.gboard.overlay.shady",
-        "com.android.system.overlay.shady",
-        "com.android.systemui.overlay.shady",
-        "com.android.settings.overlay.shady",
-        "com.android.settings.intelligence.overlay.shady",
-        "com.android.wellbeing.overlay.shady",
+        "com.android.system.overlay.shady", // 0
+        "com.android.systemui.overlay.shady", // 1
+        "com.android.settings.overlay.shady", // 2
+        "com.android.settings.intelligence.overlay.shady", // 3
+        "com.android.wellbeing.overlay.shady", // 4
     };
 
     // Glassy themes
     private static final String[] GLASSY_THEMES = {
-        "com.android.gboard.overlay.glassy",
-        "com.android.system.overlay.glassy",
-        "com.android.systemui.overlay.glassy",
-        "com.android.settings.overlay.glassy",
-        "com.android.settings.intelligence.overlay.glassy",
-        "com.android.wellbeing.overlay.glassy",
+        "com.android.system.overlay.glassy", // 0
+        "com.android.systemui.overlay.glassy", // 1
+        "com.android.settings.overlay.glassy", // 2
+        "com.android.settings.intelligence.overlay.glassy", // 3
+        "com.android.wellbeing.overlay.glassy", // 4
     };
 
     // Accents
