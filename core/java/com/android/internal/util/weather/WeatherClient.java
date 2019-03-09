@@ -29,6 +29,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Process;
+import android.os.SystemProperties;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -59,8 +60,6 @@ public class WeatherClient {
             COLUMN_TEMPERATURE_IMPERIAL
     };
 
-    private boolean mBootAndUnlockDone;
-
     private static final int WEATHER_UPDATE_INTERVAL = 60 * 20 * 1000; // 20 minutes
     private String updateIntentAction;
     private PendingIntent pendingWeatherUpdate;
@@ -84,11 +83,11 @@ public class WeatherClient {
             } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
                 onScreenOn();
             } else if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-                mBootAndUnlockDone = true;
                 updateWeatherAndNotify(false);
             } else if (updateIntentAction.equals(intent.getAction())) {
                 updateWeatherAndNotify(false);
-            } else if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction()) || Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
+            } else if (Intent.ACTION_TIME_CHANGED.equals(intent.getAction())
+                    || Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
                 updateWeatherAndNotify(true);
             }
         }
@@ -116,7 +115,7 @@ public class WeatherClient {
     }
 
     private void updateWeatherAndNotify(boolean forceResetSchedule) {
-        if (!mBootAndUnlockDone) return;
+        if (!SystemProperties.get("sys.boot_completed").equals("1")) return;
 
         if (isRunning) {
             if (forceResetSchedule) resetScheduledAlarm();
@@ -147,7 +146,7 @@ public class WeatherClient {
     }
 
     private void onScreenOn() {
-        if (!mBootAndUnlockDone || isScreenOn){
+        if (!SystemProperties.get("sys.boot_completed").equals("1") || isScreenOn){
             return;
         }
         if (DEBUG) Log.d(TAG, "onScreenOn");
