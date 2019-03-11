@@ -248,7 +248,6 @@ public class KeyguardStatusBarView extends RelativeLayout
                 mCarrierLabel.setSelected(false);
             }
         }
-        mBatteryView.setForceShowPercent(mBatteryCharging && mShowPercentAvailable);
     }
 
     public void updateSettings() {
@@ -416,7 +415,7 @@ public class KeyguardStatusBarView extends RelativeLayout
     public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
         if (mBatteryCharging != charging) {
             mBatteryCharging = charging;
-            updateVisibilities();
+            mBatteryView.setForceShowPercent(mBatteryCharging && mShowPercentAvailable);
         }
     }
 
