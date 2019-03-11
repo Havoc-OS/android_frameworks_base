@@ -70,8 +70,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         OnClickListener,  OnLongClickListener, OnUserInfoChangedListener,
         EmergencyListener, SignalCallback {
 
-    private static final String QS_FOOTER_SHOW_SETTINGS = "qs_footer_show_settings";
-    private static final String QS_FOOTER_SHOW_SERVICES = "qs_footer_show_services";
     public static final String QS_SHOW_DRAG_HANDLE = "qs_show_drag_handle";
 
     private ActivityStarter mActivityStarter;
@@ -147,8 +145,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         mActionsContainer = findViewById(R.id.qs_footer_actions_container);
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
 
-        updateVisibilities();
-
         // RenderThread is doing more harm than good when touching the header (to expand quick
         // settings), so disable it for this view
         ((RippleDrawable) mSettingsButton.getBackground()).setForceSoftware(true);
@@ -166,8 +162,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        Dependency.get(TunerService.class).addTunable(this, QS_FOOTER_SHOW_SETTINGS);
-        Dependency.get(TunerService.class).addTunable(this, QS_FOOTER_SHOW_SERVICES);
         Dependency.get(TunerService.class).addTunable(this, QS_SHOW_DRAG_HANDLE);
     }
 
@@ -272,7 +266,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     @Override
     @VisibleForTesting
     public void onDetachedFromWindow() {
-        Dependency.get(TunerService.class).removeTunable(this);
         setListening(false);
         Dependency.get(TunerService.class).removeTunable(this);
         super.onDetachedFromWindow();
@@ -320,21 +313,23 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     }
 
     private void updateVisibilities() {
-        mSettingsContainer.setVisibility(mQsDisabled ? View.GONE : View.VISIBLE);
+        mSettingsContainer.setVisibility(!isSettingsEnabled() || mQsDisabled ? View.GONE : View.VISIBLE);
         final boolean isDemo = UserManager.isDeviceInDemoMode(mContext);
-        boolean servicesButtonVisible = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.QSFOOTER_SHOW_SERVICES, 0) != 0;
-        boolean settingsButtonVisible = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.QSFOOTER_SHOW_SETTINGS, 1) != 0;
-        mMultiUserSwitch.setVisibility(showUserSwitcher(isDemo) ? View.VISIBLE : View.INVISIBLE);
-        mEdit.setVisibility(isEditEnabled() ? isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE : View.GONE);
-        mSettingsButton.setVisibility(isDemo || settingsButtonVisible ? View.VISIBLE : View.GONE);
-        mRunningServicesButton.setVisibility(!isDemo && mExpanded ? View.VISIBLE : View.INVISIBLE);
-        mRunningServicesButton.setVisibility(servicesButtonVisible ? (!isDemo && mExpanded ? View.VISIBLE : View.INVISIBLE) : View.GONE);
+        if (isDemo || !mExpanded) {
+            mMultiUserSwitch.setVisibility(View.GONE);
+            mEdit.setVisibility(View.GONE);
+            mRunningServicesButton.setVisibility(View.GONE);
+            mSettingsButton.setVisibility(View.GONE);
+        } else {
+            mMultiUserSwitch.setVisibility(showUserSwitcher() ? View.VISIBLE : View.GONE);
+            mEdit.setVisibility(isEditEnabled() ? View.VISIBLE : View.GONE);
+            mRunningServicesButton.setVisibility(isServicesEnabled() ? View.VISIBLE : View.GONE);
+            mSettingsButton.setVisibility(isSettingsEnabled() ? View.VISIBLE : View.GONE);
+        }
     }
 
-    private boolean showUserSwitcher(boolean isDemo) {
-        if (!mExpanded || isDemo || !UserManager.supportsMultipleUsers()) {
+    private boolean showUserSwitcher() {
+        if (!UserManager.supportsMultipleUsers() || !isUserEnabled()) {
             return false;
         }
         UserManager userManager = UserManager.get(mContext);
@@ -377,9 +372,24 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         }
     }
 
+    public boolean isSettingsEnabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.QS_FOOTER_SHOW_SETTINGS, 1) == 1;
+    }
+
+    public boolean isServicesEnabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.QS_FOOTER_SHOW_SERVICES, 0) == 1;
+    }
+
     public boolean isEditEnabled() {
         return Settings.System.getInt(mContext.getContentResolver(),
-            Settings.System.QS_EDIT_TOGGLE, 1) == 1;
+            Settings.System.QS_FOOTER_SHOW_EDIT, 1) == 1;
+    }
+
+    public boolean isUserEnabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+            Settings.System.QS_FOOTER_SHOW_USER, 1) == 1;
     }
 
     @Override
