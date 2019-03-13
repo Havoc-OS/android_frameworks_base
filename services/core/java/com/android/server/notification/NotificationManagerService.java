@@ -380,7 +380,7 @@ public class NotificationManagerService extends SystemService {
 
     @GuardedBy("mNotificationLock")
     private HashMap<String, Long> mAnnoyingNotifications = new HashMap<String, Long>();
-    private long mAnnoyingNotificationThreshold = 30000; // 30 seconds
+    private long mAnnoyingNotificationThreshold = -1;
 
     private AppOpsManager mAppOps;
     private UsageStatsManagerInternal mAppUsageStats;
@@ -1259,7 +1259,7 @@ public class NotificationManagerService extends SystemService {
 
             if (uri == null || MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD_URI.equals(uri)) {
                 mAnnoyingNotificationThreshold = Settings.System.getLongForUser(resolver,
-                       Settings.System.MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD, 30000,
+                       Settings.System.MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD, 0,
                        UserHandle.USER_CURRENT);
             }
 
