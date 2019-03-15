@@ -40,16 +40,14 @@
                 android:theme="?attr/lightIconTheme"
                 android:id="@+id/wifi_signal"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_marginEnd="2dp" />
+                android:layout_width="wrap_content" />
         </FrameLayout>
         <com.android.systemui.statusbar.StatusBarInoutContainer
                 android:id="@+id/inout_container"
                 android:layout_height="17dp"
                 android:layout_width="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_marginStart="2dp"
-                android:layout_marginEnd="2dp" >
+                android:layout_marginStart="4dp" >
             <ImageView
                 android:id="@+id/activity_in"
                 android:layout_height="wrap_content"
