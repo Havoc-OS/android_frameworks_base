@@ -271,4 +271,7 @@
     <java-symbol type="string" name="gaming_mode_enabled_toast" />
     <java-symbol type="string" name="gaming_mode_disabled_toast" />
 
+    <!-- Whether or not we should show vendor mismatch message -->
+    <java-symbol type="bool" name="config_show_vendor_mismatch_message" />
+
 </resources>

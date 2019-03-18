@@ -6499,7 +6499,9 @@ public class ActivityTaskManagerService extends IActivityTaskManager.Stub {
                 if (!Build.isBuildConsistent()) {
                     Slog.e(TAG, "Build fingerprint is not consistent, warning user");
                     mUiHandler.post(() -> {
-                        if (mShowDialogs) {
+                        boolean mShowVendorMismatch = Resources.getSystem().getBoolean(
+                                R.bool.config_show_vendor_mismatch_message);
+                        if (mShowDialogs && mShowVendorMismatch) {
                             String buildfingerprint = SystemProperties.get("ro.build.fingerprint");
                             String[] splitfingerprint = buildfingerprint.split("/");
                             String vendorid = splitfingerprint[3];
