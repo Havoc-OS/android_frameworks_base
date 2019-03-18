@@ -2144,7 +2144,9 @@ public class ActivityManagerService extends IActivityManager.Stub
                 }
             } break;
             case SHOW_FINGERPRINT_ERROR_UI_MSG: {
-                if (mShowDialogs) {
+                boolean mShowVendorMismatch = Resources.getSystem().getBoolean(
+                        R.bool.config_show_vendor_mismatch_message);
+                if (mShowDialogs && mShowVendorMismatch) {
                     String buildfingerprint = SystemProperties.get("ro.build.fingerprint");
                     String[] splitfingerprint = buildfingerprint.split("/");
                     String vendorid = splitfingerprint[3];
