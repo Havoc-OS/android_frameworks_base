@@ -366,7 +366,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mShowAdvancedToggles = new AdvancedAction(
                 SHOW_TOGGLES_BUTTON,
-                com.android.systemui.R.drawable.ic_restart_advanced,
+                R.drawable.ic_lock_restart_advanced,
                 com.android.systemui.R.string.global_action_restart_advanced,
                 mWindowManagerFuncs, mHandler) {
 
@@ -383,7 +383,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mRestartHot = new AdvancedAction(
                 RESTART_HOT_BUTTON,
-                com.android.systemui.R.drawable.ic_restart_hot,
+                R.drawable.ic_lock_restart_hot,
                 com.android.systemui.R.string.global_action_restart_hot,
                 mWindowManagerFuncs, mHandler) {
 
@@ -398,7 +398,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mRestartRecovery = new AdvancedAction(
                 RESTART_RECOVERY_BUTTON,
-                com.android.systemui.R.drawable.ic_restart_recovery,
+                R.drawable.ic_lock_restart_recovery,
                 com.android.systemui.R.string.global_action_restart_recovery,
                 mWindowManagerFuncs, mHandler) {
 
@@ -413,7 +413,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mRestartBootloader = new AdvancedAction(
                 RESTART_BOOTLOADER_BUTTON,
-                com.android.systemui.R.drawable.ic_restart_bootloader,
+                R.drawable.ic_lock_restart_bootloader,
                 com.android.systemui.R.string.global_action_restart_bootloader,
                 mWindowManagerFuncs, mHandler) {
 
@@ -428,7 +428,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mRestartSystemUI = new AdvancedAction(
                 RESTART_UI_BUTTON,
-                com.android.systemui.R.drawable.ic_restart_ui,
+                R.drawable.ic_lock_restart_ui,
                 com.android.systemui.R.string.global_action_restart_ui,
                 mWindowManagerFuncs, mHandler) {
 
@@ -769,7 +769,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     }
 
     private Action getTorchToggleAction() {
-        return new SinglePressAction(com.android.systemui.R.drawable.ic_lock_torch,
+        return new SinglePressAction(R.drawable.ic_lock_torch,
                 com.android.systemui.R.string.quick_settings_flashlight_label) {
 
             public void onPress() {
