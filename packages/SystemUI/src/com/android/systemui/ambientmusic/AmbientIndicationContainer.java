@@ -22,11 +22,9 @@ import com.android.systemui.statusbar.phone.DozeParameters;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
 import com.android.systemui.statusbar.phone.StatusBar;
 
-import havoc.support.lottie.LottieAnimationView;
-
 public class AmbientIndicationContainer extends AutoReinflateContainer {
     private View mAmbientIndication;
-    private LottieAnimationView mIcon;
+    private ImageView mIcon;
     private CharSequence mIndication;
     private StatusBar mStatusBar;
     private TextView mText;
@@ -60,8 +58,8 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
     public void updateAmbientIndicationView(View view) {
         mAmbientIndication = findViewById(R.id.ambient_indication);
         mText = (TextView)findViewById(R.id.ambient_indication_text);
-        mIcon = (LottieAnimationView)findViewById(R.id.ambient_indication_icon);
-        setIndication(mMediaText, false);
+        mIcon = (ImageView)findViewById(R.id.ambient_indication_icon);
+        setIndication(mMediaMetaData, mMediaText);
     }
 
     public void updateKeyguardState(boolean keyguard) {
@@ -174,8 +172,6 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
         }
         mText.setText(mInfoToSet);
         mAmbientIndication.setVisibility(shouldShow() ? View.VISIBLE : View.INVISIBLE);
-        mIcon.setAnimation(R.raw.ambient_music_note);
-        mIcon.playAnimation();
     }
 
     public View getIndication() {
