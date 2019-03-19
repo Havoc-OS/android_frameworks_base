@@ -26,7 +26,7 @@ import android.widget.ListView;
 import com.android.internal.app.AlertController;
 
 /** A dialog that lists the given Action items to be user selectable. */
-public final class ActionsDialog extends Dialog implements DialogInterface {
+public class ActionsDialog extends Dialog implements DialogInterface {
     private final Context mContext;
     private final AlertController mAlert;
     private final ActionsAdapter mAdapter;

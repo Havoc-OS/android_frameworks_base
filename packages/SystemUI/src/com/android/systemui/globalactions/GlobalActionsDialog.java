@@ -83,6 +83,7 @@ import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.IWindowManager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -549,6 +550,8 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         mDialog.getWindow().setFlags(FLAG_ALT_FOCUSABLE_IM, FLAG_ALT_FOCUSABLE_IM);
         mDialog.show();
         mWindowManagerFuncs.onGlobalActionsShown();
+
+        rescheduleBurninTimeout();
     }
 
     @VisibleForTesting
@@ -797,7 +800,13 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 mStatusBarService, mNotificationShadeWindowController,
                 controlsAvailable(), uiController,
                 mSysUiState, this::onRotate, mKeyguardShowing, mPowerAdapter,
-                mBlurUtils);
+                mBlurUtils) {
+            @Override
+            public boolean dispatchTouchEvent(MotionEvent event) {
+                rescheduleBurninTimeout();
+                return super.dispatchTouchEvent(event);
+            }
+        };
 
         if (shouldShowLockMessage(dialog)) {
             dialog.showLockMessage();
@@ -807,6 +816,11 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         dialog.setOnShowListener(this);
 
         return dialog;
+    }
+
+    private void rescheduleBurninTimeout() {
+        mHandler.removeMessages(MESSAGE_DISMISS);
+        mHandler.sendEmptyMessageDelayed(MESSAGE_DISMISS, BURNIN_DISMISS_DELAY);
     }
 
     @VisibleForTesting
@@ -2295,6 +2309,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     private static final int MESSAGE_REFRESH = 1;
     private static final int DIALOG_DISMISS_DELAY = 300; // ms
     private static final int DIALOG_PRESS_DELAY = 850; // ms
+    private static final int BURNIN_DISMISS_DELAY = 60000; // ms
 
     @VisibleForTesting void setZeroDialogPressDelayForTesting() {
         mDialogPressDelay = 0; // ms
@@ -2357,7 +2372,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     }
 
     @VisibleForTesting
-    static final class ActionsDialog extends Dialog implements DialogInterface,
+    static class ActionsDialog extends Dialog implements DialogInterface,
             ColorExtractor.OnColorsChangedListener {
 
         private final Context mContext;
