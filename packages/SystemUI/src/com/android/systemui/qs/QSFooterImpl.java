@@ -63,14 +63,10 @@ import com.android.systemui.statusbar.policy.NetworkController.EmergencyListener
 import com.android.systemui.statusbar.policy.NetworkController.SignalCallback;
 import com.android.systemui.statusbar.policy.UserInfoController;
 import com.android.systemui.statusbar.policy.UserInfoController.OnUserInfoChangedListener;
-import com.android.systemui.tuner.TunerService;
-import com.android.systemui.tuner.TunerService.Tunable;
 
-public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
+public class QSFooterImpl extends FrameLayout implements QSFooter,
         OnClickListener,  OnLongClickListener, OnUserInfoChangedListener,
         EmergencyListener, SignalCallback {
-
-    public static final String QS_SHOW_DRAG_HANDLE = "qs_show_drag_handle";
 
     private ActivityStarter mActivityStarter;
     private UserInfoController mUserInfoController;
@@ -157,19 +153,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight,
                 oldBottom) -> updateAnimator(right - left));
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
-    }
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        Dependency.get(TunerService.class).addTunable(this, QS_SHOW_DRAG_HANDLE);
-    }
-
-    public void onTuningChanged(String key, String newValue) {
-        if (QS_SHOW_DRAG_HANDLE.equals(key)) {
-            setHideDragHandle(newValue != null && Integer.parseInt(newValue) == 0);
-        }
-        updateVisibilities();
     }
 
     private void updateAnimator(int width) {
@@ -267,7 +250,6 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
     @VisibleForTesting
     public void onDetachedFromWindow() {
         setListening(false);
-        Dependency.get(TunerService.class).removeTunable(this);
         super.onDetachedFromWindow();
     }
 
@@ -526,9 +508,5 @@ public class QSFooterImpl extends FrameLayout implements Tunable, QSFooter,
         public String contentDescription;
         String typeContentDescription;
         boolean roaming;
-    }
-
-    private void setHideDragHandle(boolean hide) {
-        mDragHandle.setVisibility(hide ? View.GONE : View.VISIBLE);
     }
 }

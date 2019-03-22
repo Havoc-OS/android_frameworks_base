@@ -133,7 +133,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private ZenModeController mZenController;
     /** Counts how many times the long press tooltip has been shown to the user. */
     private int mShownCount;
-    private boolean mHideDragHandle;
 
     private boolean mLandscape;
     private boolean mHeaderImageEnabled;
@@ -317,10 +316,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                 com.android.internal.R.dimen.status_bar_height);
         int qqsHeight = mContext.getResources().getDimensionPixelSize(
                 R.dimen.qs_quick_header_panel_height);
-        if (mHideDragHandle) {
-            qqsHeight -= mContext.getResources().getDimensionPixelSize(
-                    R.dimen.quick_qs_drag_handle_height);
-        }
         setMinimumHeight(sbHeight + qqsHeight);
     }
 
@@ -351,10 +346,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                 qsHeight += resources.getDimensionPixelSize(R.dimen.qs_header_image_offset);
             }
 
-            if (mHideDragHandle) {
-                qsHeight -= resources.getDimensionPixelSize(
-                        R.dimen.quick_qs_drag_handle_height);
-            }
             lp.height = Math.max(getMinimumHeight(), qsHeight);
         }
 
@@ -460,7 +451,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         requestApplyInsets();
         final TunerService tunerService = Dependency.get(TunerService.class);
         tunerService.addTunable(this, QS_SHOW_INFO_HEADER);
-        tunerService.addTunable(this, QSFooterImpl.QS_SHOW_DRAG_HANDLE);
     }
 
     @Override
@@ -713,10 +703,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     public void onTuningChanged(String key, String newValue) {
         if (QS_SHOW_INFO_HEADER.equals(key)) {
             mHeaderTextContainerView.setVisibility(newValue == null || Integer.parseInt(newValue) != 0 ? VISIBLE : GONE);
-        }
-        if (QSFooterImpl.QS_SHOW_DRAG_HANDLE.equals(key)) {
-            mHideDragHandle = newValue != null && Integer.parseInt(newValue) == 0;
-            updateResources();
         }
     }
 }
