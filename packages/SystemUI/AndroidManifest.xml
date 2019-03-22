@@ -390,7 +390,7 @@
 
         <activity android:name=".tuner.NavBarActivity"
                   android:theme="@style/ExTunerSettings"
-                  android:label="@string/nav_bar"
+                  android:label="@string/nav_bar_layout"
                   android:process=":tuner"
                   android:parentActivityName="com.havoc.settings.fragments.Navigation"
                   android:exported="true">

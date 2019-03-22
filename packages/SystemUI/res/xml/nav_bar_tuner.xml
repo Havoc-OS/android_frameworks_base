@@ -20,7 +20,8 @@
 
     <com.android.systemui.tuner.TunerSwitch
         android:key="sysui_nav_bar_inverse"
-        android:title="@string/nav_bar_layout_inverse" />
+        android:title="@string/nav_bar_layout_inverse" 
+        android:summary="@string/nav_bar_layout_inverse_summary"/>
 
     <com.android.systemui.tuner.RadioListPreference
         android:key="layout"
