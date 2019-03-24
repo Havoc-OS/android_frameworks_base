@@ -35,7 +35,7 @@ LOCAL_SRC_FILES := \
     $(call all-Iaidl-files-under, $(RELATIVE_FINGERPRINT_PATH))
 
 LOCAL_SRC_FILES += $(call all-java-files-under, ../../../../packages/apps/SmartNav/src)
-LOCAL_SRC_FILES += $(call all-java-files-under, ../../../../external/google/src)
+LOCAL_SRC_FILES += $(call all-java-files-under, ../../../../external/google/systemui/src)
 
 LOCAL_STATIC_ANDROID_LIBRARIES := \
     SystemUIPluginLib \
@@ -68,7 +68,7 @@ LOCAL_JAVA_LIBRARIES := telephony-common \
     android.car \
     ims-common
 
-LOCAL_FULL_LIBS_MANIFEST_FILES += external/google/GoogleManifest.xml
+LOCAL_FULL_LIBS_MANIFEST_FILES += external/google/systemui/GoogleManifest.xml
 
 LOCAL_PACKAGE_NAME := SystemUI
 LOCAL_PRIVATE_PLATFORM_APIS := true
@@ -78,7 +78,7 @@ LOCAL_PRIVILEGED_MODULE := true
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res-keyguard $(LOCAL_PATH)/res $(LOCAL_PATH)/res-hwkeys
 LOCAL_RESOURCE_DIR += packages/apps/SmartNav/res
-LOCAL_RESOURCE_DIR += external/google/res
+LOCAL_RESOURCE_DIR += external/google/systemui/res
 
 ifneq ($(INCREMENTAL_BUILDS),)
     LOCAL_PROGUARD_ENABLED := disabled
