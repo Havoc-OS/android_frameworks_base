@@ -83,8 +83,17 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
     }
 
     public void updateDozingState(boolean dozing) {
-        mDozing = dozing;
+        if (mDozing != dozing) {
+            mDozing = dozing;
+            if (isAod()) {
+                setTickerMarquee(true, false);
+            }
+        }
         mAmbientIndication.setVisibility(shouldShow() ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    private boolean isAod() {
+        return DozeParameters.getInstance(mContext).getAlwaysOn() && mDozing;
     }
 
     private boolean shouldShow() {
@@ -95,7 +104,7 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
         boolean filtered = lockscreenManager.shouldHideNotifications(
                 lockscreenManager.getCurrentUserId()) || lockscreenManager.shouldHideNotifications(
                         mStatusBar.getMediaManager().getMediaNotificationKey());
-        return mKeyguard
+        return (mKeyguard || isAod())
                 && ((mDozing && (mInfoAvailable || mNpInfoAvailable))
                 || (!mDozing && mNpInfoAvailable && !mInfoAvailable)
                 || (!mDozing && mInfoAvailable && filtered));
@@ -156,11 +165,9 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
 
         mInfoToSet = null;
 
-        if (mKeyguard) {
-            // if we are already showing an Ambient Notification with track info,
-            // stop the current scrolling and start it delayed again for the next song
-            setTickerMarquee(true, true);
-        }
+        // if we are already showing an Ambient Notification with track info,
+        // stop the current scrolling and start it delayed again for the next song
+        setTickerMarquee(true, true);
 
         if (!TextUtils.isEmpty(notificationText)) {
             mInfoToSet = notificationText;
@@ -177,7 +184,7 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
             boolean isAnotherTrack = (mInfoAvailable || mNpInfoAvailable)
                     && (TextUtils.isEmpty(mLastInfo) || (!TextUtils.isEmpty(mLastInfo)
                     && !mLastInfo.equals(mInfoToSet)));
-            if (!DozeParameters.getInstance(mContext).getAlwaysOn() && mStatusBar != null
+            if (!isAod() && mStatusBar != null
                     && isAnotherTrack) {
                 mStatusBar.triggerAmbientForMedia();
             }
