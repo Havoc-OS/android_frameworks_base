@@ -67,4 +67,7 @@
     <color name="theme_background_shady">#000000</color>
     <color name="theme_background_glassy">#ae000000</color>
     <color name="theme_notification_background_shady">#ff000000</color>
+    <color name="theme_notification_background_glassy">#ae000000</color>
+
+
 </resources>

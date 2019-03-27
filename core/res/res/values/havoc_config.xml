@@ -47,10 +47,10 @@
     <bool name="config_notifyClientOnFingerprintCancelSuccess">false</bool>
 
     <!-- Whether to show emergency button in power menu -->
-    <bool name="config_showEmergencyButtonInPowerMenu">false</bool>
+    <bool name="config_showEmergencyButtonInPowerMenu">true</bool>
 
     <!-- Full screen aspect ratio -->
-    <bool name="config_haveHigherAspectRatioScreen">false</bool>
+    <bool name="config_haveHigherAspectRatioScreen">true</bool>
     <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
 	
     <!-- If this is true, key chords can be used to take a screen record on the device. -->
@@ -60,22 +60,22 @@
     <bool name="config_show_cmIMESwitcher">true</bool>
 
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveBatteryLed">true</bool>
+    <bool name="config_intrusiveBatteryLed">false</bool>
 
     <!-- Does the battery LED support multiple colors?
         Used to decide if the user can change the colors -->
-    <bool name="config_multiColorBatteryLed">true</bool>
+    <bool name="config_multiColorBatteryLed">false</bool>
 
     <!-- Do the battery/notification LEDs support pulsing?
         Used to decide if we show pulse settings -->
-    <bool name="config_ledCanPulse">true</bool>
+    <bool name="config_ledCanPulse">false</bool>
 
     <!-- Whether device has dash charging support -->
     <bool name="config_hasDashCharger">false</bool>
 
     <!-- Whether the device supports Smart Pixels
          Disable if it doesn't -->
-    <bool name="config_enableSmartPixels">false</bool>
+    <bool name="config_enableSmartPixels">true</bool>
 
     <!-- Hardware keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -169,7 +169,7 @@
     <string name="config_rat_4g" translatable="false">4G</string>
 
     <!-- Whether doze feature is enabled by default in settings. -->
-    <bool name="config_doze_enabled_by_default">false</bool>
+    <bool name="config_doze_enabled_by_default">true</bool>
 
     <!-- Component name for the activity that will be presenting the Oreo's Recents UI -->
     <string name="config_recentsComponentNameOreo" translatable="false">com.android.systemui/.recents.RecentsActivity</string>
@@ -177,9 +177,9 @@
     <!-- Default value for proximity check on screen wake
          NOTE ! - Enable for devices that have a fast response proximity sensor (ideally < 300ms)
     -->
-    <bool name="config_proximityCheckOnWake">false</bool>
+    <bool name="config_proximityCheckOnWake">true</bool>
     <integer name="config_proximityCheckTimeout">250</integer>
-    <bool name="config_proximityCheckOnWakeEnabledByDefault">false</bool>
+    <bool name="config_proximityCheckOnWakeEnabledByDefault">true</bool>
 
     <!-- Component name of the combo network location provider. -->
     <string name="config_comboNetworkLocationProvider" translatable="false">@null</string>
@@ -201,7 +201,7 @@
     <bool name="config_ignoreRssnrSignalLevel">false</bool>
 
     <!-- Does the device supports fast charging -->
-    <bool name="config_FastChargingLedSupported">false</bool>
+    <bool name="config_FastChargingLedSupported">true</bool>
     <!-- Default value for led color when fast charging is active -->
     <integer name="config_notificationsFastBatteryARGB">0xFF0000FF</integer>
 
@@ -228,7 +228,7 @@
     <bool name="config_physicalDisplayCutout">false</bool>
 
     <!-- Whether device supports an alt. ambient display -->
-    <bool name="config_alt_ambient_display">false</bool>
+    <bool name="config_alt_ambient_display">true</bool>
 
     <!-- True if the home button has the ability to wake up phone from lockscreen-->
     <bool name="config_HomeWakeButton">false</bool>

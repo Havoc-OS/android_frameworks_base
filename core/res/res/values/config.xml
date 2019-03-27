@@ -2127,11 +2127,11 @@
     <!-- Control whether the always on display mode is available. This should only be enabled on
          devices where the display has been tuned to be power efficient in DOZE and/or DOZE_SUSPEND
          states. -->
-    <bool name="config_dozeAlwaysOnDisplayAvailable">false</bool>
+    <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
 
     <!-- Control whether the always on display mode is enabled by default. This value will be used
          during initialization when the setting is still null. -->
-    <bool name="config_dozeAlwaysOnEnabled">false</bool>
+    <bool name="config_dozeAlwaysOnEnabled">true</bool>
 
     <!-- Whether the display blanks itself when transitioning from a doze to a non-doze state -->
     <bool name="config_displayBlanksAfterDoze">false</bool>
@@ -2220,7 +2220,7 @@
          This value must be between 0% and 100%.  If the value is zero, the screen will not
          dim before the device goes to sleep.
     -->
-    <fraction name="config_maximumScreenDimRatio">20%</fraction>
+    <fraction name="config_maximumScreenDimRatio">15%</fraction>
 
     <!-- Minimum size of the scrollbar thumb's touch target. -->
     <dimen name="config_minScrollbarTouchTarget">48dp</dimen>
