@@ -85,4 +85,7 @@
     <!-- Emergency button in power menu -->
     <java-symbol type="bool" name="config_showEmergencyButtonInPowerMenu" />
 
+    <!-- Smart charging battery percentage -->
+    <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
+
 </resources>
