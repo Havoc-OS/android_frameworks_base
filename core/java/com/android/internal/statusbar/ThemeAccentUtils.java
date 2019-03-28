@@ -157,6 +157,9 @@ public class ThemeAccentUtils {
         "com.havoc.themes.darkaf", // 30
         "com.havoc.themes.almostblack", // 31
         "com.havoc.themes.black", // 32
+        "com.havoc.themes.white", // 33
+        "com.havoc.themes.desaturatedblue", // 34
+
     };
 
     private static final String[] QS_TILE_THEMES = {
