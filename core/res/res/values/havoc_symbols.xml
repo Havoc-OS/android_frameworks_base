@@ -32,4 +32,7 @@
     <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
     <java-symbol type="bool" name="config_cleanupUnusedFingerprints" />
 
+    <!-- Smart charging battery percentage -->
+    <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
+
 </resources>
