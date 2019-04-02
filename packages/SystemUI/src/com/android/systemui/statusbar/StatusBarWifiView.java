@@ -21,6 +21,7 @@ import static com.android.systemui.statusbar.StatusBarIconView.STATE_HIDDEN;
 import static com.android.systemui.statusbar.StatusBarIconView.STATE_ICON;
 import static com.android.systemui.statusbar.policy.DarkIconDispatcher.getTint;
 import static com.android.systemui.statusbar.policy.DarkIconDispatcher.getDarkIntensity;
+import static com.android.systemui.statusbar.policy.DarkIconDispatcher.isInArea;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -28,13 +29,11 @@ import android.content.res.ColorStateList;
 import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +44,6 @@ import android.widget.ImageView;
 
 import android.widget.LinearLayout;
 import com.android.keyguard.AlphaOptimizedLinearLayout;
-import com.android.settingslib.Utils;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.WifiIconState;
 import com.android.systemui.statusbar.policy.DarkIconDispatcher.DarkReceiver;
@@ -67,12 +65,8 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
     private View mAirplaneSpacer;
     private WifiIconState mState;
     private String mSlot;
-    private float mDarkIntensity = 0;
     private int mVisibleState = -1;
     private boolean mActivityEnabled;
-
-    private ContextThemeWrapper mDarkContext;
-    private ContextThemeWrapper mLightContext;
 
     private boolean mShowWifiActivity;
     private final Handler mHandler = new Handler();
@@ -189,11 +183,6 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
     }
 
     private void init() {
-        int dualToneLightTheme = Utils.getThemeAttr(mContext, R.attr.lightIconTheme);
-        int dualToneDarkTheme = Utils.getThemeAttr(mContext, R.attr.darkIconTheme);
-        mLightContext = new ContextThemeWrapper(mContext, dualToneLightTheme);
-        mDarkContext = new ContextThemeWrapper(mContext, dualToneDarkTheme);
-
         mWifiGroup = findViewById(R.id.wifi_group);
         mWifiIcon = findViewById(R.id.wifi_signal);
         mSignalSpacer = findViewById(R.id.wifi_signal_spacer);
@@ -235,10 +224,7 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
     private void updateState(WifiIconState state) {
         setContentDescription(state.contentDescription);
         if (mState.resId != state.resId && state.resId >= 0) {
-            NeutralGoodDrawable drawable = NeutralGoodDrawable
-                    .create(mLightContext, mDarkContext, state.resId);
-            drawable.setDarkIntensity(mDarkIntensity);
-            mWifiIcon.setImageDrawable(drawable);
+            mWifiIcon.setImageDrawable(mContext.getDrawable(mState.resId));
         }
 
         mInoutContainer.setVisibility(mShowWifiActivity && state.visible ? View.VISIBLE : View.GONE);
@@ -255,10 +241,7 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
     private void initViewState() {
         setContentDescription(mState.contentDescription);
         if (mState.resId >= 0) {
-            NeutralGoodDrawable drawable = NeutralGoodDrawable.create(
-                    mLightContext, mDarkContext, mState.resId);
-            drawable.setDarkIntensity(mDarkIntensity);
-            mWifiIcon.setImageDrawable(drawable);
+            mWifiIcon.setImageDrawable(mContext.getDrawable(mState.resId));
         }
 
         mInoutContainer.setVisibility(
@@ -271,15 +254,13 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
 
     @Override
     public void onDarkChanged(Rect area, float darkIntensity, int tint) {
-        mDarkIntensity = getDarkIntensity(area, this, darkIntensity);
-        Drawable d = mWifiIcon.getDrawable();
-        if (d instanceof NeutralGoodDrawable) {
-            ((NeutralGoodDrawable)d).setDarkIntensity(mDarkIntensity);
+        if (!isInArea(area, this)) {
+            return;
         }
-        int areaTint = getTint(area, this, tint);
+        mWifiIcon.setImageTintList(ColorStateList.valueOf(getTint(area, this, tint)));
         mInoutContainer.setDarkIntensity(getDarkIntensity(area, this, darkIntensity));
-        mDotView.setDecorColor(areaTint);
-        mDotView.setIconColor(areaTint, false);
+        mDotView.setDecorColor(tint);
+        mDotView.setIconColor(tint, false);
     }
 
 
