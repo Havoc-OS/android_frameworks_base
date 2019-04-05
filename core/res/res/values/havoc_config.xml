@@ -249,4 +249,7 @@
 
     <!-- Whether the Dreamliner (Pixel Stand) service should be enabled -->
     <bool name="config_enableDreamlinerService">false</bool>
+
+    <!-- Whether to enable Qualcomm Boost Framework -->
+    <bool name="config_enableQcCpuBoost">false</bool>
 </resources>

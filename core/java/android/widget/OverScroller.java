@@ -616,6 +616,7 @@ public class OverScroller {
          */
         private BoostFramework mPerf = null;
         private boolean mIsPerfLockAcquired = false;
+        private boolean mIsPerfBoostEnabled = false;
 
         static {
             float x_min = 0.0f;
@@ -663,7 +664,9 @@ public class OverScroller {
                     * ppi
                     * 0.84f; // look and feel tuning
 
-            if (!SCROLL_BOOST_SS_ENABLE && mPerf == null) {
+            mIsPerfBoostEnabled = context.getResources().getBoolean(
+                   com.android.internal.R.bool.config_enableQcCpuBoost);
+            if (!SCROLL_BOOST_SS_ENABLE && mPerf == null && mIsPerfBoostEnabled) {
                 mPerf = new BoostFramework(context);
             }
         }

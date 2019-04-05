@@ -345,4 +345,7 @@
 
   <!-- Dreamliner service -->
   <java-symbol type="bool" name="config_enableDreamlinerService" />
+
+  <!-- Whether devices supports Qualcomm Boost Framework -->
+  <java-symbol type="bool" name="config_enableQcCpuBoost" />
 </resources>
