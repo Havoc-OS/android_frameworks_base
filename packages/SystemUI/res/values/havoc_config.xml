@@ -98,4 +98,7 @@
 
     <!-- Show battery icon in the QS Panel instead of in the header -->
     <bool name="config_batteryInQSPanel">true</bool>
+
+    <!-- Color of the FOD view -->
+    <color name="config_fodColor">#00ff00</color>
 </resources>

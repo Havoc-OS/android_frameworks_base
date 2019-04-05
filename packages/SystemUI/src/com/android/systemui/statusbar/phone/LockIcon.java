@@ -17,6 +17,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
@@ -25,6 +26,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 
+import com.android.internal.custom.app.LineageContextConstants;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.KeyguardAffordanceView;
@@ -56,6 +58,7 @@ public class LockIcon extends KeyguardAffordanceView implements OnUserInfoChange
     private AccessibilityController mAccessibilityController;
     private boolean mHasFingerPrintIcon;
     private boolean mHasFaceUnlockIcon;
+    private boolean mHasFod;
     private int mDensity;
 
     private final Runnable mDrawOffTimeout = () -> update(true /* forceUpdate */);
@@ -65,6 +68,9 @@ public class LockIcon extends KeyguardAffordanceView implements OnUserInfoChange
         mTrustDrawable = new TrustDrawable(context);
         setBackground(mTrustDrawable);
         mUnlockMethodCache = UnlockMethodCache.getInstance(context);
+
+        PackageManager packageManager = context.getPackageManager();
+        mHasFod = packageManager.hasSystemFeature(LineageContextConstants.Features.FOD);
     }
 
     @Override
@@ -303,13 +309,13 @@ public class LockIcon extends KeyguardAffordanceView implements OnUserInfoChange
         boolean fingerprintRunning = updateMonitor.isFingerprintDetectionRunning();
         boolean unlockingAllowed = updateMonitor.isUnlockingWithFingerprintAllowed();
         if (mTransientFpError) {
-            return STATE_FINGERPRINT_ERROR;
+            return mHasFod ? STATE_LOCKED : STATE_FINGERPRINT_ERROR;
         } else if (mUnlockMethodCache.canSkipBouncer()) {
             return STATE_LOCK_OPEN;
         } else if (mUnlockMethodCache.isFaceUnlockRunning()) {
             return STATE_FACE_UNLOCK;
         } else if (fingerprintRunning && unlockingAllowed) {
-            return STATE_FINGERPRINT;
+            return mHasFod ? STATE_LOCKED : STATE_FINGERPRINT;
         } else {
             return STATE_LOCKED;
         }
