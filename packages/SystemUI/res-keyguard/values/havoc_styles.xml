@@ -16,17 +16,11 @@
  * limitations under the License.
  */
 -->
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Lockscreen clock styles -->
-    <color name="analog_clock_border_color">#212121</color>
-    <color name="analog_clock_face_color">#FFFFFF</color>
-    <color name="analog_clock_hand_hour_color">@*android:color/accent_device_default_light</color>
-    <color name="analog_clock_hand_minute_color">#212121</color>
-
-    <!-- Sammy accented clock -->
-    <color name="sammy_minutes_accent">@*android:color/accent_device_default_light</color>
-
-    <color name="custom_text_clock_top_color">#e7b465</color>
+    <style name="customtextclock_big_thin">
+        <item name="android:textSize">@dimen/customtextclock_fontsize</item>
+        <item name="android:paddingBottom">@dimen/bottom_text_spacing_digital</item>
+    </style>
 
 </resources>
