@@ -43,4 +43,8 @@
          causes a poor experience. -->
     <bool name="config_fingerprintWakeAndUnlock">true</bool>
 
+    <!-- Color of the FOD view -->
+    <color name="config_fodColor">#00ff00</color>
+    <color name="config_fodColorBackground">#20000000</color>
+
 </resources>
