@@ -37,4 +37,7 @@
         caffeine,heads_up,livedisplay,reading_mode,usb_tether
     </string>
 
+    <!-- Color of the FOD view -->
+    <color name="config_fodColor">#00ff00</color>
+
 </resources>
