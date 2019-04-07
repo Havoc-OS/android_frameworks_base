@@ -18,20 +18,18 @@
  */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="reboot_title">Reštartovať</string>
-    <string name="reboot_message">Reštartovanie systému</string>
-    <!-- Pocket Lock -->
-    <string name="pocket_lock_message_long_press">Pre interakciu dlho stlačte tlačidlo Napájanie</string>
+    <string name="reboot_title">Reboot</string>
+    <string name="reboot_message">Rebooting System</string>
     <!-- AOKP custom system animations -->
-    <string name="animation_fade">Miznutie</string>
+    <string name="animation_fade">Miznúť</string>
     <string name="animation_slide_right">Posunúť vpravo</string>
-    <string name="animation_slide_left">Posunúť vľavo</string>
-    <string name="animation_slide_right_no_fade">Posunúť vpravo (bez miznutia)</string>
-    <string name="animation_slide_left_no_fade">Posunúť vľavo (bez miznutia)</string>
+    <string name="animation_slide_left">Posunutie vľavo</string>
+    <string name="animation_slide_right_no_fade">Posunutie vpravo (Bez miznutia)</string>
+    <string name="animation_slide_left_no_fade">Prílet zľava (Bez zanikania)</string>
     <string name="animation_slide_up">Posunúť dolu</string>
     <string name="animation_slide_down">Posunúť nahor</string>
     <string name="animation_default">Predvolené</string>
-    <string name="animation_translucent">Priehľadnosť</string>
+    <string name="animation_translucent">Priesvitné</string>
     <string name="animation_grow_shrink">Zväčšenie (Zvrchu)</string>
     <string name="animation_grow_shrink_center">Zväčšenie (Zo stredu)</string>
     <string name="animation_grow_shrink_bottom">Zväčšenie (Zospodu)</string>
@@ -50,27 +48,22 @@
     <string name="screenrecord_notif_pointer_off">Skryť ukazovateľ</string>
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Nepodarilo sa nahrať obrazovku</string>
-    <string name="notification_channel_screenrecord">Nahrávanie obrazovky</string>
-    <!-- App Blacklist -->
-    <string name="app_blacklist">Zakázané aplikácie</string>
+    <string name="notification_channel_screenrecord">Záznamy obrazovky</string>
     <!-- ADB over network -->
     <string name="adb_net_active_notification_title">ADB cez sieť povolené</string>
-    <string name="adb_both_active_notification_title">ADB ladenie cez USB a sieť je povolené</string>
+    <string name="adb_both_active_notification_title">Ladenie cez USB a sieť je povolené</string>
     <string name="adb_active_generic_notification_message">Dotykom zakážate ladenie.</string>
     <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_fakePackageSignature">Napodobniť podpis balíčku</string>
     <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permdesc_fakePackageSignature">Umožňuje aplikácii predstierať, že je inou aplikáciou. Škodlivé aplikácie môžu používať na prístup k údajom o súkromných aplikáciách. Udeľte toto iba opatrne!</string>
+    <string name="permdesc_fakePackageSignature">Umožňuje aplikácii vydávať sa za inú aplikáciu. Škodlivé aplikácie by mohli použiť túto možnosť pre prístup k dátam súkromných aplikácií. Legitímne použitie zahŕňa emulátor, ktorý predstiera, že je to, čo napodobňuje. Udeľujte toto oprávnenie s opatrnosťou!</string>
     <!-- SystemUI Restart -->
     <string name="systemui_restart_title">Vyžaduje sa reštart SystemUI</string>
     <string name="systemui_restart_message">Aby sa všetky zmeny prejavili je potrebné reštartovať SystemUI. Reštartovať teraz?</string>
-    <!-- Ambient play -->
-    <string name="ambient_recognition_notification">Práve hrá</string>
-    <string name="ambient_recognition_information">%1$s od %2$s</string>
     <!-- App ops requests -->
     <string name="app_ops_access_camera">prístup k fotoparátu</string>
     <string name="app_ops_access_location">prístup k polohe</string>
-    <string name="app_ops_access_notifications">čítať oznámenia</string>
+    <string name="app_ops_access_notifications">čítať upozornenia</string>
     <string name="app_ops_activate_vpn">aktivovať VPN</string>
     <string name="app_ops_add_voicemail">pridať hlasovú poštu</string>
     <string name="app_ops_app_start_foreground">spustiť okamžitú aplikáciu v popredí</string>
@@ -79,90 +72,98 @@
     <string name="app_ops_audio_accessibility_volume">prístup k hlasitosti zvuku</string>
     <string name="app_ops_auto_start">spustiť pri štaťte</string>
     <string name="app_ops_bind_accessibility_service">nadviazať na službu dostupnosti</string>
-    <string name="app_ops_bluetooth_scan">skenovanieBluetooth</string>
+    <string name="app_ops_bluetooth_scan">vyhľadávať zariadenia Bluetooth</string>
     <string name="app_ops_change_wallpaper">zmeniť tapetu</string>
     <string name="app_ops_delete_call_log">vymazať denník hovorov</string>
-    <string name="app_ops_delete_contacts">mazať kontakty</string>
+    <string name="app_ops_delete_contacts">vymazať kontakty</string>
     <string name="app_ops_delete_mms">vymazať MMS správy</string>
     <string name="app_ops_delete_sms">vymazať SMS správy</string>
-    <string name="app_ops_draw_on_top">vykreslovať do najvyššej vrstvy</string>
-    <string name="app_ops_get_accounts">získať účty zariadenia</string>
-    <string name="app_ops_get_usage_stats">získať štatistiky používania aplikácií</string>
-    <string name="app_ops_accept_handover">odovzdanie hovoru z inej aplikácie</string>
-    <string name="app_ops_install_packages">inštalovať balíky</string>
-    <string name="app_ops_keep_device_awake">ponechať zariadenie prebudené</string>
-    <string name="app_ops_manage_ipsec_tunnels">spravovať tunely ipsec</string>
-    <string name="app_ops_make_phone_call">uskutočniť telefonický hovor</string>
-    <string name="app_ops_mock_location">falšovať vašu polohu</string>
-    <string name="app_ops_modify_calendar">aktualizovať kalendár</string>
-    <string name="app_ops_modify_call_log">aktualizovať denník hovorov</string>
-    <string name="app_ops_modify_clipboard">upraviť schránku</string>
-    <string name="app_ops_modify_contacts">aktualizovať kontakty</string>
-    <string name="app_ops_modify_settings">aktualizovať systémové nastavenia</string>
-    <string name="app_ops_mute_unmute_microphone">stlmiť/zapnúť mikrofón</string>
-    <string name="app_ops_phone_calls">prijať telefónny hovor</string>
-    <string name="app_ops_picture_in_picture">obraz v obraze</string>
-    <string name="app_ops_play_audio">prehrávať zvuk</string>
-    <string name="app_ops_post_notification">odoslať oznámenie</string>
-    <string name="app_ops_project_media">premietať médiá</string>
-    <string name="app_ops_read_calendar">čítať údaje z kalendára</string>
-    <string name="app_ops_read_call_log">čítať výpisy hovorov</string>
-    <string name="app_ops_read_cell_broadcasts">čítať bunkové vysielanie</string>
-    <string name="app_ops_read_clipboard">čítať údaje zo schránky</string>
-    <string name="app_ops_read_contacts">čítať kontakty</string>
-    <string name="app_ops_read_external_storage">čítal externé úložisko</string>
-    <string name="app_ops_read_mms">čítať správy MMS</string>
-    <string name="app_ops_read_phone_numbers">čítať telefónne čísla</string>
-    <string name="app_ops_read_phone_state">pristupovať k stavu telefónu</string>
-    <string name="app_ops_read_sms">čítať správy SMS</string>
-    <string name="app_ops_receive_sms">prijímať SMS správy</string>
-    <string name="app_ops_receive_emergency_broadcast">prijímať správy núdzového vysielania</string>
-    <string name="app_ops_record_audio">nahrávať zvuk</string>
-    <string name="app_ops_request_delete_packages">žiadať o zmazanie balíčkov</string>
-    <string name="app_ops_run_in_background">spustiť na pozadí</string>
-    <string name="app_ops_run_any_in_background">spustiť čokoľvek na pozadí</string>
-    <string name="app_ops_scan_wifi">prehľadať Wi-Fi siete</string>
-    <string name="app_ops_send_mms">odoslielať MMS správy</string>
-    <string name="app_ops_send_sms">odosielať SMS správy</string>
-    <string name="app_ops_start_at_bootup">spustiť pri štaťte</string>
-    <string name="app_ops_start_foreground">spustiť na popredí</string>
-    <string name="app_ops_toast_window">zobraziť vyskakovacie správy</string>
-    <string name="app_ops_toggle_bluetooth">prepínať Bluetooth</string>
-    <string name="app_ops_toggle_mobile_data">prepínať mobilné dáta</string>
-    <string name="app_ops_toggle_nfc">prepínať NFC</string>
-    <string name="app_ops_toggle_wifi">prepínať Wi-Fi</string>
-    <string name="app_ops_turn_on_screen">zapnúť obrazovku</string>
-    <string name="app_ops_use_alarm_volume">ovládať hlasitosť budíka</string>
-    <string name="app_ops_use_audio_focus">ovládať zvukové zdroje</string>
+    <string name="app_ops_draw_on_top">vykresliť okná navrchu</string>
+    <string name="app_ops_get_accounts">get device accounts</string>
+    <string name="app_ops_get_usage_stats">get app usage stats</string>
+    <string name="app_ops_accept_handover">handover of a call from another app</string>
+    <string name="app_ops_install_packages">install packages</string>
+    <string name="app_ops_keep_device_awake">keep your device awake</string>
+    <string name="app_ops_manage_ipsec_tunnels">manage ipsec tunnels</string>
+    <string name="app_ops_make_phone_call">make a phone call</string>
+    <string name="app_ops_mock_location">mock your location</string>
+    <string name="app_ops_modify_calendar">update your calendar</string>
+    <string name="app_ops_modify_call_log">update the call log</string>
+    <string name="app_ops_modify_clipboard">modify the clipboard</string>
+    <string name="app_ops_modify_contacts">update your contacts</string>
+    <string name="app_ops_modify_settings">update system settings</string>
+    <string name="app_ops_mute_unmute_microphone">mute/unmute the microphone</string>
+    <string name="app_ops_phone_calls">answer phone calls</string>
+    <string name="app_ops_picture_in_picture">use picture in picture</string>
+    <string name="app_ops_play_audio">play audio</string>
+    <string name="app_ops_post_notification">post a notification</string>
+    <string name="app_ops_project_media">project media</string>
+    <string name="app_ops_read_calendar">read your calendar</string>
+    <string name="app_ops_read_call_log">read the call log</string>
+    <string name="app_ops_read_cell_broadcasts">read cell broadcasts</string>
+    <string name="app_ops_read_clipboard">read the clipboard</string>
+    <string name="app_ops_read_contacts">read your contacts</string>
+    <string name="app_ops_read_external_storage">read external storage</string>
+    <string name="app_ops_read_mms">read your MMS messages</string>
+    <string name="app_ops_read_phone_numbers">read phone numbers</string>
+    <string name="app_ops_read_phone_state">access phone state</string>
+    <string name="app_ops_read_sms">read your SMS messages</string>
+    <string name="app_ops_receive_sms">receive an SMS message</string>
+    <string name="app_ops_receive_emergency_broadcast">receive an emergency broadcast message</string>
+    <string name="app_ops_record_audio">record audio</string>
+    <string name="app_ops_request_delete_packages">request delete packages</string>
+    <string name="app_ops_run_in_background">run in background</string>
+    <string name="app_ops_run_any_in_background">run any in background</string>
+    <string name="app_ops_scan_wifi">scan Wi-Fi networks</string>
+    <string name="app_ops_send_mms">send an MMS message</string>
+    <string name="app_ops_send_sms">send an SMS message</string>
+    <string name="app_ops_start_at_bootup">start at power up</string>
+    <string name="app_ops_start_foreground">start foreground</string>
+    <string name="app_ops_toast_window">display toast messages</string>
+    <string name="app_ops_toggle_bluetooth">toggle Bluetooth</string>
+    <string name="app_ops_toggle_mobile_data">toggle cellular data</string>
+    <string name="app_ops_toggle_nfc">toggle NFC</string>
+    <string name="app_ops_toggle_wifi">toggle Wi-Fi</string>
+    <string name="app_ops_turn_on_screen">turn the screen on</string>
+    <string name="app_ops_use_alarm_volume">control alarm volume</string>
+    <string name="app_ops_use_audio_focus">control the audio focus</string>
     <string name="app_ops_use_bluetooth_volume">ovládať hlasitosť Bluetooh</string>
-    <string name="app_ops_use_body_sensors">použiť telové senzory</string>
+    <string name="app_ops_use_body_sensors">use body sensors</string>
     <string name="app_ops_use_fingerprint">použiť odtlačok prsta</string>
-    <string name="app_ops_use_master_volume">ovládať hlavnú hlasitosť</string>
+    <string name="app_ops_use_master_volume">ovládať zmiešavač hlasitosti</string>
     <string name="app_ops_use_media_buttons">používať tlačidlá médií</string>
     <string name="app_ops_use_media_volume">ovládať hlasitosť médií</string>
-    <string name="app_ops_use_notification_volume">ovládať hlasitosť oznámení</string>
+    <string name="app_ops_use_notification_volume">ovládať hlasitosť upozornení</string>
     <string name="app_ops_use_ring_volume">ovládať hlasitosť zvonenia</string>
     <string name="app_ops_use_vibrate">používať dotykovú odozvu</string>
     <string name="app_ops_use_voice_volume">ovládať hlasitosť hovoru</string>
-    <string name="app_ops_wifi_change">zmeniť stav WiFI</string>
-    <string name="app_ops_write_external_storage">zapisovať na externé úložisko</string>
-    <string name="app_ops_write_mms">vytvoriť MMS správu</string>
+    <string name="app_ops_wifi_change">zmeniť stav Wi-Fi</string>
+    <string name="app_ops_write_external_storage">zapisovať do externého úložiska</string>
+    <string name="app_ops_write_mms">napísať správu MMS</string>
     <string name="app_ops_write_sms">vytvoriť SMS správu</string>
     <!-- Privacy Guard -->
-    <string name="permlab_changePrivacyGuardState">povoliť alebo zakázať Ochranu súkromia</string>
+    <string name="permlab_changePrivacyGuardState">povoliť alebo zakázať ochranu súkromia</string>
     <string name="permdesc_changePrivacyGuardState">Umožňuje aplikácii určiť, či má byť iná aplikácia spustená s Ochranou súkromia. Keď je aplikácia spustená s Ochranou súkromia, nemá umožnený prístup k osobným údajom ako sú kontakty, denníky hovorov, alebo správy.</string>
     <string name="privacy_guard_notification">Ochrana súkromia je aktívna</string>
-    <string name="privacy_guard_notification_detail">Aplikácii <xliff:g id="app">%1$s</xliff:g> nebude umožnený prístup k osobným údajom</string>
+    <string name="privacy_guard_notification_detail"><xliff:g id="app">%1$s</xliff:g> will not be able to access personal data</string>
     <string name="privacy_guard_dialog_title">Ochrana súkromia</string>
-    <string name="privacy_guard_dialog_summary">Aplikácia <xliff:g id="app">%1$s</xliff:g> sa pokúša o <xliff:g id="op">%2$s</xliff:g>.</string>
+    <string name="privacy_guard_dialog_summary"><xliff:g id="app">%1$s</xliff:g> would like to <xliff:g id="op">%2$s</xliff:g>.</string>
     <!-- Text of the checkbox for the permission confirmation dialog to remember the user's choice. [CHAR LIMIT=40] -->
-    <string name="permission_remember_choice">Zapamätať si výber</string>
+    <string name="permission_remember_choice">Zapamätať si voľbu</string>
     <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_accessFontManager">prístup k správcovi písiem</string>
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_accessFontManager">Umožňuje aplikácii získať prístup k správcovi písmen.</string>
+    <!-- [CHAR LIMIT=NONE] Error when a package is installed but got the missing fonts.xml file, notifying the user why it isn't showing up. -->
+    <string name="fontservice_incompatible_font">Balík písma nie je kompatibilný z dôvodu chýbajúcej fonts.xml v súboroch. Prosím kontaktujte správcu balíka pre podporu.</string>
     <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_toggleNavigationEditor">ovládanie navigačného editora</string>
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_toggleNavigationEditor">Umožňuje aplikácii upraviť navigačný panel.</string>
+    <!-- App error dialog -->
+    <string name="aerr_copy">Kopírovať adresu URL záznamu o chybe</string>
+    <string name="url_copy_success">URL skopírované</string>
+    <string name="url_copy_failed">Vyskytla sa chyba pri nahrávaní log súboru na dogbin</string>
+    <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
+    <string name="system_error_vendorprint">Váš dodávateľ obrazu sa nezhoduje so systémom. Prosím napáľte obraz pre vaše zariadenie <xliff:g id="string">%s</xliff:g></string>
 </resources>
