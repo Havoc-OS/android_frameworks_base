@@ -19,28 +19,26 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="reboot_title">Reiniciar</string>
-    <string name="reboot_message">Reiniciando el sistema</string>
-    <!-- Pocket Lock -->
-    <string name="pocket_lock_message_long_press">Mantén pulsado el botón de encendido para interactuar</string>
+    <string name="reboot_message">Reiniciando sistema</string>
     <!-- AOKP custom system animations -->
     <string name="animation_fade">Desvanecer</string>
-    <string name="animation_slide_right">Deslizar desde la derecha</string>
-    <string name="animation_slide_left">Deslizar desde la izquierda</string>
-    <string name="animation_slide_right_no_fade">Deslizar desde la derecha (Sin desvanecerse)</string>
-    <string name="animation_slide_left_no_fade">Deslizar desde la izquierda (Sin desvanecerse)</string>
-    <string name="animation_slide_up">Deslizar desde abajo</string>
-    <string name="animation_slide_down">Deslizar desde arriba</string>
+    <string name="animation_slide_right">Deslizar a la derecha</string>
+    <string name="animation_slide_left">Deslizar a la izquierda</string>
+    <string name="animation_slide_right_no_fade">Deslizar a la derecha (sin desvanecimiento)</string>
+    <string name="animation_slide_left_no_fade">Deslizar a la izquierda (sin desvanecimiento)</string>
+    <string name="animation_slide_up">Deslizar hacia abajo</string>
+    <string name="animation_slide_down">Deslizar hacia arriba</string>
     <string name="animation_default">Por defecto</string>
     <string name="animation_translucent">Translúcido</string>
-    <string name="animation_grow_shrink">Aparecer (Desde arriba)</string>
-    <string name="animation_grow_shrink_center">Aparecer (Desde el centro)</string>
-    <string name="animation_grow_shrink_bottom">Aparecer (Desde abajo)</string>
-    <string name="animation_grow_shrink_left">Crecer (Izquierda)</string>
-    <string name="animation_grow_shrink_right">Crecer (Derecha)</string>
+    <string name="animation_grow_shrink">Aparecer (desde arriba)</string>
+    <string name="animation_grow_shrink_center">Aparecer (desde el centro)</string>
+    <string name="animation_grow_shrink_bottom">Aparecer (desde abajo)</string>
+    <string name="animation_grow_shrink_left">Aparecer (desde la izquierda)</string>
+    <string name="animation_grow_shrink_right">Aparecer (desde la derecha)</string>
     <string name="animation_random">Aleatorio</string>
     <string name="action_null">Vacío</string>
     <!-- Screenrecord Notification Ticker -->
-    <string name="screenrecord_notif_ticker">La pantalla está siendo grabada</string>
+    <string name="screenrecord_notif_ticker">Se está grabando la pantalla</string>
     <!-- Screenrecord notification title -->
     <string name="screenrecord_notif_title">Grabando pantalla</string>
     <!-- Screenrecord notification action: Stop -->
@@ -49,62 +47,57 @@
     <string name="screenrecord_notif_pointer_on">Mostrar puntero</string>
     <string name="screenrecord_notif_pointer_off">Ocultar puntero</string>
     <!-- Screen record notification error title -->
-    <string name="screenrecord_notif_error">No se pudo grabar la pantalla</string>
-    <string name="notification_channel_screenrecord">Grabaciones de pantalla</string>
-    <!-- App Blacklist -->
-    <string name="app_blacklist">Lista negra de aplicaciones</string>
+    <string name="screenrecord_notif_error">No se puede grabar la pantalla</string>
+    <string name="notification_channel_screenrecord">Grabador de Pantalla</string>
     <!-- ADB over network -->
-    <string name="adb_net_active_notification_title">ADB sobre red activado</string>
-    <string name="adb_both_active_notification_title">ADB sobre USB y red activado</string>
-    <string name="adb_active_generic_notification_message">Toca para deshabilitar la depuración.</string>
+    <string name="adb_net_active_notification_title">ADB habilitado</string>
+    <string name="adb_both_active_notification_title">ADB sobre USB &amp; red activada</string>
+    <string name="adb_active_generic_notification_message">Toca para desactivar la depuración.</string>
     <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_fakePackageSignature">Falsificar firma del paquete</string>
     <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permdesc_fakePackageSignature">Permite que la aplicación pretenda ser una aplicación diferente. Las aplicaciones maliciosas pueden usar esto para acceder a datos privados. ¡Concede este permiso con cuidado!</string>
+    <string name="permdesc_fakePackageSignature">Permite a las apps hacerse pasar por otras. Las aplicaciones maliciosas podrían utilizarlo para acceder a información privada. ¡Concede este permiso con precaución!</string>
     <!-- SystemUI Restart -->
-    <string name="systemui_restart_title">Se requiere reiniciar SystemUI</string>
-    <string name="systemui_restart_message">Para que todos los cambios surtan efecto, se requiere un reinicio de SystemUI. ¿Reiniciar SystemUI ahora?</string>
-    <!-- Ambient play -->
-    <string name="ambient_recognition_notification">Reproduciendo ahora</string>
-    <string name="ambient_recognition_information">%1$s por %2$s</string>
+    <string name="systemui_restart_title">Se requiere reiniciar la UI del sistema</string>
+    <string name="systemui_restart_message">Para que todos los cambios surtan efecto, es necesario reiniciar el sistema. ¿Reiniciar el sistema ahora?</string>
     <!-- App ops requests -->
     <string name="app_ops_access_camera">acceder a la cámara</string>
     <string name="app_ops_access_location">acceder a tu ubicación</string>
     <string name="app_ops_access_notifications">leer tus notificaciones</string>
-    <string name="app_ops_activate_vpn">activar una VPN</string>
+    <string name="app_ops_activate_vpn">activar VPN</string>
     <string name="app_ops_add_voicemail">añadir un mensaje de voz</string>
-    <string name="app_ops_app_start_foreground">iniciar aplicación instantánea en primer plano</string>
-    <string name="app_ops_assist_screenshot">tomar una captura de pantalla</string>
-    <string name="app_ops_assist_structure">utilizar estructura de asistencia</string>
-    <string name="app_ops_audio_accessibility_volume">volumen de accesibilidad de audio</string>
-    <string name="app_ops_auto_start">ejecutar al iniciar</string>
-    <string name="app_ops_bind_accessibility_service">enlazar servicio de accesibilidad</string>
+    <string name="app_ops_app_start_foreground">iniciar una aplicación instantánea en primer plano</string>
+    <string name="app_ops_assist_screenshot">hacer una captura de pantalla</string>
+    <string name="app_ops_assist_structure">usar una estructura de ayuda</string>
+    <string name="app_ops_audio_accessibility_volume">volumen del audio de accesibilidad</string>
+    <string name="app_ops_auto_start">abrirse al inicio</string>
+    <string name="app_ops_bind_accessibility_service">servicio de accesibilidad enlazado</string>
     <string name="app_ops_bluetooth_scan">escanear bluetooth</string>
     <string name="app_ops_change_wallpaper">cambiar el fondo de pantalla</string>
-    <string name="app_ops_delete_call_log">eliminar tu registro de llamadas</string>
-    <string name="app_ops_delete_contacts">borrar tus contactos</string>
-    <string name="app_ops_delete_mms">borrar tus mensajes MMS</string>
-    <string name="app_ops_delete_sms">borrar tus mensajes SMS</string>
-    <string name="app_ops_draw_on_top">dibujar ventanas encima</string>
+    <string name="app_ops_delete_call_log">borrar historial de llamadas</string>
+    <string name="app_ops_delete_contacts">borrar contactos</string>
+    <string name="app_ops_delete_mms">eliminar tus mensajes MMS</string>
+    <string name="app_ops_delete_sms">eliminar mensajes SMS</string>
+    <string name="app_ops_draw_on_top">dibujar ventanas en la parte superior</string>
     <string name="app_ops_get_accounts">obtener cuentas del dispositivo</string>
     <string name="app_ops_get_usage_stats">obtener estadísticas de uso de la aplicación</string>
-    <string name="app_ops_accept_handover">entrega de una llamada de otra aplicación</string>
+    <string name="app_ops_accept_handover">llamada entrante desde otra aplicación</string>
     <string name="app_ops_install_packages">instalar paquetes</string>
-    <string name="app_ops_keep_device_awake">mantener tu dispositivo despierto</string>
+    <string name="app_ops_keep_device_awake">mantener tu dispositivo encendido</string>
     <string name="app_ops_manage_ipsec_tunnels">administrar túneles ipsec</string>
-    <string name="app_ops_make_phone_call">realizar una llamada telefónica</string>
+    <string name="app_ops_make_phone_call">hacer una llamada</string>
     <string name="app_ops_mock_location">simular tu ubicación</string>
-    <string name="app_ops_modify_calendar">actualizar tu calendario</string>
+    <string name="app_ops_modify_calendar">actualizar el calendario</string>
     <string name="app_ops_modify_call_log">actualizar el registro de llamadas</string>
     <string name="app_ops_modify_clipboard">modificar el portapapeles</string>
     <string name="app_ops_modify_contacts">actualizar tus contactos</string>
     <string name="app_ops_modify_settings">actualizar ajustes del sistema</string>
     <string name="app_ops_mute_unmute_microphone">activar/desactivar el micrófono</string>
     <string name="app_ops_phone_calls">responder llamadas</string>
-    <string name="app_ops_picture_in_picture">usar PiP</string>
-    <string name="app_ops_play_audio">reproducir audio</string>
+    <string name="app_ops_picture_in_picture">usar \"foto sobre foto\"</string>
+    <string name="app_ops_play_audio">reproducir sonido</string>
     <string name="app_ops_post_notification">publicar una notificación</string>
-    <string name="app_ops_project_media">proyectar multimedia</string>
+    <string name="app_ops_project_media">proyectar contenido multimedia</string>
     <string name="app_ops_read_calendar">leer tu calendario</string>
     <string name="app_ops_read_call_log">leer el registro de llamadas</string>
     <string name="app_ops_read_cell_broadcasts">leer mensajes de difusión de la red</string>
@@ -114,55 +107,63 @@
     <string name="app_ops_read_mms">leer tus mensajes MMS</string>
     <string name="app_ops_read_phone_numbers">leer números de teléfono</string>
     <string name="app_ops_read_phone_state">acceder al estado del dispositivo</string>
-    <string name="app_ops_read_sms">leer tus mensajes SMS</string>
-    <string name="app_ops_receive_sms">recibir un mensaje SMS</string>
-    <string name="app_ops_receive_emergency_broadcast">recibir una mensaje de transmisión de emergencias</string>
+    <string name="app_ops_read_sms">leer SMS</string>
+    <string name="app_ops_receive_sms">recibir SMS</string>
+    <string name="app_ops_receive_emergency_broadcast">recibir un emitido de emergencia</string>
     <string name="app_ops_record_audio">grabar audio</string>
     <string name="app_ops_request_delete_packages">solicitar eliminación de paquetes</string>
     <string name="app_ops_run_in_background">ejecutar en segundo plano</string>
     <string name="app_ops_run_any_in_background">ejecutar cualquiera en segundo plano</string>
     <string name="app_ops_scan_wifi">escanear redes Wi-Fi</string>
-    <string name="app_ops_send_mms">enviar un mensaje MMS</string>
-    <string name="app_ops_send_sms">enviar un mensaje SMS</string>
+    <string name="app_ops_send_mms">enviar MMS</string>
+    <string name="app_ops_send_sms">enviar SMS</string>
     <string name="app_ops_start_at_bootup">ejercutar al inicio</string>
-    <string name="app_ops_start_foreground">inicio en primer plano</string>
-    <string name="app_ops_toast_window">mostrar mensajes emergentes</string>
-    <string name="app_ops_toggle_bluetooth">conmutar Bluetooth</string>
-    <string name="app_ops_toggle_mobile_data">conmutar datos móviles</string>
-    <string name="app_ops_toggle_nfc">conmutar NFC</string>
-    <string name="app_ops_toggle_wifi">conmutar Wi-Fi</string>
+    <string name="app_ops_start_foreground">iniciar en primer plano</string>
+    <string name="app_ops_toast_window">mostrar notificaciones emergentes</string>
+    <string name="app_ops_toggle_bluetooth">alternar Bluetooth</string>
+    <string name="app_ops_toggle_mobile_data">alternar datos móviles</string>
+    <string name="app_ops_toggle_nfc">alternar NFC</string>
+    <string name="app_ops_toggle_wifi">alternar Wi-Fi</string>
     <string name="app_ops_turn_on_screen">encender la pantalla</string>
-    <string name="app_ops_use_alarm_volume">controlar volumen de la alarma</string>
-    <string name="app_ops_use_audio_focus">controlar la atención del sonido</string>
-    <string name="app_ops_use_bluetooth_volume">controlar el volumen de Bluetooth</string>
-    <string name="app_ops_use_body_sensors">utilizar sensores de cuerpo</string>
-    <string name="app_ops_use_fingerprint">usar huella digital</string>
-    <string name="app_ops_use_master_volume">controlar el volumen principal</string>
-    <string name="app_ops_use_media_buttons">usar los botones multimedia</string>
+    <string name="app_ops_use_alarm_volume">controlar el volumen de la alarma</string>
+    <string name="app_ops_use_audio_focus">controlar volumen del sonido</string>
+    <string name="app_ops_use_bluetooth_volume">controlar el volumen del Bluetooth</string>
+    <string name="app_ops_use_body_sensors">utilizar sensores corporales</string>
+    <string name="app_ops_use_fingerprint">usar huella dactilar</string>
+    <string name="app_ops_use_master_volume">controlar el volumen general</string>
+    <string name="app_ops_use_media_buttons">usar los botones de multimedia</string>
     <string name="app_ops_use_media_volume">controlar el volumen multimedia</string>
-    <string name="app_ops_use_notification_volume">controlar el volumen de notificación</string>
-    <string name="app_ops_use_ring_volume">controlar el volumen de tono de llamada</string>
-    <string name="app_ops_use_vibrate">usar respuesta háptica</string>
-    <string name="app_ops_use_voice_volume">controlar el volumen de llamada de voz</string>
-    <string name="app_ops_wifi_change">cambiar estado de Wi-Fi</string>
-    <string name="app_ops_write_external_storage">escribir en memoria externa</string>
+    <string name="app_ops_use_notification_volume">controlar el volumen de notificaciones</string>
+    <string name="app_ops_use_ring_volume">controlar el volumen de llamada</string>
+    <string name="app_ops_use_vibrate">usar vibración por toques</string>
+    <string name="app_ops_use_voice_volume">controlar el volumen en llamada</string>
+    <string name="app_ops_wifi_change">cambiar el estado del Wi-Fi</string>
+    <string name="app_ops_write_external_storage">escribir en discos externos</string>
     <string name="app_ops_write_mms">escribir un mensaje MMS</string>
     <string name="app_ops_write_sms">escribir un mensaje SMS</string>
     <!-- Privacy Guard -->
-    <string name="permlab_changePrivacyGuardState">habilitar o deshabilitar la Protección de Privacidad</string>
-    <string name="permdesc_changePrivacyGuardState">Permite a la aplicación cambiar si otra aplicación se ejecuta con la Protección de la Privacidad. Cuando una aplicación se está ejecutando con la Protección de Privacidad, no tiene acceso a datos personales tales como contactos, registros de llamadas o mensajes.</string>
-    <string name="privacy_guard_notification">Protección de Privacidad activa</string>
+    <string name="permlab_changePrivacyGuardState">activar o desactivar Privacy Guard</string>
+    <string name="permdesc_changePrivacyGuardState">Permite que la aplicación cambie si otra aplicación se ejecuta con Privacy Guard. Cuando una aplicación se ejecuta con Privacy Guard, no tendrá acceso a datos personales como contactos, registros de llamadas o mensajes.</string>
+    <string name="privacy_guard_notification">Privacy Guard activo</string>
     <string name="privacy_guard_notification_detail"><xliff:g id="app">%1$s</xliff:g> no podrá acceder a datos personales</string>
-    <string name="privacy_guard_dialog_title">Protección de Privacidad</string>
-    <string name="privacy_guard_dialog_summary">A <xliff:g id="app">%1$s</xliff:g> le gustaría <xliff:g id="op">%2$s</xliff:g>.</string>
+    <string name="privacy_guard_dialog_title">Privacy Guard</string>
+    <string name="privacy_guard_dialog_summary"><xliff:g id="app">%1$s</xliff:g> desea <xliff:g id="op">%2$s</xliff:g>.</string>
     <!-- Text of the checkbox for the permission confirmation dialog to remember the user's choice. [CHAR LIMIT=40] -->
     <string name="permission_remember_choice">Recordar mi elección</string>
     <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_accessFontManager">acceder al gestor de fuentes</string>
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_accessFontManager">Permite a una aplicación acceder al gestor de fuentes.</string>
+    <!-- [CHAR LIMIT=NONE] Error when a package is installed but got the missing fonts.xml file, notifying the user why it isn't showing up. -->
+    <string name="fontservice_incompatible_font">El paquete de fuentes que ha instalado no es compatible debido a que falta fonts.xml en sus archivos. Por favor, póngase en contacto con el desarrollador de paquetes para recibir soporte.</string>
     <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permlab_toggleNavigationEditor">controlar el editor de barra de navegación</string>
+    <string name="permlab_toggleNavigationEditor">controlar editor de navegación</string>
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permdesc_toggleNavigationEditor">Permite a una aplicación controlar el editor de barra de navegación.</string>
+    <string name="permdesc_toggleNavigationEditor">Permite a una app controlar el editor de la barra de navegación.</string>
+    <!-- App error dialog -->
+    <string name="aerr_copy">Copiar URL del log de error</string>
+    <string name="url_copy_success">URL copiada correctamente</string>
+    <string name="url_copy_failed">Se ha producido un error al subir el registro a la papelera</string>
+    <!-- Vendor mismatched fingerprint warning [CHAR LIMIT=NONE] -->
+    <string name="system_error_vendorprint">La imagen de vendor no coincide con la del sistema. Por favor instala la imagen <xliff:g id="string">%s</xliff:g> para tu dispositivo</string>
 </resources>

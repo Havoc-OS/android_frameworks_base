@@ -19,8 +19,11 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Description for the screen zoom level that makes interface elements smaller. [CHAR LIMIT=24] -->
-    <string name="screen_zoom_summary_smaller">ملخص تكبير الشاشة أصغر
-وصف لمستوى تكبير الشاشة الذي يجعل عناصر الواجهة أصغر</string>
+    <string name="screen_zoom_summary_smaller">أصغر</string>
     <!-- Description for the screen zoom level that makes interface elements smallest. [CHAR LIMIT=24] -->
-    <string name="screen_zoom_summary_smallest">أصغر</string>
+    <string name="screen_zoom_summary_smallest">الأصغر</string>
+    <!-- Label for estimated remaining duration of dash battery charging -->
+    <string name="power_remaining_dash_charging_duration_only">شحن السريع (<xliff:g id="time">%1$s</xliff:g> left حتى الامتلاء)</string>
+    <!-- Battery use screen.  Battery status shown in chart label when charging from a dash source.  -->
+    <string name="battery_info_status_dash_charging">شحن السريع</string>
 </resources>

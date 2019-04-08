@@ -60,8 +60,8 @@
     <string name="global_action_screenshot">Ekran görüntüsü</string>
     <!-- LTE QS Tile -->
     <string name="qs_lte_label">LTE</string>
-    <string name="lte_on">LTE açık</string>
-    <string name="lte_off">LTE kapalı</string>
+    <string name="lte_on">LTE</string>
+    <string name="lte_off">LTE</string>
     <!-- Sound QS Tile -->
     <string name="quick_settings_sound_label">Ses</string>
     <string name="quick_settings_sound_ring">Zil sesi</string>
@@ -90,6 +90,7 @@
     <!-- Screenrecord Notification Ticker -->
     <string name="screenrecord_notif_ticker">Ekran kaydediliyor</string>
     <string name="screenrecord_notif_final_ticker">Ekran başarıyla kaydedildi</string>
+    <string name="screenrecord_notif_description">Ekran kayıtlarınızı oynatmak için dokunun</string>
     <!-- Screenrecord notification title -->
     <string name="screenrecord_notif_title">Ekran kaydediliyor</string>
     <!-- Screenrecord notification action: Stop -->
@@ -103,20 +104,20 @@
     <string name="screenrecord_notif_error">Ekran kaydedilemiyor</string>
     <string name="notification_channel_screenrecord">Ekran kayıtları</string>
     <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
-    <string name="keyguard_indication_dash_charging_time">Dash Şarj Oluyor (tam dolmasına <xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> kaldı)</string>
-    <string name="keyguard_plugged_in_dash_charging">Dash Şarj Oluyor</string>
+    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Dash Şarj oluyor (tam dolmasına <xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> kaldı)</string>
+    <string name="keyguard_plugged_in_dash_charging">Dash Şarj oluyor</string>
     <string name="camera_title_tile">Kamera</string>
     <string name="suspend_title_tile">Eylemleri askıya al</string>
     <string name="alarm_title_tile">Alarm</string>
     <string name="calc_title_tile">Hesap makinesi</string>
-    <string name="call_title_tile">Çevirici</string>
+    <string name="call_title_tile">Telefon</string>
     <string name="calendar_title_tile">Etkinlik ekle</string>
     <!-- Heads up snooze toast -->
-    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - Bildirim pencereleri 1 dakikalığına erteleniyor.</string>
-    <string name="heads_up_snooze_message"><xliff:g id="string">%s</xliff:g> - Bildirim pencereleri <xliff:g id="number">%d</xliff:g> dakika erteleniyor.</string>
-    <string name="statusbar_items_title">Durum çubuğu simgesi</string>
+    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - Bildirim pencereleri 1 dakika ertelendi.</string>
+    <string name="heads_up_snooze_message"><xliff:g id="string">%s</xliff:g> - Bildirim pencereleri <xliff:g id="number">%d</xliff:g> dakika ertelendi.</string>
+    <string name="statusbar_items_title">Durum çubuğu simgeleri</string>
     <string name="lockscreen_default">Varsayılan</string>
-    <string name="lockscreen_hidden">Yok</string>
+    <string name="lockscreen_hidden">Hiçbiri</string>
     <!-- Shows when people have clicked on the custom lockscreen shortcut [CHAR LIMIT=60] -->
     <string name="custom_hint">Başlatmak için simgeyi kaydırın</string>
     <!-- Sync QS Tile -->
@@ -178,7 +179,8 @@
     <string name="quick_settings_sleepscreen_label">Ekranı kapat</string>
     <string name="lockscreen_tuner_activity">Kilit ekranı kısayolları</string>
     <!-- Nav Bar Swipe -->
-    <string name="nav_bar_layout_inverse">Geri ve son uygulama tuşlarının yerini değiştir</string>
+    <string name="nav_bar_layout_inverse">Tuşları değiştir</string>
+    <string name="nav_bar_layout_inverse_summary">Geri ve son uygulamalar tuşlarının yerini değiştir</string>
     <!-- Volume panel QS tile -->
     <string name="quick_settings_volume_panel_label">Ses paneli</string>
     <string name="tuner_cellular_title">Mobil</string>
@@ -187,7 +189,7 @@
     <string name="gaming_mode_tile_toast">Oyun modu etkin</string>
     <string name="gaming_mode_tile_toast_disabled">Oyun modu devre dışı</string>
     <string name="gaming_mode_dialog_title">Oyun modu</string>
-    <string name="gaming_mode_dialog_message">Oyun modu etkinleştirildiğinde zil sesi modunuz titreşim moduna geçer, tüm uyarı mesajları devre dışı bırakılır ve donanım tuşları kapatılır. Medya sesi maksimum değere yükseltilecektir. Oyun modundan çıktığınızda tüm engellenen ayarlar varsayılana sıfırlanacaktır.</string>
+    <string name="gaming_mode_dialog_message">Oyun modu etkinleştirildiğinde zil modunuz titreşim moduna geçer, tüm uyarı mesajları devre dışı bırakılır ve donanım tuşları kapatılır. Medya sesi maksimum değere yükseltilecektir. Oyun modundan çıktığınızda tüm ayarlar varsayılana sıfırlanacaktır.</string>
     <string name="accessibility_quick_settings_gaming_mode_on">Oyun modu</string>
     <string name="accessibility_quick_settings_gaming_mode_off">Oyun modu</string>
     <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
@@ -198,74 +200,6 @@
     <string name="quick_settings_expanded_desktop_off">Normal</string>
     <string name="quick_settings_expanded_navigation_off">Gezinme çubuğunu gizle</string>
     <string name="quick_settings_expanded_statusbar_off">Durum çubuğunu gizle</string>
-    <!-- Theme tile -->
-    <string name="system_theme_style_title">Stil</string>
-    <string name="system_theme_style_auto">Otomatik</string>
-    <string name="system_theme_style_light">Aydınlık</string>
-    <string name="system_theme_style_dark">Karanlık</string>
-    <string name="system_theme_style_black">Siyah</string>
-    <string name="quick_settings_theme_tile_title">Vurgu rengi</string>
-    <string name="quick_settings_theme_tile_accent_detail_title">Renk seçin</string>
-    <string name="quick_settings_theme_tile_style_detail_title">Stil seçin</string>
-    <string name="quick_settings_theme_tile_color_default">Varsayılan</string>
-    <string name="quick_settings_theme_tile_color_red">Kırmızı</string>
-    <string name="quick_settings_theme_tile_color_pink">Pembe</string>
-    <string name="quick_settings_theme_tile_color_purple">Mor</string>
-    <string name="quick_settings_theme_tile_color_deep_purple">Koyu mor</string>
-    <string name="quick_settings_theme_tile_color_indigo">İndigo</string>
-    <string name="quick_settings_theme_tile_color_blue">Mavi</string>
-    <string name="quick_settings_theme_tile_color_light_blue">Açık mavi</string>
-    <string name="quick_settings_theme_tile_color_cyan">Camgöbeği</string>
-    <string name="quick_settings_theme_tile_color_teal">Çamurcun</string>
-    <string name="quick_settings_theme_tile_color_green">Yeşil</string>
-    <string name="quick_settings_theme_tile_color_light_green">Açık yeşil</string>
-    <string name="quick_settings_theme_tile_color_lime">Limon yeşili</string>
-    <string name="quick_settings_theme_tile_color_yellow">Sarı</string>
-    <string name="quick_settings_theme_tile_color_amber">Koyu sarı</string>
-    <string name="quick_settings_theme_tile_color_orange">Turuncu</string>
-    <string name="quick_settings_theme_tile_color_deep_orange">Koyu turuncu</string>
-    <string name="quick_settings_theme_tile_color_brown">Kahverengi</string>
-    <string name="quick_settings_theme_tile_color_grey">Gri</string>
-    <string name="quick_settings_theme_tile_color_blue_grey">Mavi gri</string>
-    <string name="quick_settings_theme_tile_color_black">Siyah</string>
-    <string name="quick_settings_theme_tile_color_white">Beyaz</string>
-    <string name="quick_settings_theme_tile_color_user_one">Kirli kırmızı</string>
-    <string name="quick_settings_theme_tile_color_user_two">Üzüm</string>
-    <string name="quick_settings_theme_tile_color_user_three">Blu</string>
-    <string name="quick_settings_theme_tile_color_user_four">Nane</string>
-    <string name="quick_settings_theme_tile_color_user_five">Para</string>
-    <string name="quick_settings_theme_tile_color_user_six">Kum</string>
-    <string name="quick_settings_theme_tile_color_user_seven">Keçi</string>
-    <string name="quick_settings_theme_tile_color_candy_red">Şeker kırmızısı</string>
-    <string name="quick_settings_theme_tile_color_pale_red">Soluk kırmızısı</string>
-    <string name="quick_settings_theme_tile_color_extended_green">Extended yeşili</string>
-    <string name="quick_settings_theme_tile_color_pale_blue">Soluk mavi</string>
-    <string name="quick_settings_theme_tile_color_jade_green">Yeşim yeşili</string>
-    <string name="quick_settings_theme_tile_color_holillusion_cyan">Holillüzyon camgöbeği</string>
-    <string name="quick_settings_theme_tile_color_stock">Çamurcun</string>
-    <string name="quick_settings_theme_tile_color_seaside_mint">Deniz kıyısı</string>
-    <string name="quick_settings_theme_tile_color_move_mint">Nane taşı</string>
-    <string name="quick_settings_theme_tile_color_diff_day_green">Farklı gün yeşili</string>
-    <string name="quick_settings_theme_tile_color_obfuscated_bleu">Karartılmış bleu</string>
-    <string name="quick_settings_theme_tile_color_french_bleu">Fransız mavisi</string>
-    <string name="quick_settings_theme_tile_color_cold_bleu">Soğuk akşam mavisi</string>
-    <string name="quick_settings_theme_tile_color_heirloom_bleu">Heirloom ortanca bleu</string>
-    <string name="quick_settings_theme_tile_color_not_impressive_purple">Etkileyici mor değil</string>
-    <string name="quick_settings_theme_tile_color_footprint_purple">Mor ayak izi</string>
-    <string name="quick_settings_theme_tile_color_dusk_purple">Koyu mor</string>
-    <string name="quick_settings_theme_tile_color_illusions_purple">Yansımalı mor</string>
-    <string name="quick_settings_theme_tile_color_dreamy_purple">Rüyalı mor</string>
-    <string name="quick_settings_theme_tile_color_spooked_purple">Korkulu mor</string>
-    <string name="quick_settings_theme_tile_color_tru_fil_pink">Doğru pembe</string>
-    <string name="quick_settings_theme_tile_color_bubblegum_pink">Sakız pembesi</string>
-    <string name="quick_settings_theme_tile_color_hazed_pink">Haz pembesi</string>
-    <string name="quick_settings_theme_tile_color_burning_red">Alev kırmızısı</string>
-    <string name="quick_settings_theme_tile_color_new_house_orange">Yeni ev turuncusu</string>
-    <string name="quick_settings_theme_tile_color_warmth_orange">Sıcaklık turuncusu</string>
-    <string name="quick_settings_theme_tile_color_mania_amber">Mani kehribar</string>
-    <string name="quick_settings_theme_tile_color_cold_yellow">Soğuk yaz sarısı</string>
-    <string name="theme_info_title">Bu nedir?</string>
-    <string name="theme_info_message">Temalar karesi, kullanıcının sistem vurgu rengini veya stilini değiştirmesine izin veren, benzersiz ve kullanımı kolay bir karedir.\n\nStiller arasında geçiş yapmak için, sadece kareye uzun basın ve ardından sunulan seçeneklerden seçim yapmak için tekrar basın.</string>
     <string name="recents_custom_android_n">Tümünü temizle</string>
     <!-- Language toggle tile -->
     <string name="quick_settings_locale_label">Dil</string>
@@ -284,16 +218,61 @@
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
     <!-- Partial screenshot -->
-    <string name="screenshot_abort_title">Ekran görüntüsü alınamadı</string>
+    <string name="screenshot_abort_title">Ekran görüntüsü alınmadı</string>
     <string name="screenshot_abort_text">İşlem iptal edildi</string>
     <!-- Label for item that screenrecords in power menu options dialog -->
     <string name="global_action_screenrecord">Ekran kaydı</string>
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Ekran görüntüsü silindi</string>
     <!-- Kill button in notification guts -->
-    <string name="force_stop_dlg_title">Durmaya zorlansın mı?</string>
+    <string name="force_stop_dlg_title">Zorla durdurulsun mu?</string>
     <string name="force_stop_dlg_text">Uygulamayı zorla durdurursanız, hatalı davranabilir.</string>
     <string name="dlg_ok">@android:string/ok</string>
     <string name="dlg_cancel">@android:string/cancel</string>
     <string name="kill">Uygulamayı sonlandır</string>
+    <!--Google sound search tile -->
+    <string name="quick_settings_sound_search">Sesli arama</string>
+    <!-- QS Config -->
+    <string name="qs_menu_item_columns">Sütunlar</string>
+    <string name="qs_menu_item_columns_landscape">Sütunlar (Yatay)</string>
+    <string name="qs_menu_item_columns_three">3</string>
+    <string name="qs_menu_item_columns_four">4</string>
+    <string name="qs_menu_item_columns_five">5</string>
+    <string name="qs_menu_item_columns_six">6</string>
+    <string name="qs_menu_item_columns_seven">7</string>
+    <string name="qs_menu_item_columns_eight">8</string>
+    <string name="qs_menu_item_reset">Sıfırla</string>
+    <string name="qs_menu_item_titles">Etiketleri göster</string>
+    <string name="qs_menu_item_rows">Satırlar</string>
+    <string name="qs_menu_item_rows_landscape">Satırlar (Yatay)</string>
+    <string name="qs_menu_item_rows_one">1</string>
+    <string name="qs_menu_item_rows_two">2</string>
+    <string name="qs_menu_item_rows_three">3</string>
+    <string name="qs_menu_item_rows_four">4</string>
+    <string name="qs_menu_item_rows_five">5</string>
+    <string name="qs_menu_item_rows_six">6</string>
+    <string name="qs_menu_item_qs_columns">Sütunlar (Quickbar)</string>
+    <string name="qs_menu_item_columns_auto">Otomatik</string>
+    <!-- Ambient Display Pixel-Like string -->
+    <string name="ambientmusic_songinfo">%s - %s</string>
+    <!-- App Picker Tile -->
+    <string name="quick_settings_apppicker">Uygulama seçici</string>
+    <!-- Pie controls -->
+    <string name="pie_date_format">EEEE, gg AAAA yyyy</string>
+    <string name="pie_hour_format_12">ss:dd</string>
+    <string name="pie_hour_format_24">SS:dd</string>
+    <string name="pie_am_pm">a</string>
+    <string name="pie_state_name">Pie kontrol</string>
+    <string name="pie_state_summary">Tam ekran modundayken pie kontrollerini kullanın</string>
+    <string name="pie_battery_level">"PİL SEVİYESİ "</string>
+    <string name="quick_settings_pie">Pie kontrol</string>
+    <string-array name="nav_bar_layouts_new">
+        <item>Normal</item>
+        <item>Kompakt</item>
+    </string-array>
+    <!-- Elmyra -->
+    <string name="elmyra_raw_sensor_string_type">com.google.sensor.elmyra.raw</string>
+    <string name="google_camera_app_package_name">com.google.android.GoogleCamera</string>
+    <!-- OneHand mode QS tile -->
+    <string name="qs_onehand_label">Tek el modu</string>
 </resources>

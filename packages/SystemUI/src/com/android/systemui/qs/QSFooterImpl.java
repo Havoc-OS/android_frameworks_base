@@ -153,6 +153,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight,
                 oldBottom) -> updateAnimator(right - left));
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_YES);
+        updateEverything();
     }
 
     private void updateAnimator(int width) {
@@ -161,8 +162,8 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                 - mContext.getResources().getDimensionPixelSize(dimen.qs_quick_tile_padding);
         int remaining = (width - numTiles * size) / (numTiles - 1);
         int defSpace = mContext.getResources().getDimensionPixelOffset(R.dimen.default_gear_space);
-        int endMargin = mContext.getResources().getDimensionPixelSize(R.dimen.qs_footer_mobilegroup_margin_end);
-        int sum = endMargin + mMobileGroup.getWidth();
+        int endMargin = (mInfo.visible ? mContext.getResources().getDimensionPixelSize(R.dimen.qs_footer_mobilegroup_margin_end) : 0);
+        int sum = endMargin + (mInfo.visible ? mMobileGroup.getWidth() : 0);
 
         mSettingsCogAnimator = new Builder()
                 .addFloat(mCarrierText, "translationX", -sum, 0)

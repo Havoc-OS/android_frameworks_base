@@ -23,7 +23,7 @@
     <string name="accessibility_quick_settings_heads_up_off">Спливаючі сповіщення</string>
     <string name="accessibility_quick_settings_heads_up_on">Спливаючі сповіщення</string>
     <string name="accessibility_quick_settings_heads_up_changed_off">Спливаючі сповіщення вимкнено</string>
-    <string name="accessibility_quick_settings_heads_up_changed_on">Спливаючі сповіщення увімкнено</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Спливаючі сповіщення увімк</string>
     <!-- HW Keys Tile -->
     <string name="accessibility_quick_settings_hwkeys_on">Апаратні клавіші</string>
     <string name="accessibility_quick_settings_hwkeys_off">Апаратні клавіші</string>
@@ -31,37 +31,37 @@
     <!-- Screenrecord Tile -->
     <string name="quick_settings_screenrecord">Запис екрану</string>
     <!-- Ambient display QS tile -->
-    <string name="quick_settings_ambient_display_label">Ambient Display</string>
+    <string name="quick_settings_ambient_display_label">Ambient дисплей</string>
     <!-- ADB over network QS tile -->
-    <string name="quick_settings_network_adb_label">ADB по мережі</string>
+    <string name="quick_settings_network_adb_label">Налагодження ADB по мережі</string>
     <!-- Screenrecord QS tile -->
     <string name="quick_settings_screenrecord_label">Запис екрану</string>
     <string name="quick_settings_screenrecord_lq_label">480p</string>
     <string name="quick_settings_screenrecord_mq_label">720p</string>
     <string name="quick_settings_screenrecord_hq_label">1080p</string>
     <string name="screenrecord_hide_hint">Приховати підказки</string>
-    <string name="screenrecord_show_hint">Відображати підказки</string>
+    <string name="screenrecord_show_hint">Показати підказку</string>
     <string name="status_bar_vpn">VPN</string>
     <string name="status_bar_roaming">Роумінг</string>
-    <string name="status_bar_data_saver">Економія трафіку</string>
+    <string name="status_bar_data_saver">Заощадження трафіку</string>
     <!-- QuickSettings: ScreenStabilization tile [CHAR LIMIT=NONE] -->
     <string name="quick_settings_stabilization_label">Стабілізація екрану</string>
     <!-- QuickSettings: ScreenStabilization (off) [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_stabilization_off">Стабілізація екрану</string>
+    <string name="quick_settings_stabilization_off">Стабілізація екрану вимкнена</string>
     <!-- QuickSettings: ScreenStabilization (on) [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_stabilization_on">Стабілізація екрану</string>
+    <string name="quick_settings_stabilization_on">Стабілізація екрану увімкнена</string>
     <!-- Advanced powermenu -->
-    <string name="global_action_restart_system">Перезавантажити</string>
+    <string name="global_action_restart_system">Перезавантаження</string>
     <string name="global_action_restart_advanced">Розширене перезавантаження</string>
     <string name="global_action_restart_recovery">Режим відновлення</string>
     <string name="global_action_restart_bootloader">Завантажувач</string>
     <string name="global_action_restart_ui">Перезапустити SystemUI</string>
-    <string name="global_action_restart_hot">Швидка</string>
+    <string name="global_action_restart_hot">Гаряче перезавантаження</string>
     <string name="global_action_screenshot">Знімок екрана</string>
     <!-- LTE QS Tile -->
     <string name="qs_lte_label">LTE</string>
-    <string name="lte_on">LTE</string>
-    <string name="lte_off">LTE</string>
+    <string name="lte_on">LTE увімкнено</string>
+    <string name="lte_off">LTE вимкнено</string>
     <!-- Sound QS Tile -->
     <string name="quick_settings_sound_label">Звук</string>
     <string name="quick_settings_sound_ring">Дзвінок</string>
@@ -71,74 +71,75 @@
     <string name="quick_settings_aod_label">AOD</string>
     <!-- Caffeine tile -->
     <string name="quick_settings_caffeine_label">Кофеїн</string>
-    <string name="quick_settings_caffeine_label_off">Викл</string>
-    <string name="accessibility_quick_settings_caffeine_off">Кофеїн</string>
-    <string name="accessibility_quick_settings_caffeine_on">Кофеїн</string>
+    <string name="quick_settings_caffeine_label_off">Вимкнено</string>
+    <string name="accessibility_quick_settings_caffeine_off">Кофеїн вимкнено</string>
+    <string name="accessibility_quick_settings_caffeine_on">Кофеїн увімкнено</string>
     <!-- On The Go -->
-    <string name="onthego_notif_ticker">Режим \"На ходу\" запущений</string>
-    <string name="onthego_notif_title">Режим \"На ходу\" активний</string>
-    <string name="onthego_notif_stop">Стоп</string>
+    <string name="onthego_notif_ticker">On-The-Go запущений</string>
+    <string name="onthego_notif_title">On-The-Go ввімкнений</string>
+    <string name="onthego_notif_stop">Зупинити</string>
     <string name="onthego_notif_options">Параметри</string>
-    <string name="onthego_notif_error">Не вдається запустити режим \"На ходу\"</string>
-    <string name="onthego_notif_restart">Перезавантажити режим \"На ходу\"</string>
-    <string name="onthego_notif_camera_changed">Режим камери змінено</string>
+    <string name="onthego_notif_error">Не вдається запустити On-The-Go</string>
+    <string name="onthego_notif_restart">Перезавантажити On-The-Go</string>
+    <string name="onthego_notif_camera_changed">Змінений режим камери</string>
     <string name="onthego_transparency">Прозорість</string>
     <string name="onthego_front_camera">Використовувати передню камеру</string>
-    <string name="onthego_service_toggle">Автоматичне перезавантаження сервісу</string>
+    <string name="onthego_service_toggle">Автоматично перезавантажити сервіс</string>
     <string name="onthego_channel_name">Основний</string>
     <string name="global_action_onthego">Режим \"На ходу\"</string>
     <!-- Screenrecord Notification Ticker -->
-    <string name="screenrecord_notif_ticker">Триває запис екрану</string>
+    <string name="screenrecord_notif_ticker">Екран записується</string>
     <string name="screenrecord_notif_final_ticker">Екран успішно записано</string>
+    <string name="screenrecord_notif_description">Торкніться, щоб переглянути запис екрана</string>
     <!-- Screenrecord notification title -->
     <string name="screenrecord_notif_title">Запис екрану</string>
     <!-- Screenrecord notification action: Stop -->
-    <string name="screenrecord_notif_stop">Стоп</string>
+    <string name="screenrecord_notif_stop">Зупинити</string>
     <string name="screenrecord_notif_completed">Екран успішно записано</string>
     <string name="screenrecord_notif_duration">Всього:</string>
     <!-- Screenrecord notification action: show/hide pointer -->
     <string name="screenrecord_notif_pointer_on">Показувати вказівник</string>
-    <string name="screenrecord_notif_pointer_off">Приховати вказівник</string>
+    <string name="screenrecord_notif_pointer_off">Приховування вказівника</string>
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Неможливо записати екран</string>
-    <string name="notification_channel_screenrecord">Запис екрану</string>
+    <string name="notification_channel_screenrecord">Записи екрану</string>
     <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
-    <string name="keyguard_indication_dash_charging_time">Швидке заряджання (<xliff:g id="charging_time_left" example="4 год. 2 хв.">%s</xliff:g> до повної зарядки)</string>
+    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> Швидке заряджання (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> до кінця зарядки)</string>
     <string name="keyguard_plugged_in_dash_charging">Швидке заряджання</string>
     <string name="camera_title_tile">Камера</string>
     <string name="suspend_title_tile">Дії при вимиканні екрану</string>
-    <string name="alarm_title_tile">Сигнал будильника</string>
+    <string name="alarm_title_tile">Будильник</string>
     <string name="calc_title_tile">Калькулятор</string>
     <string name="call_title_tile">Телефон</string>
     <string name="calendar_title_tile">Додати подію</string>
     <!-- Heads up snooze toast -->
     <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - Спливаючі сповіщення вимкнено на 1 хвилину.</string>
     <string name="heads_up_snooze_message"><xliff:g id="string">%s</xliff:g> - Спливаючі сповіщення вимкнено на <xliff:g id="number">%d</xliff:g> хвилин.</string>
-    <string name="statusbar_items_title">Значок в рядку стану</string>
+    <string name="statusbar_items_title">Значки рядку стану</string>
     <string name="lockscreen_default">За замовчуванням</string>
-    <string name="lockscreen_hidden">Жодного</string>
+    <string name="lockscreen_hidden">Ні</string>
     <!-- Shows when people have clicked on the custom lockscreen shortcut [CHAR LIMIT=60] -->
     <string name="custom_hint">Проведіть від іконки для запуску</string>
     <!-- Sync QS Tile -->
     <string name="quick_settings_sync_label">Синхронізація</string>
     <string name="accessibility_quick_settings_sync_off">Синхронізацію вимкнено</string>
     <string name="accessibility_quick_settings_sync_on">Синхронізацію увімкнено</string>
-    <string name="accessibility_quick_settings_sync_changed_off">Синхронізація вимкнута</string>
-    <string name="accessibility_quick_settings_sync_changed_on">Синхронізація увімкнута</string>
+    <string name="accessibility_quick_settings_sync_changed_off">Синхронізація вимкнена</string>
+    <string name="accessibility_quick_settings_sync_changed_on">Синхронізацію увімкнено</string>
     <!-- Navigation Bar tile -->
-    <string name="quick_settings_navbar_title">Панель навігації</string>
+    <string name="quick_settings_navbar_title">Панель переходів</string>
     <string name="accessibility_quick_settings_navbar_off">Синхронізацію вимкнено</string>
     <string name="accessibility_quick_settings_navbar_on">Синхронізацію увімкнено</string>
     <string name="accessibility_quick_settings_navbar_changed_off">Панель навігації вимкнена</string>
     <string name="accessibility_quick_settings_navbar_changed_on">Панель навігації увімкнена</string>
     <!-- OnTheGo Tile -->
-    <string name="quick_settings_onthego_label">Режим \"На ходу\"</string>
+    <string name="quick_settings_onthego_label">On-The-Go</string>
     <!-- Screenshot -->
-    <string name="quick_settings_screenshot_label">Знімок екрана</string>
-    <string name="quick_settings_region_screenshot_label">Частковий знімок екрана</string>
+    <string name="quick_settings_screenshot_label">Скріншот</string>
+    <string name="quick_settings_region_screenshot_label">Частковий скріншот</string>
     <!-- SmartPixels QS Tile -->
-    <string name="quick_settings_smart_pixels">Смарт-пікселі</string>
-    <string name="quick_settings_smart_pixels_on_power_save">Автоматичне увімкнення Смарт-пікселів</string>
+    <string name="quick_settings_smart_pixels">Розумні пікселі</string>
+    <string name="quick_settings_smart_pixels_on_power_save">Автоматичне увімкнення розумних пікселів</string>
     <!-- CPUInfo tile -->
     <string name="quick_settings_cpuinfo_label">Інформація про процесор</string>
     <string name="accessibility_quick_settings_cpuinfo_off">Інформація про процесор вимкнена</string>
@@ -147,12 +148,12 @@
     <string name="accessibility_quick_settings_cpuinfo_changed_on">Інформація про процесор увімкнута</string>
     <!-- Advance location quick setting tile -->
     <string name="quick_settings_secondary_location_off"></string>
-    <string name="quick_settings_location_secondary_battery_saving">Енергозбереження</string>
-    <string name="accessibility_quick_settings_location_battery_saving">Надсилання місцезнаходження: економія батареї.</string>
-    <string name="quick_settings_location_secondary_gps_only">Тільки GPS</string>
-    <string name="accessibility_quick_settings_location_gps_only">Надсилання місцезнаходження: тільки GPS.</string>
+    <string name="quick_settings_location_secondary_battery_saving">Економія батареї</string>
+    <string name="accessibility_quick_settings_location_battery_saving">Надсилання місця розташування: економія батареї.</string>
+    <string name="quick_settings_location_secondary_gps_only">Тільки датчики</string>
+    <string name="accessibility_quick_settings_location_gps_only">Служби геолокації: тільки датчики пристрою.</string>
     <string name="quick_settings_location_secondary_high_accuracy">Висока точність</string>
-    <string name="accessibility_quick_settings_location_high_accuracy">Надсилання місцезнаходження: висока точність.</string>
+    <string name="accessibility_quick_settings_location_high_accuracy">Надсилання місця розташування: висока точність.</string>
     <!-- USB tethering QS tile -->
     <string name="quick_settings_usb_tether_label">USB-модем</string>
     <!-- Havoc Tile -->
@@ -161,119 +162,52 @@
     <string name="quick_settings_reboot_recovery_label">Режим відновлення</string>
     <!-- Compass QS Tile -->
     <string name="quick_settings_compass_label">Компас</string>
-    <string name="quick_settings_compass_value"><xliff:g id="degrees">%1$.0f</xliff:g>\u00b0 <xliff:g id="direction">%2$s</xliff:g></string>
-    <string name="quick_settings_compass_init">Ініціалізація\u2026</string>
-    <string name="accessibility_quick_settings_compass_off">Компас вимк.</string>
+    <string name="quick_settings_compass_value"><xliff:g id="degrees">%1$.0f</xliff:g>\u00b0<xliff:g id="direction">%2$s</xliff:g></string>
+    <string name="quick_settings_compass_init">Ініціалізація</string>
+    <string name="accessibility_quick_settings_compass_off">Компас вимкнено.</string>
     <string name="accessibility_quick_settings_compass_on">Компас увімк.</string>
     <string name="accessibility_quick_settings_compass_changed_off">Компас вимкнено.</string>
     <string name="accessibility_quick_settings_compass_changed_on">Компас ввімкнено.</string>
     <string name="quick_settings_compass_N">Пн</string>
     <string name="quick_settings_compass_NE">ПнСх</string>
-    <string name="quick_settings_compass_E">С</string>
-    <string name="quick_settings_compass_SE">ПдСх</string>
+    <string name="quick_settings_compass_E">Сх</string>
+    <string name="quick_settings_compass_SE">ПдС</string>
     <string name="quick_settings_compass_S">Пд</string>
     <string name="quick_settings_compass_SW">ПдЗх</string>
-    <string name="quick_settings_compass_W">З</string>
+    <string name="quick_settings_compass_W">Зх</string>
     <string name="quick_settings_compass_NW">ПнЗх</string>
-    <string name="quick_settings_sleepscreen_label">Екран блокування</string>
+    <string name="quick_settings_sleepscreen_label">Блокувати екран</string>
     <string name="lockscreen_tuner_activity">Ярлики екрану блокування</string>
     <!-- Nav Bar Swipe -->
-    <string name="nav_bar_layout_inverse">Поміняти клавіші \"Назад\" та \"Нещодавні\"</string>
+    <string name="nav_bar_layout_inverse">Поміняти кнопки місцями</string>
+    <string name="nav_bar_layout_inverse_summary">Поміняти місцями кнопки Назад і Нещодавні</string>
     <!-- Volume panel QS tile -->
     <string name="quick_settings_volume_panel_label">Панель гучності</string>
-    <string name="tuner_cellular_title">Мобільний</string>
+    <string name="tuner_cellular_title">Мобільна мережа</string>
     <!-- Gaming Mode -->
-    <string name="gaming_mode_tile_title">Режим гри</string>
-    <string name="gaming_mode_tile_toast">Режим гри увімкнено</string>
-    <string name="gaming_mode_tile_toast_disabled">Режим гри вимкнено</string>
-    <string name="gaming_mode_dialog_title">Режим гри</string>
+    <string name="gaming_mode_tile_title">Ігровий режим</string>
+    <string name="gaming_mode_tile_toast">Ігровий режим ввімкнено</string>
+    <string name="gaming_mode_tile_toast_disabled">Ігровий режим вимкнено</string>
+    <string name="gaming_mode_dialog_title">Ігровий режим</string>
     <string name="gaming_mode_dialog_message">Коли ігровий режим увімкнуто, ваш режим дзвінку переключиться в режим вібрації, всі сповішення та аппаратні клавіші будуть вимкнуті. Гучність медіа буде збільшена до максимального рівню. Усі вимкнуті налаштування будуть відновлені після виходу з режиму гри.</string>
-    <string name="accessibility_quick_settings_gaming_mode_on">Режим гри</string>
-    <string name="accessibility_quick_settings_gaming_mode_off">Режим гри</string>
+    <string name="accessibility_quick_settings_gaming_mode_on">Ігровий режим увімкнено</string>
+    <string name="accessibility_quick_settings_gaming_mode_off">Ігровий режим вимкнено</string>
     <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_running_services">Відкрити список запущених програм.</string>
+    <string name="accessibility_quick_settings_running_services">Відкрити список запущених сервісів.</string>
     <!-- Expanded Desktop QS Tile -->
     <string name="quick_settings_expanded_desktop_label">Розширений робочий стіл</string>
     <string name="quick_settings_expanded_desktop">Розширений</string>
     <string name="quick_settings_expanded_desktop_off">Звичайний</string>
-    <string name="quick_settings_expanded_navigation_off">Приховати навігаційну панель</string>
-    <string name="quick_settings_expanded_statusbar_off">Приховувати рядок стану</string>
-    <!-- Theme tile -->
-    <string name="system_theme_style_title">Стиль</string>
-    <string name="system_theme_style_auto">Автоматичний</string>
-    <string name="system_theme_style_light">Світлий</string>
-    <string name="system_theme_style_dark">Темний</string>
-    <string name="system_theme_style_black">Чорний</string>
-    <string name="quick_settings_theme_tile_title">Акцент</string>
-    <string name="quick_settings_theme_tile_accent_detail_title">Обрати колір</string>
-    <string name="quick_settings_theme_tile_style_detail_title">Обрати стиль</string>
-    <string name="quick_settings_theme_tile_color_default">За замовчуванням</string>
-    <string name="quick_settings_theme_tile_color_red">Червоний</string>
-    <string name="quick_settings_theme_tile_color_pink">Рожевий</string>
-    <string name="quick_settings_theme_tile_color_purple">Фіолетовий</string>
-    <string name="quick_settings_theme_tile_color_deep_purple">Багряний</string>
-    <string name="quick_settings_theme_tile_color_indigo">Індіго</string>
-    <string name="quick_settings_theme_tile_color_blue">Синій</string>
-    <string name="quick_settings_theme_tile_color_light_blue">Світло-синій</string>
-    <string name="quick_settings_theme_tile_color_cyan">Ціан</string>
-    <string name="quick_settings_theme_tile_color_teal">Бірюзовий</string>
-    <string name="quick_settings_theme_tile_color_green">Зелений</string>
-    <string name="quick_settings_theme_tile_color_light_green">Світло-зелений</string>
-    <string name="quick_settings_theme_tile_color_lime">Лайм</string>
-    <string name="quick_settings_theme_tile_color_yellow">Жовтий</string>
-    <string name="quick_settings_theme_tile_color_amber">Бурштиновий</string>
-    <string name="quick_settings_theme_tile_color_orange">Помаранчевий</string>
-    <string name="quick_settings_theme_tile_color_deep_orange">Жовтогарячий</string>
-    <string name="quick_settings_theme_tile_color_brown">Коричневий</string>
-    <string name="quick_settings_theme_tile_color_grey">Сірий</string>
-    <string name="quick_settings_theme_tile_color_blue_grey">Блакитно-сірий</string>
-    <string name="quick_settings_theme_tile_color_black">Чорний</string>
-    <string name="quick_settings_theme_tile_color_white">Білий</string>
-    <string name="quick_settings_theme_tile_color_user_one">Брудний червоний</string>
-    <string name="quick_settings_theme_tile_color_user_two">Виноград</string>
-    <string name="quick_settings_theme_tile_color_user_three">Синій</string>
-    <string name="quick_settings_theme_tile_color_user_four">Ментоловий</string>
-    <string name="quick_settings_theme_tile_color_user_five">Гроші</string>
-    <string name="quick_settings_theme_tile_color_user_six">Пісочний</string>
-    <string name="quick_settings_theme_tile_color_user_seven">Rams</string>
-    <string name="quick_settings_theme_tile_color_candy_red">Карамельно-червоний</string>
-    <string name="quick_settings_theme_tile_color_pale_red">Блідо-червоний</string>
-    <string name="quick_settings_theme_tile_color_extended_green">Насичений зелений</string>
-    <string name="quick_settings_theme_tile_color_pale_blue">Блідо-блакитний</string>
-    <string name="quick_settings_theme_tile_color_jade_green">Нефритово-зелений</string>
-    <string name="quick_settings_theme_tile_color_holillusion_cyan">Голуба ілюзія</string>
-    <string name="quick_settings_theme_tile_color_stock">Бірюзовий</string>
-    <string name="quick_settings_theme_tile_color_seaside_mint">Морська м\'ята</string>
-    <string name="quick_settings_theme_tile_color_move_mint">М\'ятний</string>
-    <string name="quick_settings_theme_tile_color_diff_day_green">Незвичайний зелений день</string>
-    <string name="quick_settings_theme_tile_color_obfuscated_bleu">Заплутуваємий синій</string>
-    <string name="quick_settings_theme_tile_color_french_bleu">Французький синій</string>
-    <string name="quick_settings_theme_tile_color_cold_bleu">Холодний синій вечір</string>
-    <string name="quick_settings_theme_tile_color_heirloom_bleu">Реліквія гортензії синього кольору</string>
-    <string name="quick_settings_theme_tile_color_not_impressive_purple">Не вражаючий фіолетовий</string>
-    <string name="quick_settings_theme_tile_color_footprint_purple">Пурпурний слід</string>
-    <string name="quick_settings_theme_tile_color_dusk_purple">Фіолетові сутінки</string>
-    <string name="quick_settings_theme_tile_color_illusions_purple">Фіолетові ілюзії</string>
-    <string name="quick_settings_theme_tile_color_dreamy_purple">Мрійливий фіолетовий</string>
-    <string name="quick_settings_theme_tile_color_spooked_purple">Наляканий пурпурний</string>
-    <string name="quick_settings_theme_tile_color_tru_fil_pink">Справжнє розове почуття</string>
-    <string name="quick_settings_theme_tile_color_bubblegum_pink">Розова жувальна гумка</string>
-    <string name="quick_settings_theme_tile_color_hazed_pink">Блідо-рожевий</string>
-    <string name="quick_settings_theme_tile_color_burning_red">Гарячо червоний</string>
-    <string name="quick_settings_theme_tile_color_new_house_orange">Новий помаранчевий дім</string>
-    <string name="quick_settings_theme_tile_color_warmth_orange">Оранжева теплота</string>
-    <string name="quick_settings_theme_tile_color_mania_amber">Манія жовтого кольору</string>
-    <string name="quick_settings_theme_tile_color_cold_yellow">Холодний літній жовтий</string>
-    <string name="theme_info_title">Що це?</string>
-    <string name="theme_info_message">Плитка Теми є унікальною, але простою у використанні, що дозволяє користувачеві змінити системний акцент або стиль.\n\nДля зміни акцентів та стилів довго натисніть на плитку, а потім знову, для вибору запропонованих варіантів.</string>
-    <string name="recents_custom_android_n">Очистити Все</string>
+    <string name="quick_settings_expanded_navigation_off">Приховати панель навігації</string>
+    <string name="quick_settings_expanded_statusbar_off">Приховати рядок стану</string>
+    <string name="recents_custom_android_n">Очистити все</string>
     <!-- Language toggle tile -->
     <string name="quick_settings_locale_label">Мова</string>
-    <string name="quick_settings_locale_more_locales_toast">Будь ласка, налаштуйте декілька мов для конфігурації</string>
+    <string name="quick_settings_locale_more_locales_toast">Будь ласка, налаштуйте кілька мов, щоб активувати функцію</string>
     <!-- ANBI Tile -->
     <string name="quick_settings_anbi_label">Випадковий дотик</string>
-    <string name="accessibility_quick_settings_anbi_changed_off">Випадкові дотики вимкнено</string>
-    <string name="accessibility_quick_settings_anbi_changed_on">Випадкові дотики увімкнено</string>
+    <string name="accessibility_quick_settings_anbi_changed_off">Випадковий дотик вимкнено</string>
+    <string name="accessibility_quick_settings_anbi_changed_on">Випадковий дотик увімкнено</string>
     <!-- Music tile -->
     <string name="quick_settings_music_label">Музика</string>
     <string name="quick_settings_music_play">Відтворити</string>
@@ -284,17 +218,61 @@
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
     <!-- Partial screenshot -->
-    <string name="screenshot_abort_title">Знімок екрану не було створено</string>
+    <string name="screenshot_abort_title">Знімок екрана не зроблено</string>
     <string name="screenshot_abort_text">Операцію перервано</string>
     <!-- Label for item that screenrecords in power menu options dialog -->
     <string name="global_action_screenrecord">Запис екрану</string>
     <!-- Screenshot Delete Toast -->
-    <string name="delete_screenshot_toast">Скріншот видалений</string>
+    <string name="delete_screenshot_toast">Знімок екрану видалено</string>
     <!-- Kill button in notification guts -->
-    <string name="force_stop_dlg_title">Примусово припинити?</string>
-    <string name="force_stop_dlg_text">Якщо Ви примусово закриєте програму,
-\nце вплине на його роботу.</string>
+    <string name="force_stop_dlg_title">Примусово зупинити?</string>
+    <string name="force_stop_dlg_text">Примусове вимкнення додатка може призвести до збою в його роботі.</string>
     <string name="dlg_ok">@android:string/ok</string>
     <string name="dlg_cancel">@android:string/cancel</string>
     <string name="kill">Завершити додаток</string>
+    <!--Google sound search tile -->
+    <string name="quick_settings_sound_search">Пошук звуку</string>
+    <!-- QS Config -->
+    <string name="qs_menu_item_columns">Стовпці</string>
+    <string name="qs_menu_item_columns_landscape">Стовпці (альбомна орієнтація)</string>
+    <string name="qs_menu_item_columns_three">3</string>
+    <string name="qs_menu_item_columns_four">4</string>
+    <string name="qs_menu_item_columns_five">5</string>
+    <string name="qs_menu_item_columns_six">6</string>
+    <string name="qs_menu_item_columns_seven">7</string>
+    <string name="qs_menu_item_columns_eight">8</string>
+    <string name="qs_menu_item_reset">Скинути</string>
+    <string name="qs_menu_item_titles">Відображати підписи</string>
+    <string name="qs_menu_item_rows">Рядки</string>
+    <string name="qs_menu_item_rows_landscape">Рядки (альбомна орієнтація)</string>
+    <string name="qs_menu_item_rows_one">1</string>
+    <string name="qs_menu_item_rows_two">2</string>
+    <string name="qs_menu_item_rows_three">3</string>
+    <string name="qs_menu_item_rows_four">4</string>
+    <string name="qs_menu_item_rows_five">5</string>
+    <string name="qs_menu_item_rows_six">6</string>
+    <string name="qs_menu_item_qs_columns">Стовпці (Швидкий доступ)</string>
+    <string name="qs_menu_item_columns_auto">Автоматично</string>
+    <!-- Ambient Display Pixel-Like string -->
+    <string name="ambientmusic_songinfo">%s від %s</string>
+    <!-- App Picker Tile -->
+    <string name="quick_settings_apppicker">Вибір додатку</string>
+    <!-- Pie controls -->
+    <string name="pie_date_format">EEEE, дд MMMM рррр</string>
+    <string name="pie_hour_format_12">гг:хх</string>
+    <string name="pie_hour_format_24">ГГ:хх</string>
+    <string name="pie_am_pm">a</string>
+    <string name="pie_state_name">Pie-керування</string>
+    <string name="pie_state_summary">Використовувати Pie-керування в повноекранному режимі</string>
+    <string name="pie_battery_level">"РІВЕНЬ ЗАРЯДУ АКУМУЛЯТОРА "</string>
+    <string name="quick_settings_pie">Pie-керування</string>
+    <string-array name="nav_bar_layouts_new">
+        <item>Звичайний</item>
+        <item>Компактний</item>
+    </string-array>
+    <!-- Elmyra -->
+    <string name="elmyra_raw_sensor_string_type">ельміра</string>
+    <string name="google_camera_app_package_name">камера</string>
+    <!-- OneHand mode QS tile -->
+    <string name="qs_onehand_label">Режим керування однією рукою</string>
 </resources>

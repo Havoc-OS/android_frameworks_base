@@ -22,4 +22,8 @@
     <string name="screen_zoom_summary_smaller">较小</string>
     <!-- Description for the screen zoom level that makes interface elements smallest. [CHAR LIMIT=24] -->
     <string name="screen_zoom_summary_smallest">最小</string>
+    <!-- Label for estimated remaining duration of dash battery charging -->
+    <string name="power_remaining_dash_charging_duration_only">正在快速充电 ( 还剩 <xliff:g id="time">%1$s</xliff:g> 充满)</string>
+    <!-- Battery use screen.  Battery status shown in chart label when charging from a dash source.  -->
+    <string name="battery_info_status_dash_charging">正在快速充电</string>
 </resources>

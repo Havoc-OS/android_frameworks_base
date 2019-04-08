@@ -55,16 +55,6 @@
             android:layout_height="match_parent"
             android:layout="@layout/operator_name" />
 
-        <com.android.systemui.havoc.carrierlabel.CarrierLabel
-            android:id="@+id/statusbar_carrier_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="start|center_vertical"
-            android:paddingEnd="@dimen/status_bar_left_clock_end_padding"
-            android:visibility="gone"
-            android:singleLine="true"/>
-
         <FrameLayout
             android:layout_height="match_parent"
             android:layout_width="0dp"
@@ -81,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:clipChildren="false"
             >
+
                 <com.android.systemui.statusbar.policy.Clock
                     android:id="@+id/clock"
                     android:layout_width="wrap_content"
@@ -92,6 +83,33 @@
                     android:paddingEnd="@dimen/status_bar_left_clock_end_padding"
                     android:gravity="center_vertical|start"
                 />
+
+                <com.android.keyguard.AlphaOptimizedLinearLayout
+                    android:id="@+id/left_icon_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" >
+
+                    <com.android.systemui.havoc.carrierlabel.CarrierLabel
+                        android:id="@+id/statusbar_carrier_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="start|center_vertical"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:visibility="gone"
+                        android:singleLine="true"/>
+
+                    <com.android.systemui.havoc.logo.LogoImageView
+                        android:id="@+id/havoc_logo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingStart="3dp"
+                        android:paddingEnd="2dp"
+                        android:scaleType="center"
+                        android:visibility="gone" />
+                </com.android.keyguard.AlphaOptimizedLinearLayout>
 
                 <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
                     android:id="@+id/notification_icon_area"

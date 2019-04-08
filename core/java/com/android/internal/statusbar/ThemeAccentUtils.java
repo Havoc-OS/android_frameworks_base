@@ -120,6 +120,7 @@ public class ThemeAccentUtils {
         "com.accents.extendedgreen", // 54
         "com.accents.diffdaygreen", // 55
         "com.accents.jadegreen", // 56
+        "com.accents.oneplusred", // 57
     };
 
     // Themes
@@ -159,6 +160,7 @@ public class ThemeAccentUtils {
         "com.havoc.themes.black", // 32
         "com.havoc.themes.white", // 33
         "com.havoc.themes.desaturatedblue", // 34
+        "com.havoc.themes.blackpearl", // 35
 
     };
 
