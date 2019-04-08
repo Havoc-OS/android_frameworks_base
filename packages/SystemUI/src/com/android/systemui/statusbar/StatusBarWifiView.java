@@ -224,7 +224,7 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
     private void updateState(WifiIconState state) {
         setContentDescription(state.contentDescription);
         if (mState.resId != state.resId && state.resId >= 0) {
-            mWifiIcon.setImageDrawable(mContext.getDrawable(mState.resId));
+            mWifiIcon.setImageDrawable(mContext.getDrawable(state.resId));
         }
 
         mInoutContainer.setVisibility(mShowWifiActivity && state.visible ? View.VISIBLE : View.GONE);
