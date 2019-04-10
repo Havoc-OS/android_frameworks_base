@@ -53,7 +53,7 @@
     <!-- Advanced powermenu -->
     <string name="global_action_restart_system">Перезагрузка</string>
     <string name="global_action_restart_advanced">Расширенная перезагрузка</string>
-    <string name="global_action_restart_recovery">Перезагрузка а рекавери</string>
+    <string name="global_action_restart_recovery">Перезагрузка в рекавери</string>
     <string name="global_action_restart_bootloader">Загрузчик</string>
     <string name="global_action_restart_ui">Интерфейс системы</string>
     <string name="global_action_restart_hot">Быстрая</string>
@@ -264,7 +264,7 @@
     <string name="pie_am_pm">а</string>
     <string name="pie_state_name">Круговое меню</string>
     <string name="pie_state_summary">Использовать веерное управление (Pie) в полноэкранном режиме</string>
-    <string name="pie_battery_level">"УРОВЕНЬ ЗАРЯДА АККУМУЛЯТОРА "</string>
+    <string name="pie_battery_level">"УРОВЕНЬ ЗАРЯДА АККУМУЛЯТОРА"</string>
     <string name="quick_settings_pie">Круговой контроль</string>
     <string-array name="nav_bar_layouts_new">
         <item>Нормальный</item>
