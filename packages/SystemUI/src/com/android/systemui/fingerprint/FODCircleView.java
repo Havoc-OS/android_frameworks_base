@@ -115,17 +115,15 @@ public class FODCircleView extends ImageView implements OnTouchListener {
             super.onDreamingStateChanged(dreaming);
             mIsDreaming = dreaming;
             mIsInsideCircle = false;
-            if (dreaming) {
-                mBurnInProtectionTimer = new Timer();
-                mBurnInProtectionTimer.schedule(new BurnInProtectionTask(), 0, 60 * 1000);
-            } else if (mBurnInProtectionTimer != null) {
-                mBurnInProtectionTimer.cancel();
-            }
+            setIcon();
+        }
 
-            if (mIsViewAdded) {
-                resetPosition();
-                invalidate();
-            }
+        @Override
+        public void onPulsing(boolean pulsing) {
+            super.onPulsing(pulsing);
+            mIsPulsing = pulsing;
+            mIsInsideCircle = false;
+            setIcon();
         }
 
         @Override
@@ -245,7 +243,7 @@ public class FODCircleView extends ImageView implements OnTouchListener {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mIsInsideCircle) {
-            if (mIsDreaming) {
+            if (mIsDreaming && !mIsPulsing) {
                 setAlpha(1.0f);
             }
             if (!mIsPressed) {
@@ -261,7 +259,7 @@ public class FODCircleView extends ImageView implements OnTouchListener {
             }
             canvas.drawCircle(mWidth / 2, mHeight / 2, (float) (mWidth / 2.0f), mPaintFingerprint);
         } else {
-            setAlpha(mIsDreaming ? 0.5f : 1.0f);
+            setAlpha((mIsDreaming && !mIsPulsing) ? 0.5f : 1.0f);
             if (mIsPressed) {
                 IFingerprintInscreen daemon = getFingerprintInScreenDaemon();
                 if (daemon != null) {
@@ -429,7 +427,7 @@ public class FODCircleView extends ImageView implements OnTouchListener {
                 throw new IllegalArgumentException("Unknown rotation: " + rotation);
         }
 
-        if (mIsDreaming) {
+        if (mIsDreaming && !mIsPulsing) {
             mParams.x += mDreamingOffsetX;
             mParams.y += mDreamingOffsetY;
         }
@@ -468,6 +466,20 @@ public class FODCircleView extends ImageView implements OnTouchListener {
             mWindowManager.updateViewLayout(this, mParams);
         } catch (IllegalArgumentException e) {
             // do nothing
+        }
+    }
+
+    private void setIcon() {
+        if (mIsDreaming && !mIsPulsing) {
+            mBurnInProtectionTimer = new Timer();
+            mBurnInProtectionTimer.schedule(new BurnInProtectionTask(), 0, 60 * 1000);
+        } else if (mBurnInProtectionTimer != null) {
+            mBurnInProtectionTimer.cancel();
+        }
+
+        if (mIsViewAdded) {
+            resetPosition();
+            invalidate();
         }
     }
 
