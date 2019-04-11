@@ -383,7 +383,7 @@ public class NotificationMediaManager implements Dumpable {
             if (!dontPulse && mListener != null) {
                 mListener.onMediaUpdated(true);
             }
-            if (mStatusBar != null && mStatusBar.getVisualizer() != null && !mStatusBar.isKeyguardFadingAway()) {
+            if (mStatusBar != null && mStatusBar.getVisualizer() != null) {
                 mStatusBar.getVisualizer().setPlaying(true);
             }
         } else {
