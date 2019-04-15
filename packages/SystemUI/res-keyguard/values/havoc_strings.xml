@@ -32,7 +32,7 @@
     <string name="text_clock_tens_string_sixty">Sixty</string>
 
     <!-- UnitsString -->
-    <string name="text_clock_units_string_clock">Zero</string>
+    <string name="text_clock_units_string_clock">Clock</string>
     <string name="text_clock_units_string_one">One</string>
     <string name="text_clock_units_string_two">Two</string>
     <string name="text_clock_units_string_three">Three</string>
