@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources>
+
+    <string name="custom_text_clock_top_text_default">Jest</string>
+
+    <string name="text_clock_zero_h_min">0\'</string>
+    <string name="text_clock_high">Wysoki</string>
+    <string name="text_clock_noon">Południe</string>
+
+    <!-- TensString -->
+    <string name="text_clock_tens_string_twenty">Dwadzieścia</string>
+    <string name="text_clock_tens_string_thirty">Trzydzieści</string>
+    <string name="text_clock_tens_string_forty">Czterdzieści</string>
+    <string name="text_clock_tens_string_fifty">Pięćdziesiąt</string>
+    <string name="text_clock_tens_string_sixty">Sześćdziesiąt</string>
+
+    <!-- UnitsString -->
+    <string name="text_clock_units_string_clock">Zero</string>
+    <string name="text_clock_units_string_one">Jeden</string>
+    <string name="text_clock_units_string_two">Dwa</string>
+    <string name="text_clock_units_string_three">Trzy</string>
+    <string name="text_clock_units_string_four">Cztery</string>
+    <string name="text_clock_units_string_five">Pięć</string>
+    <string name="text_clock_units_string_six">Sześć</string>
+    <string name="text_clock_units_string_seven">Siedem</string>
+    <string name="text_clock_units_string_eight">Osiem</string>
+    <string name="text_clock_units_string_nine">Dziewięć</string>
+    <string name="text_clock_units_string_ten">Dziesięć</string>
+    <string name="text_clock_units_string_eleven">Jedenaście</string>
+    <string name="text_clock_units_string_twelve">Dwanaście</string>
+    <string name="text_clock_units_string_thirteen">Trzynaście</string>
+    <string name="text_clock_units_string_fourteen">Czternaście</string>
+    <string name="text_clock_units_string_fifteen">Piętnaście</string>
+    <string name="text_clock_units_string_sixteen">Szesnaście</string>
+    <string name="text_clock_units_string_seventeen">Siedemnaście</string>
+    <string name="text_clock_units_string_eighteen">Osiemnaście</string>
+    <string name="text_clock_units_string_nineteen">Dziewiętnaście</string>
+
+    <!-- TensStringH -->
+    <string name="text_clock_tens_string_h_twenty">Dwadzieścia</string>
+    <string name="text_clock_tens_string_h_thirty">Trzydzieści</string>
+    <string name="text_clock_tens_string_h_forty">Czterdzięści</string>
+    <string name="text_clock_tens_string_h_fifty">Pięćdziesiąt</string>
+    <string name="text_clock_tens_string_h_sixty">Sześćdziesiąt</string>
+
+    <!-- UnitsStringH -->
+    <string name="text_clock_units_string_h_twelve_h">Dwunasta</string>
+    <string name="text_clock_units_string_h_one">Pierwsza</string>
+    <string name="text_clock_units_string_h_two">Druga</string>
+    <string name="text_clock_units_string_h_three">Trzecia</string>
+    <string name="text_clock_units_string_h_four">Czwarta</string>
+    <string name="text_clock_units_string_h_five">Piąta</string>
+    <string name="text_clock_units_string_h_six">Szósta</string>
+    <string name="text_clock_units_string_h_seven">Siódma</string>
+    <string name="text_clock_units_string_h_eight">Ósma</string>
+    <string name="text_clock_units_string_h_nine">Dziewiąta</string>
+    <string name="text_clock_units_string_h_ten">Dziesiąta</string>
+    <string name="text_clock_units_string_h_eleven">Jedenasta</string>
+    <string name="text_clock_units_string_h_twelve">Dwunasta</string>
+    <string name="text_clock_units_string_h_thirteen">Trzynasta</string>
+    <string name="text_clock_units_string_h_fourteen">Czternasta</string>
+    <string name="text_clock_units_string_h_fifteen">Piętnasta</string>
+    <string name="text_clock_units_string_h_sixteen">Szesnasta</string>
+    <string name="text_clock_units_string_h_seventeen">Siedemnasta</string>
+    <string name="text_clock_units_string_h_eighteen">Osiemnasta</string>
+    <string name="text_clock_units_string_h_nineteen">Dziewiętnasta</string>
+
+</resources>
