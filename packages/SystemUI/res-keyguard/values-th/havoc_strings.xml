@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources>
+
+    <string name="custom_text_clock_top_text_default">ขณะนี้เวลา</string>
+
+    <string name="text_clock_zero_h_min">0\'</string>
+    <string name="text_clock_high">เที่ยง</string>
+    <string name="text_clock_noon">ตรง</string>
+
+    <!-- TensString -->
+    <string name="text_clock_tens_string_twenty">ยี่สิบ</string>
+    <string name="text_clock_tens_string_thirty">สามสิบ</string>
+    <string name="text_clock_tens_string_forty">สี่สิบ</string>
+    <string name="text_clock_tens_string_fifty">ห้าสิบ</string>
+    <string name="text_clock_tens_string_sixty">หกสิบ</string>
+
+    <!-- UnitsString -->
+    <string name="text_clock_units_string_clock">ศูยน์</string>
+    <string name="text_clock_units_string_one">หนึ่ง</string>
+    <string name="text_clock_units_string_two">สอง</string>
+    <string name="text_clock_units_string_three">สาม</string>
+    <string name="text_clock_units_string_four">สี่</string>
+    <string name="text_clock_units_string_five">ห้า</string>
+    <string name="text_clock_units_string_six">หก</string>
+    <string name="text_clock_units_string_seven">เจ็ด</string>
+    <string name="text_clock_units_string_eight">แปด</string>
+    <string name="text_clock_units_string_nine">เก้า</string>
+    <string name="text_clock_units_string_ten">สิบ</string>
+    <string name="text_clock_units_string_eleven">สิบเอ็ด</string>
+    <string name="text_clock_units_string_twelve">สิบสอง</string>
+    <string name="text_clock_units_string_thirteen">สิบสาม</string>
+    <string name="text_clock_units_string_fourteen">สิบสี่</string>
+    <string name="text_clock_units_string_fifteen">สิบห้า</string>
+    <string name="text_clock_units_string_sixteen">สิบหก</string>
+    <string name="text_clock_units_string_seventeen">สิบเจ็ด</string>
+    <string name="text_clock_units_string_eighteen">สิบแปด</string>
+    <string name="text_clock_units_string_nineteen">สิบเก้า</string>
+
+    <!-- TensStringH -->
+    <string name="text_clock_tens_string_h_twenty">ยี่สิบ</string>
+    <string name="text_clock_tens_string_h_thirty">สามสิบ</string>
+    <string name="text_clock_tens_string_h_forty">สี่สิบ</string>
+    <string name="text_clock_tens_string_h_fifty">ห้าสิบ</string>
+    <string name="text_clock_tens_string_h_sixty">หกสิบ</string>
+
+    <!-- UnitsStringH -->
+    <string name="text_clock_units_string_h_twelve_h">สิบสอง</string>
+    <string name="text_clock_units_string_h_one">หนึ่ง</string>
+    <string name="text_clock_units_string_h_two">สอง</string>
+    <string name="text_clock_units_string_h_three">สาม</string>
+    <string name="text_clock_units_string_h_four">สี่</string>
+    <string name="text_clock_units_string_h_five">ห้า</string>
+    <string name="text_clock_units_string_h_six">หก</string>
+    <string name="text_clock_units_string_h_seven">เจ็ด</string>
+    <string name="text_clock_units_string_h_eight">แปด</string>
+    <string name="text_clock_units_string_h_nine">เก้า</string>
+    <string name="text_clock_units_string_h_ten">สิบ</string>
+    <string name="text_clock_units_string_h_eleven">สิบเอ็ด</string>
+    <string name="text_clock_units_string_h_twelve">สิบสอง</string>
+    <string name="text_clock_units_string_h_thirteen">สิบสาม</string>
+    <string name="text_clock_units_string_h_fourteen">สิบสี่</string>
+    <string name="text_clock_units_string_h_fifteen">สิบห้า</string>
+    <string name="text_clock_units_string_h_sixteen">สิบหก</string>
+    <string name="text_clock_units_string_h_seventeen">สิบเจ็ด</string>
+    <string name="text_clock_units_string_h_eighteen">สิบแปด</string>
+    <string name="text_clock_units_string_h_nineteen">สิบเก้า</string>
+
+</resources>
