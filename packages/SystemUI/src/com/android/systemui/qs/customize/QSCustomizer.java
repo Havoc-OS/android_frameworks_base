@@ -169,6 +169,16 @@ public class QSCustomizer extends LinearLayout implements OnMenuItemClickListene
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         updateNavBackDrop(newConfig);
+
+        // Update top space height in orientation change
+        boolean headerImageEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.STATUS_BAR_CUSTOM_HEADER, 0,
+                UserHandle.USER_CURRENT) == 1;
+        mTopMarginView.getLayoutParams().height =
+                mContext.getResources().getDimensionPixelSize(
+                        com.android.internal.R.dimen.quick_qs_offset_height) + (headerImageEnabled ?
+                        mContext.getResources().getDimensionPixelSize(R.dimen.qs_header_image_offset) : 0);
+        mTopMarginView.setLayoutParams(mTopMarginView.getLayoutParams());
     }
 
     private void updateNavBackDrop(Configuration newConfig) {
