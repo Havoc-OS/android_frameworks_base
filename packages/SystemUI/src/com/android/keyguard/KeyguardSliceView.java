@@ -352,6 +352,18 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         }
     }
 
+    public void setViewBackground(Drawable drawRes) {
+        mRow.setBackground(drawRes);
+    }
+
+    public void setViewBackgroundResource(int drawRes) {
+        mRow.setBackgroundResource(drawRes);
+    }
+
+    public void setViewPadding(int left, int top, int right, int bottom) {
+        mRow.setPadding(left,top,right,bottom);
+    }
+
     private void updateTextColors() {
         final int blendedColor = getTextColor();
         mTitle.setTextColor(blendedColor);

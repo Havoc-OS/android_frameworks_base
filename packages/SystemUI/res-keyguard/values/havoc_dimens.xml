@@ -144,4 +144,11 @@
     <!-- Custom text clock -->
     <dimen name="customtextclock_fontsize">40dp</dimen>
     <dimen name="custom_clock_left_padding">64dp</dimen>
+
+    <!-- Padding for date view -->
+    <dimen name="widget_clock_normal_clock_padding">4dp</dimen>
+
+    <!-- Date styles padding-->
+    <dimen name="widget_date_box_padding_hor">8dp</dimen>
+    <dimen name="widget_date_box_padding_ver">4dp</dimen>
 </resources>

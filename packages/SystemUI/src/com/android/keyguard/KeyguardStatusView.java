@@ -102,6 +102,11 @@ public class KeyguardStatusView extends GridLayout implements
     private boolean mShowClock;
     private boolean mShowInfo;
     private int mClockSelection;
+    private int mDateSelection;
+
+    // Date styles paddings
+    private int mDateVerPadding;
+    private int mDateHorPadding;
 
     private boolean mWasLatestViewSmall;
 
@@ -110,6 +115,8 @@ public class KeyguardStatusView extends GridLayout implements
         @Override
         public void onTimeChanged() {
             refreshTime();
+            refreshLockFont();
+            updateDateStyles();
         }
 
         @Override
@@ -404,6 +411,8 @@ public class KeyguardStatusView extends GridLayout implements
     public void dozeTimeTick() {
         refreshTime();
         mKeyguardSlice.refresh();
+        refreshLockFont();
+        updateDateStyles();
     }
 
     private void refreshTime() {
@@ -551,6 +560,30 @@ public class KeyguardStatusView extends GridLayout implements
     @Override
     public boolean hasOverlappingRendering() {
         return false;
+    }
+
+    private void updateDateStyles() {
+        switch (mDateSelection) {
+            case 0: // default
+            default:
+                mKeyguardSlice.setViewBackgroundResource(0);
+                mDateVerPadding = 0;
+                mDateHorPadding = 0;
+                mKeyguardSlice.setViewPadding(mDateHorPadding,mDateVerPadding,mDateHorPadding,mDateVerPadding);
+                break;
+            case 1: // semi-transparent box
+                mKeyguardSlice.setViewBackground(getResources().getDrawable(R.drawable.date_box_str_border));
+                mDateHorPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.widget_date_box_padding_hor),getResources().getDisplayMetrics()));
+                mDateVerPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.widget_date_box_padding_ver),getResources().getDisplayMetrics()));
+                mKeyguardSlice.setViewPadding(mDateHorPadding,mDateVerPadding,mDateHorPadding,mDateVerPadding);
+                break;
+            case 2: // semi-transparent box (round)
+                mKeyguardSlice.setViewBackground(getResources().getDrawable(R.drawable.date_str_border));
+                mDateHorPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.widget_date_box_padding_hor),getResources().getDisplayMetrics()));
+                mDateVerPadding = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.widget_date_box_padding_ver),getResources().getDisplayMetrics()));
+                mKeyguardSlice.setViewPadding(mDateHorPadding,mDateVerPadding,mDateHorPadding,mDateVerPadding);
+                break;
+        }
     }
 
     private void refreshLockFont() {
@@ -1083,8 +1116,11 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCKSCREEN_INFO, 1, UserHandle.USER_CURRENT) == 1;
         mClockSelection = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKSCREEN_CLOCK_SELECTION, 0, UserHandle.USER_CURRENT);
+        mDateSelection = Settings.System.getIntForUser(resolver,
+                Settings.System.LOCKSCREEN_DATE_SELECTION, 0, UserHandle.USER_CURRENT);
 
         setStyle();
+        updateDateStyles();
     }
 
     private void setStyle() {
@@ -1156,6 +1192,7 @@ public class KeyguardStatusView extends GridLayout implements
             mSpectrumClockView.setVisibility(View.GONE);
             mSneekyClockView.setVisibility(View.GONE);
             mTextClock.setVisibility(View.GONE);
+            mKeyguardSlice.setViewBackgroundResource(0);
         } else {
             setStyle();
             refreshTime();
