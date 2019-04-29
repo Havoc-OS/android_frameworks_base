@@ -19,19 +19,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Heads Up QS Tile -->
-    <string name="quick_settings_heads_up_label">헤드업</string>
-    <string name="accessibility_quick_settings_heads_up_off">헤드업</string>
-    <string name="accessibility_quick_settings_heads_up_on">헤드업</string>
-    <string name="accessibility_quick_settings_heads_up_changed_off">헤드 업 알림 꺼짐</string>
-    <string name="accessibility_quick_settings_heads_up_changed_on">헤드 업 알림 켜짐</string>
+    <string name="quick_settings_heads_up_label">알림 미리보기</string>
+    <string name="accessibility_quick_settings_heads_up_off">알림 미리보기</string>
+    <string name="accessibility_quick_settings_heads_up_on">알림 미리보기</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">알림 미리보기 꺼짐</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">알림 미리보기 켜짐</string>
     <!-- HW Keys Tile -->
-    <string name="accessibility_quick_settings_hwkeys_on">하드웨어키</string>
-    <string name="accessibility_quick_settings_hwkeys_off">하드웨어키</string>
-    <string name="quick_settings_hwkeys_label">하드웨어키</string>
+    <string name="accessibility_quick_settings_hwkeys_on">하드웨어 키</string>
+    <string name="accessibility_quick_settings_hwkeys_off">하드웨어 키</string>
+    <string name="quick_settings_hwkeys_label">하드웨어 키</string>
     <!-- Screenrecord Tile -->
     <string name="quick_settings_screenrecord">화면 녹화</string>
     <!-- Ambient display QS tile -->
-    <string name="quick_settings_ambient_display_label">앰비언트 디스플레이</string>
+    <string name="quick_settings_ambient_display_label">절전 모드 자동 해제</string>
     <!-- ADB over network QS tile -->
     <string name="quick_settings_network_adb_label">무선 네트워크로 ADB 사용</string>
     <!-- Screenrecord QS tile -->
@@ -51,12 +51,12 @@
     <!-- QuickSettings: ScreenStabilization (on) [CHAR LIMIT=NONE] -->
     <string name="quick_settings_stabilization_on">화면 안정화</string>
     <!-- Advanced powermenu -->
-    <string name="global_action_restart_system">재부팅</string>
-    <string name="global_action_restart_advanced">고급 재부팅</string>
-    <string name="global_action_restart_recovery">복구모드</string>
+    <string name="global_action_restart_system">다시 시작</string>
+    <string name="global_action_restart_advanced">고급 다시 시작</string>
+    <string name="global_action_restart_recovery">복구 모드</string>
     <string name="global_action_restart_bootloader">부트로더</string>
     <string name="global_action_restart_ui">시스템 UI</string>
-    <string name="global_action_restart_hot">빠른 재부팅</string>
+    <string name="global_action_restart_hot">빠른 다시 시작</string>
     <string name="global_action_screenshot">스크린샷</string>
     <!-- LTE QS Tile -->
     <string name="qs_lte_label">LTE</string>
@@ -88,20 +88,20 @@
     <string name="onthego_channel_name">홈</string>
     <string name="global_action_onthego">On-The-Go</string>
     <!-- Screenrecord Notification Ticker -->
-    <string name="screenrecord_notif_ticker">화면이 녹화되는중</string>
-    <string name="screenrecord_notif_final_ticker">화면이 성공적으로 녹화되었습니다</string>
-    <string name="screenrecord_notif_description">화면 녹화를 보려면 누르십시오</string>
+    <string name="screenrecord_notif_ticker">화면이 녹화되는 중</string>
+    <string name="screenrecord_notif_final_ticker">화면이 성공적으로 녹화됨</string>
+    <string name="screenrecord_notif_description">눌러서 녹화된 영상 재생</string>
     <!-- Screenrecord notification title -->
-    <string name="screenrecord_notif_title">화면 녹화</string>
+    <string name="screenrecord_notif_title">화면 녹화 중</string>
     <!-- Screenrecord notification action: Stop -->
     <string name="screenrecord_notif_stop">중지</string>
-    <string name="screenrecord_notif_completed">화면이 성공적으로 녹화되었습니다</string>
-    <string name="screenrecord_notif_duration">합계:</string>
+    <string name="screenrecord_notif_completed">화면이 성공적으로 녹화됨</string>
+    <string name="screenrecord_notif_duration">길이:</string>
     <!-- Screenrecord notification action: show/hide pointer -->
-    <string name="screenrecord_notif_pointer_on">터치포인터 표시</string>
-    <string name="screenrecord_notif_pointer_off">터치포인터 숨기기</string>
+    <string name="screenrecord_notif_pointer_on">포인터 표시</string>
+    <string name="screenrecord_notif_pointer_off">포인터 숨기기</string>
     <!-- Screen record notification error title -->
-    <string name="screenrecord_notif_error">화면을 녹화할수 없습니다</string>
+    <string name="screenrecord_notif_error">화면을 녹화할 수 없음</string>
     <string name="notification_channel_screenrecord">화면 녹화</string>
     <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
     <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • 고속 충전 중 (완전 충전까지 <xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> 남음)</string>
@@ -113,8 +113,8 @@
     <string name="call_title_tile">전화</string>
     <string name="calendar_title_tile">이벤트 추가</string>
     <!-- Heads up snooze toast -->
-    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - 꺼내기 알람을 1분간 중지 시킵니다.</string>
-    <string name="heads_up_snooze_message"><xliff:g id="string">%s</xliff:g> - 알람 미리보기를 <xliff:g id="number">%d</xliff:g> 분간 중지시킵니다.</string>
+    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - 알림 미리보기를 1분간 중지합니다.</string>
+    <string name="heads_up_snooze_message"><xliff:g id="string">%s</xliff:g> - 알람 미리보기를 <xliff:g id="number">%d</xliff:g>분간 중지합니다.</string>
     <string name="statusbar_items_title">상태 표시줄 아이콘</string>
     <string name="lockscreen_default">기본</string>
     <string name="lockscreen_hidden">없음</string>
@@ -127,11 +127,11 @@
     <string name="accessibility_quick_settings_sync_changed_off">동기화 꺼짐</string>
     <string name="accessibility_quick_settings_sync_changed_on">동기화 켜짐</string>
     <!-- Navigation Bar tile -->
-    <string name="quick_settings_navbar_title">내비게이션 바</string>
+    <string name="quick_settings_navbar_title">네비게이션 바</string>
     <string name="accessibility_quick_settings_navbar_off">동기화 꺼짐</string>
     <string name="accessibility_quick_settings_navbar_on">동기화 켜짐</string>
-    <string name="accessibility_quick_settings_navbar_changed_off">소프트키 해제</string>
-    <string name="accessibility_quick_settings_navbar_changed_on">소프트키 사용</string>
+    <string name="accessibility_quick_settings_navbar_changed_off">네비게이션 바 비활성화됨</string>
+    <string name="accessibility_quick_settings_navbar_changed_on">네비게이션 바 활성화됨</string>
     <!-- OnTheGo Tile -->
     <string name="quick_settings_onthego_label">On-The-Go</string>
     <!-- Screenshot -->
@@ -189,21 +189,21 @@
     <string name="gaming_mode_tile_toast">게이밍 모드 활성화</string>
     <string name="gaming_mode_tile_toast_disabled">게이밍 모드 비활성화</string>
     <string name="gaming_mode_dialog_title">게이밍 모드</string>
-    <string name="gaming_mode_dialog_message">게임모드가 켜져있을 때, 벨소리모드는 진동모드로 바뀌며, 모든 메시지 알림은 비활성화되고, 물리키는 꺼질것입니다. 미디어 볼륨은 최대값으로 올라갑니다. 게임모드를 끄면 모든 활성화된 옵션은 기본값으로 설정될것입니다.</string>
+    <string name="gaming_mode_dialog_message">게이밍 모드가 활성화되면 모든 메시지 알림과 외부 키가 비활성화됩니다. 게이밍모드를 끄면 다시 기존으로 돌아갑니다.</string>
     <string name="accessibility_quick_settings_gaming_mode_on">게이밍 모드</string>
     <string name="accessibility_quick_settings_gaming_mode_off">게이밍 모드</string>
     <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_running_services">실행중인 서비스 보기</string>
+    <string name="accessibility_quick_settings_running_services">실행 중인 서비스 보기</string>
     <!-- Expanded Desktop QS Tile -->
     <string name="quick_settings_expanded_desktop_label">확장 데스크탑</string>
     <string name="quick_settings_expanded_desktop">확장</string>
     <string name="quick_settings_expanded_desktop_off">기본</string>
-    <string name="quick_settings_expanded_navigation_off">네비게이션바 숨기기</string>
+    <string name="quick_settings_expanded_navigation_off">네비게이션 바 숨기기</string>
     <string name="quick_settings_expanded_statusbar_off">상태 표시줄 숨기기</string>
     <string name="recents_custom_android_n">모두 지우기</string>
     <!-- Language toggle tile -->
     <string name="quick_settings_locale_label">언어</string>
-    <string name="quick_settings_locale_more_locales_toast">토글 기능을 활성화 하려면 다중 언어를 설정하시기 바랍니다</string>
+    <string name="quick_settings_locale_more_locales_toast">기능을 활성화 하려면 다른 언어를 추가해주세요</string>
     <!-- ANBI Tile -->
     <string name="quick_settings_anbi_label">터치 실수 방지</string>
     <string name="accessibility_quick_settings_anbi_changed_off">터치 실수 방지 꺼짐</string>
@@ -226,12 +226,12 @@
     <string name="delete_screenshot_toast">스크린샷 삭제됨</string>
     <!-- Kill button in notification guts -->
     <string name="force_stop_dlg_title">강제로 중지하시겠습니까?</string>
-    <string name="force_stop_dlg_text">강제 중지시키면, 잘못 동작할 수 있습니다.</string>
+    <string name="force_stop_dlg_text">강제 중지시키면 잘못 동작할 수 있습니다.</string>
     <string name="dlg_ok">@android:string/ok</string>
     <string name="dlg_cancel">@android:string/cancel</string>
-    <string name="kill">앱 종료</string>
+    <string name="kill">애플리케이션 종료</string>
     <!--Google sound search tile -->
-    <string name="quick_settings_sound_search">사운드 검색</string>
+    <string name="quick_settings_sound_search">음성 검색</string>
     <!-- QS Config -->
     <string name="qs_menu_item_columns">열</string>
     <string name="qs_menu_item_columns_landscape">행 (가로 모드)</string>
@@ -242,7 +242,7 @@
     <string name="qs_menu_item_columns_seven">7</string>
     <string name="qs_menu_item_columns_eight">8</string>
     <string name="qs_menu_item_reset">초기화</string>
-    <string name="qs_menu_item_titles">레이블 표시</string>
+    <string name="qs_menu_item_titles">제목 표시</string>
     <string name="qs_menu_item_rows">행</string>
     <string name="qs_menu_item_rows_landscape">행 (가로 모드)</string>
     <string name="qs_menu_item_rows_one">1</string>
@@ -251,28 +251,32 @@
     <string name="qs_menu_item_rows_four">4</string>
     <string name="qs_menu_item_rows_five">5</string>
     <string name="qs_menu_item_rows_six">6</string>
-    <string name="qs_menu_item_qs_columns">열 (Quickbar)</string>
+    <string name="qs_menu_item_qs_columns">열 (빠른 설정 타일)</string>
     <string name="qs_menu_item_columns_auto">자동</string>
     <!-- Ambient Display Pixel-Like string -->
-    <string name="ambientmusic_songinfo">%s에 의한 %s</string>
+    <string name="ambientmusic_songinfo">%s by %s</string>
     <!-- App Picker Tile -->
     <string name="quick_settings_apppicker">앱 선택</string>
     <!-- Pie controls -->
-    <string name="pie_date_format">요일, 날짜 월 년</string>
-    <string name="pie_hour_format_12">시:분</string>
-    <string name="pie_hour_format_24">시:분</string>
-    <string name="pie_am_pm">오전</string>
+    <string name="pie_date_format">EEEE, dd MMMM yyyy</string>
+    <string name="pie_hour_format_12">hh:mm</string>
+    <string name="pie_hour_format_24">HH:mm</string>
+    <string name="pie_am_pm">a</string>
     <string name="pie_state_name">Pie 컨트롤</string>
-    <string name="pie_state_summary">몰입모드에서 Pie 컨트롤 사용</string>
+    <string name="pie_state_summary">전체 화면 모드에서 Pie 컨트롤 사용</string>
     <string name="pie_battery_level">"배터리 잔량 "</string>
     <string name="quick_settings_pie">Pie 컨트롤</string>
     <string-array name="nav_bar_layouts_new">
         <item>기본</item>
-        <item>간단히</item>
+        <item>좁게</item>
     </string-array>
-    <!-- Elmyra -->
+	<!-- Elmyra -->
     <string name="elmyra_raw_sensor_string_type">com.google.sensor.elmyra.raw</string>
     <string name="google_camera_app_package_name">com.google.android.GoogleCamera</string>
     <!-- OneHand mode QS tile -->
     <string name="qs_onehand_label">한 손 조작 모드</string>
+	<!-- Screen pinning dialog description. (for devices without navbar) -->
+    <string name="screen_pinning_description_no_navbar">화면 고정을 해제하기 전까지 화면에 유지합니다. 뒤로가기 버튼을 길게 눌러 화면 고정을 해제합니다.</string>
+    <!-- Notify use that they are in Lock-to-app (for devices without navbar)-->
+    <string name="screen_pinning_toast_no_navbar">화면 고정을 해제하려면 뒤로가기 버튼을 길게 누르세요</string>
 </resources>
