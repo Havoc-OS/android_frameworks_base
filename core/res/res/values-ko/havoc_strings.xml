@@ -18,8 +18,8 @@
  */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="reboot_title">재부팅</string>
-    <string name="reboot_message">시스템 재부팅</string>
+    <string name="reboot_title">다시 시작</string>
+    <string name="reboot_message">시스템 다시 시작</string>
     <!-- AOKP custom system animations -->
     <string name="animation_fade">사라짐</string>
     <string name="animation_slide_right">오른쪽으로 밀기</string>
@@ -38,16 +38,16 @@
     <string name="animation_random">무작위</string>
     <string name="action_null">없음</string>
     <!-- Screenrecord Notification Ticker -->
-    <string name="screenrecord_notif_ticker">화면이 녹화되는중</string>
+    <string name="screenrecord_notif_ticker">화면을 녹화 중입니다</string>
     <!-- Screenrecord notification title -->
     <string name="screenrecord_notif_title">화면 녹화 중</string>
     <!-- Screenrecord notification action: Stop -->
-    <string name="screenrecord_notif_stop">정지</string>
+    <string name="screenrecord_notif_stop">중지</string>
     <!-- Screenrecord notification action: show/hide pointer -->
     <string name="screenrecord_notif_pointer_on">터치포인터 표시</string>
     <string name="screenrecord_notif_pointer_off">터치포인터 숨기기</string>
     <!-- Screen record notification error title -->
-    <string name="screenrecord_notif_error">화면을 녹화할수 없습니다</string>
+    <string name="screenrecord_notif_error">화면을 녹화할 수 없습니다</string>
     <string name="notification_channel_screenrecord">화면 녹화</string>
     <!-- ADB over network -->
     <string name="adb_net_active_notification_title">네트워크를 통한 ADB 사용</string>
@@ -56,17 +56,17 @@
     <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_fakePackageSignature">패키지 서명 위조</string>
     <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permdesc_fakePackageSignature">앱이 다른 앱으로 위장할 수 있게끔 허용합니다. 악의적인 앱이 이 기능을 사용하여 사용자 데이터에 액세스 할 수 있습니다. 주의해서 권한을 부여하십시오!</string>
+    <string name="permdesc_fakePackageSignature">애플리케이션이 다른 애플리케이션으로 위장할 수 있게끔 허용합니다. 악의적인 애플리케이션이 이 기능을 사용하여 사용자 데이터에 액세스 할 수 있습니다. 주의해서 권한을 부여하십시오!</string>
     <!-- SystemUI Restart -->
-    <string name="systemui_restart_title">시스템UI 재시작 필요</string>
-    <string name="systemui_restart_message">모든 효과를 적용하려면, 시스템UI의 재시작이 필요합니다. 지금 시스템UI를 재시작할까요?</string>
+    <string name="systemui_restart_title">시스템 UI 다시 시작 필요</string>
+    <string name="systemui_restart_message">모든 효과를 적용하려면, 시스템 UI를 다시 시작해야합니다. 지금 시스템 UI를 다시 시작할까요?</string>
     <!-- App ops requests -->
     <string name="app_ops_access_camera">카메라 접근 허용</string>
     <string name="app_ops_access_location">위치 접근 허용</string>
     <string name="app_ops_access_notifications">알림 읽기</string>
     <string name="app_ops_activate_vpn">VPN 활성화하기</string>
     <string name="app_ops_add_voicemail">음성사서함 추가하기</string>
-    <string name="app_ops_app_start_foreground">포그라운드에서 인스턴트 앱 실행</string>
+    <string name="app_ops_app_start_foreground">포그라운드에서 인스턴트 애플리케이션 실행</string>
     <string name="app_ops_assist_screenshot">스크린샷 찍기</string>
     <string name="app_ops_assist_structure">보조 구조 사용</string>
     <string name="app_ops_audio_accessibility_volume">오디오 볼륨 접근성</string>
@@ -80,8 +80,8 @@
     <string name="app_ops_delete_sms">SMS 메시지 삭제</string>
     <string name="app_ops_draw_on_top">화면 위에 표시</string>
     <string name="app_ops_get_accounts">기기 계정 접근</string>
-    <string name="app_ops_get_usage_stats">앱 사용 통계 가져 오기</string>
-    <string name="app_ops_accept_handover">다른 앱에서 걸려온 전화의 핸드오버</string>
+    <string name="app_ops_get_usage_stats">애플리케이션 사용 통계 가져 오기</string>
+    <string name="app_ops_accept_handover">다른 애플리케이션에서 걸려온 전화의 핸드오버</string>
     <string name="app_ops_install_packages">패키지 설치</string>
     <string name="app_ops_keep_device_awake">화면 켜짐 유지</string>
     <string name="app_ops_manage_ipsec_tunnels">ipsec 터널 관리</string>
@@ -143,7 +143,7 @@
     <string name="app_ops_write_sms">SMS 메시지 쓰기</string>
     <!-- Privacy Guard -->
     <string name="permlab_changePrivacyGuardState">개인 정보 보호 켜기/끄기</string>
-    <string name="permdesc_changePrivacyGuardState">다른 앱이 프라이버시 가드와 함께 실행될 것인지 변경할 수 있도록 앱을 허용합니다. 앱이 프라이버시 가드와 함께 실행중일 때 연락처, 통화 기록, 메시지 등의 개인 정보에 접근할 수 없게 됩니다.</string>
+    <string name="permdesc_changePrivacyGuardState">다른 애플리케이션이 프라이버시 가드와 함께 실행될 것인지 변경할 수 있도록 애플리케이션을 허용합니다. 애플리케이션이 프라이버시 가드와 함께 실행중일 때 연락처, 통화 기록, 메시지 등의 개인 정보에 접근할 수 없게 됩니다.</string>
     <string name="privacy_guard_notification">개인 정보 보호 활성화</string>
     <string name="privacy_guard_notification_detail"><xliff:g id="app">%1$s</xliff:g>은(는) 개인 데이터에 접근할 수 없습니다.</string>
     <string name="privacy_guard_dialog_title">개인 정보 보호</string>
@@ -153,13 +153,13 @@
     <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permlab_accessFontManager">글꼴 관리자 열기</string>
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permdesc_accessFontManager">앱이 글꼴 관리자에 접근하는 것을 허용</string>
+    <string name="permdesc_accessFontManager">애플리케이션이 글꼴 관리자에 접근하는 것을 허용</string>
     <!-- [CHAR LIMIT=NONE] Error when a package is installed but got the missing fonts.xml file, notifying the user why it isn't showing up. -->
     <string name="fontservice_incompatible_font">설치한 글꼴 패키지는 fonts.xml의 부재로 호환되지 않습니다. 패키지 개발자에게 도움을 요청하세요.</string>
     <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permlab_toggleNavigationEditor">네비게이션 컨트롤 패널 편집기</string>
+    <string name="permlab_toggleNavigationEditor">네비게이션 바 편집 허용</string>
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
-    <string name="permdesc_toggleNavigationEditor">앱이 소프트키 수정하도록 허용</string>
+    <string name="permdesc_toggleNavigationEditor">애플리케이션이 네비게이션 바를 편집할 수 있도록 허용합니다.</string>
     <!-- App error dialog -->
     <string name="aerr_copy">오류 로그 URL 복사</string>
     <string name="url_copy_success">URL 복사됨</string>
