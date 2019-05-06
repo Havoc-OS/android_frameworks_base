@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources>
+
+    <string name="custom_text_clock_top_text_default">Đó là</string>
+
+    <string name="text_clock_zero_h_min">O\'</string>
+    <string name="text_clock_high">Cao</string>
+    <string name="text_clock_noon">Mặt trăng</string>
+
+    <!-- TensString -->
+    <string name="text_clock_tens_string_twenty">Hai mươi</string>
+    <string name="text_clock_tens_string_thirty">Ba mươi</string>
+    <string name="text_clock_tens_string_forty">Bốn mươi</string>
+    <string name="text_clock_tens_string_fifty">Năm mươi</string>
+    <string name="text_clock_tens_string_sixty">Sáu mươi</string>
+
+    <!-- UnitsString -->
+    <string name="text_clock_units_string_clock">Đúng</string>
+    <string name="text_clock_units_string_one">Một</string>
+    <string name="text_clock_units_string_two">Hai</string>
+    <string name="text_clock_units_string_three">Ba</string>
+    <string name="text_clock_units_string_four">Bốn</string>
+    <string name="text_clock_units_string_five">Năm</string>
+    <string name="text_clock_units_string_six">Sáu</string>
+    <string name="text_clock_units_string_seven">Bảy</string>
+    <string name="text_clock_units_string_eight">Tám</string>
+    <string name="text_clock_units_string_nine">Chín</string>
+    <string name="text_clock_units_string_ten">Mười</string>
+    <string name="text_clock_units_string_eleven">Mười một</string>
+    <string name="text_clock_units_string_twelve">Mười hai</string>
+    <string name="text_clock_units_string_thirteen">Mười ba</string>
+    <string name="text_clock_units_string_fourteen">Mười bốn</string>
+    <string name="text_clock_units_string_fifteen">Mười năm</string>
+    <string name="text_clock_units_string_sixteen">Mười sáu</string>
+    <string name="text_clock_units_string_seventeen">Mười bảy</string>
+    <string name="text_clock_units_string_eighteen">Mười tám</string>
+    <string name="text_clock_units_string_nineteen">Mười chín</string>
+
+    <!-- TensStringH -->
+    <string name="text_clock_tens_string_h_twenty">Hai mươi</string>
+    <string name="text_clock_tens_string_h_thirty">Ba mươi</string>
+    <string name="text_clock_tens_string_h_forty">Bốn mươi</string>
+    <string name="text_clock_tens_string_h_fifty">Năm mươi</string>
+    <string name="text_clock_tens_string_h_sixty">Sau mươi</string>
+
+    <!-- UnitsStringH -->
+    <string name="text_clock_units_string_h_twelve_h">Mười hai</string>
+    <string name="text_clock_units_string_h_one">Một</string>
+    <string name="text_clock_units_string_h_two">Hai</string>
+    <string name="text_clock_units_string_h_three">Ba</string>
+    <string name="text_clock_units_string_h_four">Bốn</string>
+    <string name="text_clock_units_string_h_five">Năm</string>
+    <string name="text_clock_units_string_h_six">Sáu</string>
+    <string name="text_clock_units_string_h_seven">Bảy</string>
+    <string name="text_clock_units_string_h_eight">Tám</string>
+    <string name="text_clock_units_string_h_nine">Chín</string>
+    <string name="text_clock_units_string_h_ten">Mười</string>
+    <string name="text_clock_units_string_h_eleven">Mười một</string>
+    <string name="text_clock_units_string_h_twelve">Mười hai</string>
+    <string name="text_clock_units_string_h_thirteen">Mười ba</string>
+    <string name="text_clock_units_string_h_fourteen">Mười bốn</string>
+    <string name="text_clock_units_string_h_fifteen">Mười năm</string>
+    <string name="text_clock_units_string_h_sixteen">Mười sáu</string>
+    <string name="text_clock_units_string_h_seventeen">Mười bảy</string>
+    <string name="text_clock_units_string_h_eighteen">Mười tám</string>
+    <string name="text_clock_units_string_h_nineteen">Mười chín</string>
+
+</resources>
