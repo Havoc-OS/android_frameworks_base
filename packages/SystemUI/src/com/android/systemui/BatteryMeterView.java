@@ -294,7 +294,7 @@ public class BatteryMeterView extends LinearLayout implements
     }
 
     private boolean forcePercentageQsHeader() {
-        return (mQsHeaderOrKeyguard || mCharging || mPowerSave)
+        return (mQsHeaderOrKeyguard)
                 && (mStyle == BatteryMeterDrawableBase.BATTERY_STYLE_PORTRAIT
                 || mStyle == BatteryMeterDrawableBase.BATTERY_STYLE_Q
                 || mStyle == BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN
@@ -311,7 +311,7 @@ public class BatteryMeterView extends LinearLayout implements
                 getContext().getContentResolver(), SHOW_BATTERY_PERCENT, 0, mUser) == 2;
         final boolean showingOutside = mBatteryPercentView != null;
         if (0 != Settings.System.getIntForUser(getContext().getContentResolver(),
-                SHOW_BATTERY_PERCENT, 0, mUser) || mForceShowPercent || showingText || hideText || forcePercentageQsHeader()) {
+                SHOW_BATTERY_PERCENT, 0, mUser) || showingText || hideText || forcePercentageQsHeader()) {
             if (!showingOutside) {
                 mDrawable.setShowPercent(false);
                 mBatteryPercentView = loadPercentView();
@@ -322,12 +322,12 @@ public class BatteryMeterView extends LinearLayout implements
                                 LayoutParams.WRAP_CONTENT,
                                 LayoutParams.MATCH_PARENT));
             }
-            if (showingInside && !showingText && !mForceShowPercent && !forcePercentageQsHeader()) {
+            if (showingInside && !showingText && !forcePercentageQsHeader()) {
                 mDrawable.setShowPercent(true);
                 removeView(mBatteryPercentView);
                 mBatteryPercentView = null;
             }
-            if (hideText && !showingText && !mForceShowPercent && !forcePercentageQsHeader()) {
+            if (hideText && !showingText && !forcePercentageQsHeader()) {
                 mDrawable.setShowPercent(false);
                 removeView(mBatteryPercentView);
                 mBatteryPercentView = null;
