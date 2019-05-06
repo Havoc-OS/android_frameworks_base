@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources>
+
+    <string name="custom_text_clock_top_text_default"></string>
+
+    <string name="text_clock_zero_h_min">It\'s</string>
+    <string name="text_clock_high">High</string>
+    <string name="text_clock_noon">Noon</string>
+
+    <!-- TensString -->
+    <string name="text_clock_tens_string_twenty">Veinte</string>
+    <string name="text_clock_tens_string_thirty">Treinta</string>
+    <string name="text_clock_tens_string_forty">Cuarenta</string>
+    <string name="text_clock_tens_string_fifty">Cincuenta</string>
+    <string name="text_clock_tens_string_sixty">Sesenta</string>
+
+    <!-- UnitsString -->
+    <string name="text_clock_units_string_clock">Clock</string>
+    <string name="text_clock_units_string_one">Uno</string>
+    <string name="text_clock_units_string_two">Dos</string>
+    <string name="text_clock_units_string_three">Tres</string>
+    <string name="text_clock_units_string_four">Cuatro</string>
+    <string name="text_clock_units_string_five">Cinco</string>
+    <string name="text_clock_units_string_six">Seis</string>
+    <string name="text_clock_units_string_seven">Siete</string>
+    <string name="text_clock_units_string_eight">Ocho</string>
+    <string name="text_clock_units_string_nine">Nueve</string>
+    <string name="text_clock_units_string_ten">Diez</string>
+    <string name="text_clock_units_string_eleven">Once</string>
+    <string name="text_clock_units_string_twelve">Doce</string>
+    <string name="text_clock_units_string_thirteen">Trece</string>
+    <string name="text_clock_units_string_fourteen">Catorce</string>
+    <string name="text_clock_units_string_fifteen">Quince</string>
+    <string name="text_clock_units_string_sixteen">Dieciséis</string>
+    <string name="text_clock_units_string_seventeen">Diecisiete</string>
+    <string name="text_clock_units_string_eighteen">Dieciocho</string>
+    <string name="text_clock_units_string_nineteen">Diecinueve</string>
+
+    <!-- TensStringH -->
+    <string name="text_clock_tens_string_h_twenty">Veinte</string>
+    <string name="text_clock_tens_string_h_thirty">Treinta</string>
+    <string name="text_clock_tens_string_h_forty">Cuarenta</string>
+    <string name="text_clock_tens_string_h_fifty">Cincuenta</string>
+    <string name="text_clock_tens_string_h_sixty">Sesenta</string>
+
+    <!-- UnitsStringH -->
+    <string name="text_clock_units_string_h_twelve_h">Veinte</string>
+    <string name="text_clock_units_string_h_one">Uno</string>
+    <string name="text_clock_units_string_h_two">Dos</string>
+    <string name="text_clock_units_string_h_three">Tres</string>
+    <string name="text_clock_units_string_h_four">Cuatro</string>
+    <string name="text_clock_units_string_h_five">Cinco</string>
+    <string name="text_clock_units_string_h_six">Seis</string>
+    <string name="text_clock_units_string_h_seven">Siete</string>
+    <string name="text_clock_units_string_h_eight">Ocho</string>
+    <string name="text_clock_units_string_h_nine">Nueve</string>
+    <string name="text_clock_units_string_h_ten">Diez</string>
+    <string name="text_clock_units_string_h_eleven">Once</string>
+    <string name="text_clock_units_string_h_twelve">Doce</string>
+    <string name="text_clock_units_string_h_thirteen">Trece</string>
+    <string name="text_clock_units_string_h_fourteen">Catorce</string>
+    <string name="text_clock_units_string_h_fifteen">Quince</string>
+    <string name="text_clock_units_string_h_sixteen">Dieciséis</string>
+    <string name="text_clock_units_string_h_seventeen">Diecisiete</string>
+    <string name="text_clock_units_string_h_eighteen">Dieciocho</string>
+    <string name="text_clock_units_string_h_nineteen">Diecinueve</string>
+
+</resources>
