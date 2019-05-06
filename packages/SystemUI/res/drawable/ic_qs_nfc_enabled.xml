@@ -1,5 +1,5 @@
 <!--
-     Copyright (C) 2016 The Android Open Source Project
+     Copyright (C) 2019 Havoc-OS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,18 +14,15 @@
      limitations under the License.
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
 
-    <path
-        android:pathData="M4 20h16V4H4v16z" />
-    <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1 .9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0
-18H4V4h16v16zM18 6h-5c-1.1 0-2 .9-2 2v2.28c-.6 .35 -1 .98-1 1.72 0 1.1 .9 2 2
-2s2-.9 2-2c0-.74-.4-1.38-1-1.72V8h3v8H8V8h2V6H6v12h12V6z" />
-    <path
-        android:pathData="M0 0h24v24H0z" />
+    <group android:translateX="-641.0" android:translateY="-328.0">
+       <group android:translateX="641.0" android:translateY="328.0">
+           <path android:pathData="M 0 0 H 36 V 36 H 0 V 0 Z" android:strokeWidth="1.0" />
+       </group>
+       <path android:fillColor="#ffffffff" android:pathData="M653.448807,361 L645.991617,361 C644.891677,361 644,360.10216 644,359.008383 L644,332.991617 C644,331.891677 644.89784,331 645.991617,331 L659.705531,331 C665.269659,333.401525 665.269811,340.166295 665.269811,340.166667 L665.269811,353.5 L655.269811,343.5 L655.269811,346.833333 L667.769811,359.333333 L667.769811,357.666667 L667.769811,340.166667 L665.269811,340.166667 L667.769811,340.166667 C667.769811,340.166667 667.769811,333.401591 664.987671,331 L672.008383,331 C673.108323,331 674,331.89784 674,332.991617 L674,359.008383 C674,360.108323 673.10216,361 672.008383,361 L658.730947,361 C653.166819,358.598475 653.166667,351.833705 653.166667,351.833333 L653.166667,338.5 L663.166667,348.5 L663.166667,345.166667 L650.666667,332.666667 L650.666667,334.333333 L650.666667,351.833333 L653.166667,351.833333 L650.666667,351.833333 C650.666667,351.833333 650.666667,358.598409 653.448807,361 Z" android:strokeWidth="1.0" />
+    </group>
 </vector>
