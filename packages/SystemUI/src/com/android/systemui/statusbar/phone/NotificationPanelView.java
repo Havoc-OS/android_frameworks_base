@@ -3025,4 +3025,8 @@ public class NotificationPanelView extends PanelView implements
         setKeyguardStatusViewVisibility(mStatusBarState, true /* keyguardFadingAway */,
                 false /* goingToFullShade */);
     }
+
+    public KeyguardStatusView getKeyguardStatusView() {
+        return mKeyguardStatusView;
+    }
 }
