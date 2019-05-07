@@ -25,11 +25,11 @@
     <string name="text_clock_noon">Noon</string>
 
     <!-- TensString -->
-    <string name="text_clock_tens_string_twenty">Двенадцать</string>
-    <string name="text_clock_tens_string_thirty">Тринадцать</string>
-    <string name="text_clock_tens_string_forty">Четырнадцать</string>
-    <string name="text_clock_tens_string_fifty">Пятнадцать</string>
-    <string name="text_clock_tens_string_sixty">Шестнадцать</string>
+    <string name="text_clock_tens_string_twenty">Двадцать</string>
+    <string name="text_clock_tens_string_thirty">Тридцать</string>
+    <string name="text_clock_tens_string_forty">Сорок</string>
+    <string name="text_clock_tens_string_fifty">Пятьдесят</string>
+    <string name="text_clock_tens_string_sixty">Шестьдесят</string>
 
     <!-- UnitsString -->
     <string name="text_clock_units_string_clock">Clock</string>
@@ -54,11 +54,11 @@
     <string name="text_clock_units_string_nineteen">Девятнадцать</string>
 
     <!-- TensStringH -->
-    <string name="text_clock_tens_string_h_twenty">Двенадцать</string>
-    <string name="text_clock_tens_string_h_thirty">Тринадцать</string>
-    <string name="text_clock_tens_string_h_forty">Четырнадцать</string>
-    <string name="text_clock_tens_string_h_fifty">Пятнадцать</string>
-    <string name="text_clock_tens_string_h_sixty">Шестнадцать</string>
+    <string name="text_clock_tens_string_h_twenty">Двадцать</string>
+    <string name="text_clock_tens_string_h_thirty">Тридцать</string>
+    <string name="text_clock_tens_string_h_forty">Сорок</string>
+    <string name="text_clock_tens_string_h_fifty">Пятьдесят</string>
+    <string name="text_clock_tens_string_h_sixty">Шестьдесят</string>
 
     <!-- UnitsStringH -->
     <string name="text_clock_units_string_h_twelve_h">Двадцать</string>
