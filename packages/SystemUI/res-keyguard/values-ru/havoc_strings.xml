@@ -20,7 +20,7 @@
 
     <string name="custom_text_clock_top_text_default">Сейчас</string>
 
-    <string name="text_clock_zero_h_min">O\'</string>
+    <string name="text_clock_zero_h_min">Ноль</string>
     <string name="text_clock_high">После</string>
     <string name="text_clock_noon">Полночь</string>
 
