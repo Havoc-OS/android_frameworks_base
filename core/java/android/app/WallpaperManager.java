@@ -1892,7 +1892,9 @@ public class WallpaperManager {
         if (cn != null) {
             try {
                 final PackageManager packageManager = context.getPackageManager();
-                packageManager.getPackageInfo(cn.getPackageName(), 0);
+                packageManager.getPackageInfo(cn.getPackageName(),
+                        PackageManager.MATCH_DIRECT_BOOT_AWARE
+                                | PackageManager.MATCH_DIRECT_BOOT_UNAWARE);
             } catch (PackageManager.NameNotFoundException e) {
                 cn = null;
             }
