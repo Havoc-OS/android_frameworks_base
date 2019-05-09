@@ -32,7 +32,7 @@
     <string name="text_clock_tens_string_sixty">Εξήντα</string>
 
     <!-- UnitsString -->
-    <string name="text_clock_units_string_clock">Ρολόι</string>
+    <string name="text_clock_units_string_clock">Ακριβώς</string>
     <string name="text_clock_units_string_one">Ένα</string>
     <string name="text_clock_units_string_two">Δυο</string>
     <string name="text_clock_units_string_three">Τρία</string>
