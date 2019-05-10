@@ -61,7 +61,7 @@ public class NavBarTuner extends TunerPreferenceFragment {
     private static final String ICON = "icon";
 
     private static final int[][] ICONS = new int[][]{
-            {R.drawable.ic_qs_circle, R.string.tuner_circle},
+            {R.drawable.ic_circle, R.string.tuner_circle},
             {R.drawable.ic_add, R.string.tuner_plus},
             {R.drawable.ic_remove, R.string.tuner_minus},
             {R.drawable.ic_left, R.string.tuner_left},
