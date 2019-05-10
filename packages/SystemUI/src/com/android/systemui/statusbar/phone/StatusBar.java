@@ -2006,7 +2006,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         Drawable artworkDrawable = null;
         if (mediaMetadata != null && (Settings.System.getIntForUser(mContext.getContentResolver(),
-            Settings.System.LOCKSCREEN_MEDIA_METADATA, 1, UserHandle.USER_CURRENT) == 1)) {
+            Settings.System.LOCKSCREEN_MEDIA_METADATA, 1, UserHandle.USER_CURRENT) == 1) && mMediaManager.isMediaPlaying()) {
             Bitmap artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
             if (artworkBitmap == null) {
                 artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
@@ -2034,7 +2034,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
         }
 
-        if (artworkDrawable == null) {
+        if (artworkDrawable == null && mMediaManager.isMediaPlaying()) {
             //Get wallpaper as bitmap
             WallpaperManager manager = WallpaperManager.getInstance(mContext);
             ParcelFileDescriptor pfd = manager.getWallpaperFile(WallpaperManager.FLAG_LOCK);
