@@ -104,7 +104,7 @@
     <string name="screenrecord_notif_error">No se puede grabar la pantalla</string>
     <string name="notification_channel_screenrecord">Grabador de pantalla</string>
     <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
-    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Carga rápida (<xliff:g id="charging_time_left" example="4 horas y 2 minutos">%s</xliff:g> hasta 100%)</string>
+    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Carga rápida (<xliff:g id="charging_time_left" example="4 horas y 2 minutos">%s</xliff:g> hasta completar)</string>
     <string name="keyguard_plugged_in_dash_charging">Carga Rápida</string>
     <string name="camera_title_tile">Cámara</string>
     <string name="suspend_title_tile">Acciones al apagar pantalla</string>
