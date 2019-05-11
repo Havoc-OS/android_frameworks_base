@@ -6638,6 +6638,11 @@ public final class Settings {
         /**
          * @hide
          */
+        public static final String POCKET_JUDGE_ALLOW_FP = "pocket_judge_allow_fp";
+
+        /**
+         * @hide
+         */
         public static final String SMART_CHARGING = "smart_charging";
 
         /**
