@@ -18,7 +18,7 @@
 -->
 <resources>
 
-    <string name="custom_text_clock_top_text_default">Η ώρα είναι</string>
+    <string name="custom_text_clock_top_text_default">Είναι</string>
 
     <string name="text_clock_zero_h_min">Μηδέν</string>
     <string name="text_clock_high">Μεσημέρι</string>
@@ -61,8 +61,8 @@
     <string name="text_clock_tens_string_h_sixty">Εξήντα</string>
 
     <!-- UnitsStringH -->
-    <string name="text_clock_units_string_h_twelve_h">Είκοσι</string>
-    <string name="text_clock_units_string_h_one">Μία</string>
+    <string name="text_clock_units_string_h_twelve_h">Δώδεκα</string>
+    <string name="text_clock_units_string_h_one">Ένα</string>
     <string name="text_clock_units_string_h_two">Δυο</string>
     <string name="text_clock_units_string_h_three">Τρία</string>
     <string name="text_clock_units_string_h_four">Τέσσερα</string>
