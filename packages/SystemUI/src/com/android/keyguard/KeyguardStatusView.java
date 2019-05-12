@@ -51,7 +51,7 @@ import android.graphics.Typeface;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.ViewClippingUtil;
 import com.android.keyguard.clocks.CustomAnalogClock;
-import com.android.keyguard.clocks.CustomTextClock;
+import com.android.keyguard.clocks.TypographicClock;
 import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.doze.DozeLog;
@@ -80,7 +80,7 @@ public class KeyguardStatusView extends GridLayout implements
     private CustomAnalogClock mSpectrumClockView;
     private CustomAnalogClock mSneekyClockView;
     private CustomAnalogClock mDotClockView;
-    private LinearLayout mTextClock;
+    private TypographicClock mTextClock;
     private TextClock mClockView;
     private View mClockSeparator;
     private TextView mOwnerInfo;
@@ -433,6 +433,8 @@ public class KeyguardStatusView extends GridLayout implements
         } else if (mClockSelection == 11) {
             mClockView.setFormat12Hour(Html.fromHtml("<strong>h</strong><font color=" + getResources().getColor(R.color.sammy_minutes_accent) + ">mm</font>"));
             mClockView.setFormat24Hour(Html.fromHtml("<strong>kk</strong><font color=" + getResources().getColor(R.color.sammy_minutes_accent) + ">mm</font>"));
+        } else if (mClockSelection == 15) {
+            mTextClock.onTimeChanged();
         } else {
             mClockView.setFormat12Hour("hh\nmm");
             mClockView.setFormat24Hour("kk\nmm");
@@ -1198,6 +1200,9 @@ public class KeyguardStatusView extends GridLayout implements
 		mDotClockView.setDark(dark);
         mSpectrumClockView.setDark(dark);
         mSneekyClockView.setDark(dark);
+        if (mClockSelection == 15) {
+            mTextClock.setTextColor(blendedTextColor);
+        }
         updateVisibilities();
     }
 
