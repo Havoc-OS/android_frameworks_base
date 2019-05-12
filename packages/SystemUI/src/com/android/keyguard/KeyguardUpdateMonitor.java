@@ -914,8 +914,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener,
         }
     };
 
-    public boolean isFaceTrusted(){
-        return lastBroadcastActionReceived.equals(ACTION_FACE_UNLOCK_STOPPED);
+    public boolean isFaceTrusted() {
+        return lastBroadcastActionReceived != null &&
+            lastBroadcastActionReceived.equals(ACTION_FACE_UNLOCK_STOPPED);
     }
 
     private final BroadcastReceiver mBroadcastAllReceiver = new BroadcastReceiver() {
