@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources>
+
+    <string-array translatable="true" name="TensString">
+        <item>"じかん"</item>
+        <item>"じゅう"</item>
+        <item>"にじゅう"</item>
+        <item>"さんじゅう"</item>
+        <item>"よんじゅう"</item>
+        <item>"ごじゅう"</item>
+        <item>"ろくじゅう"</item>
+    </string-array>
+
+    <string-array translatable="true" name="UnitsString">
+        <item>""</item>          
+        <item>"いちじ"</item>          
+        <item>"にじ"</item>    
+        <item>"さんじ"</item>    
+        <item>"よじ"</item>     
+        <item>"ごじ"</item>     
+        <item>"ろくじ"</item>
+        <item>"しちじ"</item>
+        <item>"はちじ"</item>
+        <item>"くじ"</item>
+        <item>"じゅう"</item>
+        <item>"じゅういち"</item>
+        <item>"じゅうに"</item>
+        <item>"じゅうさん"</item>
+        <item>"じゅうよん"</item>
+        <item>"じゅうご"</item>
+        <item>"じゅうろく"</item>
+        <item>"じゅうしち"</item>
+        <item>"じゅうはち"</item>
+        <item>"じゅうきゅう"</item>
+    </string-array>
+
+    <string-array translatable="true" name="TensStringH">
+        <item></item>
+        <item></item>
+        <item>"にじゅう"</item>
+        <item>"さんじゅう"</item>
+        <item>"よんじゅう"</item>
+        <item>"ごじゅう"</item>
+        <item>"ろくじゅう"</item>
+    </string-array>
+
+    <string-array translatable="true" name="UnitsStringH">
+        <item>"じゅうに"</item>
+        <item>"いち"</item>
+        <item>"に"</item>
+        <item>"さん"</item>
+        <item>"し"</item>
+        <item>"ご"</item>
+        <item>"ろく"</item>
+        <item>"しち"</item>
+        <item>"はち"</item>
+        <item>"く"</item>
+        <item>"じゅう"</item>
+        <item>"じゅういち"</item>
+        <item>"じゅうに"</item>
+        <item>"じゅうさん"</item>
+        <item>"じゅうよん"</item>
+        <item>"じゅうご"</item>
+        <item>"じゅうろく"</item>
+        <item>"じゅうしち"</item>
+        <item>"じゅうはち"</item>
+        <item>"じゅうきゅう"</item>
+    </string-array>
+
+</resources>

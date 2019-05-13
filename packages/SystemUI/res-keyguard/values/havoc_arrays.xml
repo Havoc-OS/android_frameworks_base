@@ -18,70 +18,80 @@
 -->
 <resources>
 
-    <string-array name="TensString">
+    <string-array translatable="true" name="TensString">
         <item></item>
-        <item></item>
-        <item>@string/text_clock_tens_string_twenty</item>
-        <item>@string/text_clock_tens_string_thirty</item>
-        <item>@string/text_clock_tens_string_forty</item>
-        <item>@string/text_clock_tens_string_fifty</item>
-        <item>@string/text_clock_tens_string_sixty</item>
+        <item>Ten</item>
+        <item>Twenty</item>
+        <item>Thirty</item>
+        <item>Forty</item>
+        <item>Fifty</item>
+        <item>Sixty</item>
     </string-array>
 
-    <string-array name="UnitsString">
-        <item>@string/text_clock_units_string_clock</item>
-        <item>@string/text_clock_units_string_one</item>
-        <item>@string/text_clock_units_string_two</item>
-        <item>@string/text_clock_units_string_three</item>
-        <item>@string/text_clock_units_string_four</item>
-        <item>@string/text_clock_units_string_five</item>
-        <item>@string/text_clock_units_string_six</item>
-        <item>@string/text_clock_units_string_seven</item>
-        <item>@string/text_clock_units_string_eight</item>
-        <item>@string/text_clock_units_string_nine</item>
-        <item>@string/text_clock_units_string_ten</item>
-        <item>@string/text_clock_units_string_eleven</item>
-        <item>@string/text_clock_units_string_twelve</item>
-        <item>@string/text_clock_units_string_thirteen</item>
-        <item>@string/text_clock_units_string_fourteen</item>
-        <item>@string/text_clock_units_string_fifteen</item>
-        <item>@string/text_clock_units_string_sixteen</item>
-        <item>@string/text_clock_units_string_seventeen</item>
-        <item>@string/text_clock_units_string_eighteen</item>
-        <item>@string/text_clock_units_string_nineteen</item>
+    <string-array translatable="true" name="UnitsString">
+        <item>"O'Clock"</item>
+        <item>"O'One"</item>
+        <item>"O'Two"</item>
+        <item>"O'Three"</item>
+        <item>"O'Four"</item>
+        <item>"O'Five"</item>
+        <item>"O'Six"</item>
+        <item>"O'Seven"</item>
+        <item>"O'Eight"</item>
+        <item>"O'Nine"</item>
+        <item>Ten</item>
+        <item>Eleven</item>
+        <item>Twelve</item>
+        <item>Thirteen</item>
+        <item>Fourteen</item>
+        <item>Fifteen</item>
+        <item>Sixteen</item>
+        <item>Seventeen</item>
+        <item>Eighteen</item>
+        <item>Nineteen</item>
     </string-array>
 
-    <string-array name="TensStringH">
+    <string-array translatable="true" name="TensStringH">
         <item></item>
         <item></item>
-        <item>@string/text_clock_tens_string_h_twenty</item>
-        <item>@string/text_clock_tens_string_h_thirty</item>
-        <item>@string/text_clock_tens_string_h_forty</item>
-        <item>@string/text_clock_tens_string_h_fifty</item>
-        <item>@string/text_clock_tens_string_h_sixty</item>
+        <item>Twenty</item>
+        <item>Thirty</item>
+        <item>Forty</item>
+        <item>Fifty</item>
+        <item>Sixty</item>
     </string-array>
 
-    <string-array name="UnitsStringH">
-        <item>@string/text_clock_units_string_h_twelve_h</item>
-        <item>@string/text_clock_units_string_h_one</item>
-        <item>@string/text_clock_units_string_h_two</item>
-        <item>@string/text_clock_units_string_h_three</item>
-        <item>@string/text_clock_units_string_h_four</item>
-        <item>@string/text_clock_units_string_h_five</item>
-        <item>@string/text_clock_units_string_h_six</item>
-        <item>@string/text_clock_units_string_h_seven</item>
-        <item>@string/text_clock_units_string_h_eight</item>
-        <item>@string/text_clock_units_string_h_nine</item>
-        <item>@string/text_clock_units_string_h_ten</item>
-        <item>@string/text_clock_units_string_h_eleven</item>
-        <item>@string/text_clock_units_string_h_twelve</item>
-        <item>@string/text_clock_units_string_h_thirteen</item>
-        <item>@string/text_clock_units_string_h_fourteen</item>
-        <item>@string/text_clock_units_string_h_fifteen</item>
-        <item>@string/text_clock_units_string_h_sixteen</item>
-        <item>@string/text_clock_units_string_h_seventeen</item>
-        <item>@string/text_clock_units_string_h_eighteen</item>
-        <item>@string/text_clock_units_string_h_nineteen</item>
+    <string-array translatable="true" name="UnitsStringH">
+        <item>Twelve</item>
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+        <item>Ten</item>
+        <item>Eleven</item>
+        <item>Twelve</item>
+        <item>Thirteen</item>
+        <item>Fourteen</item>
+        <item>Fifteen</item>
+        <item>Sixteen</item>
+        <item>Seventeen</item>
+        <item>Eighteen</item>
+        <item>Nineteen</item>
+    </string-array>
+
+    <string-array translatable="false" name="langExceptions">
+        <item>nl</item>
+        <item>it</item>
+        <item>fr</item>
+        <item>pt</item>
+        <item>pl</item>
+        <item>ja</item>
+        <item>tr</item>
     </string-array>
 
 </resources>
