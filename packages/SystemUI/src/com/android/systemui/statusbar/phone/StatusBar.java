@@ -2005,8 +2005,11 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
 
         Drawable artworkDrawable = null;
+
+        boolean isMediaPlaying = mMediaManager.isMediaPlaying();
+
         if (mediaMetadata != null && (Settings.System.getIntForUser(mContext.getContentResolver(),
-            Settings.System.LOCKSCREEN_MEDIA_METADATA, 1, UserHandle.USER_CURRENT) == 1) && mMediaManager.isMediaPlaying()) {
+            Settings.System.LOCKSCREEN_MEDIA_METADATA, 1, UserHandle.USER_CURRENT) == 1) && isMediaPlaying) {
             Bitmap artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
             if (artworkBitmap == null) {
                 artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
@@ -2038,7 +2041,11 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (ENABLE_LOCKSCREEN_WALLPAPER && artworkDrawable == null) {
             Bitmap lockWallpaper = mLockscreenWallpaper.getBitmap();
             if (lockWallpaper != null) {
-                artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), lockWallpaper);
+                if (isMediaPlaying)
+                    artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), lockWallpaper);
+                else
+                    artworkDrawable = new LockscreenWallpaper.WallpaperDrawable(
+                        mBackdropBack.getResources(), lockWallpaper);
                 // We're in the SHADE mode on the SIM screen - yet we still need to show
                 // the lockscreen wallpaper in that mode.
                 allowWhenShade = mStatusBarKeyguardViewManager != null
@@ -2046,7 +2053,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
         }
 
-        if (artworkDrawable == null && mMediaManager.isMediaPlaying()) {
+        if (artworkDrawable == null && isMediaPlaying) {
             //Get wallpaper as bitmap
             WallpaperManager manager = WallpaperManager.getInstance(mContext);
             ParcelFileDescriptor pfd = manager.getWallpaperFile(WallpaperManager.FLAG_LOCK);
