@@ -6651,6 +6651,11 @@ public final class Settings {
         public static final String SMART_CHARGING_LEVEL = "smart_charging_level";
 
         /**
+         * @hide
+         */
+        public static final String SHOW_BATTERY_ESTIMATE = "show_battery_estimate";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
