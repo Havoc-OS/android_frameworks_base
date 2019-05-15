@@ -281,6 +281,9 @@
     <!-- Should we filter any display modes which are unampped? -->
     <bool name="config_filterDisplayModes">false</bool>
 
+    <!-- Value for overriding outdoor capable mode for LiveDisplay tile -->
+    <bool name="config_outdoorCapable">false</bool>
+
     <!-- Defines the sysfs attribute path used by pocket bridge
         to communicate pocket state to the pocket judge kernel driver. -->
     <string name="config_pocketBridgeSysfsInpocket"></string>
