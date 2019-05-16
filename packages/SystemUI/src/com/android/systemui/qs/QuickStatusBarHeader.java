@@ -225,7 +225,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mBatteryInQS = getResources().getBoolean(R.bool.config_batteryInQSPanel);
 
         mShowEstimate = Settings.System.getIntForUser(getContext().getContentResolver(),
-                Settings.System.SHOW_BATTERY_ESTIMATE, 1, UserHandle.USER_CURRENT) == 1;
+                Settings.System.SHOW_BATTERY_ESTIMATE, 0, UserHandle.USER_CURRENT) == 1;
 
         if (!mBatteryInQS || (mBatteryInQS && !mShowEstimate)) {
             ((ViewGroup) mBatteryRemainingIcon.getParent()).removeView(mBatteryRemainingIcon);

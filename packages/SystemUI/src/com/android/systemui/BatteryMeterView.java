@@ -501,7 +501,7 @@ public class BatteryMeterView extends LinearLayout implements
 
     public void setShowEstimate() {
         mShowEstimate = Settings.System.getIntForUser(getContext().getContentResolver(),
-                Settings.System.SHOW_BATTERY_ESTIMATE, 1, UserHandle.USER_CURRENT) == 1;
+                Settings.System.SHOW_BATTERY_ESTIMATE, 0, UserHandle.USER_CURRENT) == 1;
     }
 
     private boolean alwaysShowPercentage() {
