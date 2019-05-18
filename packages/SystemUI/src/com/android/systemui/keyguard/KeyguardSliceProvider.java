@@ -26,27 +26,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.icu.text.DateFormat;
 import android.icu.text.DisplayContext;
 import android.net.Uri;
-import android.media.MediaMetadata;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.StyleSpan;
 import android.util.Log;
-import android.util.MathUtils;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.systemui.R;
-import com.android.systemui.statusbar.NotificationMediaManager;
 import com.android.systemui.statusbar.policy.NextAlarmController;
 import com.android.systemui.statusbar.policy.NextAlarmControllerImpl;
 import com.android.systemui.statusbar.policy.ZenModeController;
@@ -59,7 +51,6 @@ import java.util.concurrent.TimeUnit;
 import androidx.slice.Slice;
 import androidx.slice.SliceProvider;
 import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.ListBuilder.HeaderBuilder;
 import androidx.slice.builders.ListBuilder.RowBuilder;
 import androidx.slice.builders.SliceAction;
 
@@ -69,8 +60,7 @@ import com.android.internal.util.weather.WeatherClient;
  * Simple Slice provider that shows the current date.
  */
 public class KeyguardSliceProvider extends SliceProvider implements
-        NextAlarmController.NextAlarmChangeCallback, ZenModeController.Callback, 
-        WeatherClient.WeatherObserver, NotificationMediaManager.MediaUpdateListener {
+        NextAlarmController.NextAlarmChangeCallback, ZenModeController.Callback, WeatherClient.WeatherObserver {
 
     public static final String KEYGUARD_SLICE_URI = "content://com.android.systemui.keyguard/main";
     public static final String KEYGUARD_DATE_URI = "content://com.android.systemui.keyguard/date";
@@ -80,10 +70,6 @@ public class KeyguardSliceProvider extends SliceProvider implements
     public static final String KEYGUARD_DND_URI = "content://com.android.systemui.keyguard/dnd";
     public static final String KEYGUARD_ACTION_URI =
             "content://com.android.systemui.keyguard/action";
-    public static final String KEYGUARD_MEDIA_URI =
-            "content://com.android.systemui.keyguard/media";
-
-    private static final StyleSpan BOLD_STYLE = new StyleSpan(Typeface.BOLD);
 
     /**
      * Only show alarms that will ring within N hours.
@@ -96,7 +82,6 @@ public class KeyguardSliceProvider extends SliceProvider implements
     protected final Uri mWeatherUri;
     protected final Uri mAlarmUri;
     protected final Uri mDndUri;
-    protected final Uri mMediaUri;
     private final Date mCurrentTime = new Date();
     private final Handler mHandler;
     private final AlarmManager.OnAlarmListener mUpdateNextAlarm = this::updateNextAlarm;
@@ -110,17 +95,6 @@ public class KeyguardSliceProvider extends SliceProvider implements
     protected AlarmManager mAlarmManager;
     protected ContentResolver mContentResolver;
     private AlarmManager.AlarmClockInfo mNextAlarmInfo;
-
-    private NotificationMediaManager mMediaManager;
-    private MediaMetadata mMediaMetaData;
-    private boolean mDozing;
-    private boolean mAllowMedia;
-
-    private static KeyguardSliceProvider sInstance;
-
-    public static KeyguardSliceProvider getAttachedInstance() {
-        return sInstance;
-    }
 
     /**
      * Receiver responsible for time ticking and updating the date format.
@@ -157,25 +131,15 @@ public class KeyguardSliceProvider extends SliceProvider implements
         mWeatherUri = Uri.parse(KEYGUARD_WEATHER_URI);
         mAlarmUri = Uri.parse(KEYGUARD_NEXT_ALARM_URI);
         mDndUri = Uri.parse(KEYGUARD_DND_URI);
-        mMediaUri = Uri.parse(KEYGUARD_MEDIA_URI);
-    }
-
-    public void setMediaManager(NotificationMediaManager mediaManager) {
-        mMediaManager = mediaManager;
-        mMediaManager.addCallback(this);
     }
 
     @Override
     public Slice onBindSlice(Uri sliceUri) {
         ListBuilder builder = new ListBuilder(getContext(), mSliceUri);
-        if (needsMedia()) {
-            addMedia(builder);
-        } else {
-            builder.addRow(new RowBuilder(builder, mDateUri).setTitle(mLastText));
-            addWeather(builder);
-            addNextAlarm(builder);
-            addZenMode(builder);
-        }
+        builder.addRow(new RowBuilder(builder, mDateUri).setTitle(mLastText));
+        addWeather(builder);
+        addNextAlarm(builder);
+        addZenMode(builder);
         addPrimaryAction(builder);
         return builder.build();
     }
@@ -286,42 +250,6 @@ public class KeyguardSliceProvider extends SliceProvider implements
         }
     }
 
-    protected boolean needsMedia() {
-        return mMediaMetaData != null && mDozing && mAllowMedia;
-    }
-
-    protected void addMedia(ListBuilder builder) {
-        if (mMediaMetaData != null) {
-            SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
-            CharSequence title = mMediaMetaData.getText("android.media.metadata.TITLE");
-            if (TextUtils.isEmpty(title)) {
-                title = getContext().getResources().getString(R.string.music_controls_no_title);
-            }
-            stringBuilder.append(title);
-            stringBuilder.setSpan(BOLD_STYLE, 0, title.length(), Spanned.SPAN_MARK_MARK);
-            CharSequence artist = mMediaMetaData.getText("android.media.metadata.ARTIST");
-            if (!TextUtils.isEmpty(artist)) {
-                stringBuilder.append("  ").append(artist);
-            }
-            RowBuilder rowBuilder = new RowBuilder(builder, mMediaUri);
-            rowBuilder.setTitle(stringBuilder);
-            Icon mediaIcon = mMediaManager != null ? mMediaManager.getMediaIcon() : null;
-            if (mediaIcon != null) {
-                rowBuilder.addEndItem(mediaIcon);
-            }
-            builder.addRow(rowBuilder);
-        }
-    }
-
-    @Override
-    public void onMediaUpdated(boolean playing) {
-        mMediaMetaData = mMediaManager.getMediaMetadata();
-        mContentResolver.notifyChange(mSliceUri, null /* observer */);
-    }
-
-    @Override
-    public void setPulseColors(boolean isColorizedMEdia, int[] colors) {}
-
     @Override
     public boolean onCreateSliceProvider() {
         mAlarmManager = getContext().getSystemService(AlarmManager.class);
@@ -336,7 +264,6 @@ public class KeyguardSliceProvider extends SliceProvider implements
         mWeatherClient = new WeatherClient(getContext());
         mWeatherClient.addObserver(this, false /*withQuery*/);
         mDatePattern = getContext().getString(R.string.system_ui_aod_date_pattern);
-        sInstance = this;
         registerClockUpdate();
         updateClock();
         return true;
@@ -433,21 +360,5 @@ public class KeyguardSliceProvider extends SliceProvider implements
                     mUpdateNextAlarm, mHandler);
         }
         updateNextAlarm();
-    }
-
-    public void setDozing(boolean dozing) {
-        boolean needsMedia = needsMedia();
-        mDozing = dozing;
-        if (needsMedia != needsMedia()) {
-            mContentResolver.notifyChange(mSliceUri, null /* observer */);
-        }
-    }
-
-    public void setAllowMedia(boolean allow) {
-        boolean needsMedia = needsMedia();
-        mAllowMedia = allow;
-        if (needsMedia != needsMedia()) {
-            mContentResolver.notifyChange(mSliceUri, null /* observer */);
-        }
     }
 }
