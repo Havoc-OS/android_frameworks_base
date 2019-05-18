@@ -688,6 +688,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private boolean mPocketJudgeAllowFP;
 
+    private BitmapDrawable altDrawable;
+
     private BroadcastReceiver mWallpaperChangedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -701,6 +703,13 @@ public class StatusBar extends SystemUI implements DemoMode,
 
             mStatusBarWindowManager.setWallpaperSupportsAmbientMode(mWallpaperSupportsAmbientMode);
             mScrimController.setWallpaperSupportsAmbientMode(mWallpaperSupportsAmbientMode);
+
+            ParcelFileDescriptor pfd = wallpaperManager.getWallpaperFile(WallpaperManager.FLAG_SYSTEM);
+            if (pfd != null) {
+                Bitmap sysWallpaper = BitmapFactory.decodeFileDescriptor(pfd.getFileDescriptor());
+                altDrawable = new BitmapDrawable(mBackdropBack.getResources(), sysWallpaper);
+            }
+
         }
     };
 
@@ -1998,10 +2007,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         Drawable artworkDrawable = null;
 
-        boolean isMediaPlaying = mMediaManager.isMediaPlaying();
-
         if (mediaMetadata != null && (Settings.System.getIntForUser(mContext.getContentResolver(),
-            Settings.System.LOCKSCREEN_MEDIA_METADATA, 1, UserHandle.USER_CURRENT) == 1) && isMediaPlaying) {
+            Settings.System.LOCKSCREEN_MEDIA_METADATA, 1, UserHandle.USER_CURRENT) == 1)) {
             Bitmap artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
             if (artworkBitmap == null) {
                 artworkBitmap = mediaMetadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
@@ -2030,32 +2037,18 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
 
         boolean allowWhenShade = false;
+        BitmapDrawable lockDrawable = null;
+
         if (ENABLE_LOCKSCREEN_WALLPAPER && artworkDrawable == null) {
             Bitmap lockWallpaper = mLockscreenWallpaper.getBitmap();
             if (lockWallpaper != null) {
-                if (isMediaPlaying)
-                    artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), lockWallpaper);
-                else
-                    artworkDrawable = new LockscreenWallpaper.WallpaperDrawable(
+                artworkDrawable = new LockscreenWallpaper.WallpaperDrawable(
                         mBackdropBack.getResources(), lockWallpaper);
+                lockDrawable = new BitmapDrawable(mBackdropBack.getResources(), lockWallpaper);
                 // We're in the SHADE mode on the SIM screen - yet we still need to show
                 // the lockscreen wallpaper in that mode.
                 allowWhenShade = mStatusBarKeyguardViewManager != null
                         && mStatusBarKeyguardViewManager.isShowing();
-            }
-        }
-
-        if (artworkDrawable == null && isMediaPlaying) {
-            //Get wallpaper as bitmap
-            WallpaperManager manager = WallpaperManager.getInstance(mContext);
-            ParcelFileDescriptor pfd = manager.getWallpaperFile(WallpaperManager.FLAG_LOCK);
-
-            //Sometimes lock wallpaper maybe null as getWallpaperFile doesnt return builtin wallpaper
-            if (pfd == null)
-                pfd = manager.getWallpaperFile(WallpaperManager.FLAG_SYSTEM);
-            if (pfd != null) {
-                Bitmap lockWallpaper = BitmapFactory.decodeFileDescriptor(pfd.getFileDescriptor());
-                artworkDrawable = new BitmapDrawable(mBackdropBack.getResources(), lockWallpaper);
             }
         }
 
@@ -2070,11 +2063,11 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         if (mVisualizerView != null) {
             if (hasArtwork && artworkDrawable instanceof BitmapDrawable) {
-                // always use current backdrop to color eq
                 mVisualizerView.setBitmap(((BitmapDrawable)artworkDrawable).getBitmap());
-            } else {
-                // clear the color
-                mVisualizerView.setBitmap(null);
+            } else if (lockDrawable != null) {
+                mVisualizerView.setBitmap(((BitmapDrawable)lockDrawable).getBitmap());
+            } else if (altDrawable != null) {
+                mVisualizerView.setBitmap(((BitmapDrawable)altDrawable).getBitmap());
             }
         }
 
