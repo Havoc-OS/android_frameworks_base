@@ -112,13 +112,15 @@ public class VisualizerView extends View
             }
 
             try {
-                mVisualizer = new Visualizer(0);
+                if (mVisualizer == null) {
+                    mVisualizer = new Visualizer(0);
+                    shouldAnimate = true;
+                }
             } catch (Exception e) {
                 Log.e(TAG, "error initializing visualizer", e);
                 return;
             }
 
-            shouldAnimate = true;
             mVisualizer.setEnabled(false);
             mVisualizer.setCaptureSize(66);
             mVisualizer.setDataCaptureListener(mVisualizerListener,Visualizer.getMaxCaptureRate(),
@@ -152,6 +154,14 @@ public class VisualizerView extends View
             }
             shouldAnimate = false;
 
+            if (!mAutoColorEnabled && !mLavaLampEnabled) {
+                if (mCurrentBitmap != null) {
+                    setBitmap(null);
+                } else {
+                    setColor(Color.TRANSPARENT);
+                }
+            }
+
             if (DEBUG) {
                 Log.w(TAG, "--- mUninkVisualizer run()");
             }
@@ -166,8 +176,6 @@ public class VisualizerView extends View
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-
-        setColor(mColor);
 
         mFFTPoints = new float[mUnits * 4];
 
@@ -284,7 +292,6 @@ public class VisualizerView extends View
 
     @Override
     public void onStopAnimation(ColorAnimator colorAnimator, int lastColor) {
-        setBitmap(null);
     }
 
     private void setVisualizerEnabled() {
@@ -313,8 +320,10 @@ public class VisualizerView extends View
                 Settings.Secure.LOCKSCREEN_VISUALIZER_AUTOCOLOR, 1, UserHandle.USER_CURRENT) == 1;
         if (mCurrentBitmap != null && mAutoColorEnabled && !mLavaLampEnabled) {
             Palette.generateAsync(mCurrentBitmap, this);
-        } else {
+        } else if (mCurrentBitmap != null) {
             setBitmap(null);
+        } else {
+            setColor(Color.TRANSPARENT);
         }
     }
 
