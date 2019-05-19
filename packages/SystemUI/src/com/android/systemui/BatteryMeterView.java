@@ -292,7 +292,7 @@ public class BatteryMeterView extends LinearLayout implements
 
     private void updatePercentText() {
         if (mBatteryController != null && mBatteryPercentView != null) {
-            if (!mShowEstimate || mCharging) {
+            if (!mShowEstimate || !misQsbHeader || mCharging) {
                 setPercentTextAtCurrentLevel();
             } else {
                 mBatteryController.getEstimatedTimeRemainingString(this::onEstimateFetchComplete);
