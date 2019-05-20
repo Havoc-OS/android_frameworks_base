@@ -397,4 +397,9 @@
   <java-symbol type="id" name="notification_media_progress_time" />
   <java-symbol type="id" name="notification_media_elapsed_time" />
   <java-symbol type="id" name="notification_media_total_time" />
+
+  <!-- Smart charge sysfs node and value for suspend/resume charging-->
+  <java-symbol type="string" name="config_SmartChargingSysfsNode" />
+  <java-symbol type="string" name="config_SmartChargingSupspendValue" />
+  <java-symbol type="string" name="config_SmartChargingResumeValue" />
 </resources>
