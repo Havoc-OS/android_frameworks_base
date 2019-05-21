@@ -62,6 +62,7 @@
     </string-array>
 
     <string-array translatable="true" name="UnitsStringH">
+        <item>Doze</item>
         <item>Uma</item>
         <item>Duas</item>
         <item>Três</item>
