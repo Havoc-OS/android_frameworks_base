@@ -144,5 +144,4 @@
     <!-- Custom text clock -->
     <dimen name="customtextclock_fontsize">40dp</dimen>
     <dimen name="custom_clock_left_padding">64dp</dimen>
-    <dimen name="custom_clock_top_margin">72dp</dimen>
 </resources>

@@ -72,7 +72,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/custom_clock_left_padding"
-                android:layout_marginTop="@dimen/custom_clock_top_margin"
                 android:layout_alignParentTop="true"
                 android:orientation="vertical" >
 
