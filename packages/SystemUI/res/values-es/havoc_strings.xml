@@ -275,4 +275,32 @@
     <string name="google_camera_app_package_name">com.google.android.GoogleCamera</string>
     <!-- OneHand mode QS tile -->
     <string name="qs_onehand_label">Modo a una mano</string>
+    <!-- Screen pinning dialog description. (for devices without navbar) -->
+    <string name="screen_pinning_description_no_navbar">Esto la mantiene visible hasta que la dejes de fijar. Toca y mantén presionado Atrás para dejar de fijar.</string>
+    <!-- Notify use that they are in Lock-to-app (for devices without navbar)-->
+    <string name="screen_pinning_toast_no_navbar">Para dejar de fijar esta pantalla, toca y mantén presionado Atrás</string>
+    <!-- Location Tile -->
+    <string name="accessibility_quick_settings_location_battery_saving">Ubicación: modo de ahorro de batería.</string>
+    <string name="accessibility_quick_settings_location_gps_only">Ubicación: modo de únicamente sensores.</string>
+    <string name="accessibility_quick_settings_location_high_accuracy">Ubicación: modo de alta precisión.</string>
+    <string name="quick_settings_location_battery_saving_label">Ahorro de batería</string>
+    <string name="quick_settings_location_battery_saving_label_twoline">Ahorro de\nbatería</string>
+    <string name="quick_settings_location_gps_only_label">Solo GPS</string>
+    <string name="quick_settings_location_gps_only_label_twoline">Solo GPS</string>
+    <string name="quick_settings_location_high_accuracy_label">Alta precisión</string>
+    <string name="quick_settings_location_high_accuracy_label_twoline">Alta\nprecisión</string>
+    <string name="quick_settings_location_detail_title">Ubicación</string>
+    <string name="quick_settings_location_detail_menu_title">Seleccionar modo:</string>
+    <string name="quick_settings_location_detail_mode_high_accuracy_title">Alta precisión</string>
+    <string name="quick_settings_location_detail_mode_battery_saving_title">Ahorro de batería</string>
+    <string name="quick_settings_location_detail_mode_sensors_only_title">Solo dispositivo</string>
+    <string name="quick_settings_location_detail_mode_high_accuracy_description">Usar GPS, Wi\u2011Fi, Bluetooth, o redes móviles para determinar la ubicación </string>
+    <string name="quick_settings_location_detail_mode_battery_saving_description">Usar Wi\u2011Fi, Bluetooth, o redes móviles para determinar la ubicación</string>
+    <string name="quick_settings_location_detail_mode_sensors_only_description">Usar GPS para determinar la ubicación</string>
+    <!-- Reader mode QS tile -->
+    <string name="quick_settings_reading_mode">Modo de lectura</string>
+    <string name="accessibility_quick_settings_reading_mode_on">Modo de lectura activo.</string>
+    <string name="accessibility_quick_settings_reading_mode_off">Modo de lectura inactivo.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_on">Modo de lectura activado.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_off">Modo de lectura desactivado.</string>
 </resources>
