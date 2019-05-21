@@ -55,8 +55,8 @@
     <string name="global_action_restart_advanced">Reinicio avanzado</string>
     <string name="global_action_restart_recovery">Reiniciar en modo recuperación (recovery)</string>
     <string name="global_action_restart_bootloader">Gestor de arranque (bootloader)</string>
-    <string name="global_action_restart_ui">System UI</string>
-    <string name="global_action_restart_hot">Popular</string>
+    <string name="global_action_restart_ui">IU del sistema</string>
+    <string name="global_action_restart_hot">Rápido</string>
     <string name="global_action_screenshot">Captura de pantalla</string>
     <!-- LTE QS Tile -->
     <string name="qs_lte_label">LTE</string>
@@ -70,10 +70,10 @@
     <!-- AOD QS tile -->
     <string name="quick_settings_aod_label">AOD</string>
     <!-- Caffeine tile -->
-    <string name="quick_settings_caffeine_label">Caffeine</string>
+    <string name="quick_settings_caffeine_label">Cafeína</string>
     <string name="quick_settings_caffeine_label_off">Desactivado</string>
-    <string name="accessibility_quick_settings_caffeine_off">Caffeine</string>
-    <string name="accessibility_quick_settings_caffeine_on">Caffeine</string>
+    <string name="accessibility_quick_settings_caffeine_off">Cafeína</string>
+    <string name="accessibility_quick_settings_caffeine_on">Cafeína</string>
     <!-- On The Go -->
     <string name="onthego_notif_ticker">On-The-Go activado</string>
     <string name="onthego_notif_title">On-The-Go está activo</string>
