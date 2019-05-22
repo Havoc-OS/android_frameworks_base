@@ -229,7 +229,7 @@
     <string name="force_stop_dlg_text">Forcer l\'arrêt d\'une application peut provoquer son dysfonctionnement.</string>
     <string name="dlg_ok">@android:string/ok</string>
     <string name="dlg_cancel">@android:string/cancel</string>
-    <string name="kill">Arrêter l’application</string>
+    <string name="kill">Arrêter l\’application</string>
     <!--Google sound search tile -->
     <string name="quick_settings_sound_search">Recherche de son</string>
     <!-- QS Config -->
@@ -241,38 +241,38 @@
     <string name="qs_menu_item_columns_six">6</string>
     <string name="qs_menu_item_columns_seven">7</string>
     <string name="qs_menu_item_columns_eight">8</string>
-    <string name="qs_menu_item_reset">Reset</string>
-    <string name="qs_menu_item_titles">Show labels</string>
-    <string name="qs_menu_item_rows">Rows</string>
-    <string name="qs_menu_item_rows_landscape">Rows (Landscape)</string>
+    <string name="qs_menu_item_reset">Réinitialiser</string>
+    <string name="qs_menu_item_titles">Afficher libellé</string>
+    <string name="qs_menu_item_rows">Lignes</string>
+    <string name="qs_menu_item_rows_landscape">Lignes (Paysage)</string>
     <string name="qs_menu_item_rows_one">1</string>
     <string name="qs_menu_item_rows_two">2</string>
     <string name="qs_menu_item_rows_three">3</string>
     <string name="qs_menu_item_rows_four">4</string>
     <string name="qs_menu_item_rows_five">5</string>
     <string name="qs_menu_item_rows_six">6</string>
-    <string name="qs_menu_item_qs_columns">Columns (Quickbar)</string>
-    <string name="qs_menu_item_columns_auto">Automatic</string>
+    <string name="qs_menu_item_qs_columns">Colonnes (Quickbar)</string>
+    <string name="qs_menu_item_columns_auto">Automatique</string>
     <!-- Ambient Display Pixel-Like string -->
-    <string name="ambientmusic_songinfo">%s by %s</string>
+    <string name="ambientmusic_songinfo">%s par %s</string>
     <!-- App Picker Tile -->
-    <string name="quick_settings_apppicker">App Picker</string>
+    <string name="quick_settings_apppicker">Sélect. App.</string>
     <!-- Pie controls -->
     <string name="pie_date_format">EEEE, dd MMMM yyyy</string>
     <string name="pie_hour_format_12">hh:mm</string>
     <string name="pie_hour_format_24">HH:mm</string>
     <string name="pie_am_pm">a</string>
-    <string name="pie_state_name">Pie Control</string>
-    <string name="pie_state_summary">Use pie controls while in immersive mode</string>
-    <string name="pie_battery_level">"BATTERY LEVEL "</string>
-    <string name="quick_settings_pie">Pie Control</string>
+    <string name="pie_state_name">Contrôles Pie</string>
+    <string name="pie_state_summary">Utiliser les contrôles Pie en mode immersif</string>
+    <string name="pie_battery_level">"NIVEAU DE BATTERIE"</string>
+    <string name="quick_settings_pie">Contrôles Pie</string>
     <string-array name="nav_bar_layouts_new">
-        <item>Normal</item>
-        <item>Compact</item>
+        <item>Normale</item>
+        <item>Compacte</item>
     </string-array>
     <!-- Elmyra -->
     <string name="elmyra_raw_sensor_string_type">com.google.sensor.elmyra.raw</string>
     <string name="google_camera_app_package_name">com.google.android.GoogleCamera</string>
     <!-- OneHand mode QS tile -->
-    <string name="qs_onehand_label">One Handed mode</string>
+    <string name="qs_onehand_label">Mode une main</string>
 </resources>
