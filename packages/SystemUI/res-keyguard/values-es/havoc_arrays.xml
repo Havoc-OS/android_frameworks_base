@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources>
+
+    <string-array translatable="true" name="TensString">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>Treinta</item>
+        <item>Cuarenta</item>
+        <item>Cincuenta</item>
+        <item>Sesenta</item>
+    </string-array>
+
+    <string-array translatable="true" name="UnitsString">
+        <item></item>
+        <item>Y una</item>
+        <item>Y dos</item>
+        <item>Y tres</item>
+        <item>Y cuatro</item>
+        <item>Y cinco</item>
+        <item>Y seis</item>
+        <item>Y siete</item>
+        <item>Y ocho</item>
+        <item>Y nueve</item>
+        <item>Y diez</item>
+        <item>Y once</item>
+        <item>Y doce</item>
+        <item>Y trece</item>
+        <item>Y catorce</item>
+        <item>Y cuarto</item>
+        <item>Y dieciseis</item>
+        <item>Y diecisiete</item>
+        <item>Y dieciocho</item>
+        <item>Y diecinueve</item>
+        <item>Y veinte</item>
+        <item>Y veintiuno</item>
+        <item>Y veintidós</item>
+        <item>Y veintitrés</item>
+        <item>Y veinticuatro</item>
+        <item>Y veinticinco</item>
+        <item>Y veintiseis</item>
+        <item>Y veintisiete</item>
+        <item>Y veintiocho</item>
+        <item>Y veintinueve</item>
+    </string-array>
+
+    <string-array translatable="true" name="TensStringH">
+        <item></item>
+        <item></item>
+        <item>Y veinte</item>
+        <item>Y media</item>
+        <item>Y cuarenta</item>
+        <item>Y cincuenta</item>
+        <item>Y sesenta</item>
+    </string-array>
+
+    <string-array translatable="true" name="UnitsStringH">
+        <item>Las doce</item>
+        <item>La una</item>
+        <item>Las dos</item>
+        <item>Las tres</item>
+        <item>Las cuatro</item>
+        <item>Las cinco</item>
+        <item>Las seis</item>
+        <item>Las siete</item>
+        <item>Las ocho</item>
+        <item>Las nueve</item>
+        <item>Las diez</item>
+        <item>Las once</item>
+        <item>Las doce</item>
+        <item>Las trece</item>
+        <item>Las catorce</item>
+        <item>Las quince</item>
+        <item>Las dieciseis</item>
+        <item>Las diecisiete</item>
+        <item>Las dieciocho</item>
+        <item>Las diecinueve</item>
+        <item>Las veinte</item>
+        <item>Las veintidós</item>
+        <item>Las veintitrés</item>
+    </string-array>
+
+</resources>
