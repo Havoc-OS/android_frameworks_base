@@ -39,8 +39,8 @@
     <string name="quick_settings_screenrecord_lq_label">480p</string>
     <string name="quick_settings_screenrecord_mq_label">720p</string>
     <string name="quick_settings_screenrecord_hq_label">1080p</string>
-    <string name="screenrecord_hide_hint">Ocultar sugerencia</string>
-    <string name="screenrecord_show_hint">Mostrar sugerencia</string>
+    <string name="screenrecord_hide_hint">Ocultar recordatorio</string>
+    <string name="screenrecord_show_hint">Mostrar recordatorio</string>
     <string name="status_bar_vpn">VPN</string>
     <string name="status_bar_roaming">Itinerancia (roaming)</string>
     <string name="status_bar_data_saver">Ahorro de datos</string>
@@ -64,16 +64,16 @@
     <string name="lte_off">LTE</string>
     <!-- Sound QS Tile -->
     <string name="quick_settings_sound_label">Sonido</string>
-    <string name="quick_settings_sound_ring">Anillo</string>
+    <string name="quick_settings_sound_ring">Sonar</string>
     <string name="quick_settings_sound_vibrate">Vibrar</string>
     <string name="quick_settings_sound_dnd">Modo no molestar</string>
     <!-- AOD QS tile -->
     <string name="quick_settings_aod_label">AOD</string>
     <!-- Caffeine tile -->
-    <string name="quick_settings_caffeine_label">Caffeine</string>
+    <string name="quick_settings_caffeine_label">Cafeína</string>
     <string name="quick_settings_caffeine_label_off">Desactivado</string>
-    <string name="accessibility_quick_settings_caffeine_off">Caffeine</string>
-    <string name="accessibility_quick_settings_caffeine_on">Caffeine</string>
+    <string name="accessibility_quick_settings_caffeine_off">Cafeína</string>
+    <string name="accessibility_quick_settings_caffeine_on">Cafeína</string>
     <!-- On The Go -->
     <string name="onthego_notif_ticker">On-The-Go activado</string>
     <string name="onthego_notif_title">On-The-Go está activo</string>
@@ -155,7 +155,7 @@
     <string name="quick_settings_location_secondary_high_accuracy">Alta precisión</string>
     <string name="accessibility_quick_settings_location_high_accuracy">Ubicación: alta precisión.</string>
     <!-- USB tethering QS tile -->
-    <string name="quick_settings_usb_tether_label">USB tethering</string>
+    <string name="quick_settings_usb_tether_label">Tethering USB</string>
     <!-- Havoc Tile -->
     <string name="quick_settings_havoc_label">Ajustes de Havoc</string>
     <string name="quick_settings_reboot_label">Reiniciar</string>
@@ -234,7 +234,7 @@
     <string name="quick_settings_sound_search">Búsqueda por sonido</string>
     <!-- QS Config -->
     <string name="qs_menu_item_columns">Columnas</string>
-    <string name="qs_menu_item_columns_landscape">Columnas (horizontal)</string>
+    <string name="qs_menu_item_columns_landscape">Columnas (apaisado)</string>
     <string name="qs_menu_item_columns_three">3</string>
     <string name="qs_menu_item_columns_four">4</string>
     <string name="qs_menu_item_columns_five">5</string>
@@ -244,7 +244,7 @@
     <string name="qs_menu_item_reset">Restablecer</string>
     <string name="qs_menu_item_titles">Mostrar etiquetas</string>
     <string name="qs_menu_item_rows">Filas</string>
-    <string name="qs_menu_item_rows_landscape">Filas (horizontal)</string>
+    <string name="qs_menu_item_rows_landscape">Filas (apaisado)</string>
     <string name="qs_menu_item_rows_one">1</string>
     <string name="qs_menu_item_rows_two">2</string>
     <string name="qs_menu_item_rows_three">3</string>
