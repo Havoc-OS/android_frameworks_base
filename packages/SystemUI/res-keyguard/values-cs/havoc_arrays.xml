@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Dvanáct</item>
+        <item>Jedna</item>
+        <item>Dvě</item>
+        <item>Tři</item>
+        <item>Čtyři</item>
+        <item>Pět</item>
+        <item>Šest</item>
+        <item>Sedm</item>
+        <item>Osm</item>
+        <item>Devět</item>
+        <item>Deset</item>
+        <item>Jedenáct</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item />
+        <item>Jedna</item>
+        <item>Dvě</item>
+        <item>Tři</item>
+        <item>Čtyři</item>
+        <item>Pět</item>
+        <item>Šest</item>
+        <item>Sedm</item>
+        <item>Osm</item>
+        <item>Devět</item>
+        <item>Deset</item>
+        <item>Jedenáct</item>
+        <item>Dvanáct</item>
+        <item>Třináct</item>
+        <item>Čtrnáct</item>
+        <item>Patnáct</item>
+        <item>Šestnáct</item>
+        <item>Sedmnáct</item>
+        <item>Osmnáct</item>
+        <item>Devatenáct</item>
+        <item>Dvacet</item>
+        <item>Dvacet
+jedna</item>
+        <item>Dvacet
+dva</item>
+        <item>Dvacet
+tři</item>
+        <item>Dvacet
+čtyři</item>
+        <item>Dvacet
+pět</item>
+        <item>Dvacet
+šest</item>
+        <item>Dvacet
+sedm</item>
+        <item>Dvacet
+osm</item>
+        <item>Dvacet
+devět</item>
+        <item>Třicet</item>
+        <item>Třicet
+jedna</item>
+        <item>Třicet
+dva</item>
+        <item>Třicet
+tři</item>
+        <item>Třicet
+čtyři</item>
+        <item>Třicet
+pět</item>
+        <item>Třicet
+šest</item>
+        <item>Třicet
+sedm</item>
+        <item>Třicet
+osm</item>
+        <item>Třicet
+devět</item>
+        <item>Čtyřicet</item>
+        <item>Čtyřicet
+jedna</item>
+        <item>Čtyřicet
+dva</item>
+        <item>Čtyřicet
+tři</item>
+        <item>Čtyřicet
+čtyři</item>
+        <item>Čtyřicet
+pět</item>
+        <item>Čtyřicet
+šest</item>
+        <item>Čtyřicet
+sedm</item>
+        <item>Čtyřicet
+osm</item>
+        <item>Čtyřicet
+devět</item>
+        <item>Padesát</item>
+        <item>Padesát
+jedna</item>
+        <item>Padesát
+dva</item>
+        <item>Padesát
+tři</item>
+        <item>Padesát
+čtyři</item>
+        <item>Padesát
+pět</item>
+        <item>Padesát
+šest</item>
+        <item>Padesát
+sedm</item>
+        <item>Padesát
+osm</item>
+        <item>Padesát
+devět</item>
+    </string-array>
+</resources>

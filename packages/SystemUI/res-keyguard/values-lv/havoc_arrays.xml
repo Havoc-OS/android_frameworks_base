@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Divpadsmit</item>
+        <item>Viens</item>
+        <item>Divi</item>
+        <item>Trīs</item>
+        <item>Četri</item>
+        <item>Pieci</item>
+        <item>Seši</item>
+        <item>Septiņi</item>
+        <item>Astoņi</item>
+        <item>Deviņi</item>
+        <item>Desmit</item>
+        <item>Vienpadsmit</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Nulle, nulle</item>
+        <item>Viena</item>
+        <item>Divas</item>
+        <item>Trīs</item>
+        <item>Četras</item>
+        <item>Piecas</item>
+        <item>Sešas</item>
+        <item>Septiņas</item>
+        <item>Astoņas</item>
+        <item>Deviņas</item>
+        <item>Desmit</item>
+        <item>Vienpadsmit</item>
+        <item>Divpadsmit</item>
+        <item>Trīspadsmit</item>
+        <item>Četrpadsmit</item>
+        <item>Piecpadsmit</item>
+        <item>Sešdpadsmit</item>
+        <item>Septiņpadsmit</item>
+        <item>Astoņpadsmit</item>
+        <item>Deviņpadsmit</item>
+        <item>Divdesmit</item>
+        <item>Divdesmit
+viena</item>
+        <item>Divdesmit
+divas</item>
+        <item>Divdesmit
+trīs</item>
+        <item>Divdesmit
+četras</item>
+        <item>Divdesmit
+piecas</item>
+        <item>Divdesmit
+sešas</item>
+        <item>Divdesmit
+septiņas</item>
+        <item>Divdesmit
+astoņas</item>
+        <item>Divdesmit
+deviņas</item>
+        <item>Trīsdesmit</item>
+        <item>Trīsdesmit
+viena</item>
+        <item>Trīsdesmit
+divas</item>
+        <item>Trīsdesmit
+trīs</item>
+        <item>Trīsdesmit
+četras</item>
+        <item>Trīsdesmit
+piecas</item>
+        <item>Trīsdesmit
+sešas</item>
+        <item>Trīsdesmit
+septiņas</item>
+        <item>Trīsdesmit
+astoņas</item>
+        <item>Trīsdesmit
+deviņas</item>
+        <item>Četrdesmit</item>
+        <item>Četrdesmit
+viena</item>
+        <item>Četrdesmit
+divas</item>
+        <item>Četrdesmit
+trīs</item>
+        <item>Četrdesmit
+četras</item>
+        <item>Četrdesmit
+piecas</item>
+        <item>Četrdesmit
+sešas</item>
+        <item>Četrdesmit
+septiņas</item>
+        <item>Četrdesmit
+astoņas</item>
+        <item>Četrdesmit
+deviņas</item>
+        <item>Piecdesmit</item>
+        <item>Piecdesmit
+viena</item>
+        <item>Piecdesmit
+divas</item>
+        <item>Piecdesmit
+trīs</item>
+        <item>Piecdesmit
+četras</item>
+        <item>Piecdesmit
+piecas</item>
+        <item>Piecdesmit
+sešas</item>
+        <item>Piecdesmit
+septiņas</item>
+        <item>Piecdesmit
+astoņas</item>
+        <item>Piecdesmit
+deviņas</item>
+    </string-array>
+</resources>

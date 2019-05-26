@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>बारह</item>
+        <item>एक</item>
+        <item>दो</item>
+        <item>तीन</item>
+        <item>चार</item>
+        <item>पाँच</item>
+        <item>छह</item>
+        <item>सात</item>
+        <item>आठ</item>
+        <item>नौ</item>
+        <item>दस</item>
+        <item>ग्यारह</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>बजे</item>
+        <item>एक</item>
+        <item>दो</item>
+        <item>तीन</item>
+        <item>चार</item>
+        <item>पाँच</item>
+        <item>छह</item>
+        <item>सात</item>
+        <item>आठ</item>
+        <item>नौ</item>
+        <item>दस</item>
+        <item>ग्यारह</item>
+        <item>बारह</item>
+        <item>तेरह</item>
+        <item>चौदह</item>
+        <item>पंद्रह</item>
+        <item>सोलह</item>
+        <item>सत्रह</item>
+        <item>अठारह</item>
+        <item>उन्नीस</item>
+        <item>बीस</item>
+        <item>इक्कीस
+</item>
+        <item>बाईस
+</item>
+        <item>तेईस
+</item>
+        <item>चौबीस
+</item>
+        <item>पच्चीस
+</item>
+        <item>छब्बीस
+</item>
+        <item>सत्ताईस
+</item>
+        <item>अट्ठाइस
+</item>
+        <item>उनतीस
+</item>
+        <item>तीस</item>
+        <item>इकत्तीस
+</item>
+        <item>बत्तीस
+</item>
+        <item>तैंतीस
+</item>
+        <item>चौंतीस
+</item>
+        <item>पैंतीस
+</item>
+        <item>छत्तीस
+</item>
+        <item>सैंतीस
+</item>
+        <item>अड़तीस
+</item>
+        <item>उनतालीस
+</item>
+        <item>चालीस</item>
+        <item>इकतालीस
+</item>
+        <item>बयालीस
+</item>
+        <item>तैंतालीस
+</item>
+        <item>चवालीस
+</item>
+        <item>पैंतालीस
+</item>
+        <item>छियालीस
+</item>
+        <item>सैंतालीस
+</item>
+        <item>अड़तालीस
+</item>
+        <item>उनचास
+</item>
+        <item>पचास</item>
+        <item>इक्यावन
+</item>
+        <item>बावन
+</item>
+        <item>तिरेपन
+</item>
+        <item>चौवन
+</item>
+        <item>पचपन
+</item>
+        <item>छप्पन
+</item>
+        <item>सत्तावन
+</item>
+        <item>अट्ठावन
+</item>
+        <item>उनसठ
+</item>
+    </string-array>
+</resources>

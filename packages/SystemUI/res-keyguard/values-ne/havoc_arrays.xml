@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>बाह्र</item>
+        <item>एक</item>
+        <item>दुई</item>
+        <item>तीन</item>
+        <item>चार</item>
+        <item>पाँच</item>
+        <item>छ</item>
+        <item>सात</item>
+        <item>आठ</item>
+        <item>नौ</item>
+        <item>दस</item>
+        <item>एघार</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>बज्यो</item>
+        <item>एक</item>
+        <item>दुई</item>
+        <item>तीन</item>
+        <item>चार</item>
+        <item>पाँच</item>
+        <item>छ</item>
+        <item>सात</item>
+        <item>आठ</item>
+        <item>नौ</item>
+        <item>दस</item>
+        <item>एघार</item>
+        <item>बाह्र</item>
+        <item>तेह्र</item>
+        <item>चौध</item>
+        <item>पन्ध्र</item>
+        <item>सोह्र</item>
+        <item>सत्र</item>
+        <item>अठार</item>
+        <item>उन्नाइस</item>
+        <item>बिस</item>
+        <item>एक्काइस
+</item>
+        <item>बाइस
+</item>
+        <item>तेइस
+</item>
+        <item>चौबिस
+</item>
+        <item>पच्चिस
+</item>
+        <item>छब्बिस
+</item>
+        <item>सत्ताइस
+</item>
+        <item>अट्ठाइस
+</item>
+        <item>उनन्तिस
+</item>
+        <item>तिस</item>
+        <item>एकतिस
+</item>
+        <item>बत्तिस
+</item>
+        <item>तेत्तिस
+</item>
+        <item>चौतिस
+</item>
+        <item>पैँतिस
+</item>
+        <item>छत्तिस
+</item>
+        <item>सैँतिस
+</item>
+        <item>अड्तिस
+</item>
+        <item>उनन्चालिस
+</item>
+        <item>चालिस</item>
+        <item>एकचालिस
+</item>
+        <item>बयालिस
+</item>
+        <item>त्रिचालिस
+</item>
+        <item>चवालिस
+</item>
+        <item>पैँतालिस
+</item>
+        <item>छयालिस
+</item>
+        <item>सड्चालिस
+</item>
+        <item>अड्चालिस
+</item>
+        <item>उनन्चास
+</item>
+        <item>पचास</item>
+        <item>एकाउन्न
+</item>
+        <item>बाउन्न
+</item>
+        <item>त्रिपन्न
+</item>
+        <item>चवन्न
+</item>
+        <item>पचपन्न
+</item>
+        <item>छपन्न
+</item>
+        <item>सन्ताउन्न
+</item>
+        <item>अन्ठाउन्न
+</item>
+        <item>उनन्साठी
+</item>
+    </string-array>
+</resources>

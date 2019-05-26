@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>বাৰ</item>
+        <item>এক</item>
+        <item>দুই</item>
+        <item>তিনি</item>
+        <item>চাৰি</item>
+        <item>পাঁচ</item>
+        <item>ছয়</item>
+        <item>সাত</item>
+        <item>আঠ</item>
+        <item>ন</item>
+        <item>দহ</item>
+        <item>এঘাৰ</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>বাজিছে</item>
+        <item>এক</item>
+        <item>দুই</item>
+        <item>তিনি</item>
+        <item>চাৰি</item>
+        <item>পাঁচ</item>
+        <item>ছয়</item>
+        <item>সাত</item>
+        <item>আঠ</item>
+        <item>ন</item>
+        <item>দহ</item>
+        <item>এঘাৰ</item>
+        <item>বাৰ</item>
+        <item>তেৰ</item>
+        <item>চৈধ্য</item>
+        <item>পোন্ধৰ</item>
+        <item>ষোল্ল</item>
+        <item>সোতৰ</item>
+        <item>ওঠৰ</item>
+        <item>ঊনৈছ</item>
+        <item>বিছ</item>
+        <item>একৈছ
+</item>
+        <item>বাইছ
+</item>
+        <item>তেইছ
+</item>
+        <item>চৌবিছ
+</item>
+        <item>পঁচিছ
+</item>
+        <item>ছাব্বিছ
+</item>
+        <item>সাতাইছ
+</item>
+        <item>আঠাইছ
+</item>
+        <item>ঊনত্ৰিছ
+</item>
+        <item>ত্ৰিছ</item>
+        <item>একত্ৰিছ
+</item>
+        <item>বত্ৰিছ
+</item>
+        <item>তেত্ৰিছ
+</item>
+        <item>চৌত্ৰিছ
+</item>
+        <item>পঁইত্ৰিছ
+</item>
+        <item>ছয়ত্ৰিছ
+</item>
+        <item>সাতত্ৰিছ
+</item>
+        <item>আঠত্ৰিছ
+</item>
+        <item>ঊনচল্লিছ
+</item>
+        <item>চল্লিছ</item>
+        <item>একচল্লিছ
+</item>
+        <item>বিয়াল্লিছ
+</item>
+        <item>তিয়াল্লিছ
+</item>
+        <item>চৌৰাল্লিছ
+</item>
+        <item>পঞ্চলিছ
+</item>
+        <item>ছয়চল্লিছ
+</item>
+        <item>সাতচল্লিছ
+</item>
+        <item>আঠচল্লিছ
+</item>
+        <item>ঊনপঞ্চাছ
+</item>
+        <item>পঞ্চাছ</item>
+        <item>একাৱন
+</item>
+        <item>বাৱন
+</item>
+        <item>তেৱন
+</item>
+        <item>চৌৱন
+</item>
+        <item>পঁচপন
+</item>
+        <item>ছাপন
+</item>
+        <item>সাতাৱন
+</item>
+        <item>আঠাৱন
+</item>
+        <item>ঊনষাঠি
+</item>
+    </string-array>
+</resources>

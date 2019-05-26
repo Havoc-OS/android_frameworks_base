@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>አስራ ሁለት</item>
+        <item>አንድ</item>
+        <item>ሁለት</item>
+        <item>ሶስት</item>
+        <item>አራት</item>
+        <item>አምስት</item>
+        <item>ስድስት</item>
+        <item>ሰባት</item>
+        <item>ስምንት</item>
+        <item>ዘጠኝ</item>
+        <item>አስር</item>
+        <item>አስራ አንድ</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>ሰዓት</item>
+        <item>አንድ</item>
+        <item>ሁለት</item>
+        <item>ሶስት</item>
+        <item>አራት</item>
+        <item>አምስት</item>
+        <item>ስድስት</item>
+        <item>ሰባት</item>
+        <item>ስምንት</item>
+        <item>ዘጠኝ</item>
+        <item>አስር</item>
+        <item>አስራ አንድ</item>
+        <item>አስራ ሁለት</item>
+        <item>አስራ ሶስት</item>
+        <item>አስራ አራት</item>
+        <item>አስራ አምስት</item>
+        <item>አስራ ስድስት</item>
+        <item>አስራ ሰባት</item>
+        <item>አስራ ስምንት</item>
+        <item>አስራ ዘጠኝ</item>
+        <item>ሃያ</item>
+        <item>ሃያ
+አንድ</item>
+        <item>ሃያ
+ሁለት</item>
+        <item>ሃያ
+ሶስት</item>
+        <item>ሃያ
+አራት</item>
+        <item>ሃያ
+አምስት</item>
+        <item>ሃያ
+ስድስት</item>
+        <item>ሃያ
+ሰባት</item>
+        <item>ሃያ
+ስምንት</item>
+        <item>ሃያ
+ዘጠኝ</item>
+        <item>ሰላሳ</item>
+        <item>ሰላሳ
+አንድ</item>
+        <item>ሰላሳ
+ሁለት</item>
+        <item>ሰላሳ
+ሶስት</item>
+        <item>ሰላሳ
+አራት</item>
+        <item>ሰላሳ
+አምስት</item>
+        <item>ሰላሳ
+ስድስት</item>
+        <item>ሰላሳ
+ሰባት</item>
+        <item>ሰላሳ
+ስምንት</item>
+        <item>ሰላሳ
+ዘጠኝ</item>
+        <item>አርባ</item>
+        <item>አርባ
+አንድ</item>
+        <item>አርባ
+ሁለት</item>
+        <item>አርባ
+ሶስት</item>
+        <item>አርባ
+አራት</item>
+        <item>አርባ
+አምስት</item>
+        <item>አርባ
+ስድስት</item>
+        <item>አርባ
+ሰባት</item>
+        <item>አርባ
+ስምንት</item>
+        <item>አርባ
+ዘጠኝ</item>
+        <item>ሃምሳ</item>
+        <item>ሃምሳ
+አንድ</item>
+        <item>ሃምሳ
+ሁለት</item>
+        <item>ሃምሳ
+ሶስት</item>
+        <item>ሃምሳ
+አራት</item>
+        <item>ሃምሳ
+አምስት</item>
+        <item>ሃምሳ
+ስድስት</item>
+        <item>ሃምሳ
+ሰባት</item>
+        <item>ሃምሳ
+ስምንት</item>
+        <item>ሃምሳ
+ዘጠኝ</item>
+    </string-array>
+</resources>

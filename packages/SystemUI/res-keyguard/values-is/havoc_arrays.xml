@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Tólf</item>
+        <item>Eitt</item>
+        <item>Tvö</item>
+        <item>Þrjú</item>
+        <item>Fjögur</item>
+        <item>Fimm</item>
+        <item>Sex</item>
+        <item>Sjö</item>
+        <item>Átta</item>
+        <item>Níu</item>
+        <item>Tíu</item>
+        <item>Ellefu</item>
+    </string-array>
+</resources>

@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Twaalf</item>
+        <item>Eén</item>
+        <item>Twee</item>
+        <item>Drie</item>
+        <item>Vier</item>
+        <item>Vijf</item>
+        <item>Zes</item>
+        <item>Zeven</item>
+        <item>Acht</item>
+        <item>Negen</item>
+        <item>Tien</item>
+        <item>Elf</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>uur</item>
+        <item>Nul één</item>
+        <item>Nul twee</item>
+        <item>Nul drie</item>
+        <item>Nul vier</item>
+        <item>Nul vijf</item>
+        <item>Nul zes</item>
+        <item>Nul zeven</item>
+        <item>Nul acht</item>
+        <item>Nul negen</item>
+        <item>Tien</item>
+        <item>Elf</item>
+        <item>Twaalf</item>
+        <item>Dertien</item>
+        <item>Veertien</item>
+        <item>Vijftien</item>
+        <item>Zestien</item>
+        <item>Zeventien</item>
+        <item>Achttien</item>
+        <item>Negentien</item>
+        <item>Twintig</item>
+        <item>Eénentwintig
+</item>
+        <item>Tweeëntwintig
+</item>
+        <item>Drieëntwintig
+</item>
+        <item>Vierentwintig
+</item>
+        <item>Vijfentwintig
+</item>
+        <item>Zesentwintig
+</item>
+        <item>Zevenentwintig
+</item>
+        <item>Achtentwintig
+</item>
+        <item>Negenentwintig
+</item>
+        <item>Dertig</item>
+        <item>Eénendertig
+</item>
+        <item>Tweeëndertig
+</item>
+        <item>Drieëndertig
+</item>
+        <item>Vierendertig
+</item>
+        <item>Vijfendertig
+</item>
+        <item>Zesendertig
+</item>
+        <item>Zevenendertig
+</item>
+        <item>Achtendertig
+</item>
+        <item>Negenendertig
+</item>
+        <item>Veertig</item>
+        <item>Eenenveertig
+</item>
+        <item>Tweeënveertig
+</item>
+        <item>Drieënveertig
+</item>
+        <item>Vierenveertig
+</item>
+        <item>Vijfenveertig
+</item>
+        <item>Zesenveertig
+</item>
+        <item>Zevenenveertig
+</item>
+        <item>Achtenveertig
+</item>
+        <item>Negenenveertig
+</item>
+        <item>Vijftig</item>
+        <item>Eenenvijftig
+</item>
+        <item>Tweeënvijftig
+</item>
+        <item>Drieënvijftig
+</item>
+        <item>Vierenvijftig
+</item>
+        <item>Vijfenvijftig
+</item>
+        <item>Zesenvijftig
+</item>
+        <item>Zevenenvijftig
+</item>
+        <item>Achtenvijftig
+</item>
+        <item>Negenenvijftig
+</item>
+    </string-array>
+</resources>

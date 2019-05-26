@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>बारा</item>
+        <item>एक</item>
+        <item>दोन</item>
+        <item>तीन</item>
+        <item>चार</item>
+        <item>पाच</item>
+        <item>सहा</item>
+        <item>सात</item>
+        <item>आठ</item>
+        <item>नऊ</item>
+        <item>दहा</item>
+        <item>एकरा</item>
+    </string-array>
+</resources>

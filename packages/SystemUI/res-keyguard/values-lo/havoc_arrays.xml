@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>ສິບສອງ</item>
+        <item>ໜຶ່ງ</item>
+        <item>ສອງ</item>
+        <item>ສາມ</item>
+        <item>ສີ່</item>
+        <item>ຫ້າ</item>
+        <item>ຫົກ</item>
+        <item>ເຈັດ</item>
+        <item>ແປດ</item>
+        <item>ເກົ້າ</item>
+        <item>ສິບ</item>
+        <item>ສິບເອັດ</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>O’Clock</item>
+        <item>O’One</item>
+        <item>O’Two</item>
+        <item>O’Three</item>
+        <item>O’Four</item>
+        <item>O’Five</item>
+        <item>O’Six</item>
+        <item>O’Seven</item>
+        <item>O’Eight</item>
+        <item>O’Nine</item>
+        <item>ສິບ</item>
+        <item>ສິບເອັດ</item>
+        <item>ສິບສອງ</item>
+        <item>ສິບສາມ</item>
+        <item>ສິບສີ່</item>
+        <item>ສິບຫ້າ</item>
+        <item>ສິບຫົກ</item>
+        <item>ສິບເຈັດ</item>
+        <item>ສິບແປດ</item>
+        <item>ສິບເກົ້າ</item>
+        <item>ຊາວ</item>
+        <item>ຊາວ
+ເອັດ</item>
+        <item>ຊາວ
+ສອງ</item>
+        <item>ຊາວ
+ສາມ</item>
+        <item>ຊາວ
+ສີ່</item>
+        <item>ຊາວ
+ຫ້າ</item>
+        <item>ຊາວ
+ຫົກ</item>
+        <item>ຊາວ
+ເຈັດ</item>
+        <item>ຊາວ
+ແປດ</item>
+        <item>ຊາວ
+ເກົ້າ</item>
+        <item>ສາມສິບ</item>
+        <item>ສາມ
+ສິບເອັດ</item>
+        <item>ສາມ
+ສິບສອງ</item>
+        <item>ສາມ
+ສິບສາມ</item>
+        <item>ສາມ
+ສິບສີ່</item>
+        <item>ສາມ
+ສິບຫ້າ</item>
+        <item>ສາມ
+ສິບຫົກ</item>
+        <item>ສາມ
+ສິບເຈັດ</item>
+        <item>ສາມສິບ
+ແປດ</item>
+        <item>ສາມ
+ສິບເກົ້າ</item>
+        <item>ສີ່ສິບ</item>
+        <item>ສີ່
+ສິບເອັດ</item>
+        <item>ສີ່
+ສິບສອງ</item>
+        <item>ສີ່
+ສິບສາມ</item>
+        <item>ສີ່
+ສິບສີ່</item>
+        <item>ສີ່
+ສິບຫ້າ</item>
+        <item>ສີ່
+ສິບຫົກ</item>
+        <item>ສີ່
+ສິບເຈັດ</item>
+        <item>ສີ່
+ສິບແປດ</item>
+        <item>ສີ່
+ສິບເກົ້າ</item>
+        <item>ຫ້າສິບ</item>
+        <item>ຫ້າ
+ສິບເອັດ</item>
+        <item>ຫ້າ
+ສິບສອງ</item>
+        <item>ຫ້າ
+ສິບສາມ</item>
+        <item>ຫ້າ
+ສິບສີ່</item>
+        <item>ຫ້າ
+ສິບຫ້າ</item>
+        <item>ຫ້າ
+ສິບຫົກ</item>
+        <item>ຫ້າ
+ສິບເຈັດ</item>
+        <item>ຫ້າ
+ສິບແປດ</item>
+        <item>ຫ້າ
+ສິບເກົ້າ</item>
+    </string-array>
+</resources>

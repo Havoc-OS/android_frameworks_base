@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>двенадцать</item>
+        <item>один</item>
+        <item>два</item>
+        <item>три</item>
+        <item>четыре</item>
+        <item>пять</item>
+        <item>шесть</item>
+        <item>семь</item>
+        <item>восемь</item>
+        <item>девять</item>
+        <item>десять</item>
+        <item>одиннадцать</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>ровно</item>
+        <item>ноль одна</item>
+        <item>ноль две</item>
+        <item>ноль три</item>
+        <item>ноль четыре</item>
+        <item>ноль пять</item>
+        <item>ноль шесть</item>
+        <item>ноль семь</item>
+        <item>ноль восемь</item>
+        <item>ноль девять</item>
+        <item>десять</item>
+        <item>одиннадцать</item>
+        <item>двенадцать</item>
+        <item>тринадцать</item>
+        <item>четырнадцать</item>
+        <item>пятнадцать</item>
+        <item>шестнадцать</item>
+        <item>семнадцать</item>
+        <item>восемнадцать</item>
+        <item>девятнадцать</item>
+        <item>двадцать</item>
+        <item>двадцать
+одна</item>
+        <item>двадцать
+две</item>
+        <item>двадцать
+три</item>
+        <item>двадцать
+четыре</item>
+        <item>двадцать
+пять</item>
+        <item>двадцать
+шесть</item>
+        <item>двадцать
+семь</item>
+        <item>двадцать
+восемь</item>
+        <item>двадцать
+девять</item>
+        <item>тридцать</item>
+        <item>тридцать
+одна</item>
+        <item>тридцать
+две</item>
+        <item>тридцать
+три</item>
+        <item>тридцать
+четыре</item>
+        <item>тридцать
+пять</item>
+        <item>тридцать
+шесть</item>
+        <item>тридцать
+семь</item>
+        <item>тридцать
+восемь</item>
+        <item>тридцать
+девять</item>
+        <item>сорок</item>
+        <item>сорок
+одна</item>
+        <item>сорок
+две</item>
+        <item>сорок
+три</item>
+        <item>сорок
+четыре</item>
+        <item>сорок
+пять</item>
+        <item>сорок
+шесть</item>
+        <item>cорок
+семь</item>
+        <item>сорок
+восемь</item>
+        <item>сорок
+девять</item>
+        <item>пятьдесят</item>
+        <item>пятьдесят
+одна</item>
+        <item>пятьдесят
+две</item>
+        <item>пятьдесят
+три</item>
+        <item>пятьдесят
+четыре</item>
+        <item>пятьдесят
+пять</item>
+        <item>пятьдесят
+шесть</item>
+        <item>пятьдесят
+семь</item>
+        <item>пятьдесят
+восемь</item>
+        <item>пятьдесят
+девять</item>
+    </string-array>
+</resources>

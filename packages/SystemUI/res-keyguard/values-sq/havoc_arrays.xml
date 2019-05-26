@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Dymbëdhjetë</item>
+        <item>Një</item>
+        <item>Dy</item>
+        <item>Tre</item>
+        <item>Katër</item>
+        <item>Pesë</item>
+        <item>Gjashtë</item>
+        <item>Shtatë</item>
+        <item>Tetë</item>
+        <item>Nëntë</item>
+        <item>Dhjetë</item>
+        <item>Njëmbëdhjetë</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Fiks</item>
+        <item>E një</item>
+        <item>E dy</item>
+        <item>E tre</item>
+        <item>E katër</item>
+        <item>E pesë</item>
+        <item>E gjashtë</item>
+        <item>E shtatë</item>
+        <item>E tetë</item>
+        <item>E nëntë</item>
+        <item>Dhjetë</item>
+        <item>Njëmbëdhjetë</item>
+        <item>Dymbëdhjetë</item>
+        <item>Trembëdhjetë</item>
+        <item>Katërmbëdhjetë</item>
+        <item>Pesëmbëdhjetë</item>
+        <item>Gjashtëmbëdhjetë</item>
+        <item>Shtatëmbëdhjetë</item>
+        <item>Tetëmbëdhjetë</item>
+        <item>Nëntëmbëdhjetë</item>
+        <item>Njëzet</item>
+        <item>Njëzet
+e një</item>
+        <item>Njëzet
+e dy</item>
+        <item>Njëzet
+e tre</item>
+        <item>Njëzet
+e katër</item>
+        <item>Njëzet
+e pesë</item>
+        <item>Njëzet
+e gjashtë</item>
+        <item>Njëzet
+e shtatë</item>
+        <item>Njëzet
+e tetë</item>
+        <item>Njëzet
+e nëntë</item>
+        <item>Tridhjetë</item>
+        <item>Tridhjetë
+e një</item>
+        <item>Tridhjetë
+e dy</item>
+        <item>Tridhjetë
+e tre</item>
+        <item>Tridhjetë
+e katër</item>
+        <item>Tridhjetë
+e pesë</item>
+        <item>Tridhjetë
+e gjashtë</item>
+        <item>Tridhjetë
+e shtatë</item>
+        <item>Tridhjetë
+e tetë</item>
+        <item>Tridhjetë
+e nëntë</item>
+        <item>Dyzet</item>
+        <item>Dyzet
+e një</item>
+        <item>Dyzet
+e dy</item>
+        <item>Dyzet
+e tre</item>
+        <item>Dyzet
+e katër</item>
+        <item>Dyzet
+e pesë</item>
+        <item>Dyzet
+e gjashtë</item>
+        <item>Dyzet
+e shtatë</item>
+        <item>Dyzet
+e tetë</item>
+        <item>Dyzet
+e nëntë</item>
+        <item>Pesëdhjetë</item>
+        <item>Pesëdhjetë
+e një</item>
+        <item>Pesëdhjetë
+e dy</item>
+        <item>Pesëdhjetë
+e tre</item>
+        <item>Pesëdhjetë
+e katër</item>
+        <item>Pesëdhjetë
+e pesë</item>
+        <item>Pesëdhjetë
+e gjashtë</item>
+        <item>Pesëdhjetë
+e shtatë</item>
+        <item>Pesëdhjetë
+e tetë</item>
+        <item>Pesëdhjetë
+e nëntë</item>
+    </string-array>
+</resources>

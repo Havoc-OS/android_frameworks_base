@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Mười hai</item>
+        <item>Một</item>
+        <item>Hai</item>
+        <item>Ba</item>
+        <item>Bốn</item>
+        <item>Năm</item>
+        <item>Sáu</item>
+        <item>Bảy</item>
+        <item>Tám</item>
+        <item>Chín</item>
+        <item>Mười</item>
+        <item>Mười một</item>
+    </string-array>
+</resources>

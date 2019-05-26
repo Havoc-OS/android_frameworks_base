@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Dua bls</item>
+        <item>Satu</item>
+        <item>Dua</item>
+        <item>Tiga</item>
+        <item>Empat</item>
+        <item>Lima</item>
+        <item>Enam</item>
+        <item>Tujuh</item>
+        <item>Lapan</item>
+        <item>Sembilan</item>
+        <item>Sepuluh</item>
+        <item>Sebelas</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Pukul</item>
+        <item>Satu</item>
+        <item>Dua</item>
+        <item>Tiga</item>
+        <item>Empat</item>
+        <item>Lima</item>
+        <item>Enam</item>
+        <item>Tujuh</item>
+        <item>Lapan</item>
+        <item>Sembilan</item>
+        <item>Sepuluh</item>
+        <item>Sebelas</item>
+        <item>Dua belas</item>
+        <item>Tiga belas</item>
+        <item>Empat belas</item>
+        <item>Lima belas</item>
+        <item>Enam belas</item>
+        <item>Tujuh belas</item>
+        <item>Lapan belas</item>
+        <item>Sembilan belas</item>
+        <item>Dua puluh</item>
+        <item>Dua Puluh
+Satu</item>
+        <item>Dua Puluh
+Dua</item>
+        <item>Dua Puluh
+Tiga</item>
+        <item>Dua Puluh
+Empat</item>
+        <item>Dua Puluh
+Lima</item>
+        <item>Dua Puluh
+Enam</item>
+        <item>Dua Puluh
+Tujuh</item>
+        <item>Dua Puluh
+Lapan</item>
+        <item>Dua Puluh
+Sembilan</item>
+        <item>Tiga puluh</item>
+        <item>Tiga Puluh
+Satu</item>
+        <item>Tiga Puluh
+Dua</item>
+        <item>Tiga Puluh
+Tiga</item>
+        <item>Tiga Puluh
+Empat</item>
+        <item>Tiga Puluh
+Lima</item>
+        <item>Tiga Puluh
+Enam</item>
+        <item>Tiga Puluh
+Tujuh</item>
+        <item>Tiga Puluh
+Lapan</item>
+        <item>Tiga Puluh
+Sembilan</item>
+        <item>Empat Puluh</item>
+        <item>Empat Puluh
+Satu</item>
+        <item>Empat Puluh
+Dua</item>
+        <item>Empat Puluh
+Tiga</item>
+        <item>Empat Puluh
+Empat</item>
+        <item>Empat Puluh
+Lima</item>
+        <item>Empat Puluh
+Enam</item>
+        <item>Empat Puluh
+Tujuh</item>
+        <item>Empat Puluh
+Lapan</item>
+        <item>Empat Puluh
+Smbln</item>
+        <item>Lima puluh</item>
+        <item>Lima Puluh
+Satu</item>
+        <item>Lima Puluh
+Dua</item>
+        <item>Lima Puluh
+Tiga</item>
+        <item>Lima Puluh
+Empat</item>
+        <item>Lima Puluh
+Lima</item>
+        <item>Lima Puluh
+Enam</item>
+        <item>Lima Puluh
+Tujuh</item>
+        <item>Lima Puluh
+Lapan</item>
+        <item>Lima Puluh
+Sembln</item>
+    </string-array>
+</resources>

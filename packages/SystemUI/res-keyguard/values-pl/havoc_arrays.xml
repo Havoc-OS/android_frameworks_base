@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Dwanaście</item>
+        <item>Jeden</item>
+        <item>Dwa</item>
+        <item>Trzy</item>
+        <item>Cztery</item>
+        <item>Pięć</item>
+        <item>Sześć</item>
+        <item>Siedem</item>
+        <item>Osiem</item>
+        <item>Dziewięć</item>
+        <item>Dziesięć</item>
+        <item>Jedenaście</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Zero zero</item>
+        <item>Zero jeden</item>
+        <item>Zero dwa</item>
+        <item>Zero trzy</item>
+        <item>Zero cztery</item>
+        <item>Zero pięć</item>
+        <item>Zero sześć</item>
+        <item>Zero siedem</item>
+        <item>Zero osiem</item>
+        <item>Zero dziewięć</item>
+        <item>Dziesięć</item>
+        <item>Jedenaście</item>
+        <item>Dwanaście</item>
+        <item>Trzynaście</item>
+        <item>Czternaście</item>
+        <item>Piętnaście</item>
+        <item>Szesnaście</item>
+        <item>Siedemnaście</item>
+        <item>Osiemnaście</item>
+        <item>Dziewiętnaście</item>
+        <item>Dwadzieścia</item>
+        <item>Dwadzieścia
+jeden</item>
+        <item>Dwadzieścia
+dwa</item>
+        <item>Dwadzieścia
+trzy</item>
+        <item>Dwadzieścia
+cztery</item>
+        <item>Dwadzieścia
+pięć</item>
+        <item>Dwadzieścia
+sześć</item>
+        <item>Dwadzieścia
+siedem</item>
+        <item>Dwadzieścia
+osiem</item>
+        <item>Dwadzieścia
+dziewięć</item>
+        <item>Trzydzieści</item>
+        <item>Trzydzieści
+jeden</item>
+        <item>Trzydzieści
+dwa</item>
+        <item>Trzydzieści
+trzy</item>
+        <item>Trzydzieści
+cztery</item>
+        <item>Trzydzieści
+pięć</item>
+        <item>Trzydzieści
+sześć</item>
+        <item>Trzydzieści
+siedem</item>
+        <item>Trzydzieści
+osiem</item>
+        <item>Trzydzieści
+dziewięć</item>
+        <item>Czterdzieści</item>
+        <item>Czterdzieści
+jeden</item>
+        <item>Czterdzieści
+dwa</item>
+        <item>Czterdzieści
+trzy</item>
+        <item>Czterdzieści
+cztery</item>
+        <item>Czterdzieści
+pięć</item>
+        <item>Czterdzieści
+sześć</item>
+        <item>Czterdzieści
+siedem</item>
+        <item>Czterdzieści
+osiem</item>
+        <item>Czterdzieści
+dziewięć</item>
+        <item>Pięćdziesiąt</item>
+        <item>Pięćdziesiąt
+jeden</item>
+        <item>Pięćdziesiąt
+dwa</item>
+        <item>Pięćdziesiąt
+trzy</item>
+        <item>Pięćdziesiąt
+cztery</item>
+        <item>Pięćdziesiąt
+pięć</item>
+        <item>Pięćdziesiąt
+sześć</item>
+        <item>Pięćdziesiąt
+siedem</item>
+        <item>Pięćdziesiąt
+osiem.</item>
+        <item>Pięćdziesiąt
+dziewięć</item>
+    </string-array>
+</resources>

@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>بارہ</item>
+        <item>ایک</item>
+        <item>دو</item>
+        <item>تین</item>
+        <item>چار</item>
+        <item>پانچ</item>
+        <item>چھ</item>
+        <item>سات</item>
+        <item>آٹھ</item>
+        <item>نو</item>
+        <item>دس</item>
+        <item>گیارہ</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>0 بجے</item>
+        <item>ایک منٹ</item>
+        <item>دو منٹ</item>
+        <item>تین منٹ</item>
+        <item>چار منٹ</item>
+        <item>پانچ منٹ</item>
+        <item>چھ منٹ</item>
+        <item>سات منٹ</item>
+        <item>آٹھ منٹ</item>
+        <item>نو منٹ</item>
+        <item>دس</item>
+        <item>گیارہ</item>
+        <item>بارہ</item>
+        <item>تیرہ</item>
+        <item>چودہ</item>
+        <item>پندرہ</item>
+        <item>سولہ</item>
+        <item>سترہ</item>
+        <item>اٹھارہ</item>
+        <item>انّیس</item>
+        <item>بیس</item>
+        <item>اکیس
+</item>
+        <item>بائیس
+</item>
+        <item>تیئیس
+</item>
+        <item>چوبیس
+</item>
+        <item>پچیس
+</item>
+        <item>چھبیس
+</item>
+        <item>ستائیں
+</item>
+        <item>اٹھائیس
+</item>
+        <item>انتیس
+</item>
+        <item>تیس</item>
+        <item>اکتیس
+</item>
+        <item>بتّیس
+</item>
+        <item>تینتیس
+</item>
+        <item>چونتیس
+</item>
+        <item>پینتیس
+</item>
+        <item>چھتیس
+</item>
+        <item>سینتیس
+</item>
+        <item>اڑتیس
+</item>
+        <item>انچالیس
+</item>
+        <item>چالیس</item>
+        <item>اکتالیس
+</item>
+        <item>بیالیس
+</item>
+        <item>تینتالیس
+</item>
+        <item>چوالیس
+</item>
+        <item>پینتالیس
+</item>
+        <item>چھیالیس
+</item>
+        <item>سینتالیس
+</item>
+        <item>اڑتالیس
+</item>
+        <item>انچاس
+</item>
+        <item>پچاس</item>
+        <item>اکیاون
+</item>
+        <item>باون
+</item>
+        <item>تریپن
+</item>
+        <item>چوّن
+</item>
+        <item>پچپن
+</item>
+        <item>چھپّن
+</item>
+        <item>ستاون
+</item>
+        <item>اٹھاون
+</item>
+        <item>انسٹھ
+</item>
+    </string-array>
+</resources>

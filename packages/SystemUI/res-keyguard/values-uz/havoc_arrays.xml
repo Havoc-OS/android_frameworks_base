@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Oʻn ikki</item>
+        <item>Bir</item>
+        <item>Ikki</item>
+        <item>Uch</item>
+        <item>Toʻrt</item>
+        <item>Besh</item>
+        <item>Olti</item>
+        <item>Yetti</item>
+        <item>Sakkiz</item>
+        <item>Toʻqqiz</item>
+        <item>Oʻn</item>
+        <item>Oʻn bir</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Soat</item>
+        <item>Nol bir</item>
+        <item>Nol ikki</item>
+        <item>Nol uch</item>
+        <item>Nol toʻrt</item>
+        <item>Nol besh</item>
+        <item>Nol olti</item>
+        <item>Nol yetti</item>
+        <item>Nol sakkiz</item>
+        <item>Nol toʻqqiz</item>
+        <item>Oʻn</item>
+        <item>Oʻn bir</item>
+        <item>Oʻn ikki</item>
+        <item>Oʻn uch</item>
+        <item>Oʻn toʻrt</item>
+        <item>Oʻn besh</item>
+        <item>Oʻn olti</item>
+        <item>Oʻn yetti</item>
+        <item>Oʻn sakkiz</item>
+        <item>Oʻn toʻqqiz</item>
+        <item>Yigirma</item>
+        <item>Yigirma
+bir</item>
+        <item>Yigirma
+ikki</item>
+        <item>Yigirma
+uch</item>
+        <item>Yigirma
+toʻrt</item>
+        <item>Yigirma
+besh</item>
+        <item>Yigirma
+olti</item>
+        <item>Yigirma
+yetti</item>
+        <item>Yigirma
+sakkiz</item>
+        <item>Yigirma
+toʻqqiz</item>
+        <item>Oʻttiz</item>
+        <item>Oʻttiz
+bir</item>
+        <item>Oʻttiz
+ikki</item>
+        <item>Oʻttiz
+uch</item>
+        <item>Oʻttiz
+toʻrt</item>
+        <item>Oʻttiz
+besh</item>
+        <item>Oʻttiz
+olti</item>
+        <item>Oʻttiz
+yetti</item>
+        <item>Oʻttiz
+sakkiz</item>
+        <item>Oʻttiz
+toʻqqiz</item>
+        <item>Qirq</item>
+        <item>Qirq
+bir</item>
+        <item>Qirq
+ikki</item>
+        <item>Qirq
+uch</item>
+        <item>Qirq
+toʻrt</item>
+        <item>Qirq
+besh</item>
+        <item>Qirq
+olti</item>
+        <item>Qirq
+yetti</item>
+        <item>Qirq
+sakkiz</item>
+        <item>Qirq
+toʻqqiz</item>
+        <item>Ellik</item>
+        <item>Ellik
+bir</item>
+        <item>Ellik
+ikki</item>
+        <item>Ellik
+uch</item>
+        <item>Ellik
+toʻrt</item>
+        <item>Ellik
+besh</item>
+        <item>Ellik
+olti</item>
+        <item>Ellik
+yetti</item>
+        <item>Ellik
+sakkiz</item>
+        <item>Ellik
+toʻqqiz</item>
+    </string-array>
+</resources>

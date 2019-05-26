@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>ಹನ್ನೆರಡು</item>
+        <item>ಒಂದು</item>
+        <item>ಎರಡು</item>
+        <item>ಮೂರು</item>
+        <item>ನಾಲ್ಕು</item>
+        <item>ಐದು</item>
+        <item>ಆರು</item>
+        <item>ಏಳು</item>
+        <item>ಎಂಟು</item>
+        <item>ಒಂಬತ್ತು</item>
+        <item>ಹತ್ತು</item>
+        <item>ಹನ್ನೊಂದು</item>
+    </string-array>
+</resources>

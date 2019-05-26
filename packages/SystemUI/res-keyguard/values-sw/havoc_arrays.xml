@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Sita</item>
+        <item>Saba</item>
+        <item>Nane</item>
+        <item>Tisa</item>
+        <item>Kumi</item>
+        <item>Kumi na moja</item>
+        <item>Kumi na mbili</item>
+        <item>Moja</item>
+        <item>Mbili</item>
+        <item>Tatu</item>
+        <item>Nne</item>
+        <item>Tano</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Kamili</item>
+        <item>Na Dakika Moja</item>
+        <item>Na Dakika Mbili</item>
+        <item>Na Dakika Tatu</item>
+        <item>Na Dakika Nne</item>
+        <item>Na Dakika Tano</item>
+        <item>Na Dakika Sita</item>
+        <item>Na Dakika Saba</item>
+        <item>Nane</item>
+        <item>Na Dakika Tisa</item>
+        <item>Kumi</item>
+        <item>Kumi na Moja</item>
+        <item>Kumi na Mbili</item>
+        <item>Kumi na tatu</item>
+        <item>Kumi na nne</item>
+        <item>Kumi na Tano</item>
+        <item>Kumi na Sita</item>
+        <item>Kumi na Saba</item>
+        <item>Kumi na nane</item>
+        <item>Kumi na tisa</item>
+        <item>Ishirini</item>
+        <item>Ishirini na
+Moja</item>
+        <item>Ishirini na
+Mbili</item>
+        <item>Ishirini na
+Tatu</item>
+        <item>Ishirini na
+Nne</item>
+        <item>Ishirini na 
+Tano</item>
+        <item>Ishirni na
+Sita</item>
+        <item>Ishirini na
+Saba</item>
+        <item>Ishirini na
+Nane</item>
+        <item>Ishirini na
+Tisa</item>
+        <item>Thelathini</item>
+        <item>Thelathini na
+Moja</item>
+        <item>Thelathini na
+Mbili</item>
+        <item>Thelathini na
+Tatu</item>
+        <item>Thelathini na
+Nne</item>
+        <item>Thelathini na
+Tano</item>
+        <item>Thelathini na
+Sita</item>
+        <item>Thelathini na
+Saba</item>
+        <item>Thelathini na
+Nane</item>
+        <item>Thelathini na
+Tisa</item>
+        <item>Arobaini</item>
+        <item>Arobaini na
+Moja</item>
+        <item>Arobaini na
+Mbili</item>
+        <item>Arobaini na
+Tatu</item>
+        <item>Arobaini na
+Nne</item>
+        <item>Arobaini na
+Tano</item>
+        <item>Arobaini na
+Sita</item>
+        <item>Arobaini na
+Saba</item>
+        <item>Arobaini na
+Nane</item>
+        <item>Arobaini na
+Tisa</item>
+        <item>Hamsini</item>
+        <item>Hamsini na
+Moja</item>
+        <item>Hamsini na
+Mbili</item>
+        <item>Hamsini
+Tatu</item>
+        <item>Hamsini na
+Nne</item>
+        <item>Hamsini na
+Tano</item>
+        <item>Hamsini na
+Sita</item>
+        <item>Hamsini na
+Saba</item>
+        <item>Hamsini na
+Nane</item>
+        <item>Hamsini na
+Tisa</item>
+    </string-array>
+</resources>

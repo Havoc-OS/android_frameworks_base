@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Tizenkettő</item>
+        <item>Egy</item>
+        <item>Kettő</item>
+        <item>Három</item>
+        <item>Négy</item>
+        <item>Öt</item>
+        <item>Hat</item>
+        <item>Hét</item>
+        <item>Nyolc</item>
+        <item>Kilenc</item>
+        <item>Tíz</item>
+        <item>Tizenegy</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>óra</item>
+        <item>Egy</item>
+        <item>Kettő</item>
+        <item>Három</item>
+        <item>Négy</item>
+        <item>Öt</item>
+        <item>Hat</item>
+        <item>Hét</item>
+        <item>Nyolc</item>
+        <item>Kilenc</item>
+        <item>Tíz</item>
+        <item>Tizenegy</item>
+        <item>Tizenkettő</item>
+        <item>Tizenhárom</item>
+        <item>Tizennégy</item>
+        <item>Tizenöt</item>
+        <item>Tizenhat</item>
+        <item>Tizenhét</item>
+        <item>Tizennyolc</item>
+        <item>Tizenkilenc</item>
+        <item>Húsz</item>
+        <item>Huszon
+egy</item>
+        <item>Huszon
+kettő</item>
+        <item>Huszon
+három</item>
+        <item>Huszon
+négy</item>
+        <item>Huszon
+öt</item>
+        <item>Huszon
+hat</item>
+        <item>Huszon
+hét</item>
+        <item>Huszon
+nyolc</item>
+        <item>Huszon
+kilenc</item>
+        <item>Harminc</item>
+        <item>Harminc
+egy</item>
+        <item>Harminc
+kettő</item>
+        <item>Harminc
+három</item>
+        <item>Harminc
+négy</item>
+        <item>Harminc
+öt</item>
+        <item>Harminc
+hat</item>
+        <item>Harminc
+hét</item>
+        <item>Harminc
+nyolc</item>
+        <item>Harminc
+kilenc</item>
+        <item>Negyven</item>
+        <item>Negyven
+egy</item>
+        <item>Negyven
+kettő</item>
+        <item>Negyven
+három</item>
+        <item>Negyven
+négy</item>
+        <item>Negyven
+öt</item>
+        <item>Negyven
+hat</item>
+        <item>Negyven
+hét</item>
+        <item>Negyven
+nyolc</item>
+        <item>Negyven
+kilenc</item>
+        <item>Ötven</item>
+        <item>Ötven
+egy</item>
+        <item>Ötven
+kettő</item>
+        <item>Ötven
+három</item>
+        <item>Ötven
+négy</item>
+        <item>Ötven
+öt</item>
+        <item>Ötven
+hat</item>
+        <item>Ötven
+hét</item>
+        <item>Ötven
+nyolc</item>
+        <item>Ötven
+kilenc</item>
+    </string-array>
+</resources>

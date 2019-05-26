@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>പന്ത്രണ്ട്</item>
+        <item>ഒന്ന്</item>
+        <item>രണ്ട്</item>
+        <item>മൂന്ന്</item>
+        <item>നാല്</item>
+        <item>അഞ്ച്</item>
+        <item>ആറ്</item>
+        <item>ഏഴ്</item>
+        <item>എട്ട്</item>
+        <item>ഒമ്പത്</item>
+        <item>പത്ത്</item>
+        <item>പതിനൊന്ന്</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>മണി</item>
+        <item>ഒന്ന്</item>
+        <item>രണ്ട്</item>
+        <item>മൂന്ന്</item>
+        <item>നാല്</item>
+        <item>അഞ്ച്</item>
+        <item>ആറ്</item>
+        <item>ഏഴ്</item>
+        <item>എട്ട്</item>
+        <item>ഒമ്പത്</item>
+        <item>പത്ത്</item>
+        <item>പതിനൊന്ന്</item>
+        <item>പന്ത്രണ്ട്</item>
+        <item>പതിമൂന്ന്</item>
+        <item>പതിനാല്</item>
+        <item>പതിനഞ്ച്</item>
+        <item>പതിനാറ്</item>
+        <item>പതിനേഴ്</item>
+        <item>പതിനെട്ട്</item>
+        <item>പത്തൊമ്പത്</item>
+        <item>ഇരുപത്</item>
+        <item>ഇരുപത്തിയൊന്ന്
+</item>
+        <item>ഇരുപത്തിരണ്ട്
+</item>
+        <item>ഇരുപത്തിമൂന്ന്
+</item>
+        <item>ഇരുപത്തിനാല്
+</item>
+        <item>ഇരുപത്തിയഞ്ച്
+</item>
+        <item>ഇരുപത്തിയാറ്
+</item>
+        <item>ഇരുപത്തിയേഴ്
+</item>
+        <item>ഇരുപത്തിയെട്ട്
+</item>
+        <item>ഇരുപത്തിയൊമ്പത്
+</item>
+        <item>മുപ്പത്</item>
+        <item>മുപ്പത്തിയൊന്ന്
+</item>
+        <item>മുപ്പത്തിരണ്ട്
+</item>
+        <item>മുപ്പത്തിമൂന്ന്
+</item>
+        <item>മുപ്പത്തിനാല്
+</item>
+        <item>അമ്പത്തിയഞ്ച്
+</item>
+        <item>മുപ്പത്തിയാറ്
+</item>
+        <item>മുപ്പത്തിയേഴ്
+</item>
+        <item>മുപ്പത്തിയെട്ട്
+</item>
+        <item>മുപ്പത്തിയൊമ്പത്
+</item>
+        <item>നാൽപത്</item>
+        <item>നാൽപ്പത്തിയൊന്ന്
+</item>
+        <item>നാൽപത്തിരണ്ട്
+</item>
+        <item>നാൽപ്പത്തിമൂന്ന്
+</item>
+        <item>നാൽപത്തിനാല്
+</item>
+        <item>നാൽപത്തിയഞ്ച്
+</item>
+        <item>നാൽപ്പത്തിയാറ്
+</item>
+        <item>നാൽപത്തിയേഴ്
+</item>
+        <item>നാൽപത്തിയെട്ട്
+</item>
+        <item>നാൽപത്തിയൊമ്പത്
+</item>
+        <item>അമ്പത്</item>
+        <item>അമ്പത്തിയൊന്ന്
+</item>
+        <item>അമ്പത്തിരണ്ട്
+</item>
+        <item>അമ്പത്തിമൂന്ന്
+</item>
+        <item>അമ്പത്തിനാല്
+</item>
+        <item>അമ്പത്തിയഞ്ച്
+</item>
+        <item>അമ്പത്തിയാറ്
+</item>
+        <item>അമ്പത്തിയേഴ്
+</item>
+        <item>അമ്പത്തിയെട്ട്
+</item>
+        <item>അമ്പത്തിയൊമ്പത്
+</item>
+    </string-array>
+</resources>

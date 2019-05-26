@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>十二</item>
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
+        <item>七</item>
+        <item>八</item>
+        <item>九</item>
+        <item>十</item>
+        <item>十一</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>零九</item>
+        <item>零一</item>
+        <item>零二</item>
+        <item>零三</item>
+        <item>零四</item>
+        <item>零五</item>
+        <item>零六</item>
+        <item>零七</item>
+        <item>零八</item>
+        <item>零九</item>
+        <item>十</item>
+        <item>十一</item>
+        <item>十二</item>
+        <item>十三</item>
+        <item>十四</item>
+        <item>十五</item>
+        <item>十六</item>
+        <item>十七</item>
+        <item>十八</item>
+        <item>十九</item>
+        <item>二十</item>
+        <item>二十
+一</item>
+        <item>二十
+二</item>
+        <item>二十
+三</item>
+        <item>二十
+四</item>
+        <item>二十
+五</item>
+        <item>二十
+六</item>
+        <item>二十
+七</item>
+        <item>二十
+八</item>
+        <item>二十
+九</item>
+        <item>三十</item>
+        <item>三十
+一</item>
+        <item>三十
+二</item>
+        <item>三十
+三</item>
+        <item>三十
+四</item>
+        <item>三十
+五</item>
+        <item>三十
+六</item>
+        <item>三十
+七</item>
+        <item>三十
+八</item>
+        <item>三十
+九</item>
+        <item>四十</item>
+        <item>四十
+一</item>
+        <item>四十
+二</item>
+        <item>四十
+三</item>
+        <item>四十
+四</item>
+        <item>四十
+五</item>
+        <item>四十
+六</item>
+        <item>四十
+七</item>
+        <item>四十
+八</item>
+        <item>四十
+九</item>
+        <item>五十</item>
+        <item>五十
+一</item>
+        <item>五十
+二</item>
+        <item>五十
+三</item>
+        <item>五十
+四</item>
+        <item>五十
+五</item>
+        <item>五十
+六</item>
+        <item>五十
+七</item>
+        <item>五十
+八</item>
+        <item>五十
+九</item>
+    </string-array>
+</resources>

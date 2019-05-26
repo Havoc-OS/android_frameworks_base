@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>douze h.</item>
+        <item>Une h.</item>
+        <item>Deux h.</item>
+        <item>Trois h.</item>
+        <item>Quatre h.</item>
+        <item>Cinq h.</item>
+        <item>Six h.</item>
+        <item>Sept h.</item>
+        <item>Huit h.</item>
+        <item>Neuf h.</item>
+        <item>Dix h.</item>
+        <item>Onze h.</item>
+    </string-array>
+</resources>

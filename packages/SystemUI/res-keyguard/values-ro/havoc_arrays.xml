@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Douăsprezece</item>
+        <item>Unu</item>
+        <item>Două</item>
+        <item>Trei</item>
+        <item>Patru</item>
+        <item>Cinci</item>
+        <item>Șase</item>
+        <item>Șapte</item>
+        <item>Opt</item>
+        <item>Nouă</item>
+        <item>Zece</item>
+        <item>Unsprezece</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>.</item>
+        <item>și unu</item>
+        <item>și două</item>
+        <item>și trei</item>
+        <item>și patru</item>
+        <item>și cinci</item>
+        <item>și șase</item>
+        <item>și șapte</item>
+        <item>și opt</item>
+        <item>și nouă</item>
+        <item>Zece</item>
+        <item>Unsprezece</item>
+        <item>Douăsprezece</item>
+        <item>Treisprezece</item>
+        <item>Paisprezece</item>
+        <item>Cincisprezece</item>
+        <item>Șaisprezece</item>
+        <item>Șaptesprezece</item>
+        <item>Optsprezece</item>
+        <item>Nouăsprezece</item>
+        <item>Douăzeci</item>
+        <item>Douăzeci
+și unu</item>
+        <item>Douăzeci
+și doi</item>
+        <item>Douăzeci
+și trei</item>
+        <item>Douăzeci
+și patru</item>
+        <item>Douăzeci
+și cinci</item>
+        <item>Douăzeci
+și șase</item>
+        <item>Douăzeci
+și șapte</item>
+        <item>Douăzeci
+și opt</item>
+        <item>Douăzeci
+și nouă</item>
+        <item>Treizeci</item>
+        <item>Treizeci
+și unu</item>
+        <item>Treizeci
+și două</item>
+        <item>Treizeci
+și trei</item>
+        <item>Treizeci
+și patru</item>
+        <item>Treizeci
+și cinci</item>
+        <item>Treizeci
+și șase</item>
+        <item>Treizeci
+și șapte</item>
+        <item>Treizeci
+și opt</item>
+        <item>Treizeci
+și nouă</item>
+        <item>Patruzeci</item>
+        <item>Patruzeci
+și unu</item>
+        <item>Patruzeci
+și două</item>
+        <item>Patruzeci
+și trei</item>
+        <item>Patruzeci
+și patru</item>
+        <item>Patruzeci
+și cinci</item>
+        <item>Patruzeci
+și șase</item>
+        <item>Patruzeci
+și șapte</item>
+        <item>Patruzeci
+și opt</item>
+        <item>Patruzeci
+și nouă</item>
+        <item>Cincizeci</item>
+        <item>Cincizeci
+și unu</item>
+        <item>Cincizeci
+și doi</item>
+        <item>Cincizeci
+și trei</item>
+        <item>Cincizeci
+și patru</item>
+        <item>Cincizeci
+și cinci</item>
+        <item>Cincizeci
+și șase</item>
+        <item>Cincizeci
+și șapte</item>
+        <item>Cincizeci
+și opt</item>
+        <item>Cincizeci
+și nouă</item>
+    </string-array>
+</resources>

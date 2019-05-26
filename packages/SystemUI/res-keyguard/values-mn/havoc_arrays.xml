@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Арван хоёр</item>
+        <item>Нэг</item>
+        <item>Хоёр</item>
+        <item>Гурав</item>
+        <item>Дөрөв</item>
+        <item>Тав</item>
+        <item>Зургаа</item>
+        <item>Долоо</item>
+        <item>Найм</item>
+        <item>Ес</item>
+        <item>Арав</item>
+        <item>Арван нэг</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Цаг</item>
+        <item>Нэг</item>
+        <item>Хоёр</item>
+        <item>Гурав</item>
+        <item>Дөрөв</item>
+        <item>Тав</item>
+        <item>Зургаа</item>
+        <item>Долоо</item>
+        <item>Найм</item>
+        <item>Ес</item>
+        <item>Арав</item>
+        <item>Арван нэг</item>
+        <item>Арван хоёр</item>
+        <item>Арван гурав</item>
+        <item>Арван дөрөв</item>
+        <item>Арван тав</item>
+        <item>Арван зургаа</item>
+        <item>Арван долоо</item>
+        <item>Арван найм</item>
+        <item>Арван ес</item>
+        <item>Хорь</item>
+        <item>Хорь
+Нэг</item>
+        <item>Хорь
+Хоёр</item>
+        <item>Хорь
+Гурав</item>
+        <item>Хорь
+Дөрөв</item>
+        <item>Хорь
+Тав</item>
+        <item>Хорь
+Зургаа</item>
+        <item>Хорь
+Долоо</item>
+        <item>Хорь
+Найм</item>
+        <item>Хорь
+Ес</item>
+        <item>Гуч</item>
+        <item>Гуч
+Нэг</item>
+        <item>Гуч
+Хоёр</item>
+        <item>Гуч
+Гурав</item>
+        <item>Гуч
+Дөрөв</item>
+        <item>Гуч
+Тав</item>
+        <item>Гуч
+Зургаа</item>
+        <item>Гуч
+Долоо</item>
+        <item>Гуч
+Найм</item>
+        <item>Гуч
+Ес</item>
+        <item>Дөч</item>
+        <item>Дөч
+Нэг</item>
+        <item>Дөч
+Хоёр</item>
+        <item>Дөч
+Гурав</item>
+        <item>Дөч
+Дөрөв</item>
+        <item>Дөч
+Тав</item>
+        <item>Дөч
+Зургаа</item>
+        <item>Дөч
+Долоо</item>
+        <item>Дөч
+Найм</item>
+        <item>Дөч
+Ес</item>
+        <item>Тавь</item>
+        <item>Тавь
+Нэг</item>
+        <item>Тавь
+Хоёр</item>
+        <item>Тавь
+Гурав</item>
+        <item>Тавь
+Дөрөв</item>
+        <item>Тавь
+Тав</item>
+        <item>Тавь
+Зургаа</item>
+        <item>Тавь
+Долоо</item>
+        <item>Тавь
+Найм</item>
+        <item>Тавь
+Ес</item>
+    </string-array>
+</resources>

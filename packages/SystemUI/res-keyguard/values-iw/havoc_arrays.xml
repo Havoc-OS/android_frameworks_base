@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>שתים-עשרה</item>
+        <item>אחת</item>
+        <item>שתיים</item>
+        <item>שלוש</item>
+        <item>ארבע</item>
+        <item>חמש</item>
+        <item>שש</item>
+        <item>שבע</item>
+        <item>שמונה</item>
+        <item>תשע</item>
+        <item>עשר</item>
+        <item>אחת-עשרה</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>בדיוק</item>
+        <item>ודקה</item>
+        <item>ושתי דקות</item>
+        <item>ושלוש דקות</item>
+        <item>וארבע דקות</item>
+        <item>וחמש דקות</item>
+        <item>ושש דקות</item>
+        <item>ושבע דקות</item>
+        <item>ושמונה דקות</item>
+        <item>ותשע דקות</item>
+        <item>עשר</item>
+        <item>אחת-עשרה</item>
+        <item>שתים-עשרה</item>
+        <item>שלוש-עשרה</item>
+        <item>ארבע-עשרה</item>
+        <item>חמש-עשרה</item>
+        <item>שש-עשרה</item>
+        <item>שבע-עשרה</item>
+        <item>שמונה-עשרה</item>
+        <item>תשע-עשרה</item>
+        <item>עשרים</item>
+        <item>עשרים
+ואחת</item>
+        <item>עשרים
+ושתיים</item>
+        <item>עשרים
+ושלוש</item>
+        <item>עשרים
+וארבע</item>
+        <item>עשרים
+וחמש</item>
+        <item>עשרים
+ושש</item>
+        <item>עשרים
+ושבע</item>
+        <item>עשרים
+ושמונה</item>
+        <item>עשרים
+ותשע</item>
+        <item>שלושים</item>
+        <item>שלושים
+ואחת</item>
+        <item>שלושים
+ושתיים</item>
+        <item>שלושים
+ושלוש</item>
+        <item>שלושים
+וארבע</item>
+        <item>שלושים
+וחמש</item>
+        <item>שלושים
+ושש</item>
+        <item>שלושים
+ושבע</item>
+        <item>שלושים
+ושמונה</item>
+        <item>שלושים
+ותשע</item>
+        <item>ארבעים</item>
+        <item>ארבעים
+ואחת</item>
+        <item>ארבעים
+ושתיים</item>
+        <item>ארבעים
+ושלוש</item>
+        <item>ארבעים
+וארבע</item>
+        <item>ארבעים
+וחמש</item>
+        <item>ארבעים
+ושש</item>
+        <item>ארבעים
+ושבע</item>
+        <item>ארבעים
+ושמונה</item>
+        <item>ארבעים
+ותשע</item>
+        <item>חמישים</item>
+        <item>חמישים
+ואחת</item>
+        <item>חמישים
+ושתיים</item>
+        <item>חמישים
+ושלוש</item>
+        <item>חמישים
+וארבע</item>
+        <item>חמישים
+וחמש</item>
+        <item>חמישים
+ושש</item>
+        <item>חמישים
+ושבע</item>
+        <item>חמישים
+ושמונה</item>
+        <item>חמישים
+ותשע</item>
+    </string-array>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>i dotze</item>
+        <item>Una</item>
+        <item>Dues</item>
+        <item>Tres</item>
+        <item>Quatre</item>
+        <item>Cinc</item>
+        <item>Sis</item>
+        <item>Set</item>
+        <item>Vuit</item>
+        <item>Nou</item>
+        <item>Deu</item>
+        <item>i onze</item>
+    </string-array>
+</resources>

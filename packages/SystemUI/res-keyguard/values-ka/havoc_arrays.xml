@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>თორმეტი</item>
+        <item>ერთი</item>
+        <item>ორი</item>
+        <item>სამი</item>
+        <item>ოთხი</item>
+        <item>ხუთი</item>
+        <item>ექვსი</item>
+        <item>შვიდი</item>
+        <item>რვა</item>
+        <item>ცხრა</item>
+        <item>ათი</item>
+        <item>თერთმეტი</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>საათი</item>
+        <item>ნულ ერთი</item>
+        <item>ნულ ორი</item>
+        <item>ნულ სამი</item>
+        <item>ნულ ოთხი</item>
+        <item>ნულ ხუთი</item>
+        <item>ნულ ექვსი</item>
+        <item>ნულ შვიდი</item>
+        <item>ნულ რვა</item>
+        <item>ნულ ცხრა</item>
+        <item>ათი</item>
+        <item>თერთმეტი</item>
+        <item>თორმეტი</item>
+        <item>ცამეტი</item>
+        <item>თოთხმეტი</item>
+        <item>თხუთმეტი</item>
+        <item>თექვსმეტი</item>
+        <item>ჩვიდმეტი</item>
+        <item>თვრამეტი</item>
+        <item>ცხრამეტი</item>
+        <item>ოცი</item>
+        <item>ოცდაერთი
+</item>
+        <item>ოცდაორი
+</item>
+        <item>ოცდასამი
+</item>
+        <item>ოცდაოთხი
+</item>
+        <item>ოცდახუთი
+</item>
+        <item>ოცდაექვსი
+</item>
+        <item>ოცდაშვიდი
+</item>
+        <item>ოცდარვა
+</item>
+        <item>ოცდაცხრა
+</item>
+        <item>ოცდაათი</item>
+        <item>ოცდათერთმეტი
+</item>
+        <item>ოცდათორმეტი
+</item>
+        <item>ოცდაცამეტი
+</item>
+        <item>ოცდათოთხმეტი
+</item>
+        <item>ოცდათხუთმეტი
+</item>
+        <item>ოცდათექვსმეტი
+</item>
+        <item>ოცდაჩვიდმეტი
+</item>
+        <item>ოცდათვრამეტი
+</item>
+        <item>ოცდაცხრამეტი
+</item>
+        <item>ორმოცი</item>
+        <item>ორმოცდაერთი
+</item>
+        <item>ორმოცდაორი
+</item>
+        <item>ორმოცდასამი
+</item>
+        <item>ორმოცდაოთხი
+</item>
+        <item>ორმოცდახუთი
+</item>
+        <item>ორმოცდაექვსი
+</item>
+        <item>ორმოცდაშვიდი
+</item>
+        <item>ორმოცდარვა
+</item>
+        <item>ორმოცდაცხრა
+</item>
+        <item>ორმოცდაათი</item>
+        <item>ორმოცდათხუთმეტი
+</item>
+        <item>ორმოცდათორმეტი
+</item>
+        <item>ორმოცდაცამეტი
+</item>
+        <item>ორმოცდათოთხმეტი
+</item>
+        <item>ორმოცდათხუთმეტი
+</item>
+        <item>ორმოცდათექვსმეტი
+</item>
+        <item>ორმოცდაჩვიდმეტი
+</item>
+        <item>ორმოცდათვრამეტი
+</item>
+        <item>ორმოცდაცხრამეტი
+</item>
+    </string-array>
+</resources>

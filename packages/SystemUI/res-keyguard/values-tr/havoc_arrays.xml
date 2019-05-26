@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>On İki</item>
+        <item>Bir</item>
+        <item>İki</item>
+        <item>Üç</item>
+        <item>Dört</item>
+        <item>Beş</item>
+        <item>Altı</item>
+        <item>Yedi</item>
+        <item>Sekiz</item>
+        <item>Dokuz</item>
+        <item>On</item>
+        <item>On Bir</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Saat</item>
+        <item>Bir</item>
+        <item>İki</item>
+        <item>Üç</item>
+        <item>Dört</item>
+        <item>Beş</item>
+        <item>Altı</item>
+        <item>Yedi</item>
+        <item>Sekiz</item>
+        <item>Dokuz</item>
+        <item>On</item>
+        <item>On Bir</item>
+        <item>On İki</item>
+        <item>On Üç</item>
+        <item>On Dört</item>
+        <item>On Beş</item>
+        <item>On Altı</item>
+        <item>On Yedi</item>
+        <item>On Sekiz</item>
+        <item>On Dokuz</item>
+        <item>Yirmi</item>
+        <item>Yirmi
+Bir</item>
+        <item>Yirmi
+İki</item>
+        <item>Yirmi
+Üç</item>
+        <item>Yirmi
+Dört</item>
+        <item>Yirmi
+Beş</item>
+        <item>Yirmi
+Altı</item>
+        <item>Yirmi
+Yedi</item>
+        <item>Yirmi
+Sekiz</item>
+        <item>Yirmi
+Dokuz</item>
+        <item>Otuz</item>
+        <item>Otuz
+Bir</item>
+        <item>Otuz
+İki</item>
+        <item>Otuz
+Üç</item>
+        <item>Otuz
+Dört</item>
+        <item>Otuz
+Beş</item>
+        <item>Otuz
+Altı</item>
+        <item>Otuz
+Yedi</item>
+        <item>Otuz
+Sekiz</item>
+        <item>Otuz
+Dokuz</item>
+        <item>Kırk</item>
+        <item>Kırk
+Bir</item>
+        <item>Kırk
+İki</item>
+        <item>Kırk
+Üç</item>
+        <item>Kırk
+Dört</item>
+        <item>Kırk
+Beş</item>
+        <item>Kırk
+Altı</item>
+        <item>Kırk
+Yedi</item>
+        <item>Kırk
+Sekiz</item>
+        <item>Kırk
+Dokuz</item>
+        <item>Elli</item>
+        <item>Elli
+Bir</item>
+        <item>Elli
+İki</item>
+        <item>Elli
+Üç</item>
+        <item>Elli
+Dört</item>
+        <item>Elli
+Beş</item>
+        <item>Elli
+Altı</item>
+        <item>Elli
+Yedi</item>
+        <item>Elli
+Sekiz</item>
+        <item>Elli
+Dokuz</item>
+    </string-array>
+</resources>

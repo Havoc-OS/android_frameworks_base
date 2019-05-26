@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>دوازده</item>
+        <item>یک</item>
+        <item>دو</item>
+        <item>سه</item>
+        <item>چهار</item>
+        <item>پنج</item>
+        <item>شش</item>
+        <item>هفت</item>
+        <item>هشت</item>
+        <item>نه</item>
+        <item>ده</item>
+        <item>یازده</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>ساعت</item>
+        <item>یک</item>
+        <item>دو</item>
+        <item>سه</item>
+        <item>چهار</item>
+        <item>پنج</item>
+        <item>شش</item>
+        <item>هفت</item>
+        <item>هشت</item>
+        <item>نه</item>
+        <item>ده</item>
+        <item>یازده</item>
+        <item>دوازده</item>
+        <item>سیزده</item>
+        <item>چهارده</item>
+        <item>پانزده</item>
+        <item>شانزده</item>
+        <item>هفده</item>
+        <item>هجده</item>
+        <item>نوزده</item>
+        <item>بیست</item>
+        <item>بیست‌و
+یک</item>
+        <item>بیست‌و
+دو</item>
+        <item>بیست‌و
+سه</item>
+        <item>بیست و
+چهار</item>
+        <item>بیست‌و
+پنج</item>
+        <item>بیست‌و
+شش</item>
+        <item>بیست‌و
+هفت</item>
+        <item>بیست‌و
+هشت</item>
+        <item>بیست‌و
+نه</item>
+        <item>سی</item>
+        <item>سی‌و
+یک</item>
+        <item>سی‌و
+دو</item>
+        <item>سی‌و
+سه</item>
+        <item>سی‌و
+چهار</item>
+        <item>سی‌و
+پنج</item>
+        <item>سی‌و
+شش</item>
+        <item>سی‌و
+هفت</item>
+        <item>سی‌و
+هشت</item>
+        <item>سی‌و
+نه</item>
+        <item>چهل</item>
+        <item>چهل‌و
+یک</item>
+        <item>چهل‌و
+دو</item>
+        <item>چهل‌و
+سه</item>
+        <item>چهل‌و
+چهار</item>
+        <item>چهل‌و
+پنج</item>
+        <item>چهل‌و
+شش</item>
+        <item>چهل‌و
+هفت</item>
+        <item>چهل‌و
+هشت</item>
+        <item>چهل‌و
+نه</item>
+        <item>پنجاه</item>
+        <item>پنجاه‌و
+یک</item>
+        <item>پنجاه‌و
+دو</item>
+        <item>چهل‌و
+سه</item>
+        <item>چهل‌و
+چهار</item>
+        <item>پنجاه‌و
+پنج</item>
+        <item>پنجاه‌و
+شش</item>
+        <item>پنجاه‌و
+هفت</item>
+        <item>پنجاه‌و
+هشت</item>
+        <item>پنجاه‌و
+نه</item>
+    </string-array>
+</resources>

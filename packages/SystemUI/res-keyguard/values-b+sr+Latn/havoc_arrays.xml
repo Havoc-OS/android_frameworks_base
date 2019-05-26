@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>dvanaest</item>
+        <item>jedan</item>
+        <item>dva</item>
+        <item>tri</item>
+        <item>četiri</item>
+        <item>pet</item>
+        <item>šest</item>
+        <item>sedam</item>
+        <item>osam</item>
+        <item>devet</item>
+        <item>deset</item>
+        <item>jedanaest</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>sata(i)</item>
+        <item>jedan</item>
+        <item>dva</item>
+        <item>tri</item>
+        <item>četiri</item>
+        <item>pet</item>
+        <item>šest</item>
+        <item>sedam</item>
+        <item>osam</item>
+        <item>devet</item>
+        <item>deset</item>
+        <item>jedanaest</item>
+        <item>dvanaest</item>
+        <item>trinaest</item>
+        <item>četrnaest</item>
+        <item>petnaest</item>
+        <item>šesnaest</item>
+        <item>sedamnaest</item>
+        <item>osamnaest</item>
+        <item>devetnaest</item>
+        <item>dvadeset</item>
+        <item>dvadeset
+jedan</item>
+        <item>dvadeset
+dva</item>
+        <item>dvadeset
+tri</item>
+        <item>dvadeset
+četiri</item>
+        <item>dvadeset
+pet</item>
+        <item>dvadeset
+šest</item>
+        <item>dvadeset
+sedam</item>
+        <item>dvadeset
+osam</item>
+        <item>dvadeset
+devet</item>
+        <item>trideset</item>
+        <item>trideset
+jedan</item>
+        <item>trideset
+dva</item>
+        <item>trideset
+tri</item>
+        <item>trideset
+četiri</item>
+        <item>trideset
+pet</item>
+        <item>trideset
+šest</item>
+        <item>trideset
+sedam</item>
+        <item>trideset
+osam</item>
+        <item>trideset
+devet</item>
+        <item>četrdeset</item>
+        <item>četrdeset
+jedan</item>
+        <item>četrdeset
+dva</item>
+        <item>četrdeset
+tri</item>
+        <item>četrdeset
+četiri</item>
+        <item>četrdeset
+pet</item>
+        <item>četrdeset
+šest</item>
+        <item>četrdeset
+sedam</item>
+        <item>četrdeset
+osam</item>
+        <item>četrdeset
+devet</item>
+        <item>pedeset</item>
+        <item>pedeset
+jedan</item>
+        <item>pedeset
+dva</item>
+        <item>pedeset
+tri</item>
+        <item>pedeset
+četiri</item>
+        <item>pedeset
+pet</item>
+        <item>pedeset
+šest</item>
+        <item>pedeset
+sedam</item>
+        <item>pedeset
+osam</item>
+        <item>pedeset
+devet</item>
+    </string-array>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>الثانية عشرة</item>
+        <item>الواحدة</item>
+        <item>الثانية</item>
+        <item>الثالثة</item>
+        <item>الرابعة</item>
+        <item>الخامسة</item>
+        <item>السادسة</item>
+        <item>السابعة</item>
+        <item>الثامنة</item>
+        <item>التاسعة</item>
+        <item>العاشرة</item>
+        <item>الحادية عشرة</item>
+    </string-array>
+</resources>

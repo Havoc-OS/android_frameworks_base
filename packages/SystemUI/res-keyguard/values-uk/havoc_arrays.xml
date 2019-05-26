@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>дванадцята</item>
+        <item>перша</item>
+        <item>друга</item>
+        <item>третя</item>
+        <item>четверта</item>
+        <item>п’ята</item>
+        <item>шоста</item>
+        <item>сьома</item>
+        <item>восьма</item>
+        <item>дев’ята</item>
+        <item>десята</item>
+        <item>одинадцята</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item />
+        <item>одна</item>
+        <item>дві</item>
+        <item>три</item>
+        <item>чотири</item>
+        <item>п’ять</item>
+        <item>шість</item>
+        <item>сім</item>
+        <item>вісім</item>
+        <item>дев’ять</item>
+        <item>десять</item>
+        <item>одинадцять</item>
+        <item>дванадцять</item>
+        <item>тринадцять</item>
+        <item>чотирнадцять</item>
+        <item>п’ятнадцять</item>
+        <item>шістнадцять</item>
+        <item>сімнадцять</item>
+        <item>вісімнадцять</item>
+        <item>дев’ятнадцять</item>
+        <item>двадцять</item>
+        <item>двадцять
+одна</item>
+        <item>двадцять
+дві</item>
+        <item>двадцять
+три</item>
+        <item>двадцять
+чотири</item>
+        <item>двадцять
+п’ять</item>
+        <item>двадцять
+шість</item>
+        <item>двадцять
+сім</item>
+        <item>двадцять
+вісім</item>
+        <item>двадцять
+дев’ять</item>
+        <item>тридцять</item>
+        <item>тридцять
+одна</item>
+        <item>тридцять
+дві</item>
+        <item>тридцять
+три</item>
+        <item>тридцять
+чотири</item>
+        <item>тридцять
+п’ять</item>
+        <item>тридцять
+шість</item>
+        <item>тридцять
+сім</item>
+        <item>тридцять
+вісім</item>
+        <item>тридцять
+дев’ять</item>
+        <item>сорок</item>
+        <item>сорок
+одна</item>
+        <item>сорок
+дві</item>
+        <item>сорок
+три</item>
+        <item>сорок
+чотири</item>
+        <item>сорок
+п’ять</item>
+        <item>сорок
+шість</item>
+        <item>сорок
+сім</item>
+        <item>сорок
+вісім</item>
+        <item>сорок
+дев’ять</item>
+        <item>п’ятдесят</item>
+        <item>п’ятдесят
+одна</item>
+        <item>п’ятдесят
+дві</item>
+        <item>п’ятдесят
+три</item>
+        <item>п’ятдесят
+чотири</item>
+        <item>п’ятдесят
+п’ять</item>
+        <item>п’ятдесят
+шість</item>
+        <item>п’ятдесят
+сім</item>
+        <item>п’ятдесят
+вісім</item>
+        <item>п’ятдесят
+дев’ять</item>
+    </string-array>
+</resources>

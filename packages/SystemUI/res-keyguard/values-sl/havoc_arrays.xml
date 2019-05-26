@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Dvanajst</item>
+        <item>Ena</item>
+        <item>Dve</item>
+        <item>Tri</item>
+        <item>Štiri</item>
+        <item>Pet</item>
+        <item>Šest</item>
+        <item>Sedem</item>
+        <item>Osem</item>
+        <item>Devet</item>
+        <item>Deset</item>
+        <item>Enajst</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item />
+        <item>Ena</item>
+        <item>Dve</item>
+        <item>Tri</item>
+        <item>Štiri</item>
+        <item>Pet</item>
+        <item>Šest</item>
+        <item>Sedem</item>
+        <item>Osem</item>
+        <item>Devet</item>
+        <item>Deset</item>
+        <item>Enajst</item>
+        <item>Dvanajst</item>
+        <item>Trinajst</item>
+        <item>Štirinajst</item>
+        <item>Petnajst</item>
+        <item>Šestnajst</item>
+        <item>Sedemnajst</item>
+        <item>Osemnajst</item>
+        <item>Devetnajst</item>
+        <item>Dvajset</item>
+        <item>Enaindvajset
+</item>
+        <item>Dvaindvajset
+</item>
+        <item>Triindvajset
+</item>
+        <item>Štiriindvajset
+</item>
+        <item>Petindvajset
+</item>
+        <item>Šestindvajset
+</item>
+        <item>Sedemindvajset
+</item>
+        <item>Osemindvajset
+</item>
+        <item>Devetindvajset
+</item>
+        <item>Trideset</item>
+        <item>Enaintrideset
+</item>
+        <item>Dvaintrideset
+</item>
+        <item>Triintrideset
+</item>
+        <item>Štiriintrideset
+</item>
+        <item>Petintrideset
+</item>
+        <item>Šestintrideset
+</item>
+        <item>Sedemintrideset
+</item>
+        <item>Osemintrideset
+</item>
+        <item>Devetintrideset
+</item>
+        <item>Štirideset</item>
+        <item>Enainštirideset
+</item>
+        <item>Dvainštirideset
+</item>
+        <item>Triinštirideset
+</item>
+        <item>Štiriinštirides.
+</item>
+        <item>Petinštirideset
+</item>
+        <item>Šestinštirideset
+</item>
+        <item>Sedeminštirides.
+</item>
+        <item>Oseminštirideset
+</item>
+        <item>Devetinštirides.
+</item>
+        <item>Petdeset</item>
+        <item>Enainpetdeset
+</item>
+        <item>Dvainpetdeset
+</item>
+        <item>Triinpetdeset
+</item>
+        <item>Štiriinpetdeset
+</item>
+        <item>Petinpetdeset
+</item>
+        <item>Šestinpetdeset
+</item>
+        <item>Sedeminpetdeset
+</item>
+        <item>Oseminpetdeset
+</item>
+        <item>Devetinpetdeset
+</item>
+    </string-array>
+</resources>

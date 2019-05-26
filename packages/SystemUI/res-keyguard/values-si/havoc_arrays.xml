@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>දොළහ</item>
+        <item>එක</item>
+        <item>දෙක</item>
+        <item>තුන</item>
+        <item>හතර</item>
+        <item>පහ</item>
+        <item>හය</item>
+        <item>හත</item>
+        <item>අට</item>
+        <item>නවය</item>
+        <item>දහය</item>
+        <item>එකොළහ</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>පැය</item>
+        <item>එකයි</item>
+        <item>දෙකයි</item>
+        <item>තුනයි</item>
+        <item>හතරයි</item>
+        <item>පහයි</item>
+        <item>හයයි</item>
+        <item>හතයි</item>
+        <item>අටයි</item>
+        <item>නවයයි</item>
+        <item>දහය</item>
+        <item>එකොළහ</item>
+        <item>දොළහ</item>
+        <item>දහතුන</item>
+        <item>දහහතර</item>
+        <item>පහළොව</item>
+        <item>දහසය</item>
+        <item>දහහත</item>
+        <item>දහඅට</item>
+        <item>දහනවය</item>
+        <item>විස්ස</item>
+        <item>විසි
+එක</item>
+        <item>විසි
+දෙක</item>
+        <item>විසි
+තුනයි</item>
+        <item>විසි
+හතර</item>
+        <item>විසි
+පහ</item>
+        <item>විසි
+හය</item>
+        <item>විසි
+හත</item>
+        <item>විසි
+අට</item>
+        <item>විසි
+නවය</item>
+        <item>තිහ</item>
+        <item>තිස්
+එක</item>
+        <item>තිස්
+දෙක</item>
+        <item>තිස්
+තුන</item>
+        <item>තිස්
+හතර</item>
+        <item>තිස්
+පහ</item>
+        <item>තිස්
+හය</item>
+        <item>තිස්
+හත</item>
+        <item>තිස්
+අට</item>
+        <item>තිස්
+නවය</item>
+        <item>හතළිහ</item>
+        <item>හතළිස්
+එක</item>
+        <item>හතළිස්
+දෙක</item>
+        <item>හතළිස්
+තුන</item>
+        <item>හතළිස්
+හතර</item>
+        <item>හතළිස්
+පහ</item>
+        <item>හතළිස්
+හය</item>
+        <item>හතළිස්
+හත</item>
+        <item>හතළිස්
+අට</item>
+        <item>හතළිස්
+නවය</item>
+        <item>පනහ</item>
+        <item>පනස්
+එක</item>
+        <item>පනස්
+දෙක</item>
+        <item>පනස්
+තුන</item>
+        <item>පනස්
+හතර</item>
+        <item>පනස්
+පහ</item>
+        <item>පනස
+හය</item>
+        <item>පනස්
+හත</item>
+        <item>පනස්
+අට</item>
+        <item>පනස්
+නවය</item>
+    </string-array>
+</resources>

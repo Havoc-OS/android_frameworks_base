@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Δώδεκα</item>
+        <item>Μία</item>
+        <item>Δύο</item>
+        <item>Τρία</item>
+        <item>Τέσσερα</item>
+        <item>Πέντε</item>
+        <item>Έξι</item>
+        <item>Επτά</item>
+        <item>Οκτώ</item>
+        <item>Εννέα</item>
+        <item>Δέκα</item>
+        <item>Έντεκα</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Ακριβώς</item>
+        <item>Ένα</item>
+        <item>Δύο</item>
+        <item>Τρεις</item>
+        <item>Τέσσερα</item>
+        <item>Πέντε</item>
+        <item>Έξι</item>
+        <item>Επτά</item>
+        <item>Οκτώ</item>
+        <item>Εννέα</item>
+        <item>Δέκα</item>
+        <item>Έντεκα</item>
+        <item>Δώδεκα</item>
+        <item>Δεκατρία</item>
+        <item>Δεκατέσσερα</item>
+        <item>Δεκαπέντε</item>
+        <item>Δεκαέξι</item>
+        <item>Δεκαεπτά</item>
+        <item>Δεκαοκτώ</item>
+        <item>Δεκαεννέα</item>
+        <item>Είκοσι</item>
+        <item>Είκοσι
+ένα</item>
+        <item>Είκοσι
+δύο</item>
+        <item>Είκοσι
+τρία</item>
+        <item>Είκοσι
+τέσσερα</item>
+        <item>Είκοσι
+πέντε</item>
+        <item>Είκοσι
+έξι</item>
+        <item>Είκοσι
+επτά</item>
+        <item>Είκοσι
+οκτώ</item>
+        <item>Είκοσι
+εννέα</item>
+        <item>Τριάντα</item>
+        <item>Τριάντα
+ένα</item>
+        <item>Τριάντα
+δύο</item>
+        <item>Τριάντα
+οκτώ</item>
+        <item>Τριάντα
+οκτώ</item>
+        <item>Τριάντα
+πέντε</item>
+        <item>Τριάντα
+έξι</item>
+        <item>Τριάντα
+επτά</item>
+        <item>Τριάντα
+οκτώ</item>
+        <item>Τριάντα
+εννέα</item>
+        <item>Σαράντα</item>
+        <item>Σαράντα
+ένα</item>
+        <item>Σαράντα
+δύο</item>
+        <item>Σαράντα
+τρία</item>
+        <item>Σαράντα
+τέσσερα</item>
+        <item>Σαράντα
+πέντε</item>
+        <item>Σαράντα
+έξι</item>
+        <item>Σαράντα
+επτά</item>
+        <item>Σαράντα
+οκτώ</item>
+        <item>Σαράντα
+εννέα</item>
+        <item>Πενήντα</item>
+        <item>Πενήντα
+ένα</item>
+        <item>Πενήντα
+δύο</item>
+        <item>Πενήντα
+τρία</item>
+        <item>Πενήντα
+τέσσερα</item>
+        <item>Πενήντα
+πέντε</item>
+        <item>Πενήντα
+έξι</item>
+        <item>Πενήντα
+επτά</item>
+        <item>Πενήντα
+οκτώ</item>
+        <item>Πενήντα
+εννέα</item>
+    </string-array>
+</resources>

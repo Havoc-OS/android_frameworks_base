@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Он эки</item>
+        <item>Бир</item>
+        <item>Эки</item>
+        <item>Үч</item>
+        <item>Төрт</item>
+        <item>Беш</item>
+        <item>Алты</item>
+        <item>Жети</item>
+        <item>Сегиз</item>
+        <item>Тогуз</item>
+        <item>Он</item>
+        <item>Он бир</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Саат</item>
+        <item>Ноль бир</item>
+        <item>Ноль эки</item>
+        <item>Ноль үч</item>
+        <item>Ноль төрт</item>
+        <item>Ноль беш</item>
+        <item>Ноль алты</item>
+        <item>Ноль жети</item>
+        <item>Ноль сегиз</item>
+        <item>Ноль тогуз</item>
+        <item>Он</item>
+        <item>Он бир</item>
+        <item>Он эки</item>
+        <item>Он үч</item>
+        <item>Он төрт</item>
+        <item>Он беш</item>
+        <item>Он алты</item>
+        <item>Он жети</item>
+        <item>Он сегиз</item>
+        <item>Он тогуз</item>
+        <item>Жыйырма</item>
+        <item>Жыйырма
+бир</item>
+        <item>Жыйырма
+эки</item>
+        <item>Жыйырма
+үч</item>
+        <item>Жыйырма
+төрт</item>
+        <item>Жыйырма
+беш</item>
+        <item>Жыйырма
+алты</item>
+        <item>Жыйырма
+жети</item>
+        <item>Жыйырма
+сегиз</item>
+        <item>Жыйырма
+тогуз</item>
+        <item>Отуз</item>
+        <item>Отуз
+бир</item>
+        <item>Отуз
+эки</item>
+        <item>Отуз
+үч</item>
+        <item>Отуз
+төрт</item>
+        <item>Отуз
+беш</item>
+        <item>Отуз
+алты</item>
+        <item>Кырк
+жети</item>
+        <item>Отуз
+сегиз</item>
+        <item>Отуз
+тогуз</item>
+        <item>Кырк</item>
+        <item>Кырк
+бир</item>
+        <item>Кырк
+эки</item>
+        <item>Кырк
+үч</item>
+        <item>Кырк
+төрт</item>
+        <item>Кырк
+беш</item>
+        <item>Кырк
+алты</item>
+        <item>Кырк
+жети</item>
+        <item>Кырк
+сегиз</item>
+        <item>Кырк
+тогуз</item>
+        <item>Элүү</item>
+        <item>Элүү
+бир</item>
+        <item>Элүү
+эки</item>
+        <item>Элүү
+үч</item>
+        <item>Элүү
+төрт</item>
+        <item>Кырк
+беш</item>
+        <item>Элүү
+алты</item>
+        <item>Кырк
+жети</item>
+        <item>Элүү
+сегиз</item>
+        <item>Элүү
+тогуз</item>
+    </string-array>
+</resources>

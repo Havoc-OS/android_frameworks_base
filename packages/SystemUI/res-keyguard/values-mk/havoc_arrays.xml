@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Дванаесет</item>
+        <item>Еден</item>
+        <item>Два</item>
+        <item>Три</item>
+        <item>Четири</item>
+        <item>Пет</item>
+        <item>Шест</item>
+        <item>Седум</item>
+        <item>Осум</item>
+        <item>Девет</item>
+        <item>Десет</item>
+        <item>Единаесет</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>часот</item>
+        <item>Еден по полноќ</item>
+        <item>Два по полноќ</item>
+        <item>Три по полноќ</item>
+        <item>Четири по полноќ</item>
+        <item>Пет по полноќ</item>
+        <item>Шест по полноќ</item>
+        <item>Седум по полноќ</item>
+        <item>Осум по полноќ</item>
+        <item>Девет по полноќ</item>
+        <item>Десет</item>
+        <item>Единаесет</item>
+        <item>Дванаесет</item>
+        <item>Тринаесет</item>
+        <item>Четиринаесет</item>
+        <item>Петнаесет</item>
+        <item>Шестнаесет</item>
+        <item>Седумнаесет</item>
+        <item>Осумнаесет</item>
+        <item>Деветнаесет</item>
+        <item>Дваесет</item>
+        <item>Дваесет
+и еден</item>
+        <item>Дваесет
+и два</item>
+        <item>Дваесет
+и три</item>
+        <item>Дваесет
+и четири</item>
+        <item>Дваесет
+и пет</item>
+        <item>Дваесет
+и шест</item>
+        <item>Дваесет
+и седум</item>
+        <item>Дваесет
+и осум</item>
+        <item>Дваесет
+и девет</item>
+        <item>Триесет</item>
+        <item>Триесет
+и еден</item>
+        <item>Триесет
+и два</item>
+        <item>Триесет
+и три</item>
+        <item>Триесет
+и четири</item>
+        <item>Триесет
+и пет</item>
+        <item>Триесет
+и шест</item>
+        <item>Триесет
+и седум</item>
+        <item>Триесет
+и осум</item>
+        <item>Триесет
+и девет</item>
+        <item>Четириесет</item>
+        <item>Четириесет
+и еден</item>
+        <item>Четириесет
+и два</item>
+        <item>Четириесет
+и три</item>
+        <item>Четириесет
+и четири</item>
+        <item>Четириесет
+и пет</item>
+        <item>Четириесет
+и шест</item>
+        <item>Четириесет
+и седум</item>
+        <item>Четириесет
+и осум</item>
+        <item>Четириесет
+и девет</item>
+        <item>Педесет</item>
+        <item>Педесет
+и еден</item>
+        <item>Педесет
+и два</item>
+        <item>Педесет
+и три</item>
+        <item>Педесет
+и четири</item>
+        <item>Педесет
+и пет</item>
+        <item>Педесет
+и шест</item>
+        <item>Педесет
+и седум</item>
+        <item>Педесет
+и осум</item>
+        <item>Педесет
+и девет</item>
+    </string-array>
+</resources>

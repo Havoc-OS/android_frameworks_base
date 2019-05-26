@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>ដប់ពីរ</item>
+        <item>មួយ</item>
+        <item>ពីរ</item>
+        <item>បី</item>
+        <item>បួន</item>
+        <item>ប្រាំ</item>
+        <item>ប្រាំមួយ</item>
+        <item>ប្រាំពីរ</item>
+        <item>ប្រាំបី</item>
+        <item>ប្រាំបួន</item>
+        <item>ដប់</item>
+        <item>ដប់មួយ</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>ម៉ោង</item>
+        <item>មួយ</item>
+        <item>ពីរ</item>
+        <item>បី</item>
+        <item>បួន</item>
+        <item>ប្រាំ</item>
+        <item>ប្រាំមួយ</item>
+        <item>ប្រាំពីរ</item>
+        <item>ប្រាំបី</item>
+        <item>ប្រាំបួន</item>
+        <item>ដប់</item>
+        <item>ដប់មួយ</item>
+        <item>ដប់ពីរ</item>
+        <item>ដប់បី</item>
+        <item>ដប់បួន</item>
+        <item>ដប់ប្រាំ</item>
+        <item>ដប់ប្រាំមួយ</item>
+        <item>ដប់ប្រាំពីរ</item>
+        <item>ដប់​ប្រាំបី</item>
+        <item>ដប់​ប្រាំបួន</item>
+        <item>ម្ភៃ</item>
+        <item>ម្ភៃ
+មួយ</item>
+        <item>ម្ភៃ
+ពីរ</item>
+        <item>ម្ភៃ
+បី</item>
+        <item>ម្ភៃ
+បួន</item>
+        <item>ម្ភៃ
+ប្រាំ</item>
+        <item>ម្ភៃ
+ប្រាំមួយ</item>
+        <item>ម្ភៃ
+ប្រាំពីរ</item>
+        <item>ម្ភៃ
+ប្រាំបី</item>
+        <item>ម្ភៃ
+ប្រាំបួន</item>
+        <item>សាមសិប</item>
+        <item>សាមសិប
+មួយ</item>
+        <item>សាមសិប
+ពីរ</item>
+        <item>សាមសិប
+បី</item>
+        <item>សាមសិប
+បួន</item>
+        <item>សាមសិប
+ប្រាំ</item>
+        <item>សាមសិប
+ប្រាំមួយ</item>
+        <item>សាមសិប
+ប្រាំពីរ</item>
+        <item>សាមសិប
+ប្រាំបី</item>
+        <item>សាមសិប
+ប្រាំបួន</item>
+        <item>សែសិប</item>
+        <item>សែសិប
+មួយ</item>
+        <item>សែសិប
+ពីរ</item>
+        <item>សែសិប
+បី</item>
+        <item>សែសិប
+បួន</item>
+        <item>សែសិប
+ប្រាំ</item>
+        <item>សែសិប
+ប្រាំមួយ</item>
+        <item>សែសិប
+ប្រាំពីរ</item>
+        <item>សែសិប
+ប្រាំបី</item>
+        <item>សែសិប
+ប្រាំបួន</item>
+        <item>ហាសិប</item>
+        <item>ហាសិប
+មួយ</item>
+        <item>ហាសិប
+ពីរ</item>
+        <item>ហាសិប
+បី</item>
+        <item>ហាសិប
+បួន</item>
+        <item>ហាសិប
+ប្រាំ</item>
+        <item>ហាសិប
+ប្រាំមួយ</item>
+        <item>ហាសិប
+ប្រាំពីរ</item>
+        <item>ហាសិប
+ប្រាំបី</item>
+        <item>ហាសិប
+ប្រាំបួន</item>
+    </string-array>
+</resources>

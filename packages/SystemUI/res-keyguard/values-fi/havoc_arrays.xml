@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Kaksitoista</item>
+        <item>Yksi</item>
+        <item>Kaksi</item>
+        <item>Kolme</item>
+        <item>Neljä</item>
+        <item>Viisi</item>
+        <item>Kuusi</item>
+        <item>Seitsemän</item>
+        <item>Kahdeksan</item>
+        <item>Yhdeksän</item>
+        <item>Kymmenen</item>
+        <item>Yksitoista</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Nolla nolla</item>
+        <item>Nolla yksi</item>
+        <item>Nolla kaksi</item>
+        <item>Nolla kolme</item>
+        <item>Nolla neljä</item>
+        <item>Nolla viisi</item>
+        <item>Nolla kuusi</item>
+        <item>Nolla seitsemän</item>
+        <item>Nolla kahdeksan</item>
+        <item>Nolla yhdeksän</item>
+        <item>Kymmenen</item>
+        <item>Yksitoista</item>
+        <item>Kaksitoista</item>
+        <item>Kolmetoista</item>
+        <item>Neljätoista</item>
+        <item>Viisitoista</item>
+        <item>Kuusitoista</item>
+        <item>Seitsemäntoista</item>
+        <item>Kahdeksantoista</item>
+        <item>Yhdeksäntoista</item>
+        <item>Kaksikymmentä</item>
+        <item>Kaksikymmentä-
+yksi</item>
+        <item>Kaksikymmentä-
+kaksi</item>
+        <item>Kaksikymmentä-
+kolme</item>
+        <item>Kaksikymmentä-
+neljä</item>
+        <item>Kaksikymmentä-
+viisi</item>
+        <item>Kaksikymmentä-
+kuusi</item>
+        <item>Kaksikymmentä-
+seitsemän</item>
+        <item>28
+</item>
+        <item>Kaksikymmentä-
+yhdeksän</item>
+        <item>Kolmekymmentä</item>
+        <item>Kolmekymmentä-
+yksi</item>
+        <item>Kolmekymmentä-
+kaksi</item>
+        <item>Kolmekymmentä-
+kolme</item>
+        <item>Kolmekymmentä-
+neljä</item>
+        <item>Kolmekymmentä-
+viisi</item>
+        <item>Kolmekymmentä-
+kuusi</item>
+        <item>Kolmekymmentä-
+seitsemän</item>
+        <item>Kolmekymmentä-
+kahdeksan</item>
+        <item>Kolmekymmentä-
+yhdeksän</item>
+        <item>Neljäkymmentä</item>
+        <item>Neljäkymmentä-
+yksi</item>
+        <item>Neljäkymmentä-
+kaksi</item>
+        <item>Neljäkymmentä-
+kolme</item>
+        <item>Neljäkymmentä-
+neljä</item>
+        <item>Neljäkymmentä-
+viisi</item>
+        <item>Neljäkymmentä-
+kuusi</item>
+        <item>Neljäkymmentä-
+seitsemän</item>
+        <item>Neljäkymmentä-
+kahdeksan</item>
+        <item>Neljäkymmentä-
+yhdeksän</item>
+        <item>Viisikymmentä</item>
+        <item>Viisikymmentä-
+yksi</item>
+        <item>Viisikymmentä-
+kaksi</item>
+        <item>Viisikymmentä-
+kolme</item>
+        <item>Viisikymmentä-
+neljä</item>
+        <item>Viisikymmentä-
+viisi</item>
+        <item>Viisikymmentä-
+kuusi</item>
+        <item>Viisikymmentä-
+seitsemän</item>
+        <item>Viisikymmentä-
+kahdeksan</item>
+        <item>Viisikymmentä-
+yhdeksän</item>
+    </string-array>
+</resources>

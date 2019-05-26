@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>বারো</item>
+        <item>এক</item>
+        <item>দুই</item>
+        <item>তিন</item>
+        <item>চার</item>
+        <item>পাঁচ</item>
+        <item>ছয়</item>
+        <item>সাত</item>
+        <item>আট</item>
+        <item>নয়</item>
+        <item>দশ</item>
+        <item>ইলেভেন</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>বাজচ্ছে</item>
+        <item>এক</item>
+        <item>দুই</item>
+        <item>তিন</item>
+        <item>চার</item>
+        <item>পাঁচ</item>
+        <item>ছয়</item>
+        <item>সাত</item>
+        <item>আট</item>
+        <item>নয়</item>
+        <item>দশ</item>
+        <item>ইলেভেন</item>
+        <item>বারো</item>
+        <item>তেরো</item>
+        <item>চোদ্দো</item>
+        <item>পনেরো</item>
+        <item>ষোল</item>
+        <item>সতেরো</item>
+        <item>আঠারো</item>
+        <item>উনিশ</item>
+        <item>কুড়ি</item>
+        <item>এ
+কুশ</item>
+        <item>বাই
+শ</item>
+        <item>তেই
+শ</item>
+        <item>চব্বি
+শ</item>
+        <item>পঁচি
+শ</item>
+        <item>চাব্বি
+শ</item>
+        <item>সা
+তাশ</item>
+        <item>আটা
+শ</item>
+        <item>উন
+ত্রিশ</item>
+        <item>তিরিশ</item>
+        <item>এক
+ত্রিশ</item>
+        <item>বত্রি
+শ</item>
+        <item>তে
+ত্রিশ</item>
+        <item>চৌ
+ত্রিশ</item>
+        <item>পঁয়
+ত্রিশ</item>
+        <item>ছত্রি
+শ</item>
+        <item>সাই
+ত্রিশ</item>
+        <item>আট
+ত্রিশ</item>
+        <item>উন
+চল্লিশ</item>
+        <item>চল্লিশ</item>
+        <item>একচ
+ল্লিশ</item>
+        <item>বিয়া
+ল্লিশ</item>
+        <item>তেতা
+ল্লিশ</item>
+        <item>চুয়া
+ল্লিশ</item>
+        <item>পঁয়তা
+ল্লিশ</item>
+        <item>চুয়া
+ল্লিশ</item>
+        <item>সাত
+চল্লিশ</item>
+        <item>আটচ
+ল্লিশ</item>
+        <item>উন
+পঞ্চাশ</item>
+        <item>পঞ্চাশ</item>
+        <item>একা
+ন্ন</item>
+        <item>বাহ
+ন্ন</item>
+        <item>তিপা
+ন্ন</item>
+        <item>চুয়া
+ন্ন</item>
+        <item>পঞ্চা
+ন্ন</item>
+        <item>পঞ্চা
+ন্ন</item>
+        <item>সা
+তান্ন</item>
+        <item>আটা
+ন্ন</item>
+        <item>উন
+ষাট</item>
+    </string-array>
+</resources>

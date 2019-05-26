@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Tolv</item>
+        <item>Et</item>
+        <item>To</item>
+        <item>Tre</item>
+        <item>Fire</item>
+        <item>Fem</item>
+        <item>Seks</item>
+        <item>Syv</item>
+        <item>Otte</item>
+        <item>Ni</item>
+        <item>Ti</item>
+        <item>Elleve</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>-</item>
+        <item>Et</item>
+        <item>To</item>
+        <item>Tre</item>
+        <item>Fire</item>
+        <item>Fem</item>
+        <item>Seks</item>
+        <item>Syv</item>
+        <item>Otte</item>
+        <item>Ni</item>
+        <item>Ti</item>
+        <item>Elleve</item>
+        <item>Tolv</item>
+        <item>Tretten</item>
+        <item>Fjorten</item>
+        <item>Femten</item>
+        <item>Seksten</item>
+        <item>Sytten</item>
+        <item>Atten</item>
+        <item>Nitten</item>
+        <item>Tyve</item>
+        <item>Enogtyve
+</item>
+        <item>Toogtyve
+</item>
+        <item>Treogtyve
+</item>
+        <item>Fireogtyve
+</item>
+        <item>Femogtyve
+</item>
+        <item>Seksogtyve
+</item>
+        <item>Syvogtyve
+</item>
+        <item>Otteogtyve
+</item>
+        <item>Niogtyve
+</item>
+        <item>Tredive</item>
+        <item>Enogtredive
+</item>
+        <item>Toogtredive
+</item>
+        <item>Treogtredive
+</item>
+        <item>Fireogtredive
+</item>
+        <item>Femogtredive
+</item>
+        <item>Seksogtredive
+</item>
+        <item>Syvogtredive
+</item>
+        <item>Otteogtredive
+</item>
+        <item>Niogtredive
+</item>
+        <item>Fyrre</item>
+        <item>Enogfyrre
+</item>
+        <item>Toogfyrre
+</item>
+        <item>Treogfyrre
+</item>
+        <item>Fireogfyrre
+</item>
+        <item>Femogfyrre
+</item>
+        <item>Seksogfyrre
+</item>
+        <item>Syvogfyrre
+</item>
+        <item>Otteogfyrre
+</item>
+        <item>Niogfyrre
+</item>
+        <item>Halvtreds</item>
+        <item>Enoghalvtreds
+</item>
+        <item>Tooghalvtreds
+</item>
+        <item>Treoghalvtreds
+</item>
+        <item>Fireoghalvtreds
+</item>
+        <item>Femoghalvtreds
+</item>
+        <item>Seksoghalvtreds
+</item>
+        <item>Syvoghalvtreds
+</item>
+        <item>Otteoghalvtreds
+</item>
+        <item>Nioghalvtreds
+</item>
+    </string-array>
+</resources>

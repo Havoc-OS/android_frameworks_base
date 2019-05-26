@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Doce</item>
+        <item>Unha</item>
+        <item>Dúas</item>
+        <item>Tres</item>
+        <item>Catro</item>
+        <item>Cinco</item>
+        <item>Seis</item>
+        <item>Sete</item>
+        <item>Oito</item>
+        <item>Nove</item>
+        <item>Dez</item>
+        <item>Once</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>En punto</item>
+        <item>E un</item>
+        <item>E dous</item>
+        <item>E tres</item>
+        <item>E catro</item>
+        <item>E cinco</item>
+        <item>E seis</item>
+        <item>E sete</item>
+        <item>E oito</item>
+        <item>E nove</item>
+        <item>Dez</item>
+        <item>Once</item>
+        <item>Doce</item>
+        <item>Trece</item>
+        <item>Catorce</item>
+        <item>Quince</item>
+        <item>Dezaseis</item>
+        <item>Dezasete</item>
+        <item>Dezaoito</item>
+        <item>Dezanove</item>
+        <item>Vinte</item>
+        <item>Vinte
+e un</item>
+        <item>Vinte
+e dous</item>
+        <item>Vinte
+e tres</item>
+        <item>Vinte
+e catro</item>
+        <item>Vinte
+e cinco</item>
+        <item>Vinte
+e seis</item>
+        <item>Vinte
+e sete</item>
+        <item>Vinte
+e oito</item>
+        <item>Vinte
+e nove</item>
+        <item>Trinta</item>
+        <item>Trinta
+e un</item>
+        <item>Trinta
+e dous</item>
+        <item>Trinta
+e tres</item>
+        <item>Trinta
+e catro</item>
+        <item>Trinta
+e cinco</item>
+        <item>Trinta
+e seis</item>
+        <item>Trinta
+e sete</item>
+        <item>Trinta
+e oito</item>
+        <item>Trinta
+e nove</item>
+        <item>Corenta</item>
+        <item>Corenta
+e un</item>
+        <item>Corenta
+e dous</item>
+        <item>Corenta
+e tres</item>
+        <item>Corenta
+e catro</item>
+        <item>Corenta
+e cinco</item>
+        <item>Corenta
+e seis</item>
+        <item>Corenta
+e sete</item>
+        <item>Corenta
+e oito</item>
+        <item>Corenta
+e nove</item>
+        <item>Cincuenta</item>
+        <item>Cincuenta
+e un</item>
+        <item>Cincuenta
+e dous</item>
+        <item>Cincuenta
+e tres</item>
+        <item>Cincuenta
+e catro</item>
+        <item>Cincuenta
+e cinco</item>
+        <item>Cincuenta
+e seis</item>
+        <item>Cincuenta
+e sete</item>
+        <item>Cincuenta
+e oito</item>
+        <item>Cincuenta
+e nove</item>
+    </string-array>
+</resources>

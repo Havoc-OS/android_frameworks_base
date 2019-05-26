@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Dvylika</item>
+        <item>Pirma</item>
+        <item>Dvi</item>
+        <item>Trys</item>
+        <item>Keturios</item>
+        <item>Penkios</item>
+        <item>Šešios</item>
+        <item>Septyn.</item>
+        <item>Aštuon.</item>
+        <item>Devynios</item>
+        <item>Dešimt</item>
+        <item>Vienuol.</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>val.</item>
+        <item>Pirma</item>
+        <item>Dvi</item>
+        <item>Trys</item>
+        <item>Keturios</item>
+        <item>Penkios</item>
+        <item>Šešios</item>
+        <item>Septynios</item>
+        <item>Aštuonios</item>
+        <item>Devynios</item>
+        <item>Dešimt</item>
+        <item>Vienuolika</item>
+        <item>Dvylika</item>
+        <item>Trylika</item>
+        <item>Keturiolika</item>
+        <item>Penkiolika</item>
+        <item>Šešiolika</item>
+        <item>Septyniolika</item>
+        <item>Aštuoniolika</item>
+        <item>Devyniolika</item>
+        <item>Dvidešimt</item>
+        <item>Dvidešimt
+viena</item>
+        <item>Dvidešimt
+dvi</item>
+        <item>Dvidešimt
+trys</item>
+        <item>Dvidešimt
+ketur.</item>
+        <item>Dvidešimt
+penkios</item>
+        <item>Dvidešimt
+šešios</item>
+        <item>Dvidešimt
+septyn.</item>
+        <item>Dvidešimt
+aštuon.</item>
+        <item>Dvidešimt
+devyn.</item>
+        <item>Trisdešimt</item>
+        <item>Trisdešimt
+viena</item>
+        <item>Trisdešimt
+dvi</item>
+        <item>Trisdešimt
+trys</item>
+        <item>Trisdešimt
+ketur.</item>
+        <item>Trisdeš.
+penkios</item>
+        <item>Trisdešimt
+šešios</item>
+        <item>Trisdeš.
+septyn.</item>
+        <item>Trisdeš.
+aštuon.</item>
+        <item>Trisdešimt
+devyn.</item>
+        <item>Keturiasdešimt</item>
+        <item>Keturiasd.
+viena</item>
+        <item>Keturiasdeš.
+dvi</item>
+        <item>Keturiasdeš.
+trys</item>
+        <item>Keturiasd.
+ketur.</item>
+        <item>Keturiasd.
+penk.</item>
+        <item>Keturiasd.
+šešios</item>
+        <item>Keturiasd.
+sept.</item>
+        <item>Keturiasdeš.
+ašt.</item>
+        <item>Keduriasd.
+devyn.</item>
+        <item>Penkiasdešimt</item>
+        <item>Penkiasdeš.
+viena</item>
+        <item>Penkiasdešimt
+dvi</item>
+        <item>Penkiasdeš.
+trys</item>
+        <item>Penkiasd.
+ketur.</item>
+        <item>Penkiasdeš.
+penk.</item>
+        <item>Penkiasd.
+šešios</item>
+        <item>Penkiasd.
+septyn.</item>
+        <item>Penkiasd.
+aštuon.</item>
+        <item>Penkiasd.
+devyn.</item>
+    </string-array>
+</resources>

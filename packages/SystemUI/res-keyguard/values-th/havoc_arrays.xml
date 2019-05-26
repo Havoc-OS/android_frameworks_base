@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>สิบสอง</item>
+        <item>หนึ่ง</item>
+        <item>สอง</item>
+        <item>สาม</item>
+        <item>สี่</item>
+        <item>ห้า</item>
+        <item>หก</item>
+        <item>เจ็ด</item>
+        <item>แปด</item>
+        <item>เก้า</item>
+        <item>สิบ</item>
+        <item>สิบเอ็ด</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>นาฬิกา</item>
+        <item>ศูนย์หนึ่ง</item>
+        <item>ศูนย์สอง</item>
+        <item>ศูนย์สาม</item>
+        <item>ศูนย์สี่</item>
+        <item>ศูนย์ห้า</item>
+        <item>ศูนย์หก</item>
+        <item>ศูนย์เจ็ด</item>
+        <item>ศูนย์แปด</item>
+        <item>ศูนย์เก้า</item>
+        <item>สิบ</item>
+        <item>สิบเอ็ด</item>
+        <item>สิบสอง</item>
+        <item>สิบสาม</item>
+        <item>สิบสี่</item>
+        <item>สิบห้า</item>
+        <item>สิบหก</item>
+        <item>สิบเจ็ด</item>
+        <item>สิบแปด</item>
+        <item>สิบเก้า</item>
+        <item>ยี่สิบ</item>
+        <item>ยี่สิบ
+เอ็ด</item>
+        <item>ยี่สิบ
+สอง</item>
+        <item>ยี่สิบ
+สาม</item>
+        <item>ยี่สิบ
+สี่</item>
+        <item>ยี่สิบ
+ห้า</item>
+        <item>ยี่สิบ
+หก</item>
+        <item>ยี่สิบ
+เจ็ด</item>
+        <item>ยี่สิบ
+แปด</item>
+        <item>ยี่สิบ
+เก้า</item>
+        <item>สามสิบ</item>
+        <item>สามสิบ
+เอ็ด</item>
+        <item>สามสิบ
+สอง</item>
+        <item>สามสิบ
+สาม</item>
+        <item>สามสิบ
+สี่</item>
+        <item>สามสิบ
+ห้า</item>
+        <item>สามสิบ
+หก</item>
+        <item>สามสิบ
+เจ็ด</item>
+        <item>สามสิบ
+แปด</item>
+        <item>สามสิบ
+เก้า</item>
+        <item>สี่สิบ</item>
+        <item>สี่สิบ
+เอ็ด</item>
+        <item>สี่สิบ
+สอง</item>
+        <item>สี่สิบ
+สาม</item>
+        <item>สี่สิบ
+สี่</item>
+        <item>สี่สิบ
+ห้า</item>
+        <item>สี่สิบ
+หก</item>
+        <item>สี่สิบ
+เจ็ด</item>
+        <item>สี่สิบ
+แปด</item>
+        <item>สี่สิบ
+เก้า</item>
+        <item>ห้าสิบ</item>
+        <item>ห้าสิบ
+เอ็ด</item>
+        <item>ห้าสิบ
+สอง</item>
+        <item>ห้าสิบ
+สาม</item>
+        <item>ห้าสิบ
+สี่</item>
+        <item>ห้าสิบ
+ห้า</item>
+        <item>ห้าสิบ
+หก</item>
+        <item>ห้าสิบ
+เจ็ด</item>
+        <item>ห้าสิบ
+แปด</item>
+        <item>ห้าสิบ
+เก้า</item>
+    </string-array>
+</resources>

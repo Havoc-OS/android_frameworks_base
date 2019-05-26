@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>ବାର</item>
+        <item>ଏକ</item>
+        <item>ଦୁଇ</item>
+        <item>ତିନି</item>
+        <item>ଚାରି</item>
+        <item>ପାଞ୍ଚ</item>
+        <item>ଛଅ</item>
+        <item>ସାତ</item>
+        <item>ଆଠ</item>
+        <item>ନଅ</item>
+        <item>ଦଶ</item>
+        <item>ଏଗାର</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>ଘଣ୍ଟା</item>
+        <item>ଏକ</item>
+        <item>ଦୁଇ</item>
+        <item>ତିନି</item>
+        <item>ଚାରି</item>
+        <item>ପାଞ୍ଚ</item>
+        <item>ଛଅ</item>
+        <item>ସାତ</item>
+        <item>ଆଠ</item>
+        <item>ନଅ</item>
+        <item>ଦଶ</item>
+        <item>ଏଗାର</item>
+        <item>ବାର</item>
+        <item>ତେର</item>
+        <item>ଚଉଦ</item>
+        <item>ପନ୍ଦର</item>
+        <item>ଷୋହଳ</item>
+        <item>ସତର</item>
+        <item>ଅଠର</item>
+        <item>ଉଣେଇଶି</item>
+        <item>କୋଡି଼ଏ</item>
+        <item>ଏକୋଇଶି
+</item>
+        <item>ବାଇଶି
+</item>
+        <item>ତେଇଶି
+</item>
+        <item>ଚବିଶି
+</item>
+        <item>ପଚିଶି
+</item>
+        <item>ଛବିଶି
+</item>
+        <item>ସତାଇଶି
+</item>
+        <item>ଅଠାଇଶି
+</item>
+        <item>ଅଣତିରିଶି
+</item>
+        <item>ତିରିଶି</item>
+        <item>ଏକତିରିଶି
+</item>
+        <item>ବତିଶି
+</item>
+        <item>ତେତିଶି
+</item>
+        <item>ଚଉତିରିଶି
+</item>
+        <item>ପଞ୍ଚତିରିଶି
+</item>
+        <item>ଛତିଶି
+</item>
+        <item>ସଂଇତିରିଶି
+</item>
+        <item>ଅଠତିରିଶ
+</item>
+        <item>ଅଣଚାଳିଶି
+</item>
+        <item>ଚାଳିଶି</item>
+        <item>ଏକଚାଳିଶି
+</item>
+        <item>ବୟାଳିଶି
+</item>
+        <item>ତେୟାଳିଶି
+</item>
+        <item>ଚଉରାଳିଶି
+</item>
+        <item>ପଞ୍ଚଚାଳିଶି
+</item>
+        <item>ଛୟାଳିଶି
+</item>
+        <item>ସତଚାଳିଶି
+</item>
+        <item>ଅଠଚାଳିଶି
+</item>
+        <item>ଅଣଚାଶ
+</item>
+        <item>ପଚାଶ</item>
+        <item>ଏକାବନ
+</item>
+        <item>ବାଉନ
+</item>
+        <item>ତେପନ
+</item>
+        <item>ଚଉରାଳିଶି
+</item>
+        <item>ପଞ୍ଚାବନ
+</item>
+        <item>ଛପନ
+</item>
+        <item>ସତାବନ
+</item>
+        <item>ଅଠାବନ
+</item>
+        <item>ଅଣଷଠି
+</item>
+    </string-array>
+</resources>

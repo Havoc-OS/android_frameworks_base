@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Он екі</item>
+        <item>Бір</item>
+        <item>Екі</item>
+        <item>Үш</item>
+        <item>Төрт</item>
+        <item>Бес</item>
+        <item>Алты</item>
+        <item>Жеті</item>
+        <item>Сегіз</item>
+        <item>Тоғыз</item>
+        <item>Он</item>
+        <item>Он бір</item>
+    </string-array>
+</resources>

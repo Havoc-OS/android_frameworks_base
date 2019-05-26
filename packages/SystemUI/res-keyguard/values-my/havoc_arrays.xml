@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>ဆယ့်နှစ်</item>
+        <item>တစ်</item>
+        <item>နှစ်</item>
+        <item>သုံး</item>
+        <item>လေး</item>
+        <item>ငါး</item>
+        <item>ခြောက်</item>
+        <item>ခုနစ်</item>
+        <item>ရှစ်</item>
+        <item>ကိုး</item>
+        <item>တစ်ဆယ်</item>
+        <item>ဆယ့်တစ်</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>နာရီ</item>
+        <item>တစ်</item>
+        <item>နှစ်</item>
+        <item>သုံး</item>
+        <item>လေး</item>
+        <item>ငါး</item>
+        <item>ခြောက်</item>
+        <item>ခုနစ်</item>
+        <item>ရှစ်</item>
+        <item>ကိုး</item>
+        <item>တစ်ဆယ်</item>
+        <item>တစ်ဆယ့်တစ်</item>
+        <item>တစ်ဆယ့်နှစ်</item>
+        <item>တစ်ဆယ့်သုံး</item>
+        <item>တစ်ဆယ့်လေး</item>
+        <item>တစ်ဆယ့်ငါး</item>
+        <item>တစ်ဆယ့်ခြောက်</item>
+        <item>တစ်ဆယ့်ခုနစ်</item>
+        <item>တစ်ဆယ့်ရှစ်</item>
+        <item>တစ်ဆယ့်ကိုး</item>
+        <item>နှစ်ဆယ်</item>
+        <item>နှစ်ဆယ့်
+တစ်</item>
+        <item>နှစ်ဆယ့်
+နှစ်</item>
+        <item>နှစ်ဆယ့်
+သုံး</item>
+        <item>နှစ်ဆယ့်
+လေး</item>
+        <item>နှစ်ဆယ့်
+ငါး</item>
+        <item>နှစ်ဆယ့်
+ခြောက်</item>
+        <item>နှစ်ဆယ့်
+ခုနစ်</item>
+        <item>နှစ်ဆယ့်
+ရှစ်</item>
+        <item>နှစ်ဆယ့်
+ကိုး</item>
+        <item>သုံးဆယ်</item>
+        <item>သုံးဆယ့်
+တစ်</item>
+        <item>သုံးဆယ့်
+နှစ်</item>
+        <item>သုံးဆယ့်
+သုံး</item>
+        <item>သုံးဆယ့်
+လေး</item>
+        <item>သုံးဆယ့်
+ငါး</item>
+        <item>သုံးဆယ့်
+ခြောက်</item>
+        <item>သုံးဆယ့်
+ခုနစ်</item>
+        <item>သုံးဆယ့်
+ရှစ်</item>
+        <item>သုံးဆယ့်
+ကိုး</item>
+        <item>လေးဆယ်</item>
+        <item>လေးဆယ့်
+တစ်</item>
+        <item>လေးဆယ့်
+နှစ်</item>
+        <item>လေးဆယ့်
+သုံး</item>
+        <item>လေးဆယ့်
+လေး</item>
+        <item>လေးဆယ့်
+ငါး</item>
+        <item>လေးဆယ့်
+ခြောက်</item>
+        <item>လေးဆယ့်
+ခုနစ်</item>
+        <item>လေးဆယ့်
+ရှစ်</item>
+        <item>လေးဆယ့်
+ကိုး</item>
+        <item>ငါးဆယ်</item>
+        <item>ငါးဆယ့်
+တစ်</item>
+        <item>ငါးဆယ့်
+နှစ်</item>
+        <item>ငါးဆယ့်
+သုံး</item>
+        <item>ငါးဆယ့်
+လေး</item>
+        <item>ငါးဆယ့်
+ငါး</item>
+        <item>ငါးဆယ့်
+ခြောက်</item>
+        <item>ငါးဆယ့်
+ခုနစ်</item>
+        <item>ငါးဆယ့်
+ရှစ်</item>
+        <item>ငါးဆယ့်
+ကိုး</item>
+    </string-array>
+</resources>

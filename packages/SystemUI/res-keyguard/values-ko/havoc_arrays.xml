@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>열두 시</item>
+        <item>한 시</item>
+        <item>두 시</item>
+        <item>세 시</item>
+        <item>네 시</item>
+        <item>다섯 시</item>
+        <item>여섯 시</item>
+        <item>일곱 시</item>
+        <item>여덟 시</item>
+        <item>아홉 시</item>
+        <item>열 시</item>
+        <item>열한 시</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>정각</item>
+        <item>일 분</item>
+        <item>이 분</item>
+        <item>삼 분</item>
+        <item>사 분</item>
+        <item>오 분</item>
+        <item>육 분</item>
+        <item>칠 분</item>
+        <item>팔 분</item>
+        <item>구 분</item>
+        <item>십 분</item>
+        <item>십일 분</item>
+        <item>십이 분</item>
+        <item>십삼 분</item>
+        <item>십사 분</item>
+        <item>십오 분</item>
+        <item>십육 분</item>
+        <item>십칠 분</item>
+        <item>십팔 분</item>
+        <item>십구 분</item>
+        <item>이십 분</item>
+        <item>이십
+일 분</item>
+        <item>이십
+이 분</item>
+        <item>이십
+삼 분</item>
+        <item>이십
+사 분</item>
+        <item>이십
+오 분</item>
+        <item>이십
+육 분</item>
+        <item>이십
+칠 분</item>
+        <item>이십
+팔 분</item>
+        <item>이십
+구 분</item>
+        <item>삼십 분</item>
+        <item>삼십
+일 분</item>
+        <item>삼십
+이 분</item>
+        <item>삼십
+삼 분</item>
+        <item>삼십
+사분</item>
+        <item>삼십
+오 분</item>
+        <item>삼십
+육 분</item>
+        <item>삼십
+칠 분</item>
+        <item>삼십
+팔 분</item>
+        <item>삼십
+구 분</item>
+        <item>사십 분</item>
+        <item>사십
+일 분</item>
+        <item>사십
+이 분</item>
+        <item>사십
+삼 분</item>
+        <item>사십
+사 분</item>
+        <item>사십
+오 분</item>
+        <item>사십
+육분</item>
+        <item>사십
+칠 분</item>
+        <item>사십
+팔 분</item>
+        <item>사십
+구 분</item>
+        <item>오십 분</item>
+        <item>오십
+일 분</item>
+        <item>오십
+이 분</item>
+        <item>오십
+삼 분</item>
+        <item>사십
+사 분</item>
+        <item>오십
+오 분</item>
+        <item>오십
+육 분</item>
+        <item>오십
+칠 분</item>
+        <item>사십
+팔 분</item>
+        <item>오십
+구 분</item>
+    </string-array>
+</resources>

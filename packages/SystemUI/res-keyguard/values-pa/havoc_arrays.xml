@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>ਬਾਰਾਂ</item>
+        <item>ਇੱਕ</item>
+        <item>ਦੋ</item>
+        <item>ਤਿੰਨ</item>
+        <item>ਚਾਰ</item>
+        <item>ਪੰਜ</item>
+        <item>ਛੇ</item>
+        <item>ਸੱਤ</item>
+        <item>ਅੱਠ</item>
+        <item>ਨੌ</item>
+        <item>ਦਸ</item>
+        <item>ਗਿਆਰਾਂ</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>ਵਜੇ</item>
+        <item>ਇੱਕ</item>
+        <item>ਦੋ</item>
+        <item>ਤਿੰਨ</item>
+        <item>ਚਾਰ</item>
+        <item>ਪੰਜ</item>
+        <item>ਛੇ</item>
+        <item>ਸੱਤ</item>
+        <item>ਅੱਠ</item>
+        <item>ਨੌ</item>
+        <item>ਦਸ</item>
+        <item>ਗਿਆਰਾਂ</item>
+        <item>ਬਾਰਾਂ</item>
+        <item>ਤੇਰਾਂ</item>
+        <item>ਚੌਦਾਂ</item>
+        <item>ਪੰਦਰਾਂ</item>
+        <item>ਸੋਲਾਂ</item>
+        <item>ਸਤਾਰਾਂ</item>
+        <item>ਅਠਾਰਾਂ</item>
+        <item>ਉੱਨੀ</item>
+        <item>ਵੀਹ</item>
+        <item>ਵੀਹ
+ਇੱਕ</item>
+        <item>ਵੀਹ
+ਦੋ</item>
+        <item>ਵੀਹ
+ਤਿੰਨ</item>
+        <item>ਵੀਹ
+ਚਾਰ</item>
+        <item>ਵੀਹ
+ਪੰਜ</item>
+        <item>ਵੀਹ
+ਛੇ</item>
+        <item>ਵੀਹ
+ਸੱਤ</item>
+        <item>ਵੀਹ
+ਅੱਠ</item>
+        <item>ਵੀਹ
+ਨੌ</item>
+        <item>ਤੀਹ</item>
+        <item>ਤੀਹ
+ਇੱਕ</item>
+        <item>ਤੀਹ
+ਦੋ</item>
+        <item>ਤੀਹ
+ਤਿੰਨ</item>
+        <item>ਤੀਹ
+ਚਾਰ</item>
+        <item>ਤੀਹ
+ਪੰਜ</item>
+        <item>ਤੀਹ
+ਛੇ</item>
+        <item>ਤੀਹ
+ਸੱਤ</item>
+        <item>ਤੀਹ
+ਅੱਠ</item>
+        <item>ਤੀਹ
+ਨੌ</item>
+        <item>ਚਾਲੀ</item>
+        <item>ਚਾਲੀ
+ਇੱਕ</item>
+        <item>ਚਾਲੀ
+ਦੋ</item>
+        <item>ਚਾਲੀ
+ਤਿੰਨ</item>
+        <item>ਚਾਲੀ
+ਚਾਰ</item>
+        <item>ਚਾਲੀ
+ਪੰਜ</item>
+        <item>ਚਾਲੀ
+ਛੇ</item>
+        <item>ਚਾਲੀ
+ਸੱਤ</item>
+        <item>ਚਾਲੀ
+ਅੱਠ</item>
+        <item>ਚਾਲੀ
+ਨੌ</item>
+        <item>ਪੰਜਾਹ</item>
+        <item>ਪੰਜਾਹ
+ਇੱਕ</item>
+        <item>ਪੰਜਾਹ
+ਦੋ</item>
+        <item>ਪੰਜਾਹ
+ਤਿੰਨ</item>
+        <item>ਪੰਜਾਹ
+ਚਾਰ</item>
+        <item>ਪੰਜਾਹ
+ਪੰਜ</item>
+        <item>ਪੰਜਾਹ
+ਛੇ</item>
+        <item>ਪੰਜਾਹ
+ਸੱਤ</item>
+        <item>ਪੰਜਾਹ
+ਅੱਠ</item>
+        <item>ਪੰਜਾਹ
+ਨੌ</item>
+    </string-array>
+</resources>

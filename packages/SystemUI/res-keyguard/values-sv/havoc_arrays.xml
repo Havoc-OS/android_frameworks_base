@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Tolv</item>
+        <item>En</item>
+        <item>Två</item>
+        <item>Tre</item>
+        <item>Fyra</item>
+        <item>Fem</item>
+        <item>Sex</item>
+        <item>Sju</item>
+        <item>Åtta</item>
+        <item>Nio</item>
+        <item>Tio</item>
+        <item>Elva</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Klockan</item>
+        <item>Noll ett</item>
+        <item>Noll två</item>
+        <item>Noll tre</item>
+        <item>Noll fyra</item>
+        <item>Noll fem</item>
+        <item>Noll sex</item>
+        <item>Noll sju</item>
+        <item>Noll åtta</item>
+        <item>Noll nio</item>
+        <item>Tio</item>
+        <item>Elva</item>
+        <item>Tolv</item>
+        <item>Tretton</item>
+        <item>Fjorton</item>
+        <item>Femton</item>
+        <item>Sexton</item>
+        <item>Sjutton</item>
+        <item>Arton</item>
+        <item>Nitton</item>
+        <item>Tjugo</item>
+        <item>Tjugoett
+</item>
+        <item>Tjugotvå
+</item>
+        <item>Tjugotre
+</item>
+        <item>Tjugofyra
+</item>
+        <item>Tjugofem
+</item>
+        <item>Tjugosex
+</item>
+        <item>Tjugosju
+</item>
+        <item>Tjugoåtta
+</item>
+        <item>Tjugonio
+</item>
+        <item>Trettio</item>
+        <item>Trettioett
+</item>
+        <item>Trettiotvå
+</item>
+        <item>Trettiotre
+</item>
+        <item>Trettiofyra
+</item>
+        <item>Trettiofem
+</item>
+        <item>Trettiosex
+</item>
+        <item>Trettiosju
+</item>
+        <item>Trettioåtta
+</item>
+        <item>Trettionio
+</item>
+        <item>Fyrtio</item>
+        <item>Fyrtioett
+</item>
+        <item>Fyrtiotvå
+</item>
+        <item>Fyrtiotre
+</item>
+        <item>Fyrtiofyra
+</item>
+        <item>Fyrtiofem
+</item>
+        <item>Fyrtiosex
+</item>
+        <item>Fyrtiosju
+</item>
+        <item>Fyrtioåtta
+</item>
+        <item>Fyrtionio
+</item>
+        <item>Femtio</item>
+        <item>Femtioett
+</item>
+        <item>Femtiotvå
+</item>
+        <item>Femtiotre
+</item>
+        <item>Femtiofyra
+</item>
+        <item>Femtiofem
+</item>
+        <item>Femtiosex
+</item>
+        <item>Femtiosju
+</item>
+        <item>Femtioåtta
+</item>
+        <item>Femtionio
+</item>
+    </string-array>
+</resources>

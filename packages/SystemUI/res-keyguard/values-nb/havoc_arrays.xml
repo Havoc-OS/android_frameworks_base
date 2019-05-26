@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Tolv</item>
+        <item>Ett</item>
+        <item>To</item>
+        <item>Tre</item>
+        <item>Fire</item>
+        <item>Fem</item>
+        <item>Seks</item>
+        <item>Sju</item>
+        <item>Åtte</item>
+        <item>Ni</item>
+        <item>Ti</item>
+        <item>Elleve</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>null-null</item>
+        <item>Ett</item>
+        <item>To</item>
+        <item>Tre</item>
+        <item>Fire</item>
+        <item>Fem</item>
+        <item>Seks</item>
+        <item>Sju</item>
+        <item>åtte</item>
+        <item>Ni</item>
+        <item>Ti</item>
+        <item>Elleve</item>
+        <item>Tolv</item>
+        <item>Tretten</item>
+        <item>Fjorten</item>
+        <item>Femten</item>
+        <item>Seksten</item>
+        <item>Sytten</item>
+        <item>Atten</item>
+        <item>Nitten</item>
+        <item>Tjue</item>
+        <item>Tjue
+en</item>
+        <item>Tjue
+to</item>
+        <item>Tjue
+tre</item>
+        <item>Tjue
+fire</item>
+        <item>Tjue
+fem</item>
+        <item>Tjue
+seks</item>
+        <item>Tjue
+sju</item>
+        <item>Tjue
+åtte</item>
+        <item>Tjue
+ni</item>
+        <item>Tretti</item>
+        <item>Tretti
+en</item>
+        <item>Tretti
+to</item>
+        <item>Tretti
+tre</item>
+        <item>Tretti
+fire</item>
+        <item>Tretti
+fem</item>
+        <item>Tretti
+seks</item>
+        <item>Tretti
+sju</item>
+        <item>Tretti
+åtte</item>
+        <item>Tretti
+ni</item>
+        <item>Førti</item>
+        <item>Førti
+en</item>
+        <item>Førti
+to</item>
+        <item>Førti
+tre</item>
+        <item>Førti
+fire</item>
+        <item>Førti
+fem</item>
+        <item>Førti
+seks</item>
+        <item>Førti
+sju</item>
+        <item>Førti
+åtte</item>
+        <item>Førti
+ni</item>
+        <item>Femti</item>
+        <item>Femti
+en</item>
+        <item>Femti
+to</item>
+        <item>Femti
+tre</item>
+        <item>Femti
+fire</item>
+        <item>Femti
+fem</item>
+        <item>Femti
+seks</item>
+        <item>Femti
+sju</item>
+        <item>Femti
+åtte</item>
+        <item>Femti
+ni</item>
+    </string-array>
+</resources>

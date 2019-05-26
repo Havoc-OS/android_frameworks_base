@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Twaalf</item>
+        <item>Een</item>
+        <item>Twee</item>
+        <item>Drie</item>
+        <item>Vier</item>
+        <item>Vyf</item>
+        <item>Ses</item>
+        <item>Sewe</item>
+        <item>Agt</item>
+        <item>Nege</item>
+        <item>Tien</item>
+        <item>Elf</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>uur</item>
+        <item>Een</item>
+        <item>Twee</item>
+        <item>Drie</item>
+        <item>Vier</item>
+        <item>Vyf</item>
+        <item>Ses</item>
+        <item>Sewe</item>
+        <item>Agt</item>
+        <item>Nege</item>
+        <item>Tien</item>
+        <item>Elf</item>
+        <item>Twaalf</item>
+        <item>Dertien</item>
+        <item>Veertien</item>
+        <item>Vyftien</item>
+        <item>Sestien</item>
+        <item>Sewentien</item>
+        <item>Agtien</item>
+        <item>Negentien</item>
+        <item>Twintig</item>
+        <item>Een en
+twintig</item>
+        <item>Twee en
+twintig</item>
+        <item>Drie en
+twintig</item>
+        <item>Vier en
+twintig</item>
+        <item>Vyf en
+twintig</item>
+        <item>Ses en
+twintig</item>
+        <item>Sewe en
+twintig</item>
+        <item>Agt en
+twintig</item>
+        <item>Nege en
+twintig</item>
+        <item>Dertig</item>
+        <item>Een en
+dertig</item>
+        <item>Twee en
+dertig</item>
+        <item>Drie en
+dertig</item>
+        <item>Vier en
+dertig</item>
+        <item>Vyf en
+dertig</item>
+        <item>Ses en
+dertig</item>
+        <item>Sewe en
+dertig</item>
+        <item>Agt en
+dertig</item>
+        <item>Nege en
+dertig</item>
+        <item>Veertig</item>
+        <item>Een en
+veertig</item>
+        <item>Twee en
+veertig</item>
+        <item>Drie en
+veertig</item>
+        <item>Vier en
+veertig</item>
+        <item>Vyf en
+veertig</item>
+        <item>Ses en
+veertig</item>
+        <item>Sewe en
+veertig</item>
+        <item>Agt en
+veertig</item>
+        <item>Nege en
+veertig</item>
+        <item>Vyftig</item>
+        <item>Een en
+vyftig</item>
+        <item>Twee en
+vyftig</item>
+        <item>Drie en
+vyftig</item>
+        <item>Vier en
+vyftig</item>
+        <item>Vyf en
+vyftig</item>
+        <item>Ses en
+vyftig</item>
+        <item>Sewe en
+vyftig</item>
+        <item>Agt en
+vyftig</item>
+        <item>Nege en
+vyftig</item>
+    </string-array>
+</resources>

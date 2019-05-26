@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Dvanásť</item>
+        <item>Jedna</item>
+        <item>Dve</item>
+        <item>Tri</item>
+        <item>Štyri</item>
+        <item>Päť</item>
+        <item>Šesť</item>
+        <item>Sedem</item>
+        <item>Osem</item>
+        <item>Deväť</item>
+        <item>Desať</item>
+        <item>Jedenásť</item>
+    </string-array>
+</resources>

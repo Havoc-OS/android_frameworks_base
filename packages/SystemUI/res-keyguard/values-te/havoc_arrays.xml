@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>పన్నెండు</item>
+        <item>ఒకటి</item>
+        <item>రెండు</item>
+        <item>మూడు</item>
+        <item>నాలుగు</item>
+        <item>ఐదు</item>
+        <item>ఆరు</item>
+        <item>ఏడు</item>
+        <item>ఎనిమిది</item>
+        <item>తొమ్మిది</item>
+        <item>పది</item>
+        <item>పదకొండు</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>అవుతుంది</item>
+        <item>ఒకటి అవుతుంది</item>
+        <item>రెండు అవుతుంది</item>
+        <item>మూడు అవుతుంది</item>
+        <item>నాలుగు అవుతుంది</item>
+        <item>ఐదు అవుతుంది</item>
+        <item>ఆరు అవుతుంది</item>
+        <item>ఏడు అవుతుంది</item>
+        <item>ఎనిమిది అవుతుంది</item>
+        <item>తొమ్మిది అవుతుంది</item>
+        <item>పది</item>
+        <item>పదకొండు</item>
+        <item>పన్నెండు</item>
+        <item>పదమూడు</item>
+        <item>పద్నాలుగు</item>
+        <item>పదిహేను</item>
+        <item>పదహారు</item>
+        <item>పదిహేడు</item>
+        <item>పద్దెనిమిది</item>
+        <item>పంతొమ్మిది</item>
+        <item>ఇరవై</item>
+        <item>ఇరవై
+ఒకటి</item>
+        <item>ఇరవై
+రెండు</item>
+        <item>ఇరవై
+మూడు</item>
+        <item>ఇరవై
+నాలుగు</item>
+        <item>ఇరవై
+ఐదు</item>
+        <item>ఇరవై
+ఆరు</item>
+        <item>ఇరవై
+ఏడు</item>
+        <item>ఇరవై
+ఎనిమిది</item>
+        <item>ఇరవై
+తొమ్మిది</item>
+        <item>ముప్పై</item>
+        <item>ముప్పై
+ఒకటి</item>
+        <item>ముప్పై
+రెండు</item>
+        <item>ముప్పై
+మూడు</item>
+        <item>ముప్పై
+నాలుగు</item>
+        <item>ముప్పై
+ఐదు</item>
+        <item>ముప్పై
+ఆరు</item>
+        <item>ముప్పై
+ఏడు</item>
+        <item>ముప్ఫై
+ఎనిమిది</item>
+        <item>ముప్పై
+తొమ్మిది</item>
+        <item>నలభై</item>
+        <item>నలభై
+ఒకటి</item>
+        <item>నలభై
+రెండు</item>
+        <item>నలభై
+మూడు</item>
+        <item>నలభై
+నాలుగు</item>
+        <item>నలభై
+ఐదు</item>
+        <item>నలభై
+ఆరు</item>
+        <item>నలభై
+ఏడు</item>
+        <item>నలభై
+ఎనిమిది</item>
+        <item>నలభై
+తొమ్మిది</item>
+        <item>యాభై</item>
+        <item>యాభై
+ఒకటి</item>
+        <item>యాభై
+రెండు</item>
+        <item>యాభై
+మూడు</item>
+        <item>యాభై
+నాలుగు</item>
+        <item>యాభై
+ఐదు</item>
+        <item>యాభై
+ఆరు</item>
+        <item>యాభై
+ఏడు</item>
+        <item>యాభై
+ఎనిమిది</item>
+        <item>యాభై
+తొమ్మిది</item>
+    </string-array>
+</resources>

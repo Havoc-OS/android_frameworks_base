@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Kaksteist</item>
+        <item>Üks</item>
+        <item>Kaks</item>
+        <item>Kolm</item>
+        <item>Neli</item>
+        <item>Viis</item>
+        <item>Kuus</item>
+        <item>Seitse</item>
+        <item>Kaheksa</item>
+        <item>Üheksa</item>
+        <item>Kümme</item>
+        <item>Üksteist</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>null üks</item>
+        <item>null üks</item>
+        <item>null kaks</item>
+        <item>null kolm</item>
+        <item>null neli</item>
+        <item>null viis</item>
+        <item>null kuus</item>
+        <item>null seitse</item>
+        <item>null kaheksa</item>
+        <item>null üheksa</item>
+        <item>Kümme</item>
+        <item>Üksteist</item>
+        <item>Kaksteist</item>
+        <item>Kolmteist</item>
+        <item>Neliteist</item>
+        <item>Viisteist</item>
+        <item>Kuusteist</item>
+        <item>Seitseteist</item>
+        <item>Kaheksateist</item>
+        <item>Üheksateist</item>
+        <item>Kakskümmend</item>
+        <item>Kakskümmend
+üks</item>
+        <item>Kakskümmend
+kaks</item>
+        <item>Kakskümmend
+kolm</item>
+        <item>Kakskümmend
+neli</item>
+        <item>Kakskümmend
+viis</item>
+        <item>Kakskümmend
+kuus</item>
+        <item>Kakskümmend
+seitse</item>
+        <item>Kakskümmend
+kaheksa</item>
+        <item>Kakskümmend
+üheksa</item>
+        <item>Kolmkümmend</item>
+        <item>Kolmkümmend
+üks</item>
+        <item>Kolmkümmend
+kaks</item>
+        <item>Kolmkümmend
+kolm</item>
+        <item>Kolmkümmend
+neli</item>
+        <item>Kolmkümmend
+viis</item>
+        <item>Kolmkümmend
+kuus</item>
+        <item>Kolmkümmend
+seitse</item>
+        <item>Kolmkümmend
+kaheksa</item>
+        <item>Kolmkümmend
+üheksa</item>
+        <item>Nelikümmend</item>
+        <item>Nelikümmend
+üks</item>
+        <item>Nelikümmend
+kaks</item>
+        <item>Nelikümmend
+kolm</item>
+        <item>Nelikümmend
+neli</item>
+        <item>Nelikümmend
+viis</item>
+        <item>Nelikümmend
+kuus</item>
+        <item>Nelikümmend
+seitse</item>
+        <item>Nelikümmend
+kaheksa</item>
+        <item>Nelikümmend
+üheksa</item>
+        <item>Viiskümmend</item>
+        <item>Viiskümmend
+üks</item>
+        <item>Viiskümmend
+kaks</item>
+        <item>Viiskümmend
+kolm</item>
+        <item>Viiskümmend
+neli</item>
+        <item>Viiskümmend
+viis</item>
+        <item>Viiskümmend
+kuus</item>
+        <item>Viiskümmend
+seitse</item>
+        <item>Viiskümmend
+kaheksa</item>
+        <item>Viiskümmend
+üheksa</item>
+    </string-array>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Hamabiak</item>
+        <item>Ordu bata</item>
+        <item>Ordu biak</item>
+        <item>Hirurak</item>
+        <item>Laurak</item>
+        <item>Bostak</item>
+        <item>Seiak</item>
+        <item>Zazpiak</item>
+        <item>Zortziak</item>
+        <item>Bederatziak</item>
+        <item>Hamarrak</item>
+        <item>Hamaikak</item>
+    </string-array>
+</resources>

@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>дванаест</item>
+        <item>један</item>
+        <item>два</item>
+        <item>три</item>
+        <item>четири</item>
+        <item>пет</item>
+        <item>шест</item>
+        <item>седам</item>
+        <item>осам</item>
+        <item>девет</item>
+        <item>десет</item>
+        <item>једанаест</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>сата(и)</item>
+        <item>један</item>
+        <item>два</item>
+        <item>три</item>
+        <item>четири</item>
+        <item>пет</item>
+        <item>шест</item>
+        <item>седам</item>
+        <item>осам</item>
+        <item>девет</item>
+        <item>десет</item>
+        <item>једанаест</item>
+        <item>дванаест</item>
+        <item>тринаест</item>
+        <item>четрнаест</item>
+        <item>петнаест</item>
+        <item>шеснаест</item>
+        <item>седамнаест</item>
+        <item>осамнаест</item>
+        <item>деветнаест</item>
+        <item>двадесет</item>
+        <item>двадесет
+један</item>
+        <item>двадесет
+два</item>
+        <item>двадесет
+три</item>
+        <item>двадесет
+четири</item>
+        <item>двадесет
+пет</item>
+        <item>двадесет
+шест</item>
+        <item>двадесет
+седам</item>
+        <item>двадесет
+осам</item>
+        <item>двадесет
+девет</item>
+        <item>тридесет</item>
+        <item>тридесет
+један</item>
+        <item>тридесет
+два</item>
+        <item>тридесет
+три</item>
+        <item>тридесет
+четири</item>
+        <item>тридесет
+пет</item>
+        <item>тридесет
+шест</item>
+        <item>тридесет
+седам</item>
+        <item>тридесет
+осам</item>
+        <item>тридесет
+девет</item>
+        <item>четрдесет</item>
+        <item>четрдесет
+један</item>
+        <item>четрдесет
+два</item>
+        <item>четрдесет
+три</item>
+        <item>четрдесет
+четири</item>
+        <item>четрдесет
+пет</item>
+        <item>четрдесет
+шест</item>
+        <item>четрдесет
+седам</item>
+        <item>четрдесет
+осам</item>
+        <item>четрдесет
+девет</item>
+        <item>педесет</item>
+        <item>педесет
+један</item>
+        <item>педесет
+два</item>
+        <item>педесет
+три</item>
+        <item>педесет
+четири</item>
+        <item>педесет
+пет</item>
+        <item>педесет
+шест</item>
+        <item>педесет
+седам</item>
+        <item>педесет
+осам</item>
+        <item>педесет
+девет</item>
+    </string-array>
+</resources>

@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>On iki</item>
+        <item>Bir</item>
+        <item>İki</item>
+        <item>Üç</item>
+        <item>Dörd</item>
+        <item>Beş</item>
+        <item>Altı</item>
+        <item>Yeddi</item>
+        <item>Səkkiz</item>
+        <item>Doqquz</item>
+        <item>On</item>
+        <item>On bir</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>Saat</item>
+        <item>Bir</item>
+        <item>İki</item>
+        <item>Üç</item>
+        <item>Dörd</item>
+        <item>Beş</item>
+        <item>Altı</item>
+        <item>Yeddi</item>
+        <item>Səkkiz</item>
+        <item>doqquz</item>
+        <item>On</item>
+        <item>On bir</item>
+        <item>On iki</item>
+        <item>On üç</item>
+        <item>On dörd</item>
+        <item>On beş</item>
+        <item>On altı</item>
+        <item>On yeddi</item>
+        <item>On səkkiz</item>
+        <item>On doqquz</item>
+        <item>İyirmi</item>
+        <item>İyirmi
+Bir</item>
+        <item>İyirmi
+İki</item>
+        <item>İyirmi
+Üç</item>
+        <item>İyirmi
+Dörd</item>
+        <item>İyirmi
+Beş</item>
+        <item>İyirmi
+Altı</item>
+        <item>İyirmi
+Yeddi</item>
+        <item>İyirmi
+Səkkiz</item>
+        <item>İyirmi
+Doqquz</item>
+        <item>Otuz</item>
+        <item>Otuz
+Bir</item>
+        <item>Otuz
+İki</item>
+        <item>Otuz
+Üç</item>
+        <item>Otuz
+Dörd</item>
+        <item>Otuz
+Beş</item>
+        <item>Otuz
+Altı</item>
+        <item>Otuz
+Yeddi</item>
+        <item>Otuz
+Yeddi</item>
+        <item>Otuz
+Doqquz</item>
+        <item>Qırx</item>
+        <item>Qırx
+Bir</item>
+        <item>Qırx
+İki</item>
+        <item>Qırx
+Üç</item>
+        <item>Qırx
+İki</item>
+        <item>Qırx
+Beş</item>
+        <item>Qırx
+Altı</item>
+        <item>Qırx
+Yeddi</item>
+        <item>Qırx
+Səkkiz</item>
+        <item>Qırx
+Doqquz</item>
+        <item>Əlli</item>
+        <item>Əlli
+Bir</item>
+        <item>Əlli
+İki</item>
+        <item>Əlli
+Üç</item>
+        <item>Əlli
+Dörd</item>
+        <item>Əlli
+Beş</item>
+        <item>Əlli
+Altı</item>
+        <item>Əlli
+Yeddi</item>
+        <item>Əlli
+Səkkiz</item>
+        <item>Əlli
+Doqquz</item>
+    </string-array>
+</resources>

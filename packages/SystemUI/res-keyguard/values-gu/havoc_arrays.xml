@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>બાર</item>
+        <item>એક</item>
+        <item>બે</item>
+        <item>ત્રણ</item>
+        <item>ચાર</item>
+        <item>પાંચ</item>
+        <item>છ</item>
+        <item>સાત</item>
+        <item>આઠ</item>
+        <item>નવ</item>
+        <item>દસ</item>
+        <item>અગિયાર</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>વાગ્યે</item>
+        <item>એક</item>
+        <item>બે</item>
+        <item>ત્રણ</item>
+        <item>ચાર</item>
+        <item>પાંચ</item>
+        <item>છ</item>
+        <item>સાત</item>
+        <item>આઠ</item>
+        <item>નવ</item>
+        <item>દસ</item>
+        <item>અગિયાર</item>
+        <item>બાર</item>
+        <item>તેર</item>
+        <item>ચૌદ</item>
+        <item>પંદર</item>
+        <item>સોળ</item>
+        <item>સત્તર</item>
+        <item>અઢાર</item>
+        <item>ઓગણીસ</item>
+        <item>વીસ</item>
+        <item>એકવીસ
+</item>
+        <item>બાવીસ
+</item>
+        <item>ત્રેવીસ
+</item>
+        <item>ચોવીસ
+</item>
+        <item>પચ્ચીસ
+</item>
+        <item>છવ્વીસ
+</item>
+        <item>સત્યાવીસ
+</item>
+        <item>અઠ્ઠયાવીસ
+</item>
+        <item>ઓગણત્રીસ
+</item>
+        <item>ત્રીસ</item>
+        <item>એકત્રીસ
+</item>
+        <item>બત્રીસ
+</item>
+        <item>તેત્રીસ
+</item>
+        <item>ચોત્રીસ
+</item>
+        <item>પાંત્રીસ
+</item>
+        <item>છત્રીસ
+</item>
+        <item>તેત્રીસ
+</item>
+        <item>આડત્રીસ
+</item>
+        <item>ઓગણચાલીસ
+</item>
+        <item>ચાલીસ</item>
+        <item>એકતાળીસ
+</item>
+        <item>બેતાલીસ
+</item>
+        <item>તેતાલીસ
+</item>
+        <item>ચુમાલીસ
+</item>
+        <item>પિસ્તાળીસ
+</item>
+        <item>છેંતાલીસ
+</item>
+        <item>સુડતાળીસ
+</item>
+        <item>અડતાલીસ
+</item>
+        <item>ઓગણપચાસ
+</item>
+        <item>પચાસ</item>
+        <item>એકાવન
+</item>
+        <item>બાવન
+</item>
+        <item>ત્રેપન
+</item>
+        <item>ચોપન
+</item>
+        <item>પંચાવન
+</item>
+        <item>છપ્પન
+</item>
+        <item>સત્તાવન
+</item>
+        <item>અઠ્ઠાવન
+</item>
+        <item>ઓગણસાઠ
+</item>
+    </string-array>
+</resources>

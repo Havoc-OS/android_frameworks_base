@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="type_clock_hours">
+        <item>Dodici</item>
+        <item>Una</item>
+        <item>Due</item>
+        <item>Tre</item>
+        <item>Quattro</item>
+        <item>Cinque</item>
+        <item>Sei</item>
+        <item>Sette</item>
+        <item>Otto</item>
+        <item>Nove</item>
+        <item>Dieci</item>
+        <item>Undici</item>
+    </string-array>
+    <string-array name="type_clock_minutes">
+        <item>in punto</item>
+        <item>e uno</item>
+        <item>e due</item>
+        <item>e tre</item>
+        <item>e quattro</item>
+        <item>e cinque</item>
+        <item>e sei</item>
+        <item>e sette</item>
+        <item>e otto</item>
+        <item>e nove</item>
+        <item>Dieci</item>
+        <item>Undici</item>
+        <item>Dodici</item>
+        <item>Tredici</item>
+        <item>Quattordici</item>
+        <item>Quindici</item>
+        <item>Sedici</item>
+        <item>Diciassette</item>
+        <item>Diciotto</item>
+        <item>Diciannove</item>
+        <item>Venti</item>
+        <item>Ventuno
+</item>
+        <item>Ventidue
+</item>
+        <item>Ventitre
+</item>
+        <item>Ventiquattro
+</item>
+        <item>Venticinque
+</item>
+        <item>Ventisei
+</item>
+        <item>Ventisette
+</item>
+        <item>Ventotto
+</item>
+        <item>Ventinove
+</item>
+        <item>Trenta</item>
+        <item>Trentuno
+</item>
+        <item>Trentadue
+</item>
+        <item>Trentatre
+</item>
+        <item>Trentaquattro
+</item>
+        <item>Trentacinque
+</item>
+        <item>Trentasei
+</item>
+        <item>Trentasette
+</item>
+        <item>Trentotto
+</item>
+        <item>Trentanove
+</item>
+        <item>Quaranta</item>
+        <item>Quarantuno
+</item>
+        <item>Quarantadue
+</item>
+        <item>Quarantatre
+</item>
+        <item>Quarantaquattro
+</item>
+        <item>Quarantacinque
+</item>
+        <item>Quarantasei
+</item>
+        <item>Quarantasette
+</item>
+        <item>Quarantotto
+</item>
+        <item>Quarantanove
+</item>
+        <item>Cinquanta</item>
+        <item>Cinquantuno
+</item>
+        <item>Cinquantadue
+</item>
+        <item>Cinquantatre
+</item>
+        <item>Cinquantaquattro
+</item>
+        <item>Cinquantacinque
+</item>
+        <item>Cinquantasei
+</item>
+        <item>Cinquantasette
+</item>
+        <item>Cinquantotto
+</item>
+        <item>Cinquantanove
+</item>
+    </string-array>
+</resources>
