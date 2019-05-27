@@ -688,6 +688,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private boolean mPocketJudgeAllowFP;
 
+    private boolean mChargingAnimation;
+
     private BitmapDrawable altDrawable;
 
     private BroadcastReceiver mWallpaperChangedReceiver = new BroadcastReceiver() {
@@ -5767,6 +5769,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.POCKET_JUDGE_ALLOW_FP),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_CHARGING_ANIMATION),
+                    false, this, UserHandle.USER_ALL);
 	    }
 
         @Override
@@ -5874,6 +5879,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.POCKET_JUDGE_ALLOW_FP))) {
                 updatePocketJudgeFP();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_CHARGING_ANIMATION))) {
+                updateChargingAnimation();
             }
         }
 
@@ -5897,6 +5905,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateLockscreenFilter();
             updateTelephonyIcons();
             updatePocketJudgeFP();
+            updateChargingAnimation();
         }
     }
 
@@ -6055,6 +6064,14 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void updatePocketJudgeFP() {
         mPocketJudgeAllowFP = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.POCKET_JUDGE_ALLOW_FP, 0, UserHandle.USER_CURRENT) == 1;
+    }
+
+    private void updateChargingAnimation() {
+        mChargingAnimation = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_CHARGING_ANIMATION, 1, UserHandle.USER_CURRENT) == 1;
+        if (mKeyguardIndicationController != null) {
+            mKeyguardIndicationController.updateChargingIndication(mChargingAnimation);
+        }
     }
 
     public int getWakefulnessState() {

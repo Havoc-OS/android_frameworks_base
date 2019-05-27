@@ -80,7 +80,8 @@ public class KeyguardIndicationController {
     private ViewGroup mIndicationArea;
     private KeyguardIndicationTextView mTextView;
     private KeyguardIndicationTextView mDisclosure;
-    private LottieAnimationView mChargingIndication;
+    private LottieAnimationView mChargingIndicationView;
+    private boolean mChargingIndication = true;
     private final UserManager mUserManager;
     private final IBatteryStats mBatteryInfo;
     private final SettableWakeLock mWakeLock;
@@ -132,7 +133,7 @@ public class KeyguardIndicationController {
                 WakeLock wakeLock) {
         mContext = context;
         mIndicationArea = indicationArea;
-        mChargingIndication = (LottieAnimationView) indicationArea.findViewById(
+        mChargingIndicationView = (LottieAnimationView) indicationArea.findViewById(
                 R.id.charging_indication);
         mTextView = indicationArea.findViewById(R.id.keyguard_indication_text);
         mInitialTextColor = mTextView != null ? mTextView.getCurrentTextColor() : Color.WHITE;
@@ -340,7 +341,7 @@ public class KeyguardIndicationController {
                         mTextView.switchIndication(null);
                     }
                 }
-                mChargingIndication.setVisibility(View.GONE);
+                updateChargingIndication();
                 return;
             }
 
@@ -384,12 +385,16 @@ public class KeyguardIndicationController {
         }
     }
 
+    public void updateChargingIndication(boolean visible) {
+        mChargingIndication = visible;
+    }
+
     private void updateChargingIndication() {
-        if (!mDozing && mPowerPluggedIn) {
-            mChargingIndication.setVisibility(View.VISIBLE);
-            mChargingIndication.playAnimation();
+        if (mChargingIndication && !mDozing && mPowerPluggedIn) {
+            mChargingIndicationView.setVisibility(View.VISIBLE);
+            mChargingIndicationView.playAnimation();
         } else {
-            mChargingIndication.setVisibility(View.GONE);
+            mChargingIndicationView.setVisibility(View.GONE);
         }
     }
 
