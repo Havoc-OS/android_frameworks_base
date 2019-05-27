@@ -73,6 +73,10 @@ public class LangGuard {
             case "ja":
                 numString = TensString[tens] + " " + UnitsString[units];
                 return numString;
+                
+            case "ru":
+                numString = TensString[tens] + " " + UnitsString[units];
+                return numString;
 
             case "tr":
                 numString = TensString[tens] + " " + UnitsString[units];
@@ -160,6 +164,14 @@ public class LangGuard {
                     return numString;
 
             case "ja":
+                if (units != 0) {
+                    numString = TensStringH[tens] + " " + UnitsString[units];
+                    return numString;
+                } else {
+                    numString = TensStringH[tens];
+                }
+                
+            case "ru":
                 if (units != 0) {
                     numString = TensStringH[tens] + " " + UnitsString[units];
                     return numString;
