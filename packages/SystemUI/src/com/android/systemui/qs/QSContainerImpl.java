@@ -242,18 +242,16 @@ public class QSContainerImpl extends FrameLayout implements
     }
 
     private void setQsBackground() {
-
         if (mSetQsFromResources) {
             mQsBackGround = getContext().getDrawable(R.drawable.qs_background_primary);
-            if (mQsBackGround != null)
-                mQsBackGround.setAlpha(mQsBackGroundAlpha);
         } else {
             if (mQsBackGround != null)
                 mQsBackGround.setColorFilter(mCurrentColor, PorterDuff.Mode.SRC_ATOP);
         }
-        if (mQsBackGround != null && mBackground != null) {
+        if (mQsBackGround != null)
+            mQsBackGround.setAlpha(mQsBackGroundAlpha);
+        if (mQsBackGround != null && mBackground != null)
             mBackground.setBackground(mQsBackGround);
-        }
     }
 
     @Override
