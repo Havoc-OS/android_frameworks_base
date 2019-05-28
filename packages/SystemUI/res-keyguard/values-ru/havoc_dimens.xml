@@ -1,0 +1,3 @@
+    <!-- Custom text clock -->
+    <dimen name="customtextclock_fontsize">32dp</dimen>
+    <dimen name="custom_clock_left_padding">55dp</dimen>
