@@ -310,7 +310,11 @@ public class CustomTextClock extends TextView {
             }
         } else { 
             if (num < 10 ) {
-                NumString = UnitsString[num];
+                if (curLang == "ru"){
+                    NumString = "Ноль " + UnitsString[num].toLowerCase();
+                }else{
+                    NumString = UnitsString[num];
+                }
             }
             if (num >= 10 && num < 20) {
                 NumString = UnitsString[num];
