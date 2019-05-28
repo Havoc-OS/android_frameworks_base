@@ -29,7 +29,7 @@
     </string-array>
 
     <string-array translatable="true" name="UnitsString">
-        <item>Ноль</item>
+        <item>Ровно</item>
 	<item>Один</item>
 	<item>Два</item>
 	<item>Три</item>
