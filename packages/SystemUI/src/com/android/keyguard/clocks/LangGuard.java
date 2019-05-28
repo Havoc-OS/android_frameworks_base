@@ -75,11 +75,7 @@ public class LangGuard {
                 return numString;
                 
             case "ru":
-                if (tens < 2 && units < 10) {
-                    numString = "Ноль " + UnitsString[units].toLowerCase();
-                } else {
-                    numString = TensString[tens] + " " + UnitsString[units].toLowerCase();
-                }
+                numString = TensString[tens] + " " + UnitsString[units];
                 return numString;
 
             case "tr":
