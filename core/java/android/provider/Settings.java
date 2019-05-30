@@ -5627,12 +5627,6 @@ public final class Settings {
          */
         public static final String IMMERSIVE_RECENTS = "immersive_recents";
 
-	/**
-         * Whether to enable the pixel navbar animation
-         * @hide
-         */
-        public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
-
          /**
          * Whether to use the custom status bar header or not
          * @hide
