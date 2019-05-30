@@ -243,9 +243,6 @@
     <!-- Whether the Dreamliner (Pixel Stand) service should be enabled -->
     <bool name="config_enableDreamlinerService">false</bool>
 
-    <!-- Whether to enable Qualcomm Boost Framework -->
-    <bool name="config_enableQcCpuBoost">false</bool>
-
     <!-- Show a custom view for FOD -->
     <bool name="config_needCustomFODView">false</bool>
     <bool name="config_usesOnePlusFOD">false</bool>
