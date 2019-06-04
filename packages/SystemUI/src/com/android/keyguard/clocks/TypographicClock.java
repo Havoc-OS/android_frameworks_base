@@ -69,7 +69,7 @@ public class TypographicClock extends TextView {
         mTime.setTimeInMillis(System.currentTimeMillis());
         setContentDescription(DateFormat.format(mDescFormat, mTime));
         int hours = mTime.get(Calendar.HOUR) % 12;
-        int minutes = mTime.get(Calendar.MINUTE) % 60;
+        int minutes = mTime.get(Calendar.MINUTE);
         SpannedString rawFormat = (SpannedString) mResources.getQuantityText(R.plurals.type_clock_header, hours);
         Annotation[] annotationArr = (Annotation[]) rawFormat.getSpans(0, rawFormat.length(), Annotation.class);
         SpannableString colored = new SpannableString(rawFormat);
