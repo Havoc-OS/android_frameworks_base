@@ -6673,6 +6673,87 @@ public final class Settings {
         public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
 
         /**
+         * Save the user defined brightness state
+         */
+        public static final String GAMING_SCREEN_BRIGHTNESS_MODE = "gaming_screen_brightness_mode";
+
+        /**
+         * Save the current user ringer mode
+         */
+        public static final String GAMING_RINGER_STATE = "gaming_ringer_state";
+
+        /**
+         * Save the user defined media volume for restoring it later
+         */
+        public static final String GAMING_MEDIA_VOLUME = "gaming_media_volume";
+
+        /**
+         * Whether to enable gaming mode or not
+         *
+         * @hide
+         */
+        public static final String ENABLE_GAMING_MODE = "enable_gaming_mode";
+
+        /**
+         * Package name of apps for enabling Gaming mode
+         *
+         * @hide
+         */
+        public static final String GAMING_MODE_VALUES = "gaming_mode_values";
+
+        public static final String GAMING_MODE_DUMMY = "gaming_mode_dummy";
+
+        /**
+         * Whether to disable hardware keys in gaming mode
+         *
+         * @hide
+         */
+        public static final String GAMING_MODE_HW_KEYS_TOGGLE = "gaming_mode_hw_keys_toggle";
+
+        /**
+         * Whether to disable heads up gaming mode
+         *
+         * @hide
+         */
+        public static final String GAMING_MODE_HEADSUP_TOGGLE = "gaming_mode_headsup_toggle";
+
+        /**
+         * Whether to enter DND in gaming mode
+         *
+         * @hide
+         */
+        public static final String GAMING_MODE_ENTER_DND = "gaming_mode_enter_dnd";
+
+        /**
+         * Whether to maximize media volume in gaming mode
+         *
+         * @hide
+         */
+        public static final String GAMING_MODE_MAXIMIZE_MEDIA_TOGGLE = "gaming_mode_maximize_media_toggle";
+
+        /**
+         * Whether to lock brightness in gaming mode
+         *
+         * @hide
+         */
+        public static final String GAMING_MODE_MANUAL_BRIGHTNESS_TOGGLE = "gaming_mode_manual_brightness_toggle";
+
+        /**
+         * Whether to enable loudspeaker during calls in gaming mode
+         *
+         * @hide
+         */
+        public static final String GAMING_MODE_SPEAKER_IN_CALL_TOGGLE = "gaming_mode_speaker_in_call_toggle";
+
+        /**
+         * Whether to automatically enable the gaming mode
+         * if the launched app is a game
+         *
+         * @hide
+         */
+        public static final String GAMING_MODE_DYNAMIC_STATE = "gaming_mode_dynamic_state";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -11642,6 +11723,12 @@ public final class Settings {
         public static final String LOCKSCREEN_SOLID_UNITS_OPACITY = "lockscreen_solid_units_opacity";
 
         /**
+         * Save hardware buttons toggle state.
+         * @hide
+         */
+        public static final String GAMING_HARDWARE_KEYS_DISABLE = "gaming_hardware_keys_disable";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
@@ -15456,6 +15543,14 @@ public final class Settings {
          */
         public static final String HEADS_UP_NOTIFICATIONS_ENABLED =
                 "heads_up_notifications_enabled";
+
+        /**
+         * Save user defined heads up toggle state.
+         *
+         * @hide
+         */
+        public static final String GAMING_HEADS_UP_NOTIFICATIONS_ENABLED =
+                "gaming_heads_up_notifications_enabled";
 
         /** @hide */ public static final int HEADS_UP_OFF = 0;
         /** @hide */ public static final int HEADS_UP_ON = 1;

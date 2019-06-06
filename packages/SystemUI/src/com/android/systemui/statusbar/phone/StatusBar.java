@@ -2343,6 +2343,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     public boolean shouldPeek(Entry entry, StatusBarNotification sbn) {
 
         // get the info from the currently running task
+        boolean gamingModeOn = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.ENABLE_GAMING_MODE, 1) == 1;
         List<ActivityManager.RunningTaskInfo> taskInfo = mAm.getRunningTasks(1);
         if(taskInfo != null && !taskInfo.isEmpty()) {
             ComponentName componentInfo = taskInfo.get(0).topActivity;
@@ -2352,8 +2354,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
         }
 
-         if(isPackageBlacklisted(sbn.getPackageName())) {
+        if(isPackageBlacklisted(sbn.getPackageName())) {
             return false;
+        }
+
+        if (gamingModeOn && isGameAppDialer(sbn.getPackageName())) {
+            return true;
         }
 
         if (mIsOccluded && !isDozing()) {
@@ -2414,6 +2420,11 @@ public class StatusBar extends SystemUI implements DemoMode,
                 arrayList.add(item.trim());
             }
         }
+    }
+
+    private boolean isGameAppDialer(String packageName) {
+        return packageName.equals("com.android.dialer")
+            || packageName.equals("com.google.android.dialer");
     }
 
     @Override  // NotificationData.Environment

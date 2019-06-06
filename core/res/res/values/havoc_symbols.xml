@@ -402,4 +402,10 @@
 
   <!-- Whether to enable oneplus cam hack -->
   <java-symbol type="bool" name="config_enableOPcamhack" />
+
+  <!-- FireHound Gaming -->
+  <java-symbol type="string" name="gaming_notif_title" />
+  <java-symbol type="string" name="gaming_notif_ticker" />
+  <java-symbol type="string" name="notification_channel_gaming" />
+  <java-symbol type="drawable" name="ic_gaming_notif" />
 </resources>

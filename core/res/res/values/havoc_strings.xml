@@ -208,4 +208,9 @@
 
     <!-- Pocket Lock --> 
     <string name="pocket_lock_message_long_press">Press and hold power button to unlock</string> 
+
+    <!-- FireHound Gaming -->
+    <string name="notification_channel_gaming">Gaming Mode</string>
+    <string name="gaming_notif_title">Gaming mode On</string>
+    <string name="gaming_notif_ticker">Gaming mode enabled</string>
 </resources>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2019 FireHound
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,46 +16,68 @@
 
 package com.android.systemui.qs;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.os.Handler;
-import android.provider.Settings;
+import android.provider.Settings.System;
 
 import com.android.systemui.statusbar.policy.Listenable;
 
 /** Helper for managing a system setting. **/
 public abstract class SystemSetting extends ContentObserver implements Listenable {
+    private static final int DEFAULT = 0;
+
     private final Context mContext;
     private final String mSettingName;
 
-    protected abstract void handleValueChanged(int value);
+    private boolean mListening;
+    private int mUserId;
+    private int mObservedValue = DEFAULT;
+
+    protected abstract void handleValueChanged(int value, boolean observedChange);
 
     public SystemSetting(Context context, Handler handler, String settingName) {
         super(handler);
         mContext = context;
         mSettingName = settingName;
+        mUserId = ActivityManager.getCurrentUser();
     }
 
     public int getValue() {
-        return Settings.System.getInt(mContext.getContentResolver(), mSettingName, 0);
+        return System.getIntForUser(mContext.getContentResolver(), mSettingName, DEFAULT, mUserId);
     }
 
     public void setValue(int value) {
-        Settings.System.putInt(mContext.getContentResolver(), mSettingName, value);
+        System.putIntForUser(mContext.getContentResolver(), mSettingName, value, mUserId);
     }
 
     @Override
     public void setListening(boolean listening) {
+        if (listening == mListening) return;
+        mListening = listening;
         if (listening) {
+            mObservedValue = getValue();
             mContext.getContentResolver().registerContentObserver(
-                    Settings.System.getUriFor(mSettingName), false, this);
+                    System.getUriFor(mSettingName), false, this, mUserId);
         } else {
             mContext.getContentResolver().unregisterContentObserver(this);
+            mObservedValue = DEFAULT;
         }
     }
 
     @Override
     public void onChange(boolean selfChange) {
-        handleValueChanged(getValue());
+        final int value = getValue();
+        handleValueChanged(value, value != mObservedValue);
+        mObservedValue = value;
+    }
+
+    public void setUserId(int userId) {
+        mUserId = userId;
+        if (mListening) {
+            setListening(false);
+            setListening(true);
+        }
     }
 }
