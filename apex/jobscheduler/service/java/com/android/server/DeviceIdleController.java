@@ -107,7 +107,9 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -1160,8 +1162,35 @@ public class DeviceIdleController extends SystemService
         private boolean mSmallBatteryDevice;
         private final KeyValueListParser mParser = new KeyValueListParser(',');
 
-        // Aggressive idle
-        private static final long AGGRESSIVE_WEIGHT = 3;
+        // Aggressive idle constants
+        private final Map<String, Long> aggressiveConstants = new HashMap<String, Long>() {{
+            put(KEY_LIGHT_IDLE_AFTER_INACTIVE_TIMEOUT, 180000l);
+            put(KEY_LIGHT_PRE_IDLE_TIMEOUT, 180000l);
+            put(KEY_LIGHT_IDLE_TIMEOUT, 300000l);
+            put(KEY_LIGHT_IDLE_FACTOR, 2l);
+            put(KEY_LIGHT_MAX_IDLE_TIMEOUT, 900000l);
+            put(KEY_LIGHT_IDLE_MAINTENANCE_MIN_BUDGET, 60000l);
+            put(KEY_LIGHT_IDLE_MAINTENANCE_MAX_BUDGET, 300000l);
+            put(KEY_MIN_LIGHT_MAINTENANCE_TIME, 5000l);
+            put(KEY_MIN_DEEP_MAINTENANCE_TIME, 30000l);
+            put(KEY_INACTIVE_TIMEOUT, 1800000l);
+            put(KEY_SENSING_TIMEOUT, 240000l);
+            put(KEY_LOCATING_TIMEOUT, 30000l);
+            put(KEY_LOCATION_ACCURACY, 20l);
+            put(KEY_MOTION_INACTIVE_TIMEOUT, 600000l);
+            put(KEY_IDLE_AFTER_INACTIVE_TIMEOUT, 1800000l);
+            put(KEY_IDLE_PENDING_TIMEOUT, 300000l);
+            put(KEY_MAX_IDLE_PENDING_TIMEOUT, 600000l);
+            put(KEY_IDLE_PENDING_FACTOR, 2l);
+            put(KEY_IDLE_TIMEOUT, 3600000l);
+            put(KEY_MAX_IDLE_TIMEOUT, 360000l);
+            put(KEY_IDLE_FACTOR, 2l);
+            put(KEY_MIN_TIME_TO_ALARM, 3600000l);
+            put(KEY_MAX_TEMP_APP_WHITELIST_DURATION, 300000l);
+            put(KEY_MMS_TEMP_APP_WHITELIST_DURATION, 60000l);
+            put(KEY_SMS_TEMP_APP_WHITELIST_DURATION, 20000l);
+            put(KEY_NOTIFICATION_WHITELIST_DURATION, 30000l);
+        }};
 
         public Constants(Handler handler, ContentResolver resolver) {
             super(handler);
@@ -1182,10 +1211,15 @@ public class DeviceIdleController extends SystemService
         }
 
         private long getDurationWeighted(String key, long defaultValue) {
-            long duration = mParser.getDurationMillis(key, defaultValue);
-
+            long duration = defaultValue;
             if (mAggressiveIdle)
-                return duration / AGGRESSIVE_WEIGHT;
+            try {
+                duration = aggressiveConstants.get(key);
+            } catch (Exception e) {
+                duration = mParser.getDurationMillis(key, defaultValue);
+            }
+        else
+            duration = mParser.getDurationMillis(key, defaultValue);
 
             return duration;
         }
