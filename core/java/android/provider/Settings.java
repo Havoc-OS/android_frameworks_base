@@ -6688,11 +6688,6 @@ public final class Settings {
         public static final String GAMING_MODE_ZEN_STATE = "gaming_mode_zen_state";
 
         /**
-         * Save the user defined media volume for restoring it later
-         */
-        public static final String GAMING_MEDIA_VOLUME = "gaming_media_volume";
-
-        /**
          * Whether to enable gaming mode or not
          *
          * @hide
@@ -6730,11 +6725,11 @@ public final class Settings {
         public static final String GAMING_MODE_RINGER_MODE = "gaming_mode_ringer_mode";
 
         /**
-         * Whether to maximize media volume in gaming mode
+         * Whether to show notifications/toasts (0:OFF, 1:notifications, 2:toasts, 3: all
          *
          * @hide
          */
-        public static final String GAMING_MODE_MAXIMIZE_MEDIA_TOGGLE = "gaming_mode_maximize_media_toggle";
+        public static final String GAMING_MODE_NOTIFICATIONS = "gaming_mode_notifications";
 
         /**
          * Whether to lock brightness in gaming mode
