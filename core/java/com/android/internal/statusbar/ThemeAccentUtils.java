@@ -184,6 +184,11 @@ public class ThemeAccentUtils {
         "com.android.systemui.qstile.squircletrim", // 17
         "com.android.systemui.qstile.teardrop", // 18
         "com.android.systemui.qstile.wavey", // 19
+        "com.android.systemui.qstile.neonlike", // 20
+        "com.android.systemui.qstile.oos", // 21
+        "com.android.systemui.qstile.triangles", // 22
+        "com.android.systemui.qstile.divided", // 23
+        "com.android.systemui.qstile.cosmos" // 24
     };
 
     // QS header themes
