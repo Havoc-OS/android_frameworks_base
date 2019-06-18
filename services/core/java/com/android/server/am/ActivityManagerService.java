@@ -4638,11 +4638,13 @@ public class ActivityManagerService extends IActivityManager.Stub
             }
 
             if (mGamingModeController != null) {
+              if (mGamingModeController.gamingModeMaster()) {
                 if (hostingType.equals("activity")) {
                     if (startResult != null) {
                          mGamingModeController.noteStarted(app.info.packageName);
                     }
                 }
+              }
             }
 
             checkTime(startTime, "startProcess: returned from zygote!");
@@ -21809,7 +21811,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                                         mCompatModePackages.handlePackageUninstalledLocked(ssp);
                                         mBatteryStatsService.notePackageUninstalled(ssp);
                                         if (mGamingModeController != null) {
-                                            mGamingModeController.notePackageUninstalled(ssp);
+                                             mGamingModeController.notePackageUninstalled(ssp);
                                         }
                                     }
                                 } else {
@@ -25304,13 +25306,15 @@ public class ActivityManagerService extends IActivityManager.Stub
 
             if (mCurResumedPackage != null) {
                 if (mGamingModeController != null) {
-                    if(mGamingModeController.topAppChanged(mCurResumedPackage) && !mGamingModeController.getEnabled()) {
-                    Settings.System.putInt(mContext.getContentResolver(),
-                        Settings.System.ENABLE_GAMING_MODE, 1);
-                     } else {
-                        Settings.System.putInt(mContext.getContentResolver(),
-                           Settings.System.ENABLE_GAMING_MODE, 0);
-                     }
+                    if (mGamingModeController.gamingModeMaster()) {
+                        if(mGamingModeController.topAppChanged(mCurResumedPackage) && !mGamingModeController.getEnabled()) {
+                              Settings.System.putInt(mContext.getContentResolver(),
+                                 Settings.System.ENABLE_GAMING_MODE, 1);
+                         } else {
+                              Settings.System.putInt(mContext.getContentResolver(),
+                                 Settings.System.ENABLE_GAMING_MODE, 0);
+                         }
+                    }
                 }
            }
         }
