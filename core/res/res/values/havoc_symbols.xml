@@ -385,6 +385,7 @@
 
   <!-- Smart charging battery percentage -->
   <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
+  <java-symbol type="integer" name="config_smartChargingBatteryResumeLevel" />
 
   <!-- Media notification seekbar control -->
   <java-symbol type="id" name="notification_media_seekbar_container" />
