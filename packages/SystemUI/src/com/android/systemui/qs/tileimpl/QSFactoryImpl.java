@@ -46,7 +46,6 @@ import com.android.systemui.qs.tiles.CallTile;
 import com.android.systemui.qs.tiles.CalendarTile;
 import com.android.systemui.qs.tiles.ExpandedDesktopTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
-import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HavocTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
@@ -194,8 +193,6 @@ public class QSFactoryImpl implements QSFactory {
                 return new ScreenStabilizationTile(mHost);
             case "volume_panel":
                 return new VolumeTile(mHost);
-            case "gaming":
-                return new GamingModeTile(mHost);
             case "expanded_desktop":
                 return new ExpandedDesktopTile(mHost);
             case "locale":
