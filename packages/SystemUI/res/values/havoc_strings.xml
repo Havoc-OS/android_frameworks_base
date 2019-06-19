@@ -347,6 +347,6 @@
     <string name="accessibility_quick_settings_reading_mode_changed_on">Reading mode turned on.</string>
     <string name="accessibility_quick_settings_reading_mode_changed_off">Reading mode turned off.</string>
 
-    <!-- FireHound Gaming -->
+    <!-- Gaming mode -->
     <string name="notification_channel_gaming">Gaming Mode</string>
 </resources>
