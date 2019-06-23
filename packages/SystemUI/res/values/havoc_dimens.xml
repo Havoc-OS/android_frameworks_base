@@ -118,4 +118,7 @@
     <dimen name="opa_line_x_trans_bg">30.0dip</dimen>
     <dimen name="opa_line_x_trans_ry">15.0dip</dimen>
     <dimen name="opa_line_y_translation">16.0dip</dimen>
+
+    <!-- Bottom margin of the ambient music ticker -->
+    <dimen name="ambient_indication_margin_bottom">76dp</dimen>
 </resources>
