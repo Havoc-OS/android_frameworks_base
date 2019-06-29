@@ -96,4 +96,8 @@
     <!-- Name of the roaming status bar icon. -->
     <string name="status_bar_roaming">Roaming</string>
 
+    <!-- Gaming mode -->
+    <string name="gaming_mode_not_enabled">Gaming mode is disabled in settings</string>
+    <string name="quick_settings_gaming_mode_label">Gaming mode</string>
+
 </resources>
