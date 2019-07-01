@@ -337,10 +337,6 @@
   <!-- Dreamliner service -->
   <java-symbol type="bool" name="config_enableDreamlinerService" />
 
-  <!-- FoD -->
-  <java-symbol type="bool" name="config_needCustomFODView" />
-  <java-symbol type="bool" name="config_usesOnePlusFOD" />
-
   <!-- LiveDisplay -->
   <java-symbol type="integer" name="config_dayColorTemperature" />
   <java-symbol type="integer" name="config_outdoorAmbientLux" />

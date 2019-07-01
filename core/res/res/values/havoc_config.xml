@@ -243,10 +243,6 @@
     <!-- Whether the Dreamliner (Pixel Stand) service should be enabled -->
     <bool name="config_enableDreamlinerService">false</bool>
 
-    <!-- Show a custom view for FOD -->
-    <bool name="config_needCustomFODView">false</bool>
-    <bool name="config_usesOnePlusFOD">false</bool>
-
     <!-- Default values for LiveDisplay -->
     <integer name="config_dayColorTemperature">6500</integer>
     <integer name="config_outdoorAmbientLux">12000</integer>
