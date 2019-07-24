@@ -17,12 +17,7 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
-import android.util.Log;
 
 import com.android.keyguard.R;
 
@@ -39,8 +34,6 @@ public class TypographicClock extends TextView {
     private final Resources mResources;
     private final Calendar mTime;
     private TimeZone mTimeZone;
-    private final Animation fadeIn;
-    private final Animation fadeOut;
 
     private final BroadcastReceiver mTimeZoneChangedReceiver = new BroadcastReceiver() {
         @Override
@@ -70,15 +63,6 @@ public class TypographicClock extends TextView {
         mHours = mResources.getStringArray(R.array.type_clock_hours);
         mMinutes = mResources.getStringArray(R.array.type_clock_minutes);
         mAccentColor = mResources.getColor(R.color.custom_text_clock_top_color, null);
-
-        fadeIn = new AlphaAnimation(0, 1);
-        fadeIn.setInterpolator(new DecelerateInterpolator());
-        fadeIn.setDuration(300);
-
-        fadeOut = new AlphaAnimation(1, 0);
-        fadeOut.setInterpolator(new AccelerateInterpolator());
-        fadeOut.setStartOffset(300);
-        fadeOut.setDuration(300);
     }
 
     public void onTimeChanged() {
@@ -97,24 +81,7 @@ public class TypographicClock extends TextView {
                         Spanned.SPAN_POINT_POINT);
             }
         }
-
-        fadeOut.setAnimationListener(new Animation.AnimationListener() {
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                setText(TextUtils.expandTemplate(colored, new CharSequence[]{mHours[hours], mMinutes[minutes]}));
-                startAnimation(fadeIn);
-            }
-
-            @Override
-            public void onAnimationStart(Animation animation) { }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) { }
-        });
-
-        if (!getText().toString().endsWith(mMinutes[minutes]))
-            startAnimation(fadeOut);
+        setText(TextUtils.expandTemplate(colored, new CharSequence[]{mHours[hours], mMinutes[minutes]}));
     }
 
     public void onTimeZoneChanged(TimeZone timeZone) {
