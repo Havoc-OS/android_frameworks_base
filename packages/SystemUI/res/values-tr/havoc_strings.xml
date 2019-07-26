@@ -204,16 +204,8 @@
 	
     <!-- Volume panel QS tile -->
     <string name="quick_settings_volume_panel_label">Ses paneli</string>
-    <string name="tuner_cellular_title">Mobil</string>
 	
-    <!-- Gaming Mode -->
-    <string name="gaming_mode_tile_title">Oyun modu</string>
-    <string name="gaming_mode_tile_toast">Oyun modu etkin</string>
-    <string name="gaming_mode_tile_toast_disabled">Oyun modu devre dışı</string>
-    <string name="gaming_mode_dialog_title">Oyun modu</string>
-    <string name="gaming_mode_dialog_message">Oyun modu etkinleştirildiğinde zil modunuz titreşim moduna geçer, tüm uyarı mesajları devre dışı bırakılır ve donanım tuşları kapatılır. Medya sesi maksimum değere yükseltilecektir. Oyun modundan çıktığınızda tüm ayarlar varsayılana sıfırlanacaktır.</string>
-    <string name="accessibility_quick_settings_gaming_mode_on">Oyun modu</string>
-    <string name="accessibility_quick_settings_gaming_mode_off">Oyun modu</string>
+    <string name="tuner_cellular_title">Mobil</string>
 	
     <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_running_services">Çalışan hizmetler ekranını aç.</string>
@@ -247,6 +239,7 @@
          (greater than status_bar_notification_info_maxnum, defined in
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
+		 
     <!-- Partial screenshot -->
     <string name="screenshot_abort_title">Ekran görüntüsü alınmadı</string>
     <string name="screenshot_abort_text">İşlem iptal edildi</string>
@@ -317,7 +310,7 @@
     <!-- OneHand mode QS tile -->
     <string name="qs_onehand_label">Tek el modu</string>
 	
-	<!-- Screen pinning dialog description. (for devices without navbar) -->
+    <!-- Screen pinning dialog description. (for devices without navbar) -->
     <string name="screen_pinning_description_no_navbar">Bu işlem, siz sabitlemeyi kaldırana kadar ekranı görünür durumda tutar. Sabitlemeyi kaldırmak için Geri tuşuna dokunun ve basılı tutun.</string>
      <!-- Notify use that they are in Lock-to-app (for devices without navbar)-->
     <string name="screen_pinning_toast_no_navbar">Bu ekranı kaldırmak için, Geri tuşuna dokunun ve basılı tutun</string>
@@ -347,4 +340,16 @@
     <string name="accessibility_quick_settings_reading_mode_off">Okuma modu kapalı.</string>
     <string name="accessibility_quick_settings_reading_mode_changed_on">Okuma modu açıldı.</string>
     <string name="accessibility_quick_settings_reading_mode_changed_off">Okuma modu kapatıldı.</string>
+
+    <!-- Gaming mode -->
+    <string name="notification_channel_gaming">Oyun modu</string>
+    <string name="gaming_mode_not_enabled">Ayarlarda oyun modu devre dışı</string>
+    <string name="quick_settings_gaming_mode_label">Oyun modu</string>
+    <!-- Content description of the Gaming mode tile in quick settings when disabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_disabled">Oyun modu kapatıldı</string>
+    <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_enabled">Oyun modu açıldı</string>
+
+    <!-- Gesture Anywhere -->
+    <string name="gestures_message">Hareketinizi buraya çizin</string>
 </resources>
