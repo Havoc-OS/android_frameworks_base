@@ -19,8 +19,8 @@ package com.android.systemui.statusbar.notification.interruption;
 import static com.android.systemui.statusbar.StatusBarState.SHADE;
 
 import android.app.NotificationManager;
-import android.content.Context;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.database.ContentObserver;
 import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.Build;
@@ -71,7 +71,6 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
     private final BatteryController mBatteryController;
     private final ContentObserver mHeadsUpObserver;
     private HeadsUpManager mHeadsUpManager;
-    private boolean mLessBoringHeadsUp;
     private TelecomManager mTm;
     private Context mContext;
 
@@ -79,6 +78,7 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
     protected boolean mUseHeadsUp = false;
 
     private boolean mSkipHeadsUp = false;
+    private boolean mLessBoringHeadsUp = false;
 
     @Inject
     public NotificationInterruptStateProviderImpl(
@@ -119,9 +119,6 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
                         mHeadsUpManager.releaseAllImmediately();
                     }
                 }
-                mLessBoringHeadsUp = Settings.System.getIntForUser(mContentResolver,
-                        Settings.System.LESS_BORING_HEADS_UP, 0,
-                        UserHandle.USER_CURRENT) == 1;
             }
         };
 
@@ -132,10 +129,6 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
                     mHeadsUpObserver);
             mContentResolver.registerContentObserver(
                     Settings.Global.getUriFor(SETTING_HEADS_UP_TICKER), true,
-                    mHeadsUpObserver);
-            mContentResolver.registerContentObserver(
-                    Settings.System.getUriFor(Settings.System.LESS_BORING_HEADS_UP),
-                    true,
                     mHeadsUpObserver);
         }
         mHeadsUpObserver.onChange(true); // set up
@@ -204,7 +197,7 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
 
         if (shouldSkipHeadsUp(sbn)) {
             if (DEBUG_HEADS_UP) {
-                Log.d(TAG, "No alerting: gaming mode");
+                Log.d(TAG, "No alerting: gaming mode or boring apps");
             }
             return false;
         }
@@ -221,10 +214,6 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
         }
 
         if (!canAlertAwakeCommon(entry)) {
-            return false;
-        }
-
-        if (shouldSkipHeadsUp(sbn)) {
             return false;
         }
 
@@ -276,35 +265,13 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
         for (int i = 0; i < mSuppressors.size(); i++) {
             if (mSuppressors.get(i).suppressAwakeHeadsUp(entry)) {
                 if (DEBUG_HEADS_UP) {
-                     Log.d(TAG, "No heads up: aborted by suppressor: "
+                    Log.d(TAG, "No heads up: aborted by suppressor: "
                             + mSuppressors.get(i).getName() + " sbnKey=" + sbn.getKey());
                 }
                 return false;
             }
         }
         return true;
-    }
-
-    private void setUseLessBoringHeadsUp(boolean lessBoring) {
-        mLessBoringHeadsUp = lessBoring;
-    }
-
-    public boolean shouldSkipHeadsUp(StatusBarNotification sbn) {
-        boolean isImportantHeadsUp = false;
-        String notificationPackageName = sbn.getPackageName();
-        isImportantHeadsUp = notificationPackageName.equals(getDefaultDialerPackage(mTm))
-                || notificationPackageName.equals(getDefaultSmsPackage(mContext))
-                || notificationPackageName.contains("clock");
-        return !mStatusBarStateController.isDozing() && mLessBoringHeadsUp && !isImportantHeadsUp;
-    }
-
-    private static String getDefaultSmsPackage(Context ctx) {
-        return Sms.getDefaultSmsPackage(ctx);
-        // for reference, there's also a new RoleManager api with getDefaultSmsPackage(context, userid) 
-    }
-
-    private static String getDefaultDialerPackage(TelecomManager tm) {
-        return tm != null ? tm.getDefaultDialerPackage() : "";
     }
 
     /**
@@ -359,17 +326,35 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
         mSkipHeadsUp = skipHeadsUp;
     }
 
+    @Override
+    public void setUseLessBoringHeadsUp(boolean lessBoring) {
+        mLessBoringHeadsUp = lessBoring;
+    }
+
     public boolean shouldSkipHeadsUp(StatusBarNotification sbn) {
-        String notificationPackageName = sbn.getPackageName().toLowerCase();
+        String notificationPackageName = sbn.getPackageName();
 
         // Gaming mode takes precedence since messaging headsup is intrusive
         if (mSkipHeadsUp) {
-            boolean isNonInstrusive = notificationPackageName.contains("dialer") ||
-                notificationPackageName.contains("clock");
+            boolean isNonInstrusive = notificationPackageName.equals(getDefaultDialerPackage(mTm))
+                    || notificationPackageName.toLowerCase().contains("clock");
             return !mStatusBarStateController.isDozing() && mSkipHeadsUp && !isNonInstrusive;
         }
 
-        return false;
+        boolean isLessBoring = notificationPackageName.equals(getDefaultDialerPackage(mTm))
+                || notificationPackageName.equals(getDefaultSmsPackage(mContext))
+                || notificationPackageName.toLowerCase().contains("clock");
+
+        return !mStatusBarStateController.isDozing() && mLessBoringHeadsUp && !isLessBoring;
+    }
+
+    private static String getDefaultSmsPackage(Context ctx) {
+        // for reference, there's also a new RoleManager api with getDefaultSmsPackage(context, userid) 
+        return Sms.getDefaultSmsPackage(ctx);
+    }
+
+    private static String getDefaultDialerPackage(TelecomManager tm) {
+        return tm != null ? tm.getDefaultDialerPackage() : "";
     }
 
     /**
