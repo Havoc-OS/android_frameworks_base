@@ -5731,6 +5731,12 @@ public final class Settings {
         public static final String FLASHLIGHT_ON_CALL_RATE = "flashlight_on_call_rate";
 
         /**
+         * Whether to show heads up only for dialer and sms apps
+         * @hide
+         */
+        public static final String LESS_BORING_HEADS_UP = "less_boring_heads_up";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
