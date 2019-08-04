@@ -4637,11 +4637,6 @@ public class ActivityManagerService extends IActivityManager.Stub
                 }
             }
 
-            if (mGamingModeController != null && mGamingModeController.isGamingModeEnabled() &&
-                    hostingType.equals("activity") && startResult != null) {
-                mGamingModeController.noteStarted(app.info.packageName);
-            }
-
             checkTime(startTime, "startProcess: returned from zygote!");
             return startResult;
         } finally {
