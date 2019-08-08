@@ -186,7 +186,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             @Override
             public boolean onLongClick(View v) {
                 setBrightnessMinMax(true);
-                mVibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK));
                 return true;
             }
         });
@@ -209,7 +209,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             @Override
             public boolean onLongClick(View v) {
                 setBrightnessMinMax(false);
-                mVibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK));
                 return true;
             }
         });

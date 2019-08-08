@@ -28,6 +28,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.os.UserManager;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
@@ -173,9 +174,11 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         setExpansion(mExpansionAmount);
     }
 
-    public void vibrateheader(int duration) {
+    public void vibrateheader() {
         if (mVibrator != null) {
-            if (mVibrator.hasVibrator()) { mVibrator.vibrate(duration); }
+            if (mVibrator.hasVibrator()) {
+                mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK));
+            }
         }
     }
 
@@ -398,7 +401,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     public boolean onLongClick(View v) {
         if (v == mSettingsButton) {
             startHavocSettingsActivity();
-            vibrateheader(20);
+            vibrateheader();
         }
         return false;
     }
