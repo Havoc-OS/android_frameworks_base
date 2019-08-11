@@ -44,6 +44,8 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.internal.custom.longshot.LongScreenshotManagerService;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -394,7 +396,11 @@ public class Toast {
             params.width = WindowManager.LayoutParams.WRAP_CONTENT;
             params.format = PixelFormat.TRANSLUCENT;
             params.windowAnimations = com.android.internal.R.style.Animation_Toast_Material;
-            params.type = WindowManager.LayoutParams.TYPE_TOAST;
+            if (LongScreenshotManagerService.PACKAGENAME_LONGSHOT.equals(packageName)) {
+                params.type = WindowManager.LayoutParams.TYPE_SYSTEM_LONGSHOT;
+            } else {
+                params.type = WindowManager.LayoutParams.TYPE_TOAST;
+            }
             params.setTitle("Toast");
             params.flags = WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                     | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
