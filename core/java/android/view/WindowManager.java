@@ -1003,7 +1003,13 @@ public interface WindowManager extends ViewManager {
          * In multiuser systems shows on all users' windows.
          * @hide
          */
-        public static final int TYPE_SLIM_RECENTS = FIRST_SYSTEM_WINDOW+39;
+        public static final int TYPE_SLIM_RECENTS = FIRST_SYSTEM_WINDOW + 39;
+
+        /**
+         * Window type: Long screenshot overlay
+         * @hide
+         */
+        public static final int TYPE_SYSTEM_LONGSHOT = FIRST_SYSTEM_WINDOW + 40;
 
         /**
          * End of types of system windows.
