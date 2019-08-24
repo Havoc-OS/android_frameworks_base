@@ -44,9 +44,6 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 
-import com.android.internal.custom.hardware.LineageHardwareManager;
-import com.android.internal.custom.hardware.LiveDisplayManager;
-
 /**
  * Controller for managing night display and color mode settings.
  * <p/>
@@ -564,19 +561,7 @@ public final class ColorDisplayController {
      * Returns {@code true} if Night display is supported by the device.
      */
     public static boolean isAvailable(Context context) {
-        boolean nightDisplayAvailable = context.getResources().getBoolean(R.bool.config_nightDisplayAvailable);
-        if (!nightDisplayAvailable){
-            try {
-                LiveDisplayManager liveDisplayManager = LiveDisplayManager.getInstance(context);
-                LineageHardwareManager hardwareManager = LineageHardwareManager.getInstance(context);
-                return hardwareManager != null
-                        && hardwareManager.isSupported(LineageHardwareManager.FEATURE_DISPLAY_COLOR_CALIBRATION)
-                        && liveDisplayManager != null && liveDisplayManager.getConfig() != null;
-            } catch (Exception e) {
-                return false;
-            }
-        }
-        return true;
+        return context.getResources().getBoolean(R.bool.config_nightDisplayAvailable);
     }
 
     /**
