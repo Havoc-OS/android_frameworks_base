@@ -24,4 +24,13 @@
         <item quantity="few"><annotation name="color">It’s</annotation>\n^1\n^2</item>
     </plurals>
 
+    <!-- Skeleton string format for displaying the date with number. -->
+    <string name="abbrev_wday_day_no_year">eeeedd</string>
+
+    <!-- Skeleton string format for displaying the date. -->
+    <string name="abbrev_wday_no_year">eeee</string>
+
+    <!-- Skeleton string format for displaying the day of the month. -->
+    <string name="abbrev_wday_month_no_year">MMMMd</string>
+
 </resources>
