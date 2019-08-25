@@ -603,4 +603,12 @@
         <item>3</item><item>3</item>
     </array>
 
+    <array name="batterymeter_charging_bolt_points">
+        <item>240</item><item>0</item>
+        <item>160</item><item>350</item>
+        <item>250</item><item>350</item>
+        <item>10</item><item>800</item>
+        <item>90</item><item>450</item>
+        <item>0</item><item>450</item>
+    </array>        
 </resources>
