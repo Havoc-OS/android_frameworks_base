@@ -292,6 +292,7 @@ public class BatteryMeterDrawableBase extends Drawable {
                  return true; break;
             default:
                 return false;
+        }
     }
 
     private void startChargingAnimation(int repeat) {
