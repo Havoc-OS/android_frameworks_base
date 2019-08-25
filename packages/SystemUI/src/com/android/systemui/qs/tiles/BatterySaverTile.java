@@ -131,6 +131,7 @@ public class BatterySaverTile extends QSTileImpl<BooleanState> implements
             setPowerSave(true);
             setCharging(false);
             setPowerSaveAsColorError(false);
+            setAnimateCharging(false);
             mPowerSaveAsColorError = true;
             mFramePaint.setColor(0);
             mPowersavePaint.setColor(frameColor);
