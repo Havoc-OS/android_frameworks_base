@@ -287,11 +287,7 @@ public class BatteryMeterDrawableBase extends Drawable {
 
     private boolean shouldAnimateCharging() {
         // this is used by PA style battery to animate the icon
-        switch (mMeterStyle) {
-            case BATTERY_STYLE_PA_CIRCLE:
-                 return true; break;
-            default:
-                return false;
+	return mMeterStyle == BATTERY_STYLE_PA_CIRCLE ? true : false;
         }
     }
 
