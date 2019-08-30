@@ -25,7 +25,6 @@
         <item>advanced</item>
         <item>lockdown</item>
         <item>screenshot</item>
-        <item>screenrecord</item>
         <item>airplane</item>
         <item>torch</item>
         <item>onthego</item>
@@ -52,9 +51,6 @@
     <!-- Full screen aspect ratio -->
     <bool name="config_haveHigherAspectRatioScreen">false</bool>
     <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
-	
-    <!-- If this is true, key chords can be used to take a screen record on the device. -->
-    <bool name="config_enableScreenrecordChord">true</bool>
 	
     <!-- Setting to false will disable CM's IME switcher implementation for tablets -->
     <bool name="config_show_cmIMESwitcher">true</bool>

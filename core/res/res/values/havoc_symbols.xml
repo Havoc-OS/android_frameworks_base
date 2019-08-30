@@ -110,9 +110,6 @@
   <java-symbol type="style" name="Animation.Toast.SlideRightLeft" />
   <java-symbol type="style" name="Animation.Toast.SlideLeftRight" />
 
-  <!-- Screenrecord -->
-  <java-symbol type="bool" name="config_enableScreenrecordChord" />
-
   <!-- On-The-Go -->
   <java-symbol type="drawable" name="ic_lock_onthego" />
 
@@ -243,9 +240,6 @@
   <!-- System fonts -->
   <java-symbol type="array" name="config_fontPackages" />
   <java-symbol type="string" name="fontservice_incompatible_font" />
-
-  <!-- Power menu -->
-  <java-symbol type="drawable" name="ic_lock_screenrecord" />
 
   <!-- Old QTI Blobs -->
   <java-symbol type="bool" name="config_oldQtiTelephony" />

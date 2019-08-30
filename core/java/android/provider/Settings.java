@@ -5315,11 +5315,6 @@ public final class Settings {
         /**
          * @hide
          */
-        public static final String SCREENRECORD_QUALITY_MODE = "screenrecord_quality_mode";
-
-        /**
-         * @hide
-         */
         public static final String FULL_GESTURE_NAVBAR = "full_gesture_navbar";
 
         /**
@@ -5773,17 +5768,6 @@ public final class Settings {
         public static final String POWER_MENU_ANIMATIONS = "power_menu_animations";
 
         /**
-         * If Screenrecord should be displayed at the power menu.
-         *
-         * @hide
-         */
-        public static final String GLOBAL_ACTIONS_SCREENRECORD = "global_actions_screenrecord";
-
-        /** @hide */
-        private static final Validator GLOBAL_ACTIONS_SCREENRECORD_VALIDATOR =
-              BOOLEAN_VALIDATOR;
-
-        /**
           * Volume dialog timeout
           * @hide
           */
@@ -5816,13 +5800,6 @@ public final class Settings {
          */
         public static final String UI_STYLE = "ui_style";
 
-        /**
-         * Switch to Enable/Disable ScreenRecord Shortcut.
-         *
-         * @hide
-         */
-        public static final String SCREEN_RECORD_SHORTCUT_SWITCH = "screen_record_shortcut";
-        
 	    /**
          * Switch to Enable/Disable ScreenShot Shortcut.
          *
@@ -6875,7 +6852,6 @@ public final class Settings {
             STATUS_BAR_SHOW_TICKER,
             STATUS_BAR_TICKER_ANIMATION_MODE,
             STATUS_BAR_TICKER_TICK_DURATION,
-            GLOBAL_ACTIONS_SCREENRECORD,
             VOLUME_KEYS_CONTROL_RING_TONE,
             USE_BOTTOM_GESTURE_NAVIGATION,
             BOTTOM_GESTURE_TRIGGER_TIMEOUT,
@@ -7089,7 +7065,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_STATE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_TYPE);
             PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
-            PRIVATE_SETTINGS.add(GLOBAL_ACTIONS_SCREENRECORD);
             PRIVATE_SETTINGS.add(VOLUME_KEYS_CONTROL_RING_TONE);
             PRIVATE_SETTINGS.add(THEMING_SETTINGS_DASHBOARD_ICONS);
             PRIVATE_SETTINGS.add(UI_STYLE);
@@ -7274,7 +7249,6 @@ public final class Settings {
             VALIDATORS.put(STATUS_BAR_SHOW_TICKER, STATUS_BAR_SHOW_TICKER_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_TICKER_ANIMATION_MODE, STATUS_BAR_TICKER_ANIMATION_MODE_VALIDATOR);
             VALIDATORS.put(STATUS_BAR_TICKER_TICK_DURATION, STATUS_BAR_TICKER_TICK_DURATION_VALIDATOR);
-            VALIDATORS.put(GLOBAL_ACTIONS_SCREENRECORD,GLOBAL_ACTIONS_SCREENRECORD_VALIDATOR);
             VALIDATORS.put(VOLUME_KEYS_CONTROL_RING_TONE,VOLUME_KEYS_CONTROL_RING_TONE_VALIDATOR);
             VALIDATORS.put(USE_BOTTOM_GESTURE_NAVIGATION, USE_BOTTOM_GESTURE_NAVIGATION_VALIDATOR);
             VALIDATORS.put(BOTTOM_GESTURE_TRIGGER_TIMEOUT, BOTTOM_GESTURE_TRIGGER_TIMEOUT_VALIDATOR);

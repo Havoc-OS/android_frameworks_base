@@ -38,7 +38,6 @@ public class NotificationChannels extends SystemUI {
     public static String TVPIP       = "TPP";
     public static String BATTERY     = "BAT";
     public static String HINTS       = "HNT";
-    public static String SCREENRECORDS = "SCR";
 
     public static void createAll(Context context) {
         final NotificationManager nm = context.getSystemService(NotificationManager.class);
@@ -85,11 +84,8 @@ public class NotificationChannels extends SystemUI {
                         context.getString(R.string.notification_channel_screenshot),
                         nm.getNotificationChannel(SCREENSHOTS_LEGACY)),
                 batteryChannel,
-                hint,
-                new NotificationChannel(
-                        SCREENRECORDS,
-                        context.getString(R.string.notification_channel_screenrecord),
-                        NotificationManager.IMPORTANCE_LOW)));
+                hint
+        ));
 
         // Delete older SS channel if present.
         // Screenshots promoted to heads-up in P, this cleans up the lower priority channel from O.

@@ -26,9 +26,6 @@
     <!-- Custom Carrier Label -->
     <dimen name="status_bar_carrier_height">14dp</dimen>
 
-    <!-- Screenrecord -->
-    <dimen name="screenrecord_hint_size">48dp</dimen>
-
     <!-- Burn-in protection -->
     <dimen name="horizontal_max_swift">3.0dp</dimen>
     <dimen name="vertical_max_swift">1.0dp</dimen>

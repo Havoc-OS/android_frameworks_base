@@ -352,12 +352,6 @@
             </intent-filter>
         </service>
 
-        <!-- started from PhoneWindowManager
-             TODO: Should have an android:permission attribute -->
-        <service android:name=".havoc.screenrecord.TakeScreenrecordService"
-            android:process=":screenrecord"
-            android:exported="false" />
-
         <service android:name=".ImageWallpaper"
                 android:permission="android.permission.BIND_WALLPAPER"
                 android:exported="true" />
@@ -458,21 +452,6 @@
         <!-- Callback for deleting screenshot notification -->
         <receiver android:name=".screenshot.GlobalScreenshot$DeleteScreenshotReceiver"
             android:process=":screenshot"
-            android:exported="false" />
-
-        <!-- Springboard for launching the share activity -->
-        <receiver android:name=".havoc.screenrecord.GlobalScreenrecord$ShareReceiver"
-            android:process=":screenrecord"
-            android:exported="false" />
-
-        <!-- Callback for dismissing screenrecord notification after a share target is picked -->
-        <receiver android:name=".havoc.screenrecord.GlobalScreenrecord$TargetChosenReceiver"
-            android:process=":screenrecord"
-            android:exported="false" />
-
-        <!-- Callback for deleting screenrecord notification -->
-        <receiver android:name=".havoc.screenrecord.GlobalScreenrecord$DeleteScreenrecordReceiver"
-            android:process=":screenrecord"
             android:exported="false" />
 
         <!-- started from UsbDeviceSettingsManager -->

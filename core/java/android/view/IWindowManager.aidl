@@ -454,11 +454,6 @@ interface IWindowManager
 
     boolean isKeyguardShowingAndNotOccluded();
 
-    /**
-     * Call screen record from WindowManager.
-     */
-    void screenRecordAction(int mode);
-
     // This requires the ONE_HANDED_MODE permission.
     boolean isOneHandedModeAvailable();
 

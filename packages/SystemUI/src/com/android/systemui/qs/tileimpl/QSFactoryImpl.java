@@ -67,7 +67,6 @@ import com.android.systemui.qs.tiles.ReadingModeTile;
 import com.android.systemui.qs.tiles.RebootTile;
 import com.android.systemui.qs.tiles.PieTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
-import com.android.systemui.qs.tiles.ScreenrecordTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.ScreenStabilizationTile;
 import com.android.systemui.qs.tiles.CalcTile;
@@ -186,8 +185,6 @@ public class QSFactoryImpl implements QSFactory {
                 return new HeadsUpTile(mHost);
             case "hwkeys":
                 return new HWKeysTile(mHost);
-            case "screenrecord":
-                return new ScreenrecordTile(mHost);
             case "aod":
                 return new AODTile(mHost);
             case "ambient_display":

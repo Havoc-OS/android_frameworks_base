@@ -42,19 +42,6 @@
     <string name="animation_random">Random</string>
     <string name="action_null">Blank</string>
 
-    <!-- Screenrecord Notification Ticker -->
-    <string name="screenrecord_notif_ticker">Screen is being recorded</string>
-    <!-- Screenrecord notification title -->
-    <string name="screenrecord_notif_title">Recording screen</string>
-    <!-- Screenrecord notification action: Stop -->
-    <string name="screenrecord_notif_stop">Stop</string>
-    <!-- Screenrecord notification action: show/hide pointer -->
-    <string name="screenrecord_notif_pointer_on">Show pointer</string>
-    <string name="screenrecord_notif_pointer_off">Hide pointer</string>
-    <!-- Screen record notification error title -->
-    <string name="screenrecord_notif_error">Unable to record screen</string>
-    <string name="notification_channel_screenrecord">Screenrecords</string>
-	
     <!-- ADB over network -->
     <string name="adb_net_active_notification_title">ADB over network enabled</string>
     <string name="adb_both_active_notification_title">ADB over USB &amp; network enabled</string>

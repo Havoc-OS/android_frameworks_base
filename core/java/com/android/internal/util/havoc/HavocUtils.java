@@ -309,15 +309,6 @@ public class HavocUtils {
                Locale.CHINESE.getLanguage());
     }
 
-    public static void takeScreenrecord(int mode) {
-        IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
-        try {
-            wm.screenRecordAction(mode);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
-
     // Check to see if device is WiFi only
     public static boolean isWifiOnly(Context context) {
         ConnectivityManager cm = (ConnectivityManager)context.getSystemService(
