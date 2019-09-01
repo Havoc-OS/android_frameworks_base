@@ -16,6 +16,9 @@
 
 package com.android.settingslib.graph;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.content.res.Resources;
@@ -48,7 +51,8 @@ public class BatteryMeterDrawableBase extends Drawable {
     public static final int BATTERY_STYLE_PORTRAIT = 0;
     public static final int BATTERY_STYLE_CIRCLE = 1;
     public static final int BATTERY_STYLE_DOTTED_CIRCLE = 2;
-    public static final int BATTERY_STYLE_HIDDEN = 3;
+    public static final int BATTERY_STYLE_PA_CIRCLE = 3;
+    public static final int BATTERY_STYLE_HIDDEN = 4;
 
     protected final Context mContext;
     protected final Paint mFramePaint;
@@ -66,6 +70,11 @@ public class BatteryMeterDrawableBase extends Drawable {
     private boolean mPowerSaveEnabled;
     protected boolean mPowerSaveAsColorError = true;
     private boolean mShowPercent;
+
+    private boolean mFastCharging;
+    private boolean mAnimateCharging = true;
+    private ValueAnimator mChargingAnimator;
+    private int mBatteryAlpha;
 
     private static final boolean SINGLE_DIGIT_PERCENT = false;
 
@@ -199,8 +208,16 @@ public class BatteryMeterDrawableBase extends Drawable {
 
     public void setCharging(boolean val) {
         if (mCharging != val) {
+            boolean previousCharging = mCharging;
             mCharging = val;
-            postInvalidate();
+            if (shouldAnimateCharging() && val) {
+                if (!previousCharging) {
+                    startChargingAnimation(2);
+                }
+            } else {
+                cancelChargingAnimation();
+                postInvalidate();
+            }
         }
     }
 
@@ -210,8 +227,14 @@ public class BatteryMeterDrawableBase extends Drawable {
 
     public void setBatteryLevel(int val) {
         if (mLevel != val) {
-            mLevel = val;
-            postInvalidate();
+            if (shouldAnimateCharging() && mChargingAnimator == null
+                    && mCharging && val > mLevel) {
+                mLevel = val;
+                startChargingAnimation(0);
+            } else {
+                mLevel = val;
+                postInvalidate();
+            }
         }
     }
 
@@ -234,8 +257,17 @@ public class BatteryMeterDrawableBase extends Drawable {
         mPowerSaveAsColorError = asError;
     }
 
+    public void setFastCharging(boolean val) {
+        if (mFastCharging == val) {
+            mFastCharging = val;
+            cancelChargingAnimation();
+            postInvalidate();
+        }
+    }
+
     public void setMeterStyle(int style) {
         mMeterStyle = style;
+        cancelChargingAnimation();
         updateSize();
         postInvalidate();
     }
@@ -244,6 +276,52 @@ public class BatteryMeterDrawableBase extends Drawable {
     protected void postInvalidate() {
         unscheduleSelf(this::invalidateSelf);
         scheduleSelf(this::invalidateSelf, 0);
+    }
+
+    public void setAnimateCharging(boolean val) {
+        mAnimateCharging = val;
+    }
+
+    private boolean shouldAnimateCharging() {
+        // this is used by PA style battery to animate the icon
+	    return mMeterStyle == BATTERY_STYLE_PA_CIRCLE ? true : false;
+    }
+
+    private void startChargingAnimation(int repeat) {
+        int alpha = mBatteryPaint.getAlpha();
+        mChargingAnimator = ValueAnimator.ofInt(alpha, 0, alpha);
+        mChargingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mBatteryAlpha = (int) animation.getAnimatedValue();
+                invalidateSelf();
+            }
+        });
+        mChargingAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                super.onAnimationCancel(animation);
+                mBatteryAlpha = alpha;
+                invalidateSelf();
+                onAnimationEnd(animation);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                mChargingAnimator = null;
+            }
+        });
+        mChargingAnimator.setRepeatCount(repeat);
+        mChargingAnimator.setDuration(2000);
+        mChargingAnimator.setStartDelay(500);
+        mChargingAnimator.start();
+    }
+
+    private void cancelChargingAnimation() {
+        if (mChargingAnimator != null) {
+            mChargingAnimator.cancel();
+        }
     }
 
     private static float[] loadPoints(Resources res, int pointArrayRes) {
@@ -345,6 +423,9 @@ public class BatteryMeterDrawableBase extends Drawable {
             case BATTERY_STYLE_DOTTED_CIRCLE:
             default:
                 drawCircle(c);
+                break;
+            case BATTERY_STYLE_PA_CIRCLE:
+                drawPACircle(c);
                 break;
         }
     }
@@ -621,6 +702,85 @@ public class BatteryMeterDrawableBase extends Drawable {
         // Draw the powersave outline last
         if (!mCharging && mPowerSaveEnabled && mPowerSaveAsColorError) {
             c.drawPath(mOutlinePath, mPowersavePaint);
+        }
+    }
+
+    private void drawPACircle(Canvas c) {
+        final int level = mLevel;
+
+        if (level == -1)
+            return;
+
+        final int circleSize = Math.min(mWidth, mHeight);
+        final int circleRadius = circleSize / 2;
+        float strokeWidth = mPowersavePaint.getStrokeWidth();
+        float drawFrac = (float) level / 100f;
+
+        mFramePaint.setStrokeWidth(0);
+        mFramePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+
+        mBatteryPaint.setStrokeWidth(0);
+        mBatteryPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+
+        mFrame.set(
+                strokeWidth / 2.0f + mPadding.left,
+                strokeWidth / 2.0f,
+                circleSize - strokeWidth / 2.0f + mPadding.left,
+                circleSize - strokeWidth / 2.0f);
+
+        // set the battery charging color
+        mBatteryPaint.setColor(batteryColorForLevel(level));
+        if (mChargingAnimator != null) {
+            mBatteryPaint.setAlpha(mBatteryAlpha);
+        }
+
+        if (level >= FULL) {
+            drawFrac = 1f;
+        } else if (level <= mCriticalLevel) {
+            drawFrac = 0f;
+        }
+
+        final float levelTop = drawFrac == 1f ? mBoltFrame.top
+                : (mFrame.top + (mFrame.height() * (1f - drawFrac)));
+
+        if (mPowerSaveEnabled) {
+            // define the plus shape
+            final float pw = mFrame.width() * 2 / 5;
+            final float pl = mFrame.left + (mFrame.width() - pw) / 2;
+            final float pt = mFrame.top + (mFrame.height() - pw) / 2;
+            final float pr = mFrame.right - (mFrame.width() - pw) / 2;
+            final float pb = mFrame.bottom - (mFrame.height() - pw) / 2;
+            if (mPlusFrame.left != pl || mPlusFrame.top != pt
+                    || mPlusFrame.right != pr || mPlusFrame.bottom != pb) {
+                mPlusFrame.set(pl, pt, pr, pb);
+                mPlusPath.reset();
+                mPlusPath.moveTo(
+                        mPlusFrame.left + mPlusPoints[0] * mPlusFrame.width(),
+                        mPlusFrame.top + mPlusPoints[1] * mPlusFrame.height());
+                for (int i = 2; i < mPlusPoints.length; i += 2) {
+                    mPlusPath.lineTo(
+                            mPlusFrame.left + mPlusPoints[i] * mPlusFrame.width(),
+                            mPlusFrame.top + mPlusPoints[i + 1] * mPlusFrame.height());
+                }
+                mPlusPath.lineTo(
+                        mPlusFrame.left + mPlusPoints[0] * mPlusFrame.width(),
+                        mPlusFrame.top + mPlusPoints[1] * mPlusFrame.height());
+            }
+        }
+
+        // draw outer circle first
+        c.drawCircle(mFrame.centerX(), mFrame.centerY(), circleRadius, mFramePaint);
+
+        // draw colored circle representing charge level
+        if (level > 0) {
+            c.drawCircle(mFrame.centerX(), mFrame.centerY(), circleRadius * (level / 100f),
+                    mBatteryPaint);
+        }
+
+        // Draw the powersave plus & outline last
+        if (!mCharging && mPowerSaveEnabled && mPowerSaveAsColorError) {
+            c.drawPath(mPlusPath, mPlusPaint);
+            c.drawArc(mFrame, 270, 360, false, mPowersavePaint);
         }
     }
 
