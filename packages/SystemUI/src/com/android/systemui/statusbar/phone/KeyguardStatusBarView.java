@@ -82,6 +82,7 @@ public class KeyguardStatusBarView extends RelativeLayout
     private boolean mBatteryCharging;
     private boolean mKeyguardUserSwitcherShowing;
     private boolean mBatteryListening;
+    private boolean mShowNotchView;
 
     private int mShowCarrierLabel;
 
@@ -338,7 +339,12 @@ public class KeyguardStatusBarView extends RelativeLayout
         Rect bounds = new Rect();
         boundsFromDirection(dc, Gravity.TOP, bounds);
 
-        mCutoutSpace.setVisibility(View.VISIBLE);
+        mShowNotchView = getResources().getBoolean(R.bool.hide_view_behind_notch);
+        if (!mShowNotchView) {
+            mCutoutSpace.setVisibility(View.VISIBLE);
+        } else {
+            mCutoutSpace.setVisibility(View.GONE);
+        }
         RelativeLayout.LayoutParams lp = (LayoutParams) mCutoutSpace.getLayoutParams();
         bounds.left = bounds.left + mCutoutSideNudge;
         bounds.right = bounds.right - mCutoutSideNudge;
