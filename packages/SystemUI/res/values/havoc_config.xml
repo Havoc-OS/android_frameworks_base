@@ -63,4 +63,7 @@
     <!-- The CPU temperature divider, if needed -->
     <integer name="config_cpuTempDivider" translatable="false">1</integer>
 
+    <!-- Whether SystemUI ignores notch -->
+    <bool name="hide_view_behind_notch">false</bool>
+
 </resources>
