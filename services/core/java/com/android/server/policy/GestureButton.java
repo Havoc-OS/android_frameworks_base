@@ -77,6 +77,7 @@ public class GestureButton implements PointerEventListener {
     private int mSwipeMinLength;
     private int mMoveTolerance;
     private int mSwipeTriggerTimeout;
+    private boolean mHapticFeedback;
     private Context mContext;
 
     private Vibrator vibrator;
@@ -84,7 +85,7 @@ public class GestureButton implements PointerEventListener {
 
     final Runnable haptic = new Runnable() {
         public void run() {
-            if (vibrator != null) {
+            if (mHapticFeedback && vibrator != null) {
                 if (vibrator.hasVibrator()) {
                     vibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_CLICK));
                 }
@@ -138,6 +139,8 @@ public class GestureButton implements PointerEventListener {
         mSwipeMinLength = getSwipeLengthInPixel(context.getResources().getInteger(R.integer.nav_gesture_swipe_min_length));
         mMoveTolerance = context.getResources().getInteger(R.integer.nav_gesture_move_threshold);
         mSwipeTriggerTimeout  = context.getResources().getInteger(R.integer.nav_gesture_swipe_timout);
+        mHapticFeedback = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.BOTTOM_GESTURE_FEEDBACK, 1, UserHandle.USER_CURRENT) != 0;
         HandlerThread gestureButtonThread = new HandlerThread("GestureButtonThread", -8);
         gestureButtonThread.start();
         mGestureButtonHandler = new GestureButtonHandler(gestureButtonThread.getLooper());
@@ -327,6 +330,9 @@ public class GestureButton implements PointerEventListener {
                 Settings.System.BOTTOM_GESTURE_SWIPE_LIMIT,
                 getSwipeLengthInPixel(mContext.getResources().getInteger(R.integer.nav_gesture_swipe_min_length)),
                 UserHandle.USER_CURRENT);
+        mHapticFeedback = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.BOTTOM_GESTURE_FEEDBACK, 1,
+                UserHandle.USER_CURRENT) != 0;
         if (DEBUG) Slog.i(TAG, "updateSettings mSwipeTriggerTimeout = " + mSwipeTriggerTimeout + " mSwipeMinLength = " + mSwipeMinLength);
     }
 
