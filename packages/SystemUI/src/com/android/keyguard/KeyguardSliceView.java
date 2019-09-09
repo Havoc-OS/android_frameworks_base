@@ -42,6 +42,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.util.TypedValue;
 
@@ -83,6 +84,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
     private Uri mKeyguardSliceUri;
     @VisibleForTesting
     TextView mTitle;
+    private RelativeLayout mRowContainer;
     private Row mRow;
     private int mTextColor;
     private float mDarkAmount = 0;
@@ -135,6 +137,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
     protected void onFinishInflate() {
         super.onFinishInflate();
         mTitle = findViewById(R.id.title);
+        mRowContainer = findViewById(R.id.row_maincenter);
         mRow = findViewById(R.id.row);
         mTextColor = Utils.getColorAttr(mContext, R.attr.wallpaperTextColor);
         updateSettings();
@@ -206,12 +209,12 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         final int blendedColor = getTextColor();
         final int startIndex = mHasHeader ? 1 : 0; // First item is header; skip it
         if (mClockSelection) {
-            mRow.setPaddingRelative((int) mContext.getResources().getDimension(R.dimen.custom_clock_left_padding), 0, 0, 0);
-            mRow.setGravity(Gravity.START);
+            mRowContainer.setPaddingRelative((int) mContext.getResources().getDimension(R.dimen.custom_clock_left_padding), 0, 0, 0);
+            mRowContainer.setGravity(Gravity.START);
         }
         else {
-            mRow.setPaddingRelative(0, 0, 0, 0);
-            mRow.setGravity(Gravity.CENTER);
+            mRowContainer.setPaddingRelative(0, 0, 0, 0);
+            mRowContainer.setGravity(Gravity.CENTER);
         }
         mRow.setVisibility(subItemsCount > 0 ? ((mShowInfo || mDarkAmount == 1) ? VISIBLE : GONE)
                 : GONE);
