@@ -14,4 +14,102 @@
         <item>Mười</item>
         <item>Mười một</item>
     </string-array>
+<string-array name="type_clock_minutes">
+        <item>O’Clock</item>
+        <item>O’ Một</item>
+        <item>O’Hai</item>
+        <item>O’Ba</item>
+        <item>O’Bốn</item>
+        <item>O’Năm</item>
+        <item>O’Sáu</item>
+        <item>O’Bảy</item>
+        <item>O’Tám</item>
+        <item>O’Chín</item>
+        <item>Mười</item>
+        <item>Mười một</item>
+        <item>Mười hai</item>
+        <item>Mười ba</item>
+        <item>Mười bốn</item>
+        <item>Mười lăm</item>
+        <item>Mười sáu</item>
+        <item>Mười bảy</item>
+        <item>Mười tám</item>
+        <item>Mười chín</item>
+        <item>Hai mươi</item>
+        <item>"Hai mươi
+One"</item>
+        <item>"Hai mươi
+Two"</item>
+        <item>"Hai mươi
+Three"</item>
+        <item>"Hai mươi
+Four"</item>
+        <item>"Hai mươi
+Five"</item>
+        <item>"Hai mươi
+Six"</item>
+        <item>"Hai mươi
+Seven"</item>
+        <item>"Hai mươi
+Eight"</item>
+        <item>"Hai mươi
+Nine"</item>
+        <item>Ba mươi</item>
+        <item>"Ba mươi
+One"</item>
+        <item>"Ba mươi
+Two"</item>
+        <item>"Ba mươi
+Three"</item>
+        <item>"Ba mươi
+Four"</item>
+        <item>"Ba mươi
+Five"</item>
+        <item>"Ba mươi
+Six"</item>
+        <item>"Ba mươi
+Seven"</item>
+        <item>"Ba mươi
+Eight"</item>
+        <item>"Ba mươi
+Nine"</item>
+        <item>Bốn mươi</item>
+        <item>"Bốn mươi
+One"</item>
+        <item>"Bốn mươi
+Two"</item>
+        <item>"Bốn mươi
+Three"</item>
+        <item>"Bốn mươi
+Four"</item>
+        <item>"Bốn mươi
+Five"</item>
+        <item>"Bốn mươi
+Six"</item>
+        <item>"Bốn mươi
+Seven"</item>
+        <item>"Bốn mươi
+Eight"</item>
+        <item>"Bốn mươi
+Nine"</item>
+        <item>Năm mươi</item>
+        <item>"Năm mươi
+One"</item>
+        <item>"Năm mươi
+Two"</item>
+        <item>"Năm mươi
+Three"</item>
+        <item>"Năm mươi
+Four"</item>
+        <item>"Năm mươi
+Five"</item>
+        <item>"Năm mươi
+Six"</item>
+        <item>"Năm mươi
+Seven"</item>
+        <item>"Năm mươi
+Eight"</item>
+        <item>"Năm mươi
+Nine"</item>
+    </string-array>
 </resources>
