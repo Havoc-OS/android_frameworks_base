@@ -18,115 +18,115 @@
 -->
 <resources>
     <string-array name="type_clock_hours">
-        <item>Twelve</item>
-        <item>One</item>
-        <item>Two</item>
-        <item>Three</item>
-        <item>Four</item>
-        <item>Five</item>
-        <item>Six</item>
-        <item>Seven</item>
-        <item>Eight</item>
-        <item>Nine</item>
-        <item>Ten</item>
-        <item>Eleven</item>
+        <item>Mười Hai</item>
+        <item>Một</item>
+        <item>Hai</item>
+        <item>Ba</item>
+        <item>Bốn</item>
+        <item>Năm</item>
+        <item>Sáu</item>
+        <item>Bảy</item>
+        <item>Tám</item>
+        <item>Chín</item>
+        <item>Mười</item>
+        <item>Mười Một</item>
     </string-array>
     <string-array name="type_clock_minutes">
         <item>O’Clock</item>
-        <item>O’One</item>
-        <item>O’Two</item>
-        <item>O’Three</item>
-        <item>O’Four</item>
-        <item>O’Five</item>
-        <item>O’Six</item>
-        <item>O’Seven</item>
-        <item>O’Eight</item>
-        <item>O’Nine</item>
-        <item>Ten</item>
-        <item>Eleven</item>
-        <item>Twelve</item>
-        <item>Thirteen</item>
-        <item>Fourteen</item>
-        <item>Fifteen</item>
-        <item>Sixteen</item>
-        <item>Seventeen</item>
-        <item>Eighteen</item>
-        <item>Nineteen</item>
-        <item>Twenty</item>
-        <item>"Twenty
+        <item>O'Một</item>
+        <item>O’Hai</item>
+        <item>O’Ba</item>
+        <item>O’Bốn</item>
+        <item>O’Năm</item>
+        <item>O’Sáu</item>
+        <item>O’Bảy</item>
+        <item>O’Tám</item>
+        <item>O’Chín</item>
+        <item>Mười</item>
+        <item>Mười một</item>
+        <item>Mười hai</item>
+        <item>Mười ba</item>
+        <item>Mười bốn</item>
+        <item>Mười lăm</item>
+        <item>Mười sáu</item>
+        <item>Mười bảy</item>
+        <item>Mười tám</item>
+        <item>Mười chín</item>
+        <item> Hai mươi</item>
+        <item>" Hai mươi
 One"</item>
-        <item>"Twenty
+        <item>"Hai mươi
 Two"</item>
-        <item>"Twenty
+        <item>"Hai mươi
 Three"</item>
-        <item>"Twenty
+        <item>"Hai mươi
 Four"</item>
-        <item>"Twenty
+        <item>"Hai mươi
 Five"</item>
-        <item>"Twenty
+        <item>"Hai mươi
 Six"</item>
-        <item>"Twenty
+        <item>"Hai mươi
 Seven"</item>
-        <item>"Twenty
+        <item>"Hai mươi
 Eight"</item>
-        <item>"Twenty
+        <item>"Hai mươi
 Nine"</item>
-        <item>Thirty</item>
-        <item>"Thirty
+        <item>Ba mươi</item>
+        <item>"Ba mươi
 One"</item>
-        <item>"Thirty
+        <item>"Ba mươi
 Two"</item>
-        <item>"Thirty
+        <item>"Ba mươi
 Three"</item>
-        <item>"Thirty
+        <item>"Ba mươi
 Four"</item>
-        <item>"Thirty
+        <item>"Ba mươi
 Five"</item>
-        <item>"Thirty
+        <item>"Ba mươi
 Six"</item>
-        <item>"Thirty
+        <item>"Ba mươi
 Seven"</item>
-        <item>"Thirty
+        <item>"Ba mươi
 Eight"</item>
-        <item>"Thirty
+        <item>"Ba mươi
 Nine"</item>
-        <item>Forty</item>
-        <item>"Forty
+        <item>Bốn mươi</item>
+        <item>" Bốn mươi
 One"</item>
-        <item>"Forty
+        <item>"Bốn mươi
 Two"</item>
-        <item>"Forty
+        <item>"Bốn mươi
 Three"</item>
-        <item>"Forty
+        <item>"Bốn mươi
 Four"</item>
-        <item>"Forty
+        <item>"Bốn mươi
 Five"</item>
-        <item>"Forty
+        <item>"Bốn mươi
 Six"</item>
-        <item>"Forty
+        <item>"Bốn mươi
 Seven"</item>
-        <item>"Forty
+        <item>"Bốn mươi
 Eight"</item>
-        <item>"Forty
+        <item>"Bốn mươi
 Nine"</item>
-        <item>Fifty</item>
-        <item>"Fifty
+        <item>Năm mươi</item>
+        <item>"Năm mươi
 One"</item>
-        <item>"Fifty
+        <item>"Năm mươi
 Two"</item>
-        <item>"Fifty
+        <item>"Năm mươi
 Three"</item>
-        <item>"Fifty
+        <item>"Năm mươi
 Four"</item>
-        <item>"Fifty
+        <item>"Năm mươi
 Five"</item>
-        <item>"Fifty
+        <item>"Năm mươi
 Six"</item>
-        <item>"Fifty
+        <item>"Năm mươi
 Seven"</item>
-        <item>"Fifty
+        <item>"Năm mươi
 Eight"</item>
-        <item>"Fifty
+        <item>"Năm mươi
 Nine"</item>
     </string-array>
 </resources>
