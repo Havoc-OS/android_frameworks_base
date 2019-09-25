@@ -246,6 +246,8 @@ public class StatusBarNotificationPresenter implements NotificationPresenter,
         Dependency.get(ConfigurationController.class).addCallback(this);
 
         notificationAlertingManager.setHeadsUpManager(mHeadsUpManager);
+        setHeadsUpStoplist();
+        setHeadsUpBlacklist();
     }
 
     @Override
