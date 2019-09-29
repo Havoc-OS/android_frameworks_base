@@ -40,12 +40,8 @@ cc_defaults {
         "external/skia/src/shaders",
     ],
 
-    product_variables: {
-        eng: {
-            lto: {
-                never: true,
-            },
-        },
+    lto: {
+        thin: true,
     },
 }
 
