@@ -64,6 +64,7 @@ public class FODCircleView extends ImageView {
 
     private boolean mIsBouncer;
     private boolean mIsDreaming;
+    private boolean mIsPulsing;
     private boolean mIsShowing;
     private boolean mIsCircleShowing;
 
@@ -98,6 +99,17 @@ public class FODCircleView extends ImageView {
             } else if (mBurnInProtectionTimer != null) {
                 mBurnInProtectionTimer.cancel();
             }
+        }
+
+        @Override
+        public void onPulsing(boolean pulsing) {
+            super.onPulsing(pulsing);
+            mIsPulsing = pulsing;
+            updateAlpha();
+
+	        if (mIsPulsing) {
+                mIsDreaming = false;
+	        }
         }
 
         @Override
@@ -306,7 +318,7 @@ public class FODCircleView extends ImageView {
         if (mIsCircleShowing) {
             setAlpha(1.0f);
         } else {
-            setAlpha(mIsDreaming ? 0.5f : 1.0f);
+            setAlpha(mIsDreaming ? (mIsPulsing ? 1.0f : 0.8f) : 1.0f);
         }
     }
 
