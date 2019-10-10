@@ -234,4 +234,7 @@
          timing(the duration which the vibrator is expected to vibrate for). -->
     <bool name="config_hasOnePlusHapticMotor">false</bool>
 
+    <!-- Default value for Ambient Pulse light color -->
+    <integer name="config_AmbientPulseLightColor" >0x3980FF</integer>
+
 </resources>
