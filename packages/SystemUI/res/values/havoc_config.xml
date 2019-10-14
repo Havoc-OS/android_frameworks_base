@@ -22,4 +22,7 @@
     <bool name="config_statusBarBurnInProtection">false</bool>
     <integer name="config_shift_interval">60</integer>
 
+    <!-- Max visible system icons -->
+    <integer name="config_maxVisibleStatusIconContainer">7</integer>
+
 </resources>
