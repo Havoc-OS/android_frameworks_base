@@ -24,6 +24,11 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.SparseArray;
+import android.content.ContentResolver;
+import android.database.ContentObserver;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +63,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     public static final String STATUS_BAR_ICON_MANAGER_TAG = "status_bar_icon_manager";
     public static final int FADE_IN_DURATION = 320;
     public static final int FADE_IN_DELAY = 50;
+    private final Handler mHandler = new Handler();
     private PhoneStatusBarView mStatusBar;
     private StatusBarStateController mStatusBarStateController;
     private KeyguardStateController mKeyguardStateController;
@@ -74,6 +80,28 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private BatteryMeterView mBatteryMeterView;
     private StatusIconContainer mStatusIcons;
     private int mSignalClusterEndPadding = 0;
+    private View mCustomCarrierLabel;
+    private int mShowCarrierLabel;
+
+    private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_CARRIER),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateSettings(true);
+        }
+    }
+
+    private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
+    private ContentResolver mContentResolver;
 
     private SignalCallback mSignalCallback = new SignalCallback() {
         @Override
@@ -94,11 +122,13 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContentResolver = getContext().getContentResolver();
         mKeyguardStateController = Dependency.get(KeyguardStateController.class);
         mNetworkController = Dependency.get(NetworkController.class);
         mStatusBarStateController = Dependency.get(StatusBarStateController.class);
         mStatusBarComponent = Dependency.get(StatusBar.class);
         mCommandQueue = Dependency.get(CommandQueue.class);
+        mSettingsObserver.observe();
     }
 
     @Override
@@ -128,10 +158,13 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mStatusIcons.setPadding(mStatusIcons.getPaddingLeft(), mStatusIcons.getPaddingTop(), (batteryStyle == 5/*hidden*/ ? 0 : mSignalClusterEndPadding), mStatusIcons.getPaddingBottom());
         mBatteryMeterView = mStatusBar.findViewById(R.id.battery);
         mBatteryMeterView.addCallback(mBatteryMeterViewCallback);
+        mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
         showSystemIconArea(false);
         showClock(false);
         initEmergencyCryptkeeperText();
         initOperatorName();
+        mSettingsObserver.observe();
+        updateSettings(false);
     }
 
     @Override
@@ -212,8 +245,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if ((diff1 & DISABLE_NOTIFICATION_ICONS) != 0) {
             if ((state1 & DISABLE_NOTIFICATION_ICONS) != 0) {
                 hideNotificationIconArea(animate);
+                hideCarrierName(animate);
             } else {
                 showNotificationIconArea(animate);
+                showCarrierName(animate);
             }
         }
         // The clock may have already been hidden, but we might want to shift its
@@ -323,6 +358,18 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
     }
 
+    public void hideCarrierName(boolean animate) {
+        if (mCustomCarrierLabel != null) {
+            animateHide(mCustomCarrierLabel, animate);
+        }
+    }
+
+    public void showCarrierName(boolean animate) {
+        if (mCustomCarrierLabel != null) {
+            setCarrierLabel(animate);
+        }
+    }
+
     /**
      * Animate a view to INVISIBLE or GONE
      */
@@ -414,5 +461,20 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     @Override
     public void onDozingChanged(boolean isDozing) {
         disable(getContext().getDisplayId(), mDisabled1, mDisabled1, false /* animate */);
+    }
+
+    public void updateSettings(boolean animate) {
+        mShowCarrierLabel = Settings.System.getIntForUser(mContentResolver,
+                Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
+                UserHandle.USER_CURRENT);
+        setCarrierLabel(animate);
+    }
+
+    private void setCarrierLabel(boolean animate) {
+        if (mShowCarrierLabel == 2 || mShowCarrierLabel == 3) {
+            animateShow(mCustomCarrierLabel, animate);
+        } else {
+            animateHide(mCustomCarrierLabel, animate);
+        }
     }
 }
