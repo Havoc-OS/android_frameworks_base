@@ -5022,6 +5022,14 @@ public final class Settings {
         /** @hide */
         private static final Validator QS_LAYOUT_ROWS_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
+        /**
+        * @hide
+        */
+        public static final String QS_LAYOUT_ROWS_LANDSCAPE = "qs_layout_rows_landscape";
+
+        /** @hide */
+        private static final Validator QS_LAYOUT_ROWS_LANDSCAPE_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
         /** @hide */
         public static final String BACK_GESTURE_HEIGHT = "back_gesture_height";
 
@@ -6007,6 +6015,7 @@ public final class Settings {
             QS_LAYOUT_COLUMNS,
             QS_TILE_TITLE_VISIBILITY,
             QS_LAYOUT_ROWS,
+            QS_LAYOUT_ROWS_LANDSCAPE,
             QS_QUICKBAR_COLUMNS,
             BACK_GESTURE_HEIGHT,
             HEADS_UP_STOPLIST_VALUES,
@@ -6200,6 +6209,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_LAYOUT_COLUMNS);
             PRIVATE_SETTINGS.add(QS_TILE_TITLE_VISIBILITY);
             PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS);
+            PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS_LANDSCAPE);
             PRIVATE_SETTINGS.add(QS_QUICKBAR_COLUMNS);
             PRIVATE_SETTINGS.add(BACK_GESTURE_HEIGHT);
             PRIVATE_SETTINGS.add(HEADS_UP_STOPLIST_VALUES);
@@ -6385,6 +6395,7 @@ public final class Settings {
             VALIDATORS.put(QS_LAYOUT_COLUMNS, QS_LAYOUT_COLUMNS_VALIDATOR);
             VALIDATORS.put(QS_TILE_TITLE_VISIBILITY, QS_TILE_TITLE_VISIBILITY_VALIDATOR);
             VALIDATORS.put(QS_LAYOUT_ROWS, QS_LAYOUT_ROWS_VALIDATOR);
+            VALIDATORS.put(QS_LAYOUT_ROWS_LANDSCAPE, QS_LAYOUT_ROWS_LANDSCAPE_VALIDATOR);
             VALIDATORS.put(QS_QUICKBAR_COLUMNS, QS_QUICKBAR_COLUMNS_VALIDATOR);
             VALIDATORS.put(BACK_GESTURE_HEIGHT, BACK_GESTURE_HEIGHT_VALIDATOR);
             VALIDATORS.put(HEADS_UP_STOPLIST_VALUES, HEADS_UP_STOPLIST_VALUES_VALIDATOR);

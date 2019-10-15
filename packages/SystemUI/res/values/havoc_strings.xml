@@ -73,6 +73,10 @@
     <!-- QS Config -->
     <string name="qs_menu_item_columns">Columns</string>
     <string name="qs_menu_item_columns_landscape">Columns (Landscape)</string>
+    <string name="qs_menu_item_rows">Rows</string>
+    <string name="qs_menu_item_rows_landscape">Rows (Landscape)</string>
+    <string name="qs_menu_item_columns_one">1</string>
+    <string name="qs_menu_item_columns_two">2</string>
     <string name="qs_menu_item_columns_three">3</string>
     <string name="qs_menu_item_columns_four">4</string>
     <string name="qs_menu_item_columns_five">5</string>

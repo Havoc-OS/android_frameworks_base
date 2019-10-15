@@ -6,10 +6,13 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -432,9 +435,10 @@ public class PagedTileLayout extends ViewPager implements QSTileLayout {
             };
 
     public static class TilePage extends TileLayout {
-
+        private int mRows;
         public TilePage(Context context, AttributeSet attrs) {
             super(context, attrs);
+            mRows = getRows();
         }
 
         public boolean isFull() {
@@ -453,7 +457,28 @@ public class PagedTileLayout extends ViewPager implements QSTileLayout {
             final int sidePadding = getContext().getResources().getDimensionPixelSize(
                     R.dimen.notification_side_paddings);
             setPadding(sidePadding, 0, sidePadding, 0);
-            return super.updateResources();
+            final int rows = getRows();
+            boolean changed = rows != mRows;
+            if (changed) {
+                mRows = rows;
+                requestLayout();
+            }
+            return super.updateResources() || changed;
+        }
+
+        private int getRows() {
+            final Resources res = getContext().getResources();
+            final ContentResolver resolver = mContext.getContentResolver();
+
+            if (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                return Settings.System.getIntForUser(resolver,
+                        Settings.System.QS_LAYOUT_ROWS, 3,
+                        UserHandle.USER_CURRENT);
+            }
+
+            return Settings.System.getIntForUser(resolver,
+                        Settings.System.QS_LAYOUT_ROWS_LANDSCAPE, 2,
+                        UserHandle.USER_CURRENT);
         }
     }
 
@@ -499,6 +524,7 @@ public class PagedTileLayout extends ViewPager implements QSTileLayout {
     public void updateSettings() {
         for (int i = 0; i < mPages.size(); i++) {
             mPages.get(i).updateSettings();
+            mPages.get(i).updateResources();
         }
         distributeTiles();
     }
@@ -506,6 +532,10 @@ public class PagedTileLayout extends ViewPager implements QSTileLayout {
     @Override
     public int getNumColumns() {
         return mPages.get(0).getNumColumns();
+    }
+
+    public int getNumRows() {
+        return mPages.get(0).getNumRows();
     }
 
     @Override
