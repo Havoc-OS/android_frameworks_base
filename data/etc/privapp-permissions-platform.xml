@@ -435,6 +435,7 @@ applications that come with the platform
         <permission name="android.permission.CAPTURE_AUDIO_OUTPUT" />
         <!-- Permissions required for CTS test - AdbManagerTest -->
         <permission name="android.permission.MANAGE_DEBUGGING" />
+        <permission name="android.permission.WRITE_DEVICE_CONFIG"/>
     </privapp-permissions>
 
     <privapp-permissions package="com.android.statementservice">
