@@ -148,33 +148,30 @@ public class LocationTile extends QSTileImpl<BooleanState> {
         if (state.disabledByPolicy == false) {
             checkIfRestrictionEnforcedByAdminOnly(state, UserManager.DISALLOW_CONFIG_LOCATION);
         }
-        state.label = mContext.getString(getStateLabelRes(currentState));
+        state.label = mContext.getString(R.string.quick_settings_location_label);
+        state.secondaryLabel = mContext.getString(getStateLabelRes(currentState));
         state.slash.isSlashed = currentState == Settings.Secure.LOCATION_MODE_OFF;
+        state.icon = mIcon;
         switch (currentState) {
             case Settings.Secure.LOCATION_MODE_OFF:
                 state.contentDescription = mContext.getString(
                         R.string.accessibility_quick_settings_location_off);
-                state.icon = mIcon;
                 break;
             case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
                 state.contentDescription = mContext.getString(
                         R.string.accessibility_quick_settings_location_high_accuracy);
-                state.icon = mIcon;
                 break;
             case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
                 state.contentDescription = mContext.getString(
                         R.string.accessibility_quick_settings_location_battery_saving);
-                state.icon = ResourceIcon.get(R.drawable.ic_qs_location_battery_saving);
                 break;
             case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
                 state.contentDescription = mContext.getString(
                         R.string.accessibility_quick_settings_location_gps_only);
-                state.icon = ResourceIcon.get(R.drawable.ic_qs_location_sensors_only);
                 break;
             default:
                 state.contentDescription = mContext.getString(
                         R.string.accessibility_quick_settings_location_on);
-                state.icon = mIcon;
         }
         if (valueChanged) {
             fireToggleStateChanged(state.value);
@@ -186,7 +183,7 @@ public class LocationTile extends QSTileImpl<BooleanState> {
     private int getStateLabelRes(int currentState) {
         switch (currentState) {
             case Settings.Secure.LOCATION_MODE_OFF:
-                return R.string.quick_settings_location_off_label;
+                return R.string.quick_settings_location_turned_off_label;
             case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
                 return R.string.quick_settings_location_high_accuracy_label;
             case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:

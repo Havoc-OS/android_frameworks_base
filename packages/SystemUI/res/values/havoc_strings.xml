@@ -96,6 +96,8 @@
     <!-- Content description of the location tile in quick settings when on, high accuracy mode (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_location_high_accuracy">Location reporting: high accuracy mode.</string>
 
+    <!-- QuickSettings: Location (Off) [CHAR LIMIT=NONE] -->
+    <string name="quick_settings_location_turned_off_label">Off</string>
     <!-- QuickSettings: Location (On, low-power) [CHAR LIMIT=NONE] -->
     <string name="quick_settings_location_battery_saving_label">Battery saving</string>
     <string name="quick_settings_location_battery_saving_label_twoline">Battery\nsaving</string>
