@@ -116,7 +116,7 @@
     <!-- Whether device has dash charging support -->
     <java-symbol type="bool" name="config_hasDashCharger" />
 
-    <!-- Advanced reboot -->
+    <!-- Power menu -->
     <java-symbol type="array" name="config_custom_globalActionsList" />
     <java-symbol type="string" name="reboot_to_recovery_title" />
     <java-symbol type="string" name="reboot_to_recovery_message" />
@@ -130,6 +130,7 @@
     <java-symbol type="drawable" name="ic_lock_restart_bootloader" />
     <java-symbol type="drawable" name="ic_lock_restart_ui" />
     <java-symbol type="drawable" name="ic_lock_torch" />
+    <java-symbol type="color" name="power_menu_icon_color" />
 
     <!-- Vendor mismatch fingerprint warning -->
     <java-symbol type="string" name="system_error_vendorprint" />
