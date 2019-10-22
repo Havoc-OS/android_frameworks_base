@@ -271,5 +271,6 @@ public class SystemSettingsValidators {
                         return true;
                     }
                 });
+        VALIDATORS.put(System.DONT_TOUCH_HEADSUP, BOOLEAN_VALIDATOR);
     }
 }

@@ -89,5 +89,6 @@ public class SystemSettings {
         Settings.System.INCALL_FEEDBACK_VIBRATE,
         Settings.System.NOTIFICATION_HEADERS,
         Settings.System.COLOR_BUCKET_OVERLAY,
+        Settings.System.DONT_TOUCH_HEADSUP,
     };
 }
