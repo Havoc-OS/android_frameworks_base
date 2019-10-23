@@ -96,4 +96,10 @@
     <dimen name="quick_settings_top_margin_media">8dp</dimen>
     <dimen name="quick_settings_media_divider_height">17dp</dimen>
 
+    <!-- Binary clock -->
+    <dimen name="binary_clock_dot_size">8dp</dimen>
+    <dimen name="binary_clock_stroke_width">2dp</dimen>
+    <dimen name="binary_clock_width">100dp</dimen>
+    <dimen name="binary_clock_height">100dp</dimen>
+
 </resources>
