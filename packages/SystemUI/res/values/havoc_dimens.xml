@@ -31,4 +31,6 @@
 
     <dimen name="quick_status_bar_margin">8dp</dimen>
 
+    <dimen name="screenrecord_dot_size">48dp</dimen>
+
 </resources>
