@@ -56,4 +56,7 @@
     <!-- Show battery icon in the QS Panel instead of in the header -->
     <bool name="config_batteryInQSPanel">true</bool>
 
+    <!-- Whether to use the mask for the quicksettings icons-->
+    <bool name="config_useMaskForQs">true</bool>
+
 </resources>
