@@ -61,4 +61,6 @@
     <!-- Vendor mismatch fingerprint warning [CHAR LIMIT=NONE] -->
     <string name="system_error_vendorprint">Your vendor image does not match the system. Please flash the <xliff:g id="string">%s</xliff:g> vendor image for your device</string>
 
+    <!-- Pocket Lock --> 
+    <string name="pocket_lock_message_long_press">Press and hold power button to unlock</string> 
 </resources>
