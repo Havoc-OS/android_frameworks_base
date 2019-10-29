@@ -349,7 +349,7 @@ public class RecordingService extends Service {
         notificationManager.createNotificationChannel(channel);
 
         mRecordingNotificationBuilder = new Notification.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_android)
+                .setSmallIcon(R.drawable.ic_screen_recorder)
                 .setContentTitle(getResources().getString(R.string.screenrecord_name))
                 .setUsesChronometer(true)
                 .setOngoing(true);
@@ -366,12 +366,12 @@ public class RecordingService extends Service {
 
         mRecordingNotificationBuilder.setActions(
                 new Notification.Action.Builder(
-                        Icon.createWithResource(this, R.drawable.ic_android),
+                        Icon.createWithResource(this, R.drawable.ic_screen_recorder),
                         getResources().getString(R.string.screenrecord_stop_label),
                         getStopPendingIntent())
                         .build(),
                 new Notification.Action.Builder(
-                        Icon.createWithResource(this, R.drawable.ic_android), pauseString,
+                        Icon.createWithResource(this, R.drawable.ic_screen_recorder), pauseString,
                         PendingIntent.getService(this, REQUEST_CODE, pauseIntent,
                                 PendingIntent.FLAG_UPDATE_CURRENT))
                         .build(),
