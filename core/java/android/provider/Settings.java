@@ -5072,12 +5072,6 @@ public final class Settings {
         public static final String FINGERPRINT_ERROR_VIB = "fingerprint_error_vib";
 
         /**
-         * Unlock keystore with fingerprint after reboot
-         * @hide
-         */
-        public static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
-
-        /**
          * Whether to display 4G icon instead LTE
          * @hide
          */
