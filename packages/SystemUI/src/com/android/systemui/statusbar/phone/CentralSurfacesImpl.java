@@ -158,6 +158,7 @@ import com.android.systemui.fragments.ExtensionFragmentListener;
 import com.android.systemui.fragments.FragmentHostManager;
 import com.android.systemui.fragments.FragmentService;
 import com.android.systemui.keyguard.KeyguardService;
+import com.android.systemui.keyguard.KeyguardSliceProvider;
 import com.android.systemui.keyguard.KeyguardUnlockAnimationController;
 import com.android.systemui.keyguard.KeyguardViewMediator;
 import com.android.systemui.keyguard.ScreenLifecycle;
@@ -284,6 +285,8 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
 
     private static final String FORCE_SHOW_NAVBAR =
             "lineagesystem:" + LineageSettings.System.FORCE_SHOW_NAVBAR;
+    private static final String PULSE_ON_NEW_TRACKS =
+            Settings.Secure.PULSE_ON_NEW_TRACKS;
 
     private static final String BANNER_ACTION_CANCEL =
             "com.android.systemui.statusbar.banner_action_cancel";
@@ -938,6 +941,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
         }
 
         mTunerService.addTunable(this, FORCE_SHOW_NAVBAR);
+        mTunerService.addTunable(this, PULSE_ON_NEW_TRACKS);
 
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 
@@ -4185,20 +4189,32 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
 
     @Override
     public void onTuningChanged(String key, String newValue) {
-        if (FORCE_SHOW_NAVBAR.equals(key) && mDisplayId == Display.DEFAULT_DISPLAY &&
-                mWindowManagerService != null) {
-            boolean forcedVisibility = mNeedsNavigationBar ||
+        switch (key) {
+            case FORCE_SHOW_NAVBAR:
+                if (mDisplayId != Display.DEFAULT_DISPLAY || mWindowManagerService == null)
+                    return;
+                boolean forcedVisibility = mNeedsNavigationBar ||
                     TunerService.parseIntegerSwitch(newValue, false);
-            boolean hasNavbar = getNavigationBarView() != null;
-            if (forcedVisibility) {
-                if (!hasNavbar) {
-                    mNavigationBarController.onDisplayReady(mDisplayId);
+                boolean hasNavbar = getNavigationBarView() != null;
+                if (forcedVisibility) {
+                    if (!hasNavbar) {
+                            mNavigationBarController.onDisplayReady(mDisplayId);
+                    }
+                } else {
+                    if (hasNavbar) {
+                        mNavigationBarController.onDisplayRemoved(mDisplayId);
+                    }
                 }
-            } else {
-                if (hasNavbar) {
-                    mNavigationBarController.onDisplayRemoved(mDisplayId);
-                }
-            }
+                break;
+            case PULSE_ON_NEW_TRACKS:
+                boolean showPulseOnNewTracks =
+                        TunerService.parseIntegerSwitch(newValue, false);
+                KeyguardSliceProvider sliceProvider = KeyguardSliceProvider.getAttachedInstance();
+                if (sliceProvider != null)
+                    sliceProvider.setPulseOnNewTracks(showPulseOnNewTracks);
+                break;
+            default:
+                break;
         }
     }
 
