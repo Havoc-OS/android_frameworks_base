@@ -249,10 +249,10 @@ public class PhoneStatusBarPolicy
         mIconController.setIconVisibility(mSlotDataSaver, false);
 
         // privacy items
-        mIconController.setIcon(mSlotMicrophone, PrivacyType.TYPE_MICROPHONE.getIconId(),
+        mIconController.setIcon(mSlotMicrophone, R.drawable.stat_sys_mic_none,
                 PrivacyType.TYPE_MICROPHONE.getName(mContext));
         mIconController.setIconVisibility(mSlotMicrophone, false);
-        mIconController.setIcon(mSlotCamera, PrivacyType.TYPE_CAMERA.getIconId(),
+        mIconController.setIcon(mSlotCamera, R.drawable.stat_sys_camera,
                 PrivacyType.TYPE_CAMERA.getName(mContext));
         mIconController.setIconVisibility(mSlotCamera, false);
         mIconController.setIcon(mSlotLocation, LOCATION_STATUS_ICON_ID,
