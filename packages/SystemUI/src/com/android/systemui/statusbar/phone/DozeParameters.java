@@ -202,10 +202,6 @@ public class DozeParameters implements
         return SystemProperties.get(propName, mContext.getString(resId));
     }
 
-    public boolean getPickupPerformsProxCheck() {
-        return mContext.getResources().getBoolean(R.bool.doze_pickup_performs_proximity_check);
-    }
-
     public int getPulseVisibleDurationExtended() {
         return 2 * getPulseVisibleDuration();
     }
