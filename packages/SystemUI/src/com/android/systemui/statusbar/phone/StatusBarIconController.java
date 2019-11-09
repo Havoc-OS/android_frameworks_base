@@ -366,7 +366,6 @@ public interface StatusBarIconController {
             }
         }
 
-
         public void onSetIconHolder(int viewIndex, StatusBarIconHolder holder) {
             switch (holder.getType()) {
                 case TYPE_ICON:
