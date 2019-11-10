@@ -23,10 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.ContentObserver;
-import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CameraManager.TorchCallback;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -47,6 +43,7 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.UserHandle;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.telecom.TelecomManager;
@@ -60,6 +57,7 @@ import com.android.server.LocalServices;
 import com.android.server.statusbar.StatusBarManagerInternal;
 
 import com.android.internal.R;
+import com.android.internal.util.havoc.Utils;
 
 import java.lang.IllegalArgumentException;
 
@@ -82,15 +80,6 @@ public class KeyHandler {
     // 1 = enabled, 0 = disabled.
     private static final int GESTURES_DEFAULT = 0; // 0 = disabled, 1 = enabled
 
-    // Dummy camera id for CameraManager.
-    private static final String DUMMY_CAMERA_ID = "";
-
-    // Vibration attributes.
-    private static final AudioAttributes VIBRATION_ATTRIBUTES = new AudioAttributes.Builder()
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-            .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-            .build();
-
     // Supported actions.
     private static final int DISABLED = 0;
     private static final int WAKE_UP = 1;
@@ -105,11 +94,9 @@ public class KeyHandler {
     private final Context mContext;
     private PowerManager mPowerManager;
     private PowerManagerInternal mPowerManagerInternal;
-    private String mCameraId;
     private EventHandler mHandler;
     private HandlerThread mHandlerThread;
     private SensorManager mSensorManager;
-    private CameraManager mCameraManager;
     private AudioManager mAudioManager;
     private TelecomManager mTelecomManager;
     private StatusBarManagerInternal mStatusBarManagerInternal;
@@ -118,7 +105,6 @@ public class KeyHandler {
     private Vibrator mVibrator;
     private WakeLock mProximityWakeLock;
     private WakeLock mGestureWakeLock;
-    private boolean mTorchEnabled;
     private boolean mSystemReady = false;
 
     private int mDoubleTapKeyCode;
@@ -150,8 +136,6 @@ public class KeyHandler {
     private int mDrawMGesture;
     private int mDrawWGesture;
     private int mDrawSGesture;
-
-    private long[] mVibePattern;
 
     private boolean mGesturesEnabled;
 
@@ -206,15 +190,8 @@ public class KeyHandler {
         ensurePowerManager();
         ensureSensors();
         ensureStatusBarService();
-        ensureCameraManager();
         ensureKeyguardManager();
         ensureWakeLocks();
-
-        // Get camera id.
-        ensureCameraId();
-
-        // Register callbacks
-        registerTorchCallback();
 
         // Register observers
         registerObservers();
@@ -394,8 +371,6 @@ public class KeyHandler {
     private void ensureVibrator() {
         if (mVibrator == null) {
             mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-            mVibePattern = getLongIntArray(mContext.getResources(),
-                    R.array.config_longPressVibePattern);
             if (!mVibrator.hasVibrator()) {
                 mVibrator = null;
             }
@@ -444,34 +419,13 @@ public class KeyHandler {
         }
     }
 
-    private void ensureCameraManager() {
-        if (mCameraManager == null) {
-            mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-        }
-    }
-
-    private void ensureCameraId() {
-        String cameraId = DUMMY_CAMERA_ID;
-        try {
-            cameraId = getCameraId();
-        } catch (Throwable e) {
-            Log.e(TAG, "Couldn't initialize.", e);
-            return;
-        } finally {
-            mCameraId = cameraId;
-        }
-    }
-
-    private void registerTorchCallback() {
-        if (mCameraManager != null) {
-            mCameraManager.registerTorchCallback(mTorchCallback, mHandler);
-        }
-    }
-
     private void registerObservers() {
         final ContentResolver resolver = mContext.getContentResolver();
         resolver.registerContentObserver(Settings.System.getUriFor(
                 Settings.System.GESTURES_ENABLED),
+                false, mObserver, UserHandle.USER_ALL);
+        resolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.GESTURES_HAPTIC_FEEDBACK),
                 false, mObserver, UserHandle.USER_ALL);
         resolver.registerContentObserver(Settings.System.getUriFor(
                 Settings.System.GESTURE_DOUBLE_TAP),
@@ -546,7 +500,8 @@ public class KeyHandler {
                 handled = dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
                 break;
             case TORCH:
-                handled = setTorchMode(!mTorchEnabled);
+                Utils.toggleCameraFlash();
+                handled = true;
                 break;
             case MUSIC_PREVIOUS:
                 handled = isMusicActive() && dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
@@ -660,7 +615,7 @@ public class KeyHandler {
         if (isKeySupportedAndEnabled && !mHandler.hasMessages(GESTURE_REQUEST)) {
             Message msg = getMessageForKeyEvent(event);
             if (mProximitySensor != null) {
-                mHandler.sendMessageDelayed(msg, 250 /* proximity timeout */);
+                mHandler.sendMessageDelayed(msg, 100 /* proximity timeout */);
                 processEvent(event);
             } else {
                 mHandler.sendMessage(msg);
@@ -720,65 +675,16 @@ public class KeyHandler {
     private void doHapticFeedback(boolean success) {
         final boolean hapticsEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.HAPTIC_FEEDBACK_ENABLED, 0, UserHandle.USER_CURRENT) != 0;
-        if (hapticsEnabled && mVibrator != null) {
+        boolean gestureHapticsEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.GESTURES_HAPTIC_FEEDBACK, 1, UserHandle.USER_CURRENT) != 0;
+        if (gestureHapticsEnabled && hapticsEnabled && mVibrator != null) {
             if (success) {
-                mVibrator.vibrate(mVibePattern, -1, VIBRATION_ATTRIBUTES);
+                mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_CLICK));
             } else {
-                mVibrator.vibrate(350L, VIBRATION_ATTRIBUTES);
+                mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_DOUBLE_CLICK));
             }
         }
     }
-
-    private String getCameraId() throws CameraAccessException {
-        String[] ids = mCameraManager.getCameraIdList();
-        if (ids != null && ids.length > 0) {
-            for (String id : ids) {
-                CameraCharacteristics c = mCameraManager.getCameraCharacteristics(id);
-                Boolean flashAvailable = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
-                Integer lensFacing = c.get(CameraCharacteristics.LENS_FACING);
-                if (flashAvailable != null && flashAvailable
-                        && lensFacing != null && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
-                    return id;
-                }
-            }
-        }
-        return DUMMY_CAMERA_ID;
-    }
-
-    private boolean setTorchMode(boolean enabled) {
-        try {
-            mCameraManager.setTorchMode(mCameraId, enabled);
-        } catch (CameraAccessException e) {
-            return false;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-        return true;
-    }
-
-    private TorchCallback mTorchCallback = new TorchCallback() {
-        @Override
-        public void onTorchModeChanged(String cameraId, boolean enabled) {
-            if (!TextUtils.isEmpty(mCameraId)) {
-                if (mCameraId.equals(cameraId)) {
-                    mTorchEnabled = enabled;
-                }
-            } else {
-                mTorchEnabled = enabled;
-            }
-        }
-
-        @Override
-        public void onTorchModeUnavailable(String cameraId) {
-            if (!TextUtils.isEmpty(mCameraId)) {
-                if (mCameraId.equals(cameraId)) {
-                    mTorchEnabled = false;
-                }
-            } else {
-                mTorchEnabled = false;
-            }
-        }
-    };
 
     private boolean isMusicActive() {
         if (mAudioManager != null) {

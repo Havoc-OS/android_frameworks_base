@@ -5391,6 +5391,12 @@ public final class Settings {
         public static final String GESTURES_ENABLED = "gestures_enabled";
 
         /**
+         * Controls whether device vibrates when a touchscreen gesture is detected.
+         * @hide
+         */
+        public static final String GESTURES_HAPTIC_FEEDBACK = "gestures_haptic_feedback";
+
+        /**
          * Controls whether double tap to wake is enabled.
          * @hide
          */
@@ -5756,6 +5762,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED);
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_FEATURE_SETTINGS);
             PRIVATE_SETTINGS.add(GESTURES_ENABLED);
+            PRIVATE_SETTINGS.add(GESTURES_HAPTIC_FEEDBACK);
             PRIVATE_SETTINGS.add(GESTURE_DOUBLE_TAP);
             PRIVATE_SETTINGS.add(GESTURE_DRAW_V);
             PRIVATE_SETTINGS.add(GESTURE_DRAW_INVERSE_V);
