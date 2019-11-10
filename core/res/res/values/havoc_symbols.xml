@@ -117,6 +117,7 @@
     <java-symbol type="drawable" name="ic_lock_restart_bootloader" />
     <java-symbol type="drawable" name="ic_lock_restart_ui" />
     <java-symbol type="drawable" name="ic_lock_torch" />
+    <java-symbol type="drawable" name="ic_lock_screenrecord" />
     <java-symbol type="color" name="power_menu_icon_color" />
 
     <!-- Vendor mismatch fingerprint warning -->
