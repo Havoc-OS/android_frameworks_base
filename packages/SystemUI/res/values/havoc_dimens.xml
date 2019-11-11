@@ -71,4 +71,7 @@
     <dimen name="fp_dialog_error_padding_top">12dp</dimen>
     <dimen name="fp_dialog_error_padding_bottom">12dp</dimen>
 
+    <!-- Qs tile title -->
+    <dimen name="qs_tile_height_wo_label">64dp</dimen>
+
 </resources>
