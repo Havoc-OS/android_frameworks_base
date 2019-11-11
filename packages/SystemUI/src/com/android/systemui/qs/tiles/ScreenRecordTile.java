@@ -72,7 +72,7 @@ public class ScreenRecordTile extends QSTileImpl<BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        state.icon = ResourceIcon.get(R.drawable.ic_screen_recorder);
+        state.icon = ResourceIcon.get(R.drawable.ic_screenrecord);
         state.label = mContext.getString(R.string.screenrecorder_title_tile);
 
     }
