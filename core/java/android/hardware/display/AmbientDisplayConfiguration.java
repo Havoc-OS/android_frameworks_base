@@ -53,7 +53,8 @@ public class AmbientDisplayConfiguration {
                 || wakeDisplayGestureEnabled(user)
                 || pickupGestureEnabled(user)
                 || tapGestureEnabled(user)
-                || doubleTapGestureEnabled(user);
+                || doubleTapGestureEnabled(user)
+                || isAmbientTickerEnabled(user);
     }
 
     /** {@hide} */
@@ -239,5 +240,10 @@ public class AmbientDisplayConfiguration {
 
     private boolean boolSetting(String name, int user, int def) {
         return Settings.Secure.getIntForUser(mContext.getContentResolver(), name, def, user) != 0;
+    }
+
+    public boolean isAmbientTickerEnabled(int user) {
+        return Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.PULSE_ON_NEW_TRACKS, 1, user) != 0;
     }
 }
