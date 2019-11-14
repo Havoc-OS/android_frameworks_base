@@ -255,4 +255,7 @@
     <java-symbol type="bool" name="config_hasAlertSlider" />
 	<java-symbol type="integer" name="config_alertSliderLocation" />
 
+    <!-- Whether device supports variable refresh rate -->
+    <java-symbol type="bool" name="config_hasVariableRefreshRate" />
+
 </resources>
