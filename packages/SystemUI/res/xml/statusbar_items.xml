@@ -35,6 +35,10 @@
         android:title="@string/quick_settings_bluetooth_label" />
 
     <com.android.systemui.tuner.StatusBarSwitch
+        android:key="camera"
+        android:title="@string/status_bar_camera" />
+
+    <com.android.systemui.tuner.StatusBarSwitch
         android:key="zen"
         android:title="@string/quick_settings_dnd_label" />
 
@@ -49,6 +53,14 @@
     <com.android.systemui.tuner.StatusBarSwitch
         android:key="hotspot"
         android:title="@string/quick_settings_hotspot_label" />
+
+    <com.android.systemui.tuner.StatusBarSwitch
+        android:key="location"
+        android:title="@string/status_bar_location" />
+
+    <com.android.systemui.tuner.StatusBarSwitch
+        android:key="microphone"
+        android:title="@string/status_bar_microphone" />
 
     <com.android.systemui.tuner.StatusBarSwitch
         android:key="mobile"
