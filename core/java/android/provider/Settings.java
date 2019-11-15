@@ -5526,25 +5526,13 @@ public final class Settings {
         public static final String STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
 
         /**
-         * QS Battery mode
-         * @hide
-         */
-        public static final String QS_BATTERY_MODE = "qs_battery_mode";
-
-        /**
-          * SStatusbar Battery %
+          * Statusbar Battery %
           * 0: Hide the battery percentage
-          * 1: Display the battery percentage inside the icon
-          * 2: Display the battery percentage next to the icon
+          * 1: Display the battery percentage
+          * 2: Display the battery percentage only while charging
           * @hide
           */
         public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
-
-        /**
-         * Show battery percentage when charging
-         * @hide
-         */
-        public static final String STATUS_BAR_BATTERY_TEXT_CHARGING = "status_bar_battery_text_charging";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings

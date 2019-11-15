@@ -22,18 +22,21 @@ import android.annotation.ColorInt;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.DeviceConfig;
@@ -150,11 +153,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
 
     private PrivacyItemController mPrivacyItemController;
 
-    private static final String QS_BATTERY_MODE =
-            "system:" + Settings.System.QS_BATTERY_MODE;
-    public static final String STATUS_BAR_BATTERY_STYLE =
-            "system:" + Settings.System.STATUS_BAR_BATTERY_STYLE;
-
     private final BroadcastReceiver mRingerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -256,9 +254,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
 
         // Tint for the battery icons are handled in setupHost()
         mBatteryRemainingIcon = findViewById(R.id.batteryRemainingIcon);
-        // Don't need to worry about tuner settings for this icon
-        mBatteryRemainingIcon.setIgnoreTunerUpdates(true);
-        mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_ON);
+        mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_ESTIMATE);
         mBatteryRemainingIcon.setOnClickListener(this);
         mRingerModeTextView.setSelected(true);
         mNextAlarmTextView.setSelected(true);
@@ -267,9 +263,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         // Change the ignored slots when DeviceConfig flag changes
         DeviceConfig.addOnPropertyChangedListener(DeviceConfig.NAMESPACE_PRIVACY,
                 mContext.getMainExecutor(), mPropertyListener);
-        Dependency.get(TunerService.class).addTunable(this,
-                QS_BATTERY_MODE,
-                STATUS_BAR_BATTERY_STYLE);
     }
 
     private List<String> getIgnoredIconSlots() {
@@ -417,6 +410,18 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         updateStatusIconAlphaAnimator();
         updateHeaderTextContainerAlphaAnimator();
         updatePrivacyChipAlphaAnimator();
+    }
+
+    private void updateSettings() {
+        updateBatteryStyle();
+    }
+
+    private void updateBatteryStyle() {
+        mBatteryRemainingIcon.mBatteryStyle = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_BATTERY_STYLE, 0);
+        mBatteryRemainingIcon.updateBatteryStyle();
+        mBatteryRemainingIcon.updatePercentView();
+        mBatteryRemainingIcon.updateVisibility();
     }
 
     private void updateStatusIconAlphaAnimator() {
@@ -675,37 +680,21 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         }
     }
 
-    @Override
-    public void onTuningChanged(String key, String newValue) {
-        switch (key) {
-            case QS_BATTERY_MODE:
-                int showEstimate =
-                        TunerService.parseInteger(newValue, 1);
-                if (showEstimate == 0) {
-                    mBatteryRemainingIcon.mShowBatteryPercent = 0;
-                    mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_OFF);
-                } else if (showEstimate == 1) {
-                    mBatteryRemainingIcon.mShowBatteryPercent = 0;
-                    mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_ON);
-                } else if (showEstimate == 2) {
-                    mBatteryRemainingIcon.mShowBatteryPercent = 1;
-                    mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_OFF);
-                } else if (showEstimate == 3) {
-                    mBatteryRemainingIcon.mShowBatteryPercent = 0;
-                    mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_ESTIMATE);
-                }
-                mBatteryRemainingIcon.updatePercentView();
-                mBatteryRemainingIcon.updateVisibility();
-                break;
-            case STATUS_BAR_BATTERY_STYLE:
-                mBatteryRemainingIcon.mBatteryStyle =
-                        TunerService.parseInteger(newValue, 0);
-                mBatteryRemainingIcon.updateBatteryStyle();
-                mBatteryRemainingIcon.updatePercentView();
-                mBatteryRemainingIcon.updateVisibility();
-                break;
-            default:
-                break;
+    private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = getContext().getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_BATTERY_STYLE),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateSettings();
         }
     }
 }

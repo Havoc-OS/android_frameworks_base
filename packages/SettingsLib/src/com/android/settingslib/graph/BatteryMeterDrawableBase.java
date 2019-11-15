@@ -48,9 +48,7 @@ public class BatteryMeterDrawableBase extends Drawable {
     public static final int BATTERY_STYLE_PORTRAIT = 0;
     public static final int BATTERY_STYLE_CIRCLE = 1;
     public static final int BATTERY_STYLE_DOTTED_CIRCLE = 2;
-    public static final int BATTERY_STYLE_SQUARE = 3; // not functional
-    public static final int BATTERY_STYLE_TEXT = 4;
-    public static final int BATTERY_STYLE_HIDDEN = 5;
+    public static final int BATTERY_STYLE_HIDDEN = 3;
 
     protected final Context mContext;
     protected final Paint mFramePaint;
@@ -419,20 +417,7 @@ public class BatteryMeterDrawableBase extends Drawable {
             }
         }
 
-        if (!mCharging && level != 100 && mShowPercent && !mPowerSaveEnabled) {
-            // compute percentage text
-            float pctX = 0, pctY = 0;
-            String pctText = null;
-            mTextPaint.setColor(getColorForLevel(level));
-            mTextPaint.setTextSize(mHeight * (SINGLE_DIGIT_PERCENT ? 0.86f : 0.52f));
-            mTextHeight = -mTextPaint.getFontMetrics().ascent;
-            pctText = level > mCriticalLevel ?
-                    String.valueOf(SINGLE_DIGIT_PERCENT ? (level / 10) : level) : mWarningString;
-            pctX = mWidth * 0.5f;
-            pctY = (mHeight + mTextHeight) * 0.47f;
-
-            c.drawText(pctText, pctX, pctY, mTextPaint);
-        } else if (mPowerSaveEnabled) {
+        if (mPowerSaveEnabled) {
             // define the plus shape
             final float pw = mFrame.width() / 2;
             final float pl = mFrame.left + (mFrame.width() - pw) / 2;
