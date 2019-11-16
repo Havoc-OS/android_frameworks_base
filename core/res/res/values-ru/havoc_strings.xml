@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2019 Havoc-OS
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Button that copies the url to the log of a crashed application -->
+    <string name="aerr_copy">Копировать crash log URL</string>
+    <string name="url_copy_success">URL скопирован успешно</string>
+    <string name="url_copy_failed">Произошла ошибка при загрузке журнала в dogbin</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_fakePackageSignature">Поддельная подпись пакетов</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_fakePackageSignature">Позволяет приложению притворяться другим приложением. Вредоносные приложения могут использовать это для доступа к частным данным приложений. Предоставляйте это разрешение с осторожностью!</string>
+
+    <!-- LiveDisplay strings -->
+    <string name="live_display_title" translatable="false">LiveDisplay</string>
+    <string name="live_display_auto">Автоматический</string>
+    <string name="live_display_auto_summary">Автоматическая настройка цветовой температуры экрана после захода и восхода солнца</string>
+    <string name="live_display_off">Выключить</string>
+    <string name="live_display_off_summary">Отключить все настройки</string>
+    <string name="live_display_day">День</string>
+    <string name="live_display_day_summary">Использовать только дневные настройки</string>
+    <string name="live_display_night">Ночь</string>
+    <string name="live_display_night_summary">Использовать только ночные настройки</string>
+    <string name="live_display_outdoor">Улица (яркое солнце)</string>
+    <string name="live_display_outdoor_summary">Использовать только уличные настройки</string>
+    <string name="live_display_hint">LiveDisplay может помочь уменьшить напряжение глаз и помочь вам легче засыпать по ночам. Нажмите здесь, чтобы попробовать!</string>
+    <string name="accessibility_quick_settings_live_display_off">LiveDisplay выключен.</string>
+    <string name="accessibility_quick_settings_live_display_auto">LiveDisplay: автоматический режим.</string>
+    <string name="accessibility_quick_settings_live_display_day">LiveDisplay: дневной режим.</string>
+    <string name="accessibility_quick_settings_live_display_night">LiveDisplay: ночной режим.</string>
+    <string name="accessibility_quick_settings_live_display_outdoor">LiveDisplay: уличный режим.</string>
+    <string name="accessibility_quick_settings_live_display_changed_off">LiveDisplay выключен.</string>
+    <string name="accessibility_quick_settings_live_display_changed_auto">LiveDisplay сменён на автоматический режим.</string>
+    <string name="accessibility_quick_settings_live_display_changed_day">LiveDisplay сменён на дневной режим.</string>
+    <string name="accessibility_quick_settings_live_display_changed_night">LiveDisplay сменён на ночной режим.</string>
+    <string name="accessibility_quick_settings_live_display_changed_outdoor">LiveDisplay сменён на уличный режим.</string>
+
+    <!-- Advanced reboot -->
+    <string name="reboot_to_recovery_title" translatable="false">Recovery</string>
+    <string name="reboot_to_recovery_message" translatable="false">Перезагрузка в режим восстановления...</string>
+    <string name="reboot_to_bootloader_title" translatable="false">Bootloader</string>
+    <string name="reboot_to_bootloader_message" translatable="false">Перезагрузка в bootloader...</string>
+    <string name="reboot_title">Перезагрузка</string>
+    <string name="reboot_message">Перезагрузка системы...</string>
+
+    <!-- Vendor mismatch fingerprint warning [CHAR LIMIT=NONE] -->
+    <string name="system_error_vendorprint">Ваш образ поставщика не соответствует системе. Пожалуйста прошейте <xliff:g id="string">%s</xliff:g> образ поставщика для вашего устройства</string>
+
+    <!-- Pocket Lock --> 
+    <string name="pocket_lock_message_long_press">Нажмите и удерживайте кнопку питания чтобы разблокировать</string>
+
+    <!-- Alert slider proc nodes paths -->
+    <string name="alert_slider_state_path"></string>
+    <string name="alert_slider_uevent_match_path"></string>
+
+</resources>
