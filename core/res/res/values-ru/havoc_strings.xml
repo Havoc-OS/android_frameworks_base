@@ -51,10 +51,10 @@
     <string name="accessibility_quick_settings_live_display_changed_outdoor">LiveDisplay сменён на уличный режим.</string>
 
     <!-- Advanced reboot -->
-    <string name="reboot_to_recovery_title" translatable="false">Recovery</string>
+    <string name="reboot_to_recovery_title" translatable="false">Рекавери</string>
     <string name="reboot_to_recovery_message" translatable="false">Перезагрузка в режим восстановления...</string>
-    <string name="reboot_to_bootloader_title" translatable="false">Bootloader</string>
-    <string name="reboot_to_bootloader_message" translatable="false">Перезагрузка в bootloader...</string>
+    <string name="reboot_to_bootloader_title" translatable="false">Загрузчик</string>
+    <string name="reboot_to_bootloader_message" translatable="false">Перезагрузка в загрузчик...</string>
     <string name="reboot_title">Перезагрузка</string>
     <string name="reboot_message">Перезагрузка системы...</string>
 
