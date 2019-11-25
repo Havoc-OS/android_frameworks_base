@@ -69,4 +69,7 @@
     <!-- Whether the qs statusbar is hidden -->
     <bool name="qs_status_bar_hidden">false</bool>
 
+    <!-- Show battery icon in the QS Panel instead of in the header -->
+    <bool name="config_batteryInQSPanel">true</bool>
+
 </resources>

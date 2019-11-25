@@ -30,17 +30,12 @@ class OngoingPrivacyChip @JvmOverloads constructor(
     defStyleRes: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttrs, defStyleRes) {
 
-    private val iconMarginExpanded = context.resources.getDimensionPixelSize(
-                    R.dimen.ongoing_appops_chip_icon_margin_expanded)
     private val iconMarginCollapsed = context.resources.getDimensionPixelSize(
                     R.dimen.ongoing_appops_chip_icon_margin_collapsed)
     private val iconSize =
             context.resources.getDimensionPixelSize(R.dimen.ongoing_appops_chip_icon_size)
     private val iconColor = context.resources.getColor(
             R.color.status_bar_clock_color, context.theme)
-    private val sidePadding =
-            context.resources.getDimensionPixelSize(R.dimen.ongoing_appops_chip_side_padding)
-    private val backgroundDrawable = context.getDrawable(R.drawable.privacy_chip_bg)
     private lateinit var iconsContainer: LinearLayout
     private lateinit var back: FrameLayout
     var expanded = false
@@ -68,9 +63,6 @@ class OngoingPrivacyChip @JvmOverloads constructor(
 
     // Should only be called if the builder icons or app changed
     private fun updateView() {
-        back.background = if (expanded) backgroundDrawable else null
-        val padding = if (expanded) sidePadding else 0
-        back.setPaddingRelative(padding, 0, padding, 0)
         fun setIcons(dialogBuilder: PrivacyDialogBuilder, iconsContainer: ViewGroup) {
             iconsContainer.removeAllViews()
             dialogBuilder.generateIcons().forEachIndexed { i, it ->
@@ -83,7 +75,7 @@ class OngoingPrivacyChip @JvmOverloads constructor(
                 iconsContainer.addView(image, iconSize, iconSize)
                 if (i != 0) {
                     val lp = image.layoutParams as MarginLayoutParams
-                    lp.marginStart = if (expanded) iconMarginExpanded else iconMarginCollapsed
+                    lp.marginStart = iconMarginCollapsed
                     image.layoutParams = lp
                 }
             }
