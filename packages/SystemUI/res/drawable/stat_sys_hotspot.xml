@@ -15,5 +15,5 @@ Copyright (C) 2017 The Android Open Source Project
 -->
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
     android:insetLeft="2dp"
-    android:insetRight="2dp"
+    android:insetRight="1.5dp"
     android:drawable="@drawable/ic_hotspot" />

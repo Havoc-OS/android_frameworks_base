@@ -66,11 +66,11 @@
     <dimen name="status_bar_horizontal_padding">2.5dp</dimen>
 
     <!-- Height of the battery icon in the status bar. -->
-    <dimen name="status_bar_battery_icon_height">12.0dp</dimen>
+    <dimen name="status_bar_battery_icon_height">12.5dp</dimen>
 
     <!-- Width of the battery icon in the status bar. The battery drawable assumes a 12x20 canvas,
     so the width of the icon should be 13.0dp * (12.0 / 20.0) -->
-    <dimen name="status_bar_battery_icon_width">7.2dp</dimen>
+    <dimen name="status_bar_battery_icon_width">7.5dp</dimen>
 
     <!-- The font size for the clock in the status bar. -->
     <dimen name="status_bar_clock_size">14sp</dimen>
@@ -274,7 +274,7 @@
     <dimen name="status_bar_padding_start">8dp</dimen>
 
     <!-- the padding on the end of the statusbar -->
-    <dimen name="status_bar_padding_end">8dp</dimen>
+    <dimen name="status_bar_padding_end">4dp</dimen>
 
     <!-- the padding on the top of the statusbar (usually 0) -->
     <dimen name="status_bar_padding_top">0dp</dimen>

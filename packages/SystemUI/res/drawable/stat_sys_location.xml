@@ -14,6 +14,6 @@
   ~ limitations under the License
   -->
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetLeft="1dp"
-    android:insetRight="1dp"
+    android:insetLeft="0.5dp"
+    android:insetRight="0.5dp"
     android:drawable="@drawable/ic_location" />
