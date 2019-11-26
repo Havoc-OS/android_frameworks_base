@@ -98,6 +98,7 @@ public class MobileSignalController extends SignalController<
     private boolean mShow4gForLte;
     private boolean mDataDisabledIcon;
     private boolean mRoamingIconAllowed;
+    private boolean mShowHDVolte;
 
     private ImsManager mImsManager;
     private ImsManager.Connector mImsManagerConnector;
@@ -180,6 +181,9 @@ public class MobileSignalController extends SignalController<
             resolver.registerContentObserver(
                     Settings.System.getUriFor(Settings.System.ROAMING_INDICATOR_ICON), false,
                     this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.SHOW_HD_ICON), false,
+                    this, UserHandle.USER_ALL);
             updateSettings();
         }
 
@@ -205,6 +209,11 @@ public class MobileSignalController extends SignalController<
 
         mRoamingIconAllowed = Settings.System.getIntForUser(resolver,
                 Settings.System.ROAMING_INDICATOR_ICON, 1,
+                UserHandle.USER_CURRENT) == 1;
+
+        int useHDIcon = (mConfig.showHDVolteIcon ? 1 : 0);
+        mShowHDVolte = Settings.System.getIntForUser(resolver,
+                Settings.System.SHOW_HD_ICON, useHDIcon,
                 UserHandle.USER_CURRENT) == 1;
 
         mapIconSets();
@@ -447,7 +456,7 @@ public class MobileSignalController extends SignalController<
         int resId = 0;
 
         if ( mCurrentState.imsRegistered ) {
-            if (mConfig.showHDVolteIcon) {
+            if (mShowHDVolte) {
                 resId = R.drawable.ic_hd_volte;
             } else {
                 resId = R.drawable.ic_volte;
