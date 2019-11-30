@@ -438,8 +438,11 @@ public interface StatusBarIconController {
         }
 
         private boolean useOldStyleMobileDataIcons() {
+            boolean mConfigUseOldMobileType = mContext.getResources().
+                    getBoolean(com.android.internal.R.bool.config_useOldMobileIcons);
+            int useOldMobileIcons = (mConfigUseOldMobileType ? 1 : 0);
             return Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.USE_OLD_MOBILETYPE, 0,
+                    Settings.System.USE_OLD_MOBILETYPE, useOldMobileIcons,
                     UserHandle.USER_CURRENT) != 0;
         }
     }
