@@ -126,12 +126,6 @@
     <!-- Whether the device supports Smart Pixels -->
     <java-symbol type="bool" name="config_enableSmartPixels" />
 
-    <!-- Whether device has a physical display cutout -->
-    <java-symbol type="bool" name="config_physicalDisplayCutout" />
-
-    <!-- Whether device has a big physical display cutout -->
-    <java-symbol type="bool" name="config_bigPhysicalDisplayCutout" />
-
     <java-symbol type="bool" name="config_hasNotificationLed" />
     <java-symbol type="bool" name="config_intrusiveBatteryLed" />
     <java-symbol type="bool" name="config_multiColorBatteryLed" />
