@@ -780,6 +780,16 @@ public class NavigationBarView extends FrameLayout implements
                 showSwipeUpUI ? mQuickStepAccessibilityDelegate : null);
     }
 
+    public void setPartialScreenshot(boolean active) {
+        int displayId = mContext.getDisplayId();
+        mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_OVERVIEW_DISABLED,
+                active ? true : (mDisabledFlags & View.STATUS_BAR_DISABLE_RECENT) != 0,
+                displayId);
+        mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_NOTIFICATION_PANEL_EXPANDED,
+                active ? true : mPanelView.isFullyExpanded() && !mPanelView.isInSettings(),
+                displayId);
+    }
+
     /**
      * Updates the {@link WindowManager.LayoutParams.FLAG_SLIPPERY} state dependent on if swipe up
      * is enabled, or the notifications is fully opened without being in an animated state. If

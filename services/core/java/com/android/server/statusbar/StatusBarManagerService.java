@@ -756,6 +756,16 @@ public class StatusBarManagerService extends IStatusBarService.Stub implements D
         }
     }
 
+    @Override
+    public void setPartialScreenshot(boolean active) {
+        if (mBar != null) {
+            try {
+                mBar.setPartialScreenshot(active);
+            } catch (RemoteException ex) {
+            }
+        }
+    }
+
     // TODO(b/117478341): make it aware of multi-display if needed.
     @Override
     public void disable(int what, IBinder token, String pkg) {
