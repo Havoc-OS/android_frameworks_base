@@ -23,9 +23,11 @@ import android.app.AlarmManager.AlarmClockInfo;
 import android.app.SynchronousUserSwitchObserver;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.nfc.NfcAdapter;
 import android.os.Handler;
@@ -69,7 +71,6 @@ import com.android.systemui.statusbar.policy.RotationLockController.RotationLock
 import com.android.systemui.statusbar.policy.SensorPrivacyController;
 import com.android.systemui.statusbar.policy.UserInfoController;
 import com.android.systemui.statusbar.policy.ZenModeController;
-import com.android.systemui.tuner.TunerService;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -89,7 +90,6 @@ public class PhoneStatusBarPolicy
                 DeviceProvisionedListener,
                 KeyguardMonitor.Callback,
                 PrivacyItemController.Callback,
-                TunerService.Tunable,
                 LocationController.LocationChangeCallback {
     private static final String TAG = "PhoneStatusBarPolicy";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -148,9 +148,6 @@ public class PhoneStatusBarPolicy
     private AlarmManager.AlarmClockInfo mNextAlarm;
 
     private boolean mShowBluetoothBattery;
-
-    private static final String BLUETOOTH_SHOW_BATTERY =
-            "system:" + Settings.System.BLUETOOTH_SHOW_BATTERY;
 
     public PhoneStatusBarPolicy(Context context, StatusBarIconController iconController) {
         mContext = context;
@@ -214,7 +211,7 @@ public class PhoneStatusBarPolicy
         updateTTY();
 
         // bluetooth status
-        updateBluetooth();
+        updateSettings();
 
         // Alarm clock
         mIconController.setIcon(mSlotAlarmClock, R.drawable.stat_sys_alarm, null);
@@ -286,21 +283,35 @@ public class PhoneStatusBarPolicy
 
         SysUiServiceProvider.getComponent(mContext, CommandQueue.class).addCallback(this);
 
-        Dependency.get(TunerService.class).addTunable(this,
-                BLUETOOTH_SHOW_BATTERY);
+        Handler mHandler = new Handler();
+        SettingsObserver settingsObserver = new SettingsObserver(mHandler);
+        settingsObserver.observe();
     }
 
-    @Override
-    public void onTuningChanged(String key, String newValue) {
-        switch (key) {
-            case BLUETOOTH_SHOW_BATTERY:
-                mShowBluetoothBattery =
-                        TunerService.parseIntegerSwitch(newValue, true);
-                updateBluetooth();
-                break;
-            default:
-                break;
+    private final class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
         }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BLUETOOTH_SHOW_BATTERY),
+                    false, this, UserHandle.USER_ALL);
+            updateSettings();
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            updateSettings();
+        }
+    }
+
+    private void updateSettings() {
+        mShowBluetoothBattery = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.BLUETOOTH_SHOW_BATTERY, 1,
+                UserHandle.USER_CURRENT) == 1;
+        updateBluetooth();
     }
 
     @Override
@@ -445,12 +456,12 @@ public class PhoneStatusBarPolicy
 
     @Override
     public void onBluetoothDevicesChanged() {
-        updateBluetooth();
+        updateSettings();
     }
 
     @Override
     public void onBluetoothStateChange(boolean enabled) {
-        updateBluetooth();
+        updateSettings();
     }
 
     private final void updateBluetooth() {
@@ -770,7 +781,7 @@ public class PhoneStatusBarPolicy
                     updateNfc();
                     break;
                 case BluetoothDevice.ACTION_BATTERY_LEVEL_CHANGED:
-                    updateBluetooth();
+                    updateSettings();
                     break;
             }
         }
