@@ -180,4 +180,5 @@ oneway interface IStatusBar
      * Havoc
      */
     void toggleCameraFlash();
+    void setPartialScreenshot(boolean active);
 }
