@@ -218,6 +218,7 @@ public class MobileSignalController extends SignalController<
 
         mapIconSets();
         updateTelephony();
+        notifyListeners();
     }
 
     @Override
