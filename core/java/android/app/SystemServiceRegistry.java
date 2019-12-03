@@ -1173,7 +1173,8 @@ final class SystemServiceRegistry {
             @Override
             public AppPredictionManager createService(ContextImpl ctx)
                     throws ServiceNotFoundException {
-                return new AppPredictionManager(ctx);
+                IBinder b = ServiceManager.getService(Context.APP_PREDICTION_SERVICE);
+                return b == null ? null : new AppPredictionManager(ctx);
             }
         });
 

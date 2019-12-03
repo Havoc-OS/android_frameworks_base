@@ -611,6 +611,10 @@ public final class PowerManagerService extends SystemService
     // doze on charge
     private boolean mDozeOnChargeEnabled;
 
+    // Transition to Doze is in progress.  We have transitioned to WAKEFULNESS_DOZING,
+    // but the DreamService has not yet been told to start (it's an async process).
+    private boolean mDozeStartInProgress;
+
     private final class ForegroundProfileObserver extends SynchronousUserSwitchObserver {
         @Override
         public void onUserSwitching(int newUserId) throws RemoteException {}
@@ -1933,6 +1937,7 @@ public final class PowerManagerService extends SystemService
             mLastSleepTime = eventTime;
             mLastSleepReason = reason;
             mSandmanSummoned = true;
+            mDozeStartInProgress = true;
             setWakefulnessLocked(WAKEFULNESS_DOZING, reason, eventTime);
 
             // Report the number of wake locks that will be cleared by going to sleep.
@@ -2020,6 +2025,10 @@ public final class PowerManagerService extends SystemService
             mWakefulness = wakefulness;
             mWakefulnessChanging = true;
             mDirty |= DIRTY_WAKEFULNESS;
+
+            // This is only valid while we are in wakefulness dozing. Set to false otherwise.
+            mDozeStartInProgress &= (mWakefulness == WAKEFULNESS_DOZING);
+
             if (mNotifier != null) {
                 mNotifier.onWakefulnessChangeStarted(wakefulness, reason, eventTime);
             }
@@ -2050,6 +2059,9 @@ public final class PowerManagerService extends SystemService
             if (mWakefulness == WAKEFULNESS_DOZING
                     && (mWakeLockSummary & WAKE_LOCK_DOZE) == 0) {
                 return; // wait until dream has enabled dozing
+            } else {
+                // Doze wakelock acquired (doze started) or device is no longer dozing.
+                mDozeStartInProgress = false;
             }
             if (mWakefulness == WAKEFULNESS_DOZING || mWakefulness == WAKEFULNESS_ASLEEP) {
                 logSleepTimeoutRecapturedLocked();
@@ -2806,6 +2818,10 @@ public final class PowerManagerService extends SystemService
             isDreaming = false;
         }
 
+        // At this point, we either attempted to start the dream or no attempt will be made,
+        // so stop holding the display suspend blocker for Doze.
+        mDozeStartInProgress = false;
+
         // Update dream state.
         synchronized (mLock) {
             // Remember the initial battery level when the dream started.
@@ -3229,9 +3245,20 @@ public final class PowerManagerService extends SystemService
             // state which means we should hold the display suspend blocker.
             return true;
         }
+
         if (mScreenBrightnessBoostInProgress) {
             return true;
         }
+
+        // When we transition to DOZING, we have to keep the display suspend blocker
+        // up until the Doze service has a change to acquire the DOZE wakelock.
+        // Here we wait for mWakefulnessChanging to become false since the wakefulness
+        // transition to DOZING isn't considered "changed" until the doze wake lock is
+        // acquired.
+        if (mWakefulness == WAKEFULNESS_DOZING && mDozeStartInProgress) {
+            return true;
+        }
+
         // Let the system suspend if the screen is off or dozing.
         return false;
     }

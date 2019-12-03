@@ -608,11 +608,11 @@ public class KeyguardIndicationController implements StateListener,
             return;
         }
 
-        String message = mContext.getString(R.string.keyguard_unlock);
         if (mStatusBarKeyguardViewManager.isBouncerShowing()) {
+            String message = mContext.getString(R.string.keyguard_retry);
             mStatusBarKeyguardViewManager.showBouncerMessage(message, mInitialTextColorState);
         } else if (mKeyguardUpdateMonitor.isScreenOn()) {
-            showTransientIndication(message);
+            showTransientIndication(mContext.getString(R.string.keyguard_unlock));
             hideTransientIndicationDelayed(BaseKeyguardCallback.HIDE_DELAY_MS);
         }
     }
@@ -699,7 +699,6 @@ public class KeyguardIndicationController implements StateListener,
             if (!updateMonitor.isUnlockingWithBiometricAllowed()) {
                 return;
             }
-            animatePadlockError();
             boolean showSwipeToUnlock =
                     msgId == KeyguardUpdateMonitor.BIOMETRIC_HELP_FACE_NOT_RECOGNIZED;
             if (mStatusBarKeyguardViewManager.isBouncerShowing()) {
@@ -725,7 +724,11 @@ public class KeyguardIndicationController implements StateListener,
                 return;
             }
             animatePadlockError();
-            if (mStatusBarKeyguardViewManager.isBouncerShowing()) {
+            if (msgId == FaceManager.FACE_ERROR_TIMEOUT) {
+                // The face timeout message is not very actionable, let's ask the user to
+                // manually retry.
+                showSwipeUpToUnlock();
+            } else if (mStatusBarKeyguardViewManager.isBouncerShowing()) {
                 mStatusBarKeyguardViewManager.showBouncerMessage(errString, mInitialTextColorState);
             } else if (updateMonitor.isScreenOn()) {
                 showTransientIndication(errString);
