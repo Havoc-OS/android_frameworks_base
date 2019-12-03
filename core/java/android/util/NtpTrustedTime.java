@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
- * Copyright (C) 2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,22 +41,20 @@ public class NtpTrustedTime implements TrustedTime {
     private static NtpTrustedTime sSingleton;
     private static Context sContext;
 
-    private String mServer;
+    private final String mServer;
     private final long mTimeout;
 
     private ConnectivityManager mCM;
 
     private boolean mHasCache;
-    private final boolean mHasSecureServer;
     private long mCachedNtpTime;
     private long mCachedNtpElapsedRealtime;
     private long mCachedNtpCertainty;
 
-    private NtpTrustedTime(String server, long timeout, boolean hasSecureServer) {
+    private NtpTrustedTime(String server, long timeout) {
         if (LOGD) Log.d(TAG, "creating NtpTrustedTime using " + server);
         mServer = server;
         mTimeout = timeout;
-        mHasSecureServer = hasSecureServer;
     }
 
     @UnsupportedAppUsage
@@ -77,7 +74,7 @@ public class NtpTrustedTime implements TrustedTime {
                     resolver, Settings.Global.NTP_TIMEOUT, defaultTimeout);
 
             final String server = secureServer != null ? secureServer : defaultServer;
-            sSingleton = new NtpTrustedTime(server, timeout, secureServer != null);
+            sSingleton = new NtpTrustedTime(server, timeout);
             sContext = context;
         }
 
@@ -120,11 +117,6 @@ public class NtpTrustedTime implements TrustedTime {
 
         if (LOGD) Log.d(TAG, "forceRefresh() from cache miss");
         final SntpClient client = new SntpClient();
-        if (!mHasSecureServer) {
-            mServer = sContext.getResources().getString(
-                    com.android.internal.R.string.config_ntpServer);
-            if (LOGD) Log.d(TAG, "NTP server changed to " + mServer);
-        }
         if (client.requestTime(mServer, (int) mTimeout, network)) {
             mHasCache = true;
             mCachedNtpTime = client.getNtpTime();
