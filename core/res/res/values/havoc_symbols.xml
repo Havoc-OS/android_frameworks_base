@@ -103,6 +103,9 @@
     <!-- Whether device has dash charging support -->
     <java-symbol type="bool" name="config_hasDashCharger" />
 
+    <!-- Whether device has warp charging support -->
+    <java-symbol type="bool" name="config_hasWarpCharger" />
+
     <!-- Power menu -->
     <java-symbol type="array" name="config_custom_globalActionsList" />
     <java-symbol type="string" name="reboot_to_recovery_title" />
