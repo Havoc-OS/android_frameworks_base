@@ -287,4 +287,6 @@
     <!-- Post reset runnable for all clients -->
     <java-symbol type="bool" name="config_fingerprintPostResetRunnableForAllClients" />
 
+    <java-symbol type="array" name="config_customPermissionsList" />
+
 </resources>
