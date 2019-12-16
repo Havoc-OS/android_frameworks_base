@@ -26,6 +26,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.PowerManager;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.view.Display;
@@ -70,6 +71,9 @@ public class FODCircleView extends ImageView {
     private float mCurrentDimAmount = 0.0f;
 
     private Handler mHandler;
+
+    private PowerManager mPowerManager;
+    private PowerManager.WakeLock mWakeLock;
 
     private Timer mBurnInProtectionTimer;
 
@@ -185,6 +189,10 @@ public class FODCircleView extends ImageView {
                 mCurrentDimAmount = drawingDimAmount;
             }
         });
+
+        mPowerManager = context.getSystemService(PowerManager.class);
+        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                FODCircleView.class.getSimpleName());
     }
 
     @Override
@@ -278,6 +286,10 @@ public class FODCircleView extends ImageView {
         mIsCircleShowing = true;
 
         setKeepScreenOn(true);
+
+        if (mIsDreaming) {
+            mWakeLock.acquire(300);
+        }
 
         setDim(true);
         updateAlpha();
