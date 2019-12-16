@@ -90,5 +90,6 @@ public class SystemSettings {
         Settings.System.NOTIFICATION_HEADERS,
         Settings.System.COLOR_BUCKET_OVERLAY,
         Settings.System.DONT_TOUCH_HEADSUP,
+        Settings.System.FLASHLIGHT_ON_CALL,
     };
 }
