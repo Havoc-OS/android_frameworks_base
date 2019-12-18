@@ -216,7 +216,7 @@ import com.android.internal.policy.IShortcutService;
 import com.android.internal.policy.PhoneWindow;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.util.ArrayUtils;
-import com.android.internal.util.havoc.Utils;
+import com.android.internal.util.havoc.ActionUtils;
 import com.android.internal.util.ScreenshotHelper;
 import com.android.server.ExtconStateObserver;
 import com.android.server.ExtconUEventObserver;
@@ -844,7 +844,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     private void toggleFlashLight() {
         performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, true, "Flashlight toggle");
-        Utils.toggleCameraFlash();
+        ActionUtils.toggleCameraFlash();
     }
 
     private UEventObserver mHDMIObserver = new UEventObserver() {
