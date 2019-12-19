@@ -2222,6 +2222,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.QS_TILE_ACCENT_TINT),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -2242,7 +2245,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_ROWS_LANDSCAPE)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_COLUMNS_PORTRAIT)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_COLUMNS_LANDSCAPE)) ||
-                    uri.equals(Settings.System.getUriFor(Settings.System.QS_TILE_TITLE_VISIBILITY))) {
+                    uri.equals(Settings.System.getUriFor(Settings.System.QS_TILE_TITLE_VISIBILITY)) ||
+                    uri.equals(Settings.System.getUriFor(Settings.System.QS_TILE_ACCENT_TINT))) {
                 updateQsPanelResources();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_ACTIVE)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_HEADSUP_TOGGLE))) {
@@ -2304,6 +2308,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private void updateQsPanelResources() {
         if (mQSPanel != null) {
+            mQSPanel.getHost().reloadAllTiles();
             mQSPanel.updateResources();
         }
     }
