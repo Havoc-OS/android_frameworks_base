@@ -5952,6 +5952,13 @@ public final class Settings {
         private static final Validator AMBIENT_LIGHT_AUTO_COLOR_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * @hide
+         */
+        public static final String AMBIENT_LIGHT_DURATION = "ambient_light_duration";
+
+        private static final Validator AMBIENT_LIGHT_DURATION_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * helper setting to contain the current pulse reason so we can check
          * if it has been triggered from a notification or a gesture
          * @hide
@@ -6025,6 +6032,7 @@ public final class Settings {
             AMBIENT_NOTIFICATION_LIGHT,
             AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC,
             AMBIENT_LIGHT_AUTO_COLOR,
+            AMBIENT_LIGHT_DURATION,
             NOTIFICATION_LIGHT_PULSE,
             ANBI_ENABLED_OPTION,
             ALLOW_INCALL_HOME,
@@ -6287,6 +6295,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(AMBIENT_NOTIFICATION_LIGHT);
             PRIVATE_SETTINGS.add(AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC);
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_AUTO_COLOR);
+            PRIVATE_SETTINGS.add(AMBIENT_LIGHT_DURATION);
         }
 
         /**
@@ -6382,6 +6391,7 @@ public final class Settings {
             VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT, AMBIENT_NOTIFICATION_LIGHT_VALIDATOR);
             VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC, AMBIENT_NOTIFICATION_LIGHT_AUTOMATIC_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_AUTO_COLOR, AMBIENT_LIGHT_AUTO_COLOR_VALIDATOR);
+            VALIDATORS.put(AMBIENT_LIGHT_DURATION, AMBIENT_LIGHT_DURATION_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
             VALIDATORS.put(DISPLAY_TEMPERATURE_DAY, DISPLAY_TEMPERATURE_DAY_VALIDATOR);
             VALIDATORS.put(DISPLAY_TEMPERATURE_NIGHT, DISPLAY_TEMPERATURE_NIGHT_VALIDATOR);
