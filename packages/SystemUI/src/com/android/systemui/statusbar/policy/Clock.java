@@ -537,10 +537,11 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
                 break;
 
             case (STATUSBAR_CLOCK_DATE_DISPLAY):
-                if (newValue == null || mQsHeader) {
+                if (newValue == null) {
                     newValue = "0"; // no date
                 }
-                mClockDateDisplay = Integer.parseInt(newValue);
+                mClockDateDisplay = mQsHeader ? CLOCK_DATE_DISPLAY_GONE
+                        : Integer.parseInt(newValue);
                 break;
 
             case (STATUSBAR_CLOCK_DATE_STYLE):
@@ -573,13 +574,9 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         }
     }
 
-    public boolean isClockDateEnabled() {
-        return shouldBeVisible() && mClockDateDisplay != CLOCK_DATE_DISPLAY_GONE;
-    }
-
     public void setQsHeader() {
         mQsHeader = true;
         mClockVisibleByUser = true;
-        mClockDateDisplay = 0;
+        mClockDateDisplay = CLOCK_DATE_DISPLAY_GONE;
     }
 }
