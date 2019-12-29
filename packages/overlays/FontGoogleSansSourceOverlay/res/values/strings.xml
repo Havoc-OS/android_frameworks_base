@@ -15,17 +15,7 @@
  * limitations under the License.
  */
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.theme.font.googlesans"
-    android:versionCode="1"
-    android:versionName="1.0">
-    <overlay android:targetPackage="android"
-        android:category="android.theme.customization.font"
-        android:priority="1"/>
-
-    <application android:label="@string/font_google_sans_overlay" android:hasCode="false">
-        <meta-data
-            android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="google-sans,google-sans-medium" />
-    </application>
-</manifest>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Headline / Body font Comic Sans overlay -->
+    <string name="font_googlesans_source_overlay" translatable="false">Google Sans</string>
+</resources>
