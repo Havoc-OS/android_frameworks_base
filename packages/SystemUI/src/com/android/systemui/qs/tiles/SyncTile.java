@@ -25,8 +25,8 @@ import android.service.quicksettings.Tile;
 import com.android.systemui.R;
 import com.android.systemui.Dependency;
 import com.android.systemui.qs.QSHost;
-import com.android.systemui.plugins.qs.QSTile.BooleanState;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
+import com.android.systemui.plugins.qs.QSTile.BooleanState;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 import javax.inject.Inject;
@@ -77,14 +77,15 @@ public class SyncTile extends QSTileImpl<BooleanState> {
     protected void handleUpdateState(BooleanState state, Object arg) {
         state.value = ContentResolver.getMasterSyncAutomatically();
         state.label = mContext.getString(R.string.quick_settings_sync_label);
+        state.icon = ResourceIcon.get(R.drawable.ic_qs_sync);
         if (state.value) {
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_sync_on);
             state.contentDescription =  mContext.getString(
                     R.string.accessibility_quick_settings_sync_on);
+            state.state = Tile.STATE_ACTIVE;
         } else {
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_sync_off);
             state.contentDescription =  mContext.getString(
                     R.string.accessibility_quick_settings_sync_off);
+            state.state = Tile.STATE_INACTIVE;
         }
     }
 
