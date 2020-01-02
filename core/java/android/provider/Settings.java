@@ -5406,102 +5406,6 @@ public final class Settings {
                 ANY_STRING_VALIDATOR;
 
         /**
-         * Controls whether gestures are enabled.
-         * @hide
-         */
-        public static final String GESTURES_ENABLED = "gestures_enabled";
-
-        /**
-         * Controls whether device vibrates when a touchscreen gesture is detected.
-         * @hide
-         */
-        public static final String GESTURES_HAPTIC_FEEDBACK = "gestures_haptic_feedback";
-
-        /**
-         * Controls whether double tap to wake is enabled.
-         * @hide
-         */
-        public static final String GESTURE_DOUBLE_TAP = "gesture_double_tap";
-
-        /**
-         * Controls whether draw V gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_DRAW_V = "gesture_draw_v";
-
-        /**
-         * Controls whether draw inverse V gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_DRAW_INVERSE_V = "gesture_draw_inverse_v";
-
-        /**
-         * Controls whether draw O gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_DRAW_O = "gesture_draw_o";
-
-        /**
-         * Controls whether draw M gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_DRAW_M = "gesture_draw_m";
-
-        /**
-         * Controls whether draw W gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_DRAW_W = "gesture_draw_w";
-
-        /**
-         * Controls whether draw S gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_DRAW_S = "gesture_draw_s";
-
-        /**
-         * Controls whether draw arrow left gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_DRAW_ARROW_LEFT = "gesture_draw_arrow_left";
-
-        /**
-         * Controls whether draw arrow right gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_DRAW_ARROW_RIGHT = "gesture_draw_arrow_right";
-
-        /**
-         * Controls whether one finger swipe up gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_ONE_FINGER_SWIPE_UP = "gesture_one_finger_swipe_up";
-
-        /**
-         * Controls whether one finger swipe right gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_ONE_FINGER_SWIPE_RIGHT = "gesture_one_finger_swipe_right";
-
-        /**
-         * Controls whether one finger swipe down gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_ONE_FINGER_SWIPE_DOWN = "gesture_one_finger_swipe_down";
-
-        /**
-         * Controls whether one finger swipe left gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_ONE_FINGER_SWIPE_LEFT = "gesture_one_finger_swipe_left";
-
-        /**
-         * Controls whether two finger swipe gesture is enabled.
-         * @hide
-         */
-        public static final String GESTURE_TWO_FINGER_SWIPE = "gesture_two_finger_swipe";
-
-        /**
          * Whether user can swap the order of the Alert Slider.
          * * Whether user can invert the order of the Alert Slider.
          * 0: Default
@@ -5555,7 +5459,6 @@ public final class Settings {
          * @hide
          */
         public static final String GAMING_MODE_ACTIVE = "gaming_mode_active";
-
 
         /**
          * Package name of apps for enabling Gaming mode
@@ -6293,21 +6196,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_PROXI_CHECK_ENABLED);
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_GESTURE_FEEDBACK_ENABLED);
             PRIVATE_SETTINGS.add(CUSTOM_DEVICE_FEATURE_SETTINGS);
-            PRIVATE_SETTINGS.add(GESTURES_ENABLED);
-            PRIVATE_SETTINGS.add(GESTURES_HAPTIC_FEEDBACK);
-            PRIVATE_SETTINGS.add(GESTURE_DOUBLE_TAP);
-            PRIVATE_SETTINGS.add(GESTURE_DRAW_V);
-            PRIVATE_SETTINGS.add(GESTURE_DRAW_INVERSE_V);
-            PRIVATE_SETTINGS.add(GESTURE_DRAW_O);
-            PRIVATE_SETTINGS.add(GESTURE_DRAW_M);
-            PRIVATE_SETTINGS.add(GESTURE_DRAW_W);
-            PRIVATE_SETTINGS.add(GESTURE_DRAW_S);
-            PRIVATE_SETTINGS.add(GESTURE_DRAW_ARROW_LEFT);
-            PRIVATE_SETTINGS.add(GESTURE_DRAW_ARROW_RIGHT);
-            PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_UP);
-            PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_RIGHT);
-            PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_DOWN);
-            PRIVATE_SETTINGS.add(GESTURE_ONE_FINGER_SWIPE_LEFT);
             PRIVATE_SETTINGS.add(STATUS_BAR_CLOCK);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_STYLE);
             PRIVATE_SETTINGS.add(STATUS_BAR_CLOCK_SECONDS);
@@ -9993,6 +9881,14 @@ public final class Settings {
         public static final String SLEEP_TIMEOUT = "sleep_timeout";
 
         /**
+         * Controls whether double tap to wake is enabled.
+         * @hide
+         */
+        public static final String DOUBLE_TAP_TO_WAKE = "double_tap_to_wake";
+
+        private static final Validator DOUBLE_TAP_TO_WAKE_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * The current assistant component. It could be a voice interaction service,
          * or an activity that handles ACTION_ASSIST, or empty which means using the default
          * handling.
@@ -10897,6 +10793,7 @@ public final class Settings {
             MOUNT_UMS_AUTOSTART,
             MOUNT_UMS_PROMPT,
             MOUNT_UMS_NOTIFY_ENABLED,
+            DOUBLE_TAP_TO_WAKE,
             WAKE_GESTURE_ENABLED,
             LONG_PRESS_TIMEOUT,
             CAMERA_GESTURE_DISABLED,
@@ -11067,6 +10964,7 @@ public final class Settings {
             VALIDATORS.put(MOUNT_UMS_AUTOSTART, MOUNT_UMS_AUTOSTART_VALIDATOR);
             VALIDATORS.put(MOUNT_UMS_PROMPT, MOUNT_UMS_PROMPT_VALIDATOR);
             VALIDATORS.put(MOUNT_UMS_NOTIFY_ENABLED, MOUNT_UMS_NOTIFY_ENABLED_VALIDATOR);
+            VALIDATORS.put(DOUBLE_TAP_TO_WAKE, DOUBLE_TAP_TO_WAKE_VALIDATOR);
             VALIDATORS.put(WAKE_GESTURE_ENABLED, WAKE_GESTURE_ENABLED_VALIDATOR);
             VALIDATORS.put(LONG_PRESS_TIMEOUT, LONG_PRESS_TIMEOUT_VALIDATOR);
             VALIDATORS.put(CAMERA_GESTURE_DISABLED, CAMERA_GESTURE_DISABLED_VALIDATOR);
