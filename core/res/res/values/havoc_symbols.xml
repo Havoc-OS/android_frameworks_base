@@ -143,8 +143,6 @@
     <!-- Pocket bridge -->
     <java-symbol type="string" name="config_pocketBridgeSysfsInpocket" />
 
-    <java-symbol type="integer" name="config_flashlightProximityTimeout" />
-
     <!-- AOKP custom system animations -->
     <java-symbol type="string" name="action_null"/>
     <java-symbol type="string" name="animation_fade"/>
