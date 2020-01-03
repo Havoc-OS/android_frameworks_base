@@ -90,4 +90,10 @@
     <dimen name="status_bar_mobile_type_padding">2dp</dimen>
     <dimen name="status_bar_mobile_type_padding_limit">10dp</dimen>
 
+    <!-- Custom cutout overlay view sizes -->
+    <dimen name="config_customCutoutTopWidth">0.0px</dimen>
+    <dimen name="config_customCutoutTopHeight">0.0px</dimen>
+    <dimen name="config_customCutoutBottomWidth">0.0px</dimen>
+    <dimen name="config_customCutoutBottomHeight">0.0px</dimen>
+
 </resources>
