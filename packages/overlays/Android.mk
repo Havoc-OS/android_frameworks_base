@@ -62,7 +62,8 @@ LOCAL_REQUIRED_MODULES := \
 	NavigationBarModeGesturalOverlayNarrowBackNoPill \
 	NavigationBarModeGesturalOverlayWideBackNoPill \
 	NavigationBarModeGesturalOverlayExtraWideBackNoPill \
-	PrimaryColorBlackOverlay
+	PrimaryColorBlackOverlay \
+	PrimaryColorDarkBlueOverlay
 
 include $(BUILD_PHONY_PACKAGE)
 include $(CLEAR_VARS)
