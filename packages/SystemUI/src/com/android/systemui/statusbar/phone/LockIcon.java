@@ -42,6 +42,7 @@ import com.android.internal.graphics.ColorUtils;
 import com.android.internal.telephony.IccCardConstants;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
+import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.dock.DockManager;
@@ -55,6 +56,7 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.KeyguardMonitor;
 import com.android.systemui.statusbar.policy.OnHeadsUpChangedListener;
 import com.android.systemui.statusbar.policy.UserInfoController.OnUserInfoChangedListener;
+import com.android.systemui.tuner.TunerService;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -69,7 +71,7 @@ public class LockIcon extends KeyguardAffordanceView implements OnUserInfoChange
         StatusBarStateController.StateListener, ConfigurationController.ConfigurationListener,
         UnlockMethodCache.OnUnlockMethodChangedListener,
         NotificationWakeUpCoordinator.WakeUpListener, ViewTreeObserver.OnPreDrawListener,
-        OnHeadsUpChangedListener {
+        OnHeadsUpChangedListener, TunerService.Tunable {
 
     private static final int STATE_LOCKED = 0;
     private static final int STATE_LOCK_OPEN = 1;
@@ -104,6 +106,9 @@ public class LockIcon extends KeyguardAffordanceView implements OnUserInfoChange
     private boolean mShowingLaunchAffordance;
     private boolean mKeyguardJustShown;
     private boolean mUpdatePending;
+
+    private static final String TUNER_SHOW_LOCK_ICON = "sysui_keyguard_show_lock_icon";
+    private boolean mHideLockIcon;
 
     private final KeyguardMonitor.Callback mKeyguardMonitorCallback =
             new KeyguardMonitor.Callback() {
@@ -206,6 +211,8 @@ public class LockIcon extends KeyguardAffordanceView implements OnUserInfoChange
         if (mDockManager != null) {
             mDockManager.addListener(mDockEventListener);
         }
+        TunerService tunerService = Dependency.get(TunerService.class);
+        tunerService.addTunable(this, TUNER_SHOW_LOCK_ICON);
         onThemeChanged();
         update();
     }
@@ -222,6 +229,8 @@ public class LockIcon extends KeyguardAffordanceView implements OnUserInfoChange
         if (mDockManager != null) {
             mDockManager.removeListener(mDockEventListener);
         }
+        TunerService tunerService = Dependency.get(TunerService.class);
+        tunerService.removeTunable(this);
     }
 
     @Override
@@ -336,7 +345,7 @@ public class LockIcon extends KeyguardAffordanceView implements OnUserInfoChange
     private boolean updateIconVisibility() {
         boolean onAodNotPulsingOrDocked = mDozing && (!mPulsing || mDocked);
         boolean invisible = onAodNotPulsingOrDocked || mWakeAndUnlockRunning
-                || mShowingLaunchAffordance;
+                || mShowingLaunchAffordance || mHideLockIcon;
         if (mBypassController.getBypassEnabled() && !mBouncerShowingScrimmed) {
             if ((mHeadsUpManager.isHeadsUpGoingAway() || mHeadsUpManager.hasPinnedHeadsUp()
                     || mStatusBarStateController.getState() == StatusBarState.KEYGUARD)
@@ -608,6 +617,13 @@ public class LockIcon extends KeyguardAffordanceView implements OnUserInfoChange
                 && scrimsVisible == ScrimController.VISIBILITY_FULLY_TRANSPARENT) {
             mWakeAndUnlockRunning = false;
             update();
+        }
+    }
+
+    @Override
+    public void onTuningChanged(String key, String newValue) {
+        if (key.equals(TUNER_SHOW_LOCK_ICON)) {
+            mHideLockIcon = newValue != null && newValue.equals("0");
         }
     }
 }
