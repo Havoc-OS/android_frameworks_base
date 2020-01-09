@@ -367,7 +367,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mShowAdvancedToggles = new AdvancedAction(
                 SHOW_TOGGLES_BUTTON,
-                R.drawable.ic_lock_restart_advanced,
+                com.android.systemui.R.drawable.ic_restart_advanced,
                 com.android.systemui.R.string.global_action_restart_advanced,
                 mWindowManagerFuncs, mHandler) {
 
@@ -384,7 +384,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mRestartHot = new AdvancedAction(
                 RESTART_HOT_BUTTON,
-                R.drawable.ic_lock_restart_hot,
+                com.android.systemui.R.drawable.ic_restart_hot,
                 com.android.systemui.R.string.global_action_restart_hot,
                 mWindowManagerFuncs, mHandler) {
 
@@ -399,7 +399,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mRestartRecovery = new AdvancedAction(
                 RESTART_RECOVERY_BUTTON,
-                R.drawable.ic_lock_restart_recovery,
+                com.android.systemui.R.drawable.ic_restart_recovery,
                 com.android.systemui.R.string.global_action_restart_recovery,
                 mWindowManagerFuncs, mHandler) {
 
@@ -414,7 +414,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mRestartBootloader = new AdvancedAction(
                 RESTART_BOOTLOADER_BUTTON,
-                R.drawable.ic_lock_restart_bootloader,
+                com.android.systemui.R.drawable.ic_restart_bootloader,
                 com.android.systemui.R.string.global_action_restart_bootloader,
                 mWindowManagerFuncs, mHandler) {
 
@@ -429,7 +429,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
         mRestartSystemUI = new AdvancedAction(
                 RESTART_UI_BUTTON,
-                R.drawable.ic_lock_restart_ui,
+                com.android.systemui.R.drawable.ic_restart_ui,
                 com.android.systemui.R.string.global_action_restart_ui,
                 mWindowManagerFuncs, mHandler) {
 
@@ -593,7 +593,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
     private final class PowerAction extends SinglePressAction implements LongPressAction {
         private PowerAction() {
-            super(R.drawable.ic_lock_power_off,
+            super(com.android.systemui.R.drawable.ic_power_off,
                     R.string.global_action_power_off);
         }
 
@@ -698,7 +698,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
     private final class RestartAction extends SinglePressAction implements LongPressAction {
         private RestartAction() {
-            super(R.drawable.ic_restart, com.android.systemui.R.string.global_action_restart_system);
+            super(com.android.systemui.R.drawable.ic_restart, com.android.systemui.R.string.global_action_restart_system);
         }
 
         @Override
@@ -732,7 +732,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
     private class ScreenshotAction extends SinglePressAction implements LongPressAction {
         public ScreenshotAction() {
-            super(R.drawable.ic_screenshot, com.android.systemui.R.string.global_action_screenshot_cust);
+            super(com.android.systemui.R.drawable.ic_screenshot, com.android.systemui.R.string.global_action_screenshot);
         }
 
         @Override
@@ -779,7 +779,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     }
 
     private Action getTorchToggleAction() {
-        return new SinglePressAction(R.drawable.ic_lock_torch,
+        return new SinglePressAction(com.android.systemui.R.drawable.ic_torch,
                 com.android.systemui.R.string.quick_settings_flashlight_label) {
 
             public void onPress() {
@@ -813,7 +813,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
     private class ScreenrecordAction extends SinglePressAction implements LongPressAction {
         public ScreenrecordAction() {
-            super(R.drawable.ic_lock_screenrecord,
+            super(com.android.systemui.R.drawable.ic_screenrecord,
             com.android.systemui.R.string.global_action_screenrecord);
         }
 
@@ -997,7 +997,7 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     }
 
     private Action getLockdownAction() {
-        return new SinglePressAction(R.drawable.ic_lock_lockdown,
+        return new SinglePressAction(com.android.systemui.R.drawable.ic_lockdown,
                 R.string.global_action_lockdown) {
 
             @Override

@@ -114,14 +114,6 @@
     <java-symbol type="string" name="reboot_to_bootloader_message" />
     <java-symbol type="string" name="reboot_title" />
     <java-symbol type="string" name="reboot_message" />
-    <java-symbol type="drawable" name="ic_lock_restart_advanced" />
-    <java-symbol type="drawable" name="ic_lock_restart_hot" />
-    <java-symbol type="drawable" name="ic_lock_restart_recovery" />
-    <java-symbol type="drawable" name="ic_lock_restart_bootloader" />
-    <java-symbol type="drawable" name="ic_lock_restart_ui" />
-    <java-symbol type="drawable" name="ic_lock_torch" />
-    <java-symbol type="drawable" name="ic_lock_screenrecord" />
-    <java-symbol type="color" name="power_menu_icon_color" />
 
     <!-- Vendor mismatch fingerprint warning -->
     <java-symbol type="string" name="system_error_vendorprint" />

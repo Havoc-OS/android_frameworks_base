@@ -19,7 +19,4 @@
     <color name="toast_bg">@color/white</color>
     <color name="toast_text">@color/black</color>
 
-    <!-- Power menu -->
-    <color name="power_menu_icon_color">#FF494E53</color>
-
 </resources>
