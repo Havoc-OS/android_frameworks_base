@@ -32,6 +32,7 @@ LOCAL_REQUIRED_MODULES := \
 	FontArvoLatoOverlay \
 	FontBariolSourceOverlay \
 	FontCagliostroSourceOverlay \
+	FontComfortaaSourceOverlay \
 	FontComicSansSourceOverlay \
 	FontCoolstorySourceOverlay \
 	FontGoogleSansSourceOverlay \
