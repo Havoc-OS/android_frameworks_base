@@ -3282,6 +3282,14 @@ public class StatusBar extends SystemUI implements DemoMode,
         return anim;
     }
 
+    public Ticker getTicker() {
+        return mTicker;
+    }
+
+    public boolean isTickerEnabled() {
+        return mTicker != null && mTickerEnabled != 0;
+    }
+
     public void haltTicker() {
         if (mTicker != null && mTickerEnabled != 0) {
             mTicker.halt();
