@@ -5852,8 +5852,8 @@ public class NotificationManagerService extends SystemService {
         // notification was a summary and the new one isn't, or when the old
         // notification was a summary and its group key changed.
         if (oldIsSummary && (!isSummary || !oldGroup.equals(group))) {
-            cancelGroupChildrenLocked(old, callingUid, callingPid, null, false /* sendDelete */,
-                    null);
+            cancelGroupChildrenLocked(old, callingUid, callingPid, null, false /* sendDelete */, null);
+            updateLightsLocked();
         }
     }
 
@@ -6055,16 +6055,16 @@ public class NotificationManagerService extends SystemService {
             return false;
         }
         // Suppressed because it's a silent update
-        /*final Notification notification = record.getNotification();
+        final Notification notification = record.getNotification();
         if (record.isUpdate && (notification.flags & FLAG_ONLY_ALERT_ONCE) != 0) {
             return false;
         }
         // Suppressed because another notification in its group handles alerting
         if (record.sbn.isGroup() && record.getNotification().suppressAlertingDueToGrouping()) {
             return false;
-        }*/
+        }
         // not if the screen's on
-        if (/*isInCall() || */mScreenOn) {
+        if (isInCall() || mScreenOn) {
             return false;
         }
 
@@ -7189,8 +7189,7 @@ public class NotificationManagerService extends SystemService {
             NotificationRecord.Light light = ledNotification.getLight();
             if (light != null && mNotificationPulseEnabled) {
                 // pulse repeatedly
-                mNotificationLight.setFlashing(light.color, Light.LIGHT_FLASH_TIMED,
-                        light.onMs, light.offMs);
+                forcePulseLed(light.color, light.onMs, light.offMs);
             }
         }
     }
