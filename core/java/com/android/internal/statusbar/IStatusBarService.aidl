@@ -162,6 +162,11 @@ interface IStatusBarService
     void hideInDisplayFingerprintView();
 
     /**
+     * Used to block or unblock usage of gestural navigation
+     */
+    void setBlockedGesturalNavigation(boolean blocked);
+
+    /**
      * Havoc
      */
     void toggleCameraFlash(boolean proximityCheck);
@@ -169,5 +174,5 @@ interface IStatusBarService
 
     void killForegroundApp();
 
-     void screenPinningStateChanged(boolean enabled);
+    void screenPinningStateChanged(boolean enabled);
 }
