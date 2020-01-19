@@ -15,6 +15,7 @@
 package com.android.systemui.privacy
 
 import android.content.Context
+import android.provider.Settings
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
@@ -68,7 +69,9 @@ class OngoingPrivacyChip @JvmOverloads constructor(
 
     // Should only be called if the builder icons or app changed
     private fun updateView() {
-        back.background = if (expanded) backgroundDrawable else null
+        val networkTraffic = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.NETWORK_TRAFFIC_LOCATION, 0);
+        back.background = if (expanded && (networkTraffic != 2)) backgroundDrawable else null
         val padding = if (expanded) sidePadding else 0
         back.setPaddingRelative(padding, 0, padding, 0)
         fun setIcons(dialogBuilder: PrivacyDialogBuilder, iconsContainer: ViewGroup) {
