@@ -84,6 +84,7 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
     private boolean mIsScreenOn;
     private boolean mIsViewAdded;
     private boolean mWasDreaming;
+    private boolean mIsKeyguard;
 
     private Handler mHandler;
 
@@ -192,6 +193,7 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
         public void onKeyguardVisibilityChanged(boolean showing) {
             super.onKeyguardVisibilityChanged(showing);
             mIsInsideCircle = false;
+            resetPosition();
         }
 
         @Override
@@ -499,6 +501,11 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
                 break;
             default:
                 throw new IllegalArgumentException("Unknown rotation: " + rotation);
+        }
+
+        if (mIsKeyguard) {
+            mParams.x = mPositionX;
+            mParams.y = mPositionY;
         }
 
         if (mIsDreaming) {
