@@ -85,4 +85,7 @@
          near events -->
     <bool name="doze_brightness_sensor_reports_proximity" translatable="false">true</bool>
 
+    <!-- Whether to use fingerprint pressed image -->
+    <bool name="config_fodPressedImage">false</bool>
+
 </resources>
