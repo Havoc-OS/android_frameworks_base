@@ -49,6 +49,8 @@ LOCAL_REQUIRED_MODULES := \
 	FontSurferSourceOverlay \
 	FontNokiaPureSourceOverlay \
 	FontFifa2018SourceOverlay \
+	FontCoconSourceOverlay \
+	FontQuandoSourceOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularPixelLauncherOverlay \
 	IconPackCircularPixelThemePickerOverlay \
