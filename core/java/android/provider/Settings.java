@@ -5966,6 +5966,15 @@ public final class Settings {
         private static final Validator QS_BACKGROUND_BLUR_ALPHA_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * QS blur intensity
+         * @hide
+         */
+        public static final String QS_BACKGROUND_BLUR_INTENSITY = "qs_background_blur_intensity";
+
+        /** @hide */
+        private static final Validator QS_BACKGROUND_BLUR_INTENSITY_VALIDATOR = ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -6096,6 +6105,7 @@ public final class Settings {
             BACK_GESTURE_HAPTIC,
             QS_BACKGROUND_BLUR,
             QS_BACKGROUND_BLUR_ALPHA,
+            QS_BACKGROUND_BLUR_INTENSITY,
         };
 
         /**
@@ -6474,6 +6484,7 @@ public final class Settings {
             VALIDATORS.put(BACK_GESTURE_HAPTIC, BACK_GESTURE_HAPTIC_VALIDATOR);
             VALIDATORS.put(QS_BACKGROUND_BLUR, QS_BACKGROUND_BLUR_VALIDATOR);
             VALIDATORS.put(QS_BACKGROUND_BLUR_ALPHA, QS_BACKGROUND_BLUR_ALPHA_VALIDATOR);
+            VALIDATORS.put(QS_BACKGROUND_BLUR_INTENSITY, QS_BACKGROUND_BLUR_INTENSITY_VALIDATOR);
         }
 
         /**
