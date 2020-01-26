@@ -170,15 +170,6 @@ public class Utils {
                 }
             }
         }
-
-        public static void setPartialScreenshot(boolean active) {
-            IStatusBarService service = getStatusBarService();
-            if (service != null) {
-                try {
-                    service.setPartialScreenshot(active);
-                } catch (RemoteException e) {}
-            }
-        }
     }
 
     public static void sendKeycode(int keycode) {
@@ -213,10 +204,6 @@ public class Utils {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void setPartialScreenshot(boolean active) {
-        FireActions.setPartialScreenshot(active);
     }
 
     public static boolean deviceHasCompass(Context ctx) {
