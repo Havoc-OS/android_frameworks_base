@@ -16,7 +16,5 @@
 package com.android.internal.util.custom;
 
 public class OverlayUtils {
-    public static String[] AllPackages = {
-        "com.google.android.apps.nexuslauncher.overlay"
-    };
+    public static String[] AllPackages = {};
 }
