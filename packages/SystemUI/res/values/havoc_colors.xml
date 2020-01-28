@@ -19,4 +19,8 @@
     <!-- QS date color-->
     <color name="qs_date_color">#FF4C4C4C</color>
 
+    <!-- Partial screenshot -->
+    <color name="screenshot_partial_layout_background">#20000000</color>
+    <color name="screenshot_partial_selector_background">#A0000000</color>
+
 </resources>
