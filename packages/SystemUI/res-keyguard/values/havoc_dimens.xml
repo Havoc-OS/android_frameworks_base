@@ -24,4 +24,7 @@
     <!-- The minimum bottom margin of the keyguard security container -->
     <dimen name="kg_security_container_min_bottom_margin">0dp</dimen>
 
+    <!-- Custom clock -->
+    <dimen name="custom_clock_left_padding">50dp</dimen>
+
 </resources>
