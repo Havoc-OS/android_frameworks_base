@@ -713,7 +713,7 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <provider android:name="com.google.android.systemui.keyguard.KeyguardSliceProvider"
+        <provider android:name="com.android.systemui.keyguard.KeyguardSliceProvider"
                   android:authorities="com.android.systemui.keyguard.disabled"
                   android:enabled="false">
         </provider>
