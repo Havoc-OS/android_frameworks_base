@@ -121,6 +121,7 @@ public class NavigationBarView extends FrameLayout implements
     private boolean mDeadZoneConsuming = false;
     private final NavigationBarTransitions mBarTransitions;
     private final OverviewProxyService mOverviewProxyService;
+    private boolean mBlockedGesturalNavigation;
 
     // performs manual animation in sync with layout transitions
     private final NavTransitionListener mTransitionListener = new NavTransitionListener();
@@ -746,10 +747,13 @@ public class NavigationBarView extends FrameLayout implements
         mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_SCREEN_PINNING,
                 ActivityManagerWrapper.getInstance().isScreenPinningActive(), displayId);
         mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_OVERVIEW_DISABLED,
+                mBlockedGesturalNavigation ||
                 (mDisabledFlags & View.STATUS_BAR_DISABLE_RECENT) != 0, displayId);
         mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_HOME_DISABLED,
+                mBlockedGesturalNavigation ||
                 (mDisabledFlags & View.STATUS_BAR_DISABLE_HOME) != 0, displayId);
         mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_SEARCH_DISABLED,
+                mBlockedGesturalNavigation ||
                 (mDisabledFlags & View.STATUS_BAR_DISABLE_SEARCH) != 0, displayId);
     }
 
@@ -757,7 +761,8 @@ public class NavigationBarView extends FrameLayout implements
         int displayId = mContext.getDisplayId();
         if (mPanelView != null) {
             mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_NOTIFICATION_PANEL_EXPANDED,
-                    mPanelView.isFullyExpanded() && !mPanelView.isInSettings(), displayId);
+                    mBlockedGesturalNavigation ||
+                    (mPanelView.isFullyExpanded() && !mPanelView.isInSettings()), displayId);
             mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_QUICK_SETTINGS_EXPANDED,
                     mPanelView.isInSettings(), displayId);
         }
@@ -781,13 +786,9 @@ public class NavigationBarView extends FrameLayout implements
     }
 
     public void setPartialScreenshot(boolean active) {
-        int displayId = mContext.getDisplayId();
-        mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_OVERVIEW_DISABLED,
-                active ? true : (mDisabledFlags & View.STATUS_BAR_DISABLE_RECENT) != 0,
-                displayId);
-        mOverviewProxyService.setSystemUiStateFlag(SYSUI_STATE_NOTIFICATION_PANEL_EXPANDED,
-                active ? true : mPanelView.isFullyExpanded() && !mPanelView.isInSettings(),
-                displayId);
+        mBlockedGesturalNavigation = active;
+        updateDisabledSystemUiStateFlags();
+        updatePanelSystemUiStateFlags();
     }
 
     /**
