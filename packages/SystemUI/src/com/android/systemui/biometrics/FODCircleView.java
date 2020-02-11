@@ -40,6 +40,7 @@ import android.view.Surface;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -57,6 +58,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class FODCircleView extends ImageView implements OnTouchListener, ConfigurationListener {
+    private static final String TAG = "FODCircleView";
     private final int mPositionX;
     private final int mPositionY;
     private final int mWidth;
@@ -81,6 +83,7 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
     private boolean mIsPulsing;
     private boolean mIsScreenOn;
     private boolean mIsViewAdded;
+    private boolean mWasDreaming;
 
     private Handler mHandler;
 
@@ -146,9 +149,13 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
         public void onPulsing(boolean pulsing) {
             super.onPulsing(pulsing);
             mIsPulsing = pulsing;
-	        if (mIsPulsing) {
+            if (mIsPulsing) {
+                resetPosition();
+                mWasDreaming = mIsDreaming;
                 mIsDreaming = false;
-	        }
+            } else {
+                mIsDreaming = mWasDreaming;
+            }
             mIsInsideCircle = false;
         }
 
