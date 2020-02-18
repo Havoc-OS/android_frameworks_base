@@ -66,6 +66,7 @@ android_library {
         "dagger2-2.19",
         "jsr330",
         "vendor.lineage.biometrics.fingerprint.inscreen-V1.0-java",
+        "vendor.lineage.biometrics.fingerprint.inscreen-V1.1-java",
         "VendorSupport-preference"
     ],
     manifest: "AndroidManifest.xml",
@@ -125,6 +126,7 @@ android_library {
         "dagger2-2.19",
         "jsr330",
         "vendor.lineage.biometrics.fingerprint.inscreen-V1.0-java",
+        "vendor.lineage.biometrics.fingerprint.inscreen-V1.1-java",
     ],
     libs: [
         "android.test.runner",
