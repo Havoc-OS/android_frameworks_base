@@ -21,8 +21,10 @@ import android.app.ActivityManager.StackInfo;
 import android.app.ActivityTaskManager;
 import android.app.IActivityTaskManager;
 import android.app.TaskStackListener;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -36,6 +38,8 @@ import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.Trace;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.EventLog;
 import android.util.MathUtils;
 import android.util.Slog;
@@ -215,7 +219,39 @@ class AutomaticBrightnessController {
     private IActivityTaskManager mActivityTaskManager;
     private PackageManager mPackageManager;
 
-    public AutomaticBrightnessController(Callbacks callbacks, Looper looper,
+    private class CustomSettingsObserver extends ContentObserver {
+        CustomSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.AUTO_BRIGHTNESS_MIN_VALUE),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            update();
+        }
+
+        public void update() {
+            mCustomScreenBrightnessRangeMinimum = Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.AUTO_BRIGHTNESS_MIN_VALUE, -1, UserHandle.USER_CURRENT);
+            mCustomScreenBrightnessRangeMinimum = Math.min(
+                    mCustomScreenBrightnessRangeMinimum, mScreenBrightnessRangeMaximum);
+            mCustomScreenBrightnessRangeMinimum = Math.max(
+                    mCustomScreenBrightnessRangeMinimum, mScreenBrightnessRangeMinimum);
+            Slog.d(TAG, "mCustomScreenBrightnessRangeMinimum = " + mCustomScreenBrightnessRangeMinimum);
+            updateAutoBrightness(true /* sendUpdate */, false /* isManuallySet */);
+        }
+    }
+
+    private CustomSettingsObserver mCustomSettingsObserver;
+    private int mCustomScreenBrightnessRangeMinimum = -1;
+    private Context mContext;
+
+    public AutomaticBrightnessController(Callbacks callbacks, Context context, Looper looper,
             SensorManager sensorManager, Sensor lightSensor, BrightnessMappingStrategy mapper,
             int lightSensorWarmUpTime, int brightnessMin, int brightnessMax, float dozeScaleFactor,
             int lightSensorRate, int initialLightSensorRate, long brighteningLightDebounceConfig,
@@ -224,6 +260,7 @@ class AutomaticBrightnessController {
             HysteresisLevels screenBrightnessThresholds, long shortTermModelTimeout,
             PackageManager packageManager) {
         mCallbacks = callbacks;
+        mContext = context;
         mSensorManager = sensorManager;
         mBrightnessMapper = mapper;
         mScreenBrightnessRangeMinimum = brightnessMin;
@@ -259,6 +296,10 @@ class AutomaticBrightnessController {
         mPendingForegroundAppPackageName = null;
         mForegroundAppCategory = ApplicationInfo.CATEGORY_UNDEFINED;
         mPendingForegroundAppCategory = ApplicationInfo.CATEGORY_UNDEFINED;
+
+        mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
+        mCustomSettingsObserver.observe();
+        mCustomSettingsObserver.update();
     }
 
     /**
@@ -762,8 +803,12 @@ class AutomaticBrightnessController {
     }
 
     private int clampScreenBrightness(int value) {
+        int minBrightness = mScreenBrightnessRangeMinimum;
+        if (mCustomScreenBrightnessRangeMinimum != -1) {
+            minBrightness = mCustomScreenBrightnessRangeMinimum;
+        }
         return MathUtils.constrain(value,
-                mScreenBrightnessRangeMinimum, mScreenBrightnessRangeMaximum);
+                minBrightness, mScreenBrightnessRangeMaximum);
     }
 
     private void prepareBrightnessAdjustmentSample() {
