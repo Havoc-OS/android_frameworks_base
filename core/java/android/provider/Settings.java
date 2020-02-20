@@ -6545,6 +6545,12 @@ public final class Settings {
         public static final String DATA_USAGE_PERIOD = "data_usage_period";
 
         /**
+         * Whether to tint the QS tiles with accent color
+         * @hide
+         */
+        public static final String QS_TILE_ACCENT_TINT = "qs_tile_accent_tint";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
