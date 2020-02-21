@@ -41,6 +41,7 @@ import android.widget.RelativeLayout;
 
 import androidx.palette.graphics.Palette;
 
+import com.android.settingslib.Utils;
 import com.android.systemui.R;
 
 public class NotificationLightsView extends RelativeLayout {
@@ -49,6 +50,7 @@ public class NotificationLightsView extends RelativeLayout {
     private ValueAnimator mLightAnimator;
     private boolean mPulsing;
     private WallpaperManager mWallManager;
+    private int color;
 
     public NotificationLightsView(Context context) {
         this(context, null);
@@ -89,7 +91,7 @@ public class NotificationLightsView extends RelativeLayout {
     }
 
     public void animateNotification() {
-        int color = Settings.System.getIntForUser(mContext.getContentResolver(),
+        int customColor = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.PULSE_AMBIENT_LIGHT_COLOR, 0xFF3980FF,
                 UserHandle.USER_CURRENT);
         int duration = Settings.System.getIntForUser(mContext.getContentResolver(),
@@ -98,10 +100,11 @@ public class NotificationLightsView extends RelativeLayout {
         int repeat = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.PULSE_AMBIENT_LIGHT_REPEAT_COUNT, 0,
                 UserHandle.USER_CURRENT);
+        int colorMode = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.PULSE_AMBIENT_LIGHT_COLOR_MODE, 1,
+                UserHandle.USER_CURRENT);
 
-        if (Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.PULSE_AMBIENT_LIGHT_AUTO_COLOR, 0,
-                UserHandle.USER_CURRENT) == 1) {
+        if (colorMode == 0) {
             try {
                 WallpaperManager wallpaperManager = WallpaperManager.getInstance(mContext);
                 WallpaperInfo wallpaperInfo = wallpaperManager.getWallpaperInfo();
@@ -118,6 +121,10 @@ public class NotificationLightsView extends RelativeLayout {
             } catch (Exception e) {
                 // Nothing to do
             }
+        } else if (colorMode == 1) {
+            color = Utils.getColorAccentDefaultColor(getContext());
+        } else {
+            color = customColor;
         }
         StringBuilder sb = new StringBuilder();
         sb.append("animateNotification color ");
