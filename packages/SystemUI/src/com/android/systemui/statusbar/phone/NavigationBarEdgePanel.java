@@ -644,7 +644,7 @@ public class NavigationBarEdgePanel extends View {
                     mVibratorHelper.vibrate(VibrationEffect.EFFECT_TICK);
                     mVibrationTime = SystemClock.uptimeMillis();
                 } else {
-                    mVibrator.vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE));
+                    mVibrator.vibrate(VibrationEffect.createOneShot(30, VibrationEffect.DEFAULT_AMPLITUDE));
                 }
             }
 
