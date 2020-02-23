@@ -102,7 +102,8 @@
     <java-symbol type="string" name="alert_slider_state_path" />
     <java-symbol type="string" name="alert_slider_uevent_match_path" />
     <java-symbol type="bool" name="config_hasAlertSlider" />
-	<java-symbol type="integer" name="config_alertSliderLocation" />
+    <java-symbol type="integer" name="config_alertSliderLocation" />
+    <java-symbol type="string" name="config_alertSliderIntent" />
 
     <!-- App error dialog -->
     <java-symbol type="id" name="aerr_copy" />
