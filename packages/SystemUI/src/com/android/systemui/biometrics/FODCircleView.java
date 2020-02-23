@@ -25,11 +25,9 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.hardware.biometrics.BiometricSourceType;
-import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.os.IHwBinder;
 import android.os.Looper;
-import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.provider.Settings;
@@ -40,15 +38,11 @@ import android.view.Surface;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.WindowManager;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.R;
-import com.android.systemui.Dependency;
-import com.android.systemui.statusbar.policy.ConfigurationController;
-import com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener;
 
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreen;
 import vendor.lineage.biometrics.fingerprint.inscreen.V1_0.IFingerprintInscreenCallback;
@@ -57,8 +51,7 @@ import java.util.NoSuchElementException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class FODCircleView extends ImageView implements OnTouchListener, ConfigurationListener {
-    private static final String TAG = "FODCircleView";
+public class FODCircleView extends ImageView implements OnTouchListener {
     private final int mPositionX;
     private final int mPositionY;
     private final int mWidth;
@@ -69,10 +62,10 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
     private final Paint mPaintShow = new Paint();
     private final WindowManager.LayoutParams mParams = new WindowManager.LayoutParams();
     private final WindowManager mWindowManager;
-    private final DisplayManager mDisplayManager;
 
     private IFingerprintInscreen mFingerprintInscreenDaemon;
 
+    private int mDreamingOffsetX;
     private int mDreamingOffsetY;
     private int mNavigationBarSize;
 
@@ -83,17 +76,11 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
     private boolean mIsPulsing;
     private boolean mIsScreenOn;
     private boolean mIsViewAdded;
-    private boolean mWasDreaming;
-    private boolean mIsKeyguard;
+    private boolean mIsRemoving;
 
     private Handler mHandler;
 
-    private PowerManager mPowerManager;
-    private PowerManager.WakeLock mWakeLock;
-
     private Timer mBurnInProtectionTimer;
-
-    private final boolean mFodPressedImage;
 
     private IFingerprintInscreenCallback mFingerprintInscreenCallback =
             new IFingerprintInscreenCallback.Stub() {
@@ -103,11 +90,7 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
 
             mHandler.post(() -> {
                 setDim(true);
-                if (mFodPressedImage) {
-                    setImageResource(R.drawable.fod_icon_pressed);
-                } else {
-                    setImageDrawable(null);
-                }
+                setImageDrawable(null);
 
                 invalidate();
             });
@@ -140,24 +123,11 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
             } else if (mBurnInProtectionTimer != null) {
                 mBurnInProtectionTimer.cancel();
             }
+
             if (mIsViewAdded) {
                 resetPosition();
                 invalidate();
             }
-        }
-
-        @Override
-        public void onPulsing(boolean pulsing) {
-            super.onPulsing(pulsing);
-            mIsPulsing = pulsing;
-            if (mIsPulsing) {
-                resetPosition();
-                mWasDreaming = mIsDreaming;
-                mIsDreaming = false;
-            } else {
-                mIsDreaming = mWasDreaming;
-            }
-            mIsInsideCircle = false;
         }
 
         @Override
@@ -193,7 +163,6 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
         public void onKeyguardVisibilityChanged(boolean showing) {
             super.onKeyguardVisibilityChanged(showing);
             mIsInsideCircle = false;
-            resetPosition();
         }
 
         @Override
@@ -228,9 +197,6 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
             }
         }
     };
-
-    private boolean mCutoutMasked;
-    private int mStatusbarHeight;
 
     public FODCircleView(Context context) {
         super(context);
@@ -276,16 +242,6 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
 
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
-
-        mDisplayManager = context.getSystemService(DisplayManager.class);
-
-        updateCutoutFlags();
-
-        Dependency.get(ConfigurationController.class).addCallback(this);
-        mPowerManager = context.getSystemService(PowerManager.class);
-        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "FODCircleView");
-
-        mFodPressedImage = res.getBoolean(R.bool.config_fodPressedImage);
     }
 
     @Override
@@ -306,8 +262,7 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
         // the HAL is expected (if supported) to set the screen brightness
         // to maximum / minimum immediately when called
         if (mIsInsideCircle) {
-          if (mIsDreaming) mWakeLock.acquire(300);
-            if (mIsDreaming || mIsPulsing) {
+            if (mIsDreaming) {
                 setAlpha(1.0f);
             }
             if (!mIsPressed) {
@@ -322,7 +277,7 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
                 mIsPressed = true;
             }
         } else {
-            setAlpha(mIsDreaming ? (mIsPulsing ? 1.0f : 0.8f) : 1.0f);
+            setAlpha(mIsDreaming ? 0.5f : 1.0f);
             if (mIsPressed) {
                 IFingerprintInscreen daemon = getFingerprintInScreenDaemon();
                 if (daemon != null) {
@@ -333,6 +288,11 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
                     }
                 }
                 mIsPressed = false;
+            }
+
+            if (mIsRemoving) {
+                mIsRemoving = false;
+                mWindowManager.removeView(this);
             }
         }
     }
@@ -365,11 +325,7 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             setDim(true);
-            if (mFodPressedImage) {
-                setImageResource(R.drawable.fod_icon_pressed);
-            } else {
-                setImageDrawable(null);
-            }
+            setImageDrawable(null);
         }
 
         return true;
@@ -429,6 +385,12 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
     }
 
     public void show() {
+        if (mIsRemoving) {
+            // Last removal hasn't been finished yet
+            mIsRemoving = false;
+            mWindowManager.removeView(this);
+        }
+
         if (mIsViewAdded) {
             return;
         }
@@ -447,6 +409,7 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
         mParams.packageName = "android";
         mParams.type = WindowManager.LayoutParams.TYPE_DISPLAY_OVERLAY;
         mParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH |
                 WindowManager.LayoutParams.FLAG_DIM_BEHIND |
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
         mParams.gravity = Gravity.TOP | Gravity.LEFT;
@@ -467,8 +430,8 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
 
         mIsInsideCircle = false;
         mIsViewAdded = false;
-        mWindowManager.removeView(this);
-        mIsPressed = false;
+        // Postpone removal to next re-layout to avoid blinking
+        mIsRemoving = true;
         setDim(false);
         invalidate();
     }
@@ -480,35 +443,29 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
         defaultDisplay.getRealSize(size);
 
         int rotation = defaultDisplay.getRotation();
-        int cutoutMaskedExtra = mCutoutMasked ? mStatusbarHeight : 0;
-
         switch (rotation) {
             case Surface.ROTATION_0:
                 mParams.x = mPositionX;
-                mParams.y = mPositionY - cutoutMaskedExtra;
+                mParams.y = mPositionY;
                 break;
             case Surface.ROTATION_90:
                 mParams.x = mPositionY;
-                mParams.y = mPositionX - cutoutMaskedExtra;
+                mParams.y = mPositionX;
                 break;
             case Surface.ROTATION_180:
                 mParams.x = mPositionX;
-                mParams.y = size.y - mPositionY - mHeight - cutoutMaskedExtra;
+                mParams.y = size.y - mPositionY - mHeight;
                 break;
             case Surface.ROTATION_270:
-                mParams.x = size.x - mPositionY - mWidth - mNavigationBarSize - cutoutMaskedExtra;
+                mParams.x = size.x - mPositionY - mWidth - mNavigationBarSize;
                 mParams.y = mPositionX;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown rotation: " + rotation);
         }
 
-        if (mIsKeyguard) {
-            mParams.x = mPositionX;
-            mParams.y = mPositionY;
-        }
-
         if (mIsDreaming) {
+            mParams.x += mDreamingOffsetX;
             mParams.y += mDreamingOffsetY;
         }
 
@@ -533,12 +490,12 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
             }
 
             if (mShouldBoostBrightness) {
-                mDisplayManager.setTemporaryBrightness(255);
+                mParams.screenBrightness = 1.0f;
             }
 
             mParams.dimAmount = ((float) dimAmount) / 255.0f;
         } else {
-            mDisplayManager.setTemporaryBrightness(-1);
+            mParams.screenBrightness = 0.0f;
             mParams.dimAmount = 0.0f;
         }
 
@@ -555,30 +512,20 @@ public class FODCircleView extends ImageView implements OnTouchListener, Configu
             // It is fine to modify the variables here because
             // no other thread will be modifying it
             long now = System.currentTimeMillis() / 1000 / 60;
+            mDreamingOffsetX = (int) (now % (mDreamingMaxOffset * 4));
+            if (mDreamingOffsetX > mDreamingMaxOffset * 2) {
+                mDreamingOffsetX = mDreamingMaxOffset * 4 - mDreamingOffsetX;
+            }
             // Let y to be not synchronized with x, so that we get maximum movement
             mDreamingOffsetY = (int) ((now + mDreamingMaxOffset / 3) % (mDreamingMaxOffset * 2));
+            if (mDreamingOffsetY > mDreamingMaxOffset * 2) {
+                mDreamingOffsetY = mDreamingMaxOffset * 4 - mDreamingOffsetY;
+            }
+            mDreamingOffsetX -= mDreamingMaxOffset;
             mDreamingOffsetY -= mDreamingMaxOffset;
             if (mIsViewAdded) {
                 mHandler.post(() -> resetPosition());
             }
         }
     };
-
-    @Override
-    public void onOverlayChanged() {
-        updateCutoutFlags();
-    }
-
-    private void updateCutoutFlags() {
-        mStatusbarHeight = getContext().getResources().getDimensionPixelSize(
-                com.android.internal.R.dimen.status_bar_height_portrait);
-        boolean cutoutMasked = getContext().getResources().getBoolean(
-                com.android.internal.R.bool.config_maskMainBuiltInDisplayCutout);
-        if (mCutoutMasked != cutoutMasked){
-            mCutoutMasked = cutoutMasked;
-            if (mIsViewAdded) {
-                resetPosition();
-            }
-        }
-    }
 }
