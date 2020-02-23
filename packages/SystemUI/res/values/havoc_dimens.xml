@@ -109,6 +109,6 @@
     <dimen name="volume_dialog_panel_transparent_padding_left">20dp</dimen>
 
     <!-- Size of the FOD animation -->
-    <dimen name="fod_animation_size">280dp</dimen>
+    <dimen name="fod_animation_size">550.0px</dimen>
 
 </resources>
