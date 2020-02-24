@@ -31,6 +31,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -44,22 +45,28 @@ public class NotificationLightsView extends RelativeLayout {
     private static final String TAG = "NotificationLightsView";
 
     private ValueAnimator mLightAnimator;
-    private ImageView mLeftView;
-    private ImageView mRightView;
+    private ImageView mLeftViewSolid;
+    private ImageView mLeftViewFaded;
+    private ImageView mRightViewSolid;
+    private ImageView mRightViewFaded;
     private AnimatorUpdateListener mAnimatorUpdateListener = new AnimatorUpdateListener() {
         public void onAnimationUpdate(ValueAnimator animation) {
             if (DEBUG) Log.d(TAG, "onAnimationUpdate");
             float progress = ((Float) animation.getAnimatedValue()).floatValue();
-            mLeftView.setScaleY(progress);
-            mRightView.setScaleY(progress);
+            mLeftViewSolid.setScaleY(progress);
+            mLeftViewFaded.setScaleY(progress);
+            mRightViewSolid.setScaleY(progress);
+            mRightViewFaded.setScaleY(progress);
             float alpha = 1.0f;
             if (progress <= 0.3f) {
                 alpha = progress / 0.3f;
             } else if (progress >= 1.0f) {
                 alpha = 2.0f - progress;
             }
-            mLeftView.setAlpha(alpha);
-            mRightView.setAlpha(alpha);
+            mLeftViewSolid.setAlpha(alpha);
+            mLeftViewFaded.setAlpha(alpha);
+            mRightViewSolid.setAlpha(alpha);
+            mRightViewFaded.setAlpha(alpha);
         }
     };
 
@@ -130,14 +137,29 @@ public class NotificationLightsView extends RelativeLayout {
     }
 
     public void animateNotificationWithColor(int color) {
-        if (mLeftView == null) {
-            mLeftView = (ImageView) findViewById(R.id.notification_animation_left);
+        int layout = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.AMBIENT_LIGHT_LAYOUT, 0,
+                UserHandle.USER_CURRENT);
+        if (mLeftViewSolid == null) {
+            mLeftViewSolid = (ImageView) findViewById(R.id.notification_animation_left_solid);
         }
-        if (mRightView == null) {
-            mRightView = (ImageView) findViewById(R.id.notification_animation_right);
+        if (mLeftViewFaded == null) {
+            mLeftViewFaded = (ImageView) findViewById(R.id.notification_animation_left_faded);
         }
-        mLeftView.setColorFilter(color);
-        mRightView.setColorFilter(color);
+        if (mRightViewSolid == null) {
+            mRightViewSolid = (ImageView) findViewById(R.id.notification_animation_right_solid);
+        }
+        if (mRightViewFaded == null) {
+            mRightViewFaded = (ImageView) findViewById(R.id.notification_animation_right_faded);
+        }
+        mLeftViewSolid.setColorFilter(color);
+        mLeftViewFaded.setColorFilter(color);
+        mLeftViewSolid.setVisibility(layout == 0 ? View.VISIBLE : View.GONE);
+        mLeftViewFaded.setVisibility(layout == 1 ? View.VISIBLE : View.GONE);
+        mRightViewSolid.setColorFilter(color);
+        mRightViewFaded.setColorFilter(color);
+        mRightViewSolid.setVisibility(layout == 0 ? View.VISIBLE : View.GONE);
+        mRightViewFaded.setVisibility(layout == 1 ? View.VISIBLE : View.GONE);
         if (!mLightAnimator.isRunning()) {
             if (DEBUG) Log.d(TAG, "start");
             int repeat = Settings.System.getIntForUser(mContext.getContentResolver(),
