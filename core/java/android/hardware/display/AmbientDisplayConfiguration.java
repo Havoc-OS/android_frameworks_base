@@ -54,7 +54,8 @@ public class AmbientDisplayConfiguration {
                 || pickupGestureEnabled(user)
                 || tapGestureEnabled(user)
                 || doubleTapGestureEnabled(user)
-                || isAmbientTickerEnabled(user);
+                || isAmbientTickerEnabled(user)
+                || isPowerBtnFlashlightEnabled(user);
     }
 
     /** {@hide} */
@@ -245,5 +246,15 @@ public class AmbientDisplayConfiguration {
     public boolean isAmbientTickerEnabled(int user) {
         return Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.PULSE_ON_NEW_TRACKS, 1, user) != 0;
+    }
+
+    /** {@hide} */
+    public boolean isPowerBtnFlashlightEnabled(int user) {
+        int flashlightMode = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.TORCH_POWER_BUTTON_GESTURE, 0, user);
+        if (flashlightMode != 0) {
+            return true;
+        }
+        return false;
     }
 }
