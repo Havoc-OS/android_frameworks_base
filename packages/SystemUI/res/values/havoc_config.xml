@@ -34,7 +34,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false">
-        aod,adb_network,caffeine,compass,cpuinfo,gaming,heads_up,hwkeys,livedisplay,lte,music,reading_mode,reboot,screenrecord,screenshot,screenstabilization,smartpixels,sound,soundsearch,dataswitch,sync,usb_tether
+        aod,adb_network,caffeine,compass,cpuinfo,fpsinfo,gaming,heads_up,hwkeys,livedisplay,lte,music,reading_mode,reboot,screenrecord,screenshot,screenstabilization,smartpixels,sound,soundsearch,dataswitch,sync,usb_tether
     </string>
 
     <!-- Color of the FOD view -->
@@ -87,5 +87,8 @@
 
     <!-- Whether to use fingerprint pressed image -->
     <bool name="config_fodPressedImage">false</bool>
+
+    <!-- FPSInfoService FPS node file path -->
+    <string name="config_fpsInfoSysNode" translatable="false"></string>
 
 </resources>

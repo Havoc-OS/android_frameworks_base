@@ -15755,6 +15755,11 @@ public final class Settings {
         public static final String SHOW_CPU_OVERLAY = "show_cpu_overlay";
 
         /**
+         * @hide
+         */
+        public static final String SHOW_FPS_OVERLAY = "show_fps_overlay";
+
+        /**
          * The TCP/IP port to run ADB on, or 0 for USB
          * @hide
          */
