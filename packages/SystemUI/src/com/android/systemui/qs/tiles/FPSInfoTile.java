@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017-2020 crDroidAndroid Project
+ * Copyright (C) 2020 Havoc-OS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +21,7 @@ import android.content.Intent;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.service.quicksettings.Tile;
+import android.text.TextUtils;
 
 import com.android.systemui.plugins.qs.QSTile.BooleanState;
 import com.android.systemui.qs.SystemSetting;
@@ -104,6 +106,14 @@ public class FPSInfoTile extends QSTileImpl<BooleanState> {
     @Override
     protected String composeChangeAnnouncement() {
         return mContext.getString(R.string.quick_settings_fpsinfo_label);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        final String fpsInfoSysNode = mContext.getResources().getString(
+                R.string.config_fpsInfoSysNode);
+        boolean fpsInfoSupported = !TextUtils.isEmpty(fpsInfoSysNode);
+        return fpsInfoSupported;
     }
 
     @Override
