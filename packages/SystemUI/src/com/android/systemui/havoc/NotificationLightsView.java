@@ -78,12 +78,7 @@ public class NotificationLightsView extends RelativeLayout {
     public NotificationLightsView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         if (DEBUG) Log.d(TAG, "new");
-        int duration = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.AMBIENT_LIGHT_DURATION, 2,
-                UserHandle.USER_CURRENT) * 1000;
         mLightAnimator = ValueAnimator.ofFloat(new float[]{0.0f, 2.0f});
-        mLightAnimator.setDuration(duration);
-        mLightAnimator.setRepeatMode(ValueAnimator.RESTART);
     }
 
     public void animateNotification() {
@@ -135,9 +130,6 @@ public class NotificationLightsView extends RelativeLayout {
     }
 
     public void animateNotificationWithColor(int color) {
-        int repeat = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.AMBIENT_LIGHT_REPEAT_COUNT, 0,
-                UserHandle.USER_CURRENT);
         if (mLeftView == null) {
             mLeftView = (ImageView) findViewById(R.id.notification_animation_left);
         }
@@ -148,10 +140,18 @@ public class NotificationLightsView extends RelativeLayout {
         mRightView.setColorFilter(color);
         if (!mLightAnimator.isRunning()) {
             if (DEBUG) Log.d(TAG, "start");
+            int repeat = Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.AMBIENT_LIGHT_REPEAT_COUNT, 0,
+                    UserHandle.USER_CURRENT);
+            int duration = Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.AMBIENT_LIGHT_DURATION, 2,
+                    UserHandle.USER_CURRENT) * 1000;
+            mLightAnimator.setDuration(duration);
+            mLightAnimator.setRepeatMode(ValueAnimator.RESTART);
             if (repeat == 0) {
                 mLightAnimator.setRepeatCount(ValueAnimator.INFINITE);
             } else {
-                mLightAnimator.setRepeatCount(repeat);
+                mLightAnimator.setRepeatCount(repeat - 1);
             }
             mLightAnimator.addUpdateListener(mAnimatorUpdateListener);
             mLightAnimator.start();
