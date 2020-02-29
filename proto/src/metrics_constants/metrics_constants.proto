@@ -7439,5 +7439,8 @@ message MetricsEvent {
     // Havoc Settings constant
     HAVOC_SETTINGS = 1999;
 
+    // Panel for Mobile Data
+    PANEL_MOBILE_DATA = 2002;
+
   }
 }
