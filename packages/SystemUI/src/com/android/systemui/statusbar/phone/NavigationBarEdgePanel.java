@@ -602,7 +602,7 @@ public class NavigationBarEdgePanel extends View {
 
     }
 
-    private void resetOnDown() {
+    public void resetOnDown() {
         animate().cancel();
         mAngleAnimation.cancel();
         mTranslationAnimation.cancel();
