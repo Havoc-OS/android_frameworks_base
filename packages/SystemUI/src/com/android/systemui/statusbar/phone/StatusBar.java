@@ -4251,6 +4251,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.RIGHT_LONG_BACK_SWIPE_ACTION),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BACK_SWIPE_EXTENDED),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
