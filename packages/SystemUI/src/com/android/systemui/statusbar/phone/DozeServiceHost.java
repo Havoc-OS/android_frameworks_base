@@ -30,6 +30,7 @@ import android.view.View;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.keyguard.KeyguardUpdateMonitor;
+import com.android.systemui.R;
 import com.android.systemui.assist.AssistManager;
 import com.android.systemui.doze.DozeHost;
 import com.android.systemui.doze.DozeLog;
@@ -37,6 +38,7 @@ import com.android.systemui.doze.DozeReceiver;
 import com.android.systemui.keyguard.KeyguardSliceProvider;
 import com.android.systemui.keyguard.KeyguardViewMediator;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
+import com.android.systemui.statusbar.AODDimView;
 import com.android.systemui.statusbar.PulseExpansionHandler;
 import com.android.systemui.statusbar.StatusBarState;
 import com.android.systemui.statusbar.SysuiStatusBarStateController;
@@ -95,6 +97,10 @@ public final class DozeServiceHost implements DozeHost {
     private StatusBar mStatusBar;
     private boolean mSuppressed;
 
+    protected NotificationShadeWindowView mNotificationShadeWindowView;
+
+    private AODDimView mAODDimView;
+
     @Inject
     public DozeServiceHost(DozeLog dozeLog, PowerManager powerManager,
             WakefulnessLifecycle wakefulnessLifecycle,
@@ -141,13 +147,15 @@ public final class DozeServiceHost implements DozeHost {
             NotificationIconAreaController notificationIconAreaController,
             StatusBarKeyguardViewManager statusBarKeyguardViewManager,
             NotificationShadeWindowViewController notificationShadeWindowViewController,
-            NotificationPanelViewController notificationPanel, View ambientIndicationContainer) {
+            NotificationPanelViewController notificationPanel, View ambientIndicationContainer,
+            NotificationShadeWindowView notificationShadeWindowView) {
         mStatusBar = statusBar;
         mNotificationIconAreaController = notificationIconAreaController;
         mStatusBarKeyguardViewManager = statusBarKeyguardViewManager;
         mNotificationPanel = notificationPanel;
         mNotificationShadeWindowViewController = notificationShadeWindowViewController;
         mAmbientIndicationContainer = ambientIndicationContainer;
+        mNotificationShadeWindowView = notificationShadeWindowView;
     }
 
 
@@ -231,6 +239,8 @@ public final class DozeServiceHost implements DozeHost {
             mScrimController.setWakeLockScreenSensorActive(true);
         }
 
+        mAODDimView = mNotificationShadeWindowView.findViewById(R.id.aod_screen_dim);
+
         boolean passiveAuthInterrupt = reason == DozeLog.PULSE_REASON_SENSOR_WAKE_LOCK_SCREEN
                         && mWakeLockScreenPerformsAuth;
         // Set the state to pulsing, so ScrimController will know what to do once we ask it to
@@ -242,6 +252,7 @@ public final class DozeServiceHost implements DozeHost {
             public void onPulseStarted() {
                 callback.onPulseStarted();
                 mStatusBar.updateNotificationPanelTouchState();
+                mAODDimView.setVisible(false);
                 setPulsing(true);
             }
 
@@ -251,6 +262,7 @@ public final class DozeServiceHost implements DozeHost {
                 callback.onPulseFinished();
                 mStatusBar.updateNotificationPanelTouchState();
                 mScrimController.setWakeLockScreenSensorActive(false);
+                mAODDimView.setVisible(true);
                 setPulsing(false);
             }
 

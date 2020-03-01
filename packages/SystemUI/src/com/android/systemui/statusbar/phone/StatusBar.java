@@ -194,6 +194,7 @@ import com.android.systemui.recents.ScreenPinningRequest;
 import com.android.systemui.shared.plugins.PluginManager;
 import com.android.systemui.shared.system.WindowManagerWrapper;
 import com.android.systemui.stackdivider.Divider;
+import com.android.systemui.statusbar.AODDimView;
 import com.android.systemui.statusbar.AutoHideUiElement;
 import com.android.systemui.statusbar.BackDropView;
 import com.android.systemui.statusbar.CommandQueue;
@@ -489,6 +490,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     private boolean mGamingModeActivated;
     private int mHeadsUpDisabled;
 
+    private AODDimView mAODDimView;
+
     // XXX: gesture research
     private final GestureRecorder mGestureRec = DEBUG_GESTURES
         ? new GestureRecorder("/sdcard/statusbar_gestures.dat")
@@ -718,6 +721,10 @@ public class StatusBar extends SystemUI implements DemoMode,
                     mIsDreaming = dreaming;
                     if (dreaming) {
                         maybeEscalateHeadsUp();
+                    }
+                    if (mAODDimView != null) {
+                        if (dreaming) mAODDimView.setVisible(true, true);
+                        if (!dreaming) mAODDimView.setVisible(false);
                     }
                 }
 
@@ -1092,7 +1099,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         mKeyguardUpdateMonitor.registerCallback(mUpdateCallback);
         mDozeServiceHost.initialize(this, mNotificationIconAreaController,
                 mStatusBarKeyguardViewManager, mNotificationShadeWindowViewController,
-                mNotificationPanelViewController, mAmbientIndicationContainer);
+                mNotificationPanelViewController, mAmbientIndicationContainer, mNotificationShadeWindowView);
 
         mConfigurationController.addCallback(this);
 
@@ -1186,6 +1193,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                 R.id.notification_stack_scroller);
         NotificationListContainer notifListContainer = (NotificationListContainer) mStackScroller;
         mNotificationLogger.setUpWithContainer(notifListContainer);
+        mAODDimView = mNotificationShadeWindowView.findViewById(R.id.aod_screen_dim);
 
         // TODO: make this injectable. Currently that would create a circular dependency between
         // NotificationIconAreaController and StatusBar.
@@ -2289,6 +2297,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DISPLAY_CUTOUT_MODE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SCREEN_OFF_FOD),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -2331,6 +2342,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     uri.equals(Settings.System.getUriFor(Settings.System.STOCK_STATUSBAR_IN_HIDE))||
                     uri.equals(Settings.Secure.getUriFor("sysui_rounded_size"))) {
                 handleCutout(null);
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.SCREEN_OFF_FOD))) {
+                updateAODDimView();
             }
         }
 
@@ -2346,6 +2360,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             setHeadsUpBlacklist();
             setScreenBrightnessMode();
             handleCutout(null);
+            updateAODDimView();
         }
     }
 
@@ -2404,6 +2419,11 @@ public class StatusBar extends SystemUI implements DemoMode,
         mBrightnessControl = Settings.System.getIntForUser(
             mContext.getContentResolver(), Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0,
             UserHandle.USER_CURRENT) == 1;
+    }
+
+    private void updateAODDimView() {
+        mAODDimView.setEnabled(Settings.System.getIntForUser(mContext.getContentResolver(),
+            Settings.System.SCREEN_OFF_FOD, 0, UserHandle.USER_CURRENT) != 0);
     }
 
     /**

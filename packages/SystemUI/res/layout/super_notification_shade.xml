@@ -102,4 +102,10 @@
             android:ellipsize="marquee"
             android:focusable="true" />
     </LinearLayout>
+
+    <com.android.systemui.statusbar.AODDimView
+        android:id="@+id/aod_screen_dim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </com.android.systemui.statusbar.phone.NotificationShadeWindowView>

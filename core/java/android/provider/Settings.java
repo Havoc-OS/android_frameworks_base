@@ -5902,6 +5902,12 @@ public final class Settings {
         public static final String FORCE_FULLSCREEN_CUTOUT_APPS = "force_full_screen_cutout_apps";
 
         /**
+         * Screen off FOD
+         * @hide
+         */
+        public static final String SCREEN_OFF_FOD = "screen_off_fod";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
