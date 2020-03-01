@@ -96,6 +96,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
     private FODAnimation mFODAnimation;
     private boolean mIsRecognizingAnimEnabled;
+    private boolean mShouldRemoveIconOnAOD;
 
     private IFingerprintInscreenCallback mFingerprintInscreenCallback =
             new IFingerprintInscreenCallback.Stub() {
@@ -121,8 +122,15 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             if (dreaming) {
                 mBurnInProtectionTimer = new Timer();
                 mBurnInProtectionTimer.schedule(new BurnInProtectionTask(), 0, 60 * 1000);
+                if (mShouldRemoveIconOnAOD) {
+                    resetFODIcon(false);
+                }
             } else if (mBurnInProtectionTimer != null) {
                 mBurnInProtectionTimer.cancel();
+            }
+            
+            if (mShouldRemoveIconOnAOD && !dreaming) {
+                resetFODIcon(true);
             }
         }
 
@@ -405,13 +413,29 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     public void hideCircle() {
         mIsCircleShowing = false;
 
-        setImageResource(R.drawable.fod_icon_default);
+        setFODIcon();
         invalidate();
 
         setDim(false);
         updateAlpha();
 
         setKeepScreenOn(false);
+    }
+
+    private void resetFODIcon(boolean show) {
+        if (show) {
+            setFODIcon();
+        } else {
+            this.setImageResource(0);
+        }
+    }
+
+    private void setFODIcon() {
+        if (mIsDreaming && mShouldRemoveIconOnAOD) {
+            return;
+        }
+
+        this.setImageResource(R.drawable.fod_icon_default);
     }
 
     public void show() {
@@ -517,6 +541,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private void updateSettings() {
         mIsRecognizingAnimEnabled = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.FOD_RECOGNIZING_ANIMATION, 1) != 0;
+
+        mShouldRemoveIconOnAOD = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_OFF_FOD, 0) != 0;
     }
 
     private class BurnInProtectionTask extends TimerTask {
