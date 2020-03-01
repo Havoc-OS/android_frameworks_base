@@ -365,14 +365,6 @@ public final class PowerManager {
     public static final int USER_ACTIVITY_FLAG_INDIRECT = 1 << 1;
 
     /**
-    * User activity flag: Certain hardware buttons are not supposed to
-    * activate hardware button illumination.  This flag indicates a
-    * button event from one of those buttons.
-    * @hide
-    */
-    public static final int USER_ACTIVITY_FLAG_NO_BUTTON_LIGHTS = 1 << 2;
-
-    /**
      * @hide
      */
     public static final int GO_TO_SLEEP_REASON_MIN = 0;
@@ -920,15 +912,6 @@ public final class PowerManager {
     public int getDefaultScreenBrightnessForVrSetting() {
         return mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_screenBrightnessForVrSettingDefault);
-    }
-
-    /**
-     * Gets the default button brightness value.
-     * @hide
-     */
-    public int getDefaultButtonBrightness() {
-        return mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_buttonBrightnessSettingDefault);
     }
 
     /**

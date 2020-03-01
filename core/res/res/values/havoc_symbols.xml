@@ -91,15 +91,6 @@
     <!-- Whether device supports an alt. ambient display -->
     <java-symbol type="bool" name="config_alt_ambient_display"/>
 
-    <!-- Button backlight -->
-    <java-symbol type="integer" name="config_buttonBrightnessSettingDefault" />
-    <java-symbol type="bool" name="config_deviceHasVariableButtonBrightness" />
-
-    <!-- HW keys binding -->
-    <java-symbol type="anim" name="custom_app_in" />
-    <java-symbol type="anim" name="custom_app_out" />
-    <java-symbol type="integer" name="config_deviceHardwareKeys" />
-
     <!-- Whether device has dash charging support -->
     <java-symbol type="bool" name="config_hasDashCharger" />
 

@@ -4580,45 +4580,12 @@ public final class Settings {
         public static final String SHOW_BATTERY_PERCENT = "dummy_show_battery_percent";
 
         /**
-         * The time in ms to keep the button backlight on after pressing a button.
-         * A value of 0 will keep the buttons on for as long as the screen is on.
-         * @hide
-         */
-        public static final String BUTTON_BACKLIGHT_TIMEOUT = "button_backlight_timeout";
-
-        /** @hide */
-        public static final Validator BUTTON_BACKLIGHT_TIMEOUT_VALIDATOR = NON_NEGATIVE_INTEGER_VALIDATOR;
-
-        /**
-         * Whether the button backlight is only lit when pressed (and not when screen is touched)
-         * The value is boolean (1 or 0).
-         */
-        public static final String BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED =
-                "button_backlight_only_when_pressed";
-
-        /** @hide */
-        public static final Validator BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
-         * The button brightness to be used while the screen is on or after a button press,
-         * depending on the value of {@link BUTTON_BACKLIGHT_TIMEOUT}.
-         * Valid value range is between 0 and {@link PowerManager#getMaximumButtonBrightness()}
-         * @hide
-         */
-        public static final String BUTTON_BRIGHTNESS = "button_brightness";
-
-        /** @hide */
-        public static final Validator BUTTON_BRIGHTNESS_VALIDATOR = NON_NEGATIVE_INTEGER_VALIDATOR;
-
-        /**
          * Whether the user has already accepted MediaProjection permission for the built-in screenrecorder
          * @hide
          */
         public static final String MEDIAPROJECTION_SYSUI_OK = "mediaprojection_sysui_ok";
 
         /**
-         * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
          * the setting value. See an example above.
@@ -4805,15 +4772,6 @@ public final class Settings {
         public static final String ANBI_ENABLED_OPTION = "anbi_enabled_option";
         /** @hide */
         private static final Validator ANBI_ENABLED_OPTION_VALIDATOR =
-                BOOLEAN_VALIDATOR;
-
-        /**
-         * Whether the Home button works during call
-         * @hide
-         */
-        public static final String ALLOW_INCALL_HOME = "allow_incall_home";
-        /** @hide */
-        private static final Validator ALLOW_INCALL_HOME_VALIDATOR =
                 BOOLEAN_VALIDATOR;
 
         /**
@@ -6050,7 +6008,6 @@ public final class Settings {
             AMBIENT_LIGHT_PULSE_FOR_ALL,
             NOTIFICATION_LIGHT_PULSE,
             ANBI_ENABLED_OPTION,
-            ALLOW_INCALL_HOME,
             VOLUME_ROCKER_WAKE,
             VOLUME_BUTTON_MUSIC_CONTROL,
             VOLUME_KEY_CURSOR_CONTROL,
@@ -6241,11 +6198,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_ADJUSTMENT);
             PRIVATE_SETTINGS.add(DISPLAY_PICTURE_ADJUSTMENT);
             PRIVATE_SETTINGS.add(LIVE_DISPLAY_HINTED);
-            PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_TIMEOUT);
-            PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED);
-            PRIVATE_SETTINGS.add(BUTTON_BRIGHTNESS);
             PRIVATE_SETTINGS.add(ANBI_ENABLED_OPTION);
-            PRIVATE_SETTINGS.add(ALLOW_INCALL_HOME);
             PRIVATE_SETTINGS.add(VOLUME_ROCKER_WAKE);
             PRIVATE_SETTINGS.add(VOLUME_BUTTON_MUSIC_CONTROL);
             PRIVATE_SETTINGS.add(VOLUME_KEY_CURSOR_CONTROL);
@@ -6423,11 +6376,7 @@ public final class Settings {
             VALIDATORS.put(DISPLAY_COLOR_ADJUSTMENT, DISPLAY_COLOR_ADJUSTMENT_VALIDATOR);
             VALIDATORS.put(DISPLAY_PICTURE_ADJUSTMENT, DISPLAY_PICTURE_ADJUSTMENT_VALIDATOR);
             VALIDATORS.put(LIVE_DISPLAY_HINTED, LIVE_DISPLAY_HINTED_VALIDATOR);
-            VALIDATORS.put(BUTTON_BACKLIGHT_TIMEOUT, BUTTON_BACKLIGHT_TIMEOUT_VALIDATOR);
-            VALIDATORS.put(BUTTON_BRIGHTNESS, BUTTON_BRIGHTNESS_VALIDATOR);
-            VALIDATORS.put(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED, BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED_VALIDATOR);
             VALIDATORS.put(ANBI_ENABLED_OPTION, ANBI_ENABLED_OPTION_VALIDATOR);
-            VALIDATORS.put(ALLOW_INCALL_HOME, ALLOW_INCALL_HOME_VALIDATOR);
             VALIDATORS.put(VOLUME_ROCKER_WAKE, VOLUME_ROCKER_WAKE_VALIDATOR);
             VALIDATORS.put(VOLUME_BUTTON_MUSIC_CONTROL, VOLUME_BUTTON_MUSIC_CONTROL_VALIDATOR);
             VALIDATORS.put(VOLUME_KEY_CURSOR_CONTROL, VOLUME_KEY_CURSOR_CONTROL_VALIDATOR);
@@ -9184,12 +9133,6 @@ public final class Settings {
          */
         public static final String SEARCH_GLOBAL_SEARCH_ACTIVITY =
                 "search_global_search_activity";
-
-        /**
-         * Disable hw buttons - actions, brightness, haptic feedback, overflow menu
-         * @hide
-         */
-        public static final String HARDWARE_KEYS_DISABLE = "hardware_keys_disable";
 
         /**
          * The number of promoted sources in GlobalSearch.
