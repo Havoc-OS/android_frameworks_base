@@ -165,4 +165,6 @@ interface IStatusBarService
      */
     void toggleCameraFlash(boolean proximityCheck);
     void triggerElmyraAction(String action);
+
+    void killForegroundApp();
 }

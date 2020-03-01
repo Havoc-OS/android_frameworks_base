@@ -240,4 +240,6 @@ oneway interface IStatusBar
      */
     void toggleCameraFlash(boolean proximityCheck);
     void triggerElmyraAction(String action);
+
+    void killForegroundApp();
 }
