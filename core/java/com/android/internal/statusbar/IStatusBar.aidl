@@ -186,4 +186,5 @@ oneway interface IStatusBar
      * Havoc
      */
     void toggleCameraFlash();
+    void killForegroundApp();
 }
