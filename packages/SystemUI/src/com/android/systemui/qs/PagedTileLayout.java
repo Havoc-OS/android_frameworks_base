@@ -94,6 +94,7 @@ public class PagedTileLayout extends ViewPager implements QSTileLayout {
         super.onConfigurationChanged(newConfig);
         if (mLayoutOrientation != newConfig.orientation) {
             mLayoutOrientation = newConfig.orientation;
+            mDistributeTiles = true;
             setCurrentItem(0, false);
             mPageToRestore = 0;
         }
