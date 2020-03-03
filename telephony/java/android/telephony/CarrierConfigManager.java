@@ -3319,6 +3319,14 @@ public class CarrierConfigManager {
     public static final String KEY_CARRIER_CERTIFICATE_STRING_ARRAY =
             "carrier_certificate_string_array";
 
+    /**
+     * Determines the default RTT mode.
+     *
+     * @hide
+     */
+    public static final String KEY_DEFAULT_RTT_MODE_INT =
+            "default_rtt_mode_int";
+
     /** The default value for every variable. */
     private final static PersistableBundle sDefaults;
 
@@ -3773,6 +3781,7 @@ public class CarrierConfigManager {
         sDefaults.putLong(KEY_DATA_SWITCH_VALIDATION_MIN_GAP_LONG, 0);
         sDefaults.putString(KEY_EMERGENCY_NOTIFICATION_SUMMARY_STRING, "");
         sDefaults.putString(KEY_EMERGENCY_NOTIFICATION_TITLE_STRING, "");
+        sDefaults.putInt(KEY_DEFAULT_RTT_MODE_INT, 0);
     }
 
     /**
