@@ -110,5 +110,6 @@
 
     <!-- Size of the FOD animation -->
     <dimen name="fod_animation_size">550.0px</dimen>
+    <dimen name="fod_animation_offset">0.0px</dimen>
 
 </resources>
