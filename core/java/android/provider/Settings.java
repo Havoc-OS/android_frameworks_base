@@ -4082,12 +4082,6 @@ public final class Settings {
         };
 
         /**
-         * Defines the screen-off animation to display
-         * @hide
-         */
-        public static final String SCREEN_OFF_ANIMATION = "screen_off_animation";
-
-        /**
          * Whether the setup wizard has been run before (on first boot), or if
          * it still needs to be run.
          *
