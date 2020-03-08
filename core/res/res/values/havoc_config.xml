@@ -161,6 +161,12 @@
     <!-- Whether device supports variable refresh rate -->
     <bool name="config_hasVariableRefreshRate">false</bool>
 
+	<!-- Default refresh rate value for the device
+         0: Auto
+         1: 60Hz
+         2: 90Hz -->
+    <integer name="config_defaultRefreshRate">0</integer>
+
     <!-- The list of components which should be automatically disabled for a specific device.
          Note: this MUST not be used to randomly disable components, ask for approval first! -->
     <string-array name="config_deviceDisabledComponents" translatable="false">

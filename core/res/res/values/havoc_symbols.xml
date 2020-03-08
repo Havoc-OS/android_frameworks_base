@@ -202,6 +202,8 @@
     <!-- Whether device supports variable refresh rate -->
     <java-symbol type="bool" name="config_hasVariableRefreshRate" />
 
+    <java-symbol type="integer" name="config_defaultRefreshRate" />
+
     <!-- Package Manager -->
     <java-symbol type="array" name="config_deviceDisabledComponents" />
     <java-symbol type="array" name="config_globallyDisabledComponents" />
