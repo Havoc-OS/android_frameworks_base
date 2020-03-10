@@ -30,7 +30,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false">
-        caffeine,cpuinfo,heads_up,killapp,livedisplay,reading_mode,soundsearch
+        caffeine,cpuinfo,fpsinfo,heads_up,killapp,livedisplay,reading_mode,soundsearch
     </string>
 
     <!-- Max visible notification icons -->
@@ -70,5 +70,8 @@
 
     <!-- The CPUs to display in CPUInfoService view -->
     <string name="config_displayCpus" translatable="false"></string>
+
+    <!-- FPSInfoService FPS node file path -->
+    <string name="config_fpsInfoSysNode" translatable="false"></string>
 
 </resources>
