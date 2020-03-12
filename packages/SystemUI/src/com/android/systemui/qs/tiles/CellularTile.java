@@ -293,13 +293,7 @@ public class CellularTile extends QSTileImpl<SignalState> {
     }
 
     static Intent getCellularSettingIntent() {
-        Intent intent = new Intent(Settings.ACTION_NETWORK_OPERATOR_SETTINGS);
-        int dataSub = SubscriptionManager.getDefaultDataSubscriptionId();
-        if (dataSub != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            intent.putExtra(Settings.EXTRA_SUB_ID,
-                    SubscriptionManager.getDefaultDataSubscriptionId());
-        }
-        return intent;
+        return new Intent(Settings.Panel.ACTION_MOBILE_DATA);
     }
 
     private final class CellularDetailAdapter implements DetailAdapter {
