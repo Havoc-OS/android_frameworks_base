@@ -294,7 +294,8 @@ public class QSContainerImpl extends FrameLayout implements
     }
 
     private void setBackgroundGradientVisibility(Configuration newConfig) {
-        if (newConfig.orientation == ORIENTATION_LANDSCAPE) {
+        boolean hideQSBlackGradient = mContext.getResources().getBoolean(R.bool.config_hideQSBlackGradient);
+        if (newConfig.orientation == ORIENTATION_LANDSCAPE || hideQSBlackGradient) {
             mBackgroundGradient.setVisibility(View.INVISIBLE);
             mStatusBarBackground.setVisibility(View.INVISIBLE);
         } else {
