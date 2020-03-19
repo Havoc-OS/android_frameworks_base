@@ -23,6 +23,7 @@ import android.annotation.Nullable;
 import android.annotation.StyleRes;
 import android.compat.annotation.UnsupportedAppUsage;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -36,6 +37,8 @@ import android.graphics.Region.Op;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION_CODES;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -172,6 +175,8 @@ public class Switch extends CompoundButton {
 
     @SuppressWarnings("hiding")
     private final Rect mTempRect = new Rect();
+
+    private final Vibrator mVibrator;
 
     private static final int[] CHECKED_STATE_SET = {
         R.attr.state_checked
@@ -313,6 +318,8 @@ public class Switch extends CompoundButton {
         // are updated.
         setDefaultStateDescritption();
         setChecked(isChecked());
+
+        mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     /**
@@ -1167,6 +1174,10 @@ public class Switch extends CompoundButton {
     @Override
     public void toggle() {
         setChecked(!isChecked());
+
+        if (mContext.checkCallingOrSelfPermission("android.permission.VIBRATE") == PackageManager.PERMISSION_GRANTED) {
+            mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_CLICK));
+        }
     }
 
     /** @hide **/
