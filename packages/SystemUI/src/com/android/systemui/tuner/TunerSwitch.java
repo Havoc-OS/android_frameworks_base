@@ -5,12 +5,12 @@ import android.content.res.TypedArray;
 import android.provider.Settings;
 import android.util.AttributeSet;
 
-import androidx.preference.SwitchPreference;
-
 import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.tuner.TunerService.Tunable;
+
+import com.havoc.support.preferences.SwitchPreference;
 
 public class TunerSwitch extends SwitchPreference implements Tunable {
 

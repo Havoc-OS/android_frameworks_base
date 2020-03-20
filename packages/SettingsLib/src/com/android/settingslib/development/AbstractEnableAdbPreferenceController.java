@@ -28,10 +28,11 @@ import androidx.annotation.VisibleForTesting;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settingslib.core.ConfirmationDialogController;
+
+import com.havoc.support.preferences.SwitchPreference;
 
 public abstract class AbstractEnableAdbPreferenceController extends
         DeveloperOptionsPreferenceController implements ConfirmationDialogController {

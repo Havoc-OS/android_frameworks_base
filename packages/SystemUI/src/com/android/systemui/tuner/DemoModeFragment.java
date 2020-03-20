@@ -29,12 +29,13 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.SwitchPreference;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.systemui.DemoMode;
 import com.android.systemui.R;
+
+import com.havoc.support.preferences.SwitchPreference;
 
 public class DemoModeFragment extends PreferenceFragment implements OnPreferenceChangeListener {
 

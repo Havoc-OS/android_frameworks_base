@@ -23,6 +23,8 @@ android_library {
         "SettingsLibBarChartPreference",
         "SettingsLibProgressBar",
         "SettingsLibAdaptiveIcon",
+
+        "VendorSupport-preference",
     ],
 
     // ANDROIDMK TRANSLATION ERROR: unsupported assignment to LOCAL_SHARED_JAVA_LIBRARIES
@@ -31,8 +33,6 @@ android_library {
     resource_dirs: ["res"],
 
     srcs: ["src/**/*.java", "src/**/*.kt"],
-
-    min_sdk_version: "21",
 
 }
 

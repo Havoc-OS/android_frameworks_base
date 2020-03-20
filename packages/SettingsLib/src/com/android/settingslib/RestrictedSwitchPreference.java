@@ -29,7 +29,8 @@ import android.widget.TextView;
 import androidx.core.content.res.TypedArrayUtils;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreference;
+
+import com.havoc.support.preferences.SwitchPreference;
 
 /**
  * Version of SwitchPreference that can be disabled by a device admin
