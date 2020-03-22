@@ -23,4 +23,7 @@
     <color name="screenshot_partial_layout_background">#20000000</color>
     <color name="screenshot_partial_selector_background">#A0000000</color>
 
+    <!-- Screenrecord -->
+    <color name="screenrecord_icon_color">#B71C1C</color>
+
 </resources>

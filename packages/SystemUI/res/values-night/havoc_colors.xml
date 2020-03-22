@@ -19,4 +19,7 @@
     <!-- QS date color-->
     <color name="qs_date_color">#FFFFFFFF</color>
 
+    <!-- Screenrecord -->
+    <color name="screenrecord_icon_color">#E45245</color>
+
 </resources>
