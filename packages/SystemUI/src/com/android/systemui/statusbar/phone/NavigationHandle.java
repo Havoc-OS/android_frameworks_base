@@ -42,9 +42,8 @@ public class NavigationHandle extends View implements ButtonInterface {
     private final int mBottom;
     private int mWidth;
 
-    private final Resources mRes;
-    private final ContentResolver mResolver;
-    private final String WIDTH_SETTING = "navigation_handle_width";
+    private Resources mRes;
+    private ContentResolver mResolver;
 
     public NavigationHandle(Context context) {
         this(context, null);
@@ -81,8 +80,7 @@ public class NavigationHandle extends View implements ButtonInterface {
     }
 
     private double getCustomPadding() {
-        int basePadding = (int) (getWidth() / 2) - (int) (mWidth / 2);
-        return basePadding;
+        return (getWidth() / 2) - (mWidth / 2);
     }
 
     @Override
@@ -113,10 +111,8 @@ public class NavigationHandle extends View implements ButtonInterface {
 
     private double getCustomWidth() {
         int baseWidth = mRes.getDimensionPixelSize(R.dimen.navigation_home_handle_width);
-        /* 0: small (stock AOSP)
-           1: medium
-           2: long
-        */
+
+        String WIDTH_SETTING = "navigation_handle_width";
         int userSelection = Settings.System.getInt(mResolver, WIDTH_SETTING, 0);
         if (userSelection == 0) {
             return baseWidth;
