@@ -39,6 +39,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build.VERSION_CODES;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.provider.Settings;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -1166,10 +1167,7 @@ public class Switch extends CompoundButton {
     @Override
     public void toggle() {
         setChecked(!isChecked());
-
-        if (mContext.checkCallingOrSelfPermission("android.permission.VIBRATE") == PackageManager.PERMISSION_GRANTED) {
-            mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_CLICK));
-        }
+        doHapticFeedback();
     }
 
     @Override
@@ -1553,4 +1551,14 @@ public class Switch extends CompoundButton {
             object.setThumbPosition(value);
         }
     };
+
+    private void doHapticFeedback() {
+        final boolean hapticEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.HAPTIC_FEEDBACK_ENABLED, 1) != 0;
+
+        if (mContext.checkCallingOrSelfPermission("android.permission.VIBRATE") == PackageManager.PERMISSION_GRANTED
+                && hapticEnabled) {
+            mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_CLICK));
+        }
+    }
 }
