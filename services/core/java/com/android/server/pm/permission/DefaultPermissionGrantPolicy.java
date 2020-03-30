@@ -398,18 +398,6 @@ public final class DefaultPermissionGrantPolicy {
         }
     }
 
-    private boolean mWellbeingInstalled(String packageName) {
-       PackageManager mPm = mContext.getPackageManager();
-       boolean result = true;
-       try {
-           mPm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-       } catch (PackageManager.NameNotFoundException e) {
-           Log.i(TAG, "Wellbeing not installed.", e);
-           result = false;
-       }
-       return result;
-    }
-
     private void grantDefaultSystemHandlerPermissions(int userId) {
         Log.i(TAG, "Granting permissions to default platform handlers for user " + userId);
 
@@ -626,13 +614,9 @@ public final class DefaultPermissionGrantPolicy {
 
         // Wellbeing
         String WellbeingPackageName = "com.google.android.apps.wellbeing";
-        if (mWellbeingInstalled(WellbeingPackageName) != false) {
         grantSystemFixedPermissionsToSystemPackage(
                 getDefaultProviderAuthorityPackage(WellbeingPackageName, userId),
                 userId, SUSPEND_APP_PERMISSIONS);
-        grantPermissionsToPackage(WellbeingPackageName, userId, false,
-                true, SUSPEND_APP_PERMISSIONS);
-        }
 
         // Voice interaction
         if (voiceInteractPackageNames != null) {
@@ -1414,7 +1398,6 @@ public final class DefaultPermissionGrantPolicy {
             return mContext.getPackageManager().getPackageInfo(pkg,
                     DEFAULT_PACKAGE_INFO_QUERY_FLAGS | extraFlags);
         } catch (NameNotFoundException e) {
-            Slog.e(TAG, "PackageNot found: " + pkg, e);
             return null;
         }
     }
