@@ -264,11 +264,6 @@
 
     <uses-permission android:name="android.permission.ACCESS_SURFACE_FLINGER" />
 
-    <!-- Pixel Live Wallpapers -->
-    <protected-broadcast android:name="com.breel.wallpapers.NOTIFICATION_RECEIVED"/>
-    <permission android:name="com.breel.wallpapers.notifications"/>
-    <uses-permission android:name="com.breel.wallpapers.notifications"/>
-
     <!-- Long swipe gesture actions -->
     <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES" />
 
