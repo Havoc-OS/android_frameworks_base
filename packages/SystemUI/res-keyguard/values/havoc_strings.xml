@@ -18,5 +18,6 @@
 
     <string name="clock_title_binary" translatable="false">Binary</string>
     <string name="clock_title_samsung" translatable="false">Samsung</string>
+    <string name="clock_title_samsung_accent" translatable="false">Samsung (Colored)</string>
 
 </resources>
