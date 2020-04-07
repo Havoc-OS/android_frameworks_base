@@ -102,4 +102,7 @@
     <dimen name="binary_clock_width">100dp</dimen>
     <dimen name="binary_clock_height">100dp</dimen>
 
+    <!-- Oroño clock -->
+    <dimen name="clock_oronos_outline_size">4dp</dimen>
+
 </resources>
