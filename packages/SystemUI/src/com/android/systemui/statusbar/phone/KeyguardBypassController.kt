@@ -189,6 +189,7 @@ open class KeyguardBypassController : Dumpable {
         } else {
             pw.println("  mPendingUnlock: $pendingUnlock")
         }
+        pw.println("  bypassEnabled: $bypassEnabled")
         pw.println("  bypassEnabledBiometric: $bypassEnabledBiometric")
         pw.println("  canBypass: ${canBypass()}")
         pw.println("  bouncerShowing: $bouncerShowing")
