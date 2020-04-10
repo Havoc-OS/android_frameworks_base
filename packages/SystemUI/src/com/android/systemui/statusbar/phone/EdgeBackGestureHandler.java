@@ -213,7 +213,8 @@ public class EdgeBackGestureHandler implements DisplayListener {
         mLongPressTimeout = Math.min(MAX_LONG_PRESS_TIMEOUT,
                 ViewConfiguration.getLongPressTimeout());
 
-        mNavBarHeight = res.getDimensionPixelSize(R.dimen.navigation_bar_frame_height);
+        mNavBarHeight = Utils.shouldShowGestureNav(context) ?
+                res.getDimensionPixelSize(R.dimen.navigation_bar_frame_height) : 0;
         mMinArrowPosition = res.getDimensionPixelSize(R.dimen.navigation_edge_arrow_min_y);
         mFingerOffset = res.getDimensionPixelSize(R.dimen.navigation_edge_finger_offset);
         updateCurrentUserResources(res);
