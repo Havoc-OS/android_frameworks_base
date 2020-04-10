@@ -45,6 +45,8 @@ import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.Region.Op;
 import android.os.Bundle;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -63,6 +65,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.util.custom.Utils;
 import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
@@ -140,6 +143,7 @@ public class NavigationBarView extends FrameLayout implements
     private boolean mDockedStackExists;
     private boolean mImeVisible;
     private boolean mScreenOn = true;
+    private boolean mShowGestureNavbar;
 
     private final SparseArray<ButtonDispatcher> mButtonDispatchers = new SparseArray<>();
     private final ContextualButtonGroup mContextualButtonGroup;
@@ -288,6 +292,7 @@ public class NavigationBarView extends FrameLayout implements
         mLongClickableAccessibilityButton = false;
         mNavBarMode = Dependency.get(NavigationModeController.class).addListener(this);
         boolean isGesturalMode = isGesturalMode(mNavBarMode);
+        mShowGestureNavbar = Utils.shouldShowGestureNav(context);
 
         mSysUiFlagContainer = Dependency.get(SysUiState.class);
         mPluginManager = Dependency.get(PluginManager.class);
@@ -720,7 +725,8 @@ public class NavigationBarView extends FrameLayout implements
         getBackButton().setVisibility(disableBack       ? View.INVISIBLE : View.VISIBLE);
         getHomeButton().setVisibility(disableHome       ? View.INVISIBLE : View.VISIBLE);
         getRecentsButton().setVisibility(disableRecent  ? View.INVISIBLE : View.VISIBLE);
-        getHomeHandle().setVisibility(disableHomeHandle || mHomeHandleForceHidden ? View.INVISIBLE : View.VISIBLE);
+        getHomeHandle().setVisibility(disableHomeHandle ? View.INVISIBLE
+                : (mShowGestureNavbar ? View.VISIBLE : View.INVISIBLE));
         notifyActiveTouchRegions();
     }
 
@@ -1122,20 +1128,22 @@ public class NavigationBarView extends FrameLayout implements
                             com.android.internal.R.dimen.navigation_bar_height_landscape)
                     : getResources().getDimensionPixelSize(
                             com.android.internal.R.dimen.navigation_bar_height);
-            int frameHeight = getResources().getDimensionPixelSize(
-                    com.android.internal.R.dimen.navigation_bar_frame_height);
-            mBarTransitions.setBackgroundFrame(new Rect(0, frameHeight - height, w, h));
+            int finalHeight = mShowGestureNavbar ? height : 0;
+            int frameHeight = mShowGestureNavbar ? getResources().getDimensionPixelSize(
+                    com.android.internal.R.dimen.navigation_bar_frame_height) : 0;
+            mBarTransitions.setBackgroundFrame(new Rect(0, frameHeight - finalHeight, w, h));
         }
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     private int getNavBarHeight() {
-        return mIsVertical
+        int height = mIsVertical
                 ? getResources().getDimensionPixelSize(
                 com.android.internal.R.dimen.navigation_bar_height_landscape)
                 : getResources().getDimensionPixelSize(
                         com.android.internal.R.dimen.navigation_bar_height);
+        return mShowGestureNavbar ? height : 0;
     }
 
     private void notifyVerticalChangedListener(boolean newVertical) {
