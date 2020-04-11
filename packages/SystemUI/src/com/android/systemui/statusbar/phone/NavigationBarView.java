@@ -1129,8 +1129,8 @@ public class NavigationBarView extends FrameLayout implements
                     : getResources().getDimensionPixelSize(
                             com.android.internal.R.dimen.navigation_bar_height);
             int finalHeight = mShowGestureNavbar ? height : 0;
-            int frameHeight = mShowGestureNavbar ? getResources().getDimensionPixelSize(
-                    com.android.internal.R.dimen.navigation_bar_frame_height) : 0;
+            int frameHeight = /*mShowGestureNavbar ? */getResources().getDimensionPixelSize(
+                    com.android.internal.R.dimen.navigation_bar_frame_height)/* : 0*/;
             mBarTransitions.setBackgroundFrame(new Rect(0, frameHeight - finalHeight, w, h));
         }
 
@@ -1144,6 +1144,10 @@ public class NavigationBarView extends FrameLayout implements
                 : getResources().getDimensionPixelSize(
                         com.android.internal.R.dimen.navigation_bar_height);
         return mShowGestureNavbar ? height : 0;
+    }
+
+    public boolean showGestureNavbar() {
+        return mShowGestureNavbar;
     }
 
     private void notifyVerticalChangedListener(boolean newVertical) {
