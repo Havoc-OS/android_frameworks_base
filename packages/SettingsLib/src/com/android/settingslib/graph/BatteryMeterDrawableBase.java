@@ -258,11 +258,10 @@ public class BatteryMeterDrawableBase extends Drawable {
     }
 
     public void setFastCharging(boolean val) {
-        if (mFastCharging == val) {
-            mFastCharging = val;
-            cancelChargingAnimation();
-            postInvalidate();
-        }
+        if (mFastCharging == val) return;
+        mFastCharging = val;
+        cancelChargingAnimation();
+        postInvalidate();
     }
 
     public void setMeterStyle(int style) {
@@ -284,7 +283,7 @@ public class BatteryMeterDrawableBase extends Drawable {
 
     private boolean shouldAnimateCharging() {
         // this is used by PA style battery to animate the icon
-	    return mMeterStyle == BATTERY_STYLE_PA_CIRCLE ? true : false;
+	return mMeterStyle == BATTERY_STYLE_CIRCLE && mAnimateCharging;
     }
 
     private void startChargingAnimation(int repeat) {
