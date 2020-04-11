@@ -4556,6 +4556,17 @@ public final class Settings {
         private static final Validator SHOW_BATTERY_PERCENT_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * Setting to determine whether or not to show the battery percentage in the qs status bar header.
+         *    0 - Show percentage
+         *    1 - Show remaining time
+         * @hide
+         */
+        public static final String QS_SHOW_BATTERY_ESTIMATE = "qs_show_battery_estimate";
+
+        /** @hide */
+        private static final Validator QS_SHOW_BATTERY_ESTIMATE_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * Whether the user has already accepted MediaProjection permission for the built-in screenrecorder
          * @hide
          */
@@ -6358,6 +6369,7 @@ public final class Settings {
             NOTIFICATION_SOUND,
             ACCELEROMETER_ROTATION,
             SHOW_BATTERY_PERCENT,
+            QS_SHOW_BATTERY_ESTIMATE,
             NOTIFICATION_VIBRATION_INTENSITY,
             RING_VIBRATION_INTENSITY,
             HAPTIC_FEEDBACK_INTENSITY,
@@ -6557,6 +6569,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCK_TO_APP_ENABLED);
             PRIVATE_SETTINGS.add(EGG_MODE);
             PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
+            PRIVATE_SETTINGS.add(QS_SHOW_BATTERY_ESTIMATE);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE);
             PRIVATE_SETTINGS.add(DISPLAY_TEMPERATURE_DAY);
             PRIVATE_SETTINGS.add(DISPLAY_TEMPERATURE_NIGHT);
@@ -6748,6 +6761,7 @@ public final class Settings {
             VALIDATORS.put(WIFI_STATIC_NETMASK, WIFI_STATIC_NETMASK_VALIDATOR);
             VALIDATORS.put(WIFI_STATIC_DNS1, WIFI_STATIC_DNS1_VALIDATOR);
             VALIDATORS.put(WIFI_STATIC_DNS2, WIFI_STATIC_DNS2_VALIDATOR);
+            VALIDATORS.put(QS_SHOW_BATTERY_ESTIMATE, QS_SHOW_BATTERY_ESTIMATE_VALIDATOR);
             VALIDATORS.put(AMBIENT_NOTIFICATION_LIGHT, AMBIENT_NOTIFICATION_LIGHT_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_COLOR, AMBIENT_LIGHT_COLOR_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_CUSTOM_COLOR, AMBIENT_LIGHT_CUSTOM_COLOR_VALIDATOR);
