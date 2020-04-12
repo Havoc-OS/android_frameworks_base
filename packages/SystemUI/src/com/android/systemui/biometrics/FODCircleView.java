@@ -25,7 +25,6 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.database.ContentObserver;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -37,9 +36,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
 import android.os.RemoteException;
-import android.os.UserHandle;
 import android.provider.Settings;
-import android.net.Uri;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -80,8 +77,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
     private int mDreamingOffsetY;
 
-    private int mCurrentBrightness;
-
     private boolean mIsBouncer;
     private boolean mIsDreaming;
     private boolean mIsKeyguard;
@@ -89,8 +84,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private boolean mIsCircleShowing;
     private boolean mIsAuthenticated;
     private boolean mCanUnlockWithFp;
-
-    private float mCurrentDimAmount = 0.0f;
 
     private Handler mHandler;
 
@@ -170,14 +163,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         @Override
         public void onScreenTurnedOff() {
-            hide();
-        }
-
-        @Override
-        public void onScreenTurnedOn() {
-            if (mUpdateMonitor.isFingerprintDetectionRunning()) {
-                show();
-            }
+            hideCircle();
         }
 
         @Override
@@ -197,40 +183,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             }
         }
     };
-
-    private class BrightnessObserver extends ContentObserver {
-        Context mContext;
-
-        BrightnessObserver(Context context, Handler handler) {
-            super(handler);
-            mContext = context;
-        }
-
-        void registerBrightnessListener() {
-            mContext.getContentResolver().registerContentObserver(
-                    Settings.System.getUriFor(
-                    Settings.System.SCREEN_BRIGHTNESS),
-                    false, this, UserHandle.USER_ALL);
-            updateCurrentBrightnessValue();
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            super.onChange(selfChange, uri);
-            if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.SCREEN_BRIGHTNESS))) {
-                updateCurrentBrightnessValue();
-            }
-        }
-
-        public void updateCurrentBrightnessValue() {
-            int currentBrightness = Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.SCREEN_BRIGHTNESS, 0,
-                    UserHandle.USER_CURRENT);
-            mCurrentBrightness = currentBrightness;
-            updateDim();
-        }
-    }
 
     private boolean canUnlockWithFp() {
         int currentUser = ActivityManager.getCurrentUser();
@@ -254,8 +206,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
     private boolean mCutoutMasked;
     private int mStatusbarHeight;
-
-    private BrightnessObserver mBrightnessObserver;
 
     public FODCircleView(Context context) {
         super(context);
@@ -308,24 +258,11 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
 
-        mBrightnessObserver = new BrightnessObserver(context, mHandler);
-        mBrightnessObserver.registerBrightnessListener();
-
         mCanUnlockWithFp = canUnlockWithFp();
 
         updateCutoutFlags();
 
         Dependency.get(ConfigurationController.class).addCallback(this);
-
-        getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-            float drawingDimAmount = mParams.dimAmount;
-            if (mCurrentDimAmount == 0.0f && drawingDimAmount > 0.0f) {
-                dispatchPress();
-                mCurrentDimAmount = drawingDimAmount;
-            } else if (mCurrentDimAmount > 0.0f && drawingDimAmount == 0.0f) {
-                mCurrentDimAmount = drawingDimAmount;
-            }
-        });
 
         mPowerManager = context.getSystemService(PowerManager.class);
         mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
@@ -442,9 +379,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             mWakeLock.acquire(300);
         }
 
-        updateDim();
-        updateBoost();
+        setDim(true);
         updateAlpha();
+        dispatchPress();
 
         if (mFodPressedImage) {
             setImageResource(R.drawable.fod_icon_pressed);
@@ -463,19 +400,13 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         dispatchRelease();
 
-        updateBoost();
-        updateDim();
+        setDim(false);
         updateAlpha();
 
         setKeepScreenOn(false);
     }
 
     public void show() {
-        if (!mUpdateMonitor.isScreenOn()) {
-            // Keyguard is shown just after screen turning off
-            return;
-        }
-
         if (mIsBouncer) {
             // Ignore show calls when Keyguard pin screen is being shown
             return;
@@ -549,35 +480,30 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         mWindowManager.updateViewLayout(this, mParams);
     }
 
-    private void updateDim() {
-        if (mIsCircleShowing) {
+    private void setDim(boolean dim) {
+        if (dim) {
+            int curBrightness = Settings.System.getInt(getContext().getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS, 100);
             int dimAmount = 0;
 
             IFingerprintInscreen daemon = getFingerprintInScreenDaemon();
             try {
-                dimAmount = daemon.getDimAmount(mCurrentBrightness);
+                dimAmount = daemon.getDimAmount(curBrightness);
             } catch (RemoteException e) {
-                return;
+                // do nothing
+            }
+
+            if (mShouldBoostBrightness) {
+                mParams.screenBrightness = 1.0f;
             }
 
             mParams.dimAmount = dimAmount / 255.0f;
         } else {
+            mParams.screenBrightness = 0.0f;
             mParams.dimAmount = 0.0f;
         }
 
         mWindowManager.updateViewLayout(this, mParams);
-    }
-
-    private void updateBoost() {
-        if (mShouldBoostBrightness) {
-            if (mIsCircleShowing) {
-                mParams.screenBrightness = 1.0f;
-            } else {
-                mParams.screenBrightness = 0.0f;
-            }
-
-            mWindowManager.updateViewLayout(this, mParams);
-        }
     }
 
     private void updateSettings() {
