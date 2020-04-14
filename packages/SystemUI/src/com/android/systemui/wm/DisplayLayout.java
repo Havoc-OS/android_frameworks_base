@@ -35,6 +35,7 @@ import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.RotationUtils;
@@ -82,6 +83,8 @@ public class DisplayLayout {
     private boolean mHasStatusBar = false;
     private int mNavBarFrameHeight = 0;
 
+    private static boolean mShowIMESpace;
+
     /**
      * Create empty layout.
      */
@@ -108,6 +111,8 @@ public class DisplayLayout {
         rawDisplay.getDisplayInfo(info);
         init(info, context.getResources(), hasNavigationBar(info, context, displayId),
                 hasStatusBar(displayId));
+        mShowIMESpace = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.NAVIGATION_BAR_IME_SPACE, 1, UserHandle.USER_CURRENT) != 0;
     }
 
     public DisplayLayout(DisplayLayout dl) {
@@ -488,19 +493,21 @@ public class DisplayLayout {
 
         } else {
             if (navBarSide == NAV_BAR_BOTTOM) {
-                return res.getDimensionPixelSize(landscape
+                int height = res.getDimensionPixelSize(landscape
                         ? R.dimen.navigation_bar_height_landscape
                         : R.dimen.navigation_bar_height);
+                return mShowIMESpace ? height : 0;
             } else {
-                return res.getDimensionPixelSize(R.dimen.navigation_bar_width);
+                return mShowIMESpace ? res.getDimensionPixelSize(R.dimen.navigation_bar_width) : 0;
             }
         }
     }
 
     /** @see com.android.server.wm.DisplayPolicy#getNavigationBarFrameHeight */
     public static int getNavigationBarFrameHeight(Resources res, boolean landscape) {
-        return res.getDimensionPixelSize(landscape
+        int frameHeight = res.getDimensionPixelSize(landscape
                 ? R.dimen.navigation_bar_frame_height_landscape
                 : R.dimen.navigation_bar_frame_height);
+        return mShowIMESpace ? frameHeight : 0;
     }
 }

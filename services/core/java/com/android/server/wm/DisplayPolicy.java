@@ -3074,14 +3074,16 @@ public class DisplayPolicy {
         final int seascapeRotation = displayRotation.getSeascapeRotation();
         final int uiMode = mService.mPolicy.getUiMode();
         final boolean showNavbar = Utils.shouldShowGestureNav(mContext);
+        final boolean showIMESpace = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.NAVIGATION_BAR_IME_SPACE, 1, UserHandle.USER_CURRENT) != 0;
         final int navbarHeight = showNavbar ?
                 res.getDimensionPixelSize(R.dimen.navigation_bar_height) : 0;
         final int navbarHeightLandscape = showNavbar ?
                 res.getDimensionPixelSize(R.dimen.navigation_bar_height_landscape) : 0;
-        final int navbarFrameHeight = /*showNavbar ?
-                */res.getDimensionPixelSize(R.dimen.navigation_bar_frame_height)/* : 0*/;
-        final int navbarFrameHeightLandscape = /*showNavbar ?
-                */res.getDimensionPixelSize(R.dimen.navigation_bar_frame_height_landscape)/* : 0*/;
+        final int navbarFrameHeight = showIMESpace || !gestureNavbarHidden() ?
+                res.getDimensionPixelSize(R.dimen.navigation_bar_frame_height) : 0;
+        final int navbarFrameHeightLandscape = showIMESpace || !gestureNavbarHidden() ?
+                res.getDimensionPixelSize(R.dimen.navigation_bar_frame_height_landscape) : 0;
         final int navbarWidth = showNavbar ?
                 res.getDimensionPixelSize(R.dimen.navigation_bar_width) : 0;
 
@@ -4316,5 +4318,17 @@ public class DisplayPolicy {
         }
 
         return Rect.intersects(targetWindow.getFrameLw(), navBarWindow.getFrameLw());
+    }
+
+    private boolean gestureNavbarHidden() {
+        boolean isGestureNavbar = (Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural")
+                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural.medium")
+                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural.long")
+                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_wide_back")
+                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_extra_wide_back")
+                || Utils.isThemeEnabled("com.android.internal.systemui.navbar.gestural_narrow_back"));
+        boolean isNavbarHidden = Settings.Secure.getFloat(mContext.getContentResolver(),
+                    Settings.Secure.GESTURE_NAVBAR_LENGTH, 1.0f) == 0.0f;
+        return isGestureNavbar && isNavbarHidden;
     }
 }
