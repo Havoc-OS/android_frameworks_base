@@ -71,8 +71,6 @@ public class BatteryMeterDrawableBase extends Drawable {
     protected boolean mPowerSaveAsColorError = true;
     private boolean mShowPercent;
 
-    private boolean mFastCharging;
-    private boolean mAnimateCharging = true;
     private ValueAnimator mChargingAnimator;
     private int mBatteryAlpha;
 
@@ -257,14 +255,6 @@ public class BatteryMeterDrawableBase extends Drawable {
         mPowerSaveAsColorError = asError;
     }
 
-    public void setFastCharging(boolean val) {
-        if (mFastCharging == val) {
-            mFastCharging = val;
-            cancelChargingAnimation();
-            postInvalidate();
-        }
-    }
-
     public void setMeterStyle(int style) {
         mMeterStyle = style;
         cancelChargingAnimation();
@@ -276,10 +266,6 @@ public class BatteryMeterDrawableBase extends Drawable {
     protected void postInvalidate() {
         unscheduleSelf(this::invalidateSelf);
         scheduleSelf(this::invalidateSelf, 0);
-    }
-
-    public void setAnimateCharging(boolean val) {
-        mAnimateCharging = val;
     }
 
     private boolean shouldAnimateCharging() {
