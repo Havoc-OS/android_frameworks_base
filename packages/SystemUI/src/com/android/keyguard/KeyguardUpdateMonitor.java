@@ -291,7 +291,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
     private final Executor mBackgroundExecutor;
 
     private final boolean mFingerprintWakeAndUnlock;
-    private final boolean mFaceAuthOnlyOnSecurityView;
+    private final boolean mFaceAuthOnSecurityView;
 
     /**
      * Short delay before restarting fingerprint authentication after a successful try. This should
@@ -1603,8 +1603,8 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         mStrongAuthTracker = new StrongAuthTracker(context, this::notifyStrongAuthStateChanged);
         mFingerprintWakeAndUnlock = mContext.getResources().getBoolean(
                 com.android.systemui.R.bool.config_fingerprintWakeAndUnlock);
-        mFaceAuthOnlyOnSecurityView = mContext.getResources().getBoolean(
-                R.bool.config_faceAuthOnlyOnSecurityView);
+        mFaceAuthOnSecurityView = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_faceAuthOnSecurityView);
         mBackgroundExecutor = backgroundExecutor;
         mBroadcastDispatcher = broadcastDispatcher;
         mRingerModeTracker = ringerModeTracker;
@@ -2030,10 +2030,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         boolean strongAuthAllowsScanning = (!isEncryptedOrTimedOut || canBypass && !mBouncer)
                 && !isLockDown;
 
-        boolean unlockPossible = true;
-        if ((!mBouncer || !awakeKeyguard) && mFaceAuthOnlyOnSecurityView){
-            unlockPossible = false;
-        }
+        boolean unlockPossible = !((!mBouncer || !awakeKeyguard) && isFaceAuthOnlyOnSecurityView());
 
         // Only listen if this KeyguardUpdateMonitor belongs to the primary user. There is an
         // instance of KeyguardUpdateMonitor for each user but KeyguardUpdateMonitor is user-aware.
@@ -2212,6 +2209,11 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         if (mFaceRunningState == BIOMETRIC_STATE_CANCELLING_RESTARTING) {
             setFaceRunningState(BIOMETRIC_STATE_CANCELLING);
         }
+    }
+
+    private boolean isFaceAuthOnlyOnSecurityView() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.FACE_UNLOCK_ALWAYS_REQUIRE_SWIPE, mFaceAuthOnSecurityView ? 1 : 0) != 0;
     }
 
     private boolean isDeviceProvisionedInSettingsDb() {
