@@ -28,11 +28,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.classifier.Classifier;
-import com.android.systemui.Dependency;
 import com.android.systemui.plugins.FalsingManager;
-import com.android.systemui.plugins.statusbar.StatusBarStateController;
-import com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener;
-import com.android.systemui.statusbar.StatusBarState;
 import com.android.systemui.util.ProximitySensor;
 
 import java.io.PrintWriter;
@@ -57,8 +53,6 @@ public class BrightLineFalsingManager implements FalsingManager {
     private boolean mScreenOn;
     private boolean mJustUnlockedWithFace;
 
-    private int mState = StatusBarState.SHADE;
-
     private final List<FalsingClassifier> mClassifiers;
 
     private ProximitySensor.ProximitySensorListener mSensorEventListener = this::onProximityEvent;
@@ -74,14 +68,6 @@ public class BrightLineFalsingManager implements FalsingManager {
                     }
                 }
             };
-
-    public StateListener mStatusBarStateListener = new StateListener() {
-        @Override
-        public void onStateChanged(int newState) {
-            logDebug("setStatusBarState " + StatusBarState.toShortString(newState));
-            mState = newState;
-        }
-    };
 
     public BrightLineFalsingManager(
             FalsingDataProvider falsingDataProvider,
@@ -103,7 +89,6 @@ public class BrightLineFalsingManager implements FalsingManager {
         mClassifiers.add(distanceClassifier);
         mClassifiers.add(proximityClassifier);
         mClassifiers.add(new ZigZagClassifier(mDataProvider));
-        Dependency.get(StatusBarStateController.class).addCallback(mStatusBarStateListener);
     }
 
     private void registerSensors() {
@@ -116,7 +101,7 @@ public class BrightLineFalsingManager implements FalsingManager {
     }
 
     private void sessionStart() {
-        if (!mSessionStarted && !mShowingAod && mScreenOn && (mState == StatusBarState.KEYGUARD)) {
+        if (!mSessionStarted && !mShowingAod && mScreenOn) {
             logDebug("Starting Session");
             mSessionStarted = true;
             mJustUnlockedWithFace = false;
@@ -346,7 +331,6 @@ public class BrightLineFalsingManager implements FalsingManager {
     public void cleanup() {
         unregisterSensors();
         mKeyguardUpdateMonitor.removeCallback(mKeyguardUpdateCallback);
-        Dependency.get(StatusBarStateController.class).removeCallback(mStatusBarStateListener);
     }
 
     static void logDebug(String msg) {
