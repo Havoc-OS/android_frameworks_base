@@ -19,5 +19,7 @@
     <string name="clock_title_binary" translatable="false">Binary</string>
     <string name="clock_title_samsung" translatable="false">Samsung</string>
     <string name="clock_title_samsung_accent" translatable="false">Samsung (Colored)</string>
+    <string name="clock_title_mnml_box" translatable="false">MNML\'s Box</string>
+    <string name="clock_title_mnml_minimal" translatable="false">MNML\'s Minimal</string>
 
 </resources>
