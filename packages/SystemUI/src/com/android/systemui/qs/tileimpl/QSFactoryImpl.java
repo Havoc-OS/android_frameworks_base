@@ -54,6 +54,7 @@ import com.android.systemui.qs.tiles.MusicTile;
 import com.android.systemui.qs.tiles.NavBarTile;
 import com.android.systemui.qs.tiles.NfcTile;
 import com.android.systemui.qs.tiles.NightDisplayTile;
+import com.android.systemui.qs.tiles.PowerShareTile;
 import com.android.systemui.qs.tiles.ReadingModeTile;
 import com.android.systemui.qs.tiles.RebootTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
@@ -125,6 +126,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<NavBarTile> mNavBarTileProvider;
     private final Provider<VpnTile> mVpnTileProvider;
     private final Provider<DcDimmingTile> mDcDimmingTileProvider;
+    private final Provider<PowerShareTile> mPowerShareTileProvider;
 
     private QSTileHost mHost;
 
@@ -172,7 +174,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<SoundTile> soundTileProvider,
             Provider<FPSInfoTile> fpsInfoTileProvider,
             Provider<NavBarTile> navBarTileProvider,
-            Provider<VpnTile> vpnTileProvider) {
+            Provider<VpnTile> vpnTileProvider,
+            Provider<PowerShareTile> powerShareTileProvider) {
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
         mCellularTileProvider = cellularTileProvider;
@@ -217,6 +220,7 @@ public class QSFactoryImpl implements QSFactory {
         mNavBarTileProvider = navBarTileProvider;
         mVpnTileProvider = vpnTileProvider;
         mDcDimmingTileProvider = dcDimTileProvider;
+        mPowerShareTileProvider = powerShareTileProvider;
     }
 
     public void setHost(QSTileHost host) {
@@ -320,6 +324,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mVpnTileProvider.get();
             case "dc_dimming":
                 return mDcDimmingTileProvider.get();
+            case "powershare":
+                return mPowerShareTileProvider.get();
         }
 
         // Intent tiles.
