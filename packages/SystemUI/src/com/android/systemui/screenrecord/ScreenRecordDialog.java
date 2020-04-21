@@ -97,7 +97,7 @@ public class ScreenRecordDialog extends Activity {
         final Switch dotSwitch = findViewById(R.id.switch_stopdot);
 
         ArrayAdapter<CharSequence> bitrateAdapter = ArrayAdapter.createFromResource(this,
-            SystemProperties.get("ro.config.low_ram").equals("true") ? R.array.screen_video_quality_go_entries :
+            SystemProperties.get("ro.config.lolz").equals("true") ? R.array.screen_video_quality_go_entries :
                         R.array.screen_video_quality_entries, android.R.layout.simple_spinner_item);
         bitrateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bitrateSpinner.setAdapter(bitrateAdapter);

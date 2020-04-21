@@ -308,7 +308,7 @@ public class RecordingService extends Service {
             mWindowManager.getDefaultDisplay().getRealMetrics(metrics);
             int screenWidth = metrics.widthPixels;
             int screenHeight = metrics.heightPixels;
-            mIsLowRamEnabled = SystemProperties.get("ro.config.low_ram").equals("true");
+            mIsLowRamEnabled = SystemProperties.get("ro.config.lolz").equals("true");
 
             switch (mVideoBitrateOpt) {
                 case 1:
