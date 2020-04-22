@@ -40,8 +40,7 @@ public class NavigationHandle extends View implements ButtonInterface {
     private @ColorInt final int mDarkColor;
     private final int mRadius;
     private final int mBottom;
-    private int mCustomWidth;
-    private int mWidth;
+    private final int mBaseWidth;
 
     private Resources mRes;
     private ContentResolver mResolver;
@@ -56,6 +55,7 @@ public class NavigationHandle extends View implements ButtonInterface {
         mResolver = context.getContentResolver();
         mRadius = mRes.getDimensionPixelSize(R.dimen.navigation_handle_radius);
         mBottom = mRes.getDimensionPixelSize(R.dimen.navigation_handle_bottom);
+        mBaseWidth = mRes.getDimensionPixelSize(R.dimen.navigation_home_handle_width);
 
         final int dualToneDarkTheme = Utils.getThemeAttr(context, R.attr.darkIconTheme);
         final int dualToneLightTheme = Utils.getThemeAttr(context, R.attr.lightIconTheme);
@@ -74,15 +74,15 @@ public class NavigationHandle extends View implements ButtonInterface {
         // Draw that bar
         int navHeight = getHeight();
         int height = mRadius * 2;
-        mWidth = getWidth();
-        mCustomWidth = (int) getCustomWidth();
+        int width = getWidth();
         int y = (navHeight - mBottom - height);
-        int padding = (int) getCustomPadding();
-        canvas.drawRoundRect(padding, y, mCustomWidth + padding, y + height, mRadius, mRadius, mPaint);
+        canvas.drawRoundRect(0, y, width, y + height, mRadius, mRadius, mPaint);
     }
 
-    private double getCustomPadding() {
-        return (mWidth / 2) - (mCustomWidth / 2);
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(getCustomWidth() + getPaddingLeft() + getPaddingRight(),
+                getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec));
     }
 
     @Override
@@ -111,16 +111,17 @@ public class NavigationHandle extends View implements ButtonInterface {
     public void setDelayTouchFeedback(boolean shouldDelay) {
     }
 
-    private double getCustomWidth() {
-        int userSelection = Settings.System.getInt(mResolver, "navigation_handle_width", 1);
-        double finalWidth = 0.0;
+    private int getCustomWidth() {
+        int userSelection = Settings.System.getInt(mResolver,
+                Settings.System.NAVIGATION_HANDLE_WIDTH, 1);
         if (userSelection == 1) {
-            finalWidth = mWidth;
+            return mBaseWidth;
         } else if (userSelection == 2) {
-            finalWidth = 1.33 * mWidth;
+            return (int) (1.33 * mBaseWidth);
         } else if (userSelection == 3) {
-            finalWidth = 2 * mWidth;
+            return 2 * mBaseWidth;
+        } else {
+            return 0;
         }
-        return finalWidth;
     }
 }
