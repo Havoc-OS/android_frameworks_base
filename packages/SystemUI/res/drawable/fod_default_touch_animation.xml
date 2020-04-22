@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list android:oneshot="false"
   xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="6" android:drawable="@drawable/fod_default_00" />
     <item android:duration="6" android:drawable="@drawable/fod_default_01" />
     <item android:duration="6" android:drawable="@drawable/fod_default_02" />
     <item android:duration="6" android:drawable="@drawable/fod_default_03" />
@@ -45,28 +46,4 @@
     <item android:duration="6" android:drawable="@drawable/fod_default_43" />
     <item android:duration="6" android:drawable="@drawable/fod_default_44" />
     <item android:duration="6" android:drawable="@drawable/fod_default_45" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_46" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_47" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_48" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_49" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_50" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_51" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_52" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_53" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_54" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_55" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_56" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_57" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_58" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_59" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_60" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_61" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_62" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_63" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_64" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_65" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_66" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_67" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_68" />
-    <item android:duration="6" android:drawable="@drawable/fod_default_69" />
 </animation-list>
