@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2019 Havoc-OS
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Button that copies the url to the log of a crashed application -->
+    <string name="aerr_copy">क्रैश यूआरएल कॉपी करें</string>
+    <string name="url_copy_success">यूआरएल सफलतापूर्वक कॉपी किया गया</string>
+    <string name="url_copy_failed">डॉगबिन में लॉग अपलोड करते समय कोई गलती हुई है</string>
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_fakePackageSignature">पैकेज हस्ताक्षर की नकल करें</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_fakePackageSignature">इस अनुमति से एक ऐप दूसरा ऐप होने का नाटक कर सकता है। हानिकारक ऐप इसका उपयोग निजी ऐप डेटा हासिल करने के लिए कर सकते हैं। सावधानी के साथ इस अनुमति को प्रदान करें!</string>
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_fake_package_signature">पैकेज हस्ताक्षर की नकल करें</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_fake_package_signature">पैकेज हस्ताक्षर नकल की अनुमति दें</string>
+    <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
+    <string name="permgrouprequest_fake_package_signature">&lt;b&gt;<xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b&gt; को पैकेज हस्ताक्षर नक़ल की अनुमति दें?</string>
+    <!-- LiveDisplay strings -->
+    <string name="live_display_auto">स्वत:</string>
+    <string name="live_display_auto_summary">सूर्यास्त और सूर्योदय के हिसाब से स्क्रीन के रंग तापमान को स्वत: समायोजित करें</string>
+    <string name="live_display_off">बंद करें</string>
+    <string name="live_display_off_summary">सभी समायोजन बंद करें</string>
+    <string name="live_display_day">दिन</string>
+    <string name="live_display_day_summary">केवल दिन की सेटिंग्स का उपयोग करें</string>
+    <string name="live_display_night">रात</string>
+    <string name="live_display_night_summary">केवल रात की सेटिंग्स का उपयोग करें</string>
+    <string name="live_display_outdoor">बाहर (चमकदार सूरज)</string>
+    <string name="live_display_outdoor_summary">केवल घर के बाहर की सेटिंग्स का उपयोग करें</string>
+    <string name="live_display_hint">लाइव डिस्प्ले आंखों के तनाव को कम कर आपको रात में सोने में मदद करता है। इसे प्रयोग करने के लिए यहाँ क्लिक करें!</string>
+    <string name="accessibility_quick_settings_live_display_off">लाइव डिस्प्ले बंद।</string>
+    <string name="accessibility_quick_settings_live_display_auto">लाइव डिस्प्ले: स्वत: मोड</string>
+    <string name="accessibility_quick_settings_live_display_day">लाइव डिस्प्ले: दिन की तरह</string>
+    <string name="accessibility_quick_settings_live_display_night">लाइव डिस्प्ले: रात्रि की तरह</string>
+    <string name="accessibility_quick_settings_live_display_outdoor">लाइव डिस्प्ले: बाहर की तरह</string>
+    <string name="accessibility_quick_settings_live_display_changed_off">लाइव डिस्प्ले बंद किया गया</string>
+    <string name="accessibility_quick_settings_live_display_changed_auto">लाइव डिस्प्ले स्वत: मोड में बदला गया</string>
+    <string name="accessibility_quick_settings_live_display_changed_day">लाइव डिस्प्ले को दिन की तरह किया गया</string>
+    <string name="accessibility_quick_settings_live_display_changed_night">लाइव डिस्प्ले को रात्रि की तरह किया गया</string>
+    <string name="accessibility_quick_settings_live_display_changed_outdoor">लाइव डिस्प्ले को बाहर की तरह किया गया</string>
+    <!-- Advanced reboot -->
+    <string name="reboot_title">पुनः आरम्भ</string>
+    <string name="reboot_message">फोन पुनः आरम्भ हो रहा है...</string>
+    <!-- Vendor mismatch fingerprint warning [CHAR LIMIT=NONE] -->
+    <string name="system_error_vendorprint">आपका वेंडर सिस्टम से मेल नहीं खाता। कृपया <xliff:g id="string">%s</xliff:g> वेंडर फ्लैश करें।</string>
+    <!-- Pocket Lock -->
+    <string name="pocket_lock_message_long_press">लॉक खोलने के लिए पावर बटन दबाए रखें</string>
+    <!-- Alert slider proc nodes paths -->
+    <!-- Gaming mode -->
+    <string name="notification_channel_gaming">गेमिंग मोड</string>
+    <string name="gaming_mode_notification_title">गेमिंग मोड चालू किया गया</string>
+    <string name="gaming_mode_notification_content">गेमिंग मोड बंद करने के लिए स्पर्श करें</string>
+    <string name="gaming_mode_enabled_toast">गेमिंग मोड चालू किया गया</string>
+    <string name="gaming_mode_disabled_toast">गेमिंग मोड बंद किया गया</string>
+</resources>

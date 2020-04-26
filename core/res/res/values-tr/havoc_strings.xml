@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2019 Havoc-OS
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Button that copies the url to the log of a crashed application -->
+    <string name="aerr_copy">Kilitlenme günlüğü linkini kopyala</string>
+    <string name="url_copy_success">Link başarıyla kopyalandı</string>
+    <string name="url_copy_failed">Günlüğü dogbin\'e yüklerken bir hata oluştu</string>
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_fakePackageSignature">Paket imzasını taklit et</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_fakePackageSignature">Uygulamanın farklı bir uygulama gibi davranmasına izin verir. Zararlı uygulamalar bu özelliği kullanarak özel içerikli bilgilere ulaşabilir. Bu izni verirken dikkatli olun!</string>
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_fake_package_signature">Paket imzasını taklit et</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_fake_package_signature">paket imzasını taklit etmeye izin ver</string>
+    <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
+    <string name="permgrouprequest_fake_package_signature">&lt;b&gt;&lt;xliff:g id=\"app_name\"
+example=\"Gmail\"&gt;%1$s&lt;/xliff:g&gt;&lt;/b&gt; paket imzasını taklit etmesine izin verilsin mi?</string>
+    <!-- LiveDisplay strings -->
+    <string name="live_display_auto">Otomatik</string>
+    <string name="live_display_auto_summary">Gün batımından ve gün doğumundan sonra ekranın renk sıcaklığını otomatik olarak ayarlar</string>
+    <string name="live_display_off">Kapalı</string>
+    <string name="live_display_off_summary">Tüm ayarları devre dışı bırak</string>
+    <string name="live_display_day">Gündüz</string>
+    <string name="live_display_day_summary">Sadece gündüz ayarlarını kullan</string>
+    <string name="live_display_night">Gece</string>
+    <string name="live_display_night_summary">Sadece gece ayarlarını kullan</string>
+    <string name="live_display_outdoor">Açık alan (parlak güneş)</string>
+    <string name="live_display_outdoor_summary">Sadece açık alan ayarlarını kullan</string>
+    <string name="live_display_hint">LiveDisplay, göz yorgunluğunuzu azaltmanıza ve gece daha rahat uyumanıza yardımcı olabilir. Denemek için dokunun!</string>
+    <string name="accessibility_quick_settings_live_display_off">LiveDisplay kapalı.</string>
+    <string name="accessibility_quick_settings_live_display_auto">LiveDisplay: otomatik mod.</string>
+    <string name="accessibility_quick_settings_live_display_day">LiveDisplay: gündüz modu.</string>
+    <string name="accessibility_quick_settings_live_display_night">LiveDisplay: gece modu.</string>
+    <string name="accessibility_quick_settings_live_display_outdoor">LiveDisplay: açık alan modu.</string>
+    <string name="accessibility_quick_settings_live_display_changed_off">LiveDisplay kapatıldı.</string>
+    <string name="accessibility_quick_settings_live_display_changed_auto">LiveDisplay otomatik mod olarak değiştirildi.</string>
+    <string name="accessibility_quick_settings_live_display_changed_day">LiveDisplay gündüz modu olarak değiştirildi.</string>
+    <string name="accessibility_quick_settings_live_display_changed_night">LiveDisplay gece modu olarak değiştirildi.</string>
+    <string name="accessibility_quick_settings_live_display_changed_outdoor">LiveDisplay açık alan modu olarak değiştirildi.</string>
+    <!-- Advanced reboot -->
+    <string name="reboot_title">Yeniden başlat</string>
+    <string name="reboot_message">Sistem yeniden başlatılıyor...</string>
+    <!-- Vendor mismatch fingerprint warning [CHAR LIMIT=NONE] -->
+    <string name="system_error_vendorprint">Üretici dosyanız sisteminiz ile eşleşmiyor. Cihazınız için lütfen <xliff:g id="string">%s</xliff:g> üretici dosyasını yükleyin</string>
+    <!-- Pocket Lock -->
+    <string name="pocket_lock_message_long_press">Kilidi açmak için güç tuşuna basılı tutun</string>
+    <!-- Alert slider proc nodes paths -->
+    <!-- Gaming mode -->
+    <string name="notification_channel_gaming">Oyun modu</string>
+    <string name="gaming_mode_notification_title">Oyun modu etkinleştirildi</string>
+    <string name="gaming_mode_notification_content">Oyun modunu kapatmak için dokunun</string>
+    <string name="gaming_mode_enabled_toast">Oyun modu açıldı</string>
+    <string name="gaming_mode_disabled_toast">Oyun modu kapatıldı</string>
+</resources>

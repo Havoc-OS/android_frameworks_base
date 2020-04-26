@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Caffeine tile -->
+    <string name="quick_settings_caffeine_label">Kafein</string>
+    <string name="quick_settings_caffeine_label_off">Kapalı</string>
+    <string name="accessibility_quick_settings_caffeine_off">Kafein kapalı</string>
+    <string name="accessibility_quick_settings_caffeine_on">Kafein açık</string>
+    <string name="statusbar_items_title">Durum çubuğu simgeleri</string>
+    <!-- Reader mode QS tile -->
+    <string name="quick_settings_reading_mode">Okuma modu</string>
+    <string name="accessibility_quick_settings_reading_mode_on">Okuma modu açık.</string>
+    <string name="accessibility_quick_settings_reading_mode_off">Okuma modu kapalı.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_on">Okuma modu açıldı.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_off">Okuma modu kapatıldı.</string>
+    <!-- Heads up QS tile -->
+    <string name="quick_settings_heads_up_label">Bildirim pencereleri</string>
+    <string name="accessibility_quick_settings_heads_up_off">Bildirim pencereleri kapalı.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Bildirim pencereleri açık.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Bildirim penceleri kapatıldı.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Bildirim pencereleri açıldı.</string>
+    <!-- USB tethering QS tile -->
+    <string name="quick_settings_usb_tether_label">USB internet paylaşımı</string>
+    <!-- Name of the nfc status bar icon. -->
+    <string name="status_bar_nfc">NFC</string>
+    <!-- Accessibility label for nfc icon (not shown on screen) [CHAR LIMIT=NONE] -->
+    <string name="accessibility_status_bar_nfc">Nfc</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Dash Şarj Oluyor (tam dolmasına <xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> kaldı)</string>
+    <string name="keyguard_plugged_in_dash_charging">Dash Şarj Oluyor</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g>Warp Şarj Oluyor (tam dolmasına <xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> kaldı)</string>
+    <string name="keyguard_plugged_in_warp_charging">Warp Şarj Oluyor</string>
+    <!-- Screenshot Delete Toast -->
+    <string name="delete_screenshot_toast">Ekran görüntüsü silindi</string>
+    <!-- Advanced powermenu -->
+    <string name="global_action_restart_system">Yeniden başlat</string>
+    <string name="global_action_restart_advanced">Gelişmiş yeniden başlatma</string>
+    <string name="global_action_restart_recovery">Kurtarma</string>
+    <string name="global_action_restart_bootloader">Ön yükleyici</string>
+    <string name="global_action_restart_ui">Sistem arayüzü</string>
+    <string name="global_action_restart_hot">Hızlı</string>
+    <!-- QS Config -->
+    <string name="qs_menu_item_columns">Sütunlar</string>
+    <string name="qs_menu_item_columns_landscape">Sütunlar (Yatay)</string>
+    <string name="qs_menu_item_rows">Satırlar</string>
+    <string name="qs_menu_item_rows_landscape">Satırlar (Yatay)</string>
+    <string name="qs_menu_item_columns_one">1</string>
+    <string name="qs_menu_item_columns_two">2</string>
+    <string name="qs_menu_item_columns_three">3</string>
+    <string name="qs_menu_item_columns_four">4</string>
+    <string name="qs_menu_item_columns_five">5</string>
+    <string name="qs_menu_item_columns_six">6</string>
+    <string name="qs_menu_item_columns_seven">7</string>
+    <string name="qs_menu_item_columns_eight">8</string>
+    <string name="qs_menu_item_reset">Sıfırla</string>
+    <string name="qs_menu_item_titles">Etiketleri göster</string>
+    <string name="qs_menu_item_qs_columns">Sütunlar (Hızlı ayarlar)</string>
+    <string name="qs_menu_item_columns_auto">Otomatik</string>
+    <!-- Smart Pixels QS Tile -->
+    <string name="quick_settings_smart_pixels">Akıllı Pikseller</string>
+    <string name="quick_settings_smart_pixels_on_power_save">Otomatik olarak akıllı pikselleri etkinleştir</string>
+    <!-- CPUInfo tile -->
+    <string name="quick_settings_cpuinfo_label">İşlemci bilgisi</string>
+    <string name="accessibility_quick_settings_cpuinfo_off">İşlemci bilgisi kapalı</string>
+    <string name="accessibility_quick_settings_cpuinfo_on">İşlemci bilgisi açık</string>
+    <!-- Screenshot QS tile -->
+    <string name="quick_settings_screenshot_label">Ekran görüntüsü</string>
+    <string name="quick_settings_full_screenshot_label">Tam</string>
+    <string name="quick_settings_region_screenshot_label">Kısmi</string>
+    <!-- Screen record -->
+    <string name="screenrecord_dialog_title">Kayda başlansın mı?</string>
+    <string name="screenrecord_dialog_summary">Kayıt sırasında Android sistemi, ekranınızda görünen veya cihazınızda oynatılan tüm hassas bilgileri yakalayabilir. Buna şifreler, ödeme bilgileri, fotoğraflar, mesajlar ve ses dahildir.</string>
+    <string name="screenrecord_dialog_start">Başlat</string>
+    <string name="screenrecord_dialog_cancel">İptal</string>
+    <string name="screenrecord_taps_title">Ekrana dokunmaları göster</string>
+    <string name="screenrecord_stopdot_title">Durdurma noktasını göster</string>
+    <string name="global_action_screenrecord">Ekran kaydı</string>
+    <!-- HW Keys Tile -->
+    <string name="accessibility_quick_settings_hwkeys_on">Donanım tuşları açık</string>
+    <string name="accessibility_quick_settings_hwkeys_off">Donanım tuşları kapalı</string>
+    <string name="quick_settings_hwkeys_label">Donanım tuşları</string>
+    <!--Screenrecord Tile-->
+    <string name="screenrecorder_title_tile">Ekran kaydı</string>
+    <!-- Heads up snooze toast -->
+    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - Bildirim pencereleri 1 dakika ertelendi.</string>
+    <string name="heads_up_snooze_message"><xliff:g id="string">%s</xliff:g> - Bildirim pencereleri <xliff:g id="number">%d</xliff:g> dakika ertelendi.</string>
+    <!-- Kill button in notification guts -->
+    <string name="force_stop_dlg_title">Zorla durdurulsun mu?</string>
+    <string name="force_stop_dlg_text">Uygulamayı zorla durdurursanız, hatalı davranabilir.</string>
+    <string name="dlg_ok">@android:string/ok</string>
+    <string name="dlg_cancel">@android:string/cancel</string>
+    <string name="guts_force_close_app">Uygulamayı kapat</string>
+    <!-- Compass QS Tile -->
+    <string name="quick_settings_compass_label">Pusula</string>
+    <string name="quick_settings_compass_value"><xliff:g id="degrees">%1$.0f</xliff:g>\u00b0 <xliff:g id="direction">%2$s</xliff:g></string>
+    <string name="quick_settings_compass_init">Başlatılıyor\u2026</string>
+    <string name="accessibility_quick_settings_compass_off">Pusula kapalı.</string>
+    <string name="accessibility_quick_settings_compass_on">Pusula açık.</string>
+    <string name="quick_settings_compass_N">K</string>
+    <string name="quick_settings_compass_NE">KD</string>
+    <string name="quick_settings_compass_E">D</string>
+    <string name="quick_settings_compass_SE">GD</string>
+    <string name="quick_settings_compass_S">G</string>
+    <string name="quick_settings_compass_SW">GB</string>
+    <string name="quick_settings_compass_W">B</string>
+    <string name="quick_settings_compass_NW">KB</string>
+    <!-- Music tile -->
+    <string name="quick_settings_music_label">Müzik</string>
+    <string name="quick_settings_music_play">Oynat</string>
+    <string name="quick_settings_music_pause">Duraklat</string>
+    <!-- Reboot/Recovery QS tile -->
+    <string name="quick_settings_reboot_label">Yeniden başlat</string>
+    <string name="quick_settings_reboot_recovery_label">Kurtarma</string>
+    <string name="quick_settings_poweroff_label">Kapat</string>
+    <string name="quick_settings_sound_search">Sesli arama</string>
+    <string name="quick_settings_sound_search_no_app">Üzgünüz, ancak bir Sesli arama uygulamanız yoksa bu çalışmayacaktır.</string>
+    <!-- Navbar editor -->
+    <string name="preview">Ön izleme</string>
+    <string name="keycode">Tuş kodu</string>
+    <string name="no_home_title">Ana ekran tuşu bulunamadı</string>
+    <string name="no_home_message">Ana ekran tuşu bu cihazda gezinebilmek için gereklidir. Kaydetmeden önce lütfen bir ana ekran tuşu ekleyin.</string>
+    <string name="clipboard_description">Pano, öğelerin doğrudan panoya sürüklenmesine izin verir. Öğeler mevcut olduğunda doğrudan pano dışına sürüklenebilir.</string>
+    <string name="keycode_description">Tuş kodu tuşları, gezinme çubuğuna klavye tuşlarının eklenmesini sağlar. Basıldığında seçili klavye tuşunu taklit ederler. Önce tuş için tuşun seçilmesi, ardından tuş üzerinde gösterilecek bir resim seçilmelidir.</string>
+    <string name="start">Başlat</string>
+    <string name="center">Orta</string>
+    <string name="end">Son</string>
+    <string name="space">Ayırıcı</string>
+    <string name="menu_ime">Menü / Klavye değiştirici</string>
+    <string name="select_button">Eklenecek tuşu seçin</string>
+    <string name="add_button">Tuş ekle</string>
+    <string name="save">Kaydet</string>
+    <string name="reset">Sıfırla</string>
+    <string name="select_keycode">Klavye tuşu seçin</string>
+    <string name="left">Sol</string>
+    <string name="right">Sağ</string>
+    <string name="navbar_editor_title">Düzenleyici</string>
+    <string name="navbar_editor_summary">Gezinme çubuğunu düzenle</string>
+    <string name="navigation_bar_accessibility_dpad_left">Sol imleç</string>
+    <string name="navigation_bar_accessibility_dpad_right">Sağ imleç</string>
+    <!-- Name of the camera status bar icon. -->
+    <string name="status_bar_camera">Kamera</string>
+    <!-- Name of the location status bar icon. -->
+    <string name="status_bar_location">Konum</string>
+    <!-- Name of the microphone status bar icon. -->
+    <string name="status_bar_microphone">Mikrofon</string>
+    <!-- Gaming mode -->
+    <string name="gaming_mode_not_enabled">Oyun modu ayarlardan devre dışı bırakıldı</string>
+    <string name="quick_settings_gaming_mode_label">Oyun modu</string>
+    <!-- Content description of the Gaming mode tile in quick settings when disabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_disabled">Oyun modu kapatıldı.</string>
+    <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_enabled">Oyun modu açıldı.</string>
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- DataSwitch Tile -->
+    <string name="qs_data_switch_label">Veri kartını değiştir</string>
+    <string name="qs_data_switch_toast_0">Şu anda SIM kart takılı değil</string>
+    <string name="qs_data_switch_toast_1">Şuan sadece bir SIM kart takılı</string>
+    <string name="qs_data_switch_changed_1">Mobil veri için SIM 1 kullanılıyor</string>
+    <string name="qs_data_switch_changed_2">Mobil veri için SIM 2 kullanılıyor</string>
+    <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_running_services">Çalışan hizmetler ekranını aç.</string>
+    <!-- ADB over network tile -->
+    <string name="quick_settings_network_adb_label">Ağ üzerinden ADB</string>
+    <string name="quick_settings_network_adb_toast">USB hata ayıklama etkin değil</string>
+    <!-- Sync QS Tile -->
+    <string name="quick_settings_sync_label">Eşitleme</string>
+    <string name="accessibility_quick_settings_sync_off">Eşitleme kapalı</string>
+    <string name="accessibility_quick_settings_sync_on">Eşitleme açık</string>
+    <string name="accessibility_quick_settings_sync_changed_off">Eşitleme kapatıldı</string>
+    <string name="accessibility_quick_settings_sync_changed_on">Eşitleme açıldı</string>
+    <!-- Screen Stabilization -->
+    <string name="quick_settings_stabilization_label">Ekran sabitleme</string>
+    <string name="quick_settings_stabilization_off">Sabitleme kapatıldı</string>
+    <string name="quick_settings_stabilization_on">Sabitleme açıldı</string>
+    <string name="low_label">Düşük</string>
+    <string name="high_label">Yüksek</string>
+    <string name="stabilization_velocity_friction">Sürtünme hızı</string>
+    <string name="stabilization_velocity_amplitude">Hız genliği</string>
+    <string name="stabilization_position_friction">Sürtünme pozisyonu</string>
+    <!-- AOD QS tile -->
+    <string name="quick_settings_aod_label">Her zaman açık ekran</string>
+    <!-- Sound QS tile -->
+    <string name="quick_settings_sound_label">Ses</string>
+    <string name="quick_settings_sound_ring">Zil sesi</string>
+    <string name="quick_settings_sound_vibrate">Titreşim</string>
+    <string name="quick_settings_sound_dnd">Rahatsız etme</string>
+    <!-- FPS Info tile -->
+    <string name="quick_settings_fpsinfo_label">FPS bilgisi</string>
+    <string name="accessibility_quick_settings_fpsinfo_off">FPS bilgisi kapalı</string>
+    <string name="accessibility_quick_settings_fpsinfo_on">FPS bilgisi açık</string>
+    <!-- Screen pinning -->
+    <string name="screen_pinning_description_custom">Bu işlem, siz sabitlemeyi kaldırana kadar ekranı görünür durumda tutar. Sabitlemeyi kaldırmak için Geri tuşuna dokunun ve basılı tutun.</string>
+    <string name="screen_pinning_description_recents_invisible_custom">Bu işlem, siz sabitlemeyi kaldırana kadar ekranı görünür durumda tutar. Sabitlemeyi kaldırmak için Geri tuşuna dokunun ve basılı tutun.</string>
+    <string name="screen_pinning_description_accessible_custom">Bu işlem, siz sabitlemeyi kaldırana kadar ekranı görünür durumda tutar. Sabitlemeyi kaldırmak için Geri tuşuna dokunun ve basılı tutun.</string>
+    <string name="screen_pinning_description_recents_invisible_accessible_custom">Bu işlem, siz sabitlemeyi kaldırana kadar ekranı görünür durumda tutar. Sabitlemeyi kaldırmak için Geri tuşuna dokunun ve basılı tutun.</string>
+    <string name="screen_pinning_toast_custom">Bu ekranı kaldırmak için, Geri tuşuna dokunun ve basılı tutun</string>
+    <string name="screen_pinning_toast_recents_invisible_custom">Bu ekranı kaldırmak için, Geri tuşuna dokunun ve basılı tutun</string>
+    <!-- Long swipe gesture actions -->
+    <string name="app_picker_dialog_title">Bir uygulama seçin</string>
+    <string name="recents_app_killed">Uygulama sonlandırıldı</string>
+    <string name="nope_cant_kill">Başlatıcı sonlandırılamaz</string>
+</resources>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Caffeine tile -->
+    <string name="quick_settings_caffeine_label">Koffein</string>
+    <string name="quick_settings_caffeine_label_off">Aus</string>
+    <string name="accessibility_quick_settings_caffeine_off">Koffein aus</string>
+    <string name="accessibility_quick_settings_caffeine_on">Koffein an</string>
+    <string name="statusbar_items_title">Statusbar Symbole</string>
+    <!-- Reader mode QS tile -->
+    <string name="quick_settings_reading_mode">Lesemodus</string>
+    <string name="accessibility_quick_settings_reading_mode_on">Lesemodus an.</string>
+    <string name="accessibility_quick_settings_reading_mode_off">Lesemodus aus.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_on">Lesemodus eingeschaltet.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_off">Lesemodus ausgeschaltet.</string>
+    <!-- Heads up QS tile -->
+    <string name="quick_settings_heads_up_label">Pop-up-Benachrichtigungen</string>
+    <string name="accessibility_quick_settings_heads_up_off">Pop-Up-Benachrichtigungen aus.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Pop-Up-Benachrichtigungen an.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Pop-Up Benachrichtigungen ausgeschaltet.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Pop-up-Benachrichtigungen eingeschaltet.</string>
+    <!-- USB tethering QS tile -->
+    <string name="quick_settings_usb_tether_label">USB-Tethering</string>
+    <!-- Name of the nfc status bar icon. -->
+    <string name="status_bar_nfc">NFC</string>
+    <!-- Accessibility label for nfc icon (not shown on screen) [CHAR LIMIT=NONE] -->
+    <string name="accessibility_status_bar_nfc">Nfc</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Schnellladen (<xliff:g id="charging_time_left" example="4 Stunden und 2 Minuten">%s</xliff:g> bis zur vollständigen Aufladung)</string>
+    <string name="keyguard_plugged_in_dash_charging">Schnelles Aufladen</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Warp-Ladevorgang (<xliff:g id="charging_time_left" example="4 Stunden und 2 Minuten">%s</xliff:g> bis zur vollständigen Aufladung)</string>
+    <string name="keyguard_plugged_in_warp_charging">Warp-Ladevorgang</string>
+    <!-- Screenshot Delete Toast -->
+    <string name="delete_screenshot_toast">Screenshot gelöscht</string>
+    <!-- Advanced powermenu -->
+    <string name="global_action_restart_system">Neustart</string>
+    <string name="global_action_restart_advanced">Erweiterter Neustart</string>
+    <string name="global_action_restart_recovery">Recovery</string>
+    <string name="global_action_restart_bootloader">Bootloader</string>
+    <string name="global_action_restart_ui">System-UI</string>
+    <string name="global_action_restart_hot">Beliebt</string>
+    <!-- QS Config -->
+    <string name="qs_menu_item_columns">Spalten</string>
+    <string name="qs_menu_item_columns_landscape">Spalten (Querformat)</string>
+    <string name="qs_menu_item_rows">Zeilen</string>
+    <string name="qs_menu_item_rows_landscape">Zeilen (Querformat)</string>
+    <string name="qs_menu_item_columns_one">1</string>
+    <string name="qs_menu_item_columns_two">2</string>
+    <string name="qs_menu_item_columns_three">3</string>
+    <string name="qs_menu_item_columns_four">4</string>
+    <string name="qs_menu_item_columns_five">5</string>
+    <string name="qs_menu_item_columns_six">6</string>
+    <string name="qs_menu_item_columns_seven">7</string>
+    <string name="qs_menu_item_columns_eight">8</string>
+    <string name="qs_menu_item_reset">Zurücksetzen</string>
+    <string name="qs_menu_item_titles">Beschriftungen anzeigen</string>
+    <string name="qs_menu_item_qs_columns">Spalten (Schnellleiste)</string>
+    <string name="qs_menu_item_columns_auto">Automatisch</string>
+    <!-- Smart Pixels QS Tile -->
+    <string name="quick_settings_smart_pixels">Smarte Pixel</string>
+    <string name="quick_settings_smart_pixels_on_power_save">Smarte Pixel automatisch einschalten</string>
+    <!-- CPUInfo tile -->
+    <string name="quick_settings_cpuinfo_label">CPU-Informationen</string>
+    <string name="accessibility_quick_settings_cpuinfo_off">CPU-Informationen aus</string>
+    <string name="accessibility_quick_settings_cpuinfo_on">CPU-Info an</string>
+    <!-- Screenshot QS tile -->
+    <string name="quick_settings_screenshot_label">Screenshot</string>
+    <string name="quick_settings_full_screenshot_label">Vollständig</string>
+    <string name="quick_settings_region_screenshot_label">Teilweise</string>
+    <!-- Screen record -->
+    <string name="screenrecord_dialog_title">Aufnahme starten?</string>
+    <string name="screenrecord_dialog_summary">Während der Aufnahme kann das Android-System alle sensiblen Informationen erfassen, die auf Ihrem Bildschirm sichtbar oder auf Ihrem Gerät abgespielt werden. Dazu gehören Passwörter, Zahlungsinformationen, Fotos, Nachrichten und Audio.</string>
+    <string name="screenrecord_dialog_start">Start</string>
+    <string name="screenrecord_dialog_cancel">Abbrechen</string>
+    <string name="screenrecord_taps_title">Berührungen auf dem Bildschirm anzeigen</string>
+    <string name="screenrecord_stopdot_title">Stop-Punkt anzeigen</string>
+    <string name="global_action_screenrecord">Bildschirmaufnahme</string>
+    <!-- HW Keys Tile -->
+    <string name="accessibility_quick_settings_hwkeys_on">Hardwaretasten aktiviert</string>
+    <string name="accessibility_quick_settings_hwkeys_off">Hardwaretasten deaktiviert</string>
+    <string name="quick_settings_hwkeys_label">Hardwaretasten</string>
+    <!--Screenrecord Tile-->
+    <string name="screenrecorder_title_tile">Bildschirmaufnahme</string>
+    <!-- Heads up snooze toast -->
+    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s </xliff:g> - Pop-Up-Benachrichtigungen schlummern für 1 Minute.</string>
+    <string name="heads_up_snooze_message"><xliff:g id="string">%s </xliff:g> Pop-up-Benachrichtigungen sind für <xliff:g id="number">%d </xliff:g> Minuten deaktiviert.</string>
+    <!-- Kill button in notification guts -->
+    <string name="force_stop_dlg_title">Beenden erzwingen?</string>
+    <string name="force_stop_dlg_text">Das erzwungene Beenden einer App kann zu unerwünschtem Verhalten führen.</string>
+    <string name="dlg_ok">@android:string/ok</string>
+    <string name="dlg_cancel">@android:string/cancel</string>
+    <string name="guts_force_close_app">App schließen</string>
+    <!-- Compass QS Tile -->
+    <string name="quick_settings_compass_label">Kompass</string>
+    <string name="quick_settings_compass_value"><xliff:g id="Grad">%1$.0f</xliff:g>\u00b0 <xliff:g id="Richtung">%2$s</xliff:g></string>
+    <string name="quick_settings_compass_init">Initialisiere\u2026</string>
+    <string name="accessibility_quick_settings_compass_off">Kompass aus.</string>
+    <string name="accessibility_quick_settings_compass_on">Kompass an.</string>
+    <string name="quick_settings_compass_N">N</string>
+    <string name="quick_settings_compass_NE">NO</string>
+    <string name="quick_settings_compass_E">O</string>
+    <string name="quick_settings_compass_SE">SO</string>
+    <string name="quick_settings_compass_S">S</string>
+    <string name="quick_settings_compass_SW">SW</string>
+    <string name="quick_settings_compass_W">W</string>
+    <string name="quick_settings_compass_NW">NW</string>
+    <!-- Music tile -->
+    <string name="quick_settings_music_label">Musik</string>
+    <string name="quick_settings_music_play">Wiedergabe</string>
+    <string name="quick_settings_music_pause">Pause</string>
+    <!-- Reboot/Recovery QS tile -->
+    <string name="quick_settings_reboot_label">Neustart</string>
+    <string name="quick_settings_reboot_recovery_label">Recovery</string>
+    <string name="quick_settings_poweroff_label">Ausschalten</string>
+    <string name="quick_settings_sound_search">Musiksuche</string>
+    <string name="quick_settings_sound_search_no_app">Leider funktioniert dies nur, wenn eine App für die Musiksuche installiert ist.</string>
+    <!-- Navbar editor -->
+    <string name="preview">Vorschau</string>
+    <string name="keycode">Keycode</string>
+    <string name="no_home_title">Keine Home-Taste gefunden</string>
+    <string name="no_home_message">Um dieses Gerät bedienen zu können, benötigt man eine Startbildschirmtaste. Bitte füge vor dem Speichern eine entsprechende Schaltfläche hinzu.</string>
+    <string name="clipboard_description">Die Zwischenablage erlaubt es, Elemente direkt in die Zwischenablage zu ziehen. Elemente können auch aus der Zwischenablage gezogen werden, sofern diese vorhanden sind.</string>
+    <string name="keycode_description">Mit den Keycode-Schaltflächen kann man der Navigationsleiste Tasten hinzufügen. Wird eine Keycode-Schaltfläche ausgewählt, führt sie die Aktion der entsprechenden Taste aus. Wähle zuerst die Taste für die Schaltfläche aus und dann ein Bild, welches auf der Schaltfläche erscheinen soll.</string>
+    <string name="start">Start</string>
+    <string name="center">Mittig</string>
+    <string name="end">Ende</string>
+    <string name="space">Abstandshalter</string>
+    <string name="menu_ime">Menü- / Tastaturwechsler</string>
+    <string name="select_button">Schaltfläche zum Hinzufügen auswählen</string>
+    <string name="add_button">Schaltfläche hinzufügen</string>
+    <string name="save">Speichern</string>
+    <string name="reset">Zurücksetzen</string>
+    <string name="select_keycode">Tastatur-Taste auswählen</string>
+    <string name="left">Links</string>
+    <string name="right">Rechts</string>
+    <string name="navbar_editor_title">Editor</string>
+    <string name="navbar_editor_summary">Navigationsleiste anpassen</string>
+    <string name="navigation_bar_accessibility_dpad_left">Zeiger links</string>
+    <string name="navigation_bar_accessibility_dpad_right">Zeiger rechts</string>
+    <!-- Name of the camera status bar icon. -->
+    <string name="status_bar_camera">Kamera</string>
+    <!-- Name of the location status bar icon. -->
+    <string name="status_bar_location">Standort</string>
+    <!-- Name of the microphone status bar icon. -->
+    <string name="status_bar_microphone">Mikrofon</string>
+    <!-- Gaming mode -->
+    <string name="gaming_mode_not_enabled">Spielemodus ist in den Einstellungen deaktiviert</string>
+    <string name="quick_settings_gaming_mode_label">Spielemodus</string>
+    <!-- Content description of the Gaming mode tile in quick settings when disabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_disabled">Spielemodus ausgeschaltet.</string>
+    <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_enabled">Spielemodus eingeschaltet.</string>
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- DataSwitch Tile -->
+    <string name="qs_data_switch_label">Daten-SIM wechseln</string>
+    <string name="qs_data_switch_toast_0">Derzeit ist keine SIM-Karte eingelegt</string>
+    <string name="qs_data_switch_toast_1">Derzeit ist nur eine SIM-Karte eingelegt</string>
+    <string name="qs_data_switch_changed_1">SIM 1 wird für Mobile Daten verwendet</string>
+    <string name="qs_data_switch_changed_2">SIM 2 wird für Mobile Daten verwendet</string>
+    <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_running_services">Laufende Dienste anzeigen.</string>
+    <!-- ADB over network tile -->
+    <string name="quick_settings_network_adb_label">ADB über Netzwerk</string>
+    <string name="quick_settings_network_adb_toast">USB-Debugging ist nicht aktiviert</string>
+    <!-- Sync QS Tile -->
+    <string name="quick_settings_sync_label">Synchronisation</string>
+    <string name="accessibility_quick_settings_sync_off">Synchronisation aus</string>
+    <string name="accessibility_quick_settings_sync_on">Synchronisation an</string>
+    <string name="accessibility_quick_settings_sync_changed_off">Synchronisation ausgeschaltet</string>
+    <string name="accessibility_quick_settings_sync_changed_on">Synchronisation eingeschaltet</string>
+    <!-- Screen Stabilization -->
+    <string name="quick_settings_stabilization_label">Bildschirmstabilisierung</string>
+    <string name="quick_settings_stabilization_off">Stabilisierung ist deaktiviert</string>
+    <string name="quick_settings_stabilization_on">Stabilisierung ist aktiviert</string>
+    <string name="low_label">Niedrig</string>
+    <string name="high_label">Hoch</string>
+    <string name="stabilization_velocity_friction">Bewegungsgeschwindigkeit</string>
+    <string name="stabilization_velocity_amplitude">Geschwindigkeitsdämpfung</string>
+    <string name="stabilization_position_friction">Positionsverschiebung</string>
+    <!-- AOD QS tile -->
+    <string name="quick_settings_aod_label">AOD</string>
+    <!-- Sound QS tile -->
+    <string name="quick_settings_sound_label">Ton</string>
+    <string name="quick_settings_sound_ring">Klingeln</string>
+    <string name="quick_settings_sound_vibrate">Vibrieren</string>
+    <string name="quick_settings_sound_dnd">Bitte nicht stören</string>
+    <!-- FPS Info tile -->
+    <string name="quick_settings_fpsinfo_label">FPS-Anzeige</string>
+    <string name="accessibility_quick_settings_fpsinfo_off">FPS-Anzeige aus</string>
+    <string name="accessibility_quick_settings_fpsinfo_on">FPS-Anzeige ein</string>
+    <!-- Screen pinning -->
+    <string name="screen_pinning_description_custom">Der Bildschirm wird solange angezeigt, bis Sie die Fixierung aufheben. Berühren &amp; halten Sie die \"Zurück-Taste\", um die Fixierung aufzuheben.</string>
+    <string name="screen_pinning_description_recents_invisible_custom">Der Bildschirm wird solange angezeigt, bis Sie die Fixierung aufheben. Berühren &amp; halten Sie die \"Zurück-Taste\", um die Fixierung aufzuheben.</string>
+    <string name="screen_pinning_description_accessible_custom">Der Bildschirm wird solange angezeigt, bis Sie die Fixierung aufheben. Berühren &amp; halten Sie die \"Zurück-Taste\", um die Fixierung aufzuheben.</string>
+    <string name="screen_pinning_description_recents_invisible_accessible_custom">Der Bildschirm wird solange angezeigt, bis Sie die Fixierung aufheben. Berühren &amp; halten Sie die \"Zurück-Taste\", um die Fixierung aufzuheben.</string>
+    <string name="screen_pinning_toast_custom">Um die Bildschirm-Fixierung aufzuheben, berühren &amp; halten Sie die \"Zurück-Taste\"</string>
+    <string name="screen_pinning_toast_recents_invisible_custom">Um die Bildschirm-Fixierung aufzuheben, berühren &amp; halten Sie die \"Zurück-Taste\"</string>
+    <!-- Long swipe gesture actions -->
+    <string name="app_picker_dialog_title">App auswählen</string>
+    <string name="recents_app_killed">Anwendung beendet</string>
+    <string name="nope_cant_kill">Launcher kann nicht beendet werden</string>
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Caffeine tile -->
+    <!-- Reader mode QS tile -->
+    <!-- Heads up QS tile -->
+    <!-- USB tethering QS tile -->
+    <!-- Name of the nfc status bar icon. -->
+    <!-- Accessibility label for nfc icon (not shown on screen) [CHAR LIMIT=NONE] -->
+    <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
+    <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
+    <!-- Screenshot Delete Toast -->
+    <!-- Advanced powermenu -->
+    <!-- QS Config -->
+    <!-- Smart Pixels QS Tile -->
+    <!-- CPUInfo tile -->
+    <!-- Screenshot QS tile -->
+    <!-- Screen record -->
+    <!-- HW Keys Tile -->
+    <!--Screenrecord Tile-->
+    <!-- Heads up snooze toast -->
+    <!-- Kill button in notification guts -->
+    <!-- Compass QS Tile -->
+    <!-- Music tile -->
+    <!-- Reboot/Recovery QS tile -->
+    <!-- Navbar editor -->
+    <!-- Name of the camera status bar icon. -->
+    <!-- Name of the location status bar icon. -->
+    <!-- Name of the microphone status bar icon. -->
+    <!-- Gaming mode -->
+    <!-- Content description of the Gaming mode tile in quick settings when disabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <!-- Name of the volte status bar icon. -->
+    <!-- DataSwitch Tile -->
+    <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
+    <!-- ADB over network tile -->
+    <!-- Sync QS Tile -->
+    <!-- Screen Stabilization -->
+    <!-- AOD QS tile -->
+    <!-- Sound QS tile -->
+    <!-- FPS Info tile -->
+    <!-- Screen pinning -->
+    <!-- Long swipe gesture actions -->
+</resources>

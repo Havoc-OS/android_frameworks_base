@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Caffeine tile -->
+    <string name="quick_settings_caffeine_label">कैफीन मोड</string>
+    <string name="quick_settings_caffeine_label_off">बंद</string>
+    <string name="accessibility_quick_settings_caffeine_off">कैफीन बंद</string>
+    <string name="accessibility_quick_settings_caffeine_on">कैफीन चालू</string>
+    <string name="statusbar_items_title">स्टेटसबार आइकन</string>
+    <!-- Reader mode QS tile -->
+    <string name="quick_settings_reading_mode">पढ़ाई मोड</string>
+    <string name="accessibility_quick_settings_reading_mode_on">पढ़ाई मोड चालू।</string>
+    <string name="accessibility_quick_settings_reading_mode_off">पढ़ाई मोड बंद</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_on">पढ़ाई मोड चालू है।</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_off">पढ़ाई मोड बंद है।</string>
+    <!-- Heads up QS tile -->
+    <string name="quick_settings_heads_up_label">हेड्स अप</string>
+    <string name="accessibility_quick_settings_heads_up_off">हेड्स अप बंद</string>
+    <string name="accessibility_quick_settings_heads_up_on">हेड्स अप चालू</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">हेड्स अप को बंद किया गया</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">हेड्स अप को चालू किया गया</string>
+    <!-- USB tethering QS tile -->
+    <string name="quick_settings_usb_tether_label">यूएसबी टेदरिंग</string>
+    <!-- Name of the nfc status bar icon. -->
+    <string name="status_bar_nfc">एनएफसी</string>
+    <!-- Accessibility label for nfc icon (not shown on screen) [CHAR LIMIT=NONE] -->
+    <string name="accessibility_status_bar_nfc">एनएफसी</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • डैश चार्जिंग (<xliff:g id="charging_time_left" example="4 घंटे and 2 मिनट">%s</xliff:g> पूर्ण होने में बाकी)</string>
+    <string name="keyguard_plugged_in_dash_charging">डैश चार्जिंग</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • वार्प चार्जिंग (<xliff:g id="charging_time_left" example="4 घंटे and 2 मिनट">%s</xliff:g> पूर्ण होने में बाकी)</string>
+    <string name="keyguard_plugged_in_warp_charging">वार्प चार्जिंग</string>
+    <!-- Screenshot Delete Toast -->
+    <string name="delete_screenshot_toast">स्क्रीनशॉट मिटाया गया</string>
+    <!-- Advanced powermenu -->
+    <string name="global_action_restart_system">पुनः आरम्भ</string>
+    <string name="global_action_restart_advanced">विशेष पुनः आरम्भ</string>
+    <string name="global_action_restart_recovery">रिकवरी</string>
+    <string name="global_action_restart_bootloader">बूटलोडर</string>
+    <string name="global_action_restart_ui">सिस्टम यूआई</string>
+    <string name="global_action_restart_hot">तेज़</string>
+    <!-- QS Config -->
+    <string name="qs_menu_item_columns">स्तंभ</string>
+    <string name="qs_menu_item_columns_landscape">स्तंभ (लैंडस्केप)</string>
+    <string name="qs_menu_item_rows">पंक्तियाँ</string>
+    <string name="qs_menu_item_rows_landscape">पंक्तियाँ (लैंडस्केप)</string>
+    <string name="qs_menu_item_columns_one">1</string>
+    <string name="qs_menu_item_columns_two">2</string>
+    <string name="qs_menu_item_columns_three">3</string>
+    <string name="qs_menu_item_columns_four">4</string>
+    <string name="qs_menu_item_columns_five">5</string>
+    <string name="qs_menu_item_columns_six">6</string>
+    <string name="qs_menu_item_columns_seven">7</string>
+    <string name="qs_menu_item_columns_eight">8</string>
+    <string name="qs_menu_item_reset">रीसेट करें</string>
+    <string name="qs_menu_item_titles">लेबल दिखाएं</string>
+    <string name="qs_menu_item_qs_columns">स्तम्भ (क्विक बार)</string>
+    <string name="qs_menu_item_columns_auto">स्वत:</string>
+    <!-- Smart Pixels QS Tile -->
+    <string name="quick_settings_smart_pixels">स्मार्ट पिक्सल्स</string>
+    <string name="quick_settings_smart_pixels_on_power_save">स्वत: स्मार्ट पिक्सल्स</string>
+    <!-- CPUInfo tile -->
+    <string name="quick_settings_cpuinfo_label">सीपीयू की जानकारी</string>
+    <string name="accessibility_quick_settings_cpuinfo_off">सीपीयू की जानकारी बंद</string>
+    <string name="accessibility_quick_settings_cpuinfo_on">सीपीयू की जानकारी चालू</string>
+    <!-- Screenshot QS tile -->
+    <string name="quick_settings_screenshot_label">स्क्रीनशॉट</string>
+    <string name="quick_settings_full_screenshot_label">पूर्ण</string>
+    <string name="quick_settings_region_screenshot_label">आंशिक</string>
+    <!-- Screen record -->
+    <string name="screenrecord_dialog_title">रिकॉर्डिंग प्रारंभ करें</string>
+    <string name="screenrecord_dialog_summary">रिकॉर्डिंग के समय फोन कोई भी आपत्तिजनक सूचना जैसे पासवर्ड, भुगतान संबंधित जानकारी, फोटो, संदेश या कोई भी आवाज़ रिकॉर्ड कर सकता है।</string>
+    <string name="screenrecord_dialog_start">प्रारंभ करें</string>
+    <string name="screenrecord_dialog_cancel">रद्द करें</string>
+    <string name="screenrecord_taps_title">स्क्रीन पर स्पर्श दिखाएं</string>
+    <string name="screenrecord_stopdot_title">बंद करने के लिए बिंदु दिखाएं</string>
+    <string name="global_action_screenrecord">स्क्रीन को रिकॉर्ड करें</string>
+    <!-- HW Keys Tile -->
+    <string name="accessibility_quick_settings_hwkeys_on">हार्डवेयर बटन्स चालू</string>
+    <string name="accessibility_quick_settings_hwkeys_off">हार्डवेयर बटन्स बंद</string>
+    <string name="quick_settings_hwkeys_label">हार्डवेयर बटन्स</string>
+    <!--Screenrecord Tile-->
+    <string name="screenrecorder_title_tile">स्क्रीन रिकॉर्ड</string>
+    <!-- Heads up snooze toast -->
+    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> नोटिफिकेशन दिखना 1 मिनट के लिए बंद किया गया है।</string>
+    <string name="heads_up_snooze_message"><xliff:g id="string">%s </xliff:g> - नोटिफिकेशन दिखना<xliff:g id="number">%d </xliff:g> मिनट के लिए बंद करें ।</string>
+    <!-- Kill button in notification guts -->
+    <string name="force_stop_dlg_title">बलपूर्वक रोके?</string>
+    <string name="force_stop_dlg_text">यदि आप कोई ऐप जबरदस्ती बंद करते हैं, तो वो दुर्व्यवहार कर सकता है|</string>
+    <string name="dlg_ok">@android:string/ok</string>
+    <string name="dlg_cancel">@android:string/cancel</string>
+    <string name="guts_force_close_app">ऐप बंद करें</string>
+    <!-- Compass QS Tile -->
+    <string name="quick_settings_compass_label">दिशा-सूचक</string>
+    <string name="quick_settings_compass_value"><xliff:g id="डिग्रीज">%1$.0f</xliff:g>\u00b0 <xliff:g id="दिशा">%2$s</xliff:g></string>
+    <string name="quick_settings_compass_init">\u2026 शुरु हो रहा है</string>
+    <string name="accessibility_quick_settings_compass_off">दिशा सूचक बंद।</string>
+    <string name="accessibility_quick_settings_compass_on">दिशा सूचक चालू।</string>
+    <string name="quick_settings_compass_N">उत्तर</string>
+    <string name="quick_settings_compass_NE">उत्तर- पूर्व</string>
+    <string name="quick_settings_compass_E">पूर्व</string>
+    <string name="quick_settings_compass_SE">दक्षिण पूर्व</string>
+    <string name="quick_settings_compass_S">दक्षिण</string>
+    <string name="quick_settings_compass_SW">दक्षिण पश्चिम</string>
+    <string name="quick_settings_compass_W">पश्चिम</string>
+    <string name="quick_settings_compass_NW">उत्तर पश्चिम</string>
+    <!-- Music tile -->
+    <string name="quick_settings_music_label">संगीत</string>
+    <string name="quick_settings_music_play">संगीत चलाएं</string>
+    <string name="quick_settings_music_pause">संगीत थोड़ा रोकें</string>
+    <!-- Reboot/Recovery QS tile -->
+    <string name="quick_settings_reboot_label">पुनः आरम्भ</string>
+    <string name="quick_settings_reboot_recovery_label">रिकवरी</string>
+    <string name="quick_settings_poweroff_label">पावर बंद</string>
+    <string name="quick_settings_sound_search">ध्वनि खोज</string>
+    <string name="quick_settings_sound_search_no_app">क्षमा करें, अगर आपके पास ध्वनि खोज ऐप नहीं है, तो यह काम नहीं करेगा</string>
+    <!-- Navbar editor -->
+    <string name="preview">पूर्वावलोकन</string>
+    <string name="keycode">कुंजी कोड</string>
+    <string name="no_home_title">कोई होम बटन नहीं मिला</string>
+    <string name="no_home_message">इस डिवाइस को नेविगेट करने के लिए एक होम बटन आवश्यक है । सेव करने से पहले कृपया एक होम बटन जोड़ें ।</string>
+    <string name="clipboard_description">क्लिपबोर्ड आइटम्स को सीधे क्लिपबोर्ड पर लाने की अनुमति देता है। मौजूद होने पर आइटम्स को सीधे क्लिपबोर्ड के बाहर से भी लाया जा सकता है।</string>
+    <string name="keycode_description">कुंजीकोड कीबोर्ड बटन को नेविगेशन बार में जोड़ने की अनुमति देता है। दबाए जाने पर वे चुनी हुई कीबोर्ड बटन का कार्य करते हैं। पहले कुंजीकोड के लिए बटन चुने फिर उसपर दिखाने के लिए चिन्ह चुनें</string>
+    <string name="start">प्रारंभ करें</string>
+    <string name="center">मध्य</string>
+    <string name="end">समाप्त</string>
+    <string name="space">जगह बनाने वाला</string>
+    <string name="menu_ime">मेनू / कीबोर्ड बदलने वाला</string>
+    <string name="select_button">जोड़ने के लिए बटन का चयन करें</string>
+    <string name="add_button">बटन जोड़ें</string>
+    <string name="save">सेव करें</string>
+    <string name="reset">रीसेट करें</string>
+    <string name="select_keycode">कीबोर्ड बटन का चयन करें</string>
+    <string name="left">बाएं</string>
+    <string name="right">दाएं</string>
+    <string name="navbar_editor_title">संपादक</string>
+    <string name="navbar_editor_summary">नेविगेशन बार कॉन्फ़िगर करें</string>
+    <string name="navigation_bar_accessibility_dpad_left">कर्सर बाएं</string>
+    <string name="navigation_bar_accessibility_dpad_right">कर्सर दाएं</string>
+    <!-- Name of the camera status bar icon. -->
+    <string name="status_bar_camera">कैमरा</string>
+    <!-- Name of the location status bar icon. -->
+    <string name="status_bar_location">स्थान स्थिति</string>
+    <!-- Name of the microphone status bar icon. -->
+    <string name="status_bar_microphone">माइक्रोफोन</string>
+    <!-- Gaming mode -->
+    <string name="gaming_mode_not_enabled">गेमिंग मोड सेटिंग्स में बंद है</string>
+    <string name="quick_settings_gaming_mode_label">गेमिंग मोड</string>
+    <!-- Content description of the Gaming mode tile in quick settings when disabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_disabled">गेमिंग मोड बंद किया गया</string>
+    <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_enabled">गेमिंग मोड चालू किया गया</string>
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- DataSwitch Tile -->
+    <string name="qs_data_switch_label">डेटा कार्ड स्विच करें</string>
+    <string name="qs_data_switch_toast_0">अभी कोई सिम नहीं डला है</string>
+    <string name="qs_data_switch_toast_1">अभी सिर्फ एक सिम डला है</string>
+    <string name="qs_data_switch_changed_1">मोबाइल डेटा के लिए सिम 1 का उपयोग हो रहा है</string>
+    <string name="qs_data_switch_changed_2">मोबाइल डेटा के लिए सिम 2 का उपयोग हो रहा है</string>
+    <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_running_services">चल रही सर्विसेज खोलें</string>
+    <!-- ADB over network tile -->
+    <string name="quick_settings_network_adb_label">एडीबी नेटवर्क से</string>
+    <string name="quick_settings_network_adb_toast">यूएसबी डिबगिंग चालू नहीं है</string>
+    <!-- Sync QS Tile -->
+    <string name="quick_settings_sync_label">सिंक्रनाइज़ करें</string>
+    <string name="accessibility_quick_settings_sync_off">सिंक्रनाइज़ करना बंद</string>
+    <string name="accessibility_quick_settings_sync_on">सिंक्रनाइज़ करना चालू</string>
+    <string name="accessibility_quick_settings_sync_changed_off">सिंक्रनाइज़ करना बंद किया गया</string>
+    <string name="accessibility_quick_settings_sync_changed_on">सिंक्रनाइज़ करना चालू किया गया</string>
+    <!-- Screen Stabilization -->
+    <string name="quick_settings_stabilization_label">स्क्रीन स्थिरीकरण</string>
+    <string name="quick_settings_stabilization_off">स्थिरीकरण बंद है</string>
+    <string name="quick_settings_stabilization_on">स्थिरीकरण चालू है</string>
+    <string name="low_label">निम्न</string>
+    <string name="high_label">उच्च</string>
+    <string name="stabilization_velocity_friction">गति का घर्षण</string>
+    <string name="stabilization_velocity_amplitude">गति की मात्रा</string>
+    <string name="stabilization_position_friction">स्थिति का घर्षण</string>
+    <!-- AOD QS tile -->
+    <string name="quick_settings_aod_label">स्क्रीन हमेशा चालू</string>
+    <!-- Sound QS tile -->
+    <string name="quick_settings_sound_label">ध्वनि</string>
+    <string name="quick_settings_sound_ring">रिंग</string>
+    <string name="quick_settings_sound_vibrate">कंपन</string>
+    <string name="quick_settings_sound_dnd">परेशान ना करें</string>
+    <!-- FPS Info tile -->
+    <string name="quick_settings_fpsinfo_label">एफपीएस की जानकारी</string>
+    <string name="accessibility_quick_settings_fpsinfo_off">एफपीएस की जानकारी बंद</string>
+    <string name="accessibility_quick_settings_fpsinfo_on">एफपीएस की जानकारी चालू</string>
+    <!-- Screen pinning -->
+    <string name="screen_pinning_description_custom">यह इसे तब तक दिखाता रहेगा जब तक आप अनपिन नहीं करते। अनपिन करने के लिए बैक बटन को कुछ देर दबाए &amp; रखें।</string>
+    <string name="screen_pinning_description_recents_invisible_custom">यह इसे तब तक दिखाता रहेगा जब तक आप अनपिन नहीं करते। अनपिन करने के लिए बैक बटन को कुछ देर दबाए &amp; रखें।</string>
+    <string name="screen_pinning_description_accessible_custom">यह इसे तब तक दिखाता रहेगा जब तक आप अनपिन नहीं करते। अनपिन करने के लिए बैक बटन को कुछ देर दबाए &amp; रखें।</string>
+    <string name="screen_pinning_description_recents_invisible_accessible_custom">यह इसे तब तक दिखाता रहेगा जब तक आप अनपिन नहीं करते। अनपिन करने के लिए बैक बटन को कुछ देर दबाए &amp; रखें।</string>
+    <string name="screen_pinning_toast_custom">इस स्क्रीन को अनपिन करने के लिए बैक बटन को दबाए &amp; रखें</string>
+    <string name="screen_pinning_toast_recents_invisible_custom">इस स्क्रीन को अनपिन करने के लिए बैक बटन को दबाए &amp; रखें</string>
+    <!-- Long swipe gesture actions -->
+    <string name="app_picker_dialog_title">एक ऐप चुनें</string>
+    <string name="recents_app_killed">ऐप बंद किया गया</string>
+    <string name="nope_cant_kill">लॉन्चर बंद नहीं किया जा सकता</string>
+</resources>

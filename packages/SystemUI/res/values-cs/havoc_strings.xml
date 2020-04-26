@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Caffeine tile -->
+    <string name="quick_settings_caffeine_label">Caffeine</string>
+    <string name="quick_settings_caffeine_label_off">Vyp.</string>
+    <string name="accessibility_quick_settings_caffeine_off">Caffeine vyp.</string>
+    <string name="accessibility_quick_settings_caffeine_on">Caffeine zap.</string>
+    <string name="statusbar_items_title">Ikony na stavovém řádku</string>
+    <!-- Reader mode QS tile -->
+    <string name="quick_settings_reading_mode">Režim čtení</string>
+    <string name="accessibility_quick_settings_reading_mode_on">Režim čtení zap.</string>
+    <string name="accessibility_quick_settings_reading_mode_off">Režim čtení vyp.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_on">Režim čtení je zapnutý.</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_off">Režim čtení je vypnutý.</string>
+    <!-- Heads up QS tile -->
+    <string name="quick_settings_heads_up_label">Plovoucí oznámení</string>
+    <string name="accessibility_quick_settings_heads_up_off">Plovoucí oznámení vyp.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Plovoucí oznámení zap.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Plovoucí oznámení byla vypnuta.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Plovoucí oznámení byla zapnuta.</string>
+    <!-- USB tethering QS tile -->
+    <string name="quick_settings_usb_tether_label">USB tethering</string>
+    <!-- Name of the nfc status bar icon. -->
+    <string name="status_bar_nfc">NFC</string>
+    <!-- Accessibility label for nfc icon (not shown on screen) [CHAR LIMIT=NONE] -->
+    <string name="accessibility_status_bar_nfc">NFC</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • DASH nabíjení (zbývá <xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g>)</string>
+    <string name="keyguard_plugged_in_dash_charging">DASH nabíjení</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Warp nabíjení (zbývá <xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> do plného nabití)</string>
+    <string name="keyguard_plugged_in_warp_charging">Warp nabíjení</string>
+    <!-- Screenshot Delete Toast -->
+    <string name="delete_screenshot_toast">Snímek obrazovky byl smazán</string>
+    <!-- Advanced powermenu -->
+    <string name="global_action_restart_system">Restartovat</string>
+    <string name="global_action_restart_advanced">Rozšířený restart</string>
+    <string name="global_action_restart_recovery">Recovery</string>
+    <string name="global_action_restart_bootloader">Bootloader</string>
+    <string name="global_action_restart_ui">SystemUI</string>
+    <string name="global_action_restart_hot">Horký restart</string>
+    <!-- QS Config -->
+    <string name="qs_menu_item_columns">Sloupce</string>
+    <string name="qs_menu_item_columns_landscape">Sloupce (na šířku)</string>
+    <string name="qs_menu_item_rows">Řádky</string>
+    <string name="qs_menu_item_rows_landscape">Řádky (na šířku)</string>
+    <string name="qs_menu_item_columns_one">1</string>
+    <string name="qs_menu_item_columns_two">2</string>
+    <string name="qs_menu_item_columns_three">3</string>
+    <string name="qs_menu_item_columns_four">4</string>
+    <string name="qs_menu_item_columns_five">5</string>
+    <string name="qs_menu_item_columns_six">6</string>
+    <string name="qs_menu_item_columns_seven">7</string>
+    <string name="qs_menu_item_columns_eight">8</string>
+    <string name="qs_menu_item_reset">Resetovat</string>
+    <string name="qs_menu_item_titles">Zobrazit popisky</string>
+    <string name="qs_menu_item_qs_columns">Sloupce (rychlá nastavení)</string>
+    <string name="qs_menu_item_columns_auto">Automaticky</string>
+    <!-- Smart Pixels QS Tile -->
+    <string name="quick_settings_smart_pixels">Smart Pixels</string>
+    <string name="quick_settings_smart_pixels_on_power_save">Automaticky povolit Smart Pixels</string>
+    <!-- CPUInfo tile -->
+    <string name="quick_settings_cpuinfo_label">Informace o CPU</string>
+    <string name="accessibility_quick_settings_cpuinfo_off">Informace o CPU vyp.</string>
+    <string name="accessibility_quick_settings_cpuinfo_on">Informace o CPU zap.</string>
+    <!-- Screenshot QS tile -->
+    <string name="quick_settings_screenshot_label">Snímek obrazovky</string>
+    <string name="quick_settings_full_screenshot_label">Úplný</string>
+    <string name="quick_settings_region_screenshot_label">Částečný</string>
+    <!-- Screen record -->
+    <string name="screenrecord_dialog_title">Spustit nahrávání?</string>
+    <string name="screenrecord_dialog_summary">Během nahrávání může systém Android zachytit jakékoli citlivé informace, které jsou viditelné nebo přehrávané na obrazovce vašeho zařízení. To zahrnuje hesla, informace o platbách, fotografie, zprávy a zvuk.</string>
+    <string name="screenrecord_dialog_start">Spustit</string>
+    <string name="screenrecord_dialog_cancel">Zrušit</string>
+    <string name="screenrecord_taps_title">Zobrazovat dotyky na obrazovce</string>
+    <string name="screenrecord_stopdot_title">Zobrazit puntík pro zastavení</string>
+    <string name="global_action_screenrecord">Videozáznam obrazovky</string>
+    <!-- HW Keys Tile -->
+    <string name="accessibility_quick_settings_hwkeys_on">HW tlačítka zapnuta</string>
+    <string name="accessibility_quick_settings_hwkeys_off">HW tlačítka vypnuta</string>
+    <string name="quick_settings_hwkeys_label">HW tlačítka</string>
+    <!--Screenrecord Tile-->
+    <string name="screenrecorder_title_tile">Videozáznam obrazovky</string>
+    <!-- Heads up snooze toast -->
+    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - Plovoucí oznámení jsou odložena na dobu 1 minuty.</string>
+    <string name="heads_up_snooze_message"><xliff:g id="string">%s </xliff:g> - Plovoucí oznámení jsou odložena na dobu <xliff:g id="number">%d </xliff:g> minut.</string>
+    <!-- Kill button in notification guts -->
+    <string name="force_stop_dlg_title">Vynutit ukončení?</string>
+    <string name="force_stop_dlg_text">Vynucené zastavení může způsobit nepředvídatelné chování aplikace.</string>
+    <string name="dlg_ok">@android:string/ok</string>
+    <string name="dlg_cancel">@android:string/cancel</string>
+    <string name="guts_force_close_app">Zavřít aplikaci</string>
+    <!-- Compass QS Tile -->
+    <string name="quick_settings_compass_label">Kompas</string>
+    <string name="quick_settings_compass_value"><xliff:g id="degrees">%1$.0f</xliff:g>\u00b0 <xliff:g id="direction">%2$s</xliff:g></string>
+    <string name="quick_settings_compass_init">Spouštění\u2026</string>
+    <string name="accessibility_quick_settings_compass_off">Kompas vyp.</string>
+    <string name="accessibility_quick_settings_compass_on">Kompas zap.</string>
+    <string name="quick_settings_compass_N">S</string>
+    <string name="quick_settings_compass_NE">SV</string>
+    <string name="quick_settings_compass_E">V</string>
+    <string name="quick_settings_compass_SE">JV</string>
+    <string name="quick_settings_compass_S">J</string>
+    <string name="quick_settings_compass_SW">JZ</string>
+    <string name="quick_settings_compass_W">Z</string>
+    <string name="quick_settings_compass_NW">SZ</string>
+    <!-- Music tile -->
+    <string name="quick_settings_music_label">Hudba</string>
+    <string name="quick_settings_music_play">Přehrát</string>
+    <string name="quick_settings_music_pause">Pozastavit</string>
+    <!-- Reboot/Recovery QS tile -->
+    <string name="quick_settings_reboot_label">Restartovat</string>
+    <string name="quick_settings_reboot_recovery_label">Recovery</string>
+    <string name="quick_settings_poweroff_label">Vypnout</string>
+    <string name="quick_settings_sound_search">Zvukové vyhledávání</string>
+    <string name="quick_settings_sound_search_no_app">Je nám to líto, ale nefunguje to, pokud nemáte aplikaci Zvukové vyhledávání.</string>
+    <!-- Navbar editor -->
+    <string name="preview">Náhled</string>
+    <string name="keycode">Klávesa</string>
+    <string name="no_home_title">Nebylo nalezeno tlačítko „Domů“</string>
+    <string name="no_home_message">Pro navigaci v zařízení je potřeba mít nastavené tlačítko „Domů.“ Před uložením toto tlačítko přidejte.</string>
+    <string name="clipboard_description">Tlačítko „Schránka“ umožňuje přetahovat položky přímo do schránky. Položky vložené do schránky lze také přetáhnout ven.</string>
+    <string name="keycode_description">Tlačítka „Klávesa“ umožňují přidat na navigační panel klávesy z klávesnice. Když na ně klepnete, budou emulovat vybranou klávesu. K tlačítku je nejprve nutné přiřadit klávesu a poté obrázek, který na něm bude zobrazen.</string>
+    <string name="start">Začátek</string>
+    <string name="center">Uprostřed</string>
+    <string name="end">Konec</string>
+    <string name="space">Mezerník</string>
+    <string name="menu_ime">Přepínač nabídky/klávesnice</string>
+    <string name="select_button">Vyberte tlačítko pro přidání</string>
+    <string name="add_button">Přidat tlačítko</string>
+    <string name="save">Uložit</string>
+    <string name="reset">Resetovat</string>
+    <string name="select_keycode">Vyberte tlačítko klávesnice</string>
+    <string name="left">Levé</string>
+    <string name="right">Pravé</string>
+    <string name="navbar_editor_title">Editor</string>
+    <string name="navbar_editor_summary">Konfigurovat navigační panel</string>
+    <string name="navigation_bar_accessibility_dpad_left">Kurzor doleva</string>
+    <string name="navigation_bar_accessibility_dpad_right">Kurzor doprava</string>
+    <!-- Name of the camera status bar icon. -->
+    <string name="status_bar_camera">Fotoaparát</string>
+    <!-- Name of the location status bar icon. -->
+    <string name="status_bar_location">Poloha</string>
+    <!-- Name of the microphone status bar icon. -->
+    <string name="status_bar_microphone">Mikrofon</string>
+    <!-- Gaming mode -->
+    <string name="gaming_mode_not_enabled">Herní režim je vypnutý v Nastavení</string>
+    <string name="quick_settings_gaming_mode_label">Herní režim</string>
+    <!-- Content description of the Gaming mode tile in quick settings when disabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_disabled">Herní režim je vypnutý.</string>
+    <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_enabled">Herní režim je zapnutý.</string>
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- DataSwitch Tile -->
+    <string name="qs_data_switch_label">Přepnout SIM pro data</string>
+    <string name="qs_data_switch_toast_0">Momentálně není vložena žádná SIM karta</string>
+    <string name="qs_data_switch_toast_1">Momentálně je vložena pouze jedna SIM karta</string>
+    <string name="qs_data_switch_changed_1">Mobilní data jsou používána na SIM 1</string>
+    <string name="qs_data_switch_changed_2">Mobilní data jsou používána na SIM 2</string>
+    <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_running_services">Otevřít obrazovku spuštěných služeb.</string>
+    <!-- ADB over network tile -->
+    <string name="quick_settings_network_adb_label">ADB přes síť</string>
+    <string name="quick_settings_network_adb_toast">Ladění USB není povoleno</string>
+    <!-- Sync QS Tile -->
+    <string name="quick_settings_sync_label">Synch.</string>
+    <string name="accessibility_quick_settings_sync_off">Synch. vyp.</string>
+    <string name="accessibility_quick_settings_sync_on">Synch. zap.</string>
+    <string name="accessibility_quick_settings_sync_changed_off">Synchronizace vypnuta</string>
+    <string name="accessibility_quick_settings_sync_changed_on">Synchronizace zapnuta</string>
+    <!-- Screen Stabilization -->
+    <string name="quick_settings_stabilization_label">Stabilizace obrazovky</string>
+    <string name="quick_settings_stabilization_off">Stabilizace je vypnuta</string>
+    <string name="quick_settings_stabilization_on">Stabilizace je zapnuta</string>
+    <string name="low_label">Nízká</string>
+    <string name="high_label">Vysoká</string>
+    <string name="stabilization_velocity_friction">Rychlost přesunu</string>
+    <string name="stabilization_velocity_amplitude">Amplituda rychlosti</string>
+    <string name="stabilization_position_friction">Pozice přesunu</string>
+    <!-- AOD QS tile -->
+    <string name="quick_settings_aod_label">AOD</string>
+    <!-- Sound QS tile -->
+    <string name="quick_settings_sound_label">Zvuk</string>
+    <string name="quick_settings_sound_ring">Vyzvánění</string>
+    <string name="quick_settings_sound_vibrate">Vibrace</string>
+    <string name="quick_settings_sound_dnd">Nerušit</string>
+    <!-- FPS Info tile -->
+    <string name="quick_settings_fpsinfo_label">Informace o FPS</string>
+    <string name="accessibility_quick_settings_fpsinfo_off">Informace o FPS vypnuty</string>
+    <string name="accessibility_quick_settings_fpsinfo_on">Informace o FPS zapnuty</string>
+    <!-- Screen pinning -->
+    <string name="screen_pinning_description_custom">Obsah bude připnut v zobrazení, dokud jej neuvolníte. Uvolníte jej stisknutím a podržením tlačítka Zpět.</string>
+    <string name="screen_pinning_description_recents_invisible_custom">Obsah bude připnut v zobrazení, dokud jej neuvolníte. Uvolníte jej stisknutím a podržením tlačítka Zpět.</string>
+    <string name="screen_pinning_description_accessible_custom">Obsah bude připnut v zobrazení, dokud jej neuvolníte. Uvolníte jej stisknutím a podržením tlačítka Zpět.</string>
+    <string name="screen_pinning_description_recents_invisible_accessible_custom">Obsah bude připnut v zobrazení, dokud jej neuvolníte. Uvolníte jej stisknutím a podržením tlačítka Zpět.</string>
+    <string name="screen_pinning_toast_custom">Stisknutím a podržením tlačítka Zpět uvolníte obrazovku</string>
+    <string name="screen_pinning_toast_recents_invisible_custom">Stisknutím a podržením tlačítka Zpět uvolníte obrazovku</string>
+    <!-- Long swipe gesture actions -->
+    <string name="app_picker_dialog_title">Vybrat aplikaci</string>
+    <string name="recents_app_killed">Aplikace ukončena</string>
+    <string name="nope_cant_kill">Spouštěč nemůže být ukončen</string>
+</resources>

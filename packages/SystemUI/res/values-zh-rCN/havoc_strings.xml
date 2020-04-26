@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (C) 2019 Havoc-OS
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Caffeine tile -->
+    <string name="quick_settings_caffeine_label">屏幕常亮</string>
+    <string name="quick_settings_caffeine_label_off">关闭</string>
+    <string name="accessibility_quick_settings_caffeine_off">关闭屏幕常亮</string>
+    <string name="accessibility_quick_settings_caffeine_on">开启屏幕常亮</string>
+    <string name="statusbar_items_title">状态栏图标</string>
+    <!-- Reader mode QS tile -->
+    <string name="quick_settings_reading_mode">阅读模式</string>
+    <string name="accessibility_quick_settings_reading_mode_on">开启阅读模式</string>
+    <string name="accessibility_quick_settings_reading_mode_off">关闭阅读模式</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_on">阅读模式已开启</string>
+    <string name="accessibility_quick_settings_reading_mode_changed_off">阅读模式已关闭</string>
+    <!-- Heads up QS tile -->
+    <string name="quick_settings_heads_up_label">浮动通知</string>
+    <string name="accessibility_quick_settings_heads_up_off">关闭浮动通知</string>
+    <string name="accessibility_quick_settings_heads_up_on">开启浮动通知</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">浮动通知已关闭</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">浮动通知已开启</string>
+    <!-- USB tethering QS tile -->
+    <string name="quick_settings_usb_tether_label">USB 网络共享</string>
+    <!-- Name of the nfc status bar icon. -->
+    <string name="status_bar_nfc">NFC</string>
+    <!-- Accessibility label for nfc icon (not shown on screen) [CHAR LIMIT=NONE] -->
+    <string name="accessibility_status_bar_nfc">NFC</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_dash_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Dash 闪充中 (还需 <xliff:g id="charging_time_left">%s</xliff:g> 充满)</string>
+    <string name="keyguard_plugged_in_dash_charging">Dash闪充</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Warp闪充中 (还需<xliff:g id="charging_time_left" >%s</xliff:g> 充满)</string>
+    <string name="keyguard_plugged_in_warp_charging">Warp闪充</string>
+    <!-- Screenshot Delete Toast -->
+    <string name="delete_screenshot_toast">屏幕截图已删除</string>
+    <!-- Advanced powermenu -->
+    <string name="global_action_restart_system">重新启动</string>
+    <string name="global_action_restart_advanced">高级重启</string>
+    <string name="global_action_restart_recovery">恢复模式</string>
+    <string name="global_action_restart_bootloader">引导模式</string>
+    <string name="global_action_restart_ui">系统界面</string>
+    <string name="global_action_restart_hot">热重启</string>
+    <!-- QS Config -->
+    <string name="qs_menu_item_columns">列数</string>
+    <string name="qs_menu_item_columns_landscape">列数(横屏)</string>
+    <string name="qs_menu_item_rows">行数</string>
+    <string name="qs_menu_item_rows_landscape">行数(横屏)</string>
+    <string name="qs_menu_item_columns_one">1</string>
+    <string name="qs_menu_item_columns_two">2</string>
+    <string name="qs_menu_item_columns_three">3</string>
+    <string name="qs_menu_item_columns_four">4</string>
+    <string name="qs_menu_item_columns_five">5</string>
+    <string name="qs_menu_item_columns_six">6</string>
+    <string name="qs_menu_item_columns_seven">7</string>
+    <string name="qs_menu_item_columns_eight">8</string>
+    <string name="qs_menu_item_reset">重置</string>
+    <string name="qs_menu_item_titles">显示标签</string>
+    <string name="qs_menu_item_qs_columns">列数(快捷栏)</string>
+    <string name="qs_menu_item_columns_auto">自动调节</string>
+    <!-- Smart Pixels QS Tile -->
+    <string name="quick_settings_smart_pixels">智能像素</string>
+    <string name="quick_settings_smart_pixels_on_power_save">自动启用智能像素</string>
+    <!-- CPUInfo tile -->
+    <string name="quick_settings_cpuinfo_label">CPU信息</string>
+    <string name="accessibility_quick_settings_cpuinfo_off">关闭 CPU 信息</string>
+    <string name="accessibility_quick_settings_cpuinfo_on">开启 CPU 信息</string>
+    <!-- Screenshot QS tile -->
+    <string name="quick_settings_screenshot_label">屏幕截图</string>
+    <string name="quick_settings_full_screenshot_label">完整</string>
+    <string name="quick_settings_region_screenshot_label">部分</string>
+    <!-- Screen record -->
+    <string name="screenrecord_dialog_title">开始录制？</string>
+    <string name="screenrecord_dialog_summary">在录制过程中，安卓系统可以捕获在您的屏幕上可见或在您的设备上播放的任何敏感信息。 这包括密码、付款信息、照片、消息和音频。</string>
+    <string name="screenrecord_dialog_start">始于</string>
+    <string name="screenrecord_dialog_cancel">取消</string>
+    <string name="screenrecord_taps_title">显示触摸效果</string>
+    <string name="screenrecord_stopdot_title">显示停止圆点</string>
+    <string name="global_action_screenrecord">屏幕录制</string>
+    <!-- HW Keys Tile -->
+    <string name="accessibility_quick_settings_hwkeys_on">启用实体按键</string>
+    <string name="accessibility_quick_settings_hwkeys_off">关闭实体按键</string>
+    <string name="quick_settings_hwkeys_label">实体按键</string>
+    <!--Screenrecord Tile-->
+    <string name="screenrecorder_title_tile">屏幕录制</string>
+    <!-- Heads up snooze toast -->
+    <string name="heads_up_snooze_message_one_minute"><xliff:g id="string">%s</xliff:g> - 浮动通知暂停1分钟。</string>
+    <string name="heads_up_snooze_message"><xliff:g id="string">%s</xliff:g> - 浮动通知暂停 <xliff:g id="number">%d</xliff:g> 分钟。</string>
+    <!-- Kill button in notification guts -->
+    <string name="force_stop_dlg_title">要强行停止吗？</string>
+    <string name="force_stop_dlg_text">强行停止某个应用可能会导致其出现异常</string>
+    <string name="dlg_ok">@android:string/ok</string>
+    <string name="dlg_cancel">@android:string/cancel</string>
+    <string name="guts_force_close_app">关闭应用</string>
+    <!-- Compass QS Tile -->
+    <string name="quick_settings_compass_label">指南针</string>
+    <string name="quick_settings_compass_value"><xliff:g id="degrees">%1$.0f</xliff:g>\u00b0 <xliff:g id="direction">%2$s</xliff:g></string>
+    <string name="quick_settings_compass_init">正在初始化…</string>
+    <string name="accessibility_quick_settings_compass_off">指南针已关闭</string>
+    <string name="accessibility_quick_settings_compass_on">指南针已开启</string>
+    <string name="quick_settings_compass_N">北</string>
+    <string name="quick_settings_compass_NE">东北</string>
+    <string name="quick_settings_compass_E">东</string>
+    <string name="quick_settings_compass_SE">东南</string>
+    <string name="quick_settings_compass_S">南</string>
+    <string name="quick_settings_compass_SW">西南</string>
+    <string name="quick_settings_compass_W">西</string>
+    <string name="quick_settings_compass_NW">西北</string>
+    <!-- Music tile -->
+    <string name="quick_settings_music_label">音乐</string>
+    <string name="quick_settings_music_play">播放</string>
+    <string name="quick_settings_music_pause">暂停</string>
+    <!-- Reboot/Recovery QS tile -->
+    <string name="quick_settings_reboot_label">重新启动</string>
+    <string name="quick_settings_reboot_recovery_label">恢复模式</string>
+    <string name="quick_settings_poweroff_label">关机</string>
+    <string name="quick_settings_sound_search">语音搜索</string>
+    <string name="quick_settings_sound_search_no_app">对不起，您未安装语音搜索应用</string>
+    <!-- Navbar editor -->
+    <string name="preview">预览</string>
+    <string name="keycode">键值</string>
+    <string name="no_home_title">未找到主屏幕按钮</string>
+    <string name="no_home_message">要在此设备上使用导航按钮或手势，您必须使用主屏幕按钮。请先添加主屏幕按钮，然后再保存。</string>
+    <string name="clipboard_description">您可以利用“剪贴板”按钮将相应内容直接拖动到剪贴板中。剪贴板中有内容时，您也可以将剪贴板中的内容直接拖出来。</string>
+    <string name="keycode_description">您可以利用“键值”按钮将键盘按键添加到导航栏中。只要按下这些按钮，按钮即可模仿所选键盘按键执行相应的操作。要使用这项功能，您必须先为按钮选择相应的按键，然后再选择要在按钮上显示的图片。</string>
+    <string name="start">开始</string>
+    <string name="center">居中</string>
+    <string name="end">结束</string>
+    <string name="space">间隔</string>
+    <string name="menu_ime">菜单 / 键盘切换器</string>
+    <string name="select_button">选择要添加的按钮</string>
+    <string name="add_button">添加按钮</string>
+    <string name="save">保存</string>
+    <string name="reset">重置</string>
+    <string name="select_keycode">选择键盘按钮</string>
+    <string name="left">左侧</string>
+    <string name="right">右侧</string>
+    <string name="navbar_editor_title">编辑器</string>
+    <string name="navbar_editor_summary">配置导航栏</string>
+    <string name="navigation_bar_accessibility_dpad_left">光标左移</string>
+    <string name="navigation_bar_accessibility_dpad_right">光标右移</string>
+    <!-- Name of the camera status bar icon. -->
+    <string name="status_bar_camera">相机</string>
+    <!-- Name of the location status bar icon. -->
+    <string name="status_bar_location">位置</string>
+    <!-- Name of the microphone status bar icon. -->
+    <string name="status_bar_microphone">麦克风</string>
+    <!-- Gaming mode -->
+    <string name="gaming_mode_not_enabled">游戏模式在设置中被禁用</string>
+    <string name="quick_settings_gaming_mode_label">游戏模式</string>
+    <!-- Content description of the Gaming mode tile in quick settings when disabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_disabled">游戏模式已关闭</string>
+    <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_gaming_mode_enabled">游戏模式已开启</string>
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- DataSwitch Tile -->
+    <string name="qs_data_switch_label">切换数据卡</string>
+    <string name="qs_data_switch_toast_0">当前未插入 SIM 卡</string>
+    <string name="qs_data_switch_toast_1">当前仅插入一张 SIM 卡</string>
+    <string name="qs_data_switch_changed_1">设置卡1为数据卡</string>
+    <string name="qs_data_switch_changed_2">设置卡2为数据卡</string>
+    <!-- accessibility label for button to open running apps prefscreen [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_running_services">打开正在运行的服务界面</string>
+    <!-- ADB over network tile -->
+    <string name="quick_settings_network_adb_label">网络 ADB 调试</string>
+    <string name="quick_settings_network_adb_toast">USB调试未启用</string>
+    <!-- Sync QS Tile -->
+    <string name="quick_settings_sync_label">同步</string>
+    <string name="accessibility_quick_settings_sync_off">关闭同步</string>
+    <string name="accessibility_quick_settings_sync_on">开启同步</string>
+    <string name="accessibility_quick_settings_sync_changed_off">同步已关闭</string>
+    <string name="accessibility_quick_settings_sync_changed_on">同步已开启</string>
+    <!-- Screen Stabilization -->
+    <string name="quick_settings_stabilization_label">屏幕防抖</string>
+    <string name="quick_settings_stabilization_off">防抖已禁用</string>
+    <string name="quick_settings_stabilization_on">防抖已启用</string>
+    <string name="low_label">低</string>
+    <string name="high_label">高</string>
+    <string name="stabilization_velocity_friction">移动速度</string>
+    <string name="stabilization_velocity_amplitude">移动幅度</string>
+    <string name="stabilization_position_friction">移动位置</string>
+    <!-- AOD QS tile -->
+    <string name="quick_settings_aod_label">始终显示</string>
+    <!-- Sound QS tile -->
+    <string name="quick_settings_sound_label">声音</string>
+    <string name="quick_settings_sound_ring">响铃</string>
+    <string name="quick_settings_sound_vibrate">振动</string>
+    <string name="quick_settings_sound_dnd">勿扰模式</string>
+    <!-- FPS Info tile -->
+    <string name="quick_settings_fpsinfo_label">FPS信息</string>
+    <string name="accessibility_quick_settings_fpsinfo_off">关闭 FPS 信息</string>
+    <string name="accessibility_quick_settings_fpsinfo_on">开启 FPS 信息</string>
+    <!-- Screen pinning -->
+    <string name="screen_pinning_description_custom">这将会固定显示此屏幕，直到您取消固定为止。长按&amp;“返回”即可取消固定屏幕。</string>
+    <string name="screen_pinning_description_recents_invisible_custom">这将会固定显示此屏幕，直到您取消固定为止。长按&amp;“返回”即可取消固定屏幕。</string>
+    <string name="screen_pinning_description_accessible_custom">这将会固定显示此屏幕，直到您取消固定为止。长按&amp;“返回”即可取消固定屏幕。</string>
+    <string name="screen_pinning_description_recents_invisible_accessible_custom">这将会固定显示此屏幕，直到您取消固定为止。长按&amp;“返回”即可取消固定屏幕。</string>
+    <string name="screen_pinning_toast_custom">要取消固定屏幕，请长按返回键</string>
+    <string name="screen_pinning_toast_recents_invisible_custom">要取消固定屏幕，请长按返回键</string>
+    <!-- Long swipe gesture actions -->
+    <string name="app_picker_dialog_title">选择一个应用</string>
+    <string name="recents_app_killed">应用已被终止</string>
+    <string name="nope_cant_kill">启动器不能被终止</string>
+</resources>

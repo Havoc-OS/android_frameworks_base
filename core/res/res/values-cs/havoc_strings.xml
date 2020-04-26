@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (c) 2019 Havoc-OS
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Button that copies the url to the log of a crashed application -->
+    <string name="aerr_copy">Kopírovat URL protokolu o selhání</string>
+    <string name="url_copy_success">URL úspěšně zkopírována</string>
+    <string name="url_copy_failed">Při nahrávání protokolu o selhání na dogbin došlo k chybě</string>
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_fakePackageSignature">Napodobit podpis balíčku</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_fakePackageSignature">Umožňuje aplikaci předstírat, že je jinou aplikací. Škodlivé aplikace by mohly použít tuto možnost k přístupu k soukromým datům aplikací. Udělujte toto oprávnění s opatrností!</string>
+    <!-- Title of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgrouplab_fake_package_signature">Napodobit podpis balíčku</string>
+    <!-- Description of a category of application permissions, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permgroupdesc_fake_package_signature">povolit napodobit podpis balíčku</string>
+    <!-- Message shown to the user when the apps requests permission from this group. If ever possible this should stay below 80 characters (assuming the parameters takes 20 characters). Don't abbreviate until the message reaches 120 characters though. [CHAR LIMIT=120] -->
+    <string name="permgrouprequest_fake_package_signature">Povolit aplikaci
+        &lt;b&gt;<xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b&gt; napodobovat podpis balíčku?</string>
+    <!-- LiveDisplay strings -->
+    <string name="live_display_auto">Automaticky</string>
+    <string name="live_display_auto_summary">Automaticky upravit teplotu barev obrazovky po západu a východu slunce</string>
+    <string name="live_display_off">Vyp.</string>
+    <string name="live_display_off_summary">Zakázat všechny úpravy</string>
+    <string name="live_display_day">Den</string>
+    <string name="live_display_day_summary">Použít pouze denní nastavení</string>
+    <string name="live_display_night">Noc</string>
+    <string name="live_display_night_summary">Použít pouze noční nastavení</string>
+    <string name="live_display_outdoor">Venku (slunečno)</string>
+    <string name="live_display_outdoor_summary">Použít pouze venkovní nastavení</string>
+    <string name="live_display_hint">LiveDisplay může pomoci snížit namáhání očí a umožnit vám lépe usnout. Klepnutím sem tuto funkci můžete vyzkoušet!</string>
+    <string name="accessibility_quick_settings_live_display_off">LiveDisplay vyp.</string>
+    <string name="accessibility_quick_settings_live_display_auto">LiveDisplay: automatický režim.</string>
+    <string name="accessibility_quick_settings_live_display_day">LiveDisplay: denní režim.</string>
+    <string name="accessibility_quick_settings_live_display_night">LiveDisplay: noční režim.</string>
+    <string name="accessibility_quick_settings_live_display_outdoor">LiveDisplay: venkovní režim.</string>
+    <string name="accessibility_quick_settings_live_display_changed_off">LiveDisplay je vypnutý.</string>
+    <string name="accessibility_quick_settings_live_display_changed_auto">LiveDisplay změněn na automatický režim.</string>
+    <string name="accessibility_quick_settings_live_display_changed_day">LiveDisplay změněn na denní režim.</string>
+    <string name="accessibility_quick_settings_live_display_changed_night">LiveDisplay změněn na noční režim.</string>
+    <string name="accessibility_quick_settings_live_display_changed_outdoor">LiveDisplay změněn na venkovní režim.</string>
+    <!-- Advanced reboot -->
+    <string name="reboot_title">Restartovat</string>
+    <string name="reboot_message">Restartování systému...</string>
+    <!-- Vendor mismatch fingerprint warning [CHAR LIMIT=NONE] -->
+    <string name="system_error_vendorprint">Váš dodavatel obrazu se neshoduje se systémem. Prosím nainstalujte obraz pro vaše zařízení <xliff:g id="string">%s </xliff:g></string>
+    <!-- Pocket Lock -->
+    <string name="pocket_lock_message_long_press">Stisknutím a podržením tlačítka napájení zapnout obrazovku</string>
+    <!-- Alert slider proc nodes paths -->
+    <!-- Gaming mode -->
+    <string name="notification_channel_gaming">Herní režim</string>
+    <string name="gaming_mode_notification_title">Herní režim povolen</string>
+    <string name="gaming_mode_notification_content">Klepněte sem pro vypnutí Herního režimu</string>
+    <string name="gaming_mode_enabled_toast">Herní režim je zapnutý</string>
+    <string name="gaming_mode_disabled_toast">Herní režim je vypnutý</string>
+</resources>
