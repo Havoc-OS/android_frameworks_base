@@ -938,6 +938,15 @@ public final class SystemServiceRegistry {
                         return new PocketManager(ctx.getOuterContext(), service);
                     }});
 
+        registerService(Context.APPLOCK_SERVICE, AppLockManager.class,
+                new CachedServiceFetcher<AppLockManager>() {
+            @Override
+            public AppLockManager createService(ContextImpl ctx) throws ServiceNotFoundException {
+                IBinder b = ServiceManager.getServiceOrThrow(Context.APPLOCK_SERVICE);
+                IAppLockService service = IAppLockService.Stub.asInterface(b);
+                return new AppLockManager(service);
+            }});
+
 	    registerService(Context.DC_DIM_SERVICE, DcDimmingManager.class,
                 new CachedServiceFetcher<DcDimmingManager>() {
             @Override
