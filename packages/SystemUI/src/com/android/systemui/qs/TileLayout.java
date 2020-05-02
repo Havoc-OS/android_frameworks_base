@@ -35,7 +35,6 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
     protected final ArrayList<TileRecord> mRecords = new ArrayList<>();
     private int mCellMarginTop;
     private boolean mListening;
-    protected int mMaxAllowedRows = 4;
 
     public TileLayout(Context context) {
         this(context, null);
@@ -93,7 +92,6 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
         mCellMarginVertical= res.getDimensionPixelSize(R.dimen.qs_tile_margin_vertical);
         mCellMarginTop = res.getDimensionPixelSize(R.dimen.qs_tile_margin_top);
         mSidePadding = res.getDimensionPixelOffset(R.dimen.qs_tile_layout_margin_side);
-        mMaxAllowedRows = Math.max(1, getResources().getInteger(R.integer.quick_settings_max_rows));
         updateSettings();
         return false;
     }
@@ -131,40 +129,19 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
     }
 
     /**
-     * Determines the maximum number of rows that can be shown based on height. Clips at a minimum
-     * of 1 and a maximum of mMaxAllowedRows.
+     * Determines the maximum number of rows that can be shown based on height.
+     * Clips at a minimum of 1.
      *
      * @param heightMeasureSpec Available height.
      * @param tilesCount Upper limit on the number of tiles to show. to prevent empty rows.
      */
     public boolean updateMaxRows(int heightMeasureSpec, int tilesCount) {
-        final Resources res = getContext().getResources();
-        final ContentResolver resolver = mContext.getContentResolver();
         final int availableHeight = MeasureSpec.getSize(heightMeasureSpec) - mCellMarginTop
                 + mCellMarginVertical;
         final int previousRows = mRows;
-        mRows = availableHeight / (mCellHeight + mCellMarginVertical);
-        if (mRows >= mMaxAllowedRows) {
-            mRows = mMaxAllowedRows;
-        } else if (mRows <= 1) {
-            mRows = 1;
-        }
         if (mRows > (tilesCount + mColumns - 1) / mColumns) {
             mRows = (tilesCount + mColumns - 1) / mColumns;
         }
-        int rowsSet;
-        if (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            rowsSet = Settings.System.getIntForUser(resolver,
-                    Settings.System.QS_LAYOUT_ROWS, 3,
-                    UserHandle.USER_CURRENT);
-        }
-        else {
-            rowsSet = Settings.System.getIntForUser(resolver,
-                    Settings.System.QS_LAYOUT_ROWS_LANDSCAPE, 3,
-                    UserHandle.USER_CURRENT);
-        }
-        if (mRows > rowsSet)
-            mRows = rowsSet;
         return previousRows != mRows;
     }
 
@@ -239,7 +216,7 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
         boolean showTitles = Settings.System.getIntForUser(
                 mContext.getContentResolver(), Settings.System.QS_TILE_TITLE_VISIBILITY, 1,
                 UserHandle.USER_CURRENT) == 1;
-         if (showTitles) {
+        if (showTitles) {
             mCellHeight = mContext.getResources().getDimensionPixelSize(R.dimen.qs_tile_height);
         } else {
             mCellHeight = mContext.getResources().getDimensionPixelSize(R.dimen.qs_tile_height_wo_label);
