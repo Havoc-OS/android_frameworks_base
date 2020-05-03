@@ -436,6 +436,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         }
 
         this.setImageResource(R.drawable.fod_icon_default);
+        this.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
     }
 
     public void show() {
