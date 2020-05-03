@@ -103,6 +103,9 @@
     <!-- Volume panel -->
     <dimen name="volume_dialog_panel_transparent_padding_left">20dp</dimen>
 
+    <!-- Size of the FOD icon -->
+    <dimen name="fod_icon_size">174.0px</dimen>
+
     <!-- Size of the FOD animation -->
     <dimen name="fod_animation_size">550.0px</dimen>
     <dimen name="fod_animation_offset">0.0px</dimen>
