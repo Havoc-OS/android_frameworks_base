@@ -97,6 +97,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private FODAnimation mFODAnimation;
     private boolean mIsRecognizingAnimEnabled;
     private boolean mShouldRemoveIconOnAOD;
+    private boolean mScreenOffFodEnabled;
+    private boolean mScreenOffFodIconEnabled;
 
     private IFingerprintInscreenCallback mFingerprintInscreenCallback =
             new IFingerprintInscreenCallback.Stub() {
@@ -471,7 +473,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         if (mIsCircleShowing) {
             setAlpha(1.0f);
         } else {
-            setAlpha(mIsDreaming ? 0.75f : 1.0f);
+            setAlpha(mIsDreaming ? 0.5f : 1.0f);
         }
     }
 
@@ -542,9 +544,11 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private void updateSettings() {
         mIsRecognizingAnimEnabled = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.FOD_RECOGNIZING_ANIMATION, 1) != 0;
-
-        mShouldRemoveIconOnAOD = Settings.System.getInt(mContext.getContentResolver(),
+        mScreenOffFodEnabled = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.SCREEN_OFF_FOD, 0) != 0;
+        mScreenOffFodIconEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_OFF_FOD_ICON, 1) != 0;
+        mShouldRemoveIconOnAOD = mScreenOffFodEnabled && !mScreenOffFodIconEnabled;
     }
 
     private class BurnInProtectionTask extends TimerTask {
