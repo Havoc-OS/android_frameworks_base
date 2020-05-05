@@ -116,6 +116,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private boolean mTouchedOutside;
     private boolean mIsAnimating = false;
     private boolean mShouldRemoveIconOnAOD;
+    private boolean mScreenOffFodEnabled;
+    private boolean mScreenOffFodIconEnabled;
 
     private Handler mHandler;
 
@@ -265,8 +267,11 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
                 updateIconDim(false);
             }
 
-            mShouldRemoveIconOnAOD = Settings.System.getInt(mContext.getContentResolver(),
+            mScreenOffFodEnabled = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.SCREEN_OFF_FOD, 0) != 0;
+            mScreenOffFodIconEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.SCREEN_OFF_FOD_ICON, 1) != 0;
+            mShouldRemoveIconOnAOD = mScreenOffFodEnabled && !mScreenOffFodIconEnabled;
         }
     }
 
