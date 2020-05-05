@@ -16,6 +16,8 @@
 
 package com.android.systemui.statusbar.phone;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.res.Resources;
 import android.hardware.display.AmbientDisplayConfiguration;
 import android.os.PowerManager;
@@ -47,6 +49,7 @@ public class DozeParameters implements TunerService.Tunable,
     public static final boolean FORCE_BLANKING =
             SystemProperties.getBoolean("debug.force_blanking", false);
 
+    private final Context mContext;
     private final AmbientDisplayConfiguration mAmbientDisplayConfiguration;
     private final PowerManager mPowerManager;
 
@@ -61,11 +64,13 @@ public class DozeParameters implements TunerService.Tunable,
             AmbientDisplayConfiguration ambientDisplayConfiguration,
             AlwaysOnDisplayPolicy alwaysOnDisplayPolicy,
             PowerManager powerManager,
-            TunerService tunerService) {
+            TunerService tunerService,
+            Context context) {
         mResources = resources;
         mAmbientDisplayConfiguration = ambientDisplayConfiguration;
         mAlwaysOnPolicy = alwaysOnDisplayPolicy;
 
+        mContext = context;
         mControlScreenOffAnimation = !getDisplayNeedsBlanking();
         mPowerManager = powerManager;
         mPowerManager.setDozeAfterScreenOff(!mControlScreenOffAnimation);
@@ -184,8 +189,11 @@ public class DozeParameters implements TunerService.Tunable,
      * @return {@code true} if screen needs to be completely black before a power transition.
      */
     public boolean getDisplayNeedsBlanking() {
-        return FORCE_BLANKING || !FORCE_NO_BLANKING && mResources.getBoolean(
-                com.android.internal.R.bool.config_displayBlanksAfterDoze);
+        final ContentResolver resolver = mContext.getContentResolver();
+        boolean screenOffFod = Settings.System.getInt(resolver,
+                Settings.System.SCREEN_OFF_FOD, 0) != 0;
+        return FORCE_BLANKING || !FORCE_NO_BLANKING && (mResources.getBoolean(
+                com.android.internal.R.bool.config_displayBlanksAfterDoze) || screenOffFod);
     }
 
     public boolean shouldControlScreenOff() {
