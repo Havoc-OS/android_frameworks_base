@@ -85,9 +85,6 @@
          near events -->
     <bool name="doze_brightness_sensor_reports_proximity" translatable="false">true</bool>
 
-    <!-- Whether to use fingerprint pressed image -->
-    <bool name="config_fodPressedImage">false</bool>
-
     <!-- FPSInfoService FPS node file path -->
     <string name="config_fpsInfoSysNode" translatable="false"></string>
 

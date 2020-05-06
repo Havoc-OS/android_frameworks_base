@@ -16,12 +16,6 @@
 
 package com.android.systemui.biometrics;
 
-import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_DPM_LOCK_NOW;
-import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_LOCKOUT;
-import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_TIMEOUT;
-import static com.android.internal.widget.LockPatternUtils.StrongAuthTracker.STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN;
-
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -35,7 +29,6 @@ import android.hardware.biometrics.BiometricSourceType;
 import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.PowerManager;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.view.Display;
@@ -49,7 +42,6 @@ import android.widget.ImageView;
 
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
-import com.android.keyguard.KeyguardSecurityModel.SecurityMode;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.ConfigurationController;
@@ -85,16 +77,10 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private boolean mIsShowing;
     private boolean mIsCircleShowing;
     private boolean mIsAuthenticated;
-    private boolean mCanUnlockWithFp;
 
     private Handler mHandler;
 
-    private PowerManager mPowerManager;
-    private PowerManager.WakeLock mWakeLock;
-
     private Timer mBurnInProtectionTimer;
-
-    private final boolean mFodPressedImage;
 
     private FODAnimation mFODAnimation;
     private boolean mIsRecognizingAnimEnabled;
@@ -153,17 +139,10 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         public void onKeyguardBouncerChanged(boolean isBouncer) {
             mIsBouncer = isBouncer;
 
-            if (mIsKeyguard && mUpdateMonitor.isFingerprintDetectionRunning()) {
-                final SecurityMode sec = mUpdateMonitor.getSecurityMode();
-                final boolean maybeShow = sec == SecurityMode.Pattern ||
-                        sec == SecurityMode.PIN;
-                if (maybeShow || !mIsBouncer) {
-                    show();
-                } else {
-                    hide();
-                }
-            } else {
+            if (isBouncer) {
                 hide();
+            } else if (mUpdateMonitor.isFingerprintDetectionRunning()) {
+                show();
             }
         }
 
@@ -182,39 +161,10 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         public void onBiometricHelp(int msgId, String helpString,
                 BiometricSourceType biometricSourceType) {
             if (msgId == -1) { // Auth error
-                hideCircle();
                 mHandler.post(() -> mFODAnimation.hideFODanimation());
             }
         }
-
-        @Override
-        public void onStrongAuthStateChanged(int userId) {
-            mCanUnlockWithFp = canUnlockWithFp();
-            if (mIsShowing && !mCanUnlockWithFp) {
-                hide();
-            }
-        }
     };
-
-    private boolean canUnlockWithFp() {
-        int currentUser = ActivityManager.getCurrentUser();
-        boolean biometrics = mUpdateMonitor.isUnlockingWithBiometricsPossible(currentUser);
-        KeyguardUpdateMonitor.StrongAuthTracker strongAuthTracker =
-                mUpdateMonitor.getStrongAuthTracker();
-        int strongAuth = strongAuthTracker.getStrongAuthForUser(currentUser);
-        if (biometrics && !strongAuthTracker.hasUserAuthenticatedSinceBoot()) {
-            return false;
-        } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_TIMEOUT) != 0) {
-            return false;
-        } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_DPM_LOCK_NOW) != 0) {
-            return false;
-        } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_LOCKOUT) != 0) {
-            return false;
-        } else if (biometrics && (strongAuth & STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN) != 0) {
-            return false;
-        }
-        return true;
-    }
 
     private boolean mCutoutMasked;
     private int mStatusbarHeight;
@@ -264,6 +214,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         mWindowManager.addView(this, mParams);
 
+        mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
+
         updateSettings();
         updatePosition();
         hide();
@@ -271,19 +223,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         mUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         mUpdateMonitor.registerCallback(mMonitorCallback);
 
-        mCanUnlockWithFp = canUnlockWithFp();
-
         updateCutoutFlags();
 
         Dependency.get(ConfigurationController.class).addCallback(this);
-
-        mPowerManager = context.getSystemService(PowerManager.class);
-        mWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                FODCircleView.class.getSimpleName());
-
-        mFodPressedImage = res.getBoolean(R.bool.config_fodPressedImage);
-
-        mFODAnimation = new FODAnimation(context, mPositionX, mPositionY);
     }
 
     @Override
@@ -292,17 +234,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         if (mIsCircleShowing) {
             canvas.drawCircle(mSize / 2, mSize / 2, mSize / 2.0f, mPaintFingerprint);
-        }
-    }
-
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-
-        if (mIsCircleShowing) {
-            dispatchPress();
-        } else {
-            dispatchRelease();
         }
     }
 
@@ -399,19 +330,11 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         setKeepScreenOn(true);
 
-        if (mIsDreaming) {
-            mWakeLock.acquire(300);
-        }
-
         setDim(true);
         updateAlpha();
+        dispatchPress();
 
-        if (mFodPressedImage) {
-            setImageResource(R.drawable.fod_icon_pressed);
-        } else {
-            setImageDrawable(null);
-        }
-
+        setImageResource(R.drawable.fod_icon_pressed);
         invalidate();
     }
 
@@ -420,6 +343,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         setFODIcon();
         invalidate();
+
+        dispatchRelease();
 
         setDim(false);
         updateAlpha();
@@ -447,11 +372,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     public void show() {
         if (mIsBouncer) {
             // Ignore show calls when Keyguard pin screen is being shown
-            return;
-        }
-
-        if (!mCanUnlockWithFp) {
-            // Ignore when unlocking with fp is not possible
             return;
         }
 
@@ -544,16 +464,6 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         mWindowManager.updateViewLayout(this, mParams);
     }
 
-    private void updateSettings() {
-        mIsRecognizingAnimEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.FOD_RECOGNIZING_ANIMATION, 1) != 0;
-        mScreenOffFodEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_FOD, 0) != 0;
-        mScreenOffFodIconEnabled = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SCREEN_OFF_FOD_ICON, 1) != 0;
-        mShouldRemoveIconOnAOD = mScreenOffFodEnabled && !mScreenOffFodIconEnabled;
-    }
-
     private class BurnInProtectionTask extends TimerTask {
         @Override
         public void run() {
@@ -580,5 +490,15 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             mCutoutMasked = cutoutMasked;
             updatePosition();
         }
+    }
+
+    private void updateSettings() {
+        mIsRecognizingAnimEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.FOD_RECOGNIZING_ANIMATION, 1) != 0;
+        mScreenOffFodEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_OFF_FOD, 0) != 0;
+        mScreenOffFodIconEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREEN_OFF_FOD_ICON, 1) != 0;
+        mShouldRemoveIconOnAOD = mScreenOffFodEnabled && !mScreenOffFodIconEnabled;
     }
 }
