@@ -2056,6 +2056,10 @@ public interface WindowManager extends ViewManager {
          */
         public static final int PRIVATE_FLAG_INSET_PARENT_FRAME_BY_IME = 0x40000000;
 
+         * Flag to indicate that the window is a trusted overlay.
+         * @hide
+         */
+        public static final int PRIVATE_FLAG_TRUSTED_OVERLAY = 0x20000000;
         /**
          * An internal annotation for flags that can be specified to {@link #softInputMode}.
          *
@@ -2962,6 +2966,20 @@ public interface WindowManager extends ViewManager {
         public void setFitInsetsIgnoringVisibility(boolean ignore) {
             mFitInsetsIgnoringVisibility = ignore;
             privateFlags |= PRIVATE_FLAG_FIT_INSETS_CONTROLLED;
+        }
+
+        /**
+         * Specifies that the window should be considered a trusted system overlay. Trusted system
+         * overlays are ignored when considering whether windows are obscured during input
+         * dispatch. Requires the {@link android.Manifest.permission.INTERNAL_SYSTEM_WINDOW}
+         * permission.
+         *
+         * {@see android.view.MotionEvent#FLAG_WINDOW_IS_OBSCURED}
+         * {@see android.view.MotionEvent#FLAG_WINDOW_IS_PARTIALLY_OBSCURED}
+         * @hide
+         */
+        public void setTrustedOverlay() {
+            privateFlags |= PRIVATE_FLAG_TRUSTED_OVERLAY;
         }
 
         /**
