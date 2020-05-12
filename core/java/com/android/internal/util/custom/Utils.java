@@ -387,4 +387,9 @@ public class Utils {
         int newAlpha = (int) (emptyAlpha + ((fullAlpha-emptyAlpha)*blendFactor));
         return Color.HSVToColor(newAlpha, newColor);
     }
+
+    // Check if device has a notch
+    public static boolean hasNotch(Context context) {
+        return context.getResources().getBoolean(com.android.internal.R.bool.config_haveNotch);
+    }
 }

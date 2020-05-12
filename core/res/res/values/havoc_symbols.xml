@@ -152,4 +152,7 @@
     <java-symbol type="string" name="gaming_mode_enabled_toast" />
     <java-symbol type="string" name="gaming_mode_disabled_toast" />
 
+    <!-- Whether device has a notch -->
+    <java-symbol type="bool" name="config_haveNotch" />
+
 </resources>

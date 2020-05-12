@@ -162,4 +162,7 @@
     <!-- Whether device has VOOC charging support -->
     <bool name="config_hasVoocCharger">false</bool>
 
+    <!-- Whether device has a notch -->
+    <bool name="config_haveNotch">false</bool>
+
 </resources>
