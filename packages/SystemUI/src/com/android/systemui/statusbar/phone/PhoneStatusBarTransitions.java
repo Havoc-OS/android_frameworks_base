@@ -22,7 +22,6 @@ import android.animation.ObjectAnimator;
 import android.content.res.Resources;
 import android.view.View;
 
-import com.android.internal.util.havoc.Utils;
 import com.android.systemui.R;
 
 public final class PhoneStatusBarTransitions extends BarTransitions {
