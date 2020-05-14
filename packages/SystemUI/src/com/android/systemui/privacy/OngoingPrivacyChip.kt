@@ -15,6 +15,7 @@
 package com.android.systemui.privacy
 
 import android.content.Context
+import android.provider.Settings
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
@@ -68,8 +69,10 @@ class OngoingPrivacyChip @JvmOverloads constructor(
 
     // Should only be called if the builder icons or app changed
     private fun updateView() {
-        back.background = if (expanded) backgroundDrawable else null
-        val padding = if (expanded) sidePadding else 0
+        val networkTraffic = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.NETWORK_TRAFFIC_LOCATION, 0);
+        back.background = if (expanded && networkTraffic == 0) backgroundDrawable else null
+        val padding = if (expanded && networkTraffic == 0) sidePadding else 0
         back.setPaddingRelative(padding, 0, padding, 0)
         fun setIcons(dialogBuilder: PrivacyDialogBuilder, iconsContainer: ViewGroup) {
             iconsContainer.removeAllViews()
@@ -83,7 +86,7 @@ class OngoingPrivacyChip @JvmOverloads constructor(
                 iconsContainer.addView(image, iconSize, iconSize)
                 if (i != 0) {
                     val lp = image.layoutParams as MarginLayoutParams
-                    lp.marginStart = if (expanded) iconMarginExpanded else iconMarginCollapsed
+                    lp.marginStart = if (expanded && networkTraffic == 0) iconMarginExpanded else iconMarginCollapsed
                     image.layoutParams = lp
                 }
             }
@@ -94,7 +97,7 @@ class OngoingPrivacyChip @JvmOverloads constructor(
             setIcons(builder, iconsContainer)
             val lp = iconsContainer.layoutParams as FrameLayout.LayoutParams
             lp.gravity = Gravity.CENTER_VERTICAL or
-                    (if (expanded) Gravity.CENTER_HORIZONTAL else Gravity.END)
+                    (if (expanded && networkTraffic == 0) Gravity.CENTER_HORIZONTAL else Gravity.END)
             iconsContainer.layoutParams = lp
         } else {
             iconsContainer.removeAllViews()
