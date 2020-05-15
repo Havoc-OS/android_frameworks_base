@@ -26,6 +26,6 @@
     <application android:label="@string/font_rubik_rubik_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="rubik,rubik-medium" />
+            android:value="rubik,rubik-medium,rubik-light,rubik-semi-bold,rubik-bold" />
     </application>
 </manifest>

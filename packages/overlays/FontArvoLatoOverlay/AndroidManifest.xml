@@ -26,6 +26,6 @@
     <application android:label="@string/font_arvo_lato_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="arvo,arvo-bold,lato,lato-bold" />
+            android:value="arvo,arvo-bold,lato,lato-light,lato-bold" />
     </application>
 </manifest>

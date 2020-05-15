@@ -260,7 +260,7 @@
     <alias name="fantasy" to="comicsans" />
     <alias name="ITC Stone Serif" to="comicsans" />
 
-    <family name="googlesans">
+    <family name="google-sans">
         <font weight="400" style="normal">GoogleSans-Regular.ttf</font>
         <font weight="400" style="italic">GoogleSans-Italic.ttf</font>
         <font weight="500" style="normal">GoogleSans-Medium.ttf</font>
@@ -269,17 +269,17 @@
         <font weight="700" style="italic">GoogleSans-BoldItalic.ttf</font>
     </family>
 
-    <alias name="googlesans-medium" to="googlesans" weight="500" />
-    <alias name="googlesans-semi-bold" to="googlesans" weight="600" />
-    <alias name="googlesans-bold" to="googlesans" weight="700" />
-    <alias name="times" to="googlesans" />
-    <alias name="times new roman" to="googlesans" />
-    <alias name="palatino" to="googlesans" />
-    <alias name="georgia" to="googlesans" />
-    <alias name="baskerville" to="googlesans" />
-    <alias name="goudy" to="googlesans" />
-    <alias name="fantasy" to="googlesans" />
-    <alias name="ITC Stone Serif" to="googlesans" />
+    <alias name="google-sans-medium" to="google-sans" weight="500" />
+    <alias name="google-sans-semi-bold" to="google-sans" weight="600" />
+    <alias name="google-sans-bold" to="google-sans" weight="700" />
+    <alias name="times" to="google-sans" />
+    <alias name="times new roman" to="google-sans" />
+    <alias name="palatino" to="google-sans" />
+    <alias name="georgia" to="google-sans" />
+    <alias name="baskerville" to="google-sans" />
+    <alias name="goudy" to="google-sans" />
+    <alias name="fantasy" to="google-sans" />
+    <alias name="ITC Stone Serif" to="google-sans" />
 
     <family name="comfortaa">
         <font weight="400" style="normal">Comfortaa.ttf</font>
