@@ -744,7 +744,7 @@ public class MobileSignalController extends SignalController<
 
     void onMobileDataChanged() {
         checkDefaultData();
-        notifyListenersIfNecessary();
+        notifyListeners();
     }
 
     private MobileIconGroup getNr5GIconGroup() {
