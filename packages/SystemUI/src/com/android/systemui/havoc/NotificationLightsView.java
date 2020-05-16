@@ -146,8 +146,11 @@ public class NotificationLightsView extends RelativeLayout {
             int duration = Settings.System.getIntForUser(mContext.getContentResolver(),
                     Settings.System.AMBIENT_LIGHT_DURATION, 2,
                     UserHandle.USER_CURRENT) * 1000;
+            boolean directionIsRestart = Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.AMBIENT_LIGHT_REPEAT_DIRECTION, 0,
+                    UserHandle.USER_CURRENT) != 1;
             mLightAnimator.setDuration(duration);
-            mLightAnimator.setRepeatMode(ValueAnimator.RESTART);
+            mLightAnimator.setRepeatMode(directionIsRestart ? ValueAnimator.RESTART : ValueAnimator.REVERSE);
             if (repeat == 0) {
                 mLightAnimator.setRepeatCount(ValueAnimator.INFINITE);
             } else {

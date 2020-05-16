@@ -5875,6 +5875,16 @@ public final class Settings {
         private static final Validator AMBIENT_LIGHT_PULSE_FOR_ALL_VALIDATOR = ANY_INTEGER_VALIDATOR;
 
         /**
+         * Direction of repeat animations of Ambient edge light
+         * 0 is restart
+         * 1 is reverse
+         * @hide
+         */
+        public static final String AMBIENT_LIGHT_REPEAT_DIRECTION = "ambient_light_repeat_direction";
+
+        private static final Validator AMBIENT_LIGHT_REPEAT_DIRECTION_VALIDATOR = BOOLEAN_VALIDATOR;
+
+        /**
          * helper setting to contain the current pulse reason so we can check
          * if it has been triggered from a notification or a gesture
          * @hide
@@ -6555,6 +6565,7 @@ public final class Settings {
             AMBIENT_LIGHT_DURATION,
             AMBIENT_LIGHT_REPEAT_COUNT,
             AMBIENT_LIGHT_PULSE_FOR_ALL,
+            AMBIENT_LIGHT_REPEAT_DIRECTION,
             NOTIFICATION_LIGHT_PULSE,
             ANBI_ENABLED_OPTION,
             VOLUME_ROCKER_WAKE,
@@ -6824,6 +6835,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_DURATION);
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_REPEAT_COUNT);
             PRIVATE_SETTINGS.add(AMBIENT_LIGHT_PULSE_FOR_ALL);
+            PRIVATE_SETTINGS.add(AMBIENT_LIGHT_REPEAT_DIRECTION);
             PRIVATE_SETTINGS.add(FORCE_SHOW_NAVBAR);
             PRIVATE_SETTINGS.add(NAVIGATION_BAR_ARROW_KEYS);
             PRIVATE_SETTINGS.add(KEY_HOME_LONG_PRESS_ACTION);
@@ -6945,6 +6957,7 @@ public final class Settings {
             VALIDATORS.put(AMBIENT_LIGHT_DURATION, AMBIENT_LIGHT_DURATION_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_REPEAT_COUNT, AMBIENT_LIGHT_REPEAT_COUNT_VALIDATOR);
             VALIDATORS.put(AMBIENT_LIGHT_PULSE_FOR_ALL, AMBIENT_LIGHT_PULSE_FOR_ALL_VALIDATOR);
+            VALIDATORS.put(AMBIENT_LIGHT_REPEAT_DIRECTION, AMBIENT_LIGHT_REPEAT_DIRECTION_VALIDATOR);
             VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
             VALIDATORS.put(DISPLAY_TEMPERATURE_DAY, DISPLAY_TEMPERATURE_DAY_VALIDATOR);
             VALIDATORS.put(DISPLAY_TEMPERATURE_NIGHT, DISPLAY_TEMPERATURE_NIGHT_VALIDATOR);
