@@ -267,4 +267,8 @@
     <string name="accessibility_quick_settings_navbar_on">Navigation bar on</string>
     <string name="accessibility_quick_settings_navbar_off">Navigation bar off</string>
 
+    <!-- FOD View -->
+    <string name="fod_view_title" translatable="false">Fingerprint on display</string>
+    <string name="fod_view_pressed_title" translatable="false">Fingerprint on display.touched</string>
+
 </resources>
