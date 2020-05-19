@@ -9684,7 +9684,6 @@ public final class Settings {
          */
         public static final String DOZE_ON_CHARGE_NOW = "doze_on_charge_now";
 
-
         /**
          * Pulse navbar music visualizer
          *
@@ -9779,6 +9778,12 @@ public final class Settings {
          * @hide
          */
         public static final String PULSE_SMOOTHING_ENABLED = "pulse_smoothing_enabled";
+
+        /**
+         * boolean value. toggles swipe up hint in gestural nav mode
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_HINT = "navigation_bar_hint";
     }
 
     /**
