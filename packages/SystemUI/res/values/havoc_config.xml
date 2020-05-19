@@ -34,7 +34,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false">
-        aod,adb_network,caffeine,compass,cpuinfo,fpsinfo,gaming,heads_up,hwkeys,livedisplay,music,reading_mode,reboot,screenrecord,screenshot,screenstabilization,smartpixels,sound,soundsearch,dataswitch,sync,usb_tether
+        aod,adb_network,caffeine,compass,cpuinfo,gaming,heads_up,hwkeys,livedisplay,music,reading_mode,reboot,screenrecord,screenshot,screenstabilization,smartpixels,sound,soundsearch,dataswitch,sync,usb_tether
     </string>
 
     <!-- Color of the FOD view -->
@@ -84,9 +84,6 @@
     <!-- Whether the binned brightness sensor reports a value of 0 on proximity
          near events -->
     <bool name="doze_brightness_sensor_reports_proximity" translatable="false">true</bool>
-
-    <!-- FPSInfoService FPS node file path -->
-    <string name="config_fpsInfoSysNode" translatable="false"></string>
 
     <!-- Navbar -->
     <string name="config_navBarLayoutHandleArrows" translatable="false">back[1.7WC];home_handle;ime_switcher[1.7WC]</string>
