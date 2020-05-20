@@ -274,4 +274,7 @@
     <!-- Enable face auth when swiping security view -->
     <java-symbol type="bool" name="config_faceAuthOnSecurityView" />
 
+    <!-- Home button wake -->
+    <java-symbol type="bool" name="config_enableHomeButtonWake" /> 
+ 
 </resources>
