@@ -273,4 +273,7 @@
     <!-- Wired/BT headset focus mode -->
     <java-symbol type="bool" name="config_deviceRingtoneFocusMode" />
 
+    <!-- Home button wake -->
+    <java-symbol type="bool" name="config_enableHomeButtonWake" /> 
+ 
 </resources>

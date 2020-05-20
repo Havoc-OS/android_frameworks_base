@@ -313,4 +313,7 @@
     <!-- Wired/BT headset focus mode -->
     <bool name="config_deviceRingtoneFocusMode">false</bool>
 
+    <!-- True if your device have home button and want to use it as wake button-->
+    <bool name="config_enableHomeButtonWake">false</bool>
+
 </resources>
