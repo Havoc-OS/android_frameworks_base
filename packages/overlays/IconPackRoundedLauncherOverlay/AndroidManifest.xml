@@ -16,9 +16,9 @@
  */
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.theme.icon_pack.filled.launcher"
+    package="com.android.theme.icon_pack.rounded.launcher"
     android:versionCode="1"
     android:versionName="1.0">
-    <overlay android:targetPackage="com.google.android.apps.nexuslauncher" android:category="android.theme.customization.icon_pack.launcher" android:priority="1"/>
-    <application android:label="Filled" android:hasCode="false"/>
+    <overlay android:targetPackage="com.android.launcher3" android:category="android.theme.customization.icon_pack.launcher" android:priority="1"/>
+    <application android:label="Rounded" android:hasCode="false"/>
 </manifest>
