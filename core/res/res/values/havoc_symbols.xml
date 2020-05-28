@@ -126,6 +126,9 @@
     <!-- Pocket bridge -->
     <java-symbol type="string" name="config_pocketBridgeSysfsInpocket" />
 
+    <!-- Pocket Service -->
+    <java-symbol type="string" name="config_pocketJudgeVendorSensorName" />
+
     <!-- AOKP custom system animations -->
     <java-symbol type="string" name="action_null"/>
     <java-symbol type="string" name="animation_fade"/>

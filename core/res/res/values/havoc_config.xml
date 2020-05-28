@@ -125,6 +125,9 @@
          to communicate pocket state to the pocket judge kernel driver. -->
     <string name="config_pocketBridgeSysfsInpocket"></string>
 
+    <!-- Defines custom OEM sensor for pocket detection. -->
+    <string name="config_pocketJudgeVendorSensorName"></string>
+
     <!-- AOKP custom system animations -->
     <string name="animation_fade">Fade</string>
     <string name="animation_slide_right">Slide in right</string>
