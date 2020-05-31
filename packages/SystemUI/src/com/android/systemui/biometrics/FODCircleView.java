@@ -117,6 +117,7 @@ public class FODCircleView extends ImageView {
                 }
             } else if (mBurnInProtectionTimer != null) {
                 mBurnInProtectionTimer.cancel();
+                updatePosition();
             }
             
             if (mShouldRemoveIconOnAOD && !dreaming) {
@@ -330,6 +331,7 @@ public class FODCircleView extends ImageView {
         dispatchPress();
 
         setImageResource(R.drawable.fod_icon_pressed);
+        updatePosition();
         invalidate();
     }
 
@@ -416,9 +418,12 @@ public class FODCircleView extends ImageView {
         mPressedParams.x = mParams.x = x;
         mPressedParams.y = mParams.y = y;
 
-        if (mIsDreaming) {
-            mParams.y += mDreamingOffsetY;
+        if (mFODAnimation != null) {
             mFODAnimation.updateParams(mParams.y);
+        }
+
+        if (mIsDreaming && !mIsCircleShowing) {
+            mParams.y += mDreamingOffsetY;
         }
 
         mWindowManager.updateViewLayout(this, mParams);
