@@ -79,6 +79,7 @@ public class MNMLBoxClockController implements ClockPlugin {
      */
     private TextView mClock;
     private TextView mDate;
+    private TextView mDateDay;
 
     /**
      * Time and calendars to check the date
@@ -106,7 +107,7 @@ public class MNMLBoxClockController implements ClockPlugin {
                 .inflate(R.layout.digital_mnml_box, null);
         mClock = mView.findViewById(R.id.clock);
         mDate = mView.findViewById(R.id.bigDate);
-        onTimeTick();
+        mDateDay = mView.findViewById(R.id.bigDateDay);
     }
 
     @Override
@@ -114,6 +115,7 @@ public class MNMLBoxClockController implements ClockPlugin {
         mView = null;
         mClock = null;
         mDate = null;
+        mDateDay = null;
     }
 
     @Override
@@ -179,6 +181,8 @@ public class MNMLBoxClockController implements ClockPlugin {
     @Override
     public void setTextColor(int color) {
         mClock.setTextColor(color);
+        mDate.setTextColor(color);
+        mDateDay.setTextColor(color);
     }
 
     @Override
@@ -186,17 +190,6 @@ public class MNMLBoxClockController implements ClockPlugin {
 
     @Override
     public void onTimeTick() {
-        mTime.setTimeInMillis(System.currentTimeMillis());
-        final int hour = mTime.get(Calendar.HOUR) % 12;
-        // lazy and ugly workaround for the it's string
-        String typeHeader = mResources.getQuantityText(
-                R.plurals.type_clock_header, hour).toString();
-        typeHeader = typeHeader.replaceAll("\\n", "");
-        SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
-        mClock.setText(typeHeader.substring(0, typeHeader.indexOf("^")) + " " + timeformat.format(mTime.getInstance().getTimeInMillis()));
-        DateFormat dateFormat = DateFormat.getInstanceForSkeleton("EEEEMMMMd", Locale.getDefault());
-        dateFormat.setContext(DisplayContext.CAPITALIZATION_FOR_STANDALONE);
-        mDate.setText(dateFormat.format(mTime.getInstance().getTimeInMillis()));
 
     }
 
