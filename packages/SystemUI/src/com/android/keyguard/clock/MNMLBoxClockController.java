@@ -23,7 +23,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint.Style;
-import android.graphics.Typeface;
 import android.icu.text.DateFormat;
 import android.icu.text.DisplayContext;
 import android.text.Html;
@@ -136,23 +135,18 @@ public class MNMLBoxClockController implements ClockPlugin {
     @Override
     public Bitmap getPreview(int width, int height) {
 
-        View previewView = mLayoutInflater.inflate(R.layout.digital_mnml_box, null);
+        View previewView = mLayoutInflater.inflate(R.layout.digital_mnml_box_preview, null);
         TextView previewTime = previewView.findViewById(R.id.clock);
         TextView previewDate = previewView.findViewById(R.id.bigDate);
+        TextView previewDateDay = previewView.findViewById(R.id.bigDateDay);
 
         // Initialize state of plugin before generating preview.
+        previewTime.setTextColor(Color.WHITE);
+        previewDate.setTextColor(Color.WHITE);
+        previewDateDay.setTextColor(Color.WHITE);
         ColorExtractor.GradientColors colors = mColorExtractor.getColors(
                 WallpaperManager.FLAG_LOCK);
-        final int hour = mTime.get(Calendar.HOUR) % 12;
-        // lazy and ugly workaround for the it's string
-        String typeHeader = mResources.getQuantityText(
-                R.plurals.type_clock_header, hour).toString();
-        typeHeader = typeHeader.replaceAll("\\n", "") + " ";
-        SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm");
-        previewTime.setText(typeHeader.substring(0, typeHeader.indexOf("^")) + " " + timeformat.format(mTime.getInstance().getTimeInMillis()));
-        DateFormat dateFormat = DateFormat.getInstanceForSkeleton("EEEEMMMMd", Locale.getDefault());
-        dateFormat.setContext(DisplayContext.CAPITALIZATION_FOR_STANDALONE);
-        previewDate.setText(dateFormat.format(mTime.getInstance().getTimeInMillis()));
+        setColorPalette(colors.supportsDarkText(), colors.getColorPalette());
 
         return mRenderer.createPreview(previewView, width, height);
     }

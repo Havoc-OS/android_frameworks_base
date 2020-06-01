@@ -22,7 +22,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.Paint.Style;
-import android.graphics.Typeface;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,10 +68,20 @@ public class MNMLMinimalClockController implements ClockPlugin {
     private ClockLayout mView;
 
     /**
+     * Preview of clock.
+     */
+    private View mPreviewView;
+
+    /**
      * Text clock in preview view hierarchy.
      */
     private TextClock mClock;
     private TextClock mDate;
+
+    /**
+     * Accent color for the hour section
+     */
+    private int mAccentColor;
 
     /**
      * Create a DefaultClockController instance.
@@ -93,17 +102,13 @@ public class MNMLMinimalClockController implements ClockPlugin {
                 .inflate(R.layout.digital_mnml_minimal, null);
         mClock = mView.findViewById(R.id.clock);
         mDate = mView.findViewById(R.id.date);
-        ColorExtractor.GradientColors colors;
 
-        // Initialize state of plugin before generating preview.
-        colors = mColorExtractor.getColors(
+        ColorExtractor.GradientColors colors = mColorExtractor.getColors(
                 WallpaperManager.FLAG_LOCK);
-        int[] palette = colors.getColorPalette();
-        if (palette == null) {
-            colors = mColorExtractor.getColors(
-                    WallpaperManager.FLAG_SYSTEM);
-        }
         setColorPalette(colors.supportsDarkText(), colors.getColorPalette());
+        GradientDrawable dateBg = (GradientDrawable) mDate.getBackground();
+        dateBg.setColor(mAccentColor);
+        dateBg.setStroke(0,Color.TRANSPARENT);
     }
 
     @Override
@@ -131,21 +136,19 @@ public class MNMLMinimalClockController implements ClockPlugin {
     @Override
     public Bitmap getPreview(int width, int height) {
 
-        // Use the normal clock view for the preview
-        View previewView = getView();
-        ColorExtractor.GradientColors colors;
+        View previewView = mLayoutInflater.inflate(R.layout.digital_mnml_minimal_preview, null);
+        TextClock previewTime = previewView.findViewById(R.id.clock);
+        TextClock previewDate = previewView.findViewById(R.id.date);
 
         // Initialize state of plugin before generating preview.
-        colors = mColorExtractor.getColors(
+        previewTime.setTextColor(Color.WHITE);
+        previewDate.setTextColor(Color.BLACK);
+        ColorExtractor.GradientColors colors = mColorExtractor.getColors(
                 WallpaperManager.FLAG_LOCK);
-        int[] palette = colors.getColorPalette();
-        if (palette == null) {
-            colors = mColorExtractor.getColors(
-                    WallpaperManager.FLAG_SYSTEM);
-        }
         setColorPalette(colors.supportsDarkText(), colors.getColorPalette());
-        setColorPalette(colors.supportsDarkText(), colors.getColorPalette());
-        onTimeTick();
+        GradientDrawable datePrevBg = (GradientDrawable) previewDate.getBackground();
+        datePrevBg.setColor(mAccentColor);
+        datePrevBg.setStroke(0,Color.TRANSPARENT);
 
         return mRenderer.createPreview(previewView, width, height);
     }
@@ -173,6 +176,7 @@ public class MNMLMinimalClockController implements ClockPlugin {
 
     @Override
     public void setTextColor(int color) {
+        mClock.setTextColor(color);
     }
 
     @Override
@@ -180,10 +184,8 @@ public class MNMLMinimalClockController implements ClockPlugin {
         if (colorPalette == null || colorPalette.length == 0) {
             return;
         }
-        final int accentColor = colorPalette[Math.max(0, colorPalette.length - 5)];
-        GradientDrawable dateBg = (GradientDrawable) mDate.getBackground();
-        dateBg.setColor(accentColor);
-        dateBg.setStroke(0,Color.TRANSPARENT);
+        final int color = colorPalette[Math.max(0, colorPalette.length - 5)];
+        mAccentColor = color;
     }
 
     @Override
