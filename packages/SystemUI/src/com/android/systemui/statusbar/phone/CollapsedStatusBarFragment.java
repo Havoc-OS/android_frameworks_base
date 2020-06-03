@@ -110,6 +110,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_CARRIER),
                     false, this, UserHandle.USER_ALL);
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_TICKER),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -120,7 +123,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
     private ContentResolver mContentResolver;
 
-    private int mTickerEnabled;
+    private boolean mTickerEnabled;
     private View mTickerViewFromStub;
 
     private SignalCallback mSignalCallback = new SignalCallback() {
@@ -506,11 +509,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                     Settings.System.STATUSBAR_CLOCK_STYLE, 0,
                     UserHandle.USER_CURRENT);
         }
+        mTickerEnabled = Settings.System.getIntForUser(mContentResolver,
+                Settings.System.STATUS_BAR_SHOW_TICKER, 0,
+                UserHandle.USER_CURRENT) == 1;
         updateClockStyle(animate);
         setCarrierLabel(animate);
-        mTickerEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
-                Settings.System.STATUS_BAR_SHOW_TICKER, 0,
-                UserHandle.USER_CURRENT);
         initTickerView();
     }
 
@@ -533,15 +536,14 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     private void initTickerView() {
-        if (mTickerEnabled != 0) {
+        if (mTickerEnabled) {
             View tickerStub = mStatusBar.findViewById(R.id.ticker_stub);
             if (mTickerViewFromStub == null && tickerStub != null) {
                 mTickerViewFromStub = ((ViewStub) tickerStub).inflate();
             }
             TickerView tickerView = (TickerView) mStatusBar.findViewById(R.id.tickerText);
             ImageSwitcher tickerIcon = (ImageSwitcher) mStatusBar.findViewById(R.id.tickerIcon);
-            mStatusBarComponent.createTicker(
-                    mTickerEnabled, getContext(), mStatusBar, tickerView, tickerIcon, mTickerViewFromStub);
+            mStatusBarComponent.createTicker(getContext(), mStatusBar, tickerView, tickerIcon, mTickerViewFromStub);
         } else {
             mStatusBarComponent.disableTicker();
         }

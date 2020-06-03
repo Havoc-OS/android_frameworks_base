@@ -348,7 +348,7 @@ public class StatusBarNotificationPresenter implements NotificationPresenter,
 
         if (old != null) {
             // Cancel the ticker if it's still running
-            if (mStatusBar != null && mStatusBar.mTicker != null && mStatusBar.mTickerEnabled != 0) {
+            if (mStatusBar != null && mStatusBar.mTicker != null && mStatusBar.mTickerEnabled) {
                 try {
                     mStatusBar.mTicker.removeEntry(old);
                 } catch (Exception e) {}

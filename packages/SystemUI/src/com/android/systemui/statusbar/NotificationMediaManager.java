@@ -588,7 +588,7 @@ public class NotificationMediaManager implements Dumpable {
             for (int i = 0; i < N; i++) {
                 final NotificationEntry entry = activeNotifications.get(i);
                 if (entry.notification.getPackageName().equals(pkg)) {
-                    if (mStatusBar.mTickerEnabled == 2) {
+                    if (mStatusBar.mTickerMode == 1) {
                         mHandler.postDelayed(() -> {
                             mStatusBar.tick(entry.notification, true, true, mMediaMetadata, null);
                         }, 500);
