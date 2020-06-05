@@ -553,10 +553,15 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                 cutout, getDisplay());
         if (padding == null) {
             mSystemIconsView.setPaddingRelative(
-                    getResources().getDimensionPixelSize(R.dimen.status_bar_icon_padding), 0,
-                    getResources().getDimensionPixelSize(R.dimen.status_bar_icon_padding), 0);
+                    getResources().getDimensionPixelSize(R.dimen.status_bar_icon_padding),
+                    getResources().getDimensionPixelSize(R.dimen.status_bar_padding_top),
+                    getResources().getDimensionPixelSize(R.dimen.status_bar_icon_padding),
+                    0);
         } else {
-            mSystemIconsView.setPadding(padding.first, 0, padding.second, 0);
+            mSystemIconsView.setPadding(
+                    padding.first,
+                    getResources().getDimensionPixelSize(R.dimen.status_bar_padding_top),
+                    padding.second, 0);
 
         }
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mSpace.getLayoutParams();
