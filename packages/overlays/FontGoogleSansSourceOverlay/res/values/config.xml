@@ -19,15 +19,11 @@
     <!-- Name of a font family to use for body text. -->
     <string name="config_bodyFontFamily" translatable="false">google-sans</string>
     <!-- Name of a font family to use for medium body text. -->
-    <string name="config_bodyFontFamilyMedium" translatable="false">google-sans-semi-bold</string>
+    <string name="config_bodyFontFamilyMedium" translatable="false">google-sans-medium</string>
     <!-- Name of a font family to use for headlines. If empty, falls back to platform default -->
-    <string name="config_headlineFontFamily" translatable="false">google-sans-medium</string>
+    <string name="config_headlineFontFamily" translatable="false">google-sans</string>
     <!-- Name of the font family used for system surfaces where the font should use medium weight -->
-    <string name="config_headlineFontFamilyMedium" translatable="false">google-sans-bold</string>
+    <string name="config_headlineFontFamilyMedium" translatable="false">google-sans-medium</string>
     <!-- Allows setting custom fontFeatureSettings on specific text. -->
     <string name="config_headlineFontFeatureSettings">ss03</string>
-    <!-- Name of a font family to use as light font. For theming purpose. -->
-    <string name="config_lightFontFamily" translatable="false">@string/config_bodyFontFamily</string>
-    <!-- Name of a font family to use as regular font. For theming purpose. -->
-    <string name="config_regularFontFamily" translatable="false">@string/config_bodyFontFamily</string>
 </resources>

@@ -26,6 +26,6 @@
     <application android:label="@string/font_nunito_source_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="nunito,nunito-semi-bold,nunito-bold,nunito-light,nunito-medium" />
+            android:value="nunito,nunito-bold,nunito-medium" />
     </application>
 </manifest>

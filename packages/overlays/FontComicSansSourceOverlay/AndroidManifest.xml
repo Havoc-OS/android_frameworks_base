@@ -26,6 +26,6 @@
     <application android:label="@string/font_comicsans_source_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="comicsans,comicsans-semi-bold,comicsans-bold" />
+            android:value="comicsans,comicsans-bold" />
     </application>
 </manifest>

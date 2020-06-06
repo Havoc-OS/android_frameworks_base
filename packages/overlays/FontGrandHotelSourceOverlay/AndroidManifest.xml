@@ -26,6 +26,6 @@
     <application android:label="@string/font_grandhotel_source_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="grandhotel,grandhotel-semi-bold,grandhotel-bold,grandhotel-light,grandhotel-medium" />
+            android:value="grandhotel,grandhotel-bold,grandhotel-medium" />
     </application>
 </manifest>

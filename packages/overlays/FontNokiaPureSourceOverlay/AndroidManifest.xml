@@ -26,6 +26,6 @@
     <application android:label="@string/font_nokiapure_source_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="nokiapure,nokiapure-semi-bold,nokiapure-bold,nokiapure-light,nokiapure-medium" />
+            android:value="nokiapure,nokiapure-bold,nokiapure-medium" />
     </application>
 </manifest>

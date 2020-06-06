@@ -26,6 +26,6 @@
     <application android:label="@string/font_fifa2018_source_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="fifa2018,fifa2018-semi-bold,fifa2018-bold,fifa2018-light,fifa2018-medium" />
+            android:value="fifa2018,fifa2018-bold,fifa2018-medium" />
     </application>
 </manifest>

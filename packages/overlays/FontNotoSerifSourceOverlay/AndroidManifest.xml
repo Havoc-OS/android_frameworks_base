@@ -26,6 +26,6 @@
     <application android:label="@string/font_notoserif_source_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="serif,serif-bold,source-sans-pro,source-sans-pro-medium" />
+            android:value="serif,serif-bold,source-sans-pro,source-sans-pro-semi-bold" />
     </application>
 </manifest>

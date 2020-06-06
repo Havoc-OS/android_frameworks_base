@@ -26,6 +26,6 @@
     <application android:label="@string/font_storopia_source_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="storopia,storopia-medium,storopia-semi-bold,storopia-bold" />
+            android:value="storopia,storopia-medium,storopia-bold" />
     </application>
 </manifest>

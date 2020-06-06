@@ -19,13 +19,9 @@
     <!-- Name of a font family to use for body text. -->
     <string name="config_bodyFontFamily" translatable="false">storopia</string>
     <!-- Name of a font family to use for medium body text. -->
-    <string name="config_bodyFontFamilyMedium" translatable="false">storopia-semi-bold</string>
+    <string name="config_bodyFontFamilyMedium" translatable="false">storopia-bold</string>
     <!-- Name of a font family to use for headlines. If empty, falls back to platform default -->
     <string name="config_headlineFontFamily" translatable="false">storopia-medium</string>
     <!-- Name of the font family used for system surfaces where the font should use medium weight -->
     <string name="config_headlineFontFamilyMedium" translatable="false">storopia-bold</string>
-    <!-- Name of a font family to use as light font. For theming purpose. -->
-    <string name="config_lightFontFamily" translatable="false">@string/config_bodyFontFamily</string>
-    <!-- Name of a font family to use as regular font. For theming purpose. -->
-    <string name="config_regularFontFamily" translatable="false">@string/config_bodyFontFamily</string>
 </resources>

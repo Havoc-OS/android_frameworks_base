@@ -16,12 +16,13 @@
  */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Name of a font family to use for body text. -->
-    <string name="config_bodyFontFamily" translatable="false">ubuntu</string>
+     <!-- Name of a font family to use for body text. -->
+    <string name="config_bodyFontFamily" translatable="false">source-sans-pro</string>
     <!-- Name of a font family to use for medium body text. -->
-    <string name="config_bodyFontFamilyMedium" translatable="false">ubuntu-bold</string>
+    <string name="config_bodyFontFamilyMedium" translatable="false">source-sans-pro-semi-bold</string>
     <!-- Name of a font family to use for headlines. If empty, falls back to platform default -->
-    <string name="config_headlineFontFamily" translatable="false">ubuntu-medium</string>
+    <string name="config_headlineFontFamily" translatable="false">arbutus-slab</string>
     <!-- Name of the font family used for system surfaces where the font should use medium weight -->
-    <string name="config_headlineFontFamilyMedium" translatable="false">ubuntu-bold</string>
+    <string name="config_headlineFontFamilyMedium" translatable="false">arbutus-slab</string>
 </resources>
+

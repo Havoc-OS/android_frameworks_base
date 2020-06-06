@@ -26,6 +26,6 @@
     <application android:label="@string/font_quando_source_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="quando,quando-semi-bold,quando-bold,quando-light,quando-medium" />
+            android:value="quando,quando-bold,quando-medium" />
     </application>
 </manifest>

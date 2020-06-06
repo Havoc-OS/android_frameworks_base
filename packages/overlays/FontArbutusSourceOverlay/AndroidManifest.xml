@@ -16,16 +16,16 @@
  */
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.theme.font.cocon"
+    package="com.android.theme.font.arbutussource"
     android:versionCode="1"
     android:versionName="1.0">
     <overlay android:targetPackage="android"
         android:category="android.theme.customization.font"
         android:priority="1"/>
 
-    <application android:label="@string/font_cocon_source_overlay" android:hasCode="false">
+    <application android:label="@string/font_arbutus_source_overlay" android:hasCode="false">
         <meta-data
             android:name="android.theme.customization.REQUIRED_SYSTEM_FONTS"
-            android:value="cocon,cocon-bold,cocon-medium" />
+            android:value="arbutus-slab,source-sans-pro,source-sans-pro-semi-bold" />
     </application>
 </manifest>
