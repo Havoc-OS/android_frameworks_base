@@ -297,6 +297,6 @@ public class SystemSettingsValidators {
         VALIDATORS.put(System.VOLUME_WAKE_SCREEN, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.VOLUME_ANSWER_CALL, BOOLEAN_VALIDATOR);
         VALIDATORS.put(System.CLICK_PARTIAL_SCREENSHOT, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(System.FLASHLIGHT_ON_CALL, new InclusiveIntegerRangeValidator(0, 3));
+        VALIDATORS.put(System.FLASHLIGHT_ON_CALL, new InclusiveIntegerRangeValidator(0, 4));
     }
 }
