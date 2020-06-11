@@ -665,6 +665,8 @@ public abstract class Window {
         void updateNavigationBarColor(int color);
 
         boolean moveTaskToBack(boolean nonRoot);
+
+        void onBackPressed();
     }
 
     /** @hide */
