@@ -92,9 +92,6 @@ public class AODTile extends QSTileImpl<BooleanState> implements
 
     @Override
     public CharSequence getTileLabel() {
-        if (mBatteryController.isAodPowerSave()) {
-            return mContext.getString(R.string.quick_settings_aod_off_powersave_label);
-        }
         return mContext.getString(R.string.quick_settings_aod_label);
     }
 
@@ -111,8 +108,10 @@ public class AODTile extends QSTileImpl<BooleanState> implements
         state.label = mContext.getString(R.string.quick_settings_aod_label);
         if (mBatteryController.isAodPowerSave()) {
             state.state = Tile.STATE_UNAVAILABLE;
+            state.secondaryLabel = mContext.getString(R.string.quick_settings_aod_off_powersave_label);
         } else {
             state.state = enable ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE;
+            state.secondaryLabel = "";
         }
     }
 
