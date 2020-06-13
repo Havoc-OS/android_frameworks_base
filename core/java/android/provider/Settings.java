@@ -6347,6 +6347,12 @@ public final class Settings {
         public static final String FLASHLIGHT_ON_CALL = "flashlight_on_call";
 
         /**
+         * Rate in Hz in which to blink flashlight_on_call
+         * @hide
+         */
+        public static final String FLASHLIGHT_ON_CALL_RATE = "flashlight_on_call_rate";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
@@ -6515,6 +6521,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(VOLUME_ANSWER_CALL);
             PRIVATE_SETTINGS.add(CLICK_PARTIAL_SCREENSHOT);
             PRIVATE_SETTINGS.add(FLASHLIGHT_ON_CALL);
+            PRIVATE_SETTINGS.add(FLASHLIGHT_ON_CALL_RATE);
         }
 
         /**
