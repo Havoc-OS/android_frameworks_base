@@ -38,6 +38,7 @@ import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 import android.widget.Toast;
@@ -346,5 +347,11 @@ public class Utils {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             context.startActivity(intent);
         } catch (Exception e) {}
+    }
+
+    public static int getThemeAccentColor (final Context context) {
+        final TypedValue value = new TypedValue ();
+        context.getTheme ().resolveAttribute (android.R.attr.colorAccent, value, true);
+        return value.data;
     }
 }
