@@ -160,4 +160,7 @@
     <!-- Whether the device supports Smart Pixels -->
     <java-symbol type="bool" name="config_enableSmartPixels" />
 
+    <!-- Wired/BT headset focus mode -->
+    <java-symbol type="bool" name="config_deviceRingtoneFocusMode" />
+
 </resources>
