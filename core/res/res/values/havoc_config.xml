@@ -310,4 +310,7 @@
     <!-- Enable face auth when swiping security view -->
     <bool name="config_faceAuthOnSecurityView">false</bool>
 
+    <!-- Wired/BT headset focus mode -->
+    <bool name="config_deviceRingtoneFocusMode">false</bool>
+
 </resources>

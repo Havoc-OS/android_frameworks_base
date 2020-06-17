@@ -270,4 +270,7 @@
     <!-- Enable face auth when swiping security view -->
     <java-symbol type="bool" name="config_faceAuthOnSecurityView" />
 
+    <!-- Wired/BT headset focus mode -->
+    <java-symbol type="bool" name="config_deviceRingtoneFocusMode" />
+
 </resources>
