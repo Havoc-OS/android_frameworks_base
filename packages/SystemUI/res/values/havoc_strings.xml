@@ -200,6 +200,9 @@
     <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_gaming_mode_enabled">Gaming mode turned on.</string>
 
+    <!-- Name of the vowifi status bar icon. -->
+    <string name="status_bar_vowifi">VoWiFi</string>
+
     <!-- DataSwitch Tile -->
     <string name="qs_data_switch_label">Switch data card</string>
     <string name="qs_data_switch_toast_0">Currently no SIM card is inserted</string>

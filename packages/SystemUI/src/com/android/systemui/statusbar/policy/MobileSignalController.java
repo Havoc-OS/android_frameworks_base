@@ -112,6 +112,7 @@ public class MobileSignalController extends SignalController<
     private ImsManager.Connector mImsManagerConnector;
     private int mCallState = TelephonyManager.CALL_STATE_IDLE;
     private boolean mVolteIcon = true;
+    private boolean mVowifiIcon = true;
 
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
@@ -134,6 +135,7 @@ public class MobileSignalController extends SignalController<
                 com.android.internal.R.string.lockscreen_carrier_default).toString();
 
         Dependency.get(TunerService.class).addTunable(this, "volte");
+        Dependency.get(TunerService.class).addTunable(this, "vowifi");
         mapIconSets();
 
         String networkName = info.getCarrierName() != null ? info.getCarrierName().toString()
@@ -240,6 +242,10 @@ public class MobileSignalController extends SignalController<
         switch (key) {
             case "volte":
                 mVolteIcon =
+                    TunerService.parseIntegerSwitch(newValue, true);
+                    notifyListenersIfNecessary();
+            case "vowifi":
+                mVowifiIcon =
                     TunerService.parseIntegerSwitch(newValue, true);
                     notifyListenersIfNecessary();
             default:
@@ -531,7 +537,7 @@ public class MobileSignalController extends SignalController<
         int volteIcon = isVolteSwitchOn() ? getVolteResId() : 0;
 
         MobileIconGroup vowifiIconGroup = getVowifiIconGroup();
-        if ( mConfig.showVowifiIcon && vowifiIconGroup != null ) {
+        if (vowifiIconGroup != null && mVowifiIcon) {
             typeIcon = vowifiIconGroup.mDataType;
             statusIcon = new IconState(true,
                     mCurrentState.enabled && !mCurrentState.airplaneMode? statusIcon.icon : 0,
