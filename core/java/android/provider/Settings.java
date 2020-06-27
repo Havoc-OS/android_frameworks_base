@@ -4717,6 +4717,12 @@ public final class Settings {
         public static final String CUSTOM_AMBIENT_TILT_GESTURE = "custom_ambient_tilt_gesture";
 
         /**
+         * Custom Ambient raise gesture
+         * @hide
+         */
+        public static final String CUSTOM_AMBIENT_RAISE_GESTURE = "custom_ambient_raise_gesture";
+
+        /**
          * Custom Ambient handwave gesture
          * @hide
          */
