@@ -183,9 +183,6 @@
     <!-- Whether or not we should show vendor mismatch message -->
     <bool name="config_show_vendor_mismatch_message">true</bool>
 
-    <!-- Whether to show HD icon in the status bar for volte -->
-    <bool name="config_display_hd_volte">false</bool>
-
     <!-- Whether device has screen with higher aspect ratio -->
     <bool name="config_haveHigherAspectRatioScreen">false</bool>
     <!-- Aspect ratio of screen -->

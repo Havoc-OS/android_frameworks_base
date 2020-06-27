@@ -61,7 +61,6 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
     private View mMobileRoamingSpace;
     private int mVisibleState = -1;
     private DualToneHandler mDualToneHandler;
-    private ImageView mVolte;
     private boolean mOldStyleType;
     private ImageView mMobileTypeSmall;
 
@@ -114,7 +113,6 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mIn = findViewById(R.id.mobile_in);
         mOut = findViewById(R.id.mobile_out);
         mInoutContainer = findViewById(R.id.inout_container);
-        mVolte = findViewById(R.id.mobile_volte);
         mMobileSignalType = findViewById(R.id.mobile_signal_type);
         mMobileTypeSmall = findViewById(R.id.mobile_type_small);
 
@@ -182,12 +180,6 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mOut.setVisibility(mState.activityOut ? View.VISIBLE : View.GONE);
         mInoutContainer.setVisibility((mState.activityIn || mState.activityOut)
                 ? View.VISIBLE : View.GONE);
-        if (mState.volteId > 0 ) {
-            mVolte.setImageResource(mState.volteId);
-            mVolte.setVisibility(View.VISIBLE);
-        }else {
-            mVolte.setVisibility(View.GONE);
-        }
     }
 
     private void setMobileSignalWidth(boolean small) {
@@ -247,14 +239,6 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
                 || state.activityOut != mState.activityOut
                 || mOldStyleType != oldStyleType;
 
-        if (mState.volteId != state.volteId) {
-            if (state.volteId != 0) {
-                mVolte.setImageResource(state.volteId);
-                mVolte.setVisibility(View.VISIBLE);
-            } else {
-                mVolte.setVisibility(View.GONE);
-            }
-        }
         mState = state;
         mOldStyleType = oldStyleType;
         return needsLayout;
@@ -271,7 +255,6 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mMobileType.setImageTintList(color);
         mMobileTypeSmall.setImageTintList(color);
         mMobileRoaming.setImageTintList(color);
-        mVolte.setImageTintList(color);
         mDotView.setDecorColor(tint);
         mDotView.setIconColor(tint, false);
     }
@@ -298,7 +281,6 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mMobileType.setImageTintList(list);
         mMobileRoaming.setImageTintList(list);
         mMobileTypeSmall.setImageTintList(list);
-        mVolte.setImageTintList(list);
         mDotView.setDecorColor(color);
     }
 

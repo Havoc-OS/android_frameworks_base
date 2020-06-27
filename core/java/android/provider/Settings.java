@@ -5622,12 +5622,6 @@ public final class Settings {
         private static final Validator STATUS_BAR_FILE_HEADER_IMAGE_VALIDATOR = ANY_STRING_VALIDATOR;
 
         /**
-         * Whether to display 4G icon instead LTE
-         * @hide
-         */
-        public static final String SHOW_HD_ICON = "show_hd_icon";
-
-        /**
          * @hide
          */
         public static final String ASPECT_RATIO_APPS_LIST = "aspect_ratio_apps_list";

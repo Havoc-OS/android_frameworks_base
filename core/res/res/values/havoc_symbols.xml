@@ -220,9 +220,6 @@
     <!-- Whether or not we should show vendor mismatch message -->
     <java-symbol type="bool" name="config_show_vendor_mismatch_message" />
 
-    <!-- Whether to show HD icon in the status bar for volte -->
-    <java-symbol type="bool" name="config_display_hd_volte" />
-
     <!-- Full screen aspect ratio -->
     <java-symbol type="bool" name="config_haveHigherAspectRatioScreen" />
     <java-symbol type="dimen" name="config_screenAspectRatio" />
