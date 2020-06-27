@@ -4990,6 +4990,12 @@ public final class Settings {
         public static final String CUSTOM_AMBIENT_HANDWAVE_GESTURE = "custom_ambient_handwave_gesture";
 
         /**
+         * Custom Ambient raise gesture
+         * @hide
+         */
+        public static final String CUSTOM_AMBIENT_RAISE_GESTURE = "custom_ambient_raise_gesture";
+
+        /**
          * Custom Ambient pocketmode gesture
          * @hide
          */
