@@ -78,6 +78,7 @@ import com.android.systemui.statusbar.phone.StatusBar;
 import com.android.systemui.statusbar.phone.StatusBarWindowController;
 import com.android.systemui.statusbar.policy.KeyguardMonitor;
 import com.android.systemui.statusbar.VisualizerView;
+import com.android.systemui.statusbar.policy.TaskHelper;
 import com.android.systemui.SysUiServiceProvider;
 
 import java.io.FileDescriptor;
@@ -143,6 +144,8 @@ public class NotificationMediaManager implements Dumpable {
     private final ArrayList<MediaListener> mMediaListeners;
     private final MediaArtworkProcessor mMediaArtworkProcessor;
     private final Set<AsyncTask<?, ?, ?>> mProcessArtworkTasks = new ArraySet<>();
+
+    private TaskHelper mTaskHelper = Dependency.get(TaskHelper.class);
 
     protected NotificationPresenter mPresenter;
     private MediaController mMediaController;
@@ -312,7 +315,7 @@ public class NotificationMediaManager implements Dumpable {
                 && entry.notification.getKey().equals(mMediaNotificationKey)
                 && mMediaIsVisible
                 // skip media heads up if the player is already in foreground
-                && !entry.notification.getPackageName().toLowerCase().equals(mForegroundPackage);
+                && !entry.notification.getPackageName().toLowerCase().equals(mTaskHelper.getForegroundApp());
     }
 
     public boolean isNewTrackNotification() {
