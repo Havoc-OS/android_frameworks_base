@@ -56,6 +56,7 @@ LOCAL_REQUIRED_MODULES := \
 	FontQuandoSourceOverlay \
 	FontGrandHotelSourceOverlay \
 	FontRedressedSourceOverlay \
+	FontLinotteSourceOverlay \
 	IconPackCircularAndroidOverlay \
 	IconPackCircularLauncherOverlay \
 	IconPackCircularSettingsOverlay \
