@@ -6551,6 +6551,11 @@ public final class Settings {
         public static final String QS_TILE_ACCENT_TINT = "qs_tile_accent_tint";
 
         /**
+         * @hide
+         */
+        public static final String QS_HEADER_BACKGROUND = "qs_header_background";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
