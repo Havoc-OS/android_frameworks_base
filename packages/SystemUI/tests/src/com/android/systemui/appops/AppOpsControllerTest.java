@@ -16,8 +16,9 @@
 
 package com.android.systemui.appops;
 
+import static junit.framework.TestCase.assertFalse;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -67,6 +68,8 @@ public class AppOpsControllerTest extends SysuiTestCase {
     private AppOpsController.Callback mCallback;
     @Mock
     private AppOpsControllerImpl.H mMockHandler;
+    @Mock
+    private PermissionFlagsCache mFlagsCache;
 
     private AppOpsControllerImpl mController;
     private TestableLooper mTestableLooper;
@@ -81,16 +84,16 @@ public class AppOpsControllerTest extends SysuiTestCase {
         // All permissions of TEST_UID and TEST_UID_OTHER are user sensitive. None of
         // TEST_UID_NON_USER_SENSITIVE are user sensitive.
         getContext().setMockPackageManager(mPackageManager);
-        when(mPackageManager.getPermissionFlags(anyString(), anyString(),
+        when(mFlagsCache.getPermissionFlags(anyString(), anyString(),
                 eq(UserHandle.getUserHandleForUid(TEST_UID)))).thenReturn(
                 PackageManager.FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED);
-        when(mPackageManager.getPermissionFlags(anyString(), anyString(),
+        when(mFlagsCache.getPermissionFlags(anyString(), anyString(),
                 eq(UserHandle.getUserHandleForUid(TEST_UID_OTHER)))).thenReturn(
                 PackageManager.FLAG_PERMISSION_USER_SENSITIVE_WHEN_GRANTED);
-        when(mPackageManager.getPermissionFlags(anyString(), anyString(),
+        when(mFlagsCache.getPermissionFlags(anyString(), anyString(),
                 eq(UserHandle.getUserHandleForUid(TEST_UID_NON_USER_SENSITIVE)))).thenReturn(0);
 
-        mController = new AppOpsControllerImpl(mContext, mTestableLooper.getLooper());
+        mController = new AppOpsControllerImpl(mContext, mTestableLooper.getLooper(), mFlagsCache);
     }
 
     @Test
