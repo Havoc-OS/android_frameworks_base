@@ -813,13 +813,20 @@ public class ScreenDecorations extends SystemUI implements Tunable,
                 int size = mRoundedDefault;
                 int sizeTop = mRoundedDefaultTop;
                 int sizeBottom = mRoundedDefaultBottom;
-                boolean sizeSet = false;
+                boolean sizeSet = true;
                 if (newValue != null) {
                     try {
                         size = (int) (Integer.parseInt(newValue) * mDensity);
-                        sizeSet = true;
                     } catch (Exception e) {
                     }
+                } else {
+                    size = (int) (Secure.getIntForUser(mContext.getContentResolver(), SIZE,
+                            -1, UserHandle.USER_CURRENT) * mDensity);
+                }
+
+                // Special case, default behavaiour (framework values)
+                if (size == (int) (-1 * mDensity)) {
+                    sizeSet = false; // Assume no sizes were set
                 }
 
                 // Choose a sane safe size in immerse, often
