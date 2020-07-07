@@ -72,6 +72,7 @@ public class QSContainerImpl extends FrameLayout implements
     private boolean mQsBackgroundAlpha;
     private boolean mForceHideQsStatusBar;
     private boolean mHideQSBlackGradient;
+    private boolean mImmerseMode;
 
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -96,11 +97,10 @@ public class QSContainerImpl extends FrameLayout implements
         mBackgroundImage = findViewById(R.id.qs_header_image_view);
         mBackgroundImage.setClipToOutline(true);
         mForceHideQsStatusBar = mContext.getResources().getBoolean(R.bool.qs_status_bar_hidden);
-        updateSettings();
-        updateResources();
 
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         setMargins();
+        updateSettings();
     }
 
     @Override
@@ -139,6 +139,9 @@ public class QSContainerImpl extends FrameLayout implements
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_HEADER_BACKGROUND),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DISPLAY_CUTOUT_MODE),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -154,6 +157,9 @@ public class QSContainerImpl extends FrameLayout implements
                 UserHandle.USER_CURRENT);
         mHideQSBlackGradient = Settings.System.getIntForUser(resolver,
                 Settings.System.QS_HEADER_BACKGROUND, 0,
+                UserHandle.USER_CURRENT) == 1;
+        mImmerseMode = Settings.System.getIntForUser(resolver,
+                Settings.System.DISPLAY_CUTOUT_MODE, 0,
                 UserHandle.USER_CURRENT) == 1;
 
         Drawable bg = mBackground.getBackground();
@@ -294,8 +300,8 @@ public class QSContainerImpl extends FrameLayout implements
     }
 
     private void setBackgroundGradientVisibility(Configuration newConfig) {
-        boolean shouldHideStatusbar = (mLandscape || mForceHideQsStatusBar || mHideQSBlackGradient) && !mHeaderImageEnabled;
-        if (mLandscape || mForceHideQsStatusBar || mHideQSBlackGradient) {
+        boolean shouldHideStatusbar = (mLandscape || mForceHideQsStatusBar || mHideQSBlackGradient || mImmerseMode) && !mHeaderImageEnabled;
+        if (mLandscape || mForceHideQsStatusBar || mHideQSBlackGradient || mImmerseMode) {
             mBackgroundGradient.setVisibility(View.INVISIBLE);
         } else {
             mBackgroundGradient.setVisibility((mQsDisabled || mQsBackgroundAlpha) ? View.INVISIBLE : View.VISIBLE);
