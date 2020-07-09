@@ -716,7 +716,10 @@ public class ScreenDecorations extends SystemUI implements Tunable,
     }
 
     static boolean shouldDrawCutout(Context context) {
-        return context.getResources().getBoolean(
+        ContentResolver cr = context.getContentResolver();
+        boolean newImmerseMode = cr != null && System.getIntForUser(cr,
+                        System.DISPLAY_CUTOUT_MODE, 0, UserHandle.USER_CURRENT) == 1;
+        return !newImmerseMode && context.getResources().getBoolean(
                 com.android.internal.R.bool.config_fillMainBuiltInDisplayCutout);
     }
 
@@ -975,6 +978,7 @@ public class ScreenDecorations extends SystemUI implements Tunable,
         private int mRotation;
         private float mCameraProtectionProgress = HIDDEN_CAMERA_PROTECTION_SCALE;
         private ValueAnimator mCameraProtectionAnimator;
+        private CustomSettingsObserver mCustomSettingsObserver;
 
         public DisplayCutoutView(Context context, boolean start,
                 Runnable visibilityChangedListener, ScreenDecorations decorations) {
@@ -988,6 +992,8 @@ public class ScreenDecorations extends SystemUI implements Tunable,
                         (mInitialStart ? "OverlayTop" : "OverlayBottom")
                                 + " drawn in rot " + mRotation));
             }
+            mCustomSettingsObserver = new CustomSettingsObserver(new Handler());
+            mCustomSettingsObserver.observe();
         }
 
         public void setColor(int color) {
@@ -1287,6 +1293,30 @@ public class ScreenDecorations extends SystemUI implements Tunable,
                     rootView.getBottom(), Region.Op.INTERSECT);
 
             return cutoutBounds;
+        }
+
+        private class CustomSettingsObserver extends ContentObserver {
+            CustomSettingsObserver(Handler handler) {
+                super(handler);
+            }
+
+            void observe() {
+                ContentResolver resolver = mContext.getContentResolver();
+                resolver.registerContentObserver(System.getUriFor(
+                        System.DISPLAY_CUTOUT_MODE), false, this);
+            }
+
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                if (uri.equals(System.getUriFor(System.DISPLAY_CUTOUT_MODE))) {
+                    update();
+                }
+            }
+
+            @Override
+            public void onChange(boolean selfChange) {
+                update();
+            }
         }
     }
 
