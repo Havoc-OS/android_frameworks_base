@@ -1058,7 +1058,9 @@ public class ConnectivityService extends IConnectivityManager.Stub
 
         String hostname = Settings.Secure.getString(context.getContentResolver(),
                 Settings.Secure.DEVICE_HOSTNAME);
-        SystemProperties.set("net.hostname", hostname);
+        if (hostname != null) {
+            SystemProperties.set("net.hostname", hostname);
+        }
     }
 
     @VisibleForTesting
