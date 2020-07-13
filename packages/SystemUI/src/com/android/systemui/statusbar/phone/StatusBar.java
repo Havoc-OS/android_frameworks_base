@@ -4700,6 +4700,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                     uri.equals(Settings.System.getUriFor(Settings.System.STOCK_STATUSBAR_IN_HIDE))||
                     uri.equals(Settings.Secure.getUriFor("sysui_rounded_size"))) {
                 handleCutout(null);
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_TILE_ACCENT_TINT))) {
+                mQSPanel.getHost().reloadAllTiles();
             }
             update();
         }
@@ -4748,7 +4750,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private void setQsColumns() {
         if (mQSPanel != null) {
-            mQSPanel.getHost().reloadAllTiles();
             mQSPanel.updateResources();
             mQSPanel.updateSettings();
         }
