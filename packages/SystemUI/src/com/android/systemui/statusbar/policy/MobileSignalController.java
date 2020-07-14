@@ -429,17 +429,13 @@ public class MobileSignalController extends SignalController<
         return getCurrentIconId();
     }
 
-    private boolean isVolteSwitchOn() {
-        return mImsManager != null && mImsManager.isEnhanced4gLteModeSettingEnabledByUser();
-    }
-
     private int getVolteResId() {
         int resId = 0;
         if (mVowifiIcon && isVowifiAvailable()) {
+            resId = R.drawable.ic_vowifi;
             return resId;
         }
-        if ((mCurrentState.voiceCapable || mCurrentState.videoCapable)
-                &&  mCurrentState.imsRegistered && mVolteIcon) {
+        if (mVolteIcon && isVolteAvailable()) {
             resId = R.drawable.ic_volte;
         }
         return resId;
@@ -537,15 +533,7 @@ public class MobileSignalController extends SignalController<
                 && mCurrentState.activityOut;
         showDataIcon &= mCurrentState.isDefault || dataDisabled;
         int typeIcon = (showDataIcon || mConfig.alwaysShowDataRatIcon) ? icons.mDataType : 0;
-        int volteIcon = isVolteSwitchOn() ? getVolteResId() : 0;
-
-        MobileIconGroup vowifiIconGroup = getVowifiIconGroup();
-        if (vowifiIconGroup != null && mVowifiIcon) {
-            typeIcon = vowifiIconGroup.mDataType;
-            statusIcon = new IconState(true,
-                    mCurrentState.enabled && !mCurrentState.airplaneMode? statusIcon.icon : 0,
-                    statusIcon.contentDescription);
-        }
+        int volteIcon = getVolteResId();
 
         callback.setMobileDataIndicators(statusIcon, qsIcon, typeIcon, qsTypeIcon,
                 activityIn, activityOut, volteIcon, dataContentDescription, dataContentDescriptionHtml,
@@ -852,23 +840,14 @@ public class MobileSignalController extends SignalController<
         notifyListenersIfNecessary();
     }
 
-    private boolean isCallIdle() {
-        return mCallState == TelephonyManager.CALL_STATE_IDLE;
+    private boolean isVolteAvailable() {
+        return mImsManager != null && mImsManager.isEnhanced4gLteModeSettingEnabledByUser()
+                && (mCurrentState.voiceCapable || mCurrentState.videoCapable) && mCurrentState.imsRegistered;
     }
 
     private boolean isVowifiAvailable() {
-        return mCurrentState.voiceCapable &&  mCurrentState.imsRegistered
+        return mCurrentState.voiceCapable && mCurrentState.imsRegistered
                 && mServiceState.getDataNetworkType() == TelephonyManager.NETWORK_TYPE_IWLAN;
-    }
-
-    private MobileIconGroup getVowifiIconGroup() {
-        if ( isVowifiAvailable() && !isCallIdle() ) {
-            return TelephonyIcons.VOWIFI_CALLING;
-        } else if (isVowifiAvailable()) {
-            return TelephonyIcons.VOWIFI;
-        } else {
-            return null;
-        }
     }
 
     @Override
@@ -1082,7 +1061,7 @@ public class MobileSignalController extends SignalController<
             builder.append("carrierNetworkChangeMode=").append(carrierNetworkChangeMode)
                     .append(',');
             builder.append("userSetup=").append(userSetup).append(',');
-            builder.append("defaultDataOff=").append(defaultDataOff);
+            builder.append("defaultDataOff=").append(defaultDataOff).append(',');
             builder.append("imsRegistered=").append(imsRegistered).append(',');
             builder.append("voiceCapable=").append(voiceCapable).append(',');
             builder.append("videoCapable=").append(videoCapable);
