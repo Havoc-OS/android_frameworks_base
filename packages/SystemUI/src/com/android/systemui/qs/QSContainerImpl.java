@@ -72,7 +72,6 @@ public class QSContainerImpl extends FrameLayout implements
     private boolean mQsBackgroundAlpha;
     private boolean mForceHideQsStatusBar;
     private boolean mHideQSBlackGradient;
-    private boolean mImmerseMode;
 
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -139,9 +138,6 @@ public class QSContainerImpl extends FrameLayout implements
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_HEADER_BACKGROUND),
                     false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.DISPLAY_CUTOUT_MODE),
-                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -157,9 +153,6 @@ public class QSContainerImpl extends FrameLayout implements
                 UserHandle.USER_CURRENT);
         mHideQSBlackGradient = Settings.System.getIntForUser(resolver,
                 Settings.System.QS_HEADER_BACKGROUND, 0,
-                UserHandle.USER_CURRENT) == 1;
-        mImmerseMode = Settings.System.getIntForUser(resolver,
-                Settings.System.DISPLAY_CUTOUT_MODE, 0,
                 UserHandle.USER_CURRENT) == 1;
 
         Drawable bg = mBackground.getBackground();
@@ -300,8 +293,8 @@ public class QSContainerImpl extends FrameLayout implements
     }
 
     private void setBackgroundGradientVisibility(Configuration newConfig) {
-        boolean shouldHideStatusbar = (mLandscape || mForceHideQsStatusBar || mHideQSBlackGradient || mImmerseMode) && !mHeaderImageEnabled;
-        if (mLandscape || mForceHideQsStatusBar || mHideQSBlackGradient || mImmerseMode) {
+        boolean shouldHideStatusbar = (mLandscape || mForceHideQsStatusBar || mHideQSBlackGradient) && !mHeaderImageEnabled;
+        if (mLandscape || mForceHideQsStatusBar || mHideQSBlackGradient) {
             mBackgroundGradient.setVisibility(View.INVISIBLE);
         } else {
             mBackgroundGradient.setVisibility((mQsDisabled || mQsBackgroundAlpha) ? View.INVISIBLE : View.VISIBLE);
