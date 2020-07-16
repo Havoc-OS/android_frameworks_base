@@ -690,6 +690,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private int mImmerseMode;
     private boolean mStockStatusBar = true;
+    private boolean mPortrait = true;
 
     private final View.OnClickListener mGoToLockedShadeListener = v -> {
         if (mState == StatusBarState.KEYGUARD) {
@@ -1036,7 +1037,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                         new BurnInProtectionController(mContext, this, mStatusBarView);
                     mStatusBarContent = (LinearLayout) mStatusBarView.findViewById(R.id.status_bar_contents);
                     mCenterClockLayout = mStatusBarView.findViewById(R.id.center_clock_layout);
-                    handleCutout(null);
+                    handleCutout();
                 }).getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.status_bar_container, new CollapsedStatusBarFragment(),
@@ -3424,13 +3425,16 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateResources();
         updateDisplaySize(); // populates mDisplayMetrics
 
-        if (DEBUG) {
-            Log.v(TAG, "configuration changed: " + mContext.getResources().getConfiguration());
-        }
+        mPortrait = newConfig.orientation == Configuration.ORIENTATION_PORTRAIT;
 
         mViewHierarchyManager.updateRowStates();
         mScreenPinningRequest.onConfigurationChanged();
-        handleCutout(newConfig);
+
+        if (mImmerseMode == 1) {
+            mUiOffloadThread.submit(() -> {
+                setBlackStatusBar(mPortrait);
+            });
+        }
 
         if (blurperformed) {
             mNotificationPanel.setPanelAlpha(0, false);
@@ -4702,7 +4706,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         public void onChange(boolean selfChange, Uri uri) {
             if (uri.equals(Settings.System.getUriFor(Settings.System.DISPLAY_CUTOUT_MODE)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.STOCK_STATUSBAR_IN_HIDE))) {
-                handleCutout(null);
+                handleCutout();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_TILE_ACCENT_TINT))) {
                 mQSPanel.getHost().reloadAllTiles();
             }
@@ -4858,22 +4862,18 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
-    private void handleCutout(Configuration newConfig) {
+    private void handleCutout() {
         mImmerseMode = Settings.System.getIntForUser(mContext.getContentResolver(),
                         Settings.System.DISPLAY_CUTOUT_MODE, 0, UserHandle.USER_CURRENT);
         mStockStatusBar = Settings.System.getIntForUser(mContext.getContentResolver(),
                         Settings.System.STOCK_STATUSBAR_IN_HIDE, 1, UserHandle.USER_CURRENT) == 1;
-        boolean immerseMode;
-        if (newConfig == null) newConfig = mContext.getResources().getConfiguration();
-        if (newConfig == null || newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            immerseMode = mImmerseMode == 1;
-        } else {
-            immerseMode = false;
-        }
+        final boolean immerseMode = mImmerseMode == 1;
         final boolean hideCutoutMode = mImmerseMode == 2;
-        setBlackStatusBar(immerseMode);
-        setCutoutOverlay(hideCutoutMode);
-        setStatusBarStockOverlay(hideCutoutMode && mStockStatusBar);
+        mUiOffloadThread.submit(() -> {
+            setBlackStatusBar(mPortrait && immerseMode);
+            setCutoutOverlay(hideCutoutMode);
+            setStatusBarStockOverlay(hideCutoutMode && mStockStatusBar);
+        });
     }
 
     public int getWakefulnessState() {
