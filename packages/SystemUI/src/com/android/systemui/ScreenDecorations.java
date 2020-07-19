@@ -646,11 +646,13 @@ public class ScreenDecorations extends SystemUI implements Tunable,
             updateView(bottomRight, Gravity.TOP | Gravity.LEFT, useCustomCutout ? 180 : 0);
         }
 
-        updateAssistantHandleViews();
-        mCutoutTop.setRotation(mRotation);
-        mCutoutBottom.setRotation(mRotation);
+        mHandler.post(() -> {
+            updateAssistantHandleViews();
+            mCutoutTop.setRotation(mRotation);
+            mCutoutBottom.setRotation(mRotation);
 
-        updateWindowVisibilities();
+            updateWindowVisibilities();
+        });
     }
 
     private void updateAssistantHandleViews() {
