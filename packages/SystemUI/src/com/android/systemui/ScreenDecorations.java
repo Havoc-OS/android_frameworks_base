@@ -154,6 +154,7 @@ public class ScreenDecorations extends SystemUI implements Tunable,
             (SysuiStatusBarStateController) Dependency.get(StatusBarStateController.class);
     private boolean mFullscreenMode = false;
     private boolean mImmerseMode = false;
+    private int mImmerseModeSetting = 0;
     private StatusBar mStatusBar;
     private boolean mCustomCutout;
 
@@ -720,13 +721,11 @@ public class ScreenDecorations extends SystemUI implements Tunable,
     }
 
     static boolean shouldDrawCutout(Context context) {
-        ContentResolver cr = context.getContentResolver();
-        boolean newImmerseMode = cr != null && System.getIntForUser(cr,
+        boolean newImmerseMode = System.getIntForUser(context.getContentResolver(),
                         System.DISPLAY_CUTOUT_MODE, 0, UserHandle.USER_CURRENT) == 1;
         return !newImmerseMode && context.getResources().getBoolean(
                 com.android.internal.R.bool.config_fillMainBuiltInDisplayCutout);
     }
-
 
     private void setupStatusBarPaddingIfNeeded() {
         // TODO: This should be moved to a more appropriate place, as it is not related to the
@@ -1420,13 +1419,17 @@ public class ScreenDecorations extends SystemUI implements Tunable,
     }
 
     private void updateCutoutMode() {
+        mImmerseModeSetting = System.getIntForUser(mContext.getContentResolver(),
+                System.DISPLAY_CUTOUT_MODE, 0, UserHandle.USER_CURRENT);
+
         boolean newImmerseMode;
         if (mRotation == RotationUtils.ROTATION_LANDSCAPE ||
-                mRotation == RotationUtils.ROTATION_SEASCAPE)
+                mRotation == RotationUtils.ROTATION_SEASCAPE) {
             newImmerseMode = false;
-        else
-            newImmerseMode = System.getIntForUser(mContext.getContentResolver(),
-                        System.DISPLAY_CUTOUT_MODE, 0, UserHandle.USER_CURRENT) == 1;
+        } else {
+            newImmerseMode = mImmerseModeSetting == 1;
+        }
+
         if (mImmerseMode != newImmerseMode) {
             mImmerseMode = newImmerseMode;
             if (mOverlay != null) {
