@@ -89,8 +89,13 @@
     <string name="screenrecord_dialog_summary">Podczas nagrywania, system android może przechwytywać wrażliwe informacje, które są widoczne na ekranie lub odtwarzane na twoim urządzeniu. Zawiera również hasła, informacje o płatnościach, zdjęciach, wiadomościach i audio.</string>
     <string name="screenrecord_dialog_start">Uruchom</string>
     <string name="screenrecord_dialog_cancel">Anuluj</string>
+    <string name="screenrecord_audio_recording_title">Źródło dźwięku</string>
+    <string name="screenrecord_audio_recording_internal">Wewnętrzne</string>
+    <string name="screenrecord_audio_recording_microphone">Mikrofon</string>
+    <string name="screenrecord_audio_recording_off">Wyłączone</string>
     <string name="screenrecord_taps_title">Pokaż dotyki na ekranie</string>
     <string name="screenrecord_stopdot_title">Pokaż kropkę zatrzymania</string>
+    <string name="screenrecord_video_bitrate_title">Bitrate wideo</string>
     <string name="global_action_screenrecord">Nagrywanie ekranu</string>
     <!-- HW Keys Tile -->
     <string name="accessibility_quick_settings_hwkeys_on">Przyciski fizyczne włączone</string>
@@ -104,8 +109,6 @@
     <!-- Kill button in notification guts -->
     <string name="force_stop_dlg_title">Wymusić zatrzymanie?</string>
     <string name="force_stop_dlg_text">Jeśli wymusisz zatrzymanie aplikacji, może ona działać nieprawidłowo.</string>
-    <string name="dlg_ok">@android:string/ok</string>
-    <string name="dlg_cancel">@android:string/cancel</string>
     <string name="guts_force_close_app">Zamknij aplikację</string>
     <!-- Compass QS Tile -->
     <string name="quick_settings_compass_label">Kompas</string>
@@ -167,8 +170,7 @@
     <string name="accessibility_quick_settings_gaming_mode_disabled">Tryb gry wyłączony.</string>
     <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_gaming_mode_enabled">Tryb gry włączony.</string>
-    <!-- Name of the volte status bar icon. -->
-    <string name="status_bar_volte">VoLTE</string>
+    <!-- Name of the vowifi status bar icon. -->
     <!-- DataSwitch Tile -->
     <string name="qs_data_switch_label">Przełącz kartę danych</string>
     <string name="qs_data_switch_toast_0">Obecnie nie ma włożonej karty SIM</string>
@@ -217,4 +219,12 @@
     <string name="app_picker_dialog_title">Wybierz aplikację</string>
     <string name="recents_app_killed">Aplikacja została zabita</string>
     <string name="nope_cant_kill">Launcher nie może zostać zabity</string>
+    <!-- Navigation Bar tile -->
+    <!-- VPN QS tile -->
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- Text to use when the number in a notification info is too large
+         (greater than status_bar_notification_info_maxnum, defined in
+         values/config.xml) and must be truncated.
+         [CHAR LIMIT=4] -->
 </resources>

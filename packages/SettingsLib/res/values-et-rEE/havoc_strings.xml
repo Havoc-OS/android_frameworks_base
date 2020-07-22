@@ -16,18 +16,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Description for the screen zoom level that makes interface elements smaller. [CHAR LIMIT=24] -->
-    <string name="screen_zoom_summary_smaller">較小</string>
     <!-- Description for the screen zoom level that makes interface elements smallest. [CHAR LIMIT=24] -->
-    <string name="screen_zoom_summary_smallest">最小的</string>
-    <string name="status_deep_sleep">(深度睡眠: %1$d%2$s)</string>
     <!-- Label for estimated remaining duration of dash battery charging -->
-    <string name="power_remaining_dash_charging_duration_only">快速充電中（剩餘 <xliff:g id="time">%1$s</xliff:g> 充滿）</string>
     <!-- Battery use screen.  Battery status shown in chart label when charging from a dash source.  -->
-    <string name="battery_info_status_dash_charging">快速充電中</string>
-    <string name="battery_info_status_dash_charging_lower">快速充電中</string>
     <!-- Label for estimated remaining duration of warp battery charging -->
-    <string name="power_remaining_warp_charging_duration_only">快速充電中(剩餘 <xliff:g id="time">%1$s</xliff:g> 充滿)</string>
     <!-- Battery use screen. Battery status shown in chart label when charging from a warp source.  -->
-    <string name="battery_info_status_warp_charging">快速充電中</string>
-    <string name="battery_info_status_warp_charging_lower">快速充電中</string>
 </resources>

@@ -89,8 +89,13 @@
     <string name="screenrecord_dialog_summary">Во время записи Android может захватить любую важную информацию, которая видна на вашем экране или воспроизведена на вашем устройстве. Сюда входят пароли, платежные данные, фотографии, сообщения и аудио.</string>
     <string name="screenrecord_dialog_start">Начать запись</string>
     <string name="screenrecord_dialog_cancel">Отменить</string>
+    <string name="screenrecord_audio_recording_title">Источник аудио</string>
+    <string name="screenrecord_audio_recording_internal">Внутренний</string>
+    <string name="screenrecord_audio_recording_microphone">Микрофон</string>
+    <string name="screenrecord_audio_recording_off">Отключён</string>
     <string name="screenrecord_taps_title">Показать касания на экране</string>
     <string name="screenrecord_stopdot_title">Показать кнопку остановки</string>
+    <string name="screenrecord_video_bitrate_title">Битрейт видео</string>
     <string name="global_action_screenrecord">Запись экрана</string>
     <!-- HW Keys Tile -->
     <string name="accessibility_quick_settings_hwkeys_on">Аппаратные кнопки включены</string>
@@ -104,8 +109,6 @@
     <!-- Kill button in notification guts -->
     <string name="force_stop_dlg_title">Принудительно завершить?</string>
     <string name="force_stop_dlg_text">Если вы принудительно завершите приложение, это может отразиться на его функциональности.</string>
-    <string name="dlg_ok">Ок</string>
-    <string name="dlg_cancel">Отмена</string>
     <string name="guts_force_close_app">Закрыть приложение</string>
     <!-- Compass QS Tile -->
     <string name="quick_settings_compass_label">Компас</string>
@@ -167,8 +170,8 @@
     <string name="accessibility_quick_settings_gaming_mode_disabled">Игровой режим выключен.</string>
     <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_gaming_mode_enabled">Игровой режим включён.</string>
-    <!-- Name of the volte status bar icon. -->
-    <string name="status_bar_volte">VoLTE</string>
+    <!-- Name of the vowifi status bar icon. -->
+    <string name="status_bar_vowifi">VoWiFi</string>
     <!-- DataSwitch Tile -->
     <string name="qs_data_switch_label">Сменить сим-карту для передачи данных</string>
     <string name="qs_data_switch_toast_0">В настоящее время SIM-карта не вставлена</string>
@@ -197,6 +200,7 @@
     <string name="stabilization_position_friction">Положение трения</string>
     <!-- AOD QS tile -->
     <string name="quick_settings_aod_label">Активный дисплей</string>
+    <string name="quick_settings_aod_off_powersave_label">Режим энергосбережения включен</string>
     <!-- Sound QS tile -->
     <string name="quick_settings_sound_label">Звук</string>
     <string name="quick_settings_sound_ring">Звонок</string>
@@ -217,4 +221,21 @@
     <string name="app_picker_dialog_title">Выбрать приложение</string>
     <string name="recents_app_killed">Приложение закрыто</string>
     <string name="nope_cant_kill">Лончер не может быть завершён</string>
+    <!-- Navigation Bar tile -->
+    <string name="quick_settings_navbar_title">Панель навигации</string>
+    <string name="accessibility_quick_settings_navbar_on">Панель навигации включена</string>
+    <string name="accessibility_quick_settings_navbar_off">Панель навигации выключена</string>
+    <!-- VPN QS tile -->
+    <string name="quick_settings_vpn_label">VPN</string>
+    <string name="quick_settings_vpn_connect_dialog_title">Подключить к\u2026</string>
+    <string name="vpn_credentials_hint">Пожалуйста, введите свои учетные данные для подключения к <xliff:g id="name">%s</xliff:g></string>
+    <string name="vpn_credentials_username">Имя пользователя</string>
+    <string name="vpn_credentials_password">Пароль</string>
+    <string name="vpn_credentials_dialog_connect">Подключиться</string>
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- Text to use when the number in a notification info is too large
+         (greater than status_bar_notification_info_maxnum, defined in
+         values/config.xml) and must be truncated.
+         [CHAR LIMIT=4] -->
 </resources>

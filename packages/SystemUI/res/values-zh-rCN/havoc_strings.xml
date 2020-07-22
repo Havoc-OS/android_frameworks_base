@@ -89,8 +89,13 @@
     <string name="screenrecord_dialog_summary">在录制过程中，安卓系统可以捕获在您的屏幕上可见或在您的设备上播放的任何敏感信息。 这包括密码、付款信息、照片、消息和音频。</string>
     <string name="screenrecord_dialog_start">始于</string>
     <string name="screenrecord_dialog_cancel">取消</string>
+    <string name="screenrecord_audio_recording_title">声音来源</string>
+    <string name="screenrecord_audio_recording_internal">内部</string>
+    <string name="screenrecord_audio_recording_microphone">麦克风</string>
+    <string name="screenrecord_audio_recording_off">禁用</string>
     <string name="screenrecord_taps_title">显示触摸效果</string>
     <string name="screenrecord_stopdot_title">显示停止圆点</string>
+    <string name="screenrecord_video_bitrate_title">视频比特率</string>
     <string name="global_action_screenrecord">屏幕录制</string>
     <!-- HW Keys Tile -->
     <string name="accessibility_quick_settings_hwkeys_on">启用实体按键</string>
@@ -104,8 +109,6 @@
     <!-- Kill button in notification guts -->
     <string name="force_stop_dlg_title">要强行停止吗？</string>
     <string name="force_stop_dlg_text">强行停止某个应用可能会导致其出现异常</string>
-    <string name="dlg_ok">@android:string/ok</string>
-    <string name="dlg_cancel">@android:string/cancel</string>
     <string name="guts_force_close_app">关闭应用</string>
     <!-- Compass QS Tile -->
     <string name="quick_settings_compass_label">指南针</string>
@@ -167,8 +170,7 @@
     <string name="accessibility_quick_settings_gaming_mode_disabled">游戏模式已关闭</string>
     <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_gaming_mode_enabled">游戏模式已开启</string>
-    <!-- Name of the volte status bar icon. -->
-    <string name="status_bar_volte">VoLTE</string>
+    <!-- Name of the vowifi status bar icon. -->
     <!-- DataSwitch Tile -->
     <string name="qs_data_switch_label">切换数据卡</string>
     <string name="qs_data_switch_toast_0">当前未插入 SIM 卡</string>
@@ -217,4 +219,12 @@
     <string name="app_picker_dialog_title">选择一个应用</string>
     <string name="recents_app_killed">应用已被终止</string>
     <string name="nope_cant_kill">启动器不能被终止</string>
+    <!-- Navigation Bar tile -->
+    <!-- VPN QS tile -->
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- Text to use when the number in a notification info is too large
+         (greater than status_bar_notification_info_maxnum, defined in
+         values/config.xml) and must be truncated.
+         [CHAR LIMIT=4] -->
 </resources>

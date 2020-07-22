@@ -89,8 +89,13 @@
     <string name="screenrecord_dialog_summary">Kayıt sırasında Android sistemi, ekranınızda görünen veya cihazınızda oynatılan tüm hassas bilgileri yakalayabilir. Buna şifreler, ödeme bilgileri, fotoğraflar, mesajlar ve ses dahildir.</string>
     <string name="screenrecord_dialog_start">Başlat</string>
     <string name="screenrecord_dialog_cancel">İptal</string>
+    <string name="screenrecord_audio_recording_title">Ses kaynağı</string>
+    <string name="screenrecord_audio_recording_internal">Dahili</string>
+    <string name="screenrecord_audio_recording_microphone">Mikrofon</string>
+    <string name="screenrecord_audio_recording_off">Devre dışı</string>
     <string name="screenrecord_taps_title">Ekrana dokunmaları göster</string>
     <string name="screenrecord_stopdot_title">Durdurma noktasını göster</string>
+    <string name="screenrecord_video_bitrate_title">Video bit hızı</string>
     <string name="global_action_screenrecord">Ekran kaydı</string>
     <!-- HW Keys Tile -->
     <string name="accessibility_quick_settings_hwkeys_on">Donanım tuşları açık</string>
@@ -104,8 +109,6 @@
     <!-- Kill button in notification guts -->
     <string name="force_stop_dlg_title">Zorla durdurulsun mu?</string>
     <string name="force_stop_dlg_text">Uygulamayı zorla durdurursanız, hatalı davranabilir.</string>
-    <string name="dlg_ok">@android:string/ok</string>
-    <string name="dlg_cancel">@android:string/cancel</string>
     <string name="guts_force_close_app">Uygulamayı kapat</string>
     <!-- Compass QS Tile -->
     <string name="quick_settings_compass_label">Pusula</string>
@@ -167,8 +170,8 @@
     <string name="accessibility_quick_settings_gaming_mode_disabled">Oyun modu kapatıldı.</string>
     <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_gaming_mode_enabled">Oyun modu açıldı.</string>
-    <!-- Name of the volte status bar icon. -->
-    <string name="status_bar_volte">VoLTE</string>
+    <!-- Name of the vowifi status bar icon. -->
+    <string name="status_bar_vowifi">VoWiFi</string>
     <!-- DataSwitch Tile -->
     <string name="qs_data_switch_label">Veri kartını değiştir</string>
     <string name="qs_data_switch_toast_0">Şu anda SIM kart takılı değil</string>
@@ -197,6 +200,7 @@
     <string name="stabilization_position_friction">Sürtünme pozisyonu</string>
     <!-- AOD QS tile -->
     <string name="quick_settings_aod_label">Her zaman açık ekran</string>
+    <string name="quick_settings_aod_off_powersave_label">Pil tasarrufu etkin</string>
     <!-- Sound QS tile -->
     <string name="quick_settings_sound_label">Ses</string>
     <string name="quick_settings_sound_ring">Zil sesi</string>
@@ -217,4 +221,21 @@
     <string name="app_picker_dialog_title">Bir uygulama seçin</string>
     <string name="recents_app_killed">Uygulama sonlandırıldı</string>
     <string name="nope_cant_kill">Başlatıcı sonlandırılamaz</string>
+    <!-- Navigation Bar tile -->
+    <string name="quick_settings_navbar_title">Gezinme çubuğu</string>
+    <string name="accessibility_quick_settings_navbar_on">Gezinme çubuğu açık</string>
+    <string name="accessibility_quick_settings_navbar_off">Gezinme çubuğu kapalı</string>
+    <!-- VPN QS tile -->
+    <string name="quick_settings_vpn_label">VPN</string>
+    <string name="quick_settings_vpn_connect_dialog_title">Bağlan\u2026</string>
+    <string name="vpn_credentials_hint">Lütfen <xliff:g id="name">%s</xliff:g> bağlanmak için kimlik bilgilerinizi girin</string>
+    <string name="vpn_credentials_username">Kullanıcı adı</string>
+    <string name="vpn_credentials_password">Şifre</string>
+    <string name="vpn_credentials_dialog_connect">Bağlan</string>
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- Text to use when the number in a notification info is too large
+         (greater than status_bar_notification_info_maxnum, defined in
+         values/config.xml) and must be truncated.
+         [CHAR LIMIT=4] -->
 </resources>

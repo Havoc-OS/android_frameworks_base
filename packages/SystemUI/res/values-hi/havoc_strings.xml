@@ -89,8 +89,13 @@
     <string name="screenrecord_dialog_summary">रिकॉर्डिंग के समय फोन कोई भी आपत्तिजनक सूचना जैसे पासवर्ड, भुगतान संबंधित जानकारी, फोटो, संदेश या कोई भी आवाज़ रिकॉर्ड कर सकता है।</string>
     <string name="screenrecord_dialog_start">प्रारंभ करें</string>
     <string name="screenrecord_dialog_cancel">रद्द करें</string>
+    <string name="screenrecord_audio_recording_title">ध्वनि स्रोत</string>
+    <string name="screenrecord_audio_recording_internal">आंतरिक</string>
+    <string name="screenrecord_audio_recording_microphone">माइक्रोफोन</string>
+    <string name="screenrecord_audio_recording_off">बंद किया गया</string>
     <string name="screenrecord_taps_title">स्क्रीन पर स्पर्श दिखाएं</string>
     <string name="screenrecord_stopdot_title">बंद करने के लिए बिंदु दिखाएं</string>
+    <string name="screenrecord_video_bitrate_title">वीडियो बिटरेट</string>
     <string name="global_action_screenrecord">स्क्रीन को रिकॉर्ड करें</string>
     <!-- HW Keys Tile -->
     <string name="accessibility_quick_settings_hwkeys_on">हार्डवेयर बटन्स चालू</string>
@@ -104,8 +109,6 @@
     <!-- Kill button in notification guts -->
     <string name="force_stop_dlg_title">बलपूर्वक रोके?</string>
     <string name="force_stop_dlg_text">यदि आप कोई ऐप जबरदस्ती बंद करते हैं, तो वो दुर्व्यवहार कर सकता है|</string>
-    <string name="dlg_ok">@android:string/ok</string>
-    <string name="dlg_cancel">@android:string/cancel</string>
     <string name="guts_force_close_app">ऐप बंद करें</string>
     <!-- Compass QS Tile -->
     <string name="quick_settings_compass_label">दिशा-सूचक</string>
@@ -167,8 +170,7 @@
     <string name="accessibility_quick_settings_gaming_mode_disabled">गेमिंग मोड बंद किया गया</string>
     <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_gaming_mode_enabled">गेमिंग मोड चालू किया गया</string>
-    <!-- Name of the volte status bar icon. -->
-    <string name="status_bar_volte">VoLTE</string>
+    <!-- Name of the vowifi status bar icon. -->
     <!-- DataSwitch Tile -->
     <string name="qs_data_switch_label">डेटा कार्ड स्विच करें</string>
     <string name="qs_data_switch_toast_0">अभी कोई सिम नहीं डला है</string>
@@ -217,4 +219,12 @@
     <string name="app_picker_dialog_title">एक ऐप चुनें</string>
     <string name="recents_app_killed">ऐप बंद किया गया</string>
     <string name="nope_cant_kill">लॉन्चर बंद नहीं किया जा सकता</string>
+    <!-- Navigation Bar tile -->
+    <!-- VPN QS tile -->
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- Text to use when the number in a notification info is too large
+         (greater than status_bar_notification_info_maxnum, defined in
+         values/config.xml) and must be truncated.
+         [CHAR LIMIT=4] -->
 </resources>

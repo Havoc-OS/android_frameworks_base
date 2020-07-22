@@ -104,8 +104,6 @@
     <!-- Kill button in notification guts -->
     <string name="force_stop_dlg_title">Примусово зупинити?</string>
     <string name="force_stop_dlg_text">Примусове вимкнення додатка може призвести до збою в його роботі.</string>
-    <string name="dlg_ok">@android:string/ok</string>
-    <string name="dlg_cancel">@android:string/cancel</string>
     <string name="guts_force_close_app">Закрити додаток</string>
     <!-- Compass QS Tile -->
     <string name="quick_settings_compass_label">Компас</string>
@@ -167,8 +165,7 @@
     <string name="accessibility_quick_settings_gaming_mode_disabled">Ігровий режим вимкнено.</string>
     <!-- Content description of the Gaming mode tile in quick settings when enabled (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_gaming_mode_enabled">Ігровий режим увімкнено.</string>
-    <!-- Name of the volte status bar icon. -->
-    <string name="status_bar_volte">VoLTE</string>
+    <!-- Name of the vowifi status bar icon. -->
     <!-- DataSwitch Tile -->
     <string name="qs_data_switch_label">Змінити картку для передачі даних</string>
     <string name="qs_data_switch_toast_0">Наразі не вставлено жодної SIM-картки</string>
@@ -217,4 +214,15 @@
     <string name="app_picker_dialog_title">Виберіть додаток</string>
     <string name="recents_app_killed">Додаток закрито</string>
     <string name="nope_cant_kill">Додаток головного екрану не може бути завершено</string>
+    <!-- Navigation Bar tile -->
+    <string name="quick_settings_navbar_title">Панель навігації</string>
+    <string name="accessibility_quick_settings_navbar_on">Панель навігації увімкнено</string>
+    <string name="accessibility_quick_settings_navbar_off">Панель навігації вимкнено</string>
+    <!-- VPN QS tile -->
+    <!-- Name of the volte status bar icon. -->
+    <string name="status_bar_volte">VoLTE</string>
+    <!-- Text to use when the number in a notification info is too large
+         (greater than status_bar_notification_info_maxnum, defined in
+         values/config.xml) and must be truncated.
+         [CHAR LIMIT=4] -->
 </resources>
