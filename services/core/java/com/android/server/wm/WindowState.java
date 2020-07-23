@@ -60,6 +60,7 @@ import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_MASK_ADJUST;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_SHOW_FOR_ALL_USERS;
+import static android.view.WindowManager.LayoutParams.TYPE_ACCESSIBILITY_MAGNIFICATION_OVERLAY;
 import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION;
 import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION_MEDIA;
 import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION_MEDIA_OVERLAY;
@@ -946,6 +947,13 @@ class WindowState extends WindowContainer<WindowState> implements WindowManagerP
                 mActivityRecord != null
                         ? mActivityRecord.getInputApplicationHandle(false /* update */) : null,
                     getDisplayId());
+
+        //  Check private trusted overlay flag and window type to set trustedOverlay variable of
+        //  input window handle.
+        mInputWindowHandle.trustedOverlay =
+                (mAttrs.privateFlags & PRIVATE_FLAG_TRUSTED_OVERLAY) != 0
+                && mOwnerCanAddInternalSystemWindow;
+        mInputWindowHandle.trustedOverlay |= InputMonitor.isTrustedOverlay(mAttrs.type);
 
         // Make sure we initial all fields before adding to parentWindow, to prevent exception
         // during onDisplayChanged.
