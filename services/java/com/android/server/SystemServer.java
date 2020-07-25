@@ -94,6 +94,7 @@ import com.android.server.connectivity.IpConnectivityMetrics;
 import com.android.server.contentcapture.ContentCaptureManagerInternal;
 import com.android.server.coverage.CoverageService;
 import com.android.server.devicepolicy.DevicePolicyManagerService;
+import com.android.server.display.DcDimmingService;
 import com.android.server.display.DisplayManagerService;
 import com.android.server.display.color.ColorDisplayService;
 import com.android.server.display.ScreenStabilization;
@@ -1123,6 +1124,15 @@ public final class SystemServer {
             traceBeginAndSlog("StartAppLockService");
             mSystemServiceManager.startService(AppLockService.class);
             traceEnd();
+
+	    if (!context.getResources().getString(R.string.config_deviceDcDimmingSysfsNode)
+                    .isEmpty()) {
+                traceBeginAndSlog("StartDcDimmingService");
+                mSystemServiceManager.startService(DcDimmingService.class);
+                traceEnd();
+            } else {
+                Slog.i(TAG, "Dc Dimming not supported");
+            }
 
             traceBeginAndSlog("SignedConfigService");
             SignedConfigService.registerUpdateReceiver(mSystemContext);
