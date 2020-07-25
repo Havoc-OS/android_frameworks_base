@@ -106,6 +106,7 @@ import com.android.server.connectivity.IpConnectivityMetrics;
 import com.android.server.contentcapture.ContentCaptureManagerInternal;
 import com.android.server.coverage.CoverageService;
 import com.android.server.devicepolicy.DevicePolicyManagerService;
+import com.android.server.display.DcDimmingService;
 import com.android.server.display.DisplayManagerService;
 import com.android.server.display.color.ColorDisplayService;
 import com.android.server.dreams.DreamManagerService;
@@ -1237,6 +1238,14 @@ public final class SystemServer {
             t.traceBegin("IorapForwardingService");
             mSystemServiceManager.startService(IorapForwardingService.class);
             t.traceEnd();
+
+	        if (!context.getResources().getString(R.string.config_deviceDcDimmingSysfsNode).isEmpty()) {
+                t.traceBegin("StartDcDimmingService");
+                mSystemServiceManager.startService(DcDimmingService.class);
+                t.traceEnd();
+            } else {
+                Slog.i(TAG, "DC Dimming not supported");
+            }
 
             t.traceBegin("SignedConfigService");
             SignedConfigService.registerUpdateReceiver(mSystemContext);

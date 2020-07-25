@@ -169,4 +169,7 @@
     <!-- Enable face auth when swiping security view -->
     <java-symbol type="bool" name="config_faceAuthOnSecurityView" />
 
+    <!-- DC Dimming -->
+    <java-symbol type="string" name="config_deviceDcDimmingSysfsNode" />
+
 </resources>

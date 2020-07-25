@@ -218,4 +218,8 @@
     <!-- Enable face auth when swiping security view -->
     <bool name="config_faceAuthOnSecurityView">false</bool>
 
+    <!-- Defines the sysfs attribute path used by the device
+         to enable/disable DC dimming. -->
+    <string name="config_deviceDcDimmingSysfsNode"></string>
+
 </resources>
