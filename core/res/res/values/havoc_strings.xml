@@ -86,4 +86,7 @@
     <string name="app_clipboard_access_denied">%1$s was denied access to the clipboard</string>
     <string name="app_clipboard_access_granted">%1$s was granted access to the clipboard</string>
 
+    <!-- Cycle through ringer modes -->
+    <string name="volume_dialog_ringer_guidance_normal">Calls and notifications will ring</string>
+
 </resources>

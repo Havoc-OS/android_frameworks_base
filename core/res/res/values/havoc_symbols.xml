@@ -279,4 +279,7 @@
     <java-symbol type="string" name="app_clipboard_access_denied" />
     <java-symbol type="string" name="app_clipboard_access_granted" />
 
+    <!-- Cycle through ringer modes -->
+    <java-symbol type="string" name="volume_dialog_ringer_guidance_normal" />
+
 </resources>
