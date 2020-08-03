@@ -96,9 +96,6 @@
     <dimen name="config_customCutoutBottomWidth">0.0px</dimen>
     <dimen name="config_customCutoutBottomHeight">0.0px</dimen>
 
-    <!-- Volume panel -->
-    <dimen name="volume_dialog_panel_transparent_padding_left">20dp</dimen>
-
     <!-- Size of the FOD icon -->
     <dimen name="fod_icon_size">174.0px</dimen>
 
