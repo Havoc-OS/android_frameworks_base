@@ -88,7 +88,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
-import android.view.View.OnLongClickListener;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
@@ -125,7 +124,7 @@ import java.util.List;
  * Methods ending in "H" must be called on the (ui) handler.
  */
 public class VolumeDialogImpl implements VolumeDialog,
-        ConfigurationController.ConfigurationListener, OnLongClickListener {
+        ConfigurationController.ConfigurationListener {
     private static final String TAG = Util.logTag(VolumeDialogImpl.class);
 
     private static final long USER_ATTEMPT_GRACE_PERIOD = 1000;
@@ -326,7 +325,6 @@ public class VolumeDialogImpl implements VolumeDialog,
         if (mExpandRows != null) {
             setLayoutGravity(mExpandRows.getLayoutParams(), panelGravity);
             mExpandRows.setRotation(mVolumePanelOnLeft ? -90 : 90);
-            mExpandRows.setOnLongClickListener(this);
         }
 
         if (mRows.isEmpty()) {
@@ -631,7 +629,18 @@ public class VolumeDialogImpl implements VolumeDialog,
                             mActivityManager.getLockTaskModeState() == LOCK_TASK_MODE_NONE ?
                             VISIBLE : GONE);
         }
+
         if (mExpandRows != null) {
+            mExpandRows.setOnLongClickListener(v -> {
+                Events.writeEvent(Events.EVENT_SETTINGS_CLICK);
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("com.android.settings",
+                        "com.android.settings.Settings$SoundSettingsActivity");
+                dismissH(DISMISS_REASON_SETTINGS_CLICKED);
+                Dependency.get(ActivityStarter.class).startActivity(intent,
+                        true /* dismissShade */);
+                return true;
+            });
             mExpandRows.setOnClickListener(v -> {
                 rescheduleTimeoutH();
                 animateExpandedRowsChange(!mExpanded);
@@ -1580,21 +1589,6 @@ public class VolumeDialogImpl implements VolumeDialog,
                 case STATE_CHANGED: onStateChangedH(mState); break;
             }
         }
-    }
-
-    public boolean onLongClick(View v) {
-        if (v == mExpandRows) {
-            startSoundActivity();
-        }
-        return false;
-    }
-
-    private void startSoundActivity() {
-        dismissH(Events.DISMISS_REASON_TOUCH_OUTSIDE);
-        Intent nIntent = new Intent(Intent.ACTION_MAIN);
-        nIntent.setClassName("com.android.settings",
-            "com.android.settings.Settings$SoundSettingsActivity");
-        Dependency.get(ActivityStarter.class).startActivity(nIntent, true /* dismissShade */);
     }
 
     private final class VolumeSeekBarChangeListener implements OnSeekBarChangeListener {
