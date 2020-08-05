@@ -77,9 +77,7 @@ import com.android.systemui.statusbar.phone.ShadeController;
 import com.android.systemui.statusbar.phone.StatusBar;
 import com.android.systemui.statusbar.phone.StatusBarWindowController;
 import com.android.systemui.statusbar.policy.KeyguardMonitor;
-import com.android.systemui.statusbar.VisualizerView;
 import com.android.systemui.statusbar.policy.TaskHelper;
-import com.android.systemui.SysUiServiceProvider;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -624,14 +622,7 @@ public class NotificationMediaManager implements Dumpable {
                     break;
                 }
             }
-
-            if (mStatusBar.getVisualizer() != null) {
-                mStatusBar.getVisualizer().setPlaying(true);
-            }
         } else {
-            if (mStatusBar.getVisualizer() != null) {
-                mStatusBar.getVisualizer().setPlaying(false);
-            }
             mStatusBar.resetTrackInfo();
         }
     }
@@ -730,15 +721,6 @@ public class NotificationMediaManager implements Dumpable {
         mColorExtractor.setHasMediaArtwork(hasMediaArtwork);
         if (mScrimController != null) {
             mScrimController.setHasBackdrop(hasArtwork);
-        }
-
-        if (mStatusBar != null && mStatusBar.getVisualizer() != null) {
-            if (hasMediaArtwork && (artworkDrawable instanceof BitmapDrawable)) {
-                // always use current backdrop to color eq
-                mStatusBar.getVisualizer().setBitmap(((BitmapDrawable)artworkDrawable).getBitmap());
-            } else if (lockDrawable != null) {
-                mStatusBar.getVisualizer().setBitmap(((BitmapDrawable)lockDrawable).getBitmap());
-            }
         }
 
         if ((hasArtwork || DEBUG_MEDIA_FAKE_ARTWORK)
