@@ -39,7 +39,6 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
-import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.text.format.DateUtils;
@@ -60,7 +59,6 @@ import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
 
-import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
 import com.android.settingslib.Utils;
 import com.android.systemui.BatteryMeterView;
 import com.android.systemui.DualToneHandler;
@@ -72,7 +70,6 @@ import com.android.systemui.privacy.OngoingPrivacyChip;
 import com.android.systemui.privacy.PrivacyDialogBuilder;
 import com.android.systemui.privacy.PrivacyItem;
 import com.android.systemui.privacy.PrivacyItemController;
-import com.android.systemui.privacy.PrivacyItemControllerKt;
 import com.android.systemui.qs.QSDetail.Callback;
 import com.android.systemui.statusbar.phone.PhoneStatusBarView;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
@@ -171,20 +168,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private boolean mHasTopCutout = false;
     private boolean mPrivacyChipLogged = false;
 
-    private final DeviceConfig.OnPropertyChangedListener mPropertyListener =
-            new DeviceConfig.OnPropertyChangedListener() {
-                @Override
-                public void onPropertyChanged(String namespace, String name, String value) {
-                    if (DeviceConfig.NAMESPACE_PRIVACY.equals(namespace)
-                            && SystemUiDeviceConfigFlags.PROPERTY_PERMISSIONS_HUB_ENABLED.equals(
-                            name)) {
-                        mPermissionsHubEnabled = Boolean.valueOf(value);
-                        StatusIconContainer iconContainer = findViewById(R.id.statusIcons);
-                        iconContainer.setIgnoredSlots(getIgnoredIconSlots());
-                    }
-                }
-            };
-
     private PrivacyItemController.Callback mPICCallback = new PrivacyItemController.Callback() {
         @Override
         public void privacyChanged(List<PrivacyItem> privacyItems) {
@@ -216,6 +199,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mHeaderQsPanel = findViewById(R.id.quick_qs_panel);
         mSystemIconsView = findViewById(R.id.quick_status_bar_system_icons);
         mQuickQsStatusIcons = findViewById(R.id.quick_qs_status_icons);
+
+        mBatteryInQS = getResources().getBoolean(R.bool.config_batteryInQSPanel);
+
         StatusIconContainer iconContainer = findViewById(R.id.statusIcons);
         // Ignore privacy icons because they show in the space above QQS
         iconContainer.addIgnoredSlots(getIgnoredIconSlots());
@@ -274,12 +260,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mRingerModeTextView.setSelected(true);
         mNextAlarmTextView.setSelected(true);
 
-        mPermissionsHubEnabled = PrivacyItemControllerKt.isPermissionsHubEnabled();
-        // Change the ignored slots when DeviceConfig flag changes
-        DeviceConfig.addOnPropertyChangedListener(DeviceConfig.NAMESPACE_PRIVACY,
-                mContext.getMainExecutor(), mPropertyListener);
-
-        mBatteryInQS = getResources().getBoolean(R.bool.config_batteryInQSPanel);
         mBatteryMeterView.setVisibility(mBatteryInQS ? View.GONE : View.VISIBLE);
         mBatteryRemainingIcon.setVisibility(mBatteryInQS ? View.VISIBLE : View.GONE);
 
@@ -293,8 +273,10 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                     com.android.internal.R.string.status_bar_camera));
             ignored.add(mContext.getResources().getString(
                     com.android.internal.R.string.status_bar_microphone));
-            ignored.add(mContext.getResources().getString(
-                    com.android.internal.R.string.status_bar_location));
+            if (mPermissionsHubEnabled) {
+                ignored.add(mContext.getResources().getString(
+                        com.android.internal.R.string.status_bar_location));
+            }
         }
 
         return ignored;
@@ -418,6 +400,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mSystemIconsView.getLayoutParams().height = topMargin;
         mSystemIconsView.setLayoutParams(mSystemIconsView.getLayoutParams());
 
+        StatusIconContainer iconContainer = findViewById(R.id.statusIcons);
+        iconContainer.addIgnoredSlots(getIgnoredIconSlots());
+
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) getLayoutParams();
         if (mQsDisabled) {
             lp.height = topMargin;
@@ -441,6 +426,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private void updateSettings() {
         mHeaderImageEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
                 Settings.System.STATUS_BAR_CUSTOM_HEADER, 0,
+                UserHandle.USER_CURRENT) == 1;
+        mPermissionsHubEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.PERMISSIONS_HUB_ENABLED, 1,
                 UserHandle.USER_CURRENT) == 1;
         updateResources();
         updateStatusbarProperties();
@@ -741,6 +729,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             ContentResolver resolver = getContext().getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_CUSTOM_HEADER), false,
+                    this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.PERMISSIONS_HUB_ENABLED), false,
                     this, UserHandle.USER_ALL);
         }
 

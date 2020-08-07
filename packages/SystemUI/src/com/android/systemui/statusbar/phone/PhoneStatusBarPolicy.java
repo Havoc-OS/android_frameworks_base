@@ -52,7 +52,6 @@ import com.android.systemui.SysUiServiceProvider;
 import com.android.systemui.UiOffloadThread;
 import com.android.systemui.privacy.PrivacyItem;
 import com.android.systemui.privacy.PrivacyItemController;
-import com.android.systemui.privacy.PrivacyItemControllerKt;
 import com.android.systemui.privacy.PrivacyType;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
@@ -151,6 +150,8 @@ public class PhoneStatusBarPolicy
     private AlarmManager.AlarmClockInfo mNextAlarm;
 
     private boolean mShowBluetoothBattery;
+
+    private boolean mPermissionsHubEnabled;
 
     public PhoneStatusBarPolicy(Context context, StatusBarIconController iconController) {
         mContext = context;
@@ -313,6 +314,9 @@ public class PhoneStatusBarPolicy
     private void updateSettings() {
         mShowBluetoothBattery = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.BLUETOOTH_SHOW_BATTERY, 1,
+                UserHandle.USER_CURRENT) == 1;
+        mPermissionsHubEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.PERMISSIONS_HUB_ENABLED, 1,
                 UserHandle.USER_CURRENT) == 1;
         updateBluetooth();
     }
@@ -761,7 +765,7 @@ public class PhoneStatusBarPolicy
 
     @Override
     public void onLocationActiveChanged(boolean active) {
-        if (!PrivacyItemControllerKt.isPermissionsHubEnabled()) updateLocation();
+        if (!mPermissionsHubEnabled) updateLocation();
     }
 
     // Updates the status view based on the current state of location requests.

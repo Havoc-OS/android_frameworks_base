@@ -6673,8 +6673,13 @@ public final class Settings {
          * Toggle for clipboard access toast.
          * @hide
          */
-
         public static final String SHOW_CLIPBOARD_TOAST = "show_clipboard_toast";
+
+        /**
+         * Whether to enable permissions hub
+         * @hide
+         */
+        public static final String PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
