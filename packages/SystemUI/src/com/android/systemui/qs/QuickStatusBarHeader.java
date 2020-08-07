@@ -33,6 +33,7 @@ import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.CalendarContract;
 import android.provider.Settings;
@@ -154,6 +155,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private Space mSpace;
     private BatteryMeterView mBatteryRemainingIcon;
     private RingerModeTracker mRingerModeTracker;
+    private boolean mPermissionsHubEnabled;
     private boolean mAllIndicatorsEnabled;
     private boolean mMicCameraIndicatorsEnabled;
 
@@ -443,6 +445,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                 com.android.internal.R.dimen.quick_qs_offset_height);
         mSystemIconsView.setLayoutParams(mSystemIconsView.getLayoutParams());
 
+        StatusIconContainer iconContainer = findViewById(R.id.statusIcons);
+        iconContainer.addIgnoredSlots(getIgnoredIconSlots());
+
         ViewGroup.LayoutParams lp = getLayoutParams();
         if (mQsDisabled) {
             lp.height = resources.getDimensionPixelSize(
@@ -451,6 +456,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             lp.height = WRAP_CONTENT;
         }
         setLayoutParams(lp);
+
+        mPermissionsHubEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.PERMISSIONS_HUB_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
 
         updateStatusIconAlphaAnimator();
         updateHeaderTextContainerAlphaAnimator();
@@ -810,7 +818,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     }
 
     private boolean getChipEnabled() {
-        return mMicCameraIndicatorsEnabled || mAllIndicatorsEnabled;
+        return mPermissionsHubEnabled && (mMicCameraIndicatorsEnabled || mAllIndicatorsEnabled);
     }
 
     private void updateStatusbarProperties() {
