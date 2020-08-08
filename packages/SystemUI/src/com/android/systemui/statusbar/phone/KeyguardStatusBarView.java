@@ -84,7 +84,7 @@ public class KeyguardStatusBarView extends RelativeLayout
     private boolean mKeyguardUserSwitcherShowing;
     private boolean mShowNotchView;
 
-    private int mShowCarrierLabel;
+    private boolean mShowCarrierLabel;
 
     private TextView mCarrierLabel;
     private MultiUserSwitch mMultiUserSwitch;
@@ -127,8 +127,11 @@ public class KeyguardStatusBarView extends RelativeLayout
     }
 
     private void showStatusBarCarrier() {
-        mShowCarrierLabel = Settings.System.getIntForUser(getContext().getContentResolver(),
-                Settings.System.STATUS_BAR_SHOW_CARRIER, 1, UserHandle.USER_CURRENT);
+        boolean enabled = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.CARRIER_LABEL_ENABLED, 1, UserHandle.USER_CURRENT) == 1;
+        int location = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.CARRIER_LABEL_LOCATION, 0, UserHandle.USER_CURRENT);
+        mShowCarrierLabel = enabled && location != 1;
     }
 
     @Override
@@ -225,7 +228,7 @@ public class KeyguardStatusBarView extends RelativeLayout
             }
         }
         if (mCarrierLabel != null) {
-            if (mShowCarrierLabel == 1 || mShowCarrierLabel == 3) {
+            if (mShowCarrierLabel) {
                 mCarrierLabel.setVisibility(mHideContents ? View.INVISIBLE : View.VISIBLE);
                 mCarrierLabel.setSelected(true);
             } else {
@@ -366,7 +369,9 @@ public class KeyguardStatusBarView extends RelativeLayout
         mIconManager = new TintedIconManager(findViewById(R.id.statusIcons));
         Dependency.get(StatusBarIconController.class).addIconGroup(mIconManager);
         getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
-		        Settings.System.STATUS_BAR_SHOW_CARRIER), false, mObserver);
+		        Settings.System.CARRIER_LABEL_ENABLED), false, mObserver);
+        getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+		        Settings.System.CARRIER_LABEL_LOCATION), false, mObserver);
         onThemeChanged();
     }
 

@@ -108,7 +108,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                     Settings.System.STATUSBAR_CLOCK_STYLE),
                     false, this, UserHandle.USER_ALL);
             mContentResolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_SHOW_CARRIER),
+                    Settings.System.CARRIER_LABEL_ENABLED),
+                    false, this, UserHandle.USER_ALL);
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.CARRIER_LABEL_LOCATION),
                     false, this, UserHandle.USER_ALL);
             mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_TICKER),
@@ -494,13 +497,15 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void updateSettings(boolean animate) {
+        boolean carrierEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.CARRIER_LABEL_ENABLED, 1, UserHandle.USER_CURRENT) == 1;
+        int carrierLocation = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.CARRIER_LABEL_LOCATION, 0, UserHandle.USER_CURRENT);
+        mHasCarrierLabel = carrierEnabled && carrierLocation != 0;
+
         mShowClock = Settings.System.getIntForUser(mContentResolver,
                 Settings.System.STATUS_BAR_CLOCK, 1,
                 UserHandle.USER_CURRENT) == 1;
-        mShowCarrierLabel = Settings.System.getIntForUser(mContentResolver,
-                Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
-                UserHandle.USER_CURRENT);
-        mHasCarrierLabel = (mShowCarrierLabel == 2 || mShowCarrierLabel == 3);
         if (!mShowClock) {
             mClockStyle = 1; // internally switch to centered clock layout because
                              // left & right will show up again after QS pulldown
@@ -509,9 +514,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                     Settings.System.STATUSBAR_CLOCK_STYLE, 0,
                     UserHandle.USER_CURRENT);
         }
+
         mTickerEnabled = Settings.System.getIntForUser(mContentResolver,
                 Settings.System.STATUS_BAR_SHOW_TICKER, 0,
                 UserHandle.USER_CURRENT) == 1;
+
         updateClockStyle(animate);
         setCarrierLabel(animate);
         initTickerView();
