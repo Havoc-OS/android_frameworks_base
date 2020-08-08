@@ -9665,7 +9665,6 @@ public final class Settings {
          */
         public static final String LOCKSCREEN_MEDIA_METADATA = "lockscreen_media_metadata";
 
-
         /** Whether to allow one finger quick settings expansion on the right side of the statusbar.
          *
          * @hide
@@ -9685,17 +9684,17 @@ public final class Settings {
         public static final String DOZE_ON_CHARGE_NOW = "doze_on_charge_now";
 
         /**
-         * Pulse navbar music visualizer
+         * Pulse music visualizer
          *
          * @hide
          */
-        public static final String NAVBAR_PULSE_ENABLED = "navbar_pulse_enabled";
+        public static final String PULSE_ENABLED = "pulse_enabled";
 
         /**
-         * Pulse lockscreen music visualizer
+         * Pulse location
          * @hide
          */
-        public static final String LOCKSCREEN_PULSE_ENABLED = "lockscreen_pulse_enabled";
+        public static final String PULSE_LOCATION = "pulse_location";
 
         /**
          * Pulse navbar music visualizer color type
