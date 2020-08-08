@@ -11485,17 +11485,17 @@ public final class Settings {
         public static final String FACE_UNLOCK_ALWAYS_REQUIRE_SWIPE = "face_unlock_always_require_swipe";
 
         /**
-         * Pulse navbar music visualizer
+         * Pulse music visualizer
          *
          * @hide
          */
-        public static final String NAVBAR_PULSE_ENABLED = "navbar_pulse_enabled";
+        public static final String PULSE_ENABLED = "pulse_enabled";
 
         /**
-         * Pulse lockscreen music visualizer
+         * Pulse location
          * @hide
          */
-        public static final String LOCKSCREEN_PULSE_ENABLED = "lockscreen_pulse_enabled";
+        public static final String PULSE_LOCATION = "pulse_location";
 
         /**
          * Pulse navbar music visualizer color type
