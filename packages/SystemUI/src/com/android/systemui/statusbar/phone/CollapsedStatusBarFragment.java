@@ -84,6 +84,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private int mSignalClusterEndPadding = 0;
     private View mCustomCarrierLabel;
     private int mShowCarrierLabel;
+    private boolean mHasCarrierLabel;
 
     private View mBatteryBars[] = new View[2];
 
@@ -94,7 +95,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
         void observe() {
             mContentResolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_SHOW_CARRIER),
+                    Settings.System.CARRIER_LABEL_ENABLED),
+                    false, this, UserHandle.USER_ALL);
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.CARRIER_LABEL_LOCATION),
                     false, this, UserHandle.USER_ALL);
         }
 
@@ -482,14 +486,17 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void updateSettings(boolean animate) {
-        mShowCarrierLabel = Settings.System.getIntForUser(mContentResolver,
-                Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
-                UserHandle.USER_CURRENT);
+        boolean carrierEnabled = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.CARRIER_LABEL_ENABLED, 1, UserHandle.USER_CURRENT) == 1;
+        int carrierLocation = Settings.System.getIntForUser(getContext().getContentResolver(),
+                Settings.System.CARRIER_LABEL_LOCATION, 0, UserHandle.USER_CURRENT);
+        mHasCarrierLabel = carrierEnabled && carrierLocation != 0;
+
         setCarrierLabel(animate);
     }
 
     private void setCarrierLabel(boolean animate) {
-        if (mShowCarrierLabel == 2 || mShowCarrierLabel == 3) {
+        if (mHasCarrierLabel) {
             animateShow(mCustomCarrierLabel, animate);
         } else {
             animateHide(mCustomCarrierLabel, animate);

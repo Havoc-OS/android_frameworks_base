@@ -69,7 +69,7 @@ public class CarrierLabel extends TextView implements DarkReceiver {
         the user changes notch overlays */
         if (Utils.hasNotch(mContext)) {
             Settings.System.putInt(mContext.getContentResolver(),
-                    Settings.System.STATUS_BAR_SHOW_CARRIER, 1);
+                    Settings.System.CARRIER_LABEL_LOCATION, 0);
         }
     }
 
