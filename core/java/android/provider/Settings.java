@@ -5092,10 +5092,10 @@ public final class Settings {
         public static final String PERMISSIONS_HUB_ENABLED = "permissions_hub_enabled";
 
         /**
-         * Toggle for clipboard access toast.
+         * Clipboard access info
          * @hide
          */
-        public static final String SHOW_CLIPBOARD_TOAST = "show_clipboard_toast";
+        public static final String CLIPBOARD_TOAST_INFO = "clipboard_toast_info";
 
         /**
          * Wheter to show network traffic indicator in statusbar

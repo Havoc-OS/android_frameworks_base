@@ -69,4 +69,8 @@
     <!-- Button to disable the crashed application -->
     <string name="aerr_disable">Disable app</string>
 
+    <!-- Clipboard access toast -->
+    <string name="app_clipboard_access_denied">%1$s was denied access to the clipboard</string>
+    <string name="app_clipboard_access_granted">%1$s was granted access to the clipboard</string>
+
 </resources>

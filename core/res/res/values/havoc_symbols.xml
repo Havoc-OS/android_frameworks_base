@@ -210,4 +210,8 @@
     <!-- Camera key type -->
     <java-symbol type="bool" name="config_singleStageCameraKey" />
 
+    <!-- Clipboard access toast -->
+    <java-symbol type="string" name="app_clipboard_access_denied" />
+    <java-symbol type="string" name="app_clipboard_access_granted" />
+
 </resources>
