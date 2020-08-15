@@ -277,6 +277,10 @@
     <java-symbol type="bool" name="config_deviceRingtoneFocusMode" />
 
     <!-- Home button wake -->
-    <java-symbol type="bool" name="config_enableHomeButtonWake" /> 
- 
+    <java-symbol type="bool" name="config_enableHomeButtonWake" />
+
+    <!-- Clipboard access toast -->
+    <java-symbol type="string" name="app_clipboard_access_denied" />
+    <java-symbol type="string" name="app_clipboard_access_granted" />
+
 </resources>

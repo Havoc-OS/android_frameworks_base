@@ -6584,10 +6584,10 @@ public final class Settings {
         public static final String SETTINGS_SHOW_SUGGESTIONS = "settings_show_suggestions";
 
         /**
-         * Toggle for clipboard access toast.
+         * Clipboard access info
          * @hide
          */
-        public static final String SHOW_CLIPBOARD_TOAST = "show_clipboard_toast";
+        public static final String CLIPBOARD_TOAST_INFO = "clipboard_toast_info";
 
         /**
          * Whether to enable permissions hub
