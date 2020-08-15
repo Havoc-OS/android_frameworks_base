@@ -65,4 +65,5 @@
     <string name="gaming_mode_notification_content">Toque para desativar o Modo Jogo</string>
     <string name="gaming_mode_enabled_toast">Modo Jogo ativado</string>
     <string name="gaming_mode_disabled_toast">O Modo Jogo foi desativado</string>
+    <!-- Clipboard access toast -->
 </resources>

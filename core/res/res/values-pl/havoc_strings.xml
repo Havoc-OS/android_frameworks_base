@@ -65,4 +65,5 @@
     <string name="gaming_mode_notification_content">Naciśnij, aby wyłączyć tryb gry</string>
     <string name="gaming_mode_enabled_toast">Tryb gry włączony</string>
     <string name="gaming_mode_disabled_toast">Tryb gry wyłączony</string>
+    <!-- Clipboard access toast -->
 </resources>

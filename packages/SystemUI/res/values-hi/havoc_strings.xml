@@ -47,6 +47,7 @@
     <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
     <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • वार्प चार्जिंग (<xliff:g id="charging_time_left" example="4 घंटे and 2 मिनट">%s</xliff:g> पूर्ण होने में बाकी)</string>
     <string name="keyguard_plugged_in_warp_charging">वार्प चार्जिंग</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">स्क्रीनशॉट मिटाया गया</string>
     <!-- Advanced powermenu -->
@@ -217,8 +218,6 @@
     <string name="screen_pinning_toast_recents_invisible_custom">इस स्क्रीन को अनपिन करने के लिए बैक बटन को दबाए &amp; रखें</string>
     <!-- Long swipe gesture actions -->
     <string name="app_picker_dialog_title">एक ऐप चुनें</string>
-    <string name="recents_app_killed">ऐप बंद किया गया</string>
-    <string name="nope_cant_kill">लॉन्चर बंद नहीं किया जा सकता</string>
     <!-- Navigation Bar tile -->
     <!-- VPN QS tile -->
     <!-- Name of the volte status bar icon. -->

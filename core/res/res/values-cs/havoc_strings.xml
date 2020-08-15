@@ -66,4 +66,5 @@
     <string name="gaming_mode_notification_content">Klepněte sem pro vypnutí Herního režimu</string>
     <string name="gaming_mode_enabled_toast">Herní režim je zapnutý</string>
     <string name="gaming_mode_disabled_toast">Herní režim je vypnutý</string>
+    <!-- Clipboard access toast -->
 </resources>

@@ -66,4 +66,5 @@
     <string name="gaming_mode_notification_content">Apăsaţi pentru a opri modul de joc</string>
     <string name="gaming_mode_enabled_toast">Modul de joc a fost pornit</string>
     <string name="gaming_mode_disabled_toast">Modul de jocuri a fost oprit</string>
+    <!-- Clipboard access toast -->
 </resources>

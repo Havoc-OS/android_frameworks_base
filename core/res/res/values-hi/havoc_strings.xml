@@ -65,4 +65,5 @@
     <string name="gaming_mode_notification_content">गेमिंग मोड बंद करने के लिए स्पर्श करें</string>
     <string name="gaming_mode_enabled_toast">गेमिंग मोड चालू किया गया</string>
     <string name="gaming_mode_disabled_toast">गेमिंग मोड बंद किया गया</string>
+    <!-- Clipboard access toast -->
 </resources>

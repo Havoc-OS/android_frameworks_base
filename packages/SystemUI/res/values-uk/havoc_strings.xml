@@ -47,6 +47,7 @@
     <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
     <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> Швидке заряджання (<xliff:g id="charging_time_left" example="4 години і 2 хвилини">%s</xliff:g> до кінця заряджання)</string>
     <string name="keyguard_plugged_in_warp_charging">Швидке заряджання</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Знімок екрану видалено</string>
     <!-- Advanced powermenu -->
@@ -212,8 +213,6 @@
     <string name="screen_pinning_toast_recents_invisible_custom">Щоб відкріпити цей екран, натисніть і утримуйте кнопку \"Назад\"</string>
     <!-- Long swipe gesture actions -->
     <string name="app_picker_dialog_title">Виберіть додаток</string>
-    <string name="recents_app_killed">Додаток закрито</string>
-    <string name="nope_cant_kill">Додаток головного екрану не може бути завершено</string>
     <!-- Navigation Bar tile -->
     <string name="quick_settings_navbar_title">Панель навігації</string>
     <string name="accessibility_quick_settings_navbar_on">Панель навігації увімкнено</string>

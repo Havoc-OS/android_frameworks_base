@@ -66,4 +66,5 @@ example=\"Gmail\"&gt;%1$s&lt;/xliff:g&gt;&lt;/b&gt; paket imzasını taklit etme
     <string name="gaming_mode_notification_content">Oyun modunu kapatmak için dokunun</string>
     <string name="gaming_mode_enabled_toast">Oyun modu açıldı</string>
     <string name="gaming_mode_disabled_toast">Oyun modu kapatıldı</string>
+    <!-- Clipboard access toast -->
 </resources>

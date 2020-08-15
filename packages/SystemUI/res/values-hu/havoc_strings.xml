@@ -47,6 +47,7 @@
     <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
     <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> Warp Töltes(<xliff:g id="charging_time_left" example="4 óra és 2 perc">%s</xliff:g> a teljes töltöttségig)</string>
     <string name="keyguard_plugged_in_warp_charging">Warp Töltés</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Képernyőmentés törölve</string>
     <!-- Advanced powermenu -->
@@ -217,8 +218,6 @@
     <string name="screen_pinning_toast_recents_invisible_custom">A Képernyőrögzítés feloldásához tartsa nyomva a Vissza gombot</string>
     <!-- Long swipe gesture actions -->
     <string name="app_picker_dialog_title">Alkalmazás kiválasztása</string>
-    <string name="recents_app_killed">Alkalmazás leállítva</string>
-    <string name="nope_cant_kill">Az indítót nem lehet leállítva</string>
     <!-- Navigation Bar tile -->
     <!-- VPN QS tile -->
     <!-- Name of the volte status bar icon. -->

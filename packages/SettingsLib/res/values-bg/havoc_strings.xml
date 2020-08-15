@@ -21,4 +21,6 @@
     <!-- Battery use screen.  Battery status shown in chart label when charging from a dash source.  -->
     <!-- Label for estimated remaining duration of warp battery charging -->
     <!-- Battery use screen. Battery status shown in chart label when charging from a warp source.  -->
+    <!-- Label for estimated remaining duration of VOOC battery charging -->
+    <!-- Battery use screen. Battery status shown in chart label when charging from a VOOC source.  -->
 </resources>

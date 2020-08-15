@@ -65,4 +65,5 @@
     <string name="gaming_mode_notification_content">Érintse meg a Játékmódból való kilépéshez</string>
     <string name="gaming_mode_enabled_toast">A Játékmód bekapcsolásra került</string>
     <string name="gaming_mode_disabled_toast">A Játékmód kikapcsolásra került</string>
+    <!-- Clipboard access toast -->
 </resources>

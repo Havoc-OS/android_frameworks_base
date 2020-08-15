@@ -65,4 +65,5 @@
     <string name="gaming_mode_notification_content">點按以關閉遊戲模式</string>
     <string name="gaming_mode_enabled_toast">遊戲模式已開啟</string>
     <string name="gaming_mode_disabled_toast">遊戲模式已關閉</string>
+    <!-- Clipboard access toast -->
 </resources>

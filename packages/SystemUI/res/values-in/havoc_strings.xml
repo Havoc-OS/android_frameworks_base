@@ -47,6 +47,7 @@
     <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
     <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Pengisian Daya Pintar (<xliff:g id="charging_time_left" example="4 jam 2 menit">%s</xliff:g> hingga penuh)</string>
     <string name="keyguard_plugged_in_warp_charging">Pengisian Daya Pintar</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Tangkapan layar dihapus</string>
     <!-- Advanced powermenu -->
@@ -219,8 +220,6 @@
     <string name="screen_pinning_toast_recents_invisible_custom">Untuk melepas pin layar ini, sentuh &amp; tahan tombol Kembali</string>
     <!-- Long swipe gesture actions -->
     <string name="app_picker_dialog_title">Pilih aplikasi</string>
-    <string name="recents_app_killed">Aplikasi dihentikan</string>
-    <string name="nope_cant_kill">Peluncur tidak dapat dihentikan</string>
     <!-- Navigation Bar tile -->
     <string name="quick_settings_navbar_title">Bilah Navigasi</string>
     <string name="accessibility_quick_settings_navbar_on">Bilah navigasi aktif</string>

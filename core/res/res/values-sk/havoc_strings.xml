@@ -65,4 +65,5 @@
     <string name="gaming_mode_notification_content">Ťuknite sem pre vypnutie Herného režimu</string>
     <string name="gaming_mode_enabled_toast">Herný režim zapnutý</string>
     <string name="gaming_mode_disabled_toast">Herný režim vypnutý</string>
+    <!-- Clipboard access toast -->
 </resources>

@@ -66,4 +66,5 @@
     <string name="gaming_mode_notification_content">Tekan untuk mematikan mode permainan</string>
     <string name="gaming_mode_enabled_toast">Mode permainan diaktifkan</string>
     <string name="gaming_mode_disabled_toast">Mode permainan dinonaktifkan</string>
+    <!-- Clipboard access toast -->
 </resources>

@@ -30,4 +30,6 @@
     <!-- Battery use screen. Battery status shown in chart label when charging from a warp source.  -->
     <string name="battery_info_status_warp_charging">Ricarica Warp</string>
     <string name="battery_info_status_warp_charging_lower">ricarica warp</string>
+    <!-- Label for estimated remaining duration of VOOC battery charging -->
+    <!-- Battery use screen. Battery status shown in chart label when charging from a VOOC source.  -->
 </resources>

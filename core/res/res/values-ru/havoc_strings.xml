@@ -67,4 +67,5 @@
     <string name="gaming_mode_notification_content">Нажмите чтобы выключить Игровой режим</string>
     <string name="gaming_mode_enabled_toast">Игровой режим включён</string>
     <string name="gaming_mode_disabled_toast">Игровой режим выключен</string>
+    <!-- Clipboard access toast -->
 </resources>

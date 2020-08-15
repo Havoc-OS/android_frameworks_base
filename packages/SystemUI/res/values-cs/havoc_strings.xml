@@ -47,6 +47,7 @@
     <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
     <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Warp nabíjení (zbývá <xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> do plného nabití)</string>
     <string name="keyguard_plugged_in_warp_charging">Warp nabíjení</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Snímek obrazovky byl smazán</string>
     <!-- Advanced powermenu -->
@@ -219,8 +220,6 @@
     <string name="screen_pinning_toast_recents_invisible_custom">Stisknutím a podržením tlačítka Zpět uvolníte obrazovku</string>
     <!-- Long swipe gesture actions -->
     <string name="app_picker_dialog_title">Vybrat aplikaci</string>
-    <string name="recents_app_killed">Aplikace ukončena</string>
-    <string name="nope_cant_kill">Spouštěč nemůže být ukončen</string>
     <!-- Navigation Bar tile -->
     <string name="quick_settings_navbar_title">Navigační panel</string>
     <string name="accessibility_quick_settings_navbar_on">Navigační panel zap.</string>

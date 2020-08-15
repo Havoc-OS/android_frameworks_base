@@ -47,6 +47,7 @@
     <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
     <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g>Warp Şarj Oluyor (tam dolmasına <xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> kaldı)</string>
     <string name="keyguard_plugged_in_warp_charging">Warp Şarj Oluyor</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Ekran görüntüsü silindi</string>
     <!-- Advanced powermenu -->
@@ -219,8 +220,6 @@
     <string name="screen_pinning_toast_recents_invisible_custom">Bu ekranı kaldırmak için, Geri tuşuna dokunun ve basılı tutun</string>
     <!-- Long swipe gesture actions -->
     <string name="app_picker_dialog_title">Bir uygulama seçin</string>
-    <string name="recents_app_killed">Uygulama sonlandırıldı</string>
-    <string name="nope_cant_kill">Başlatıcı sonlandırılamaz</string>
     <!-- Navigation Bar tile -->
     <string name="quick_settings_navbar_title">Gezinme çubuğu</string>
     <string name="accessibility_quick_settings_navbar_on">Gezinme çubuğu açık</string>

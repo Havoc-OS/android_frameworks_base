@@ -65,4 +65,5 @@
     <string name="gaming_mode_notification_content">Tippen, um Spielemodus auszuschalten</string>
     <string name="gaming_mode_enabled_toast">Spielemodus eingeschaltet</string>
     <string name="gaming_mode_disabled_toast">Spielemodus ausgeschaltet</string>
+    <!-- Clipboard access toast -->
 </resources>

@@ -66,4 +66,5 @@
     <string name="gaming_mode_notification_content">برای غیرفعال کردن حالت بازی ضربه بزنید</string>
     <string name="gaming_mode_enabled_toast">حالت بازی روشن شد</string>
     <string name="gaming_mode_disabled_toast">حالت بازی خاموش شد</string>
+    <!-- Clipboard access toast -->
 </resources>

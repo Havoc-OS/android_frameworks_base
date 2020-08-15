@@ -47,6 +47,7 @@
     <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
     <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Încărcare Super-Rapidă (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> până la finalizare)</string>
     <string name="keyguard_plugged_in_warp_charging">Încărcare super-rapidă</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Captură de ecran ştearsă</string>
     <!-- Advanced powermenu -->
@@ -212,8 +213,6 @@
     <string name="screen_pinning_toast_recents_invisible_custom">Pentru a anula fixarea acestui ecran, atingeți și țineți apăsat butonul Înapoi</string>
     <!-- Long swipe gesture actions -->
     <string name="app_picker_dialog_title">Selectaţi o aplicație</string>
-    <string name="recents_app_killed">Aplicaţie oprită</string>
-    <string name="nope_cant_kill">Lansatorul nu poate fi oprit</string>
     <!-- Navigation Bar tile -->
     <!-- VPN QS tile -->
     <!-- Name of the volte status bar icon. -->

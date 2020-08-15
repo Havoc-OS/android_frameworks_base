@@ -47,6 +47,7 @@
     <!-- Indication on the keyguard that is shown when the device is charging with a warp charger. Should match keyguard_plugged_in_warp_charging [CHAR LIMIT=40]-->
     <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Warp-Ladevorgang (<xliff:g id="charging_time_left" example="4 Stunden und 2 Minuten">%s</xliff:g> bis zur vollständigen Aufladung)</string>
     <string name="keyguard_plugged_in_warp_charging">Warp-Ladevorgang</string>
+    <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Screenshot gelöscht</string>
     <!-- Advanced powermenu -->
@@ -219,8 +220,6 @@
     <string name="screen_pinning_toast_recents_invisible_custom">Um die Bildschirm-Fixierung aufzuheben, berühren &amp; halten Sie die \"Zurück-Taste\"</string>
     <!-- Long swipe gesture actions -->
     <string name="app_picker_dialog_title">App auswählen</string>
-    <string name="recents_app_killed">Anwendung beendet</string>
-    <string name="nope_cant_kill">Launcher kann nicht beendet werden</string>
     <!-- Navigation Bar tile -->
     <!-- VPN QS tile -->
     <string name="quick_settings_vpn_label">VPN</string>
