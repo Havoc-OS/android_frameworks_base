@@ -332,4 +332,7 @@
          (without "Focus" state) instead of Dual-stage. -->
     <bool name="config_singleStageCameraKey">false</bool>
 
+    <!-- Whether device has fingerprint on power button -->
+    <bool name="config_powerButtonFingerprint">false</bool>
+
 </resources>

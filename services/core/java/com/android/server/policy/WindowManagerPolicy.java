@@ -1480,4 +1480,11 @@ public interface WindowManagerPolicy extends WindowManagerPolicyConstants {
      * Send some ActionHandler commands to WindowManager.
      */
     public void sendCustomAction(Intent intent);
+
+    public interface FingerListener {
+        void powerDown(boolean z);
+    }
+    void registerFingerListener(FingerListener fingerListener);
+    void interceptPowerKeyByFinger(long time);
+    void notifySideFpAuthenOrEnroll(boolean start);
 }
