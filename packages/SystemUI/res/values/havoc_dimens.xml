@@ -105,4 +105,6 @@
     <!-- Oroño clock -->
     <dimen name="clock_oronos_outline_size">4dp</dimen>
 
+    <dimen name="volume_row_app_icon_padding">12dp</dimen>
+
 </resources>
