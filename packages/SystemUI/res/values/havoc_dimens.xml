@@ -112,4 +112,6 @@
     <dimen name="ticker_icon_end_margin">4dp</dimen>
     <dimen name="ticker_text_end_padding">10dp</dimen>
 
+    <dimen name="volume_row_app_icon_padding">12dp</dimen>
+
 </resources>
