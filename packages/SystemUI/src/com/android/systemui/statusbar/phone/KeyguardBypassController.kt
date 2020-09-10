@@ -103,7 +103,7 @@ class KeyguardBypassController {
      */
     fun onBiometricAuthenticated(biometricSourceType: BiometricSourceType): Boolean {
         if (bypassEnabledBiometric) {
-            val can = canBypass()
+            val can = biometricSourceType != BiometricSourceType.FACE || canBypass()
             if (!can && (isPulseExpanding || qSExpanded)) {
                 pendingUnlockType = biometricSourceType
             }
