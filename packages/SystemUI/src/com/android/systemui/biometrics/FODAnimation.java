@@ -94,7 +94,7 @@ public class FODAnimation extends ImageView {
             }
 
             if (this.getWindowToken() != null) {
-                mWindowManager.removeView(this);
+                mWindowManager.removeViewImmediate(this);
             }
         }
     }
