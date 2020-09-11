@@ -274,6 +274,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
 
     private final boolean mFingerprintWakeAndUnlock;
     private final boolean mFaceAuthOnSecurityView;
+    private boolean mBouncerFullyShown;
 
     /**
      * Short delay before restarting biometric authentication after a successful try
@@ -287,8 +288,6 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
     private int mHardwareFaceUnavailableRetryCount = 0;
     private static final int HAL_ERROR_RETRY_TIMEOUT = 500; // ms
     private static final int HAL_ERROR_RETRY_MAX = 10;
-
-    private boolean mKeyguardReset = false;
 
     private PocketManager mPocketManager;
     private boolean mIsDeviceInPocket;
@@ -311,7 +310,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
         }
     };
 
-    public boolean isPocketLockVisible(){
+    public boolean isPocketLockVisible() {
         return mPocketManager.isPocketLockVisible();
     }
 
@@ -941,7 +940,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
     }
 
     private void handleFaceLockoutReset() {
-        updateFaceListeningState();
+        mHandler.postDelayed(this::updateFaceListeningState, 1000);
     }
 
     private void setFaceRunningState(int faceRunningState) {
@@ -1803,7 +1802,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
             return (mKeyguardIsVisible || mBouncer || shouldListenForFingerprintAssistant() ||
                     (mKeyguardOccluded && mIsDreaming)) && mDeviceInteractive && !mGoingToSleep
                     && !mSwitchingUser && !isFingerprintDisabled(getCurrentUser())
-                    && (!mKeyguardGoingAway || !mDeviceInteractive) && mIsPrimaryUser;
+                    && (!mKeyguardGoingAway || !mDeviceInteractive) && mIsPrimaryUser && !mIsDeviceInPocket;
         } else {
             return (mKeyguardIsVisible || !mDeviceInteractive ||
                     (mBouncer && !mKeyguardGoingAway) || mGoingToSleep ||
@@ -1817,12 +1816,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
      * If face auth is allows to scan on this exact moment.
      */
     public boolean shouldListenForFace() {
-        if (mFaceAuthOnSecurityView && mKeyguardReset) {
-            mKeyguardReset = false;
-            return false;
-        }
-
-        boolean awakeKeyguard = mKeyguardIsVisible && mDeviceInteractive && !mGoingToSleep;
+        final boolean awakeKeyguard = mKeyguardIsVisible && mDeviceInteractive && !mGoingToSleep;
         final int user = getCurrentUser();
         final int strongAuth = mStrongAuthTracker.getStrongAuthForUser(user);
         final boolean isLockOutOrLockDown =
@@ -1845,19 +1839,28 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
         boolean strongAuthAllowsScanning = (!isEncryptedOrTimedOut || canBypass && !mBouncer)
                 && !isLockOutOrLockDown;
 
-        boolean unlockPossible = true;
-        if ((!mBouncer || !awakeKeyguard) && isFaceAuthOnlyOnSecurityView()){
-            unlockPossible = false;
-        }
-
         // Only listen if this KeyguardUpdateMonitor belongs to the primary user. There is an
         // instance of KeyguardUpdateMonitor for each user but KeyguardUpdateMonitor is user-aware.
-        return (mBouncer || mAuthInterruptActive || awakeKeyguard || shouldListenForFaceAssistant())
+        boolean shouldListen = (mBouncer || mAuthInterruptActive || awakeKeyguard || shouldListenForFaceAssistant())
                 && !mSwitchingUser && !isFaceDisabled(user) && becauseCannotSkipBouncer
                 && !mKeyguardGoingAway && mFaceSettingEnabledForUser.get(user) && !mLockIconPressed
                 && strongAuthAllowsScanning && mIsPrimaryUser
-                && !mSecureCameraLaunched && !mIsDeviceInPocket
-                && unlockPossible;
+                && !mSecureCameraLaunched && !mIsDeviceInPocket;
+
+        if (shouldListen && isFaceAuthOnlyOnSecurityView() && !mBouncerFullyShown) {
+            shouldListen = false;
+        }
+
+        return shouldListen;
+    }
+
+    public void onKeyguardBouncerFullyShown(boolean fullyShow) {
+        if (mBouncerFullyShown != fullyShow) {
+            mBouncerFullyShown = fullyShow;
+            if (isFaceAuthOnlyOnSecurityView()) {
+                updateFaceListeningState();
+            }
+        }
     }
 
     /**
@@ -2203,7 +2206,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
      * Handle Telephony status during Boot for CarrierText display policy
      */
     @VisibleForTesting
-    void updateTelephonyCapable(boolean capable){
+    void updateTelephonyCapable(boolean capable) {
         if (capable == mTelephonyCapable) {
             return;
         }
@@ -2313,6 +2316,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
         checkIsHandlerThread();
         Log.d(TAG, "onKeyguardVisibilityChanged(" + showing + ")");
         mKeyguardIsVisible = showing;
+        mBouncerFullyShown = false;
 
         if (showing) {
             mSecureCameraLaunched = false;
@@ -2332,11 +2336,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
      */
     private void handleKeyguardReset() {
         if (DEBUG) Log.d(TAG, "handleKeyguardReset");
+        mBouncerFullyShown = false;
         updateBiometricListeningState();
         mNeedsSlowUnlockTransition = resolveNeedsSlowUnlockTransition();
-        if (mFaceAuthOnSecurityView) {
-            mKeyguardReset = true;
-        }
     }
 
     private boolean resolveNeedsSlowUnlockTransition() {
@@ -2380,6 +2382,7 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener {
      * Handle {@link #MSG_REPORT_EMERGENCY_CALL_ACTION}
      */
     private void handleReportEmergencyCallAction() {
+        mBouncerFullyShown = false;
         for (int i = 0; i < mCallbacks.size(); i++) {
             KeyguardUpdateMonitorCallback cb = mCallbacks.get(i).get();
             if (cb != null) {
