@@ -189,11 +189,6 @@
     <!-- Whether or not we should show vendor mismatch message -->
     <bool name="config_show_vendor_mismatch_message">true</bool>
 
-    <!-- Whether device has screen with higher aspect ratio -->
-    <bool name="config_haveHigherAspectRatioScreen">false</bool>
-    <!-- Aspect ratio of screen -->
-    <item name="config_screenAspectRatio" format="float" type="dimen">2.1</item>
-
     <!-- Whether to use old mobile type icons as default -->
     <bool name="config_useOldMobileIcons">false</bool>
 
