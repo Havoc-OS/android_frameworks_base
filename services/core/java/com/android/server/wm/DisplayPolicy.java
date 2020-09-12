@@ -3883,6 +3883,7 @@ public class DisplayPolicy {
         final boolean immersive = (vis & View.SYSTEM_UI_FLAG_IMMERSIVE) != 0;
         immersiveSticky = (vis & View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY) != 0;
         final boolean navAllowedHidden = immersive || immersiveSticky;
+        final boolean isPocketLock = (vis & View.SYSTEM_UI_FLAG_POCKET_LOCK) != 0;
 
         if (hideNavBarSysui && !navAllowedHidden
                 && mService.mPolicy.getWindowLayerLw(win)
@@ -3898,7 +3899,7 @@ public class DisplayPolicy {
         boolean newInsetsMode = ViewRootImpl.sNewInsetsMode == NEW_INSETS_MODE_FULL;
         boolean oldImmersiveMode = newInsetsMode ? mLastImmersiveMode : isImmersiveMode(oldVis);
         boolean newImmersiveMode = newInsetsMode ? isImmersiveMode(win) : isImmersiveMode(vis);
-        if (oldImmersiveMode != newImmersiveMode) {
+        if (oldImmersiveMode != newImmersiveMode && !isPocketLock) {
             mLastImmersiveMode = newImmersiveMode;
             final String pkg = win.getOwningPackage();
             mImmersiveModeConfirmation.immersiveModeChangedLw(pkg, newImmersiveMode,
