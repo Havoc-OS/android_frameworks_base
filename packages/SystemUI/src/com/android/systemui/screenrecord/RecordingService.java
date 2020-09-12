@@ -71,6 +71,7 @@ import com.android.systemui.R;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.Math;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -305,6 +306,9 @@ public class RecordingService extends Service {
 
             // Check if the device allows to use h265 for lighter recordings
             boolean useH265 = getResources().getBoolean(R.bool.config_useNewScreenRecEncoder);
+            int maxRefreshRate = Settings.System.getInt(getApplicationContext().getContentResolver(),
+                Settings.System.PEAK_REFRESH_RATE, getApplicationContext().getResources().getInteger(
+                com.android.internal.R.integer.config_defaultPeakRefreshRate));
 
             // Set initial resources
             DisplayMetrics metrics = new DisplayMetrics();
@@ -335,13 +339,14 @@ public class RecordingService extends Service {
             }
 
             if (mVideoBitrateOpt > 2) {
-                VIDEO_FRAME_RATE = mIsLowRamEnabled ? 30 : 60;
+                VIDEO_FRAME_RATE = mIsLowRamEnabled ? 30 : maxRefreshRate;
                 if (!mIsLowRamEnabled) {
                     TOTAL_NUM_TRACKS = 2;
                     AUDIO_CHANNEL_TYPE = AudioFormat.CHANNEL_IN_STEREO;
                 }
             } else {
-                VIDEO_FRAME_RATE = mIsLowRamEnabled ? 25 : 48;
+                int slightLowerRefreshRate = (int) Math.round(maxRefreshRate * 0.8);
+                VIDEO_FRAME_RATE = mIsLowRamEnabled ? 25 : slightLowerRefreshRate;
                 if (!mIsLowRamEnabled) {
                     TOTAL_NUM_TRACKS = 1;
                     AUDIO_CHANNEL_TYPE = AudioFormat.CHANNEL_IN_MONO;
