@@ -48,6 +48,8 @@
     <string name="keyguard_indication_warp_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Ricarica Warp (<xliff:g id="charging_time_left" example="4 ore e 2 minuti">%s</xliff:g> fino al completamento della carica)</string>
     <string name="keyguard_plugged_in_warp_charging">Ricarica Warp</string>
     <!-- Indication on the keyguard that is shown when the device is charging with a VOOC charger. Should match keyguard_plugged_in_vooc_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_vooc_charging_time"><xliff:g id="percentage">%2$s</xliff:g> • Ricarica VOOC (<xliff:g id="charging_time_left" example="4 ore e 2 minuti">%1$s</xliff:g> fino al completamento della carica)</string>
+    <string name="keyguard_plugged_in_vooc_charging"><xliff:g id="percentage">%s</xliff:g> • Ricarica VOOC</string>
     <!-- Screenshot Delete Toast -->
     <string name="delete_screenshot_toast">Screenshot eliminato</string>
     <!-- Advanced powermenu -->
@@ -220,6 +222,8 @@
     <string name="screen_pinning_toast_recents_invisible_custom">Per disattivare il blocco su schermo, tocca e tieni premuto il pulsante Indietro</string>
     <!-- Long swipe gesture actions -->
     <string name="app_picker_dialog_title">Seleziona un\'applicazione</string>
+    <string name="task_helper_app_killed">%1$s arrestata forzatamente</string>
+    <string name="empty_app_killed">Applicazione</string>
     <!-- Navigation Bar tile -->
     <string name="quick_settings_navbar_title">Barra di navigazione</string>
     <string name="accessibility_quick_settings_navbar_on">Barra di navigazione attiva</string>

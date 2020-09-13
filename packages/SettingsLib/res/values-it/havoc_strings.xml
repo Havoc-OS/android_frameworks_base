@@ -31,5 +31,8 @@
     <string name="battery_info_status_warp_charging">Ricarica Warp</string>
     <string name="battery_info_status_warp_charging_lower">ricarica warp</string>
     <!-- Label for estimated remaining duration of VOOC battery charging -->
+    <string name="power_remaining_vooc_charging_duration_only">Ricarica VOOC (<xliff:g id="time">%1$s</xliff:g> rimanenti fino alla carica completa)</string>
     <!-- Battery use screen. Battery status shown in chart label when charging from a VOOC source.  -->
+    <string name="battery_info_status_vooc_charging">Ricarica VOOC</string>
+    <string name="battery_info_status_vooc_charging_lower">Ricarica VOOC</string>
 </resources>

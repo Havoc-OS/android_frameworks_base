@@ -31,5 +31,8 @@
     <string name="battery_info_status_warp_charging">快速充電中</string>
     <string name="battery_info_status_warp_charging_lower">快速充電中</string>
     <!-- Label for estimated remaining duration of VOOC battery charging -->
+    <string name="power_remaining_vooc_charging_duration_only">VOOC 快速充電 (剩餘 <xliff:g id="time">%1$s</xliff:g> 充滿)</string>
     <!-- Battery use screen. Battery status shown in chart label when charging from a VOOC source.  -->
+    <string name="battery_info_status_vooc_charging">VOOC 快速充電</string>
+    <string name="battery_info_status_vooc_charging_lower">VOOC 快速充電</string>
 </resources>

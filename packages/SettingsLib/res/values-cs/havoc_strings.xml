@@ -31,5 +31,8 @@
     <string name="battery_info_status_warp_charging">Warp nabíjení</string>
     <string name="battery_info_status_warp_charging_lower">Warp nabíjení</string>
     <!-- Label for estimated remaining duration of VOOC battery charging -->
+    <string name="power_remaining_vooc_charging_duration_only">VOOC nabíjení (zbývá <xliff:g id="time">%1$s</xliff:g> do plného nabití)</string>
     <!-- Battery use screen. Battery status shown in chart label when charging from a VOOC source.  -->
+    <string name="battery_info_status_vooc_charging">VOOC nabíjení</string>
+    <string name="battery_info_status_vooc_charging_lower">VOOC nabíjení</string>
 </resources>
