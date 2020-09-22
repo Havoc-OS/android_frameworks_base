@@ -23,10 +23,16 @@ import android.view.MenuItem;
 import com.android.systemui.Dependency;
 import com.android.systemui.fragments.FragmentService;
 
+import javax.inject.Inject;
+
 public class StatusbarItemsActivity extends Activity {
 
+    @Inject
+    StatusbarItemsActivity() {
+        super();
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
-        Dependency.initDependencies(this);
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new StatusbarItems())
                 .commit();

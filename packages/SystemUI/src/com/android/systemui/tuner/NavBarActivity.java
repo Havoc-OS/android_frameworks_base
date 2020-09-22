@@ -16,17 +16,24 @@
 package com.android.systemui.tuner;
 
 import android.os.Bundle;
+
 import androidx.preference.PreferenceFragment;
-import com.android.systemui.Dependency;
-import com.android.systemui.tuner.TunerActivity;
+
 import com.android.systemui.R;
+import com.android.systemui.tuner.TunerActivity;
+
+import javax.inject.Inject;
 
 public class NavBarActivity extends TunerActivity {
 
     private static final String TAG_TUNER = "tuner";
 
+    @Inject
+    NavBarActivity() {
+        super();
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
-        Dependency.initDependencies(this);
         super.onCreate(savedInstanceState);
 
         if (getFragmentManager().findFragmentByTag(TAG_TUNER) == null) {
