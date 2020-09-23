@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:elevation="4dp"
-        android:paddingBottom="5dp">
+        android:paddingBottom="8dp">
         <View
             android:layout_width="46dp"
             android:layout_height="3dp"
