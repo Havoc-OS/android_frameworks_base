@@ -467,7 +467,6 @@ public class AppLockService extends SystemService {
                 mBiometricPrompt = new BiometricPrompt.Builder(mContext)
                     .setTitle(cont.appLabel)
                     .setApplockPackage(cont.packageName)
-                    .setDescription(cont.appLabel)
                     .setDeviceCredentialAllowed(true)
                     .setConfirmationRequired(false)
                     .build();
