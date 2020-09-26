@@ -20,6 +20,8 @@ import android.annotation.IntDef;
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.biometrics.BiometricConstants;
@@ -43,6 +45,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.custom.app.LineageContextConstants;
 import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
@@ -93,6 +96,9 @@ public class AuthContainerView extends LinearLayout
     private final View mPanelView;
 
     private final float mTranslationY;
+
+    private static boolean mHasFod;
+    private PackageManager mPackageManager;
 
     @VisibleForTesting final WakefulnessLifecycle mWakefulnessLifecycle;
 
@@ -294,6 +300,9 @@ public class AuthContainerView extends LinearLayout
 
         mBiometricScrollView = mInjector.getBiometricScrollView(mFrameLayout);
         mBackgroundView = mInjector.getBackgroundView(mFrameLayout);
+
+        mPackageManager = mContext.getPackageManager();
+        mHasFod = mPackageManager.hasSystemFeature(LineageContextConstants.Features.FOD);
 
         addView(mFrameLayout);
 
@@ -636,6 +645,9 @@ public class AuthContainerView extends LinearLayout
         lp.setFitInsetsTypes(lp.getFitInsetsTypes() & ~WindowInsets.Type.ime());
         lp.setTitle("BiometricPrompt");
         lp.token = windowToken;
+        if (mHasFod) {
+            lp.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        }
         return lp;
     }
 }
