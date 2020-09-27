@@ -67,4 +67,5 @@
     <string name="gaming_mode_enabled_toast">Mode permainan diaktifkan</string>
     <string name="gaming_mode_disabled_toast">Mode permainan dinonaktifkan</string>
     <!-- Clipboard access toast -->
+    <!-- Cycle through ringer modes -->
 </resources>

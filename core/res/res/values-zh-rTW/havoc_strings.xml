@@ -66,4 +66,7 @@
     <string name="gaming_mode_enabled_toast">遊戲模式已開啟</string>
     <string name="gaming_mode_disabled_toast">遊戲模式已關閉</string>
     <!-- Clipboard access toast -->
+    <string name="app_clipboard_access_denied">已拒絕 %1$s 存取剪貼簿</string>
+    <string name="app_clipboard_access_granted">已允許 %1$s 存取剪貼簿</string>
+    <!-- Cycle through ringer modes -->
 </resources>

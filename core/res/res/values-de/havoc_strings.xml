@@ -66,4 +66,7 @@
     <string name="gaming_mode_enabled_toast">Spielemodus eingeschaltet</string>
     <string name="gaming_mode_disabled_toast">Spielemodus ausgeschaltet</string>
     <!-- Clipboard access toast -->
+    <string name="app_clipboard_access_denied">%1$s wurde der Zugriff auf die Zwischenablage verweigert</string>
+    <string name="app_clipboard_access_granted">%1$s wurde Zugriff auf die Zwischenablage gewährt</string>
+    <!-- Cycle through ringer modes -->
 </resources>

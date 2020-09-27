@@ -66,4 +66,5 @@
     <string name="gaming_mode_enabled_toast">Herný režim zapnutý</string>
     <string name="gaming_mode_disabled_toast">Herný režim vypnutý</string>
     <!-- Clipboard access toast -->
+    <!-- Cycle through ringer modes -->
 </resources>

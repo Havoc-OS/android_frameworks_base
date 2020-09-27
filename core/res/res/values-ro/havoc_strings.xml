@@ -67,4 +67,5 @@
     <string name="gaming_mode_enabled_toast">Modul de joc a fost pornit</string>
     <string name="gaming_mode_disabled_toast">Modul de jocuri a fost oprit</string>
     <!-- Clipboard access toast -->
+    <!-- Cycle through ringer modes -->
 </resources>

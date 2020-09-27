@@ -67,4 +67,7 @@
     <string name="gaming_mode_enabled_toast">Ігровий режим увімкнено</string>
     <string name="gaming_mode_disabled_toast">Ігровий режим вимкнено</string>
     <!-- Clipboard access toast -->
+    <string name="app_clipboard_access_denied">%1$s відмовлено в доступі до буфера обміну</string>
+    <string name="app_clipboard_access_granted">%1$s дозволено доступ до буфера обміну</string>
+    <!-- Cycle through ringer modes -->
 </resources>

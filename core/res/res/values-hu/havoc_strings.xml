@@ -66,4 +66,7 @@
     <string name="gaming_mode_enabled_toast">A Játékmód bekapcsolásra került</string>
     <string name="gaming_mode_disabled_toast">A Játékmód kikapcsolásra került</string>
     <!-- Clipboard access toast -->
+    <string name="app_clipboard_access_denied">%1$s vágólap-elérése letiltásra került</string>
+    <string name="app_clipboard_access_granted">%1$s vágólap-elérése engedélyezésre került</string>
+    <!-- Cycle through ringer modes -->
 </resources>
