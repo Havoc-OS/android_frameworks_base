@@ -38,6 +38,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.hardware.biometrics.BiometricSourceType;
 import android.media.AudioAttributes;
@@ -69,6 +70,7 @@ import android.view.WindowManagerPolicyConstants;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.android.internal.custom.app.LineageContextConstants;
 import com.android.internal.policy.IKeyguardDismissCallback;
 import com.android.internal.policy.IKeyguardDrawnCallback;
 import com.android.internal.policy.IKeyguardExitCallback;
@@ -379,6 +381,8 @@ public class KeyguardViewMediator extends SystemUI implements Dumpable {
     private boolean mWakeAndUnlocking;
     private IKeyguardDrawnCallback mDrawnCallback;
     private CharSequence mCustomMessage;
+
+    private boolean mHasFod;
 
     private final DeviceConfig.OnPropertiesChangedListener mOnPropertiesChangedListener =
             new DeviceConfig.OnPropertiesChangedListener() {
@@ -748,6 +752,8 @@ public class KeyguardViewMediator extends SystemUI implements Dumpable {
                 QuickStepContract.isGesturalMode(navigationModeController.addListener(mode -> {
                     mInGestureNavigationMode = QuickStepContract.isGesturalMode(mode);
                 }));
+        PackageManager packageManager = context.getPackageManager();
+        mHasFod = packageManager.hasSystemFeature(LineageContextConstants.Features.FOD);
     }
 
     public void userActivity() {
@@ -878,7 +884,9 @@ public class KeyguardViewMediator extends SystemUI implements Dumpable {
             // explicitly DO NOT want to call
             // mKeyguardViewControllerLazy.get().setKeyguardGoingAwayState(false)
             // here, since that will mess with the device lock state.
-            mUpdateMonitor.dispatchKeyguardGoingAway(false);
+            if (!mHasFod) {
+                mUpdateMonitor.dispatchKeyguardGoingAway(false);
+            }
 
             // Lock immediately based on setting if secure (user has a pin/pattern/password).
             // This also "locks" the device when not secure to provide easy access to the
