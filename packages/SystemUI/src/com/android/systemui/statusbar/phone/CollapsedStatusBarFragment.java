@@ -99,6 +99,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private View mBatteryBars[] = new View[2];
 
     private View mTickerViewFromStub;
+    private View mTickerViewContainer;
 
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -270,9 +271,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             if ((state1 & DISABLE_SYSTEM_INFO) != 0) {
                 hideSystemIconArea(animate);
                 hideOperatorName(animate);
+                hideTicker(animate);
             } else {
                 showSystemIconArea(animate);
                 showOperatorName(animate);
+                showTicker(animate);
             }
         }
         if ((diff1 & DISABLE_NOTIFICATION_ICONS) != 0) {
@@ -415,6 +418,18 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
     }
 
+    public void showTicker(boolean animate) {
+        if (mTickerViewContainer != null) {
+            animateShow(mTickerViewContainer, animate);
+        }
+    }
+    
+    public void hideTicker(boolean animate) {
+        if (mTickerViewContainer != null) {
+            animateHide(mTickerViewContainer, animate, true);
+        }
+    }
+
     /**
      * Hides a view.
      */
@@ -540,6 +555,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     private void initTickerView() {
+        mTickerViewContainer = mStatusBar.findViewById(R.id.ticker_container);
         View tickerStub = mStatusBar.findViewById(R.id.ticker_stub);
         if (mTickerViewFromStub == null && tickerStub != null) {
             mTickerViewFromStub = ((ViewStub) tickerStub).inflate();
