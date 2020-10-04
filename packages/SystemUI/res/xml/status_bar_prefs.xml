@@ -109,6 +109,11 @@
         android:title="@string/battery" />
 
     <com.android.systemui.tuner.StatusBarSwitch
+        android:title="@string/status_bar_nfc"
+        android:key="nfc"
+        android:icon="@drawable/ic_statusbar_nfc" />
+
+    <com.android.systemui.tuner.StatusBarSwitch
         android:icon="@drawable/ic_statusbar_alarm"
         android:key="alarm_clock"
         android:title="@string/status_bar_alarm" />
