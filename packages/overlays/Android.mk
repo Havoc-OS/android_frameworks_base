@@ -78,6 +78,8 @@ LOCAL_REQUIRED_MODULES := \
 	NavigationBarModeGesturalOverlayWideBack \
 	NavigationBarModeGesturalOverlayExtraWideBack \
 	NavigationBarModeGesturalOverlayNoHint \
+	NavigationBarModeGesturalOverlayLong \
+	NavigationBarModeGesturalOverlayMedium \
 	preinstalled-packages-platform-overlays.xml
 
 include $(BUILD_PHONY_PACKAGE)
