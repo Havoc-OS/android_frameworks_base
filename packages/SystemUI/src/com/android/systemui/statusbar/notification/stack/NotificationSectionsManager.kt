@@ -86,6 +86,7 @@ class NotificationSectionsManager @Inject internal constructor(
 
     private lateinit var parent: NotificationStackScrollLayout
     private var initialized = false
+    private var mShowHeaders = true
     private var onClearSilentNotifsClickListener: View.OnClickListener? = null
 
     @get:VisibleForTesting
@@ -113,9 +114,10 @@ class NotificationSectionsManager @Inject internal constructor(
         private set
 
     /** Must be called before use.  */
-    fun initialize(parent: NotificationStackScrollLayout, layoutInflater: LayoutInflater) {
+    fun initialize(parent: NotificationStackScrollLayout, layoutInflater: LayoutInflater, showHeaders: Boolean) {
         check(!initialized) { "NotificationSectionsManager already initialized" }
         initialized = true
+        mShowHeaders = showHeaders
         this.parent = parent
         reinflateViews(layoutInflater)
         configurationController.addCallback(configurationListener)
@@ -153,21 +155,40 @@ class NotificationSectionsManager @Inject internal constructor(
         silentHeaderView = reinflateView(
                 silentHeaderView, layoutInflater, R.layout.status_bar_notification_section_header
         ).apply {
-            setHeaderText(R.string.notification_section_header_gentle)
-            setOnHeaderClickListener { onGentleHeaderClick() }
-            setOnClearAllClickListener { onClearGentleNotifsClick(it) }
+            if (mShowHeaders) {
+                setVisibility(View.VISIBLE)
+                setHeaderText(R.string.notification_section_header_gentle)
+                setOnHeaderClickListener { onGentleHeaderClick() }
+                setOnClearAllClickListener { onClearGentleNotifsClick(it) }
+            } else {
+                setVisibility(View.GONE)
+                setOnHeaderClickListener(null)
+                setOnClearAllClickListener(null)
+            }
         }
         alertingHeaderView = reinflateView(
                 alertingHeaderView, layoutInflater, R.layout.status_bar_notification_section_header
         ).apply {
-            setHeaderText(R.string.notification_section_header_alerting)
-            setOnHeaderClickListener { onGentleHeaderClick() }
+            if (mShowHeaders) {
+                setVisibility(View.VISIBLE)
+                setHeaderText(R.string.notification_section_header_alerting)
+                setOnHeaderClickListener { onGentleHeaderClick() }
+            } else {
+                setVisibility(View.GONE)
+                setOnHeaderClickListener(null)
+            }
         }
         peopleHubSubscription?.unsubscribe()
         peopleHubSubscription = null
         peopleHeaderView = reinflateView(peopleHeaderView, layoutInflater, R.layout.people_strip)
                 .apply {
-                    setOnHeaderClickListener(View.OnClickListener { onPeopleHeaderClick() })
+                    if (!mShowHeaders) {
+                        setVisibility(View.GONE)
+                        setOnHeaderClickListener(null)
+                    } else {
+                        setVisibility(View.VISIBLE)
+                        setOnHeaderClickListener(View.OnClickListener { onPeopleHeaderClick() })
+                    }
                 }
         if (ENABLE_SNOOZED_CONVERSATION_HUB) {
             peopleHubSubscription = peopleHubViewAdapter.bindView(peopleHubViewBoundary)
@@ -175,12 +196,26 @@ class NotificationSectionsManager @Inject internal constructor(
         incomingHeaderView = reinflateView(
                 incomingHeaderView, layoutInflater, R.layout.status_bar_notification_section_header
         ).apply {
-            setHeaderText(R.string.notification_section_header_incoming)
-            setOnHeaderClickListener { onGentleHeaderClick() }
+            if (mShowHeaders) {
+                setVisibility(View.VISIBLE)
+                setHeaderText(R.string.notification_section_header_incoming)
+                setOnHeaderClickListener { onGentleHeaderClick() }
+            } else {
+                setVisibility(View.GONE)
+                setOnHeaderClickListener(null)
+            }
         }
         mediaControlsView =
                 reinflateView(mediaControlsView, layoutInflater, R.layout.keyguard_media_header)
                         .also(keyguardMediaController::attach)
+    }
+
+    fun setHeadersVisibility(visible: Boolean) {
+        if  (mShowHeaders != visible) {
+            mShowHeaders = visible
+            reinflateViews(LayoutInflater.from(parent.context))
+            if (visible) updateSectionBoundaries("headers toggled on")
+        }
     }
 
     override fun beginsSection(view: View, previous: View?): Boolean =
@@ -296,6 +331,7 @@ class NotificationSectionsManager @Inject internal constructor(
         // target, but won't be once they are moved / removed after the pass has completed.
 
         val showHeaders = statusBarStateController.state != StatusBarState.KEYGUARD
+                && mShowHeaders
         val usingPeopleFiltering = sectionsFeatureManager.isFilteringEnabled()
         val usingMediaControls = sectionsFeatureManager.isMediaControlsEnabled()
 

@@ -5870,6 +5870,12 @@ public final class Settings {
         public static final String QS_TILE_ACCENT_TINT = "qs_tile_accent_tint";
 
         /**
+         * Controls whether to show notification headers
+         * @hide
+         */
+        public static final String NOTIFICATION_HEADERS = "notification_headers";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
@@ -6002,6 +6008,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
             PRIVATE_SETTINGS.add(INCALL_FEEDBACK_VIBRATE);
+            PRIVATE_SETTINGS.add(NOTIFICATION_HEADERS);
         }
 
         /**
