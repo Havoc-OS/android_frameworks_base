@@ -2011,8 +2011,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
                 && !statusBarShadeLocked;
         final int user = getCurrentUser();
         final int strongAuth = mStrongAuthTracker.getStrongAuthForUser(user);
-        final boolean isLockDown =
-                containsFlag(strongAuth, STRONG_AUTH_REQUIRED_AFTER_DPM_LOCK_NOW)
+        final boolean isLockOutOrLockDown =
+                containsFlag(strongAuth, STRONG_AUTH_REQUIRED_AFTER_LOCKOUT)
+                        || containsFlag(strongAuth, STRONG_AUTH_REQUIRED_AFTER_DPM_LOCK_NOW)
                         || containsFlag(strongAuth, STRONG_AUTH_REQUIRED_AFTER_USER_LOCKDOWN);
         final boolean isEncryptedOrTimedOut =
                 containsFlag(strongAuth, STRONG_AUTH_REQUIRED_AFTER_BOOT)
@@ -2026,9 +2027,9 @@ public class KeyguardUpdateMonitor implements TrustManager.TrustListener, Dumpab
         boolean becauseCannotSkipBouncer = !getUserCanSkipBouncer(user) || canBypass;
 
         // Scan even when encrypted or timeout to show a preemptive bouncer when bypassing.
-        // Lock-down mode shouldn't scan, since it is more explicit.
+        // Lockout/lockdown modes shouldn't scan, since they are more explicit.
         boolean strongAuthAllowsScanning = (!isEncryptedOrTimedOut || canBypass && !mBouncer)
-                && !isLockDown;
+                && !isLockOutOrLockDown;
 
         boolean unlockPossible = !((!mBouncer || !awakeKeyguard) && isFaceAuthOnlyOnSecurityView());
 
