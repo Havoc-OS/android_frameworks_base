@@ -961,14 +961,7 @@ public class FaceService extends BiometricServiceBase {
         @Override
         public void onLockoutChanged(long duration) {
             Slog.d(TAG, "onLockoutChanged: " + duration);
-            if (duration == 0) {
-                mCurrentUserLockoutMode = AuthenticationClient.LOCKOUT_NONE;
-            } else if (duration == Long.MAX_VALUE) {
-                mCurrentUserLockoutMode = AuthenticationClient.LOCKOUT_PERMANENT;
-            } else {
-                mCurrentUserLockoutMode = AuthenticationClient.LOCKOUT_TIMED;
-            }
-
+            mCurrentUserLockoutMode = AuthenticationClient.LOCKOUT_NONE;
             mHandler.post(() -> {
                 if (duration == 0) {
                     notifyLockoutResetMonitors();
@@ -1235,7 +1228,7 @@ public class FaceService extends BiometricServiceBase {
 
     @Override
     protected int getLockoutMode() {
-        return mCurrentUserLockoutMode;
+        return AuthenticationClient.LOCKOUT_NONE;
     }
 
     /** Gets the face daemon */
