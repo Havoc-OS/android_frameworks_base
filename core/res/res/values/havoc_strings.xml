@@ -51,4 +51,11 @@
     <!-- Cycle through ringer modes -->
     <string name="volume_dialog_ringer_guidance_normal">Calls and notifications will ring</string>
 
+    <string name="reboot_to_recovery_title" translatable="false">Recovery</string>
+    <string name="reboot_to_recovery_message" translatable="false">Rebooting to Recovery</string>
+    <string name="reboot_to_bootloader_title" translatable="false">Bootloader</string>
+    <string name="reboot_to_bootloader_message" translatable="false">Rebooting to Bootloader</string>
+    <string name="reboot_title">Reboot</string>
+    <string name="reboot_message">Rebooting System</string>
+
 </resources>

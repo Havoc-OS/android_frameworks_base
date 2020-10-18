@@ -36,4 +36,9 @@
     <string name="task_helper_app_killed">%1$s force stopped</string>
     <string name="empty_app_killed">App</string>
 
+    <string name="global_action_restart_advanced">Advanced</string>
+    <string name="global_action_restart_recovery">Recovery</string>
+    <string name="global_action_restart_bootloader">Bootloader</string>
+    <string name="global_action_restart_ui">SystemUI</string>
+
 </resources>
