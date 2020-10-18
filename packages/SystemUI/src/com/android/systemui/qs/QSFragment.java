@@ -145,8 +145,7 @@ public class QSFragment extends LifecycleFragment implements QS, CommandQueue.Ca
 
 
         mQSDetail.setQsPanel(mQSPanel, mHeader, (View) mFooter);
-        mQSAnimator = new QSAnimator(this, mHeader.findViewById(R.id.quick_qs_panel), mQSPanel);
-
+        mQSAnimator = new QSAnimator(this, mHeader.findViewById(R.id.quick_qs_panel), mQSPanel, getContext());
 
         mQSCustomizer = view.findViewById(R.id.qs_customize);
         mQSCustomizer.setQs(this);
