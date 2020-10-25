@@ -242,4 +242,7 @@ oneway interface IStatusBar
     void triggerElmyraAction(String action);
 
     void killForegroundApp();
+
+    void screenPinningStateChanged(boolean enabled);
+    void leftInLandscapeChanged(boolean isLeft);
 }

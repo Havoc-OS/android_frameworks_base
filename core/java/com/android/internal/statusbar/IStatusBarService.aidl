@@ -168,4 +168,6 @@ interface IStatusBarService
     void triggerElmyraAction(String action);
 
     void killForegroundApp();
+
+     void screenPinningStateChanged(boolean enabled);
 }
