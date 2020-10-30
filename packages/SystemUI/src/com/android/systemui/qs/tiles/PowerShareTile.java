@@ -144,14 +144,6 @@ public class PowerShareTile extends QSTileImpl<BooleanState>
 
     @Override
     public CharSequence getTileLabel() {
-        if (mBatteryController.isPowerSave()) {
-            return mContext.getString(R.string.quick_settings_powershare_off_powersave_label);
-        } else {
-            if (getBatteryLevel() < getMinBatteryLevel()) {
-                return mContext.getString(R.string.quick_settings_powershare_off_low_battery_label);
-            }
-        }
-
         return mContext.getString(R.string.quick_settings_powershare_label);
     }
 
@@ -174,6 +166,14 @@ public class PowerShareTile extends QSTileImpl<BooleanState>
         }
         state.slash.isSlashed = state.value;
         state.label = mContext.getString(R.string.quick_settings_powershare_label);
+
+        if (mBatteryController.isPowerSave()) {
+            state.secondaryLabel = mContext.getString(R.string.quick_settings_powershare_off_powersave_label);
+        } else if (getBatteryLevel() < getMinBatteryLevel()) {
+            state.secondaryLabel = mContext.getString(R.string.quick_settings_powershare_off_low_battery_label);
+        } else {
+            state.secondaryLabel = null;
+        }
 
         if (mBatteryController.isPowerSave() || getBatteryLevel() < getMinBatteryLevel()) {
             state.state = Tile.STATE_UNAVAILABLE;
