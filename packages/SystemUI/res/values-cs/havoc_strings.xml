@@ -242,4 +242,17 @@
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
     <!-- App lock -->
+    <string name="applock_fingerprint_face">, odemkněte otiskem prstu nebo obličejem</string>
+    <string name="applock_face">&#160;nebo odemkněte obličejem</string>
+    <string name="applock_fingerprint">&#160;nebo odemkněte otiskem prstu</string>
+    <string name="applock_locked_notification">Aplikace je uzamčena</string>
+    <!-- DC Dimming -->
+    <string name="quick_settings_dc_dimming_label">DC – Ztlumení</string>
+    <string name="quick_settings_dc_brightness_mode">Režim jasu</string>
+    <string name="quick_settings_dc_full_auto">Automatický režim</string>
+    <!-- PowerShare QS tile -->
+    <string name="quick_settings_powershare_label">Bezdrátové sdílení energie</string>
+    <string name="quick_settings_powershare_off_powersave_label">Spořič baterie</string>
+    <string name="quick_settings_powershare_off_low_battery_label">Nízký stav baterie</string>
+    <string name="quick_settings_powershare_enabled_label">Bezdrátové sdílení energie je zapnuto</string>
 </resources>

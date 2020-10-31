@@ -242,4 +242,6 @@
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
     <!-- App lock -->
+    <!-- DC Dimming -->
+    <!-- PowerShare QS tile -->
 </resources>

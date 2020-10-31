@@ -66,5 +66,8 @@
     <string name="gaming_mode_enabled_toast">Modo Jogo ativado</string>
     <string name="gaming_mode_disabled_toast">O Modo Jogo foi desativado</string>
     <!-- Clipboard access toast -->
+    <string name="app_clipboard_access_denied">%1$s teve acesso negado à área de transferência</string>
+    <string name="app_clipboard_access_granted">%1$s recebeu acesso à área de transferência</string>
     <!-- Cycle through ringer modes -->
+    <string name="volume_dialog_ringer_guidance_normal">Chamadas e notificações tocarão</string>
 </resources>

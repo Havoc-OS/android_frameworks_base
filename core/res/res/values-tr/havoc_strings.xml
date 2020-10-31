@@ -70,4 +70,5 @@ example=\"Gmail\"&gt;%1$s&lt;/xliff:g&gt;&lt;/b&gt; paket imzasını taklit etme
     <string name="app_clipboard_access_denied">%1$s panoya erişimi reddedildi</string>
     <string name="app_clipboard_access_granted">%1$s panoya erişim izni verildi</string>
     <!-- Cycle through ringer modes -->
+    <string name="volume_dialog_ringer_guidance_normal">Çağrılar ve bildirimler çalacak</string>
 </resources>

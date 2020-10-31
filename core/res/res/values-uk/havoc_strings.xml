@@ -70,4 +70,5 @@
     <string name="app_clipboard_access_denied">%1$s відмовлено в доступі до буфера обміну</string>
     <string name="app_clipboard_access_granted">%1$s дозволено доступ до буфера обміну</string>
     <!-- Cycle through ringer modes -->
+    <string name="volume_dialog_ringer_guidance_normal">Звуковий сигнал для викликів і сповіщень увімкнено</string>
 </resources>

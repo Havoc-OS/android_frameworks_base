@@ -242,4 +242,10 @@
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
     <!-- App lock -->
+    <string name="applock_fingerprint_face">, відбиток пальця або обличчя для розблокування</string>
+    <string name="applock_face">&#160;або обличчя для розблокування</string>
+    <string name="applock_fingerprint">&#160;або відбиток пальця для розблокування</string>
+    <string name="applock_locked_notification">Додаток заблоковано</string>
+    <!-- DC Dimming -->
+    <!-- PowerShare QS tile -->
 </resources>

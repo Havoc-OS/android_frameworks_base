@@ -242,4 +242,17 @@
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
     <!-- App lock -->
+    <string name="applock_fingerprint_face">, kilidi açmak için parmak izi yada yüz kilidini kullanın</string>
+    <string name="applock_face">Kilidi açmak için &#160;veya yüz kilidini kullanın</string>
+    <string name="applock_fingerprint">Kilidi açmak için &#160;veya parmak izini kullanın</string>
+    <string name="applock_locked_notification">Uygulama kilitli</string>
+    <!-- DC Dimming -->
+    <string name="quick_settings_dc_dimming_label">DC Karartma</string>
+    <string name="quick_settings_dc_brightness_mode">Parlaklık modu</string>
+    <string name="quick_settings_dc_full_auto">Otomatik mod</string>
+    <!-- PowerShare QS tile -->
+    <string name="quick_settings_powershare_label">Kablosuz Güç Paylaşımı</string>
+    <string name="quick_settings_powershare_off_powersave_label">Pil tasarrufu</string>
+    <string name="quick_settings_powershare_off_low_battery_label">Düşük Pil</string>
+    <string name="quick_settings_powershare_enabled_label">Kablosuz Güç Paylaşımı etkin</string>
 </resources>

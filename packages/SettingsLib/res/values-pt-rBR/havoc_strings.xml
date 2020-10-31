@@ -31,5 +31,8 @@
     <string name="battery_info_status_warp_charging">Carregamento Turbo</string>
     <string name="battery_info_status_warp_charging_lower">carregamento Turbo</string>
     <!-- Label for estimated remaining duration of VOOC battery charging -->
+    <string name="power_remaining_vooc_charging_duration_only">Carregamento VOOC (<xliff:g id="time">%1$s</xliff:g> restante até concluir)</string>
     <!-- Battery use screen. Battery status shown in chart label when charging from a VOOC source.  -->
+    <string name="battery_info_status_vooc_charging">Carregamento VOOC</string>
+    <string name="battery_info_status_vooc_charging_lower">Carregamento VOOC</string>
 </resources>
