@@ -158,4 +158,9 @@ interface IStatusBarService
      */
     void showInDisplayFingerprintView();
     void hideInDisplayFingerprintView();
+
+    /**
+     * Havoc
+     */
+    void toggleCameraFlash();
 }
