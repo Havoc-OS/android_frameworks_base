@@ -98,8 +98,7 @@ public class NavbarUtilities {
             KeyEvent.KEYCODE_BACK,
             KeyEvent.KEYCODE_MENU,
             KeyEvent.KEYCODE_ASSIST,
-            KeyEvent.KEYCODE_APP_SWITCH,
-            KeyEvent.KEYCODE_CAMERA
+            KeyEvent.KEYCODE_APP_SWITCH
     };
 
     /**
@@ -143,8 +142,6 @@ public class NavbarUtilities {
                 return com.android.internal.R.integer.config_doubleTapOnAssistKeyBehavior;
             case KeyEvent.KEYCODE_APP_SWITCH:
                 return com.android.internal.R.integer.config_doubleTapOnAppSwitchKeyBehavior;
-            case KeyEvent.KEYCODE_CAMERA:
-                return com.android.internal.R.integer.config_doubleTapOnCameraKeyBehavior;
         }
         return 0;
     }
@@ -165,8 +162,6 @@ public class NavbarUtilities {
                 return com.android.internal.R.integer.config_longPressOnAssistKeyBehavior;
             case KeyEvent.KEYCODE_APP_SWITCH:
                 return com.android.internal.R.integer.config_longPressOnAppSwitchKeyBehavior;
-            case KeyEvent.KEYCODE_CAMERA:
-                return com.android.internal.R.integer.config_longPressOnCameraKeyBehavior;
         }
         return 0;
     }
