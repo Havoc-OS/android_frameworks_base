@@ -850,6 +850,11 @@ public final class DefaultPermissionGrantPolicy {
                     MICROPHONE_PERMISSIONS);
         }
 
+        // Flipendo
+        grantSystemFixedPermissionsToSystemPackage(pm,
+                getDefaultProviderAuthorityPackage("com.google.android.flipendo", userId),
+                userId, SUSPEND_APP_PERMISSIONS);
+
         // ThemePicker
         String themePickerPackage = "com.android.wallpaper";
         PackageInfo pkg = pm.getPackageInfo(themePickerPackage);
