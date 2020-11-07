@@ -21,27 +21,31 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.media.AudioManager;
+import android.media.session.MediaController;
 import android.media.session.MediaSessionLegacyHelper;
+import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
 import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.util.Slog;
 import android.view.KeyEvent;
 import android.view.ViewConfiguration;
 
+import java.util.List;
+
 public final class LineageButtons {
     private final String TAG = "LineageButtons";
-    private final boolean DEBUG = false;
 
     private static final int MSG_DISPATCH_VOLKEY_WITH_WAKELOCK = 1;
 
     private final Context mContext;
-    private ButtonHandler mHandler;
+    private final ButtonHandler mHandler;
 
     private boolean mIsLongPress = false;
 
     private boolean mVolBtnMusicControls = false;
+    private final MediaSessionManager mMediaSessionManager;
 
     private class ButtonHandler extends Handler {
         @Override
@@ -50,11 +54,7 @@ public final class LineageButtons {
                 case MSG_DISPATCH_VOLKEY_WITH_WAKELOCK:
                     KeyEvent ev = (KeyEvent) msg.obj;
                     mIsLongPress = true;
-                    if (DEBUG) {
-                        Slog.d(TAG, "Dispatching key to audio service");
-                    }
-                    dispatchMediaKeyToAudioService(ev);
-                    dispatchMediaKeyToAudioService(KeyEvent.changeAction(ev, KeyEvent.ACTION_UP));
+                    onSkipTrackEvent(ev);
                     break;
             }
         }
@@ -63,6 +63,7 @@ public final class LineageButtons {
     public LineageButtons(Context context) {
         mContext = context;
         mHandler = new ButtonHandler();
+        mMediaSessionManager = mContext.getSystemService(MediaSessionManager.class);
 
         SettingsObserver observer = new SettingsObserver(new Handler());
         observer.observe();
@@ -74,9 +75,6 @@ public final class LineageButtons {
 
         if (isInteractive) {
             // nothing to do here for now
-            if (DEBUG) {
-                Slog.d(TAG, "Skipping because interactive");
-            }
             return false;
         }
 
@@ -93,14 +91,8 @@ public final class LineageButtons {
                     int newKeyCode = (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN
                             ? KeyEvent.KEYCODE_MEDIA_PREVIOUS
                             : KeyEvent.KEYCODE_MEDIA_NEXT);
-
                     KeyEvent newEvent = new KeyEvent(event.getDownTime(), event.getEventTime(),
                             event.getAction(), newKeyCode, 0);
-                    if (DEBUG) {
-                        Slog.d(TAG, "Queueing media " +
-                                (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN ? "previous" : "next") +
-                                " event " + newEvent);
-                    }
                     Message msg = mHandler.obtainMessage(MSG_DISPATCH_VOLKEY_WITH_WAKELOCK,
                             newEvent);
                     msg.setAsynchronous(true);
@@ -128,11 +120,35 @@ public final class LineageButtons {
         return true;
     }
 
-    void dispatchMediaKeyToAudioService(KeyEvent ev) {
-        if (DEBUG) {
-            Slog.d(TAG, "Dispatching KeyEvent " + ev + " to audio service");
+    private void triggerKeyEvents(KeyEvent evDown, MediaController controller) {
+        final KeyEvent evUp = KeyEvent.changeAction(evDown, KeyEvent.ACTION_UP);
+        mHandler.post(() -> controller.dispatchMediaButtonEvent(evDown));
+        mHandler.postDelayed(() -> controller.dispatchMediaButtonEvent(evUp), 20);
+    }
+
+    public void onSkipTrackEvent(KeyEvent ev) {
+        if (mMediaSessionManager != null) {
+            final List<MediaController> sessions
+                    = mMediaSessionManager.getActiveSessionsForUser(
+                    null, UserHandle.USER_ALL);
+            for (MediaController aController : sessions) {
+                if (PlaybackState.STATE_PLAYING ==
+                        getMediaControllerPlaybackState(aController)) {
+                    triggerKeyEvents(ev, aController);
+                    break;
+                }
+            }
         }
-        MediaSessionLegacyHelper.getHelper(mContext).sendMediaButtonEvent(ev, true);
+    }
+
+    private int getMediaControllerPlaybackState(MediaController controller) {
+        if (controller != null) {
+            final PlaybackState playbackState = controller.getPlaybackState();
+            if (playbackState != null) {
+                return playbackState.getState();
+            }
+        }
+        return PlaybackState.STATE_NONE;
     }
 
     class SettingsObserver extends ContentObserver {
@@ -143,9 +159,9 @@ public final class LineageButtons {
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
 
-            /*resolver.registerContentObserver(LineageSettings.System.getUriFor(
-                    LineageSettings.System.VOLBTN_MUSIC_CONTROLS),
-                            false, this, UserHandle.USER_ALL);*/
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.VOLUME_BUTTON_MUSIC_CONTROL),
+                            false, this, UserHandle.USER_ALL);
 
             update();
         }
@@ -159,13 +175,9 @@ public final class LineageButtons {
             ContentResolver resolver = mContext.getContentResolver();
             Resources res = mContext.getResources();
 
-            mVolBtnMusicControls = /*LineageSettings.System.getIntForUser(
-                    resolver, LineageSettings.System.VOLBTN_MUSIC_CONTROLS, 1,
-                    UserHandle.USER_CURRENT) == 1;*/false;
-
-            if (DEBUG) {
-                Slog.d(TAG, "music controls enabled = " + mVolBtnMusicControls);
-            }
+            mVolBtnMusicControls = Settings.System.getIntForUser(
+                    resolver, Settings.System.VOLUME_BUTTON_MUSIC_CONTROL, 1,
+                    UserHandle.USER_CURRENT) == 1;
         }
     }
 }

@@ -4920,6 +4920,12 @@ public final class Settings {
           */
         public static final String STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
 
+        /** Whether to skip music track with volume rocker 
+        /**
+         * @hide
+         */
+        public static final String VOLUME_BUTTON_MUSIC_CONTROL = "volume_button_music_control";
+
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
