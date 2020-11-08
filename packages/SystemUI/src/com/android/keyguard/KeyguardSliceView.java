@@ -333,10 +333,14 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        final PendingIntent action = mClickActions.get(v);
+        /*final PendingIntent action = mClickActions.get(v);
         if (action != null) {
             mActivityStarter.startPendingIntentDismissingKeyguard(action);
-        }
+        }*/ //not being used by aosp actually for any slice - see KeyguardSliceProvider.addPrimaryActionLocked
+    }
+
+    public View getTitleView() {
+        return mTitle;
     }
 
     /**

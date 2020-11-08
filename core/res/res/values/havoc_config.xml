@@ -124,4 +124,6 @@
          1: Right side -->
     <integer name="config_alertSliderLocation">0</integer>
 
+    <bool name="config_has_Soli">false</bool>
+
 </resources>

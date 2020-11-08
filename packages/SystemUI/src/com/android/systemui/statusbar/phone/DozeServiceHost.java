@@ -34,6 +34,7 @@ import com.android.systemui.assist.AssistManager;
 import com.android.systemui.doze.DozeHost;
 import com.android.systemui.doze.DozeLog;
 import com.android.systemui.doze.DozeReceiver;
+import com.android.systemui.keyguard.KeyguardSliceProvider;
 import com.android.systemui.keyguard.KeyguardViewMediator;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
 import com.android.systemui.statusbar.PulseExpansionHandler;
@@ -362,28 +363,37 @@ public final class DozeServiceHost implements DozeHost {
     }
 
     @Override
-    public void onSlpiTap(float screenX, float screenY) {
-        if (screenX > 0 && screenY > 0 && mAmbientIndicationContainer != null
-                && mAmbientIndicationContainer.getVisibility() == View.VISIBLE) {
-            int[] locationOnScreen = new int[2];
-            mAmbientIndicationContainer.getLocationOnScreen(locationOnScreen);
-            float viewX = screenX - locationOnScreen[0];
-            float viewY = screenY - locationOnScreen[1];
-            if (0 <= viewX && viewX <= mAmbientIndicationContainer.getWidth()
-                    && 0 <= viewY && viewY <= mAmbientIndicationContainer.getHeight()) {
-
-                // Dispatch a tap
-                long now = SystemClock.elapsedRealtime();
-                MotionEvent ev = MotionEvent.obtain(
-                        now, now, MotionEvent.ACTION_DOWN, screenX, screenY, 0);
-                mAmbientIndicationContainer.dispatchTouchEvent(ev);
-                ev.recycle();
-                ev = MotionEvent.obtain(
-                        now, now, MotionEvent.ACTION_UP, screenX, screenY, 0);
-                mAmbientIndicationContainer.dispatchTouchEvent(ev);
-                ev.recycle();
+    public void onSlpiTap(float screenX, float screenY, int pulseReason) {
+        if (isDoubleTapOnMusicTicker(screenX, screenY)) {
+            for (Callback callback : mCallbacks) {
+                callback.skipTrack();
+            }
+        } else {
+            for (Callback callback : mCallbacks) {
+                callback.wakeUpFromDoubleTap(pulseReason);
             }
         }
+    }
+
+    public boolean isDoubleTapOnMusicTicker(float screenX, float screenY) {
+        final KeyguardSliceProvider sliceProvider = KeyguardSliceProvider.getAttachedInstance();
+        View trackTitleView = null;
+        if (mNotificationPanel != null) {
+            trackTitleView = mNotificationPanel.getKeyguardStatusView().getKeyguardSliceView().getTitleView();
+        }
+        if (screenX <= 0 || screenY <= 0 || sliceProvider == null || trackTitleView == null
+                || !sliceProvider.needsMediaLocked()) {
+            return false;
+        }
+        int[] locationOnScreen = new int[2];
+        trackTitleView.getLocationOnScreen(locationOnScreen);
+        float viewX = screenX - locationOnScreen[0];
+        float viewY = screenY - locationOnScreen[1];
+        if (0 <= viewX && viewX <= trackTitleView.getWidth()
+                && 0 <= viewY && viewY <= trackTitleView.getHeight()) {
+            return true;
+        }
+        return false;
     }
 
     @Override
