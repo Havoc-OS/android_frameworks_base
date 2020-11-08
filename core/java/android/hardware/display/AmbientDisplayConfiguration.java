@@ -85,6 +85,11 @@ public class AmbientDisplayConfiguration {
     }
 
     /** @hide */
+    public boolean isAmbientGestureEnabled(int user) {
+        return boolSettingDefaultOn(Settings.Secure.AMBIENT_WAKE_GESTURES, user);
+    }
+
+    /** @hide */
     public boolean pulseOnNotificationEnabled(int user) {
         return boolSettingDefaultOn(Settings.Secure.DOZE_ENABLED, user)
                 && pulseOnNotificationAvailable();
