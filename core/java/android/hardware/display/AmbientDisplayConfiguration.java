@@ -239,4 +239,10 @@ public class AmbientDisplayConfiguration {
     public boolean deviceHasSoli() {
         return mDeviceHasSoli;
     }
+
+    /** {@hide} */
+    public boolean isAmbientGestureEnabled(int user) {
+        return !mDeviceHasSoli && Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.AMBIENT_WAKE_GESTURES, 1, user) != 0;
+    }
 }
