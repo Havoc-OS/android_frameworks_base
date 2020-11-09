@@ -162,7 +162,4 @@
     <!-- Whether device has VOOC charging support -->
     <bool name="config_hasVoocCharger">false</bool>
 
-    <!-- Default value for Ambient Pulse light color -->
-    <integer name="config_ambientNotificationDefaultColor">0xFF3980FF</integer>
-
 </resources>
