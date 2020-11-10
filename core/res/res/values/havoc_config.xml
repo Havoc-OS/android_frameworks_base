@@ -126,4 +126,6 @@
 
     <bool name="config_has_Soli">false</bool>
 
+    <bool name="config_has_weird_dt_sensor">false</bool>
+
 </resources>
