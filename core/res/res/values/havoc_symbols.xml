@@ -178,4 +178,7 @@
     <!-- Screen off delay -->
     <java-symbol type="integer" name="config_screen_off_delay" />
 
+    <!-- Button to disable the crashed application -->
+    <java-symbol type="id" name="aerr_disable" />
+
 </resources>

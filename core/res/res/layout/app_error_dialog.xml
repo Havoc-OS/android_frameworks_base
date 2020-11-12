@@ -65,6 +65,14 @@
         style="@style/aerr_list_item" />
 
     <Button
+        android:id="@+id/aerr_disable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/aerr_disable"
+        android:drawableStart="@drawable/ic_aerr_disable"
+        style="@style/aerr_list_item" />
+
+    <Button
         android:id="@+id/aerr_mute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
