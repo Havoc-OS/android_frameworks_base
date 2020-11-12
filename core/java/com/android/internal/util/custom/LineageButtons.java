@@ -163,6 +163,13 @@ public final class LineageButtons {
         onSkipTrackEvent(newEvent);
     }
 
+    public void previousTrack() {
+        long when = SystemClock.uptimeMillis();
+        KeyEvent newEvent = new KeyEvent(when, when,
+                KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0);
+        onSkipTrackEvent(newEvent);
+    }
+
     private int getMediaControllerPlaybackState(MediaController controller) {
         if (controller != null) {
             final PlaybackState playbackState = controller.getPlaybackState();
