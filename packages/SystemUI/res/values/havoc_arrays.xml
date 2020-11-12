@@ -71,4 +71,13 @@
         <item>@string/quick_settings_compass_NW</item> <!-- North west -->
     </string-array>
 
+    <string-array name="app_exceptions" translatable="false">
+        <item>org.kde.kdeconnect_tp</item>
+        <item>#FF808080</item>
+        <item>com.instagram.android</item>
+        <item>#FF833AB4</item>
+        <item>com.google.android.dialer</item>
+        <item>#FF2162D7</item>
+    </string-array>
+
 </resources>

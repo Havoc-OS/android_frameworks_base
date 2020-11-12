@@ -267,12 +267,13 @@ public class HeadsUpAppearanceController implements OnHeadsUpChangedListener,
             boolean animateIsolation = false;
             if (newEntry == null) {
                 // no heads up anymore, lets start the disappear animation
-
+                mNotificationPanelViewController.reTickerView(false);
                 setShown(false);
                 animateIsolation = !mIsExpanded;
             } else if (previousEntry == null) {
                 // We now have a headsUp and didn't have one before. Let's start the disappear
                 // animation
+                mNotificationPanelViewController.reTickerView(true);
                 setShown(true);
                 animateIsolation = !mIsExpanded;
             }

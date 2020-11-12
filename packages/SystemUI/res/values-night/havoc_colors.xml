@@ -19,4 +19,6 @@
     <!-- QS date color-->
     <color name="qs_date_color">#FFFFFFFF</color>
 
+    <color name="qs_bg_primary">#90000000</color>
+
 </resources>

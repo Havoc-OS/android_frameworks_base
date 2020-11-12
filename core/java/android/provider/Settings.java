@@ -6249,6 +6249,10 @@ public final class Settings {
          */
         public static final String FLASHLIGHT_ON_CALL_IGNORE_DND = "flashlight_on_call_ignore_dnd";
 
+        /** reTicker **/
+        public static final String RETICKER_STATUS = "reticker_status";
+        public static final String RETICKER_COLORED = "reticker_colored";
+
         /**
          * Rate in Hz in which to blink flashlight_on_call
          * @hide
