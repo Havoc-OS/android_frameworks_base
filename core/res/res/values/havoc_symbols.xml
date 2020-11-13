@@ -111,4 +111,6 @@
 
     <java-symbol type="bool" name="config_has_weird_dt_sensor" />
 
+    <java-symbol type="bool" name="config_has_elmyra" />
+
 </resources>

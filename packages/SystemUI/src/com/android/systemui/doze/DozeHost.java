@@ -106,6 +106,8 @@ public interface DozeHost {
         default void onDozeSuppressedChanged(boolean suppressed) {}
 
         default void toggleFlashlightProximityCheck() {}
+
+        default void triggerActionProximityCheck(String action) {}
     }
 
     interface PulseCallback {
@@ -114,4 +116,6 @@ public interface DozeHost {
     }
 
     void performToggleFlashlight();
+
+    void performTriggeredAction(String action);
 }

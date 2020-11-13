@@ -37,6 +37,7 @@ public class AmbientDisplayConfiguration {
     private final boolean mAlwaysOnByDefault;
     private final boolean mDeviceHasSoli;
     private final boolean mDeviceWithWeirdDtSensor;
+    private final boolean mDeviceHasElmyra;
 
     /** {@hide} */
     @TestApi
@@ -45,6 +46,7 @@ public class AmbientDisplayConfiguration {
         mAlwaysOnByDefault = mContext.getResources().getBoolean(R.bool.config_dozeAlwaysOnEnabled);
         mDeviceHasSoli = mContext.getResources().getBoolean(R.bool.config_has_Soli);
         mDeviceWithWeirdDtSensor = mContext.getResources().getBoolean(R.bool.config_has_weird_dt_sensor);
+        mDeviceHasElmyra = mContext.getResources().getBoolean(R.bool.config_has_elmyra);
     }
 
     /** {@hide} */
@@ -58,7 +60,8 @@ public class AmbientDisplayConfiguration {
                 || tapGestureEnabled(user)
                 || doubleTapGestureEnabled(user)
                 || isPowerBtnFlashlightEnabled(user)
-                || isAmbientTickerEnabled(user);
+                || isAmbientTickerEnabled(user)
+                || deviceHasElmyra();
     }
 
     /** {@hide} */
@@ -251,5 +254,10 @@ public class AmbientDisplayConfiguration {
     /** {@hide} */
     public boolean deviceHasWeirtdDtSensor() {
         return mDeviceWithWeirdDtSensor;
+    }
+
+    /** {@hide} */
+    public boolean deviceHasElmyra() {
+        return mDeviceHasElmyra;
     }
 }

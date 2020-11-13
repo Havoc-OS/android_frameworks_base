@@ -478,6 +478,18 @@ public class DozeTriggers implements DozeMachine.Part {
         }, false/*performedProxCheck*/, DozeLog.REASON_TOGGLE_FLASHLIGHT);
     }
 
+    private void tryTriggerAction(String action) {
+        proximityCheckThenCall((result) -> {
+            if (result != null && result) {
+                // in pocket, abort pulse
+                return;
+            } else {
+                // not in pocket, trigger action
+                mDozeHost.performTriggeredAction(action);
+            }
+        }, false/*performedProxCheck*/, DozeLog.REASON_TRIGGER_ACTION);
+    }
+
     private void requestPulse(final int reason, boolean performedProxCheck,
             Runnable onPulseSuppressedListener) {
         Assert.isMainThread();
@@ -632,6 +644,11 @@ public class DozeTriggers implements DozeMachine.Part {
         @Override
         public void toggleFlashlightProximityCheck() {
             tryToggleFlashlight();
+        }
+
+        @Override
+        public void triggerActionProximityCheck(String action) {
+            tryTriggerAction(action);
         }
 
         @Override

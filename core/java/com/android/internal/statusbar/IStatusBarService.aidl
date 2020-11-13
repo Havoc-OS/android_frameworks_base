@@ -163,5 +163,6 @@ interface IStatusBarService
     /**
      * Havoc
      */
-    void toggleCameraFlash();
+    void toggleCameraFlash(boolean proximityCheck);
+    void triggerElmyraAction(String action);
 }

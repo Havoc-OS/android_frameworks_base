@@ -430,6 +430,11 @@ public final class DozeServiceHost implements DozeHost {
         mStatusBar.toggleFlashlight();
     }
 
+    @Override
+    public void performTriggeredAction(String action) {
+        mStatusBar.performTriggeredAction(action);
+    }
+
     /**
      * When the dozing host is waiting for scrims to fade out to change the display state.
      */
@@ -480,6 +485,12 @@ public final class DozeServiceHost implements DozeHost {
     public void toggleFlashlightProximityCheck() {
         for (Callback callback : mCallbacks) {
             callback.toggleFlashlightProximityCheck();
+        }
+    }
+
+    public void triggerActionProximityCheck(String action) {
+        for (Callback callback : mCallbacks) {
+            callback.triggerActionProximityCheck(action);
         }
     }
 }

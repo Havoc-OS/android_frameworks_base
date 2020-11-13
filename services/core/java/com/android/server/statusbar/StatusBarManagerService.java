@@ -781,12 +781,22 @@ public class StatusBarManagerService extends IStatusBarService.Stub implements D
         }
     }
 
-    // TODO(b/117478341): make it aware of multi-display if needed.
     @Override
-    public void toggleCameraFlash() {
+    public void toggleCameraFlash(boolean proximityCheck) {
         if (mBar != null) {
             try {
-                mBar.toggleCameraFlash();
+                mBar.toggleCameraFlash(proximityCheck);
+            } catch (RemoteException ex) {
+                // do nothing
+            }
+        }
+    }
+
+    @Override
+    public void triggerElmyraAction(String action) {
+        if (mBar != null) {
+            try {
+                mBar.triggerElmyraAction(action);
             } catch (RemoteException ex) {
             }
         }
