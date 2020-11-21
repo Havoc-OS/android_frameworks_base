@@ -5148,6 +5148,122 @@ public final class Settings {
         public static final String BATTERY_LIGHT_REALLYFULL_COLOR = "battery_light_reallyfull_color";
 
         /**
+         * Gestures nav: left long back swipe action
+         * @hide
+         */
+        public static final String LEFT_LONG_BACK_SWIPE_ACTION = "left_long_back_swipe_action";
+
+        /**
+         * Gestures nav: left long back swipe app action
+         * @hide
+         */
+        public static final String LEFT_LONG_BACK_SWIPE_APP_ACTION = "left_long_back_swipe_app_action";
+
+        /**
+         * Display friendly name of custom application launched when
+         * using the long left back swipe app action
+         * @hide
+         */
+        public static final String LEFT_LONG_BACK_SWIPE_APP_FR_ACTION = "left_long_back_swipe_app_fr_action";
+
+        /**
+         * Launch custom activity when using the long left back swipe app action
+         *
+         * @hide
+         */
+        public static final String LEFT_LONG_BACK_SWIPE_APP_ACTIVITY_ACTION = "left_long_back_swipe_app_activity_action";
+
+        /**
+         * Gestures nav: right long back swipe action
+         * @hide
+         */
+        public static final String RIGHT_LONG_BACK_SWIPE_ACTION = "right_long_back_swipe_action";
+
+        /**
+         * Gestures nav: right long back swipe app action
+         * @hide
+         */
+        public static final String RIGHT_LONG_BACK_SWIPE_APP_ACTION = "right_long_back_swipe_app_action";
+
+        /**
+         * Display friendly name of custom application launched when
+         * using the long right back swipe app action
+         * @hide
+         */
+        public static final String RIGHT_LONG_BACK_SWIPE_APP_FR_ACTION = "right_long_back_swipe_app_fr_action";
+
+        /**
+         * Launch custom activity when using the long right back swipe app action
+         *
+         * @hide
+         */
+        public static final String RIGHT_LONG_BACK_SWIPE_APP_ACTIVITY_ACTION = "right_long_back_swipe_app_activity_action";
+
+        /**
+         * Gestures nav: long back swipe timeout
+         * @hide
+         */
+        public static final String LONG_BACK_SWIPE_TIMEOUT = "long_back_swipe_timeout";
+
+        /**
+         * Gestures nav: whether to use extended swipe instead of timeout to trigger custom actions
+         * @hide
+         */
+        public static final String BACK_SWIPE_EXTENDED = "back_swipe_extended";
+
+        /**
+         * Gestures nav: left long back swipe action
+         * @hide
+         */
+        public static final String LEFT_VERTICAL_BACK_SWIPE_ACTION = "left_vertical_back_swipe_action";
+
+        /**
+         * Gestures nav: left long back swipe app action
+         * @hide
+         */
+        public static final String LEFT_VERTICAL_BACK_SWIPE_APP_ACTION = "left_vertical_back_swipe_app_action";
+
+        /**
+         * Display friendly name of custom application launched when
+         * using the long left back swipe app action
+         * @hide
+         */
+        public static final String LEFT_VERTICAL_BACK_SWIPE_APP_FR_ACTION = "left_vertical_back_swipe_app_fr_action";
+
+        /**
+         * Launch custom activity when using the long left back swipe app action
+         *
+         * @hide
+         */
+        public static final String LEFT_VERTICAL_BACK_SWIPE_APP_ACTIVITY_ACTION = "left_vertical_back_swipe_app_activity_action";
+
+        /**
+         * Gestures nav: right long back swipe action
+         * @hide
+         */
+        public static final String RIGHT_VERTICAL_BACK_SWIPE_ACTION = "right_vertical_back_swipe_action";
+
+        /**
+         * Gestures nav: right long back swipe app action
+         * @hide
+         */
+        public static final String RIGHT_VERTICAL_BACK_SWIPE_APP_ACTION = "right_vertical_back_swipe_app_action";
+
+        /**
+         * Display friendly name of custom application launched when
+         * using the long right back swipe app action
+         * @hide
+         */
+        public static final String RIGHT_VERTICAL_BACK_SWIPE_APP_FR_ACTION = "right_vertical_back_swipe_app_fr_action";
+
+        /**
+         * Launch custom activity when using the long right back swipe app action
+         *
+         * @hide
+         */
+        public static final String RIGHT_VERTICAL_BACK_SWIPE_APP_ACTIVITY_ACTION = "right_vertical_back_swipe_app_activity_action";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
