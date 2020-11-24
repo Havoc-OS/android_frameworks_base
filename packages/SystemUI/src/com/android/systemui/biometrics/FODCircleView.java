@@ -447,11 +447,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN && newIsInside) {
             showCircle();
-            mHandler.post(() -> mFODAnimation.showFODanimation());
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             hideCircle();
-            mFODAnimation.hideFODAnimation();
             return true;
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             return true;
@@ -532,6 +530,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             dispatchPress();
         });
 
+        mHandler.post(() -> mFODAnimation.showFODAnimation());
+
         setImageDrawable(null);
         updatePosition();
         invalidate();
@@ -547,6 +547,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             dispatchRelease();
         });
         setDim(false);
+
+        mHandler.post(() -> mFODAnimation.hideFODAnimation());
 
         setKeepScreenOn(false);
     }
