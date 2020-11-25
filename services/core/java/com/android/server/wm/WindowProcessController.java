@@ -1198,7 +1198,7 @@ public class WindowProcessController extends ConfigurationContainer<Configuratio
         final Configuration config = getConfiguration();
         if (mLastReportedConfiguration.diff(config) == 0) {
             // Nothing changed.
-            if (Build.IS_DEBUGGABLE && mHasImeService) {
+            if (Build.IS_ENG && mHasImeService) {
                 // TODO (b/135719017): Temporary log for debugging IME service.
                 Slog.w(TAG_CONFIGURATION, "Current config: " + config
                         + " unchanged for IME proc " + mName);
@@ -1223,7 +1223,7 @@ public class WindowProcessController extends ConfigurationContainer<Configuratio
         }
         mHasPendingConfigurationChange = false;
         if (mThread == null) {
-            if (Build.IS_DEBUGGABLE && mHasImeService) {
+            if (Build.IS_ENG && mHasImeService) {
                 // TODO (b/135719017): Temporary log for debugging IME service.
                 Slog.w(TAG_CONFIGURATION, "Unable to send config for IME proc " + mName
                         + ": no app thread");
@@ -1233,7 +1233,7 @@ public class WindowProcessController extends ConfigurationContainer<Configuratio
         if (DEBUG_CONFIGURATION) {
             Slog.v(TAG_CONFIGURATION, "Sending to proc " + mName + " new config " + config);
         }
-        if (Build.IS_DEBUGGABLE && mHasImeService) {
+        if (Build.IS_ENG && mHasImeService) {
             // TODO (b/135719017): Temporary log for debugging IME service.
             Slog.v(TAG_CONFIGURATION, "Sending to IME proc " + mName + " new config " + config);
         }

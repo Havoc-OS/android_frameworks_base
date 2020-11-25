@@ -73,20 +73,20 @@ public class GarbageMonitor implements Dumpable {
 
     // Whether to use TrackedGarbage to trigger LeakReporter. Off by default unless you set the
     // appropriate sysprop on a userdebug device.
-    public static final boolean LEAK_REPORTING_ENABLED = Build.IS_DEBUGGABLE
+    public static final boolean LEAK_REPORTING_ENABLED = Build.IS_ENG
             && SystemProperties.getBoolean("debug.enable_leak_reporting", false);
     public static final String FORCE_ENABLE_LEAK_REPORTING = "sysui_force_enable_leak_reporting";
 
     // Heap tracking: watch the current memory levels and update the MemoryTile if available.
     // On for all userdebug devices.
-    public static final boolean HEAP_TRACKING_ENABLED = Build.IS_DEBUGGABLE;
+    public static final boolean HEAP_TRACKING_ENABLED = Build.IS_ENG;
 
     // Tell QSTileHost.java to toss this into the default tileset?
     public static final boolean ADD_MEMORY_TILE_TO_DEFAULT_ON_DEBUGGABLE_BUILDS = true;
 
     // whether to use ActivityManager.setHeapLimit (and post a notification to the user asking
     // to dump the heap). Off by default unless you set the appropriate sysprop on userdebug
-    private static final boolean ENABLE_AM_HEAP_LIMIT = Build.IS_DEBUGGABLE
+    private static final boolean ENABLE_AM_HEAP_LIMIT = Build.IS_ENG
             && SystemProperties.getBoolean("debug.enable_sysui_heap_limit", false);
 
     // Tuning params

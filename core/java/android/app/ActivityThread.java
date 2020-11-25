@@ -1397,7 +1397,7 @@ public final class ActivityThread extends ClientTransactionHandler {
             if (dumpUnreachable) {
                 boolean showContents = ((mBoundApplication != null)
                     && ((mBoundApplication.appInfo.flags&ApplicationInfo.FLAG_DEBUGGABLE) != 0))
-                    || android.os.Build.IS_DEBUGGABLE;
+                    || android.os.Build.IS_ENG;
                 pw.println(" ");
                 pw.println(" Unreachable memory");
                 pw.print(Debug.getUnreachableMemory(100, showContents));
@@ -1523,7 +1523,7 @@ public final class ActivityThread extends ClientTransactionHandler {
             if (dumpUnreachable) {
                 int flags = mBoundApplication == null ? 0 : mBoundApplication.appInfo.flags;
                 boolean showContents = (flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0
-                        || android.os.Build.IS_DEBUGGABLE;
+                        || android.os.Build.IS_ENG;
                 proto.write(MemInfoDumpProto.AppData.UNREACHABLE_MEMORY,
                         Debug.getUnreachableMemory(100, showContents));
             }
@@ -5756,7 +5756,7 @@ public final class ActivityThread extends ClientTransactionHandler {
 
             if (config == null) {
                 // TODO (b/135719017): Temporary log for debugging IME service.
-                if (Build.IS_DEBUGGABLE && mHasImeComponent) {
+                if (Build.IS_ENG && mHasImeComponent) {
                     Log.w(TAG, "handleConfigurationChanged for IME app but config is null");
                 }
                 return;
@@ -5789,7 +5789,7 @@ public final class ActivityThread extends ClientTransactionHandler {
             }
             if (!mConfiguration.isOtherSeqNewer(config) && compat == null) {
                 // TODO (b/135719017): Temporary log for debugging IME service.
-                if (Build.IS_DEBUGGABLE && mHasImeComponent) {
+                if (Build.IS_ENG && mHasImeComponent) {
                     Log.w(TAG, "handleConfigurationChanged for IME app but config seq is obsolete "
                             + ", config=" + config
                             + ", mConfiguration=" + mConfiguration);
@@ -5827,7 +5827,7 @@ public final class ActivityThread extends ClientTransactionHandler {
                     performConfigurationChanged(cb, config);
                 } else {
                     // TODO (b/135719017): Temporary log for debugging IME service.
-                    if (Build.IS_DEBUGGABLE && cb instanceof InputMethodService) {
+                    if (Build.IS_ENG && cb instanceof InputMethodService) {
                         Log.w(TAG, "performConfigurationChanged didn't callback to IME "
                                 + ", configDiff=" + configDiff
                                 + ", mConfiguration=" + mConfiguration);
@@ -6529,18 +6529,18 @@ public final class ActivityThread extends ClientTransactionHandler {
         // Allow binder tracing, and application-generated systrace messages if we're profileable.
         boolean isAppProfileable = data.appInfo.isProfileableByShell();
         Trace.setAppTracingAllowed(isAppProfileable);
-        if ((isAppProfileable || Build.IS_DEBUGGABLE) && data.enableBinderTracking) {
+        if ((isAppProfileable || Build.IS_ENG) && data.enableBinderTracking) {
             Binder.enableTracing();
         }
 
         // Initialize heap profiling.
-        if (isAppProfileable || Build.IS_DEBUGGABLE) {
+        if (isAppProfileable || Build.IS_ENG) {
             nInitZygoteChildHeapProfiling();
         }
 
         // Allow renderer debugging features if we're debuggable.
         boolean isAppDebuggable = (data.appInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-        HardwareRenderer.setDebuggingEnabled(isAppDebuggable || Build.IS_DEBUGGABLE);
+        HardwareRenderer.setDebuggingEnabled(isAppDebuggable || Build.IS_ENG);
         HardwareRenderer.setPackageName(data.appInfo.packageName);
 
         /**
@@ -7387,7 +7387,7 @@ public final class ActivityThread extends ClientTransactionHandler {
                 = (Configuration globalConfig) -> {
             synchronized (mResourcesManager) {
                 // TODO (b/135719017): Temporary log for debugging IME service.
-                if (Build.IS_DEBUGGABLE && mHasImeComponent) {
+                if (Build.IS_ENG && mHasImeComponent) {
                     Log.d(TAG, "ViewRootImpl.ConfigChangedCallback for IME, "
                             + "config=" + globalConfig);
                 }

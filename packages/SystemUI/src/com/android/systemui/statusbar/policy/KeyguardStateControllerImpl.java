@@ -80,7 +80,7 @@ public class KeyguardStateControllerImpl implements KeyguardStateController, Dum
         mKeyguardUpdateMonitor.registerCallback(mKeyguardUpdateMonitorCallback);
 
         update(true /* updateAlways */);
-        if (Build.IS_DEBUGGABLE && DEBUG_AUTH_WITH_ADB) {
+        if (Build.IS_ENG && DEBUG_AUTH_WITH_ADB) {
             // Watch for interesting updates
             final IntentFilter filter = new IntentFilter();
             filter.addAction(AUTH_BROADCAST_KEY);
@@ -182,7 +182,7 @@ public class KeyguardStateControllerImpl implements KeyguardStateController, Dum
         int user = KeyguardUpdateMonitor.getCurrentUser();
         boolean secure = mLockPatternUtils.isSecure(user);
         boolean canDismissLockScreen = !secure || mKeyguardUpdateMonitor.getUserCanSkipBouncer(user)
-                || (Build.IS_DEBUGGABLE && DEBUG_AUTH_WITH_ADB && mDebugUnlocked);
+                || (Build.IS_ENG && DEBUG_AUTH_WITH_ADB && mDebugUnlocked);
         boolean trustManaged = mKeyguardUpdateMonitor.getUserTrustIsManaged(user);
         boolean trusted = mKeyguardUpdateMonitor.getUserHasTrust(user);
         boolean faceAuthEnabled = mKeyguardUpdateMonitor.isFaceAuthEnabledForUser(user);

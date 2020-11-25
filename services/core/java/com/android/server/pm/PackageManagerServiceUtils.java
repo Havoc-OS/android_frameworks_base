@@ -897,7 +897,7 @@ public class PackageManagerServiceUtils {
         if (!downgradeRequested) {
             return false;
         }
-        final boolean isDebuggable = Build.IS_DEBUGGABLE || isAppDebuggable;
+        final boolean isDebuggable = Build.IS_ENG || isAppDebuggable;
         if (isDebuggable) {
             return true;
         }

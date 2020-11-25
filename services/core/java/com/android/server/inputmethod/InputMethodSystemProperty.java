@@ -35,13 +35,13 @@ public class InputMethodSystemProperty {
      * System property key for debugging purpose. The value must be either empty or a valid
      * (flattened) component name of the multi-client IME.
      *
-     * <p>This value will be ignored when {@link Build#IS_DEBUGGABLE} returns {@code false}</p>
+     * <p>This value will be ignored when {@link Build.IS_ENG} returns {@code false}</p>
      */
     private static final String PROP_DEBUG_MULTI_CLIENT_IME = "persist.debug.multi_client_ime";
 
     @Nullable
     private static ComponentName getMultiClientImeComponentName() {
-        if (Build.IS_DEBUGGABLE) {
+        if (Build.IS_ENG) {
             // If debuggable, allow developers to override the multi-client IME component name
             // with a different (writable) key.
             final ComponentName debugIme = ComponentName.unflattenFromString(

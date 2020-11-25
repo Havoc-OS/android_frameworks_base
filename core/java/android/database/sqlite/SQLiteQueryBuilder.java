@@ -583,7 +583,7 @@ public class SQLiteQueryBuilder {
 
         final String[] sqlArgs = selectionArgs;
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            if (Build.IS_DEBUGGABLE) {
+            if (Build.IS_ENG) {
                 Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
             } else {
                 Log.d(TAG, sql);
@@ -620,7 +620,7 @@ public class SQLiteQueryBuilder {
             sqlArgs[i] = rawValues.valueAt(i);
         }
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            if (Build.IS_DEBUGGABLE) {
+            if (Build.IS_ENG) {
                 Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
             } else {
                 Log.d(TAG, sql);
@@ -696,7 +696,7 @@ public class SQLiteQueryBuilder {
             }
         }
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            if (Build.IS_DEBUGGABLE) {
+            if (Build.IS_ENG) {
                 Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
             } else {
                 Log.d(TAG, sql);
@@ -756,7 +756,7 @@ public class SQLiteQueryBuilder {
 
         final String[] sqlArgs = selectionArgs;
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            if (Build.IS_DEBUGGABLE) {
+            if (Build.IS_ENG) {
                 Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
             } else {
                 Log.d(TAG, sql);

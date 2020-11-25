@@ -1424,7 +1424,7 @@ public class AppStandbyController implements AppStandbyInternal {
                     // Only user force can bypass the delay restriction. If the user forced the
                     // app into the RESTRICTED bucket, then a toast confirming the action
                     // shouldn't be surprising.
-                    if (Build.IS_DEBUGGABLE) {
+                    if (Build.IS_ENG) {
                         Toast.makeText(mContext,
                                 // Since AppStandbyController sits low in the lock hierarchy,
                                 // make sure not to call out with the lock held.

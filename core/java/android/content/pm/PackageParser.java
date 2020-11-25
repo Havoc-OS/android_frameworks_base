@@ -151,13 +151,13 @@ public class PackageParser {
     public static final boolean DEBUG_JAR = false;
     public static final boolean DEBUG_PARSER = false;
     public static final boolean DEBUG_BACKUP = false;
-    public static final boolean LOG_PARSE_TIMINGS = Build.IS_DEBUGGABLE;
+    public static final boolean LOG_PARSE_TIMINGS = Build.IS_ENG;
     public static final int LOG_PARSE_TIMINGS_THRESHOLD_MS = 100;
 
     private static final String PROPERTY_CHILD_PACKAGES_ENABLED =
             "persist.sys.child_packages_enabled";
 
-    public static final boolean MULTI_PACKAGE_APK_ENABLED = Build.IS_DEBUGGABLE &&
+    public static final boolean MULTI_PACKAGE_APK_ENABLED = Build.IS_ENG &&
             SystemProperties.getBoolean(PROPERTY_CHILD_PACKAGES_ENABLED, false);
 
     public static final float DEFAULT_PRE_O_MAX_ASPECT_RATIO = 1.86f;

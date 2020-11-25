@@ -394,7 +394,7 @@ import java.util.List;
 public final class AccessibilityEvent extends AccessibilityRecord implements Parcelable {
     private static final String LOG_TAG = "AccessibilityEvent";
 
-    private static final boolean DEBUG = Log.isLoggable(LOG_TAG, Log.DEBUG) && Build.IS_DEBUGGABLE;
+    private static final boolean DEBUG = Log.isLoggable(LOG_TAG, Log.DEBUG) && Build.IS_ENG;
 
     /** @hide */
     public static final boolean DEBUG_ORIGIN = false;

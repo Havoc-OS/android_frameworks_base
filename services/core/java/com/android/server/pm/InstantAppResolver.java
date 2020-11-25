@@ -69,7 +69,7 @@ import java.util.Set;
 
 /** @hide */
 public abstract class InstantAppResolver {
-    private static final boolean DEBUG_INSTANT = Build.IS_DEBUGGABLE;
+    private static final boolean DEBUG_INSTANT = Build.IS_ENG;
     private static final String TAG = "PackageManager";
 
     private static final int RESOLUTION_SUCCESS = 0;

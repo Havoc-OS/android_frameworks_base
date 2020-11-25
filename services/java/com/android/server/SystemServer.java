@@ -620,7 +620,7 @@ public final class SystemServer {
             initZygoteChildHeapProfiling();
 
             // Debug builds - spawn a thread to monitor for fd leaks.
-            if (Build.IS_DEBUGGABLE) {
+            if (Build.IS_ENG) {
                 spawnFdLeakCheckThread();
             }
 
@@ -642,7 +642,7 @@ public final class SystemServer {
             // Prepare the thread pool for init tasks that can be parallelized
             SystemServerInitThreadPool.start();
             // Attach JVMTI agent if this is a debuggable build and the system property is set.
-            if (Build.IS_DEBUGGABLE) {
+            if (Build.IS_ENG) {
                 // Property is of the form "library_path=parameters".
                 String jvmtiAgent = SystemProperties.get("persist.sys.dalvik.jvmtiagent");
                 if (!jvmtiAgent.isEmpty()) {
@@ -1132,7 +1132,7 @@ public final class SystemServer {
                 PackageManager.FEATURE_VR_MODE_HIGH_PERFORMANCE);
 
         // For debugging RescueParty
-        if (Build.IS_DEBUGGABLE && SystemProperties.getBoolean("debug.crash_system", false)) {
+        if (Build.IS_ENG && SystemProperties.getBoolean("debug.crash_system", false)) {
             throw new RuntimeException();
         }
 

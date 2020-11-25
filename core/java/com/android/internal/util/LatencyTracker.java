@@ -125,7 +125,7 @@ public class LatencyTracker {
     }
 
     public boolean isEnabled() {
-        return Build.IS_DEBUGGABLE && mEnabled;
+        return Build.IS_ENG && mEnabled;
     }
 
     /**

@@ -41,7 +41,7 @@ Thus the first decision we made was that to support such special multi-display e
 
 For multi-client IME to properly work, an internal boolean resource `com.android.internal.R.bool.config_perDisplayFocusEnabled` needs to be `true`. Since this value cannot be overridden at the run time, you may need to rebuild the system image to enable per-display focus mode.
 
-As for multi-client IME mode itself, you can enable multi-client IME mode just by setting a valid component name that supports multi-client IME protocol to the system property `persist.debug.multi_client_ime`, as long as `android.os.Build.IS_DEBUGGABLE` returns `true` and you can have root access. Reboot is required for this to take effect.
+As for multi-client IME mode itself, you can enable multi-client IME mode just by setting a valid component name that supports multi-client IME protocol to the system property `persist.debug.multi_client_ime`, as long as `android.os.Build.IS_ENG` returns `true` and you can have root access. Reboot is required for this to take effect.
 
 ```shell
 # Build and install a sample multi-client IME
@@ -117,7 +117,7 @@ In order to override `persist.debug.multi_client_ime` device property, an explic
 
 #### Multi-client IME must be pre-installed
 
-Multi-client IME must be pre-installed since it is considered as part of the system component. This is verified by checking `ApplicationInfo.FLAG_SYSTEM` bit. This security check can be bypassed when `Build.IS_DEBUGGABLE` is `true` so that IME developers can easily side-load their APKs during development phase.
+Multi-client IME must be pre-installed since it is considered as part of the system component. This is verified by checking `ApplicationInfo.FLAG_SYSTEM` bit. This security check can be bypassed when `Build.IS_ENG` is `true` so that IME developers can easily side-load their APKs during development phase.
 
 ```java
 public final class MultiClientInputMethodManagerService {
@@ -129,7 +129,7 @@ public final class MultiClientInputMethodManagerService {
         ...
 
         if (! && (si.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-            Slog.e(TAG, imeId + " must be pre-installed when Build.IS_DEBUGGABLE is false");
+            Slog.e(TAG, imeId + " must be pre-installed when Build.IS_ENG is false");
             return null;
         }
 ```

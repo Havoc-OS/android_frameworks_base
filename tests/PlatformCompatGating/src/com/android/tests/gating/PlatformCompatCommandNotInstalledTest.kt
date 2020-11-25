@@ -58,7 +58,7 @@ class PlatformCompatCommandNotInstalledTest {
         @JvmStatic
         @BeforeClass
         fun assumeDebuggable() {
-            assumeTrue(Build.IS_DEBUGGABLE)
+            assumeTrue(Build.IS_ENG)
         }
 
         @JvmStatic

@@ -113,7 +113,7 @@ public class EmergencyAffordanceService extends SystemService {
             mEmergencyCallCountryIsos.add(iso);
         }
 
-        if (Build.IS_DEBUGGABLE) {
+        if (Build.IS_ENG) {
             String overrideIso = Settings.Global.getString(
                     mContext.getContentResolver(), EMERGENCY_AFFORDANCE_OVERRIDE_ISO);
             if (!TextUtils.isEmpty(overrideIso)) {

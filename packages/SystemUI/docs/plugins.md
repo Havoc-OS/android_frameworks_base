@@ -1,6 +1,6 @@
 # SystemUI Plugins
 
-Plugins provide an easy way to rapidly prototype SystemUI features.  Plugins are APKs that will be installable only on Build.IS_DEBUGGABLE (dogfood) builds, that can change the behavior of SystemUI at runtime.  This is done by creating a basic set of interfaces that the plugins can expect to be in SysUI, then the portion of code controlled by the interface can be iterated on faster than currently.
+Plugins provide an easy way to rapidly prototype SystemUI features.  Plugins are APKs that will be installable only on Build.IS_ENG (dogfood) builds, that can change the behavior of SystemUI at runtime.  This is done by creating a basic set of interfaces that the plugins can expect to be in SysUI, then the portion of code controlled by the interface can be iterated on faster than currently.
 
 Plugins keep the experimental and turbulent code outside of master and only on the devices which need to use the prototype.  You can distribute early prototype directly to those that need to see it either through drive or email, and only show it to dogfooders when ready.
 
@@ -192,7 +192,7 @@ Plugins are APKs that contain code and resources that can be dynamically loaded 
 
 Whenever loading a code from another APK into a privileged process like SysUI, there are serious security concerns to be addressed.  To handle this, plugins have a couple lines of defense to ensure these don’t create any security holes.
 
-The first line of defense is Build.IS_DEBUGGABLE checks.  In 2 different places, SysUI checks to ensure that the build is debuggable before even scanning or loading any plugins on the device.  There are even tests in place to help ensure these checks are not lost.
+The first line of defense is Build.IS_ENG checks.  In 2 different places, SysUI checks to ensure that the build is debuggable before even scanning or loading any plugins on the device.  There are even tests in place to help ensure these checks are not lost.
 
 The second line of defense is a signature permission.  This ensures that plugins are always provided by the source of the android build.  All plugins must hold this permission for any of their code to be loaded, otherwise the infraction will be logged, and the plugin ignored.
 
