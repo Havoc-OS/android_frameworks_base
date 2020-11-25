@@ -170,7 +170,6 @@ public class EdgeBackGestureHandler extends CurrentUserTracker implements Displa
     private boolean mIsExtendedSwipe;
     private int mLeftVerticalSwipeAction;
     private int mRightVerticalSwipeAction;
-    private boolean mBlockNextEvent;
     private Handler mHandler;
     private final Vibrator mVibrator;
     private boolean mImeVisible;
@@ -579,7 +578,7 @@ public class EdgeBackGestureHandler extends CurrentUserTracker implements Displa
                 mEndPoint.set(-1, -1);
                 mThresholdCrossed = false;
             }
-        } else if ((mAllowGesture || mLogGesture) && !mBlockNextEvent) {
+        } else if (mAllowGesture || mLogGesture) {
             if (!mThresholdCrossed) {
                 // mThresholdCrossed is true only after the first move event
                 // then other events will go straight to "forward touch" line
@@ -654,9 +653,6 @@ public class EdgeBackGestureHandler extends CurrentUserTracker implements Displa
                 // forward touch
                 mEdgeBackPlugin.onMotionEvent(ev);
             }
-        } else if (mBlockNextEvent) {
-            mBlockNextEvent = false;
-            cancelGesture(ev);
         }
 
         Dependency.get(ProtoTracer.class).update();
@@ -677,8 +673,11 @@ public class EdgeBackGestureHandler extends CurrentUserTracker implements Displa
     }
 
     private void prepareForAction() {
-        mBlockNextEvent = true;
-        mEdgeBackPlugin.resetOnDown();
+        // cancel touch event then trigger the action
+        final long now = SystemClock.uptimeMillis();
+        final MotionEvent ev = MotionEvent.obtain(now, now,
+                MotionEvent.ACTION_CANCEL, 0.0f, 0.0f, 0);
+        cancelGesture(ev);
         mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK));
     }
 

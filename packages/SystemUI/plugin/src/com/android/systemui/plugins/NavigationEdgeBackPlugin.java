@@ -49,8 +49,6 @@ public interface NavigationEdgeBackPlugin extends Plugin {
     /** Updates the UI based on the motion events passed in device coordinates. */
     void onMotionEvent(MotionEvent motionEvent);
 
-    void resetOnDown();
-
     void setLongSwipeEnabled(boolean enabled);
 
     /** Callback to let the system react to the detected back gestures. */
