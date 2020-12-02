@@ -30,6 +30,7 @@ import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.ViewMediatorCallback;
 import com.android.systemui.InitController;
 import com.android.systemui.assist.AssistManager;
+import com.android.systemui.biometrics.FODCircleViewImpl;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.bubbles.BubbleController;
 import com.android.systemui.colorextraction.SysuiColorExtractor;
@@ -205,7 +206,8 @@ public interface StatusBarGoogleModule {
             DismissCallbackRegistry dismissCallbackRegistry,
             StatusBarTouchableRegionManager statusBarTouchableRegionManager,
             FlashlightController flashlightController,
-            TaskHelper taskHelper) {
+            TaskHelper taskHelper,
+            FODCircleViewImpl fodCircleViewImpl) {
         return new StatusBarGoogle(
                 smartSpaceController,
                 wallpaperNotifier,
@@ -287,6 +289,7 @@ public interface StatusBarGoogleModule {
                 notificationShadeDepthController,
                 statusBarTouchableRegionManager,
                 flashlightController,
-                taskHelper);
+                taskHelper,
+                fodCircleViewImpl);
     }
 }
