@@ -69,4 +69,5 @@
     <string name="app_clipboard_access_denied">%1$s vágólap-elérése letiltásra került</string>
     <string name="app_clipboard_access_granted">%1$s vágólap-elérése engedélyezésre került</string>
     <!-- Cycle through ringer modes -->
+    <string name="volume_dialog_ringer_guidance_normal">A hívások és az értesítések rezegnek</string>
 </resources>

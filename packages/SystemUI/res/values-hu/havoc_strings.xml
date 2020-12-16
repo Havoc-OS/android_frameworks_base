@@ -242,6 +242,17 @@
          values/config.xml) and must be truncated.
          [CHAR LIMIT=4] -->
     <!-- App lock -->
+    <string name="applock_fingerprint_face">, feloldáshoz használja az ujjlenyomat érzékelőt, vagy az arcfelismerést</string>
+    <string name="applock_face">&#160;vagy az arcod a feloldáshoz</string>
+    <string name="applock_fingerprint">&#160;vagy ujjlenyomat a feloldáshoz</string>
+    <string name="applock_locked_notification">Az alkalmazás zárolva van</string>
     <!-- DC Dimming -->
+    <string name="quick_settings_dc_dimming_label">Szemkímélő Mód</string>
+    <string name="quick_settings_dc_brightness_mode">Fényerő mód</string>
+    <string name="quick_settings_dc_full_auto">Automatikus mód</string>
     <!-- PowerShare QS tile -->
+    <string name="quick_settings_powershare_label">Vezetéknélküli PowerShare</string>
+    <string name="quick_settings_powershare_off_powersave_label">Akkumulátor kímélő</string>
+    <string name="quick_settings_powershare_off_low_battery_label">Alacsony akkumulátor</string>
+    <string name="quick_settings_powershare_enabled_label">A vezetéknélküli PowerShare engedélyezve van</string>
 </resources>
