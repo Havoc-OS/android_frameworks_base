@@ -81,7 +81,9 @@ public class HeadsUpStatusBarView extends AlphaOptimizedLinearLayout {
         Resources res = getResources();
         mAbsoluteStartPadding = res.getDimensionPixelSize(R.dimen.notification_side_paddings)
             + res.getDimensionPixelSize(
-                    com.android.internal.R.dimen.notification_content_margin_start);
+                    com.android.internal.R.dimen.notification_content_margin_start)
+            + res.getDimensionPixelSize(
+                    R.dimen.heads_up_status_bar_padding_start);
         mEndMargin = res.getDimensionPixelSize(
                 com.android.internal.R.dimen.notification_content_margin_end);
         setPaddingRelative(mAbsoluteStartPadding, 0, mEndMargin, 0);
