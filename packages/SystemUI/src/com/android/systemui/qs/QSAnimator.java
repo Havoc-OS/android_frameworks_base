@@ -1,4 +1,4 @@
-\/*
+/*
  * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
@@ -35,6 +35,7 @@ import com.android.systemui.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import com.android.systemui.R;
 
 public class QSAnimator implements Callback, PageListener, Listener, OnLayoutChangeListener,
         OnAttachStateChangeListener, Tunable {
@@ -79,6 +80,7 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
     private float mLastPosition;
     private QSTileHost mHost;
     private boolean mShowCollapsedOnKeyguard;
+    private int mMediaTopOffset;
 
     public QSAnimator(QS qs, QuickQSPanel quickPanel, QSPanel panel, Context context) {
         mContext = context;
@@ -97,6 +99,8 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
             Log.w(TAG, "QS Not using page layout");
         }
         panel.setPageListener(this);
+
+        mMediaTopOffset = mContext.getResources().getDimensionPixelSize(R.dimen.quick_settings_top_margin_media_extra);
     }
 
     public void onRtlChanged() {
@@ -286,7 +290,12 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
                 && mQsPanel.isMediaHostVisible()) {
             View mQsPanelMediaHostView = mQsPanel.getMediaHost().getHostView();
             View mQuickQsPanelMediaHostView = mQuickQsPanel.getMediaHost().getHostView();
-            float translation = mQsPanelMediaHostView.getHeight() - mQuickQsPanelMediaHostView.getHeight();
+            float translation;
+            if (!mQsPanel.hasActiveMedia()) {
+                translation = mQsPanelMediaHostView.getHeight() + mMediaTopOffset;
+            } else {
+                translation = mQsPanelMediaHostView.getHeight() - mQuickQsPanelMediaHostView.getHeight();
+            }
             mBrightnessAnimator = new TouchAnimator.Builder().addFloat(brightnessView, "translationY", translation, 0)
                     .build();
             mAllViews.add(brightnessView);
