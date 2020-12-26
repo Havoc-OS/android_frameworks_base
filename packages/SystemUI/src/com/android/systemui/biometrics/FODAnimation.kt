@@ -19,6 +19,7 @@ package com.android.systemui.biometrics
 import android.content.Context
 import android.graphics.PixelFormat
 import android.graphics.drawable.AnimationDrawable
+import android.provider.Settings
 import android.view.Gravity
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams
@@ -51,6 +52,11 @@ class FODAnimation(context: Context, y: Int) : ImageView(context) {
         visibility = GONE
         recognizingAnim = background as AnimationDrawable
         windowManager.addView(this, animParams)
+
+        var enabled = Settings.System.getInt(context.getContentResolver(),
+                Settings.System.FOD_RECOGNIZING_ANIMATION, 0) != 0
+
+        update(enabled);
     }
 
     fun setAnimationKeyguard(state: Boolean) {
@@ -78,6 +84,14 @@ class FODAnimation(context: Context, y: Int) : ImageView(context) {
                 recognizingAnim.selectDrawable(0)
             }
             visibility = GONE
+        }
+    }
+
+    fun update(isEnabled: Boolean) {
+        if (isEnabled) {
+            setAlpha(1.0f)
+        } else {
+            setAlpha(0.0f)
         }
     }
 }
