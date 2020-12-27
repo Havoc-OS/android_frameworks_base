@@ -71,6 +71,7 @@ import com.android.systemui.statusbar.phone.LockscreenWallpaper;
 import com.android.systemui.statusbar.phone.NotificationGroupManager;
 import com.android.systemui.statusbar.phone.NotificationShadeWindowController;
 import com.android.systemui.statusbar.phone.PhoneStatusBarPolicy;
+import com.android.systemui.statusbar.phone.ScrimController;
 import com.android.systemui.statusbar.phone.ShadeController;
 import com.android.systemui.statusbar.phone.StatusBar;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
@@ -91,7 +92,6 @@ import com.android.systemui.statusbar.policy.UserInfoControllerImpl;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
 import com.android.systemui.volume.VolumeComponent;
 
-import com.google.android.systemui.LiveWallpaperScrimController;
 import com.google.android.systemui.NotificationLockscreenUserManagerGoogle;
 import com.google.android.systemui.smartspace.SmartSpaceController;
 
@@ -162,7 +162,7 @@ public class StatusBarGoogle extends StatusBar {
             NotificationShadeWindowController notificationShadeWindowController,
             LockscreenLockIconController lockscreenLockIconController,
             DozeParameters dozeParameters,
-            LiveWallpaperScrimController liveWallpaperScrimController,
+            ScrimController scrimController,
             @Nullable KeyguardLiftController keyguardLiftController,
             Lazy<LockscreenWallpaper> lockscreenWallpaperLazy,
             Lazy<BiometricUnlockController> biometricUnlockControllerLazy,
@@ -242,7 +242,7 @@ public class StatusBarGoogle extends StatusBar {
                 notificationShadeWindowController,
                 lockscreenLockIconController,
                 dozeParameters,
-                liveWallpaperScrimController,
+                scrimController,
                 keyguardLiftController,
                 lockscreenWallpaperLazy,
                 biometricUnlockControllerLazy,
