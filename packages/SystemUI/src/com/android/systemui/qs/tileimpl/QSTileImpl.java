@@ -37,6 +37,7 @@ import android.metrics.LogMaker;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.os.VibrationEffect;
 import android.service.quicksettings.Tile;
 import android.text.format.DateUtils;
 import android.util.ArraySet;
@@ -68,6 +69,8 @@ import com.android.systemui.qs.QSEvent;
 import com.android.systemui.qs.QSHost;
 import com.android.systemui.qs.QuickStatusBarHeader;
 import com.android.systemui.qs.logging.QSLogger;
+
+import com.havoc.support.util.VibrationUtils;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -254,6 +257,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
                 getInstanceId());
         mQSLogger.logTileClick(mTileSpec, mStatusBarStateController.getState(), mState.state);
         mHandler.sendEmptyMessage(H.CLICK);
+        VibrationUtils.doHapticFeedback(mContext, VibrationEffect.EFFECT_CLICK);
     }
 
     public void secondaryClick() {
@@ -265,6 +269,7 @@ public abstract class QSTileImpl<TState extends State> implements QSTile, Lifecy
         mQSLogger.logTileSecondaryClick(mTileSpec, mStatusBarStateController.getState(),
                 mState.state);
         mHandler.sendEmptyMessage(H.SECONDARY_CLICK);
+        VibrationUtils.doHapticFeedback(mContext, VibrationEffect.EFFECT_TICK);
     }
 
     public void longClick() {
