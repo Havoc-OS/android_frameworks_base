@@ -5,6 +5,7 @@
     android:id="@+id/global_actions_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/global_actions_top_margin"
     android:orientation="vertical"
 >
   <com.android.systemui.globalactions.GlobalActionsFlatLayout
