@@ -40,6 +40,7 @@ import com.android.systemui.qs.dagger.QSModule;
 import com.android.systemui.qs.tileimpl.QSFactoryImpl;
 import com.android.systemui.recents.Recents;
 import com.android.systemui.recents.RecentsImplementation;
+import com.android.systemui.settings.CurrentUserContentResolverProvider;
 import com.android.systemui.stackdivider.DividerModule;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.NotificationLockscreenUserManager;
@@ -97,9 +98,9 @@ public abstract class SystemUIGoogleModule {
     static BatteryController provideBatteryController(Context context,
             EnhancedEstimates enhancedEstimates, PowerManager powerManager,
             BroadcastDispatcher broadcastDispatcher, @Main Handler mainHandler,
-            @Background Handler bgHandler) {
+            @Background Handler bgHandler, CurrentUserContentResolverProvider currentUserContentResolverProvider) {
         BatteryController bC = new BatteryControllerImpl(context, enhancedEstimates, powerManager,
-                broadcastDispatcher, mainHandler, bgHandler);
+                broadcastDispatcher, mainHandler, bgHandler, currentUserContentResolverProvider);
         bC.init();
         return bC;
     }

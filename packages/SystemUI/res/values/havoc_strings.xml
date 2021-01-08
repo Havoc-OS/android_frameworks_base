@@ -121,4 +121,7 @@
          [CHAR LIMIT=4] -->
     <string name="status_bar_notification_info_overflow" translatable="false">\u221E</string>
 
+    <!-- Battery saver extreme [CHAR LIMIT=NONE]-->
+    <string name="extreme_battery_saver_text">Extreme</string>
+
 </resources>
