@@ -10154,6 +10154,18 @@ public final class Settings {
                 "system_navigation_keys_enabled";
 
         /**
+         * Setting to allow setting rounded corner size and content padding
+         * @hide
+         */
+        public static final String SYSUI_ROUNDED_SIZE = "sysui_rounded_size";
+
+        /**
+         * Setting to disable rounded corner preferences and use frameworks values instead
+         * @hide
+         */
+        public static final String SYSUI_ROUNDED_FWVALS = "sysui_rounded_fwvals";
+
+        /**
          * Wheter to dismiss notifications on fingerprint left and right swipe action
          * @hide
          */
