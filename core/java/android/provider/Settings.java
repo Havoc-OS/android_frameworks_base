@@ -5294,6 +5294,15 @@ public final class Settings {
         public static final String SHOW_FPS_OVERLAY = "show_fps_overlay";
 
         /**
+         * OEM theme mode
+         * 0 - light
+         * 1 - dark
+         * 2 - android
+         * @hide
+         */
+        public static final String OEM_BLACK_MODE = "oem_black_mode";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
