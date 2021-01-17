@@ -22,6 +22,7 @@ import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.os.SystemProperties;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -262,7 +263,9 @@ public class QSContainerImpl extends FrameLayout {
     }
 
     private void setBackgroundGradientVisibility(Configuration newConfig) {
-        if (newConfig.orientation == ORIENTATION_LANDSCAPE) {
+        boolean blurEnabled = !SystemProperties.getBoolean(
+                "persist.sys.sf.disable_blurs", false /* default */);
+        if (newConfig.orientation == ORIENTATION_LANDSCAPE || blurEnabled) {
             mBackgroundGradient.setVisibility(View.INVISIBLE);
             mStatusBarBackground.setVisibility(View.INVISIBLE);
         } else {
