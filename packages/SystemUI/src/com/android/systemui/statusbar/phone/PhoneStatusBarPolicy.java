@@ -301,14 +301,14 @@ public class PhoneStatusBarPolicy
         String microphoneString = mResources.getString(PrivacyType.TYPE_MICROPHONE.getNameId());
         String microphoneDesc = mResources.getString(
                 R.string.ongoing_privacy_chip_content_multiple_apps, microphoneString);
-        mIconController.setIcon(mSlotMicrophone, PrivacyType.TYPE_MICROPHONE.getIconId(),
+        mIconController.setIcon(mSlotMicrophone, R.drawable.stat_sys_mic_none,
                 microphoneDesc);
         mIconController.setIconVisibility(mSlotMicrophone, false);
 
         String cameraString = mResources.getString(PrivacyType.TYPE_CAMERA.getNameId());
         String cameraDesc = mResources.getString(
                 R.string.ongoing_privacy_chip_content_multiple_apps, cameraString);
-        mIconController.setIcon(mSlotCamera, PrivacyType.TYPE_CAMERA.getIconId(),
+        mIconController.setIcon(mSlotCamera, R.drawable.stat_sys_camera,
                 cameraDesc);
         mIconController.setIconVisibility(mSlotCamera, false);
 
