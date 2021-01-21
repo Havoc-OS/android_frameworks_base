@@ -282,7 +282,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mBatteryMeterView = findViewById(R.id.battery);
         mBatteryMeterView.setForceShowPercent(true);
         mBatteryMeterView.setOnClickListener(this);
-        mBatteryMeterView.setPercentShowMode(BatteryMeterView.MODE_ESTIMATE);
+        mBatteryMeterView.setPercentShowMode(getBatteryPercentMode());
 
         mClockView = findViewById(R.id.clock);
         mClockView.setOnClickListener(this);
@@ -506,6 +506,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     }
 
     public void setBatteryPercentMode() {
+        mBatteryMeterView.setPercentShowMode(getBatteryPercentMode());
         mBatteryRemainingIcon.setPercentShowMode(getBatteryPercentMode());
     }
 
