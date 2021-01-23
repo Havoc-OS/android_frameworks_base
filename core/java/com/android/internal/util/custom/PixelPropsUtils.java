@@ -29,13 +29,18 @@ public class PixelPropsUtils {
     private static final boolean DEBUG = false;
 
     private static final Map<String, Object> propsToChange;
+    private static final Map<String, Object> propsToChangePixel3;
 
     private static final String[] packagesToChange = {
-            "com.google.android.apps.safetyhub",
-            "com.google.android.apps.turbo",
-            "com.google.android.apps.wallpaper",
-            "com.google.android.apps.maps",
-            "com.google.android.gms"
+        "com.google.android.apps.safetyhub",
+        "com.google.android.apps.turbo",
+        "com.google.android.apps.wallpaper",
+        "com.google.android.apps.maps",
+        "com.google.android.gms"
+    };
+
+    private static final String[] packagesToChangePixel3 = {
+        "com.google.android.googlequicksearchbox"
     };
 
     static {
@@ -46,14 +51,16 @@ public class PixelPropsUtils {
         propsToChange.put("PRODUCT", "redfin");
         propsToChange.put("MODEL", "Pixel 5");
         propsToChange.put("FINGERPRINT", "google/redfin/redfin:11/RQ1A.210105.003/7005429:user/release-keys");
+        propsToChangePixel3 = new HashMap<>();
+        propsToChangePixel3.put("MODEL", "Pixel 3 XL");
     }
 
     public static void setProps(String packageName) {
-        if (packageName == null){
+        if (packageName == null) {
             return;
         }
-        if (Arrays.asList(packagesToChange).contains(packageName)){
-            if (DEBUG){
+        if (Arrays.asList(packagesToChange).contains(packageName)) {
+            if (DEBUG) {
                 Log.d(TAG, "Defining props for: " + packageName);
             }
             for (Map.Entry<String, Object> prop : propsToChange.entrySet()) {
@@ -62,15 +69,25 @@ public class PixelPropsUtils {
                 setPropValue(key, value);
             }
         }
+        if (Arrays.asList(packagesToChangePixel3).contains(packageName)) {
+            if (DEBUG) {
+                Log.d(TAG, "Defining props for: " + packageName);
+            }
+            for (Map.Entry<String, Object> prop : propsToChangePixel3.entrySet()) {
+                String key = prop.getKey();
+                Object value = prop.getValue();
+                setPropValue(key, value);
+            }
+        }
         // Set proper indexing fingerprint
-        if (packageName.equals("com.google.android.settings.intelligence")){
+        if (packageName.equals("com.google.android.settings.intelligence")) {
             setPropValue("FINGERPRINT", Build.DATE);
         }
     }
 
-    private static void setPropValue(String key, Object value){
+    private static void setPropValue(String key, Object value) {
         try {
-            if (DEBUG){
+            if (DEBUG) {
                 Log.d(TAG, "Defining prop " + key + " to " + value.toString());
             }
             Field field = Build.class.getDeclaredField(key);
