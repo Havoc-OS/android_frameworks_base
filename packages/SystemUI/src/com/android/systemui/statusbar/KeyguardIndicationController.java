@@ -549,8 +549,8 @@ public class KeyguardIndicationController implements StateListener,
                                 : R.string.keyguard_plugged_in_warp_charging;
                     } else if (hasVoocCharger) {
                         chargingId = hasChargingTime
-                                ? R.string.keyguard_indication_warp_charging_time
-                                : R.string.keyguard_plugged_in_warp_charging;
+                                ? R.string.keyguard_indication_vooc_charging_time
+                                : R.string.keyguard_plugged_in_vooc_charging;
                     } else {
                         chargingId = hasChargingTime
                                 ? R.string.keyguard_indication_charging_time_fast
