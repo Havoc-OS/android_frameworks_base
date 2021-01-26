@@ -11043,6 +11043,12 @@ public final class Settings {
         public static final String PULSE_LOCATION = "pulse_location";
 
         /**
+         * Pulse ambient music visualizer
+         * @hide
+         */
+        public static final String AMBIENT_PULSE_ENABLED = "ambient_pulse_enabled";
+
+        /**
          * Pulse navbar music visualizer color type
          *
          * @hide
