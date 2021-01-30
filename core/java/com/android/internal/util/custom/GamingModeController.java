@@ -253,10 +253,10 @@ public class GamingModeController {
         boolean disableHwKeys = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.GAMING_MODE_HW_KEYS_TOGGLE, 0) == 1;
         if (disableHwKeys) {
-            // mHwKeysState = Settings.Secure.getInt(mContext.getContentResolver(),
-            //                  Settings.Secure.HARDWARE_KEYS_DISABLE, 0);
-            // Settings.Secure.putInt(mContext.getContentResolver(),
-            //    Settings.Secure.HARDWARE_KEYS_DISABLE, 1);
+            mHwKeysState = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.HARDWARE_KEYS_ENABLE, 1);
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HARDWARE_KEYS_ENABLE, 0);
         }
 
         // Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)
@@ -298,8 +298,8 @@ public class GamingModeController {
         boolean disableHwKeys = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.GAMING_MODE_HW_KEYS_TOGGLE, 0) == 1;
         if (disableHwKeys) {
-            // Settings.Secure.putInt(mContext.getContentResolver(),
-            //    Settings.Secure.HARDWARE_KEYS_DISABLE, mHwKeysState);
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HARDWARE_KEYS_ENABLE, mHwKeysState);
         }
         int ringerMode = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.GAMING_MODE_RINGER_MODE, 0);
