@@ -68,6 +68,18 @@
             android:textDirection="locale"
             android:textSize="12sp" />
 
+        <com.android.systemui.statusbar.DataUsageView
+            android:id="@+id/data_usage_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.QS.TileLabel"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textDirection="locale"
+            android:textSize="12sp" />
+
         <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
             android:id="@+id/settings_button_container"
             android:layout_width="@dimen/op_qs_footer_action_layout_size"
