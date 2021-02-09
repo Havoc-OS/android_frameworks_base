@@ -143,6 +143,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.statusbar.RegisterStatusBarResult;
 import com.android.internal.util.custom.LineageButtons;
+import com.android.internal.util.custom.Utils;
 import com.android.internal.view.AppearanceRegion;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -1110,13 +1111,16 @@ public class StatusBar extends SystemUI implements DemoMode,
                 }, OverlayPlugin.class, true /* Allow multiple plugins */);
     }
 
-    private void initCoreOverlays(){
+    private void initCoreOverlays() {
         boolean aodAvailable = mContext.getResources().getBoolean(
                     com.android.internal.R.bool.config_dozeAlwaysOnDisplayAvailable);
-        try{
-            mOverlayManager.setEnabled("com.google.android.pixel.setupwizard.overlay.aod",
-                aodAvailable, mLockscreenUserManager.getCurrentUserId());
-        } catch (RemoteException ignored) {
+        String setupWizardOverlay = "com.google.android.pixel.setupwizard.overlay.aod";
+        if (Utils.isPackageInstalled(mContext, setupWizardOverlay)) {
+            try {
+                mOverlayManager.setEnabled(setupWizardOverlay,
+                    aodAvailable, mLockscreenUserManager.getCurrentUserId());
+            } catch (RemoteException ignored) {
+            }
         }
     }
 
