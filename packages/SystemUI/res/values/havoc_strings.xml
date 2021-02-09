@@ -247,4 +247,7 @@
     <string name="accessibility_quick_settings_onthego_off">On-The-Go off</string>
     <string name="accessibility_quick_settings_onthego_on">On-The-Go on</string>
 
+    <!-- Sensors QS tile -->
+    <string name="sensor_privacy_mode_tile">Sensors</string>
+
 </resources>
