@@ -76,6 +76,7 @@ public class OPQSFooter extends LinearLayout {
     private SettingsButton mSettingsButton;
     protected View mEdit;
     protected TouchAnimator mFooterAnimator;
+    protected TouchAnimator mCarrierTextAnimator;
     private ActivityStarter mActivityStarter;
     private Boolean mExpanded;
     private Boolean mIsLandscape;
@@ -98,17 +99,20 @@ public class OPQSFooter extends LinearLayout {
         mDataUsageView = findViewById(R.id.data_usage_view);
         mDataUsageView.setVisibility(View.GONE);
         mFooterAnimator = createFooterAnimator();
+        mCarrierTextAnimator = createCarrierTextAnimator();
     }
 
     public void setExpansion(float headerExpansionFraction) {
         if (mFooterAnimator != null) {
             mFooterAnimator.setPosition(headerExpansionFraction);
         }
+        if (mCarrierTextAnimator != null) {
+            mCarrierTextAnimator.setPosition(headerExpansionFraction);
+        }
     }
 
     public void setExpanded(boolean expanded) {
-        if (mCarrierText != null && mDataUsageView != null) {
-            mCarrierText.setVisibility(expanded ? View.GONE : View.VISIBLE);
+        if (mDataUsageView != null) {
             mDataUsageView.setVisibility(expanded ? View.VISIBLE : View.GONE);
             if (expanded) {
                 mDataUsageView.updateUsage();
@@ -124,9 +128,15 @@ public class OPQSFooter extends LinearLayout {
     @Nullable
     private TouchAnimator createFooterAnimator() {
         return new TouchAnimator.Builder()
-                .addFloat(mEdit, "alpha", 0, 1)
-                .addFloat(mDataUsageView, "alpha", 0, 1)
-                .setStartDelay(0.9f)
+                .addFloat(mEdit, "alpha", 0, 0, 1)
+                .addFloat(mDataUsageView, "alpha", 0, 0, 1)
+                .build();
+    }
+
+    @Nullable
+    private TouchAnimator createCarrierTextAnimator() {
+        return new TouchAnimator.Builder()
+                .addFloat(mCarrierText, "alpha", 1, 0, 0)
                 .build();
     }
 
