@@ -38,4 +38,7 @@
     <java-symbol type="string" name="config_lightFontFamily" />
     <java-symbol type="string" name="config_regularFontFamily" />
 
+    <!-- Location indicator -->
+    <java-symbol type="drawable" name="stat_sys_location" />
+
 </resources>
