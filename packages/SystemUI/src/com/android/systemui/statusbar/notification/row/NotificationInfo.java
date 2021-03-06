@@ -344,7 +344,11 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
                     killDialog.setPositiveButton(
                             R.string.dlg_ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            com.android.internal.util.custom.Utils.killForegroundApp();
+                            // kill pkg
+                            ActivityManager actMan =
+                                    (ActivityManager) mContext.getSystemService(
+                                    Context.ACTIVITY_SERVICE);
+                            actMan.forceStopPackage(mPackageName);
                         }
                     });
                     killDialog.setNegativeButton(R.string.dlg_cancel, null);
