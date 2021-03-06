@@ -330,4 +330,8 @@
          (without "Focus" state) instead of Dual-stage. -->
     <bool name="config_singleStageCameraKey">false</bool>
 
+    <!-- Smart cutoff -->
+    <integer name="config_smartCutoffTemperature">30</integer>
+    <integer name="config_smartCutoffResumeTemperature">25</integer>
+
 </resources>
