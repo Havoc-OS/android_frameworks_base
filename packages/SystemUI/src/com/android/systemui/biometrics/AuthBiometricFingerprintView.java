@@ -18,14 +18,10 @@ package com.android.systemui.biometrics;
 
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
-
-import com.android.internal.custom.app.LineageContextConstants;
 
 import com.android.systemui.R;
 
@@ -33,20 +29,12 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
 
     private static final String TAG = "BiometricPrompt/AuthBiometricFingerprintView";
 
-    private final boolean mHasFod;
-
     public AuthBiometricFingerprintView(Context context) {
         this(context, null);
     }
 
     public AuthBiometricFingerprintView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        PackageManager packageManager = context.getPackageManager();
-        mHasFod = packageManager.hasSystemFeature(LineageContextConstants.Features.FOD);
-        if (mHasFod) {
-            if (mIconView != null) mIconView.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -94,10 +82,6 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private void updateIcon(int lastState, int newState) {
-        if (mHasFod) {
-            return;
-        }
-
         final Drawable icon = getAnimationForTransition(lastState, newState);
         if (icon == null) {
             Log.e(TAG, "Animation not found, " + lastState + " -> " + newState);
@@ -117,10 +101,6 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private boolean shouldAnimateForTransition(int oldState, int newState) {
-        if (mHasFod) {
-            return false;
-        }
-
         switch (newState) {
             case STATE_HELP:
             case STATE_ERROR:
@@ -140,10 +120,6 @@ public class AuthBiometricFingerprintView extends AuthBiometricView {
     }
 
     private Drawable getAnimationForTransition(int oldState, int newState) {
-        if (mHasFod) {
-            return null;
-        }
-
         int iconRes;
 
         switch (newState) {

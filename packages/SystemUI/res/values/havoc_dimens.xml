@@ -76,10 +76,6 @@
     <!-- Width of the battery icon in the status bar when set to circle style. -->
     <dimen name="status_bar_battery_icon_circle_width">13.5dp</dimen>
 
-    <!-- Custom padding size on biometric dialog -->
-    <dimen name="fp_dialog_error_padding_top">12dp</dimen>
-    <dimen name="fp_dialog_error_padding_bottom">12dp</dimen>
-
     <!-- Qs tile title -->
     <dimen name="qs_tile_height_wo_label">64dp</dimen>
 
