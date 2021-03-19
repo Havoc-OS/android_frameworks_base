@@ -114,5 +114,6 @@
 
     <!-- App Lock -->
     <dimen name="applock_icon_dimension">54dp</dimen>
+    <dimen name="applock_icon_elevation">2dp</dimen>
 
 </resources>

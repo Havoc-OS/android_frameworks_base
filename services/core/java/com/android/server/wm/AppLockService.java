@@ -490,9 +490,9 @@ public class AppLockService extends SystemService {
                     return;
                 }
                 mBiometricPrompt = new BiometricPrompt.Builder(mContext)
-                    .setTitle(cont.appLabel)
+                    .setTitle(mContext.getString(R.string.applock_prompt_title) + " " + cont.appLabel)
+                    .setDescription(mContext.getString(R.string.applock_prompt_subtitle))
                     .setApplockPackage(cont.packageName)
-                    .setDescription(cont.appLabel)
                     .setAllowedAuthenticators(Authenticators.DEVICE_CREDENTIAL | Authenticators.BIOMETRIC_WEAK)
                     .setConfirmationRequired(false)
                     .build();
@@ -726,6 +726,11 @@ public class AppLockService extends SystemService {
         @Override
         public void removeAppLockCallback(IAppLockCallback callback) {
             AppLockService.this.removeAppLockCallback(callback);
+        }
+
+        @Override
+        public boolean isAppLockAuthenticating() {
+            return AppLockService.this.isAppLockAuthenticating();
         }
     };
 

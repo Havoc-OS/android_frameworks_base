@@ -78,4 +78,8 @@
     <string name="sleep_mode_enabled_toast">Sleep mode turned on</string>
     <string name="sleep_mode_disabled_toast">Sleep mode turned off</string>
 
+    <!-- App lock -->
+    <string name="applock_prompt_title">Unlock</string>
+    <string name="applock_prompt_subtitle">Confirm your screen lock pattern, PIN or password</string>
+
 </resources>

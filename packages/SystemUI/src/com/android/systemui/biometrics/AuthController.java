@@ -23,6 +23,7 @@ import static android.hardware.biometrics.BiometricManager.Authenticators;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.ActivityTaskManager;
+import android.app.AppLockManager;
 import android.app.IActivityTaskManager;
 import android.app.TaskStackListener;
 import android.content.BroadcastReceiver;
@@ -66,6 +67,7 @@ public class AuthController extends SystemUI implements CommandQueue.Callbacks,
 
     private final CommandQueue mCommandQueue;
     private final Injector mInjector;
+    private AppLockManager mAppLockManager;
 
     // TODO: These should just be saved from onSaveState
     private SomeArgs mCurrentDialogArgs;
@@ -120,7 +122,8 @@ public class AuthController extends SystemUI implements CommandQueue.Callbacks,
                         mActivityTaskManager.getTasks(1);
                 if (!runningTasks.isEmpty()) {
                     final String topPackage = runningTasks.get(0).topActivity.getPackageName();
-                    if (!topPackage.contentEquals(clientPackage)) {
+                    if (!topPackage.contentEquals(clientPackage)
+                            && !mAppLockManager.isAppLockAuthenticating()) {
                         Log.w(TAG, "Evicting client due to: " + topPackage);
                         mCurrentDialog.dismissWithoutCallback(true /* animate */);
                         mCurrentDialog = null;
@@ -262,6 +265,7 @@ public class AuthController extends SystemUI implements CommandQueue.Callbacks,
     @Override
     public void start() {
         mCommandQueue.addCallback(this);
+        mAppLockManager = (AppLockManager) mContext.getSystemService(Context.APPLOCK_SERVICE);
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         mActivityTaskManager = mInjector.getActivityTaskManager();
 

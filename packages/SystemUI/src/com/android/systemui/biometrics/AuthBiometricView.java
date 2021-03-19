@@ -224,12 +224,6 @@ public abstract class AuthBiometricView extends LinearLayout {
      */
     protected abstract boolean supportsSmallDialog();
 
-    /**
-     * @return string resource which is appended to the negative text
-     */
-    @StringRes
-    protected abstract int getDescriptionTextId();
-
     private final Runnable mResetErrorRunnable;
 
     private final Runnable mResetHelpRunnable;
@@ -622,7 +616,7 @@ public abstract class AuthBiometricView extends LinearLayout {
                     R.dimen.applock_icon_dimension);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(iconDim, iconDim);
         lp.gravity = CENTER;
-        lp.topMargin = -iconDim / 2;
+        lp.topMargin = iconDim / 2;
         mAppIcon.setLayoutParams(lp);
         mAppIcon.setVisibility(View.GONE);
         addView(mAppIcon, 0);
@@ -671,6 +665,8 @@ public abstract class AuthBiometricView extends LinearLayout {
      */
     @VisibleForTesting
     void onAttachedToWindowInternal() {
+        setText(mTitleView, mBiometricPromptBundle.getString(BiometricPrompt.KEY_TITLE));
+
         final String negativeText;
         if (isDeviceCredentialAllowed()) {
 
@@ -700,12 +696,11 @@ public abstract class AuthBiometricView extends LinearLayout {
         setTextOrHide(mSubtitleView,
                 mBiometricPromptBundle.getString(BiometricPrompt.KEY_SUBTITLE));
 
+        setTextOrHide(mDescriptionView,
+                mBiometricPromptBundle.getString(BiometricPrompt.KEY_DESCRIPTION));
+
         final CharSequence applockPackage = mBiometricPromptBundle.getCharSequence(BiometricPrompt.KEY_APPLOCK_PKG);
-        if (TextUtils.isEmpty(applockPackage)) {
-            setText(mTitleView, mBiometricPromptBundle.getString(BiometricPrompt.KEY_TITLE));
-            setTextOrHide(mDescriptionView,
-                    mBiometricPromptBundle.getString(BiometricPrompt.KEY_DESCRIPTION));
-        } else {
+        if (!TextUtils.isEmpty(applockPackage)) {
             ApplicationInfo aInfo = null;
             try {
                 aInfo = mPackageManager.getApplicationInfoAsUser(applockPackage.toString(), 0, mUserId);
@@ -713,19 +708,12 @@ public abstract class AuthBiometricView extends LinearLayout {
                 // ignored
             }
             Drawable icon = (aInfo == null) ? null : mPackageManager.getApplicationIcon(aInfo);
-            if (icon == null) {
-                mTitleView.setVisibility(View.VISIBLE);
-                setText(mTitleView, getResources().getString(R.string.applock_unlock) + " "
-                        + mBiometricPromptBundle.getString(BiometricPrompt.KEY_TITLE));
-            } else {
-                mTitleView.setVisibility(View.GONE);
+            int elevation = getResources().getDimensionPixelSize(R.dimen.applock_icon_elevation);
+            if (icon != null) {
                 mAppIcon.setVisibility(View.VISIBLE);
-                mAppIcon.setImageDrawable(icon);
+                mAppIcon.setBackground(icon);
+                mAppIcon.setElevation(elevation);
             }
-            setTextOrHide(mDescriptionView, mBiometricPromptBundle.getString(BiometricPrompt.KEY_DESCRIPTION)
-                    + getResources().getString(R.string.applock_locked) + "\n"
-                    + negativeText + getResources().getString(getDescriptionTextId()));
-            mDescriptionView.setGravity(CENTER);
         }
 
         if (mSavedState == null) {
@@ -795,8 +783,8 @@ public abstract class AuthBiometricView extends LinearLayout {
             }
 
             if (child.getVisibility() != View.GONE) {
-                totalHeight += (child.equals(mAppIcon)) ? child.getMeasuredHeight() / 2
-                        : child.getMeasuredHeight();
+                int iconSize = Math.round(child.getMeasuredHeight() * 1.5f);
+                totalHeight += (child.equals(mAppIcon)) ? iconSize : child.getMeasuredHeight();
             }
         }
 

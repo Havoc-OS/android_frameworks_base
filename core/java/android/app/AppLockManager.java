@@ -136,6 +136,14 @@ public class AppLockManager {
         }
     }
 
+    public boolean isAppLockAuthenticating() {
+        try {
+            return mService.isAppLockAuthenticating();
+        } catch (RemoteException e) {
+            throw e.rethrowFromSystemServer();
+        }
+    }
+
     public abstract static class AppLockCallback extends IAppLockCallback.Stub {
         @Override
         public abstract void onAppStateChanged(String pkg);

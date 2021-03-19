@@ -61,10 +61,11 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.util.FrameworkStatsLog;
+import com.android.server.LocalServices;
+import com.android.server.SystemService;
 import com.android.server.biometrics.Utils;
 import com.android.server.policy.WindowManagerPolicy;
-import com.android.server.SystemService;
-import com.android.server.LocalServices;
+import com.android.server.wm.AppLockService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -537,7 +538,8 @@ public abstract class BiometricServiceBase extends SystemService
                 if (!runningTasks.isEmpty()) {
                     final String topPackage = runningTasks.get(0).topActivity.getPackageName();
                     if (!topPackage.contentEquals(currentClient)
-                            && !mCurrentClient.isAlreadyDone()) {
+                            && !mCurrentClient.isAlreadyDone()
+                            && !LocalServices.getService(AppLockService.class).isAppLockAuthenticating()) {
                         Slog.e(getTag(), "Stopping background authentication, top: "
                                 + topPackage + " currentClient: " + currentClient);
                         mCurrentClient.stop(false /* initiatedByClient */);

@@ -227,4 +227,8 @@
     <!-- Whether to enable performance tuning in Gaming mode -->
     <java-symbol type="bool" name="config_enableGamingPerformanceTuning" />
 
+    <!-- App lock -->
+    <java-symbol type="string" name="applock_prompt_title" />
+    <java-symbol type="string" name="applock_prompt_subtitle" />
+
 </resources>

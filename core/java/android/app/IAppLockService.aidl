@@ -44,4 +44,6 @@ interface IAppLockService {
     void addAppLockCallback(IAppLockCallback callback);
 
     void removeAppLockCallback(IAppLockCallback callback);
+
+    boolean isAppLockAuthenticating();
 }
