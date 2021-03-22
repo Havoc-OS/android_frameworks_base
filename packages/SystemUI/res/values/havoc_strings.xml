@@ -170,6 +170,7 @@
 
     <!-- Data usage info -->
     <string name="usage_data">used</string>
+    <string name="usage_wifi_prefix">Wi-Fi</string>
 
     <!-- Screen pinning dialog description. (for devices without navbar) -->
     <string name="screen_pinning_description_no_navbar">This keeps it in view until you unpin. Touch &amp; hold Back to unpin.</string>

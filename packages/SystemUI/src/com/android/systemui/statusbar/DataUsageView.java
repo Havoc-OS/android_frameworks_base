@@ -2,6 +2,12 @@ package com.android.systemui.statusbar;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkTemplate;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
@@ -23,14 +29,18 @@ public class DataUsageView extends TextView {
 
     private static boolean shouldUpdateData;
     private static boolean shouldUpdateDataTextView;
+    private ConnectivityManager mConnectivityManager;
     private NetworkController mNetworkController;
+    private WifiManager mWifiManager;
     private Context mContext;
-    private String formatedinfo;
+    private String formattedInfo;
 
     public DataUsageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         mNetworkController = Dependency.get(NetworkController.class);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
     public static void updateUsage() {
@@ -45,19 +55,33 @@ public class DataUsageView extends TextView {
         }
         if (shouldUpdateDataTextView) {
             shouldUpdateDataTextView = false;
-            setText(formatedinfo);
+            setText(formattedInfo);
         }
     }
 
     private void updateUsageData() {
         boolean showDailyDataUsage = Settings.System.getInt(getContext().getContentResolver(),
                 Settings.System.DATA_USAGE_PERIOD, 1) == 0;
-        DataUsageController mobileDataController = new DataUsageController(mContext);
-        mobileDataController.setSubscriptionId(
-                SubscriptionManager.getDefaultDataSubscriptionId());
-        final DataUsageController.DataUsageInfo info = showDailyDataUsage ? mobileDataController.getDailyDataUsageInfo()
-                : mobileDataController.getDataUsageInfo();
-        formatedinfo = getSlotCarrierName() + ": " + formatDataUsage(info.usageLevel) + " "
+        DataUsageController dataController = new DataUsageController(mContext);
+        DataUsageController.DataUsageInfo info;
+        String prefix;
+        if (isWifiConnected()) {
+            final NetworkTemplate template;
+            final WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
+            if (wifiInfo.getHiddenSSID() || wifiInfo.getSSID() == WifiManager.UNKNOWN_SSID) {
+                template = NetworkTemplate.buildTemplateWifiWildcard();
+            } else {
+                template = NetworkTemplate.buildTemplateWifi(wifiInfo.getSSID());
+            }
+            info = dataController.getDataUsageInfo(template);
+            prefix = mContext.getResources().getString(R.string.usage_wifi_prefix);
+        } else {
+            dataController.setSubscriptionId(SubscriptionManager.getDefaultDataSubscriptionId());
+            info = showDailyDataUsage ? dataController.getDailyDataUsageInfo()
+                    : dataController.getDataUsageInfo();
+            prefix = getSlotCarrierName();
+        }
+        formattedInfo = prefix + ": " + formatDataUsage(info.usageLevel) + " "
                 + mContext.getResources().getString(R.string.usage_data);
         shouldUpdateDataTextView = true;
     }
@@ -85,4 +109,15 @@ public class DataUsageView extends TextView {
         }
         return result.toString();
     }
+
+    private boolean isWifiConnected() {
+        Network network = mConnectivityManager.getActiveNetwork();
+        if (network != null) {
+            NetworkCapabilities capabilities = mConnectivityManager.getNetworkCapabilities(network);
+            return capabilities != null && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+        } else {
+            return false;
+        }
+    }
+
 }
