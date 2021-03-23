@@ -21,9 +21,4 @@
         <item name="preferenceTheme">@style/TunerPreferenceTheme</item>
     </style>
 
-    <style name="TriStateUiText">
-        <item name="android:textSize">14.0sp</item>
-        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
-    </style>
-
 </resources>
