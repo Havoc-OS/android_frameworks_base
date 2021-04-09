@@ -680,6 +680,12 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         if (mFooter != null) {
             // Then the footer with the settings
             switchToParent(mFooter, parent, index);
+            index++;
+        }
+
+        if (mOPFooterView != null) {
+            // Then the OPFooter with the brightness bar and settings
+            switchToParent(mOPFooterView, parent, index);
         }
     }
 
@@ -1113,7 +1119,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 footerMargin = mFooterMarginStartHorizontal;
                 indicatorMargin = footerMargin - mVisualMarginEnd;
             }
-            updateFooterMargins(mFooter, footerMargin, 0);
+            //updateFooterMargins(mFooter, footerMargin, 0);
             // The page indicator isn't centered anymore because of the visual positioning.
             // Let's fix it by adding some margin
             if (mFooterPageIndicator != null) {
