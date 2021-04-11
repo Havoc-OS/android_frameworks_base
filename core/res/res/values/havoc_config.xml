@@ -228,4 +228,7 @@
     <!-- Screen off delay -->
     <integer name="config_screen_off_delay">1000</integer>
 
+    <!-- True if the home button has the ability to wake up phone from lockscreen-->
+    <bool name="config_HomeWakeButton">false</bool>
+    
 </resources>

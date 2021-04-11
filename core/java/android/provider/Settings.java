@@ -5914,6 +5914,12 @@ public final class Settings {
         public static final String SCREEN_OFF_FOD_ICON = "screen_off_fod_icon";
 
         /**
+         * Home wake button
+         * @hide
+         */
+        public static final String HOME_WAKE_BUTTON = "home_wake_button";
+        
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
