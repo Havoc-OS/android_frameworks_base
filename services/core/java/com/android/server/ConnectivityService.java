@@ -2063,7 +2063,8 @@ public class ConnectivityService extends IConnectivityManager.Stub
         reattachNetworkRequestsForUid(uid);
     }
 
-    private boolean isUidIsolated(int uid) {
+    @Override
+    public boolean isUidIsolated(int uid) {
         synchronized (mIsolatedUids) {
             return mIsolatedUids.get(uid);
         }
