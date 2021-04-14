@@ -1170,11 +1170,11 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 footerMargin = mFooterMarginStartHorizontal;
                 indicatorMargin = footerMargin - mVisualMarginEnd;
             }
-            //updateFooterMargins(mFooter, footerMargin, 0);
+            updateMargins(mFooter, footerMargin, 0);
             // The page indicator isn't centered anymore because of the visual positioning.
             // Let's fix it by adding some margin
             if (mFooterPageIndicator != null) {
-                updateFooterMargins(mFooterPageIndicator, 0, indicatorMargin);
+                updateMargins(mFooterPageIndicator, 0, indicatorMargin);
             }
         }
     }
@@ -1227,19 +1227,12 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
      * @param end the end margin to set
      */
     protected void updateMargins(View view, int start, int end) {
-        LayoutParams lp = (LayoutParams) view.getLayoutParams();
-        lp.setMarginStart(start);
-        lp.setMarginEnd(end);
-        view.setLayoutParams(lp);
-    }
-
-    protected void updateFooterMargins(View view, int start, int end) {
         try {
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) view.getLayoutParams();
             lp.setMarginStart(start);
             lp.setMarginEnd(end);
             view.setLayoutParams(lp);
-        } catch (Exception ex) {
+        } catch (ClassCastException e) {
             FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) view.getLayoutParams();
             lp.setMarginStart(start);
             lp.setMarginEnd(end);
