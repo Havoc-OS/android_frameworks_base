@@ -101,16 +101,19 @@ public class AODTile extends QSTileImpl<State> implements
 
     @Override
     public CharSequence getTileLabel() {
+        return mContext.getString(R.string.quick_settings_aod_label);
+    }
+
+    private CharSequence getTileSecondaryLabel() {
         if (mBatteryController.isAodPowerSave()) {
             return mContext.getString(R.string.quick_settings_aod_off_powersave_label);
         }
         switch (getAodState()) {
+            default:
             case 1:
-                return mContext.getString(R.string.quick_settings_aod_label);
+                return "";
             case 2:
                 return mContext.getString(R.string.quick_settings_aod_on_charge_label);
-            default:
-                return mContext.getString(R.string.quick_settings_aod_off_label);
         }
     }
 
@@ -118,11 +121,11 @@ public class AODTile extends QSTileImpl<State> implements
     protected void handleUpdateState(State state, Object arg) {
         state.icon = mIcon;
         state.label = getTileLabel();
+        state.secondaryLabel = getTileSecondaryLabel();
         if (mBatteryController.isAodPowerSave()) {
             state.state = Tile.STATE_UNAVAILABLE;
         } else {
             state.state = getAodState() == 0 ? Tile.STATE_INACTIVE : Tile.STATE_ACTIVE;
-
         }
     }
 

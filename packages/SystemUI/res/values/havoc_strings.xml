@@ -159,8 +159,7 @@
 
     <!-- AOD QS tile -->
     <string name="quick_settings_aod_label">AOD</string>
-    <string name="quick_settings_aod_on_charge_label">AOD on charge</string>
-    <string name="quick_settings_aod_off_label">AOD off</string>
-    <string name="quick_settings_aod_off_powersave_label">AOD off\nBattery saver</string>
+    <string name="quick_settings_aod_on_charge_label">While charging</string>
+    <string name="quick_settings_aod_off_powersave_label">Battery saver enabled</string>
 
 </resources>
