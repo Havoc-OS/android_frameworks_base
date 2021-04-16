@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.BidiFormatter;
 import android.text.format.Formatter;
@@ -15,6 +16,8 @@ import com.android.settingslib.net.DataUsageController;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.NetworkController;
+
+import java.util.List;
 
 public class DataUsageView extends TextView {
 
@@ -54,7 +57,8 @@ public class DataUsageView extends TextView {
                 SubscriptionManager.getDefaultDataSubscriptionId());
         final DataUsageController.DataUsageInfo info = showDailyDataUsage ? mobileDataController.getDailyDataUsageInfo()
                 : mobileDataController.getDataUsageInfo();
-        formatedinfo = formatDataUsage(info.usageLevel) + " " + mContext.getResources().getString(R.string.usage_data);
+        formatedinfo = getSlotCarrierName() + ": " + formatDataUsage(info.usageLevel) + " "
+                + mContext.getResources().getString(R.string.usage_data);
         shouldUpdateDataTextView = true;
     }
 
@@ -63,5 +67,22 @@ public class DataUsageView extends TextView {
                 Formatter.FLAG_IEC_UNITS);
         return BidiFormatter.getInstance().unicodeWrap(mContext.getString(
                 com.android.internal.R.string.fileSizeSuffix, res.value, res.units));
+    }
+
+    private String getSlotCarrierName() {
+        CharSequence result = "";
+        SubscriptionManager subManager = mContext.getSystemService(SubscriptionManager.class);
+        int subId = subManager.getDefaultDataSubscriptionId();
+        List<SubscriptionInfo> subInfoList =
+                subManager.getActiveSubscriptionInfoList(true);
+        if (subInfoList != null) {
+            for (SubscriptionInfo subInfo : subInfoList) {
+                if (subId == subInfo.getSubscriptionId()) {
+                    result = subInfo.getDisplayName();
+                    break;
+                }
+            }
+        }
+        return result.toString();
     }
 }
