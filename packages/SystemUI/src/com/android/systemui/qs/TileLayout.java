@@ -124,7 +124,7 @@ public class TileLayout extends ViewGroup implements QSTileLayout {
                     Settings.System.QS_COLUMNS_PORTRAIT, 4,
                     UserHandle.USER_CURRENT));
             rows = Math.max(1, Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.QS_ROWS_PORTRAIT, 3,
+                    Settings.System.QS_ROWS_PORTRAIT, 2,
                     UserHandle.USER_CURRENT));
         } else {
             mResourceColumns = Math.max(1, Settings.System.getIntForUser(resolver,

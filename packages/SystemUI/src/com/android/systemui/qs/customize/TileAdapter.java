@@ -598,7 +598,7 @@ public class TileAdapter extends RecyclerView.Adapter<Holder> implements TileSta
     private final DynamicSpanSizeLookup mSizeLookup = new DynamicSpanSizeLookup();
 
     private class DynamicSpanSizeLookup extends SpanSizeLookup {
-        private int mColumns = 5;
+        private int mColumns = 4;
 
         public void setColumns(int columns) {
             mColumns = columns;
