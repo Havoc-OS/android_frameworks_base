@@ -71,8 +71,9 @@
         <com.android.systemui.statusbar.DataUsageView
             android:id="@+id/data_usage_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
+            android:gravity="center_vertical"
             android:ellipsize="marquee"
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.QS.TileLabel"

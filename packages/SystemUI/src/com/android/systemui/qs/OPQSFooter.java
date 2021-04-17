@@ -122,6 +122,11 @@ public class OPQSFooter extends LinearLayout {
             mDataUsageView.setVisibility(expanded ? View.VISIBLE : View.GONE);
             if (expanded) {
                 mDataUsageView.updateUsage();
+                mDataUsageView.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                    startDataUsageActivity();
+                    }
+                });
             }
         }
         mExpanded = expanded;
@@ -188,5 +193,12 @@ public class OPQSFooter extends LinearLayout {
     public boolean isEditEnabled() {
         return Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.QS_FOOTER_SHOW_EDIT, 1) == 1;
+    }
+
+    private void startDataUsageActivity() {
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                "com.android.settings.Settings$DataUsageSummaryActivity");
+        Dependency.get(ActivityStarter.class).startActivity(intent, true /* dismissShade */);
     }
 }
