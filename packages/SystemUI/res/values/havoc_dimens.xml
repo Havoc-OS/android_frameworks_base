@@ -91,11 +91,9 @@
     <!-- Starting padding for a left-aligned quick status bar clock -->
     <dimen name="quick_status_bar_left_clock_starting_padding">0dp</dimen>
 
-    <dimen name="op_qs_footer_height">98dp</dimen>
-    <dimen name="op_qs_footer_action_layout_size">96dp</dimen>
-    <dimen name="quick_settings_top_margin_media">10dp</dimen>
-    <dimen name="quick_settings_top_margin_media_extra">14dp</dimen>
-    <dimen name="qs_media_action_button_margin_top">18dp</dimen>
-    <dimen name="qs_media_action_button_size">40dp</dimen>
+    <!-- OnePlus QS -->
+    <dimen name="quick_settings_top_margin_media_extra">33dp</dimen>
+    <dimen name="quick_settings_top_margin_media">8dp</dimen>
+    <dimen name="quick_settings_media_divider_height">17dp</dimen>
 
 </resources>

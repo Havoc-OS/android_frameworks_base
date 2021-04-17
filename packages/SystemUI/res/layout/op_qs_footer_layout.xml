@@ -15,7 +15,8 @@
 ** limitations under the License.
 -->
 
-<com.android.systemui.qs.OPQSFooter xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.systemui.qs.OPQSFooter
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:systemui="http://schemas.android.com/apk/res-auto"
     android:id="@+id/op_qs_footer"
     android:layout_width="match_parent"
@@ -23,7 +24,6 @@
     android:layout_marginStart="@dimen/qs_footer_margin"
     android:layout_marginTop="-12dp"
     android:layout_marginEnd="@dimen/qs_footer_margin"
-    android:layout_marginBottom="-8dp"
     android:background="@android:color/transparent"
     android:clickable="false"
     android:clipChildren="false"
@@ -34,7 +34,7 @@
         style="@style/BrightnessDialogContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical">
+        android:layout_gravity="center_horizontal">
 
         <com.android.systemui.settings.ToggleSliderView
             android:id="@+id/brightness_slider"
@@ -50,17 +50,17 @@
     <FrameLayout
         android:id="@+id/op_qs_footer_actions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/qs_footer_height"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="-8dp"
-        android:layout_marginEnd="4dp">
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="-8dp">
 
         <com.android.keyguard.CarrierText
             android:id="@+id/qs_carrier_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
+            android:gravity="center_vertical"
             android:ellipsize="marquee"
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.QS.TileLabel"
@@ -80,42 +80,57 @@
             android:textDirection="locale"
             android:textSize="12sp" />
 
-        <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
-            android:id="@+id/settings_button_container"
-            android:layout_width="@dimen/op_qs_footer_action_layout_size"
-            android:layout_height="@dimen/qs_footer_action_button_size"
-            android:layout_gravity="right"
-            android:clipChildren="false"
-            android:clipToPadding="false">
+        <com.android.keyguard.AlphaOptimizedLinearLayout
+            android:id="@+id/op_qs_footer_actions_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right" >
 
             <com.android.systemui.statusbar.AlphaOptimizedImageView
                 android:id="@+id/edit"
                 android:layout_width="@dimen/qs_footer_action_button_size"
                 android:layout_height="@dimen/qs_footer_action_button_size"
-                android:layout_gravity="left"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:clipToPadding="false"
                 android:contentDescription="@string/accessibility_quick_settings_edit"
                 android:focusable="true"
                 android:padding="@dimen/qs_footer_icon_padding"
-                android:src="@drawable/op_ic_mode_edit"
+                android:src="@*android:drawable/ic_mode_edit"
                 android:tint="?android:attr/colorForeground" />
 
-
-            <com.android.systemui.statusbar.phone.SettingsButton
-                android:id="@+id/settings_button"
-                style="@android:style/Widget.Material.Button.Borderless"
+            <com.android.keyguard.AlphaOptimizedImageButton
+                android:id="@+id/running_services_button"
                 android:layout_width="@dimen/qs_footer_action_button_size"
                 android:layout_height="@dimen/qs_footer_action_button_size"
-                android:layout_gravity="right"
-                android:background="@drawable/ripple_drawable"
-                android:contentDescription="@string/accessibility_quick_settings_settings"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:clipToPadding="false"
+                android:contentDescription="@string/accessibility_quick_settings_running_services"
+                android:focusable="true"
                 android:padding="@dimen/qs_footer_icon_padding"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_op_settings"
-                android:tint="?android:attr/colorForeground" />
+                android:src="@drawable/ic_settings_memory"
+                android:tint="?android:attr/colorForeground"/>
 
-        </com.android.systemui.statusbar.AlphaOptimizedFrameLayout>
+            <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
+                android:id="@+id/settings_button_container"
+                android:layout_width="@dimen/qs_footer_action_button_size"
+                android:layout_height="@dimen/qs_footer_action_button_size"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <com.android.systemui.statusbar.phone.SettingsButton
+                    android:id="@+id/settings_button"
+                    style="@android:style/Widget.Material.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ripple_drawable"
+                    android:contentDescription="@string/accessibility_quick_settings_settings"
+                    android:padding="@dimen/qs_footer_icon_padding"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_settings"
+                    android:tint="?android:attr/colorForeground" />
+            </com.android.systemui.statusbar.AlphaOptimizedFrameLayout>
+        </com.android.keyguard.AlphaOptimizedLinearLayout>
     </FrameLayout>
 </com.android.systemui.qs.OPQSFooter>

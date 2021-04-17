@@ -81,6 +81,7 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
     private QSTileHost mHost;
     private boolean mShowCollapsedOnKeyguard;
     private int mMediaTopOffset;
+    private int mMediaDividerHeight;
 
     public QSAnimator(QS qs, QuickQSPanel quickPanel, QSPanel panel, Context context) {
         mContext = context;
@@ -101,6 +102,7 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
         panel.setPageListener(this);
 
         mMediaTopOffset = mContext.getResources().getDimensionPixelSize(R.dimen.quick_settings_top_margin_media_extra);
+        mMediaDividerHeight = mContext.getResources().getDimensionPixelSize(R.dimen.quick_settings_media_divider_height);
     }
 
     public void onRtlChanged() {
@@ -288,13 +290,14 @@ public class QSAnimator implements Callback, PageListener, Listener, OnLayoutCha
         View brightnessView = mQsPanel.getBrightnessView();
         if (brightnessView != null && Utils.useQsMediaPlayer(mContext) && !mQsPanel.shouldUseHorizontalLayout()
                 && mQsPanel.isMediaHostVisible()) {
+            View mQsPanelMediaDividerView = mQsPanel.getDivider();
             View mQsPanelMediaHostView = mQsPanel.getMediaHost().getHostView();
             View mQuickQsPanelMediaHostView = mQuickQsPanel.getMediaHost().getHostView();
             float translation;
             if (!mQsPanel.hasActiveMedia()) {
                 translation = mQsPanelMediaHostView.getHeight() + mMediaTopOffset;
             } else {
-                translation = mQsPanelMediaHostView.getHeight() - mQuickQsPanelMediaHostView.getHeight();
+                translation = mQsPanelMediaHostView.getHeight() - mQuickQsPanelMediaHostView.getHeight() + mMediaDividerHeight;
             }
             mBrightnessAnimator = new TouchAnimator.Builder().addFloat(brightnessView, "translationY", translation, 0)
                     .build();

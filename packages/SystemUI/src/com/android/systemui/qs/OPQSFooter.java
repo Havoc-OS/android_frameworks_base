@@ -58,8 +58,8 @@ import com.android.keyguard.CarrierText;
 import com.android.systemui.R;
 import com.android.systemui.R.dimen;
 import com.android.systemui.plugins.ActivityStarter;
-import com.android.systemui.statusbar.DataUsageView;
 import com.android.systemui.qs.TouchAnimator.Builder;
+import com.android.systemui.statusbar.DataUsageView;
 import com.android.systemui.statusbar.phone.MultiUserSwitch;
 import com.android.systemui.statusbar.phone.SettingsButton;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
@@ -73,7 +73,10 @@ import android.util.Log;
 
 public class OPQSFooter extends LinearLayout {
 
+    private Context mContext;
+    private View mSettingsContainer;
     private SettingsButton mSettingsButton;
+    private View mRunningServicesButton;
     protected View mEdit;
     protected TouchAnimator mFooterAnimator;
     protected TouchAnimator mCarrierTextAnimator;
@@ -86,6 +89,7 @@ public class OPQSFooter extends LinearLayout {
 
     public OPQSFooter(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
     }
 
     @Override
@@ -93,7 +97,9 @@ public class OPQSFooter extends LinearLayout {
         super.onFinishInflate();
 
         mEdit = findViewById(R.id.edit);
+        mRunningServicesButton = findViewById(R.id.running_services_button);
         mSettingsButton = findViewById(R.id.settings_button);
+        mSettingsContainer = findViewById(R.id.settings_button_container);
         mFooterActions = findViewById(R.id.op_qs_footer_actions);
         mCarrierText = findViewById(R.id.qs_carrier_text);
         mDataUsageView = findViewById(R.id.data_usage_view);
@@ -119,9 +125,21 @@ public class OPQSFooter extends LinearLayout {
             }
         }
         mExpanded = expanded;
+        if (mSettingsButton != null) {
+            int visibility = isSettingsEnabled() ? View.VISIBLE : View.GONE;
+            mSettingsButton.setVisibility(visibility);
+        }
+        if (mSettingsContainer != null) {
+            int visibility = isSettingsEnabled() ? View.VISIBLE : View.GONE;
+            mSettingsContainer.setVisibility(visibility);
+        }
         if (mEdit != null) {
-            int visibility = mExpanded ? View.VISIBLE : View.GONE;
+            int visibility = (mExpanded && isEditEnabled()) ? View.VISIBLE : View.GONE;
             mEdit.setVisibility(visibility);
+        }
+        if (mRunningServicesButton != null) {
+            int visibility = (mExpanded && isServicesEnabled()) ? View.VISIBLE : View.GONE;
+            mRunningServicesButton.setVisibility(visibility);
         }
     }
 
@@ -129,6 +147,7 @@ public class OPQSFooter extends LinearLayout {
     private TouchAnimator createFooterAnimator() {
         return new TouchAnimator.Builder()
                 .addFloat(mEdit, "alpha", 0, 0, 1)
+                .addFloat(mRunningServicesButton, "alpha", 0, 0, 1)
                 .addFloat(mDataUsageView, "alpha", 0, 0, 1)
                 .build();
     }
@@ -140,6 +159,10 @@ public class OPQSFooter extends LinearLayout {
                 .build();
     }
 
+    public View getSettingsContainer() {
+        return mSettingsContainer;
+    }
+
     public View getSettingsButton() {
         return mSettingsButton;
     }
@@ -148,13 +171,22 @@ public class OPQSFooter extends LinearLayout {
         return mEdit;
     }
 
-    public void setOrientation(boolean isLandscape) {
-        mIsLandscape = isLandscape;
-        if (mIsLandscape) {
-            mFooterActions.setVisibility(View.GONE);
-        } else {
-            mFooterActions.setVisibility(View.VISIBLE);
-        }
+    public View getServicesButton() {
+        return mRunningServicesButton;
+    }
 
+    public boolean isSettingsEnabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.QS_FOOTER_SHOW_SETTINGS, 1) == 1;
+    }
+
+    public boolean isServicesEnabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.QS_FOOTER_SHOW_SERVICES, 0) == 1;
+    }
+
+    public boolean isEditEnabled() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.QS_FOOTER_SHOW_EDIT, 1) == 1;
     }
 }

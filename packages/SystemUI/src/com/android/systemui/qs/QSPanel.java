@@ -252,13 +252,21 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         if (mOPFooterView.getSettingsButton() != null) {
             mOPFooterView.getSettingsButton().setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                   Dependency.get(ActivityStarter.class).postStartActivityDismissingKeyguard(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                   startSettingsActivity();
                 }
             });
-        } if (mOPFooterView.getEditButton() != null) {
+        }
+        if (mOPFooterView.getEditButton() != null) {
             mOPFooterView.getEditButton().setOnClickListener(view ->
                 Dependency.get(ActivityStarter.class).postQSRunnableDismissingKeyguard(() ->
                         showEdit(view)));
+        }
+        if (mOPFooterView.getServicesButton() != null) {
+            mOPFooterView.getServicesButton().setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                   startRunningServicesActivity();
+                }
+            });
         }
     }
 
@@ -543,21 +551,10 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         updateResources();
 
         updateBrightnessMirror();
-        mIsLandscape = mContext.getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE ? true : false;
+
         if (newConfig.orientation != mLastOrientation) {
             mLastOrientation = newConfig.orientation;
             switchTileLayout();
-        }
-
-        if (mOPFooterView != null) mOPFooterView.setOrientation(mIsLandscape);
-
-        if (mIsLandscape && mUsingMediaPlayer) {
-            LinearLayout.LayoutParams layoutParams = (LayoutParams) mMediaHost.getHostView().getLayoutParams();
-            layoutParams.topMargin = 0;
-        } else if (mUsingMediaPlayer) {
-            LinearLayout.LayoutParams layoutParams = (LayoutParams) mMediaHost.getHostView().getLayoutParams();
-            layoutParams.topMargin = mMediaTotalTopMargin;
         }
     }
 
@@ -633,8 +630,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     private void updateHorizontalLinearLayoutMargins() {
         if (mHorizontalLinearLayout != null && !displayMediaMarginsOnMedia()) {
             LayoutParams lp = (LayoutParams) mHorizontalLinearLayout.getLayoutParams();
-            lp.bottomMargin = mMediaTotalBottomMargin - getPaddingBottom();
-            lp.topMargin = 0;
+            // lp.bottomMargin = mMediaTotalBottomMargin - getPaddingBottom();
             mHorizontalLinearLayout.setLayoutParams(lp);
         }
     }
@@ -731,9 +727,8 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             // carried in the parent of this view (to ensure correct vertical alignment)
             layoutParams.bottomMargin = !horizontal || displayMediaMarginsOnMedia()
                     ? mMediaTotalBottomMargin - getPaddingBottom() : 0;
-            layoutParams.topMargin = mMediaTotalTopMargin;
+            layoutParams.topMargin = 0;
         }
-        
     }
 
     public void updateBrightnessMirror() {
@@ -767,9 +762,26 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             mUiEventLogger.log(openPanelEvent());
             logTiles();
         }
+        if (mOPFooterView.getSettingsButton() != null) {
+            int visibility = mOPFooterView.isSettingsEnabled() ? View.VISIBLE : View.GONE;
+            mOPFooterView.getSettingsButton().setVisibility(visibility);
+        }
+        if (mOPFooterView.getSettingsContainer() != null) {
+            int visibility = mOPFooterView.isSettingsEnabled() ? View.VISIBLE : View.GONE;
+            mOPFooterView.getSettingsContainer().setVisibility(visibility);
+        }
         if (mOPFooterView.getEditButton() != null) {
-            int visibility = mExpanded ? View.VISIBLE : View.INVISIBLE;
+            int visibility = (mExpanded && mOPFooterView.isEditEnabled()) ? View.VISIBLE : View.GONE;
             mOPFooterView.getEditButton().setVisibility(visibility);
+        }
+        if (mOPFooterView.getServicesButton() != null) {
+            int visibility = (mExpanded && mOPFooterView.isServicesEnabled()) ? View.VISIBLE : View.GONE;
+            mOPFooterView.getServicesButton().setVisibility(visibility);
+        }
+        mIsLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        if (mIsLandscape && mUsingMediaPlayer) {
+            LinearLayout.LayoutParams layoutParams = (LayoutParams) mMediaHost.getHostView().getLayoutParams();
+            layoutParams.topMargin = mExpanded ? mMediaTotalTopMargin : 0;
         }
     }
 
@@ -953,6 +965,24 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         return r;
     }
 
+    private void startRunningServicesActivity() {
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                "com.android.settings.Settings$DevRunningServicesActivity");
+        Dependency.get(ActivityStarter.class).startActivity(intent, true /* dismissShade */);
+    }
+
+    private void startConfigCenterActivity() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setClassName("com.android.settings",
+                "com.android.settings.Settings$ConfigCenterActivity");
+        Dependency.get(ActivityStarter.class).startActivity(intent, true /* dismissShade */);
+    }
+
+    private void startSettingsActivity() {
+        Intent intent = new Intent(android.provider.Settings.ACTION_SETTINGS);
+        Dependency.get(ActivityStarter.class).startActivity(intent, true /* dismissShade */);
+    }
 
     public void showEdit(final View v) {
         v.post(new Runnable() {
