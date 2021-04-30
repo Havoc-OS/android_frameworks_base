@@ -232,4 +232,7 @@
     <!-- Sleep Mode -->
     <string name="quick_settings_sleep_mode_label">Sleep Mode</string>
 
+    <!-- Screenshot Delete Toast -->
+    <string name="delete_screenshot_toast">Screenshot deleted</string>
+
 </resources>
