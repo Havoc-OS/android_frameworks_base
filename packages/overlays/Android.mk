@@ -80,7 +80,6 @@ LOCAL_REQUIRED_MODULES := \
 	NavigationBarModeGesturalOverlayNarrowBack \
 	NavigationBarModeGesturalOverlayWideBack \
 	NavigationBarModeGesturalOverlayExtraWideBack \
-	NavigationBarModeGesturalOverlayNoHint \
 	NavigationBarModeGesturalOverlayLong \
 	NavigationBarModeGesturalOverlayMedium \
 	preinstalled-packages-platform-overlays.xml
