@@ -62,7 +62,7 @@ public class FloatingRotationButton implements RotationButton {
         Resources res = mContext.getResources();
         mDiameter = res.getDimensionPixelSize(R.dimen.floating_rotation_button_diameter);
         mMargin = Math.max(res.getDimensionPixelSize(R.dimen.floating_rotation_button_min_margin),
-                res.getDimensionPixelSize(R.dimen.rounded_corner_content_padding));
+                res.getDimensionPixelSize(R.dimen.nav_content_padding));
     }
 
     @Override
