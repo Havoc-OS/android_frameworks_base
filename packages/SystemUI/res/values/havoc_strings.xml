@@ -219,6 +219,7 @@
     <!-- Screenrecorder -->
     <string name="screenrecord_stopdot_label">Show dot to stop recording</string>
     <string name="screenrecord_lowquality_label">Lower recording quality</string>
+    <string name="screenrecord_longer_timeout_switch_label">Increase recording size limit</string>
 
     <!-- Screenshot QS tile -->
     <string name="quick_settings_screenshot_label">Screenshot</string>

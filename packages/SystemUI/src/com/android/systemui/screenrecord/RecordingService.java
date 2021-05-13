@@ -76,6 +76,7 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
     private static final String EXTRA_SHOW_TAPS = "extra_showTaps";
     private static final String EXTRA_SHOW_STOP_DOT = "extra_showStopDot";
     private static final String EXTRA_LOW_QUALITY = "extra_lowQuality";
+    private static final String EXTRA_LONGER_DURATION = "extra_longerDuration";
 
     private static final String ACTION_START = "com.android.systemui.screenrecord.START";
     private static final String ACTION_STOP = "com.android.systemui.screenrecord.STOP";
@@ -97,6 +98,7 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
     private final RecordingServiceBinder mBinder;
 
     private boolean mLowQuality;
+    private boolean mLongerDuration;
     private boolean mShowStopDot;
     private boolean mIsDotAtRight;
     private boolean mDotShowing;
@@ -129,14 +131,16 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
      * @param showTaps   True to make touches visible while recording
      */
     public static Intent getStartIntent(Context context, int resultCode,
-            int audioSource, boolean showTaps, boolean showStopDot, boolean lowQuality) {
+            int audioSource, boolean showTaps, boolean showStopDot,
+            boolean lowQuality, boolean longerDuration) {
         return new Intent(context, RecordingService.class)
                 .setAction(ACTION_START)
                 .putExtra(EXTRA_RESULT_CODE, resultCode)
                 .putExtra(EXTRA_AUDIO_SOURCE, audioSource)
                 .putExtra(EXTRA_SHOW_TAPS, showTaps)
                 .putExtra(EXTRA_SHOW_STOP_DOT, showStopDot)
-                .putExtra(EXTRA_LOW_QUALITY, lowQuality);
+                .putExtra(EXTRA_LOW_QUALITY, lowQuality)
+                .putExtra(EXTRA_LONGER_DURATION, longerDuration);
     }
 
     @Override
@@ -154,7 +158,8 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
                 doStartRecording(intent.getIntExtra(EXTRA_AUDIO_SOURCE, 0),
                         intent.getBooleanExtra(EXTRA_SHOW_TAPS, false),
                         intent.getBooleanExtra(EXTRA_SHOW_STOP_DOT, false),
-                        intent.getBooleanExtra(EXTRA_LOW_QUALITY, false));
+                        intent.getBooleanExtra(EXTRA_LOW_QUALITY, false),
+                        intent.getBooleanExtra(EXTRA_LONGER_DURATION, false));
                 break;
 
             case ACTION_STOP_NOTIF:
@@ -215,7 +220,7 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
         return Service.START_STICKY;
     }
 
-    protected void doStartRecording(int audioSource, boolean showTaps, boolean showStopDot, boolean lowQuality) {
+    protected void doStartRecording(int audioSource, boolean showTaps, boolean showStopDot, boolean lowQuality, boolean longerDuration) {
         int mCurrentUserId = mUserContextTracker.getCurrentUserContext().getUserId();
         mAudioSource = ScreenRecordingAudioSource
                 .values()[audioSource];
@@ -223,6 +228,7 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
         mShowTaps = showTaps;
         mShowStopDot = showStopDot;
         mLowQuality = lowQuality;
+        mLongerDuration = longerDuration;
 
         mOriginalShowTaps = Settings.System.getInt(
                 getApplicationContext().getContentResolver(),
@@ -238,6 +244,7 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
                 this
         );
         setLowQuality(mLowQuality);
+        setLongerDuration(mLongerDuration);
         startRecording();
     }
 
@@ -432,6 +439,12 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
         }
     }
 
+    private void setLongerDuration(boolean longer) {
+        if (getRecorder() != null) {
+            getRecorder().setLongerDuration(longer);
+        }
+    }
+
     private void setTapsVisible(boolean turnOn) {
         int value = turnOn ? 1 : 0;
         Settings.System.putInt(getContentResolver(), Settings.System.SHOW_TOUCHES, value);
@@ -558,8 +571,8 @@ public class RecordingService extends Service implements MediaRecorder.OnInfoLis
         private ArrayList<IRecordingCallback> mCallbackList = new ArrayList<>();
 
         @Override
-        public void startRecording(int audioSource, boolean showTaps, boolean showStopDot, boolean lowQuality) throws RemoteException {
-            doStartRecording(audioSource, showTaps, showStopDot, lowQuality);
+        public void startRecording(int audioSource, boolean showTaps, boolean showStopDot, boolean lowQuality, boolean longerDuration) throws RemoteException {
+            doStartRecording(audioSource, showTaps, showStopDot, lowQuality, longerDuration);
         }
 
         @Override
