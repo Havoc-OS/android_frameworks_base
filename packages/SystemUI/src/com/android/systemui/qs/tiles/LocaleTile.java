@@ -128,7 +128,8 @@ public class LocaleTile extends QSTileImpl<BooleanState> {
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
         state.icon = ResourceIcon.get(R.drawable.ic_qs_locale);
-        state.label = mLocaleList.get(0).getDisplayLanguage();
+        state.label = mContext.getString(R.string.quick_settings_locale_label);
+        state.secondaryLabel = mLocaleList.get(0).getDisplayLanguage();
     }
 
     public void setListening(boolean listening) {
