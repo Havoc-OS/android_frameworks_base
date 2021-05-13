@@ -6211,6 +6211,11 @@ public final class Settings {
         public static final String KEYGUARD_ANTI_FALSING_ENABLED = "keyguard_anti_falsing_enabled";
 
         /**
+         * Wether auto brightness is applied one shot when screen is turned on
+         */
+        public static final String AUTO_BRIGHTNESS_ONE_SHOT = "auto_brightness_one_shot";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
