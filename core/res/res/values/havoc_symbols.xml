@@ -32,12 +32,14 @@
     <!-- Whether to cleanup fingerprints upon connection to the daemon and when user switches -->
     <java-symbol type="bool" name="config_cleanupUnusedFingerprints" />
 
-    <!-- Smart charging -->
-    <java-symbol type="integer" name="config_smartChargingBatteryLevel" />
-    <java-symbol type="integer" name="config_smartChargingBatteryResumeLevel" />
-    <java-symbol type="string" name="config_SmartChargingSysfsNode" />
-    <java-symbol type="string" name="config_SmartChargingSupspendValue" />
-    <java-symbol type="string" name="config_SmartChargingResumeValue" />
+    <!-- Adaptive charging -->
+    <java-symbol type="integer" name="config_adaptiveChargingCutoffLevel" />
+    <java-symbol type="integer" name="config_adaptiveChargingResumeLevel" />
+    <java-symbol type="integer" name="config_adaptiveChargingCutoffTemperature" />
+    <java-symbol type="integer" name="config_adaptiveChargingResumeTemperature" />
+    <java-symbol type="string" name="config_adaptiveChargingSysfsNode" />
+    <java-symbol type="string" name="config_adaptiveChargingSuspendValue" />
+    <java-symbol type="string" name="config_adaptiveChargingResumeValue" />
 
     <!-- Post reset runnable for all clients -->
     <java-symbol type="bool" name="config_fingerprintPostResetRunnableForAllClients" />
@@ -213,9 +215,5 @@
     <!-- Clipboard access toast -->
     <java-symbol type="string" name="app_clipboard_access_denied" />
     <java-symbol type="string" name="app_clipboard_access_granted" />
-
-    <!-- Smart cutoff temperature -->
-    <java-symbol type="integer" name="config_smartCutoffTemperature" />
-    <java-symbol type="integer" name="config_smartCutoffResumeTemperature" />
 
 </resources>
