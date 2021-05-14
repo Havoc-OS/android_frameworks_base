@@ -98,7 +98,8 @@
                 android:focusable="true"
                 android:padding="@dimen/qs_footer_icon_padding"
                 android:src="@*android:drawable/ic_mode_edit"
-                android:tint="?android:attr/colorForeground" />
+                android:tint="?android:attr/colorForeground"
+                android:visibility="gone" />
 
             <com.android.keyguard.AlphaOptimizedImageButton
                 android:id="@+id/running_services_button"
@@ -111,7 +112,8 @@
                 android:focusable="true"
                 android:padding="@dimen/qs_footer_icon_padding"
                 android:src="@drawable/ic_settings_memory"
-                android:tint="?android:attr/colorForeground"/>
+                android:tint="?android:attr/colorForeground"
+                android:visibility="gone" />
 
             <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
                 android:id="@+id/settings_button_container"
