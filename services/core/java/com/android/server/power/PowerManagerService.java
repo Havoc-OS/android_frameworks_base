@@ -2256,28 +2256,31 @@ public final class PowerManagerService extends SystemService
         boolean levelCutoffEnabled = mAdaptiveChargingEnabled && mAdaptiveChargingMode != 1;
         boolean temperatureCutoffEnabled = mAdaptiveChargingEnabled && mAdaptiveChargingMode != 0;
         if (mPowerInputSuspended) {
-            if (temperatureCutoffEnabled && (mBatteryTemperature >= mAdaptiveChargingCutoffTemperature)) {
-                return;
-            } else if (!mAdaptiveChargingEnabled || (temperatureCutoffEnabled &&
-                    (mBatteryTemperature <= mAdaptiveChargingResumeTemperature)) || 
-                    (levelCutoffEnabled && (mBatteryLevel <= mAdaptiveChargingResumeLevel))) {
+            boolean resumeByLevel = !levelCutoffEnabled || (levelCutoffEnabled &&
+                    (mBatteryLevel <= mAdaptiveChargingResumeLevel));
+            boolean resumeByTemperature = !temperatureCutoffEnabled || (temperatureCutoffEnabled &&
+                    (mBatteryTemperature <= mAdaptiveChargingResumeTemperature));
+            // Charging should only be resumed when all factors vote yes
+            if (resumeByLevel && resumeByTemperature) {
                 setChargingStatus(true);
                 return;
             }
         } else {
-            if (levelCutoffEnabled && (mBatteryLevel >= mAdaptiveChargingCutoffLevel)) {
-                if (mAdaptiveChargingResetStats) {
+            boolean suspendByLevel = levelCutoffEnabled &&
+                    (mBatteryLevel >= mAdaptiveChargingCutoffLevel);
+            boolean suspendByTemperature = temperatureCutoffEnabled &&
+                    (mBatteryTemperature >= mAdaptiveChargingCutoffTemperature);
+            // Charging should be suspended when any of the factors vote yes
+            if (suspendByLevel || suspendByTemperature) {
+                setChargingStatus(false);
+
+                if (suspendByLevel && mAdaptiveChargingResetStats) {
                     try {
                         mBatteryStats.resetStatistics();
                     } catch (RemoteException e) {
                         Slog.e(TAG, "failed to reset battery statistics");
                     }
                 }
-                setChargingStatus(false);
-                return;
-            } else if (temperatureCutoffEnabled && (mBatteryTemperature >= mAdaptiveChargingCutoffTemperature)) {
-                setChargingStatus(false);
-                return;
             }
         }
     }
