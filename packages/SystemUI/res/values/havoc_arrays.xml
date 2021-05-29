@@ -16,49 +16,6 @@
 -->
 <resources>
 
-    <!-- FOD icon dim control -->
-    <integer-array name="config_FODiconDimAmount">
-        <item>255</item>
-        <item>224</item>
-        <item>213</item>
-        <item>211</item>
-        <item>208</item>
-        <item>206</item>
-        <item>203</item>
-        <item>200</item>
-        <item>196</item>
-        <item>186</item>
-        <item>176</item>
-        <item>160</item>
-        <item>139</item>
-        <item>114</item>
-        <item>90</item>
-        <item>56</item>
-        <item>14</item>
-        <item>0</item>
-    </integer-array>
-
-    <integer-array name="config_FODiconDisplayBrightness">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>8</item>
-        <item>10</item>
-        <item>15</item>
-        <item>20</item>
-        <item>30</item>
-        <item>45</item>
-        <item>70</item>
-        <item>100</item>
-        <item>150</item>
-        <item>227</item>
-        <item>255</item>
-    </integer-array>
-
     <!-- Cardinal directions for the compass tile -->
     <string-array name="cardinal_directions">
         <item>@string/quick_settings_compass_N</item>  <!-- North -->
