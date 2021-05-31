@@ -673,6 +673,9 @@
     <protected-broadcast android:name="android.intent.action.GAMING_MODE_TURN_OFF" />
     <protected-broadcast android:name="android.intent.action.GAMING_MODE_TURN_ON" />
 
+    <!-- Sleep Mode -->
+    <protected-broadcast android:name="android.intent.action.SLEEP_MODE_TURN_OFF" />
+
     <!-- IMS Status -->
     <protected-broadcast android:name="android.intent.action.IMS_REGISTRATION_CHANGED" />
 

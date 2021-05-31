@@ -310,7 +310,7 @@ public final class TwilightService extends SystemService
     private static TwilightState getManualTwilightState(long timeMillis) {
         final Calendar sunrise = Calendar.getInstance();
         sunrise.setTimeInMillis(timeMillis);
-        sunrise.set(Calendar.HOUR_OF_DAY, 6);
+        sunrise.set(Calendar.HOUR_OF_DAY, 7);
         sunrise.set(Calendar.MINUTE, 0);
         sunrise.set(Calendar.SECOND, 0);
         sunrise.set(Calendar.MILLISECOND, 0);

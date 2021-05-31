@@ -57,6 +57,7 @@ import com.android.systemui.qs.tiles.ReadingModeTile;
 import com.android.systemui.qs.tiles.RotationLockTile;
 import com.android.systemui.qs.tiles.ScreenRecordTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
+import com.android.systemui.qs.tiles.SleepModeTile;
 import com.android.systemui.qs.tiles.SmartPixelsTile;
 import com.android.systemui.qs.tiles.SoundSearchTile;
 import com.android.systemui.qs.tiles.SyncTile;
@@ -122,6 +123,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<PowerMenuTile> mPowerMenuTileProvider;
     private final Provider<VolumeTile> mVolumeTileProvider;
     private final Provider<ScreenshotTile> mScreenshotTileProvider;
+    private final Provider<SleepModeTile> mSleepModeTileProvider;
 
     private final Lazy<QSHost> mQsHostLazy;
 
@@ -168,7 +170,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<LocaleTile> localeTileProvider,
             Provider<PowerMenuTile> powerMenuTileProvider,
             Provider<VolumeTile> volumeTileProvider,
-            Provider<ScreenshotTile> screenshotTileProvider) {
+            Provider<ScreenshotTile> screenshotTileProvider,
+            Provider<SleepModeTile> sleepModeTileProvider) {
         mQsHostLazy = qsHostLazy;
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
@@ -212,6 +215,7 @@ public class QSFactoryImpl implements QSFactory {
         mPowerMenuTileProvider = powerMenuTileProvider;
         mVolumeTileProvider = volumeTileProvider;
         mScreenshotTileProvider = screenshotTileProvider;
+        mSleepModeTileProvider = sleepModeTileProvider;
     }
 
     public QSTile createTile(String tileSpec) {
@@ -307,6 +311,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mVolumeTileProvider.get();
             case "screenshot":
                 return mScreenshotTileProvider.get();
+            case "sleep_mode":
+                return mSleepModeTileProvider.get();
         }
 
         // Custom tiles
