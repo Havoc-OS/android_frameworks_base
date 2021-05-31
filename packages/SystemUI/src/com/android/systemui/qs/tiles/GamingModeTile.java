@@ -37,9 +37,14 @@ import javax.inject.Inject;
 
 public class GamingModeTile extends QSTileImpl<BooleanState> {
 
+    private static final ComponentName GAMING_MODE_SETTING_COMPONENT = new ComponentName(
+            "com.android.settings", "com.android.settings.Settings$GamingModeActivity");
+
+    private static final Intent GAMING_MODE_SETTINGS =
+            new Intent().setComponent(GAMING_MODE_SETTING_COMPONENT);
+
     private final SystemSetting mGamingModeActivated;
     private final Icon mIcon = ResourceIcon.get(R.drawable.ic_qs_gaming_mode);
-    private static final Intent GAMING_MODE_SETTINGS = new Intent("android.settings.GAMING_MODE_SETTINGS");
 
     @Inject
     public GamingModeTile(QSHost host) {
