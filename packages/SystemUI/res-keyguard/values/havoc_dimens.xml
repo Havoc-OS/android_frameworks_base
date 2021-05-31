@@ -16,7 +16,9 @@
 -->
 <resources>
 
-    <!-- Custom Clock -->
+    <!-- Custom Clocks -->
     <dimen name="keyguard_status_area_typeclock_padding">32dp</dimen>
-    <dimen name="custom_clock_left_padding">50dp</dimen>
+    <dimen name="type_clock_left_padding">50dp</dimen>
+    <dimen name="oos_clock_left_padding">20dp</dimen>
+
 </resources>

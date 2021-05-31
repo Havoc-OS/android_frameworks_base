@@ -307,12 +307,17 @@ public class KeyguardStatusView extends GridLayout implements
             final ContentResolver resolver = mContext.getContentResolver();
             String currentClock = Settings.Secure.getString(
                 resolver, Settings.Secure.LOCK_SCREEN_CUSTOM_CLOCK_FACE);
-            boolean mCustomClockSelection = currentClock == null ? false : currentClock.contains("Type");
+            boolean mCustomClockSelectionType = currentClock == null ? false : currentClock.contains("TypeClockController");
+            boolean mCustomClockSelectionOOS = currentClock == null ? false : currentClock.contains("OOS");
 
-            // If text style clock, align the textView to start else keep it center.
-            if (mCustomClockSelection) {
+            // If left aligned style clock, align the textView to start else keep it center.
+            if (mCustomClockSelectionType) {
                 mOwnerInfo.setPaddingRelative((int) mContext.getResources()
-                    .getDimension(R.dimen.custom_clock_left_padding) + 8, 0, 0, 0);
+                    .getDimension(R.dimen.type_clock_left_padding) + 8, 0, 0, 0);
+                mOwnerInfo.setGravity(Gravity.START);
+            } else if (mCustomClockSelectionOOS) {
+                mOwnerInfo.setPaddingRelative((int) mContext.getResources()
+                    .getDimension(R.dimen.oos_clock_left_padding) + 8, 0, 0, 0);
                 mOwnerInfo.setGravity(Gravity.START);
             } else {
                 mOwnerInfo.setPaddingRelative(0, 0, 0, 0);
