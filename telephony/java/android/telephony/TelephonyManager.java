@@ -6104,26 +6104,6 @@ public class TelephonyManager {
     }
 
     /**
-     * @hide
-     */
-    public void toggle2G(boolean twoGees) {
-        try {
-            getITelephony().toggle2G(twoGees);
-        } catch (RemoteException e) {
-        }
-    }
-
-    /**
-     * @hide
-     */
-    public void toggle3G(boolean threeGees) {
-        try {
-            getITelephony().toggle3G(threeGees);
-        } catch (RemoteException e) {
-        }
-    }
-
-    /**
      * Returns the MMS user agent.
      */
     public String getMmsUserAgent() {
