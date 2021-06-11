@@ -111,6 +111,7 @@ public class NetworkControllerImpl extends BroadcastReceiver
     private Config mConfig;
 
     private boolean mShowImsIcon = true;
+    private boolean mInvertImsSlots;
 
     private PhoneStateListener mPhoneStateListener;
     private int mActiveMobileDataSubscription = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
@@ -227,6 +228,8 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
         // wifi
         mWifiManager = wifiManager;
+
+        mInvertImsSlots = mContext.getResources().getBoolean(R.bool.config_invertImsSlots);
 
         Dependency.get(TunerService.class).addTunable(this, "ims");
         mLocale = mContext.getResources().getConfiguration().locale;
@@ -548,10 +551,10 @@ public class NetworkControllerImpl extends BroadcastReceiver
             mobileSignalController.notifyListeners(cb);
         }
         if (mMobileSignalControllers.size() == 2) {
-            boolean volte1 = mMobileSignalControllers.valueAt(1).isVolteAvailable();
-            boolean volte2 = mMobileSignalControllers.valueAt(0).isVolteAvailable();
-            boolean vowifi1 = mMobileSignalControllers.valueAt(1).isVowifiAvailable();
-            boolean vowifi2 = mMobileSignalControllers.valueAt(0).isVowifiAvailable();
+            boolean volte1 = mMobileSignalControllers.valueAt(mInvertImsSlots ? 1 : 0).isVolteAvailable();
+            boolean volte2 = mMobileSignalControllers.valueAt(mInvertImsSlots ? 0 : 1).isVolteAvailable();
+            boolean vowifi1 = mMobileSignalControllers.valueAt(mInvertImsSlots ? 1 : 0).isVowifiAvailable();
+            boolean vowifi2 = mMobileSignalControllers.valueAt(mInvertImsSlots ? 0 : 1).isVowifiAvailable();
             cb.setImsIcon(new ImsIconState((volte1 || volte2) && mShowImsIcon,
                     (vowifi1 || vowifi2) && mShowImsIcon,
                     getVolteResId(volte1, volte2),
@@ -583,10 +586,10 @@ public class NetworkControllerImpl extends BroadcastReceiver
 
     public void updateImsIcon() {
         if (mMobileSignalControllers.size() == 2) {
-            boolean volte1 = mMobileSignalControllers.valueAt(1).isVolteAvailable();
-            boolean volte2 = mMobileSignalControllers.valueAt(0).isVolteAvailable();
-            boolean vowifi1 = mMobileSignalControllers.valueAt(1).isVowifiAvailable();
-            boolean vowifi2 = mMobileSignalControllers.valueAt(0).isVowifiAvailable();
+            boolean volte1 = mMobileSignalControllers.valueAt(mInvertImsSlots ? 1 : 0).isVolteAvailable();
+            boolean volte2 = mMobileSignalControllers.valueAt(mInvertImsSlots ? 0 : 1).isVolteAvailable();
+            boolean vowifi1 = mMobileSignalControllers.valueAt(mInvertImsSlots ? 1 : 0).isVowifiAvailable();
+            boolean vowifi2 = mMobileSignalControllers.valueAt(mInvertImsSlots ? 0 : 1).isVowifiAvailable();
             mCallbackHandler.setImsIcon(new ImsIconState((volte1 || volte2) && mShowImsIcon,
                     (vowifi1 || vowifi2) && mShowImsIcon,
                     getVolteResId(volte1, volte2),
