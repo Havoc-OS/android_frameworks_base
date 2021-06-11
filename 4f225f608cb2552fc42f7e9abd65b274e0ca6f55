@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a8c90b_691ce24c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000006
+      },
+      "writtenOn": "2021-06-11T13:10:41Z",
+      "side": 1,
+      "message": "Not needed as this is already present on the top of volume panel. The same behavior can be replicated by using vol up + power key",
+      "revId": "4f225f608cb2552fc42f7e9abd65b274e0ca6f55",
+      "serverId": "9060a12c-e4ac-4c6f-a232-1777a55b3a69"
+    }
+  ]
+}
