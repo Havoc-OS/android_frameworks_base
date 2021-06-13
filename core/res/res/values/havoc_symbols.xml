@@ -87,8 +87,6 @@
     <java-symbol type="bool" name="config_filterDisplayModes" />
     <java-symbol type="array" name="config_displayModeMappings" />
 
-    <java-symbol type="bool" name="config_hasOnePlusHapticMotor" />
-
     <!-- Pocket Lock -->
     <java-symbol type="layout" name="pocket_lock_view" />
     <java-symbol type="string" name="config_pocketBridgeSysfsInpocket" />
