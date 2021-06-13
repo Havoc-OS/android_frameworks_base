@@ -39,6 +39,7 @@ import com.android.internal.logging.UiEvent;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.UiEventLoggerImpl;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.util.IndentingPrintWriter;
 import com.android.systemui.Dependency;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.dock.DockManager;
@@ -430,15 +431,12 @@ public class DozeTriggers implements DozeMachine.Part {
                 break;
             case DOZE_PULSE_DONE:
                 mDozeSensors.requestTemporaryDisable();
-                // A pulse will temporarily disable sensors that require a touch screen.
-                // Let's make sure that they are re-enabled when the pulse is over.
-                mDozeSensors.updateListening();
                 break;
             case FINISH:
                 mBroadcastReceiver.unregister(mBroadcastDispatcher);
                 mDozeHost.removeCallback(mHostCallback);
                 mDockManager.removeListener(mDockEventListener);
-                mDozeSensors.setListening(false);
+                mDozeSensors.setListening(false, false);
                 mDozeSensors.setProxListening(false);
                 mWantSensors = false;
                 mWantProx = false;
@@ -446,25 +444,16 @@ public class DozeTriggers implements DozeMachine.Part {
                 break;
             default:
         }
+        mDozeSensors.setListening(mWantSensors, mWantTouchScreenSensors);
     }
 
     @Override
     public void onScreenState(int state) {
         mDozeSensors.onScreenState(state);
-        if (state == Display.STATE_DOZE || state == Display.STATE_DOZE_SUSPEND
-                || state == Display.STATE_OFF) {
-            mDozeSensors.setProxListening(mWantProx);
-            mDozeSensors.setListening(mWantSensors);
-            if (mConfig.deviceHasWeirtdDtSensor() && mWantTouchScreenSensors) {
-                mDozeSensors.setTouchscreenSensorsListening(false);
-                mDozeSensors.setTouchscreenSensorsListening(true);
-            } else {
-                mDozeSensors.setTouchscreenSensorsListening(mWantTouchScreenSensors);
-            }
-        } else {
-            mDozeSensors.setProxListening(false);
-            mDozeSensors.setListening(mWantSensors);
-        }
+        mDozeSensors.setProxListening(mWantProx && (state == Display.STATE_DOZE
+                || state == Display.STATE_DOZE_SUSPEND
+                || state == Display.STATE_OFF));
+        mDozeSensors.setListening(mWantSensors, mWantTouchScreenSensors);
     }
 
     private void checkTriggersAtInit() {
@@ -567,7 +556,9 @@ public class DozeTriggers implements DozeMachine.Part {
 
         pw.println(" pulsePending=" + mPulsePending);
         pw.println("DozeSensors:");
-        mDozeSensors.dump(pw);
+        IndentingPrintWriter idpw = new IndentingPrintWriter(pw, "  ");
+        idpw.increaseIndent();
+        mDozeSensors.dump(idpw);
     }
 
     private class TriggerReceiver extends BroadcastReceiver {
