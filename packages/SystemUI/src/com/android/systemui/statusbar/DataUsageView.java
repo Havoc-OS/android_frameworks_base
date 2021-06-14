@@ -73,7 +73,8 @@ public class DataUsageView extends TextView {
             } else {
                 template = NetworkTemplate.buildTemplateWifi(wifiInfo.getSSID());
             }
-            info = dataController.getDataUsageInfo(template);
+            info = showDailyDataUsage ? dataController.getDailyDataUsageInfo(template)
+                    : dataController.getDataUsageInfo(template);
             prefix = mContext.getResources().getString(R.string.usage_wifi_prefix);
         } else {
             dataController.setSubscriptionId(SubscriptionManager.getDefaultDataSubscriptionId());
