@@ -97,6 +97,7 @@ public class BrightnessController implements ToggleSlider.Listener {
     private boolean mControlValueInitialized;
 
     private ValueAnimator mSliderAnimator;
+    private float mBrightnessRampRate;
     private static final float mDefaultBrightnessRampRateSlow = 0.2352941f;
     private final float mBrightnessRampRateSlow;
 
@@ -332,6 +333,8 @@ public class BrightnessController implements ToggleSlider.Listener {
                 Context.VR_SERVICE));
 
         final Resources resources = context.getResources();
+        mBrightnessRampRate = resources.getFloat(
+                com.android.internal.R.dimen.config_brightnessRampRateFastFloat);
         mBrightnessRampRateSlow = resources.getFloat(
                 com.android.internal.R.dimen.config_brightnessRampRateSlowFloat);
     }
@@ -476,8 +479,8 @@ public class BrightnessController implements ToggleSlider.Listener {
             mControl.setValue((int) animation.getAnimatedValue());
             mExternalChange = false;
         });
-        final long animationDuration = SLIDER_ANIMATION_DURATION * Math.abs(
-                mControl.getValue() - target) / GAMMA_SPACE_MAX;
+        final long animationDuration = Math.round(SLIDER_ANIMATION_DURATION * Math.abs(
+                mControl.getValue() - target) / mBrightnessRampRate) / GAMMA_SPACE_MAX;
         mSliderAnimator.setDuration(animationDuration);
         // Only override the duration scale when the ramp rate is different from the default value
         if (mBrightnessRampRateSlow > 0 &&
