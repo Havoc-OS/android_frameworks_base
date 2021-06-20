@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "143066bb_e2d0e11f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-20T19:02:00Z",
+      "side": 1,
+      "message": "I tested, some custom ROM have this problem. This problem since Android 4.3.",
+      "revId": "b189afd3bb141b4ac0d3eeceee2d3fc729ab300d",
+      "serverId": "9060a12c-e4ac-4c6f-a232-1777a55b3a69"
+    }
+  ]
+}
