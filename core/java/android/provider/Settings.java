@@ -6065,6 +6065,13 @@ public final class Settings {
         public static final String QS_FOOTER_SHOW_SETTINGS = "qs_footer_show_settings";
 
         /**
+         * Show Auto brightness icon in QS Footer.
+         *
+         * @hide
+         */
+        public static final String QS_FOOTER_SHOW_BRIGHTNESS_ICON = "qs_footer_show_brightness_icon";
+
+        /**
          * Show Running Services icon in QS Footer.
          *
          * @hide

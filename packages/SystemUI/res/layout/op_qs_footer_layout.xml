@@ -101,6 +101,20 @@
                 android:tint="?android:attr/colorForeground"
                 android:visibility="gone" />
 
+            <ImageView
+                android:id="@+id/auto_brightness_button"
+                android:layout_width="@dimen/qs_footer_action_button_size"
+                android:layout_height="@dimen/qs_footer_action_button_size"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:clipToPadding="false"
+                android:contentDescription="@string/accessibility_quick_settings_auto_brightness"
+                android:focusable="true"
+                android:padding="@dimen/qs_footer_icon_padding"
+                android:src="@drawable/ic_qs_brightness_auto_off"
+                android:tint="?android:attr/colorForeground"
+                android:visibility="gone" />
+
             <com.android.keyguard.AlphaOptimizedImageButton
                 android:id="@+id/running_services_button"
                 android:layout_width="@dimen/qs_footer_action_button_size"

@@ -229,4 +229,7 @@
     <string name="quick_settings_full_screenshot_label">Full</string>
     <string name="quick_settings_region_screenshot_label">Partial</string>
 
+    <!-- Accessibility label for button to toggle auto brightness [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_auto_brightness">Toggle auto brightness.</string>
+
 </resources>

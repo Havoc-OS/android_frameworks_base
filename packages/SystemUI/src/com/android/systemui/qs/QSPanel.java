@@ -31,8 +31,10 @@ import android.metrics.LogMaker;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.UserHandle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -94,6 +96,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     private final BroadcastDispatcher mBroadcastDispatcher;
     protected final MediaHost mMediaHost;
     private OPQSFooter mOPFooterView;
+    private volatile boolean mAutomatic;
 
     /**
      * The index where the content starts that needs to be moved between parents
@@ -263,6 +266,13 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 }
             });
             mOPFooterView.getSettingsButton().setOnLongClickListener(this);
+        }
+        if (mOPFooterView.getBrightnessButton() != null) {
+            mOPFooterView.getBrightnessButton().setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                   toggleAutoBrightness();
+                }
+            });
         }
         if (mOPFooterView.getEditButton() != null) {
             mOPFooterView.getEditButton().setOnClickListener(view ->
@@ -778,6 +788,11 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             int visibility = mOPFooterView.isSettingsEnabled() ? View.VISIBLE : View.GONE;
             mOPFooterView.getSettingsContainer().setVisibility(visibility);
         }
+        if (mOPFooterView.getBrightnessButton() != null) {
+            int visibility = (mExpanded && mOPFooterView.isBrightnessEnabled()) ? View.VISIBLE : View.GONE;
+            mOPFooterView.getBrightnessButton().setVisibility(visibility);
+            updateBrightnessIcon();
+        }
         if (mOPFooterView.getEditButton() != null) {
             int visibility = (mExpanded && mOPFooterView.isEditEnabled()) ? View.VISIBLE : View.GONE;
             mOPFooterView.getEditButton().setVisibility(visibility);
@@ -984,6 +999,28 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             }
         }
         return false;
+    }
+
+    private void toggleAutoBrightness() {
+        Settings.System.putIntForUser(mContext.getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS_MODE, mAutomatic ?
+                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL :
+                Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC,
+                UserHandle.USER_CURRENT);
+        updateBrightnessIcon();
+    }
+
+    private void updateBrightnessIcon() {
+        int automatic = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS_MODE,
+                Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL,
+                UserHandle.USER_CURRENT);
+        mAutomatic = automatic != Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+        if (mOPFooterView.getBrightnessButton() != null) {
+            mOPFooterView.getBrightnessButton().setImageResource(mAutomatic ?
+                    com.android.systemui.R.drawable.ic_qs_brightness_auto_on :
+                    com.android.systemui.R.drawable.ic_qs_brightness_auto_off);
+        }
     }
 
     private void startRunningServicesActivity() {
