@@ -71,7 +71,7 @@ class FODAnimation(context: Context, y: Int) : ImageView(context) {
         if (!showing && isKeyguard && canUnlock) {
             showing = true
             visibility = VISIBLE
-            recognizingAnim?.start()
+            if (recognizingAnim != null) recognizingAnim?.start()
         }
     }
 
