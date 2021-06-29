@@ -16,6 +16,11 @@
 
 package com.android.systemui.biometrics;
 
+import static android.app.WindowConfiguration.ACTIVITY_TYPE_ASSISTANT;
+import static android.app.WindowConfiguration.WINDOWING_MODE_UNDEFINED;
+
+import android.app.ActivityManager.StackInfo;
+import android.app.ActivityTaskManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -50,6 +55,8 @@ import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
+import com.android.systemui.shared.system.ActivityManagerWrapper;
+import com.android.systemui.shared.system.TaskStackChangeListener;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener;
 
@@ -92,6 +99,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     private boolean mShouldRemoveIconOnAOD;
     private boolean mScreenOffFodEnabled;
     private boolean mScreenOffFodIconEnabled;
+    private boolean mIsAssistantVisible = false;
 
     private Handler mHandler;
 
@@ -237,6 +245,28 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         }
     };
 
+    private final TaskStackChangeListener
+            mTaskStackChangeListener = new TaskStackChangeListener() {
+        @Override
+        public void onTaskStackChangedBackground() {
+            try {
+                StackInfo stackInfo = ActivityTaskManager.getService().getStackInfo(
+                        WINDOWING_MODE_UNDEFINED, ACTIVITY_TYPE_ASSISTANT);
+                if (stackInfo == null && mIsAssistantVisible) {
+                        mIsAssistantVisible = false;
+                        if (mUpdateMonitor.isFingerprintDetectionRunning()) {
+                            mHandler.post(() -> show());
+                    }
+                    return;
+                }
+                mIsAssistantVisible = stackInfo.visible;
+                if (mIsAssistantVisible) {
+                    mHandler.post(() -> hide());
+                }
+            } catch (RemoteException ignored) { }
+        }
+    };
+
     private boolean mCutoutMasked;
     private int mStatusbarHeight;
     private class CustomSettingsObserver extends ContentObserver {
@@ -355,6 +385,20 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
     
         updateCutoutFlags();
         Dependency.get(ConfigurationController.class).addCallback(this);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        ActivityManagerWrapper.getInstance().registerTaskStackListener(
+                mTaskStackChangeListener);
+        super.onAttachedToWindow();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        ActivityManagerWrapper.getInstance().unregisterTaskStackListener(
+                mTaskStackChangeListener);
+        super.onDetachedFromWindow();
     }
 
     @Override
@@ -509,6 +553,11 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         if (mIsKeyguard && mUpdateMonitor.getUserCanSkipBouncer(mUpdateMonitor.getCurrentUser())) {
             // Ignore show calls if user can skip bouncer
+            return;
+        }
+
+        if (mIsAssistantVisible) {
+            // Don't show when assistant UI is visible
             return;
         }
 
