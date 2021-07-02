@@ -470,7 +470,7 @@ public abstract class KernelCpuUidTimeReader<T> {
                 // Unit is 10ms.
                 mDeltaTimes[i] = mCurTimes[i] - lastTimes[i];
                 if (mDeltaTimes[i] < 0) {
-                    Slog.e(mTag, "Negative delta from freq time proc: " + mDeltaTimes[i]);
+                    //Slog.e(mTag, "Negative delta from freq time proc: " + mDeltaTimes[i]);
                     valid = false;
                 }
                 notify |= mDeltaTimes[i] > 0;
