@@ -158,10 +158,8 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         public void onDreamingStateChanged(boolean dreaming) {
             mIsDreaming = dreaming;
 
-            if (mIsKeyguard && mUpdateMonitor.isFingerprintDetectionRunning()) {
+            if (mIsKeyguard && mIsBiometricRunning) {
                 show();
-            } else {
-                hide();
             }
 
             if (dreaming) {
@@ -201,15 +199,13 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         @Override
         public void onKeyguardBouncerChanged(boolean isBouncer) {
             mIsBouncer = isBouncer;
-            if (mUpdateMonitor.isFingerprintDetectionRunning()) {
+            if (mIsBiometricRunning) {
                 if (isPinOrPattern(mUpdateMonitor.getCurrentUser()) || !isBouncer) {
                     mIsAssistantVisible = false;
                     show();
                 } else {
                     hide();
                 }
-            } else {
-                hide();
             }
         }
 
@@ -220,14 +216,14 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         @Override
         public void onStartedWakingUp() {
-            if (mUpdateMonitor.isFingerprintDetectionRunning() && mIsKeyguard) {
+            if (mIsBiometricRunning && mIsKeyguard) {
                 show();
             }
         }
 
         @Override
         public void onScreenTurnedOn() {
-            if (mUpdateMonitor.isFingerprintDetectionRunning() && mIsKeyguard) {
+            if (mIsBiometricRunning && mIsKeyguard) {
                 show();
                 if (!mShouldRemoveIconOnAOD) triggerFodIconAnimation();
             }
