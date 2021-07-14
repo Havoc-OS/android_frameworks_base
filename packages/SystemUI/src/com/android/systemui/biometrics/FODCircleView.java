@@ -19,6 +19,7 @@ package com.android.systemui.biometrics;
 import static android.app.WindowConfiguration.ACTIVITY_TYPE_ASSISTANT;
 import static android.app.WindowConfiguration.WINDOWING_MODE_UNDEFINED;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager.StackInfo;
 import android.app.ActivityTaskManager;
 import android.app.admin.DevicePolicyManager;
@@ -260,7 +261,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
                     }
                     return;
                 }
-                mIsAssistantVisible = stackInfo.visible;
+                if (stackInfo != null) mIsAssistantVisible = stackInfo.visible;
                 if (mIsAssistantVisible) {
                     mHandler.post(() -> hide());
                 }
@@ -305,6 +306,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
     private CustomSettingsObserver mCustomSettingsObserver;
 
+    @SuppressLint("RtlHardcoded")
     public FODCircleView(Context context) {
         super(context);
         mContext = context;
@@ -327,10 +329,10 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
 
         Resources res = context.getResources();
 
-        mPaintFingerprint.setColor(res.getColor(R.color.config_fodColor));
+        mPaintFingerprint.setColor(res.getColor(R.color.config_fodColor, null));
         mPaintFingerprint.setAntiAlias(true);
 
-        mPaintFingerprintBackground.setColor(res.getColor(R.color.config_fodColorBackground));
+        mPaintFingerprintBackground.setColor(res.getColor(R.color.config_fodColorBackground, null));
         mPaintFingerprintBackground.setAntiAlias(true);
 
         mWindowManager = context.getSystemService(WindowManager.class);
@@ -410,6 +412,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         super.onDraw(canvas);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getAxisValue(MotionEvent.AXIS_X);
@@ -608,6 +611,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
                 || !biometrics) && !mFpDisabled;
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     private void updatePosition() {
         Display defaultDisplay = mWindowManager.getDefaultDisplay();
 
