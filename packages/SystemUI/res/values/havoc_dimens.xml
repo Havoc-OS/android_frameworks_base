@@ -85,9 +85,6 @@
     <!-- Margin on the left side of the heads up notification -->
     <dimen name="heads_up_status_bar_padding_start">0dp</dimen>
 
-    <!-- Biometric Prompt -->
-    <dimen name="biometric_dialog_fod_margin">12dp</dimen>
-
     <!-- Starting padding for a left-aligned quick status bar clock -->
     <dimen name="quick_status_bar_left_clock_starting_padding">0dp</dimen>
 
