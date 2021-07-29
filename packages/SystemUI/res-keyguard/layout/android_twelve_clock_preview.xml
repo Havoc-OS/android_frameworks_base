@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright (C) 2019 The Android Open Source Project
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
+        android:gravity="center"
+        android:lineSpacingMultiplier="0.9"
+        android:text="6:09"
+        android:textAlignment="center"
+        android:textColor="?attr/colorAccent"
+        android:textFontWeight="300"
+        android:textSize="80dp"
+        android:theme="@style/TextAppearance.Keyguard"
+        android:translationY="20dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/clock"
+        android:layout_marginStart="-60dp"
+        android:layout_marginTop="190dp"
+        android:gravity="center|top"
+        android:letterSpacing="0.02"
+        android:singleLine="true"
+        android:text="Jul 05, 29 July"
+        android:textColor="?attr/colorAccent"
+        android:textSize="20dp"
+        android:theme="@style/TextAppearance.Keyguard"
+        android:visibility="visible" />
+</FrameLayout>

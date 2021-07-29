@@ -424,5 +424,6 @@ number">%d</xliff:g> remaining attempts before SIM becomes permanently unusable.
     <!-- Name of the "Type" clock face [CHAR LIMIT=15]-->
     <string name="clock_title_type">Type</string>
     <string name="clock_title_type_alt" translatable="false">Type (Center)</string>
+    <string name="clock_title_ssos_twelve" translatable="false">Twelve</string>
 
 </resources>
