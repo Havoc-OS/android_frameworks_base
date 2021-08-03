@@ -49,8 +49,6 @@ import com.android.systemui.util.InjectionInflationController;
 import com.android.systemui.util.LifecycleFragment;
 import com.android.systemui.util.Utils;
 
-import com.android.systemui.qs.OPQSFooter;
-
 import javax.inject.Inject;
 
 public class QSFragment extends LifecycleFragment implements QS, CommandQueue.Callbacks,
@@ -140,7 +138,7 @@ public class QSFragment extends LifecycleFragment implements QS, CommandQueue.Ca
         mHeader = view.findViewById(R.id.header);
         mQSPanel.setHeaderContainer(view.findViewById(R.id.header_text_container));
         mFooter = view.findViewById(R.id.qs_footer);
-        mOPFooter = view.findViewById(R.id.op_qs_footer);
+        mOPFooter = mQSPanel.findViewById(R.id.op_qs_footer);
         mContainer = view.findViewById(id.quick_settings_container);
 
         mQSContainerImplController = mQSContainerImplControllerBuilder

@@ -15,7 +15,8 @@
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:systemui="http://schemas.android.com/apk/res-auto"
-    android:layout_height="wrap_content"
+    android:id="@+id/brightness_view"
+    android:layout_height="@dimen/brightness_slider_height"
     android:layout_width="match_parent"
     android:layout_marginStart="@dimen/qs_footer_margin"
     android:layout_marginEnd="@dimen/qs_footer_margin"
@@ -25,7 +26,7 @@
     <com.android.systemui.settings.ToggleSliderView
         android:id="@+id/brightness_slider"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:contentDescription="@string/accessibility_brightness"

@@ -95,7 +95,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     protected final ArrayList<TileRecord> mRecords = new ArrayList<>();
     private final BroadcastDispatcher mBroadcastDispatcher;
     protected final MediaHost mMediaHost;
-    private OPQSFooter mOPFooterView;
+    protected OPQSFooter mOPFooterView;
     private volatile boolean mAutomatic;
 
     /**
@@ -160,7 +160,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
     private int mFooterMarginStartHorizontal;
     private Consumer<Boolean> mMediaVisibilityChangedListener;
 
-    private boolean mIsLandscape;
+    protected boolean mIsLandscape;
 
     protected Vibrator mVibrator;
 
@@ -566,10 +566,12 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
         if (mSecurityFooter != null) {
             mSecurityFooter.onConfigurationChanged();
         }
-        updateResources();
 
+        updateResources();
         updateBrightnessMirror();
 
+        mIsLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
+    
         if (newConfig.orientation != mLastOrientation) {
             mLastOrientation = newConfig.orientation;
             switchTileLayout();
@@ -701,6 +703,19 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
             // Then the OPFooter with the brightness bar and settings
             switchToParent(mOPFooterView, parent, index);
         }
+
+        if (mBrightnessView != null) {
+            // Then the OPFooter with the brightness bar and settings
+            if (mUsingHorizontalLayout) {
+                ViewGroup currentParent = (ViewGroup) mBrightnessView.getParent();
+                if (currentParent != null) {
+                    currentParent.removeView(mBrightnessView);
+                }
+                addView(mBrightnessView, indexOfChild(mHorizontalLinearLayout) + 1);
+            } else {
+                switchToParent(mBrightnessView, parent, index);
+            }
+        }
     }
 
     private void switchToParent(View child, ViewGroup parent, int index) {
@@ -715,8 +730,11 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
     boolean shouldUseHorizontalLayout() {
         return mUsingMediaPlayer && mMediaHost.getVisible()
-                && getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE;
+                && isLandscape();
+    }
+
+    boolean isLandscape() {
+        return mIsLandscape;
     }
 
     boolean isMediaHostVisible() {

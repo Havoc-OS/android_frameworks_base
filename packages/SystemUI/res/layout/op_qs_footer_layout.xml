@@ -31,21 +31,11 @@
     android:orientation="vertical">
 
     <LinearLayout
-        style="@style/BrightnessDialogContainer"
+        android:id="@+id/qs_footer_media_spacer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="@dimen/media_spacer_height" />
 
-        <com.android.systemui.settings.ToggleSliderView
-            android:id="@+id/brightness_slider"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:contentDescription="@string/accessibility_brightness"
-            android:importantForAccessibility="no"
-            systemui:text="@string/status_bar_settings_auto_brightness_label" />
-    </LinearLayout>
+    <include layout="@layout/quick_settings_brightness_dialog" />
 
     <FrameLayout
         android:id="@+id/op_qs_footer_actions"

@@ -85,6 +85,12 @@ public class QuickQSPanel extends QSPanel {
     }
 
     @Override
+    protected void addViewsBelowTiles() {
+        super.addViewsBelowTiles();
+        mOPFooterView.setIsQQSPanel();
+    }
+
+    @Override
     protected void addSecurityFooter() {
         // No footer needed
     }

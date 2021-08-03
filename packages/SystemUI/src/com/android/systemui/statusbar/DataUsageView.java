@@ -43,7 +43,7 @@ public class DataUsageView extends TextView {
         mConnectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
 
-    public static void updateUsage() {
+    public void updateUsage() {
         shouldUpdateData = true;
     }
 
@@ -85,6 +85,7 @@ public class DataUsageView extends TextView {
         formattedInfo = prefix + ": " + formatDataUsage(info.usageLevel) + " "
                 + mContext.getResources().getString(R.string.usage_data);
         shouldUpdateDataTextView = true;
+        invalidate();
     }
 
     private CharSequence formatDataUsage(long byteValue) {

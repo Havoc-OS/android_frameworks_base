@@ -92,6 +92,8 @@
     <dimen name="quick_settings_top_margin_media_extra">33dp</dimen>
     <dimen name="quick_settings_top_margin_media">8dp</dimen>
     <dimen name="quick_settings_media_divider_height">17dp</dimen>
+    <dimen name="brightness_slider_height">48dp</dimen>
+    <dimen name="media_spacer_height">28dp</dimen>
 
     <!-- Binary clock -->
     <dimen name="binary_clock_dot_size">8dp</dimen>
