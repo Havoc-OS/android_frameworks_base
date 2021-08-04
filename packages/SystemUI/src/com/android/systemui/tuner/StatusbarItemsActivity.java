@@ -42,7 +42,6 @@ public class StatusbarItemsActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         Dependency.destroy(FragmentService.class, s -> s.destroyAll());
-        Dependency.clearDependencies();
     }
 
     @Override
@@ -55,4 +54,3 @@ public class StatusbarItemsActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 }
-
