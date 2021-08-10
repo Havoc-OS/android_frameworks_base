@@ -524,7 +524,7 @@ public class KeyguardSliceProvider extends SliceProvider implements
         }
 
         // Set new track info from playing media notification
-        if (isTwelveClock) {
+        if (isTwelveClock && title != null) {
             StringBuffer evenSB = new StringBuffer(" ");
             evenSB.append(title);
             mMediaTitle = evenSB;
