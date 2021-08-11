@@ -84,6 +84,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.ViewPropertyAnimator;
 import android.view.ViewStub;
 import android.view.ViewTreeObserver;
@@ -325,6 +326,11 @@ public class VolumeDialogImpl implements VolumeDialog,
 
         if (mHasAlertSlider) {
             mRinger.setVisibility(View.GONE);
+            if (isLandscape() && mODICaptionsView != null) {
+                MarginLayoutParams ODICaptionsViewParams = (MarginLayoutParams) mODICaptionsView.getLayoutParams();
+                ODICaptionsViewParams.setMargins(0, 0, 0, 0);
+                mODICaptionsView.setLayoutParams(ODICaptionsViewParams);
+            }
         }
 
         mMediaOutputView = mDialog.findViewById(R.id.media_output_container);
