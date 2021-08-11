@@ -9441,6 +9441,12 @@ public final class Settings {
         public static final String DOZE_TAP_SCREEN_GESTURE = "doze_tap_gesture";
 
         /**
+         * Enable\Disable swipe up or down gesture on ambient display like OOS
+         * @hide
+         */
+        public static final String DOZE_AMBIENT_SWIPE = "doze_ambient_swipe";
+
+        /**
          * Gesture that wakes up the display, showing some version of the lock screen.
          * @hide
          */

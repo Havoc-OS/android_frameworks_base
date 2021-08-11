@@ -173,6 +173,7 @@ public class SecureSettings {
         Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED,
         Settings.Secure.ASSIST_HANDLES_LEARNING_TIME_ELAPSED_MILLIS,
         Settings.Secure.ASSIST_HANDLES_LEARNING_EVENT_COUNT,
-        Settings.Secure.TORCH_POWER_BUTTON_GESTURE
+        Settings.Secure.TORCH_POWER_BUTTON_GESTURE,
+        Settings.Secure.DOZE_AMBIENT_SWIPE
     };
 }
