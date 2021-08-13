@@ -175,7 +175,7 @@ public class PowerShareTile extends QSTileImpl<BooleanState>
             state.secondaryLabel = null;
         }
 
-        if (mBatteryController.isPowerSave() || getBatteryLevel() < getMinBatteryLevel()) {
+        if (mBatteryController.isPluggedIn() || mBatteryController.isPowerSave() || getBatteryLevel() < getMinBatteryLevel()) {
             state.state = Tile.STATE_UNAVAILABLE;
         } else if (!state.value) {
             state.state = Tile.STATE_INACTIVE;
@@ -191,6 +191,11 @@ public class PowerShareTile extends QSTileImpl<BooleanState>
 
     @Override
     public void handleSetListening(boolean listening) {
+    }
+
+    @Override
+    public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
+        refreshState();
     }
 
     private synchronized IPowerShare getPowerShare() {
