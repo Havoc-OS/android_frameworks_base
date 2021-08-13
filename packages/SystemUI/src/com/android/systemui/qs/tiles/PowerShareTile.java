@@ -193,6 +193,11 @@ public class PowerShareTile extends QSTileImpl<BooleanState>
     public void handleSetListening(boolean listening) {
     }
 
+    @Override
+    public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
+        refreshState();
+    }
+
     private synchronized IPowerShare getPowerShare() {
         try {
             return IPowerShare.getService();
