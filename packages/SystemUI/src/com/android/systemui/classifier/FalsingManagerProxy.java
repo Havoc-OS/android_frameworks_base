@@ -16,13 +16,14 @@
 
 package com.android.systemui.classifier;
 
-import static com.android.internal.config.sysui.SystemUiDeviceConfigFlags.BRIGHTLINE_FALSING_MANAGER_ENABLED;
-
 import android.content.Context;
-import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.hardware.SensorManager;
 import android.net.Uri;
-import android.provider.DeviceConfig;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
@@ -30,7 +31,6 @@ import androidx.annotation.NonNull;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.Dumpable;
-import com.android.systemui.R;
 import com.android.systemui.classifier.brightline.BrightLineFalsingManager;
 import com.android.systemui.classifier.brightline.FalsingDataProvider;
 import com.android.systemui.dagger.qualifiers.Main;
@@ -65,13 +65,15 @@ public class FalsingManagerProxy implements FalsingManager, Dumpable {
     private final ProximitySensor mProximitySensor;
     private final FalsingDataProvider mFalsingDataProvider;
     private FalsingManager mInternalFalsingManager;
-    private DeviceConfig.OnPropertiesChangedListener mDeviceConfigListener;
     private final DeviceConfigProxy mDeviceConfig;
     private boolean mBrightlineEnabled;
     private final DockManager mDockManager;
     private final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     private Executor mUiBgExecutor;
     private final StatusBarStateController mStatusBarStateController;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    private final Context mContext;
+    private SettingsObserver mSettingsObserver;
 
     @Inject
     FalsingManagerProxy(Context context, PluginManager pluginManager, @Main Executor executor,
@@ -91,14 +93,8 @@ public class FalsingManagerProxy implements FalsingManager, Dumpable {
         mProximitySensor.setTag(PROXIMITY_SENSOR_TAG);
         mProximitySensor.setDelay(SensorManager.SENSOR_DELAY_GAME);
         mDeviceConfig = deviceConfig;
-        mDeviceConfigListener =
-                properties -> onDeviceConfigPropertiesChanged(context, properties.getNamespace());
-        setupFalsingManager(context);
-        mDeviceConfig.addOnPropertiesChangedListener(
-                DeviceConfig.NAMESPACE_SYSTEMUI,
-                executor,
-                mDeviceConfigListener
-        );
+        mContext = context;
+        setupFalsingManager(mContext);
 
         final PluginListener<FalsingPlugin> mPluginListener = new PluginListener<FalsingPlugin>() {
             public void onPluginConnected(FalsingPlugin plugin, Context context) {
@@ -117,24 +113,36 @@ public class FalsingManagerProxy implements FalsingManager, Dumpable {
         pluginManager.addPluginListener(mPluginListener, FalsingPlugin.class);
 
         dumpManager.registerDumpable("FalsingManager", this);
+
+        mSettingsObserver = new SettingsObserver(mHandler);
+        mSettingsObserver.update();
     }
 
-    private void onDeviceConfigPropertiesChanged(Context context, String namespace) {
-        if (!DeviceConfig.NAMESPACE_SYSTEMUI.equals(namespace)) {
-            return;
+    private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+
+            mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.KEYGUARD_ANTI_FALSING_ENABLED),
+                    false, this, UserHandle.USER_ALL);
         }
 
-        setupFalsingManager(context);
+        @Override
+        public void onChange(boolean selfChange) {
+            update();
+        }
+
+        public void update() {
+            setupFalsingManager(mContext);
+        }
     }
 
     /**
      * Chooses the FalsingManager implementation.
      */
     private void setupFalsingManager(Context context) {
-        Resources res = context.getResources();
-        boolean brightlineEnabled = mDeviceConfig.getBoolean(
-                DeviceConfig.NAMESPACE_SYSTEMUI, BRIGHTLINE_FALSING_MANAGER_ENABLED,
-                res.getBoolean(R.bool.config_lockscreenAntiFalsingClassifierEnabled));
+        boolean brightlineEnabled = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.KEYGUARD_ANTI_FALSING_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
         if (brightlineEnabled == mBrightlineEnabled && mInternalFalsingManager != null) {
             return;
         }
@@ -352,7 +360,6 @@ public class FalsingManagerProxy implements FalsingManager, Dumpable {
 
     @Override
     public void cleanup() {
-        mDeviceConfig.removeOnPropertiesChangedListener(mDeviceConfigListener);
         mInternalFalsingManager.cleanup();
     }
 }
