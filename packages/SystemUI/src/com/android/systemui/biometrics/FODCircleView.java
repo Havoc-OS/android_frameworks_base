@@ -528,6 +528,9 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
         });
 
         if (mFODAnimation != null && mIsRecognizingAnimEnabled) {
+            if (mIsDreaming) {
+                updatePosition();
+            }
             mHandler.post(() -> mFODAnimation.showFODAnimation());
         }
 
