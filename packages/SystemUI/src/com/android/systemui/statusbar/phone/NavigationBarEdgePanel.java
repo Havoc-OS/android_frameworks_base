@@ -196,6 +196,7 @@ public class NavigationBarEdgePanel extends View implements NavigationEdgeBackPl
      */
     private float mDesiredTranslation;
 
+    private boolean mTriggerBackHaptic;
     private boolean mDragSlopPassed;
     private boolean mArrowsPointLeft;
     private float mMaxTranslation;
@@ -405,6 +406,11 @@ public class NavigationBarEdgePanel extends View implements NavigationEdgeBackPl
         mWindowManager.addView(this, mLayoutParams);
     }
 
+    @Override
+    public void setTriggerBackHaptic(boolean enabled) {
+        mTriggerBackHaptic = enabled;
+    }
+
     /**
      * Adjusts the sampling rect to conform to the actual visible bounding box of the arrow.
      */
@@ -605,8 +611,9 @@ public class NavigationBarEdgePanel extends View implements NavigationEdgeBackPl
         mVelocityTracker.computeCurrentVelocity(1000);
         // Only do the extra translation if we're not already flinging
         boolean isSlow = Math.abs(mVelocityTracker.getXVelocity()) < 500;
-        if (isSlow
-                || SystemClock.uptimeMillis() - mVibrationTime >= GESTURE_DURATION_FOR_CLICK_MS) {
+        if (mTriggerBackHaptic
+                && (isSlow
+                || SystemClock.uptimeMillis() - mVibrationTime >= GESTURE_DURATION_FOR_CLICK_MS)) {
             mVibratorHelper.vibrate(VibrationEffect.EFFECT_CLICK);
         }
 
