@@ -201,6 +201,7 @@ public class EdgeBackGestureHandler extends CurrentUserTracker implements Displa
     private Handler mHandler;
     private final Vibrator mVibrator;
     private boolean mImeVisible;
+    private int mBackGestureHaptic;
 
     private boolean mIsAttached;
     private boolean mIsGesturalModeEnabled;
@@ -319,6 +320,7 @@ public class EdgeBackGestureHandler extends CurrentUserTracker implements Displa
         mIsExtendedSwipe = mGestureNavigationSettingsObserver.getIsExtendedSwipe();
         mLeftVerticalSwipeAction = mGestureNavigationSettingsObserver.getLeftLSwipeAction();
         mRightVerticalSwipeAction = mGestureNavigationSettingsObserver.getRightLSwipeAction();
+        mBackGestureHaptic = mGestureNavigationSettingsObserver.getBackGestureHaptic();
         if (mEdgeBackPlugin != null) {
             mEdgeBackPlugin.setLongSwipeEnabled(mIsExtendedSwipe);
         }
@@ -713,6 +715,7 @@ public class EdgeBackGestureHandler extends CurrentUserTracker implements Displa
                     && isWithinTouchRegion((int) ev.getX(), (int) ev.getY());
             if (mAllowGesture) {
                 mEdgeBackPlugin.setIsLeftPanel(mIsOnLeftEdge);
+                mEdgeBackPlugin.setBackGestureHaptic(mBackGestureHaptic);
                 mEdgeBackPlugin.onMotionEvent(ev);
             }
             if (mLogGesture) {

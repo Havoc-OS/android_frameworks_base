@@ -173,6 +173,9 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
         r.registerContentObserver(
                 Settings.System.getUriFor(Settings.System.RIGHT_VERTICAL_BACK_SWIPE_ACTION),
                 false, this, UserHandle.USER_ALL);
+        r.registerContentObserver(
+                Settings.System.getUriFor(Settings.System.BACK_GESTURE_HAPTIC),
+                false, this, UserHandle.USER_ALL);
     }
 
     public void unregister() {
@@ -273,6 +276,12 @@ public class GestureNavigationSettingsObserver extends ContentObserver {
     public int getRightLSwipeAction() {
         return Settings.System.getIntForUser(mContext.getContentResolver(),
             Settings.System.RIGHT_VERTICAL_BACK_SWIPE_ACTION, 0,
+            UserHandle.USER_CURRENT);
+    }
+
+    public int getBackGestureHaptic() {
+        return Settings.System.getIntForUser(mContext.getContentResolver(),
+            Settings.System.BACK_GESTURE_HAPTIC, 2,
             UserHandle.USER_CURRENT);
     }
 }
