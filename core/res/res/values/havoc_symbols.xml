@@ -96,6 +96,10 @@
     <java-symbol type="string" name="config_pocketJudgeVendorSensorName" />
     <java-symbol type="string" name="config_pocketJudgeVendorProximitySensorName" />
 
+    <!-- Hide IME space -->
+    <java-symbol type="dimen" name="navigation_bar_frame_height_hide_ime" />
+    <java-symbol type="dimen" name="navigation_bar_frame_height_landscape_hide_ime" />
+
     <!-- Alert slider -->
     <java-symbol type="string" name="alert_slider_state_path" />
     <java-symbol type="string" name="alert_slider_uevent_match_path" />
