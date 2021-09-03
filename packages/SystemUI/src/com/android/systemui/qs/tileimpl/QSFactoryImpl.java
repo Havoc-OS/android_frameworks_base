@@ -42,7 +42,6 @@ import com.android.systemui.qs.tiles.DcDimmingTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.FPSInfoTile;
-import com.android.systemui.qs.tiles.GamingModeTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.KillappTile;
@@ -109,7 +108,6 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<HeadsUpTile> mHeadsUpTileProvider;
     private final Provider<CPUInfoTile> mCPUInfoTileProvider;
     private final Provider<FPSInfoTile> mFPSInfoTileProvider;
-    private final Provider<GamingModeTile> mGamingModeTileProvider;
     private final Provider<SmartPixelsTile> mSmartPixelsTileProvider;
     private final Provider<DcDimmingTile> mDcDimmingTileProvider;
     private final Provider<DataSwitchTile> mDataSwitchTileProvider;
@@ -158,7 +156,6 @@ public class QSFactoryImpl implements QSFactory {
             Provider<CPUInfoTile> cpuInfoTileProvider,
             Provider<DcDimmingTile> dcDimTileProvider,
             Provider<FPSInfoTile> fpsInfoTileProvider,
-            Provider<GamingModeTile> gamingModeTileProvider,
             Provider<SmartPixelsTile> smartPixelsTileProvider,
             Provider<DataSwitchTile> dataSwitchTileProvider,
             Provider<SyncTile> syncTileProvider,
@@ -201,7 +198,6 @@ public class QSFactoryImpl implements QSFactory {
         mHeadsUpTileProvider = headsUpTileProvider;
         mCPUInfoTileProvider = cpuInfoTileProvider;
         mFPSInfoTileProvider = fpsInfoTileProvider;
-        mGamingModeTileProvider = gamingModeTileProvider;
         mSmartPixelsTileProvider = smartPixelsTileProvider;
         mDcDimmingTileProvider = dcDimTileProvider;
         mDataSwitchTileProvider = dataSwitchTileProvider;
@@ -283,8 +279,6 @@ public class QSFactoryImpl implements QSFactory {
                 return mCPUInfoTileProvider.get();
             case "fpsinfo":
                 return mFPSInfoTileProvider.get();
-            case "gaming":
-                return mGamingModeTileProvider.get();
             case "smartpixels":
                 return mSmartPixelsTileProvider.get();
             case "dc_dimming":

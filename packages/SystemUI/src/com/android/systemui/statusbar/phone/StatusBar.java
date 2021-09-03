@@ -522,8 +522,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private final DisplayMetrics mDisplayMetrics;
 
-    private boolean mGamingModeActivated;
-    private int mHeadsUpDisabled;
+    private boolean mHeadsUpDisabled;
 
     private AODDimView mAODDimView;
 
@@ -2326,12 +2325,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.QS_TILE_TITLE_VISIBILITY),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.GAMING_MODE_ACTIVE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.GAMING_MODE_HEADSUP_TOGGLE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LESS_BORING_HEADS_UP),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2399,9 +2392,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_TILE_TITLE_VISIBILITY)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.QS_TILE_ACCENT_TINT))) {
                 updateQsPanelResources();
-            } else if (uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_ACTIVE)) ||
-                    uri.equals(Settings.System.getUriFor(Settings.System.GAMING_MODE_HEADSUP_TOGGLE))) {
-                setGamingMode();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.LESS_BORING_HEADS_UP))) {
                 setUseLessBoringHeadsUp();
@@ -2435,7 +2425,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             setLockScreenMediaBlurLevel();
             setFpToDismissNotifications();
             updateQsPanelResources();
-            setGamingMode();
             setUseLessBoringHeadsUp();
             setHeadsUpStoplist();
             setHeadsUpBlacklist();
@@ -2477,17 +2466,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             mQSPanel.getHost().reloadAllTiles();
             mQSPanel.updateResources();
         }
-    }
-
-    private void setGamingMode() {
-        mGamingModeActivated = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.GAMING_MODE_ACTIVE, 0,
-                UserHandle.USER_CURRENT) == 1;
-        mHeadsUpDisabled = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.GAMING_MODE_HEADSUP_TOGGLE, 1,
-                UserHandle.USER_CURRENT);
-        if (mNotificationInterruptStateProvider != null)
-            mNotificationInterruptStateProvider.setGamingPeekMode(mGamingModeActivated, mHeadsUpDisabled);
     }
 
     private void setUseLessBoringHeadsUp() {

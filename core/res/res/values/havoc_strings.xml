@@ -64,13 +64,6 @@
     <string name="reboot_title">Reboot</string>
     <string name="reboot_message">Rebooting system...</string>
 
-    <!-- Gaming mode -->
-    <string name="notification_channel_gaming">Gaming Mode</string>
-    <string name="gaming_mode_notification_title">Gaming mode enabled</string>
-    <string name="gaming_mode_notification_content">Tap to turn off Gaming mode</string>
-    <string name="gaming_mode_enabled_toast">Gaming mode turned on</string>
-    <string name="gaming_mode_disabled_toast">Gaming mode turned off</string>
-
     <!-- Button to disable the crashed application -->
     <string name="aerr_disable">Disable app</string>
 

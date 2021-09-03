@@ -30,7 +30,7 @@
 
     <!-- The default tiles to display in QuickSettings -->
     <string name="quick_settings_tiles_extra" translatable="false">
-        aod,caffeine,compass,cpuinfo,dc_dimming,fpsinfo,gaming,heads_up,killapp,locale,livedisplay,powermenu,powershare,reading_mode,screenshot,sleep_mode,smartpixels,soundsearch,dataswitch,sync,usb_tether,volume_panel,vpn
+        aod,caffeine,compass,cpuinfo,dc_dimming,fpsinfo,heads_up,killapp,locale,livedisplay,powermenu,powershare,reading_mode,screenshot,sleep_mode,smartpixels,soundsearch,dataswitch,sync,usb_tether,volume_panel,vpn
     </string>
 
     <!-- Max visible notification icons -->
