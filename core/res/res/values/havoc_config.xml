@@ -338,4 +338,7 @@
     <!-- Whether to enable OnePlus Camera hack -->
     <bool name="config_enableOnePlusCameraHack">false</bool>
 
+    <!-- Whether to enable performance tuning in Gaming mode -->
+    <bool name="config_enableGamingPerformanceTuning">false</bool>
+
 </resources>

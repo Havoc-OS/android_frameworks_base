@@ -677,6 +677,10 @@
     <!-- IMS Status -->
     <protected-broadcast android:name="android.intent.action.IMS_REGISTRATION_CHANGED" />
 
+    <!-- Gaming Mode -->
+    <protected-broadcast android:name="android.intent.action.GAMING_MODE_ON" />
+    <protected-broadcast android:name="android.intent.action.GAMING_MODE_OFF" />
+
     <!-- ====================================================================== -->
     <!--                          RUNTIME PERMISSIONS                           -->
     <!-- ====================================================================== -->

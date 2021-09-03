@@ -224,4 +224,7 @@
     <java-symbol type="string" name="sleep_mode_enabled_toast" />
     <java-symbol type="string" name="sleep_mode_disabled_toast" />
 
+    <!-- Whether to enable performance tuning in Gaming mode -->
+    <java-symbol type="bool" name="config_enableGamingPerformanceTuning" />
+
 </resources>
