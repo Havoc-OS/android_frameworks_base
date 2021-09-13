@@ -68,6 +68,7 @@ import com.android.systemui.statusbar.notification.logging.NotificationLogger;
 import com.android.systemui.statusbar.notification.row.NotificationGutsManager;
 import com.android.systemui.statusbar.phone.AutoHideController;
 import com.android.systemui.statusbar.phone.BiometricUnlockController;
+import com.android.systemui.statusbar.policy.BurnInProtectionController;
 import com.android.systemui.statusbar.phone.DozeParameters;
 import com.android.systemui.statusbar.phone.DozeScrimController;
 import com.android.systemui.statusbar.phone.DozeServiceHost;
@@ -209,7 +210,8 @@ public interface StatusBarGoogleModule {
             FlashlightController flashlightController,
             TaskHelper taskHelper,
             TunerService tunerService,
-            FODCircleViewImpl fodCircleViewImpl) {
+            FODCircleViewImpl fodCircleViewImpl,
+            BurnInProtectionController burnInProtectionController) {
         return new StatusBarGoogle(
                 smartSpaceController,
                 wallpaperNotifier,
@@ -293,6 +295,7 @@ public interface StatusBarGoogleModule {
                 flashlightController,
                 taskHelper,
                 tunerService,
-                fodCircleViewImpl);
+                fodCircleViewImpl,
+                burnInProtectionController);
     }
 }
