@@ -140,15 +140,17 @@ public class PhoneStatusBarView extends PanelBar implements Callbacks {
         mScrimController = scrimController;
     }
 
-    public void swiftStatusBarItems(int horizontalShift, int verticalShift) {
+    public void shiftStatusBarItems(int horizontalShift, int verticalShift) {
         if (mStatusBarContents == null) {
             return;
         }
 
-        mStatusBarContents.setPaddingRelative(mBasePaddingLeft + horizontalShift,
-                                              mBasePaddingTop + verticalShift,
-                                              mBasePaddingRight + horizontalShift,
-                                              mBasePaddingBottom - verticalShift);
+        mStatusBarContents.setPaddingRelative(
+            mBasePaddingLeft + horizontalShift,
+            mBasePaddingTop + verticalShift,
+            mBasePaddingRight + horizontalShift,
+            mBasePaddingBottom - verticalShift
+        );
         invalidate();
     }
 
