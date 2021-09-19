@@ -19,101 +19,101 @@
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_1"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_2"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_3"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_4"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_5"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_6"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_7"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_8"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_9"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_10"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_11"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_12"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_13"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_14"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_15"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_16"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_17"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_18"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_19"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_20"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_21"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_22"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_23"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_24"
-        android:duration="24" />
+        android:duration="12" />
 
     <item
         android:drawable="@drawable/fod_recognizing_animation_25"
-        android:duration="24" />
+        android:duration="12" />
 </animation-list>
