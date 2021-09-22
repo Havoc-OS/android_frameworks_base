@@ -594,6 +594,7 @@ public class FODCircleView extends ImageView implements ConfigurationListener {
             return;
         }
 
+        updateSettings();
         updatePosition();
         mCustomSettingsObserver.observe();
         mCustomSettingsObserver.update();
