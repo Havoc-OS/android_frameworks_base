@@ -43,4 +43,10 @@
     <!-- Kill button in notification guts -->
     <string name="force_stop_dlg_title">Force stop?</string>
     <string name="force_stop_dlg_text">If you force stop an app, it may misbehave.</string>
+
+    <!-- Data usage info in QS footer -->
+    <string name="usage_data">used</string>
+    <string name="usage_data_default_suffix">Data</string>
+    <string name="usage_wifi_default_suffix">Wi-Fi</string>
+    <string name="usage_data_unavailable">Network unavailable</string>
 </resources>

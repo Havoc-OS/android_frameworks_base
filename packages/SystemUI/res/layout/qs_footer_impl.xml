@@ -32,7 +32,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/qs_footer_height"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:paddingHorizontal="@dimen/qs_tile_margin_horizontal">
 
             <TextView
                 android:id="@+id/build"
@@ -40,12 +41,10 @@
                 android:layout_height="match_parent"
                 android:paddingEnd="4dp"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:ellipsize="marquee"
-                android:focusable="true"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.QS.Status.Build"
+                android:textAppearance="@style/TextAppearance.QS.TileLabel.DataUsage"
+                android:textColor="?android:attr/textColorSecondary"
                 android:visibility="gone" />
 
             <com.android.systemui.qs.PageIndicator
