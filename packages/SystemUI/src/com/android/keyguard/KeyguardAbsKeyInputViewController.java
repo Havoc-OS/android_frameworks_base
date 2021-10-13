@@ -171,6 +171,9 @@ public abstract class KeyguardAbsKeyInputViewController<T extends KeyguardAbsKey
     void onPasswordChecked(int userId, boolean matched, int timeoutMs, boolean isValidPassword) {
         boolean dismissKeyguard = KeyguardUpdateMonitor.getCurrentUser() == userId;
         if (matched) {
+            if (mLockPatternUtils.getPinPasswordLength(userId) == -1) {
+                mLockPatternUtils.setPinPasswordLength(mView.getEnteredCredential().size(), userId);
+            }
             getKeyguardSecurityCallback().reportUnlockAttempt(userId, true, 0);
             if (dismissKeyguard) {
                 mDismissing = true;
