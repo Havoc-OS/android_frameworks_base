@@ -26420,7 +26420,6 @@ public class View implements Drawable.Callback, KeyEvent.Callback,
                 surface.destroy();
             }
             session.kill();
-            surface.destroy();
         }
     }
 
