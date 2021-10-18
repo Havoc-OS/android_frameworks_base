@@ -19,6 +19,7 @@ import android.annotation.ColorInt;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.MonetWannabe;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -73,8 +74,8 @@ public class QSTileBaseView extends com.android.systemui.plugins.qs.QSTileView {
     private final ImageView mBg;
     private int mColorActive;
     private int mColorActiveAlpha;
-    private final int mColorInactive;
-    private final int mColorDisabled;
+    private int mColorInactive;
+    private int mColorDisabled;
     private int mCircleColor;
     private int mBgSize;
 
@@ -129,15 +130,20 @@ public class QSTileBaseView extends com.android.systemui.plugins.qs.QSTileView {
         setBackground(mTileBackground);
 
         mColorActive = Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
-        mColorActiveAlpha = adjustAlpha(mColorActive, 0.2f);
-        boolean useQSAccentTint = Settings.System.getIntForUser(context.getContentResolver(),
-                Settings.System.QS_TILE_ACCENT_TINT, 0, UserHandle.USER_CURRENT) == 1;
-        if (useQSAccentTint) {
-            mColorActive = mColorActiveAlpha;
+        if (MonetWannabe.isMonetEnabled(context)) {
+            mColorInactive = MonetWannabe.getInactiveAccent(context);
+            mColorDisabled = mColorInactive;
+        } else {
+            mColorActiveAlpha = adjustAlpha(mColorActive, 0.2f);
+            boolean useQSAccentTint = Settings.System.getIntForUser(context.getContentResolver(),
+                    Settings.System.QS_TILE_ACCENT_TINT, 0, UserHandle.USER_CURRENT) == 1;
+            if (useQSAccentTint) {
+                mColorActive = mColorActiveAlpha;
+            }
+            mColorDisabled = Utils.getDisabled(context,
+                    Utils.getColorAttrDefaultColor(context, android.R.attr.textColorTertiary));
+            mColorInactive = Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
         }
-        mColorDisabled = Utils.getDisabled(context,
-                Utils.getColorAttrDefaultColor(context, android.R.attr.textColorTertiary));
-        mColorInactive = Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
 
         setPadding(0, 0, 0, 0);
         setClipChildren(false);
@@ -322,6 +328,7 @@ public class QSTileBaseView extends com.android.systemui.plugins.qs.QSTileView {
             case Tile.STATE_ACTIVE:
                 return mColorActive;
             case Tile.STATE_INACTIVE:
+                if (MonetWannabe.isMonetEnabled(getContext())) return mColorInactive;
             case Tile.STATE_UNAVAILABLE:
                 return mColorDisabled;
             default:

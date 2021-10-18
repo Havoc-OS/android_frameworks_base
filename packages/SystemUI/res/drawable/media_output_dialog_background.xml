@@ -18,6 +18,6 @@
 <inset xmlns:android="http://schemas.android.com/apk/res/android">
     <shape android:shape="rectangle">
         <corners android:radius="8dp" />
-        <solid android:color="?android:attr/colorBackground" />
+        <solid android:color="@*android:color/monet_background_device_default" />
     </shape>
 </inset>

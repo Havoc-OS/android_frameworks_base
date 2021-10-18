@@ -35,7 +35,7 @@
     <color name="status_bar_clock_color">#FFFFFFFF</color>
     <color name="qs_user_detail_icon_muted">#FFFFFFFF</color> <!-- not so muted after all -->
     <color name="qs_tile_disabled_color">#9E9E9E</color> <!-- 38% black -->
-    <color name="qs_customize_background">@color/GM2_grey_50</color>
+    <color name="qs_customize_background">@color/qs_background_dark</color>
     <color name="qs_customize_decoration">@color/GM2_grey_100</color>
 
     <!-- The color of the background in the separated list of the Global Actions menu -->
@@ -104,7 +104,6 @@
 
     <!-- The color of the text inside a notification -->
     <color name="notification_primary_text_color">@*android:color/notification_primary_text_color_light</color>
-
 
     <color name="notification_guts_link_icon_tint">@color/GM2_grey_700</color>
     <color name="notification_guts_sub_text_color">@color/GM2_grey_700</color>
