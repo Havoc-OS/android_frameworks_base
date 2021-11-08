@@ -696,6 +696,10 @@ public abstract class PanelViewController {
             mExpandLatencyTracking = false;
         }
         float fhWithoutOverExpansion = getMaxPanelHeight() - getOverExpansionAmount();
+        if (isNaN(fhWithoutOverExpansion)) {
+            Log.wtf(TAG, "fhWithoutOverExpansion set to NaN");
+            fhWithoutOverExpansion = 0;
+        }
         if (mHeightAnimator == null) {
             float overExpansionPixels = Math.max(0, h - fhWithoutOverExpansion);
             if (getOverExpansionPixels() != overExpansionPixels && mTracking) {
