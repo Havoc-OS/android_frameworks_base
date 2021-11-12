@@ -50,6 +50,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.UserInfo;
 import android.content.res.ColorStateList;
+import android.content.res.MonetWannabe;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Color;
@@ -108,6 +109,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.colorextraction.ColorExtractor;
 import com.android.internal.colorextraction.ColorExtractor.GradientColors;
 import com.android.internal.colorextraction.drawable.ScrimDrawable;
+import com.android.internal.graphics.ColorUtils;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.UiEvent;
 import com.android.internal.logging.UiEventLogger;
@@ -118,6 +120,7 @@ import com.android.internal.util.ScreenRecordHelper;
 import com.android.internal.util.ScreenshotHelper;
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settingslib.Utils;
 import com.android.systemui.Interpolators;
 import com.android.systemui.MultiListLayout;
 import com.android.systemui.MultiListLayout.MultiListAdapter;
@@ -2645,7 +2648,22 @@ public class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             if (!(mBackgroundDrawable instanceof ScrimDrawable)) {
                 return;
             }
-            ((ScrimDrawable) mBackgroundDrawable).setColor(Color.BLACK, animate);
+
+            boolean monetEnabled = MonetWannabe.isMonetEnabled(mContext);
+            int mainColor, secondaryColor;
+            float[] hsv = new float[3];
+
+            if (monetEnabled) {
+                mainColor = mContext.getResources().getColor(android.R.color.accent_background_device_default, mContext.getTheme());
+            } else {
+                mainColor = mContext.getResources().getColor(com.android.systemui.R.color.scrim_background_color, mContext.getTheme());
+            }
+            secondaryColor = Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorAccent);
+            Color.colorToHSV(ColorUtils.blendARGB(mainColor, secondaryColor, 0.5f), hsv);
+            hsv[2] *= 0.95f;
+
+            ((ScrimDrawable) mBackgroundDrawable).setColor(monetEnabled ? Color.HSVToColor(hsv) : mainColor, animate);
+
             View decorView = getWindow().getDecorView();
             if (colors.supportsDarkText()) {
                 decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR |

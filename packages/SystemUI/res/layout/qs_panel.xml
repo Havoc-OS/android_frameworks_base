@@ -83,6 +83,7 @@
         android:elevation="4dp"
         android:paddingBottom="6dp">
         <View
+            android:id="@+id/qs_drag_handle"
             android:layout_width="46dp"
             android:layout_height="3dp"
             android:background="@drawable/qs_footer_drag_handle" />

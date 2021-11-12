@@ -36,7 +36,7 @@
     <color name="qs_user_detail_icon_muted">#FFFFFFFF</color> <!-- not so muted after all -->
     <color name="qs_tile_disabled_color">#9E9E9E</color> <!-- 38% black -->
     <color name="qs_customize_background">@color/qs_background_dark</color>
-    <color name="qs_customize_decoration">@color/GM2_grey_100</color>
+    <color name="qs_customize_decoration">@color/qs_background_dark</color>
 
     <!-- The color of the background in the separated list of the Global Actions menu -->
     <color name="global_actions_separated_background">#F5F5F5</color>
@@ -91,7 +91,7 @@
     <color name="notification_divider_color">#FF616161</color>
 
     <!-- The background color of the notification shade -->
-    <color name="notification_shade_background_color">@color/GM2_grey_200</color>
+    <color name="notification_shade_background_color">@*android:color/monet_background_secondary_device_default</color>
 
     <!-- The color of the ripples on the untinted notifications -->
     <color name="notification_ripple_untinted_color">#28000000</color>
@@ -258,7 +258,7 @@
     <color name="control_primary_text">#E6FFFFFF</color>
     <color name="control_secondary_text">#99FFFFFF</color>
     <color name="control_default_foreground">@color/GM2_grey_500</color>
-    <color name="control_default_background">#7f000000</color> <!-- 50% black -->
+    <color name="control_default_background">#7f000000</color> <!-- 10% white -->
     <color name="control_dialog_background">@color/GM2_grey_900</color>
     <color name="control_list_popup_background">@*android:color/background_floating_material_dark</color>
     <color name="control_spinner_dropdown">@*android:color/foreground_material_dark</color>

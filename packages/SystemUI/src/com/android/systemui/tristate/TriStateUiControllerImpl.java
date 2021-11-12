@@ -431,7 +431,7 @@ public class TriStateUiControllerImpl implements ConfigurationListener, TriState
     private void updateTheme() {
         mIconColor = getAttrColor(android.R.attr.colorAccent);
         mTextColor = getAttrColor(android.R.attr.textColorPrimary);
-        mBackgroundColor = getAttrColor(android.R.attr.colorPrimary);
+        mBackgroundColor = mContext.getResources().getColor(com.android.internal.R.color.monet_background_device_default);
         mDialogView.setBackgroundTintList(ColorStateList.valueOf(mBackgroundColor));
         mTriStateIcon.setColorFilter(mIconColor);
         mTriStateText.setTextColor(mTextColor);
