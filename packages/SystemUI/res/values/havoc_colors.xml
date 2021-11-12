@@ -19,4 +19,7 @@
     <!-- QS date color-->
     <color name="qs_date_color">#FF4C4C4C</color>
 
+    <!-- Scrim color-->
+    <color name="scrim_background_color">#FF4C4C4C</color>
+
 </resources>

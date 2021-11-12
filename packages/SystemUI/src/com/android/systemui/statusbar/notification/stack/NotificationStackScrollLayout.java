@@ -636,7 +636,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
         mSections = mSectionsManager.createSectionsForBuckets();
 
         mAmbientState = new AmbientState(context, mSectionsManager, mHeadsUpManager);
-        mBgColor = context.getColor(R.color.notification_shade_background_color);
+        mBgColor = context.getColor(com.android.internal.R.color.monet_background_secondary_device_default);
         int minHeight = res.getDimensionPixelSize(R.dimen.notification_min_height);
         int maxHeight = res.getDimensionPixelSize(R.dimen.notification_max_height);
         mExpandHelper = new ExpandHelper(getContext(), mExpandHelperCallback,
@@ -934,7 +934,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements ScrollAd
     @Override
     @ShadeViewRefactor(RefactorComponent.SHADE_VIEW)
     public void onUiModeChanged() {
-        mBgColor = mContext.getColor(R.color.notification_shade_background_color);
+        mBgColor = mContext.getColor(com.android.internal.R.color.monet_background_secondary_device_default);
         updateBackgroundDimming();
         mShelf.onUiModeChanged();
     }

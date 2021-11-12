@@ -16,19 +16,17 @@
 -->
 <resources>
 
-    <color name="toast_text">@color/white</color>
-
-    <color name="accent_overlay_device_default">#212121</color>
+    <!-- Value of these colors are used when Monet is disabled -->
+    <color name="accent_background_device_default">#8ab4f8</color>
+    <color name="accent_overlay_device_default">#041d44</color>
 
     <!-- Monet System Colors-->
     <color name="monet_background_device_default">#000000</color>
-    <color name="monet_background_secondary_device_default">#212121</color>
+    <color name="monet_background_secondary_device_default">#000000</color>
+    <color name="monet_accent_secondary_device_default">#d4e3fc</color>
 
-    <!-- Monet Lockscreen Colors-->
-    <color name="monet_lockscreen_background_device_default">#000000</color>
-    <color name="monet_lockscreen_background_secondary_device_default">#212121</color>
+    <color name="toast_text">@color/white</color>
 
-    <!-- Monet Extra Colors-->
-    <color name="monet_contextual_color_device_default">#212121</color>
+    <color name="bottomsheet_color">@color/GM2_grey_800</color>
 
 </resources>

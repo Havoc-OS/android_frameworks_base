@@ -1521,7 +1521,7 @@ easier.
         <item name="toolbarStyle">@style/Widget.DeviceDefault.Toolbar</item>
 
         <!-- volume background -->
-        <item name="panelColorBackground">@color/primary_material_light</item>
+        <item name="panelColorBackground">@color/primary_device_default_light</item>
     </style>
 
     <style name="Theme.DeviceDefault.QuickSettings.Dialog" parent="Theme.DeviceDefault.Light.Dialog">

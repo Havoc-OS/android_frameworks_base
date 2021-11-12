@@ -20,7 +20,9 @@ import static android.app.StatusBarManager.DISABLE2_QUICK_SETTINGS;
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.MonetWannabe;
 import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.UserHandle;
@@ -66,6 +68,7 @@ public class QSContainerImpl extends FrameLayout {
     private QuickStatusBarHeader mHeader;
     private float mQsExpansion;
     private QSCustomizer mQSCustomizer;
+    private View mDragHandleView;
     private View mDragHandle;
     private View mQSPanelContainer;
 
@@ -96,7 +99,8 @@ public class QSContainerImpl extends FrameLayout {
         mQSDetail = findViewById(R.id.qs_detail);
         mHeader = findViewById(R.id.header);
         mQSCustomizer = findViewById(R.id.qs_customize);
-        mDragHandle = findViewById(R.id.qs_drag_handle_view);
+        mDragHandleView = findViewById(R.id.qs_drag_handle_view);
+        mDragHandle = findViewById(R.id.qs_drag_handle);
         mBackground = findViewById(R.id.quick_settings_background);
         mStatusBarBackground = findViewById(R.id.quick_settings_status_bar_background);
         mBackgroundGradient = findViewById(R.id.quick_settings_gradient_view);
@@ -112,6 +116,9 @@ public class QSContainerImpl extends FrameLayout {
             }
         });
 
+        if (mDragHandle != null && MonetWannabe.isMonetEnabled(mContext))
+            mDragHandle.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(
+                    com.android.internal.R.color.accent_overlay_device_default)));
 
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
         updateSettings();
@@ -267,7 +274,7 @@ public class QSContainerImpl extends FrameLayout {
         setBottom(getTop() + height);
         mQSDetail.setBottom(getTop() + height);
         // Pin the drag handle to the bottom of the panel.
-        mDragHandle.setTranslationY(height - mDragHandle.getHeight());
+        mDragHandleView.setTranslationY(height - mDragHandleView.getHeight());
         mBackground.setTop(mQSPanelContainer.getTop());
         updateBackgroundBottom(height, animate);
     }
@@ -308,7 +315,7 @@ public class QSContainerImpl extends FrameLayout {
 
     public void setExpansion(float expansion) {
         mQsExpansion = expansion;
-        mDragHandle.setAlpha(1.0f - expansion);
+        mDragHandleView.setAlpha(1.0f - expansion);
         updateExpansion();
     }
 

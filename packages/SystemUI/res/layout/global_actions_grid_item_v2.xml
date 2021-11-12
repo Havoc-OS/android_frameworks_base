@@ -48,5 +48,6 @@
             android:textColor="@color/control_primary_text"
             android:breakStrategy="high_quality"
             android:hyphenationFrequency="full"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:fontFamily="@*android:string/config_headlineFontFamilyMedium" />
 </com.android.systemui.globalactions.GlobalActionsItem>

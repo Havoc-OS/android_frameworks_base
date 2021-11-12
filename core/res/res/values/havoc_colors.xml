@@ -17,24 +17,26 @@
 <resources>
 
     <!-- Value of these colors are used when Monet is disabled -->
-    <color name="accent_background_device_default">#fff</color>
-    <color name="accent_overlay_device_default">#fff</color>
+    <color name="accent_background_device_default">#1a73e8</color>
+    <color name="accent_overlay_device_default">#97bff5</color>
 
     <!-- Monet System Colors-->
-    <color name="monet_background_device_default">#fff</color>
-    <color name="monet_background_secondary_device_default">#fff</color>
-    <color name="monet_accent_secondary_device_default">#fff</color>
-    <color name="monet_accent_teritary_device_default">#fff</color>
+    <color name="monet_background_device_default">#ffffff</color>
+    <color name="monet_background_secondary_device_default">#ffffff</color>
+    <color name="monet_accent_secondary_device_default">#7b8087</color>
+    <color name="monet_accent_teritary_device_default">#ffffff</color>
 
     <!-- Monet Lockscreen Colors-->
-    <color name="monet_clock_color_device_default">#fff</color>
-    <color name="monet_lockscreen_background_device_default">#fff</color>
-    <color name="monet_lockscreen_background_secondary_device_default">#fff</color>
+    <color name="monet_clock_color_device_default">@color/accent_background_device_default</color>
+    <color name="monet_lockscreen_background_device_default">@color/monet_background_device_default</color>
+    <color name="monet_lockscreen_background_secondary_device_default">@color/monet_background_secondary_device_default</color>
 
     <!-- Monet System Extra Colors -->
-    <color name="monet_contextual_color_device_default">#fff</color>
+    <color name="monet_contextual_color_device_default">@color/monet_background_secondary_device_default</color>
 
     <color name="toast_bg">@color/monet_background_device_default</color>
     <color name="toast_text">@color/black</color>
+
+    <color name="bottomsheet_color">@color/white</color>
 
 </resources>

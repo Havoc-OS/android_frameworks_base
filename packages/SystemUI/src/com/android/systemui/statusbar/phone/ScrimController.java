@@ -983,9 +983,9 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, OnCo
         int secondaryColor;
         Context context = scrimView.getContext();
         if (MonetWannabe.isMonetEnabled(context)) {
-            mainColor = context.getResources().getColor(android.R.color.accent_overlay_device_default, context.getTheme());
+            mainColor = context.getResources().getColor(android.R.color.accent_background_device_default, context.getTheme());
         } else {
-            mainColor = Utils.getColorAttrDefaultColor(context, android.R.attr.textColorSecondary);
+            mainColor = context.getResources().getColor(R.color.scrim_background_color, context.getTheme());
         }
         secondaryColor = Utils.getColorAttrDefaultColor(context, android.R.attr.colorAccent);
         mColors.setMainColor(mainColor);

@@ -56,7 +56,8 @@ public class AccentUtils {
     }
 
     public boolean isResourceLightAccent(@Nullable String resName) {
-        return resName != null && resName.contains("accent_device_default_light");
+        return resName != null && resName.contains("accent_device_default_light") ||
+                resName.contains("system_notification_accent_color");
     }
 
     public boolean isResourceAccentSecondary(@Nullable String resName) {
