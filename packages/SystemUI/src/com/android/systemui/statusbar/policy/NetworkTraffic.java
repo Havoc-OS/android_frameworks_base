@@ -280,7 +280,7 @@ public class NetworkTraffic extends TextView {
         @Override
         public void onChange(boolean selfChange) {
             setMode();
-            getHandler().post(NetworkTraffic.this::update);
+            update();
         }
     }
 
