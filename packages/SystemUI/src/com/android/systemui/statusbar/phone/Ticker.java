@@ -432,7 +432,6 @@ public abstract class Ticker implements DarkReceiver {
     }
 
     private void setAppIconColor(Drawable icon) {
-        boolean isGrayscale = mNotificationColorUtil.isGrayscaleIcon(icon);
-        mIconSwitcher.setImageDrawableTint(icon, mIconTint, isGrayscale);
+        mIconSwitcher.setImageDrawableTint(icon, mIconTint, true);
     }
 }
