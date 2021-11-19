@@ -446,11 +446,15 @@ public class KeyguardClockSwitch extends RelativeLayout {
     }
 
     private void adjustStatusAreaPadding(ClockPlugin plugin) {
+        final int paddingLeft = (int) mContext.getResources().getDimension(R.dimen.keyguard_clock_padding_left) / 2;
         final boolean mIsTypeClock = plugin != null && plugin.getName().equals("type");
-        mKeyguardStatusArea.setRowGravity(mIsTypeClock ? Gravity.LEFT : Gravity.CENTER);
-        mKeyguardStatusArea.setRowPadding(mIsTypeClock ? mContext.getResources()
-                .getDimensionPixelSize(R.dimen.keyguard_status_area_typeclock_padding) : 0, 0, 0,
-                0);
+        if (mIsTypeClock) {
+            mKeyguardStatusArea.setRowGravity(Gravity.LEFT);
+            mKeyguardStatusArea.setRowPadding(paddingLeft, 0, 0, 0);
+        } else {
+            mKeyguardStatusArea.setRowGravity(Gravity.CENTER);
+            mKeyguardStatusArea.setRowPadding(0, 0, 0, 0);
+        }
     }
 
     /**

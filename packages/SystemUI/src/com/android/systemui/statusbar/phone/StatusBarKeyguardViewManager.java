@@ -26,20 +26,16 @@ import static com.android.systemui.statusbar.phone.BiometricUnlockController.MOD
 import static com.android.systemui.statusbar.phone.BiometricUnlockController.MODE_WAKE_AND_UNLOCK_PULSING;
 
 import android.content.ComponentCallbacks2;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewRootImpl;
 import android.view.WindowManagerGlobal;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -51,7 +47,6 @@ import com.android.keyguard.KeyguardViewController;
 import com.android.keyguard.ViewMediatorCallback;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.systemui.DejankUtils;
-import com.android.systemui.R;
 import com.android.systemui.SystemUIFactory;
 import com.android.systemui.dock.DockManager;
 import com.android.systemui.keyguard.DismissCallbackRegistry;
@@ -368,36 +363,6 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
                 CrossFadeHelper.fadeOut(mLockIconContainer, duration, delay, null /* runnable */);
             }
         }
-
-        if (!lockVisible)
-            return;
-
-        final ContentResolver resolver = mContext.getContentResolver();
-        String currentClock = Settings.Secure.getString(
-            resolver, Settings.Secure.LOCK_SCREEN_CUSTOM_CLOCK_FACE);
-        boolean mCustomClockSelectionType = currentClock == null ? false : currentClock.contains("TypeClockController");
-        boolean mCustomClockSelectionOOS = currentClock == null ? false : currentClock.contains("OOS");
-
-        FrameLayout.LayoutParams paramsContainer =
-            (FrameLayout.LayoutParams) mLockIconContainer.getLayoutParams();
-
-        if (mBouncer.isShowing()) {
-            mLockIconContainer.setPaddingRelative(0, 0, 0, 0);
-            paramsContainer.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
-        } else if (mCustomClockSelectionType) {
-            mLockIconContainer.setPaddingRelative((int) mContext.getResources()
-                    .getDimension(R.dimen.type_clock_left_padding) + 8, 0, 0, 0);
-            paramsContainer.gravity = Gravity.TOP | Gravity.LEFT;
-        } else if (mCustomClockSelectionOOS) {
-            mLockIconContainer.setPaddingRelative((int) mContext.getResources()
-                    .getDimension(R.dimen.oos_clock_left_padding) + 8, 0, 0, 0);
-            paramsContainer.gravity = Gravity.TOP | Gravity.LEFT;
-        } else {
-            mLockIconContainer.setPaddingRelative(0, 0, 0, 0);
-            paramsContainer.gravity = Gravity.TOP | Gravity.CENTER_HORIZONTAL;
-        }
-
-        mLockIconContainer.setLayoutParams(paramsContainer);
     }
 
     /**

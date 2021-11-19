@@ -19,9 +19,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal|top"
-    android:paddingBottom="5dp"
-    >
+    android:layout_gravity="center_horizontal|top">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clock_view"
@@ -29,24 +27,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_gravity="center_horizontal"
-    >
+        android:paddingHorizontal="@dimen/keyguard_clock_padding_left">
 
         <TextClock
             android:id="@+id/clock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="0dp"
-            android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
             android:format12Hour="h:mm"
             android:format24Hour="kk:mm"
             android:gravity="start|top"
             android:translationY="10dp"
             android:textAlignment="center"
             android:textColor="?attr/wallpaperTextColor"
-            android:textFontWeight="300"
             android:textSize="80sp"
-            android:theme="@style/TextAppearance.Keyguard"
+            style="@style/widget_big"
             app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" 
@@ -56,7 +51,6 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
             android:layout_marginTop="117dp"
             android:gravity="start|top"
             android:letterSpacing="0.02"
@@ -79,7 +73,6 @@
             android:layout_gravity="start"
             android:alpha="0.86"
             android:textSize="17sp"
-            android:layout_marginStart="21dp"
             android:gravity="start"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"

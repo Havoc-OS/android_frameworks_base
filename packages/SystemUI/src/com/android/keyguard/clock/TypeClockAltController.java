@@ -15,6 +15,8 @@
  */
 package com.android.keyguard.clock;
 
+import static com.android.systemui.statusbar.phone.KeyguardClockPositionAlgorithm.CLOCK_USE_DEFAULT_Y;
+
 import android.app.WallpaperManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -31,8 +33,6 @@ import com.android.systemui.colorextraction.SysuiColorExtractor;
 import com.android.systemui.plugins.ClockPlugin;
 
 import java.util.TimeZone;
-
-import static android.view.View.TEXT_ALIGNMENT_CENTER;
 
 /**
  * Plugin for a custom Typographic clock face that displays the time in words.
@@ -58,10 +58,6 @@ public class TypeClockAltController implements ClockPlugin {
      * Computes preferred position of clock.
      */
     private float mDarkAmount;
-    private final int mStatusBarHeight;
-    private final int mKeyguardLockPadding;
-    private final int mKeyguardLockHeight;
-    private final int mBurnInOffsetY;
 
     /**
      * Renders preview from clock view.
@@ -96,10 +92,6 @@ public class TypeClockAltController implements ClockPlugin {
         mResources = res;
         mLayoutInflater = inflater;
         mColorExtractor = colorExtractor;
-        mStatusBarHeight = res.getDimensionPixelSize(R.dimen.status_bar_height);
-        mKeyguardLockPadding = res.getDimensionPixelSize(R.dimen.keyguard_lock_padding);
-        mKeyguardLockHeight = res.getDimensionPixelSize(R.dimen.keyguard_lock_height);
-        mBurnInOffsetY = res.getDimensionPixelSize(R.dimen.burn_in_prevention_offset_y);
     }
 
     private void createViews() {
@@ -172,12 +164,7 @@ public class TypeClockAltController implements ClockPlugin {
 
     @Override
     public int getPreferredY(int totalHeight) {
-        // On AOD, clock needs to appear below the status bar with enough room for pixel shifting
-        int aodY = mStatusBarHeight + mKeyguardLockHeight + 2 * mKeyguardLockPadding
-                + mBurnInOffsetY + mTypeClock.getHeight() + (mTypeClock.getHeight() / 2);
-        // On lock screen, clock needs to appear below the lock icon
-        int lockY =  mStatusBarHeight + mKeyguardLockHeight + 2 * mKeyguardLockPadding + (mTypeClock.getHeight() / 2);
-        return (int) MathUtils.lerp(lockY, aodY, mDarkAmount);
+        return CLOCK_USE_DEFAULT_Y;
     }
 
     @Override

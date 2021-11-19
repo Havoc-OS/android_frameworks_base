@@ -216,8 +216,8 @@ public class KeyguardStatusView extends GridLayout implements
      */
     private void onSliceContentChanged() {
         if (mNotificationIcons != null) {
-            mNotificationIcons.setCenter(isTypeClock() || isOosClock() ? false : true);
-            mNotificationIcons.setCustomPaddingStart(getCustomClockPaddingStart());
+            mNotificationIcons.setCenter(isClockLeftAligned() ? false : true);
+            mNotificationIcons.setCustomPaddingStart(getCustomClockPaddingStart() + 8);
         }
 
         final boolean hasHeader = mKeyguardSlice.hasHeader();
@@ -306,30 +306,16 @@ public class KeyguardStatusView extends GridLayout implements
                 com.android.internal.R.string.global_action_logout));
     }
 
-    private boolean isTypeClock() {
+    private boolean isClockLeftAligned() {
         final ContentResolver resolver = mContext.getContentResolver();
         String currentClock = Settings.Secure.getString(
-            resolver, Settings.Secure.LOCK_SCREEN_CUSTOM_CLOCK_FACE);
-        return currentClock == null ? false : currentClock.contains("TypeClockController");
-    }
-
-    private boolean isOosClock() {
-        final ContentResolver resolver = mContext.getContentResolver();
-        String currentClock = Settings.Secure.getString(
-            resolver, Settings.Secure.LOCK_SCREEN_CUSTOM_CLOCK_FACE);
-        return currentClock == null ? false : currentClock.contains("OOS");
-    }
-
-    private boolean isTwelveClock() {
-        final ContentResolver resolver = mContext.getContentResolver();
-        String currentClock = Settings.Secure.getString(
-            resolver, Settings.Secure.LOCK_SCREEN_CUSTOM_CLOCK_FACE);
-        return currentClock == null ? false : currentClock.contains("Twelve");
+                resolver, Settings.Secure.LOCK_SCREEN_CUSTOM_CLOCK_FACE);
+        return currentClock == null ? false : currentClock.contains("Twelve") ||
+                currentClock.contains("OOS") || currentClock.contains("TypeClockController");
     }
 
     private int getCustomClockPaddingStart() {
-        return isTypeClock() ? (int) mContext.getResources().getDimension(R.dimen.type_clock_left_padding) :
-                    (int) mContext.getResources().getDimension(R.dimen.oos_clock_left_padding);
+        return (int) mContext.getResources().getDimension(R.dimen.keyguard_clock_padding_left);
     }
 
     private void updateOwnerInfo() {
@@ -337,8 +323,8 @@ public class KeyguardStatusView extends GridLayout implements
         String info = mLockPatternUtils.getDeviceOwnerInfo();
         if (info == null) {
             // If left aligned style clock, align the textView to start else keep it center.
-            if (isTypeClock() || isOosClock() || isTwelveClock()) {
-                mOwnerInfo.setPaddingRelative(getCustomClockPaddingStart() + 8, 0, 0, 0);
+            if (isClockLeftAligned()) {
+                mOwnerInfo.setPaddingRelative(getCustomClockPaddingStart() + 12, 0, 0, 0);
                 mOwnerInfo.setGravity(Gravity.START);
             } else {
                 mOwnerInfo.setPaddingRelative(0, 0, 0, 0);

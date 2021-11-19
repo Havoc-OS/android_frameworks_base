@@ -347,7 +347,7 @@ public class AndroidTwelveClockController implements ClockPlugin {
             SliceItem icon = SliceQuery.find(item.getSlice(),
                     android.app.slice.SliceItem.FORMAT_IMAGE);
             if (icon != null) {
-                final int iconSize = Converter.dpToPx(mContext, (((int) mSliceTextSize) - 4));
+                final int iconSize = Converter.dpToPx(mContext, (int) mSliceTextSize);
                 iconDrawable = icon.getIcon().loadDrawable(mContext);
                 if (iconDrawable != null) {
                     final int width = (int) (iconDrawable.getIntrinsicWidth()
