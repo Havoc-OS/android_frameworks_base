@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The NamelessRom Project
+ * Copyright (C) 2021 Havoc-OS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +17,18 @@
 
 package com.android.systemui.custom.onthego;
 
-import android.app.Dialog;
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -34,138 +36,76 @@ import android.widget.Switch;
 import com.android.internal.util.custom.OnTheGoUtils;
 import com.android.systemui.R;
 
-public class OnTheGoDialog extends Dialog {
-
-    protected final Context mContext;
-    protected final Handler mHandler = new Handler();
-
-    private final int mOnTheGoDialogLongTimeout;
-    private final int mOnTheGoDialogShortTimeout;
-
-    private final Runnable mDismissDialogRunnable = new Runnable() {
-        public void run() {
-            if (OnTheGoDialog.this.isShowing()) {
-                OnTheGoDialog.this.dismiss();
-            }
-        }
-    };
-
-    public OnTheGoDialog(Context ctx) {
-        super(ctx);
-        mContext = ctx;
-        final Resources r = mContext.getResources();
-        mOnTheGoDialogLongTimeout =
-                r.getInteger(R.integer.quick_settings_onthego_dialog_long_timeout);
-        mOnTheGoDialogShortTimeout =
-                r.getInteger(R.integer.quick_settings_onthego_dialog_short_timeout);
-    }
+public class OnTheGoDialog extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Window window = getWindow();
-        window.setType(WindowManager.LayoutParams.TYPE_VOLUME_OVERLAY);
-        window.getAttributes().privateFlags |=
-                WindowManager.LayoutParams.SYSTEM_FLAG_SHOW_FOR_ALL_USERS;
-        window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        window.requestFeature(Window.FEATURE_NO_TITLE);
+        // Inflate the decor view, so the attributes below are not overwritten by the theme.
+        window.getDecorView();
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        window.addPrivateFlags(WindowManager.LayoutParams.SYSTEM_FLAG_SHOW_FOR_ALL_USERS);
+        window.setGravity(Gravity.BOTTOM);
+        setTitle(R.string.onthego_label);
 
-        setContentView(R.layout.quick_settings_onthego_dialog);
-        setCanceledOnTouchOutside(true);
+        setContentView(R.layout.onthego_dialog);
 
-        final ContentResolver resolver = mContext.getContentResolver();
-
-        final SeekBar mSlider = (SeekBar) findViewById(R.id.alpha_slider);
-        final float value = Settings.System.getFloat(resolver,
-                Settings.System.ON_THE_GO_ALPHA,
-                0.5f);
-        final int progress = ((int) (value * 100));
-        mSlider.setProgress(progress);
-        mSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                sendAlphaBroadcast(String.valueOf(i + 10));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                removeAllOnTheGoDialogCallbacks();
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                dismissOnTheGoDialog(mOnTheGoDialogShortTimeout);
-            }
+        Button cancelBtn = findViewById(R.id.button_cancel);
+        cancelBtn.setOnClickListener(v -> {
+            finish();
         });
 
-        if (!OnTheGoUtils.hasFrontCamera(getContext())) {
-            findViewById(R.id.onthego_category_1).setVisibility(View.GONE);
-        } else {
-            final Switch mServiceToggle = (Switch) findViewById(R.id.onthego_service_toggle);
-            final boolean restartService = Settings.System.getInt(resolver,
-                    Settings.System.ON_THE_GO_SERVICE_RESTART, 0) == 1;
-            mServiceToggle.setChecked(restartService);
-            mServiceToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    Settings.System.putInt(resolver,
-                            Settings.System.ON_THE_GO_SERVICE_RESTART,
-                            (b ? 1 : 0));
-                    dismissOnTheGoDialog(mOnTheGoDialogShortTimeout);
-                }
-            });
+        Button startBtn = findViewById(R.id.button_start);
+        startBtn.setOnClickListener(v -> {
+            startService();
+            finish();
+        });
 
+        final ContentResolver resolver = this.getContentResolver();
+
+        final SeekBar mSlider = (SeekBar) findViewById(R.id.alpha_slider);
+        int value = Settings.System.getInt(resolver,
+                Settings.System.ON_THE_GO_ALPHA, 50);
+        mSlider.setProgress(value);
+        mSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Settings.System.putInt(resolver,
+                        Settings.System.ON_THE_GO_ALPHA, progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        if (!OnTheGoUtils.hasFrontCamera(this)) {
+            findViewById(R.id.onthego_front_camera).setVisibility(View.GONE);
+        } else {
             final Switch mCamSwitch = (Switch) findViewById(R.id.onthego_camera_toggle);
-            final boolean useFrontCam = (Settings.System.getInt(resolver,
-                    Settings.System.ON_THE_GO_CAMERA,
-                    0) == 1);
+            boolean useFrontCam = (Settings.System.getInt(resolver,
+                    Settings.System.ON_THE_GO_CAMERA, 0) == 1);
             mCamSwitch.setChecked(useFrontCam);
             mCamSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                     Settings.System.putInt(resolver,
-                            Settings.System.ON_THE_GO_CAMERA,
-                            (b ? 1 : 0));
-                    sendCameraBroadcast();
-                    dismissOnTheGoDialog(mOnTheGoDialogShortTimeout);
+                            Settings.System.ON_THE_GO_CAMERA, isChecked ? 1 : 0);
                 }
             });
         }
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        dismissOnTheGoDialog(mOnTheGoDialogLongTimeout);
+    private void startService() {
+        ComponentName cn = new ComponentName("com.android.systemui",
+                "com.android.systemui.custom.onthego.OnTheGoService");
+        Intent startIntent = new Intent();
+        startIntent.setComponent(cn);
+        startIntent.setAction("start");
+        this.startService(startIntent);
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        removeAllOnTheGoDialogCallbacks();
-    }
-
-    private void dismissOnTheGoDialog(int timeout) {
-        removeAllOnTheGoDialogCallbacks();
-        mHandler.postDelayed(mDismissDialogRunnable, timeout);
-    }
-
-    private void removeAllOnTheGoDialogCallbacks() {
-        mHandler.removeCallbacks(mDismissDialogRunnable);
-    }
-
-    private void sendAlphaBroadcast(String i) {
-        final float value = (Float.parseFloat(i) / 100);
-        final Intent alphaBroadcast = new Intent();
-        alphaBroadcast.setAction(OnTheGoService.ACTION_TOGGLE_ALPHA);
-        alphaBroadcast.putExtra(OnTheGoService.EXTRA_ALPHA, value);
-        mContext.sendBroadcast(alphaBroadcast);
-    }
-
-    private void sendCameraBroadcast() {
-        final Intent cameraBroadcast = new Intent();
-        cameraBroadcast.setAction(OnTheGoService.ACTION_TOGGLE_CAMERA);
-        mContext.sendBroadcast(cameraBroadcast);
-    }
-
 }

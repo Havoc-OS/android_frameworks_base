@@ -386,8 +386,10 @@
             </intent-filter>
         </service>
 
-        <!-- started from PhoneWindowManager
-             TODO: Should have an android:permission attribute -->
+        <activity android:name=".custom.onthego.OnTheGoDialog"
+            android:theme="@style/ScreenRecord"
+            android:showForAllUsers="true"
+            android:excludeFromRecents="true" />
         <service android:name=".custom.onthego.OnTheGoService"
             android:process=":onthego"
             android:exported="false" />
