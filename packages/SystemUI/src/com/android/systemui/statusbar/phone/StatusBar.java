@@ -183,6 +183,7 @@ import com.android.systemui.bubbles.BubbleController;
 import com.android.systemui.charging.WirelessChargingAnimation;
 import com.android.systemui.classifier.FalsingLog;
 import com.android.systemui.colorextraction.SysuiColorExtractor;
+import com.android.systemui.custom.BackgroundProcessManager;
 import com.android.systemui.dagger.qualifiers.UiBackground;
 import com.android.systemui.fragments.ExtensionFragmentListener;
 import com.android.systemui.fragments.FragmentHostManager;
@@ -526,6 +527,9 @@ public class StatusBar extends SystemUI implements DemoMode,
     private boolean mHeadsUpDisabled;
 
     private AODDimView mAODDimView;
+
+    // Background process killer
+    private boolean mIsProcessKillerInstantiated = false;
 
     // XXX: gesture research
     private final GestureRecorder mGestureRec = DEBUG_GESTURES
@@ -4648,6 +4652,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             mBypassHeadsUpNotifier.setFullyAwake(false);
             mKeyguardBypassController.onStartedGoingToSleep();
             DejankUtils.stopDetectingBlockingIpcs(tag);
+            executeProcessKiller(true);
         }
 
         @Override
@@ -4669,6 +4674,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateNotificationPanelTouchState();
             mPulseExpansionHandler.onStartedWakingUp();
             DejankUtils.stopDetectingBlockingIpcs(tag);
+            executeProcessKiller(false);
         }
 
         @Override
@@ -4724,6 +4730,24 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateIsKeyguard();
         }
     };
+
+    private void executeProcessKiller(boolean start) {
+        boolean enabled = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.BACKGROUND_PROCESS_KILLER, 0, mLockscreenUserManager.getCurrentUserId()) == 1;
+        if (enabled) {
+            if (start) {
+                if (!mIsProcessKillerInstantiated) {
+                    BackgroundProcessManager.init(mContext);
+                    BackgroundProcessManager.start();
+                    mIsProcessKillerInstantiated = true;
+                } else {
+                    BackgroundProcessManager.start();
+                }
+            } else {
+                BackgroundProcessManager.stop();
+            }
+        }
+    }
 
     private void setHeadsUpStoplist() {
         if (mNotificationInterruptStateProvider != null)

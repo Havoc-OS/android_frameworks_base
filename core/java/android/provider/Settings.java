@@ -5667,6 +5667,11 @@ public final class Settings {
         public static final String VOLUME_WAKE_SCREEN = "volume_wake_screen";
 
         /**
+         * Whether to kill background processes when the screen is turned off.
+         */
+        public static final String BACKGROUND_PROCESS_KILLER = "background_process_killer";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
