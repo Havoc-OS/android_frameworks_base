@@ -5127,6 +5127,12 @@ public final class Settings {
         public static final String ALERT_SLIDER_SILENT_MODE = "alert_slider_silent_mode";
 
         /**
+         * Whether to mute media volume when in silent mode
+         * @hide
+         */
+        public static final String ALERT_SLIDER_MUTE_MEDIA = "alert_slider_mute_media";
+
+        /**
          * Whether to enable permissions hub
          * @hide
          */
