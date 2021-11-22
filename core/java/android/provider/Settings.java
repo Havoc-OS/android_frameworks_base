@@ -5971,14 +5971,6 @@ public final class Settings {
          */
         public static final String ADAPTIVE_PLAYBACK_TIMEOUT = "adaptive_playback_timeout";
 
-        /**
-         * Whether to show the kill app button in notification guts
-         *
-         * @hide
-         */
-        public static final String NOTIFICATION_GUTS_KILL_APP_BUTTON =
-                "notification_guts_kill_app_button";
-
        /**
          * Whether to wake the display when plugging or unplugging the charger
          *

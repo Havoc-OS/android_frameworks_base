@@ -324,11 +324,7 @@ public class NotificationInfo extends LinearLayout implements NotificationGuts.G
 
         // Force stop button
         final View killButton = findViewById(R.id.force_stop);
-        boolean killButtonEnabled = Settings.System.getIntForUser(
-                mContext.getContentResolver(),
-                Settings.System.NOTIFICATION_GUTS_KILL_APP_BUTTON, 0,
-                UserHandle.USER_CURRENT) != 0;
-        if (killButtonEnabled && !isThisASystemPackage(mPackageName)) {
+        if (!isThisASystemPackage(mPackageName)) {
             killButton.setVisibility(View.VISIBLE);
             killButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
