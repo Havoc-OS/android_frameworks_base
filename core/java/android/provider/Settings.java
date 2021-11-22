@@ -5482,38 +5482,6 @@ public final class Settings {
          */
         public static final String STATUSBAR_CLOCK_AM_PM_STYLE = "statusbar_clock_am_pm_style";
 
-        /**
-         * Shows custom date before clock time
-         * 0 - No Date
-         * 1 - Small Date
-         * 2 - Normal Date
-         * @hide
-         */
-        public static final String STATUSBAR_CLOCK_DATE_DISPLAY = "statusbar_clock_date_display";
-
-        /**
-         * Sets the date string style
-         * 0 - Regular style
-         * 1 - Lowercase
-         * 2 - Uppercase
-         * @hide
-         */
-        public static final String STATUSBAR_CLOCK_DATE_STYLE = "statusbar_clock_date_style";
-
-        /**
-         * Stores the java DateFormat string for the date
-         * @hide
-         */
-        public static final String STATUSBAR_CLOCK_DATE_FORMAT = "statusbar_clock_date_format";
-
-        /**
-         * Position of date
-         * 0 - Left of clock
-         * 1 - Right of clock
-         * @hide
-         */
-        public static final String STATUSBAR_CLOCK_DATE_POSITION = "statusbar_clock_date_position";
-
         /*
          * Whether to auto hide clock
          * @hide
@@ -6509,10 +6477,6 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_STYLE);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_SECONDS);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_AM_PM_STYLE);
-            PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_DISPLAY);
-            PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_STYLE);
-            PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_FORMAT);
-            PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_POSITION);
             PRIVATE_SETTINGS.add(DONT_TOUCH_HEADSUP);
             PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED);
             PRIVATE_SETTINGS.add(NAVIGATION_BAR_SHOW);
@@ -10902,12 +10866,6 @@ public final class Settings {
         public static final String SLEEP_MODE_AOD_TOGGLE = "sleep_mode_aod_toggle";
 
         /**
-         * Whether to enable Aggressive battery in Sleep Mode
-         * @hide
-         */
-        public static final String SLEEP_MODE_AGGRESSIVE_TOGGLE = "sleep_mode_aggressive_toggle";
-
-        /**
          * Ringer in Sleep Mode (0:OFF, 1:Vibrate, 2:DND, 3:Silent)
          * @hide
          */
@@ -14226,30 +14184,6 @@ public final class Settings {
          */
         public static final String ADB_ALLOWED_CONNECTION_TIME =
                 "adb_allowed_connection_time";
-
-        /**
-         * Whether or not to use aggressive device idle constants and ignore motion.
-         * Type: int (0 for false, 1 for true)
-         * Default: 0
-         * @hide
-         */
-        public static final String AGGRESSIVE_IDLE_ENABLED = "aggressive_idle_enabled";
-
-        /**
-         * Whether or not to use aggressive app idle constants.
-         * Type: int (0 for false, 1 for true)
-         * Default: 0
-         * @hide
-         */
-        public static final String AGGRESSIVE_STANDBY_ENABLED = "aggressive_standby_enabled";
-
-        /**
-         * Flag to automatically enable Aggressive Idle and Standby with battery saver.
-         * Type: int (0 for false, 1 for true)
-         * Default: 0
-         * @hide
-         */
-        public static final String AGGRESSIVE_BATTERY_SAVER = "aggressive_battery_saver";
 
         /**
          * Scaling factor for normal window animations. Setting to 0 will

@@ -124,7 +124,7 @@ public class NotificationLightsView extends RelativeLayout {
                 Settings.System.NOTIFICATION_PULSE_DURATION, 2,
                 UserHandle.USER_CURRENT) * 1000; // seconds to ms
         int repeats = Settings.System.getIntForUser(resolver,
-                Settings.System.NOTIFICATION_PULSE_REPEATS, 0,
+                Settings.System.NOTIFICATION_PULSE_REPEATS, 3,
                 UserHandle.USER_CURRENT);
         boolean directionIsRestart = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.AMBIENT_LIGHT_REPEAT_DIRECTION, 0,

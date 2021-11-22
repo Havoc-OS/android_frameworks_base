@@ -64,7 +64,6 @@ import android.os.ShellCommand;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.Settings;
-import android.provider.Settings.Global;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.AtomicFile;
@@ -107,9 +106,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -323,9 +320,6 @@ public class DeviceIdleController extends SystemService
     private final ArrayMap<IDeviceIdleConstraint, DeviceIdleConstraintTracker>
             mConstraints = new ArrayMap<>();
     private ConstraintController mConstraintController;
-
-    // Aggressive Idle
-    private boolean mAggressiveIdle = false;
 
     /** Device is currently active. */
     @VisibleForTesting
@@ -609,17 +603,6 @@ public class DeviceIdleController extends SystemService
                         }
                     }
                 } break;
-                case PowerManager.ACTION_POWER_SAVE_MODE_CHANGED: {
-                    if (Settings.Global.getInt(getContext().getContentResolver(),
-                                Settings.Global.AGGRESSIVE_BATTERY_SAVER, 0) != 0) {
-                        int isPowerSave = mPowerManager.isPowerSaveMode() ? 1 : 0;
-
-                        Settings.Global.putInt(getContext().getContentResolver(),
-                                Settings.Global.AGGRESSIVE_IDLE_ENABLED, isPowerSave);
-                        Settings.Global.putInt(getContext().getContentResolver(),
-                                Settings.Global.AGGRESSIVE_STANDBY_ENABLED, isPowerSave);
-                    }
-                }
             }
         }
     };
@@ -1159,38 +1142,8 @@ public class DeviceIdleController extends SystemService
         public boolean WAIT_FOR_UNLOCK;
 
         private final ContentResolver mResolver;
-        private boolean mSmallBatteryDevice;
+        private final boolean mSmallBatteryDevice;
         private final KeyValueListParser mParser = new KeyValueListParser(',');
-
-        // Aggressive idle constants
-        private final Map<String, Long> aggressiveConstants = new HashMap<String, Long>() {{
-            put(KEY_LIGHT_IDLE_AFTER_INACTIVE_TIMEOUT, 180000l);
-            put(KEY_LIGHT_PRE_IDLE_TIMEOUT, 180000l);
-            put(KEY_LIGHT_IDLE_TIMEOUT, 300000l);
-            put(KEY_LIGHT_IDLE_FACTOR, 2l);
-            put(KEY_LIGHT_MAX_IDLE_TIMEOUT, 900000l);
-            put(KEY_LIGHT_IDLE_MAINTENANCE_MIN_BUDGET, 60000l);
-            put(KEY_LIGHT_IDLE_MAINTENANCE_MAX_BUDGET, 300000l);
-            put(KEY_MIN_LIGHT_MAINTENANCE_TIME, 5000l);
-            put(KEY_MIN_DEEP_MAINTENANCE_TIME, 30000l);
-            put(KEY_INACTIVE_TIMEOUT, 1800000l);
-            put(KEY_SENSING_TIMEOUT, 240000l);
-            put(KEY_LOCATING_TIMEOUT, 30000l);
-            put(KEY_LOCATION_ACCURACY, 20l);
-            put(KEY_MOTION_INACTIVE_TIMEOUT, 600000l);
-            put(KEY_IDLE_AFTER_INACTIVE_TIMEOUT, 1800000l);
-            put(KEY_IDLE_PENDING_TIMEOUT, 300000l);
-            put(KEY_MAX_IDLE_PENDING_TIMEOUT, 600000l);
-            put(KEY_IDLE_PENDING_FACTOR, 2l);
-            put(KEY_IDLE_TIMEOUT, 3600000l);
-            put(KEY_MAX_IDLE_TIMEOUT, 360000l);
-            put(KEY_IDLE_FACTOR, 2l);
-            put(KEY_MIN_TIME_TO_ALARM, 3600000l);
-            put(KEY_MAX_TEMP_APP_WHITELIST_DURATION, 300000l);
-            put(KEY_MMS_TEMP_APP_WHITELIST_DURATION, 60000l);
-            put(KEY_SMS_TEMP_APP_WHITELIST_DURATION, 20000l);
-            put(KEY_NOTIFICATION_WHITELIST_DURATION, 30000l);
-        }};
 
         public Constants(Handler handler, ContentResolver resolver) {
             super(handler);
@@ -1198,9 +1151,6 @@ public class DeviceIdleController extends SystemService
             mSmallBatteryDevice = ActivityManager.isSmallBatteryDevice();
             mResolver.registerContentObserver(
                     Settings.Global.getUriFor(Settings.Global.DEVICE_IDLE_CONSTANTS),
-                    false, this);
-            mResolver.registerContentObserver(
-                    Settings.Global.getUriFor(Settings.Global.AGGRESSIVE_IDLE_ENABLED),
                     false, this);
             updateConstants();
         }
@@ -1210,98 +1160,78 @@ public class DeviceIdleController extends SystemService
             updateConstants();
         }
 
-        private long getDurationWeighted(String key, long defaultValue) {
-            long duration = defaultValue;
-            if (mAggressiveIdle)
-            try {
-                duration = aggressiveConstants.get(key);
-            } catch (Exception e) {
-                duration = mParser.getDurationMillis(key, defaultValue);
-            }
-        else
-            duration = mParser.getDurationMillis(key, defaultValue);
-
-            return duration;
-        }
-
         private void updateConstants() {
             synchronized (DeviceIdleController.this) {
                 try {
                     mParser.setString(Settings.Global.getString(mResolver,
                             Settings.Global.DEVICE_IDLE_CONSTANTS));
-                    // Check if aggressive_standby_enabled has changed
-                    mAggressiveIdle = Settings.Global.getInt(mResolver,
-                        Settings.Global.AGGRESSIVE_IDLE_ENABLED) == 1;
-                } catch (Exception e) {
+                } catch (IllegalArgumentException e) {
                     // Failed to parse the settings string, log this and move on
                     // with defaults.
                     Slog.e(TAG, "Bad device idle settings", e);
-
-                    // Setting not found, assume false
-                    mAggressiveIdle = false;
                 }
 
-                LIGHT_IDLE_AFTER_INACTIVE_TIMEOUT = getDurationWeighted(
+                LIGHT_IDLE_AFTER_INACTIVE_TIMEOUT = mParser.getDurationMillis(
                         KEY_LIGHT_IDLE_AFTER_INACTIVE_TIMEOUT,
                         !COMPRESS_TIME ? 3 * 60 * 1000L : 15 * 1000L);
-                LIGHT_PRE_IDLE_TIMEOUT = getDurationWeighted(KEY_LIGHT_PRE_IDLE_TIMEOUT,
+                LIGHT_PRE_IDLE_TIMEOUT = mParser.getDurationMillis(KEY_LIGHT_PRE_IDLE_TIMEOUT,
                         !COMPRESS_TIME ? 3 * 60 * 1000L : 30 * 1000L);
-                LIGHT_IDLE_TIMEOUT = getDurationWeighted(KEY_LIGHT_IDLE_TIMEOUT,
+                LIGHT_IDLE_TIMEOUT = mParser.getDurationMillis(KEY_LIGHT_IDLE_TIMEOUT,
                         !COMPRESS_TIME ? 5 * 60 * 1000L : 15 * 1000L);
                 LIGHT_IDLE_FACTOR = mParser.getFloat(KEY_LIGHT_IDLE_FACTOR,
                         2f);
-                LIGHT_MAX_IDLE_TIMEOUT = getDurationWeighted(KEY_LIGHT_MAX_IDLE_TIMEOUT,
+                LIGHT_MAX_IDLE_TIMEOUT = mParser.getDurationMillis(KEY_LIGHT_MAX_IDLE_TIMEOUT,
                         !COMPRESS_TIME ? 15 * 60 * 1000L : 60 * 1000L);
-                LIGHT_IDLE_MAINTENANCE_MIN_BUDGET = getDurationWeighted(
+                LIGHT_IDLE_MAINTENANCE_MIN_BUDGET = mParser.getDurationMillis(
                         KEY_LIGHT_IDLE_MAINTENANCE_MIN_BUDGET,
                         !COMPRESS_TIME ? 1 * 60 * 1000L : 15 * 1000L);
-                LIGHT_IDLE_MAINTENANCE_MAX_BUDGET = getDurationWeighted(
+                LIGHT_IDLE_MAINTENANCE_MAX_BUDGET = mParser.getDurationMillis(
                         KEY_LIGHT_IDLE_MAINTENANCE_MAX_BUDGET,
                         !COMPRESS_TIME ? 5 * 60 * 1000L : 30 * 1000L);
-                MIN_LIGHT_MAINTENANCE_TIME = getDurationWeighted(
+                MIN_LIGHT_MAINTENANCE_TIME = mParser.getDurationMillis(
                         KEY_MIN_LIGHT_MAINTENANCE_TIME,
                         !COMPRESS_TIME ? 5 * 1000L : 1 * 1000L);
-                MIN_DEEP_MAINTENANCE_TIME = getDurationWeighted(
+                MIN_DEEP_MAINTENANCE_TIME = mParser.getDurationMillis(
                         KEY_MIN_DEEP_MAINTENANCE_TIME,
                         !COMPRESS_TIME ? 30 * 1000L : 5 * 1000L);
                 long inactiveTimeoutDefault = (mSmallBatteryDevice ? 15 : 30) * 60 * 1000L;
-                INACTIVE_TIMEOUT = getDurationWeighted(KEY_INACTIVE_TIMEOUT,
+                INACTIVE_TIMEOUT = mParser.getDurationMillis(KEY_INACTIVE_TIMEOUT,
                         !COMPRESS_TIME ? inactiveTimeoutDefault : (inactiveTimeoutDefault / 10));
-                SENSING_TIMEOUT = getDurationWeighted(KEY_SENSING_TIMEOUT,
+                SENSING_TIMEOUT = mParser.getDurationMillis(KEY_SENSING_TIMEOUT,
                         !COMPRESS_TIME ? 4 * 60 * 1000L : 60 * 1000L);
-                LOCATING_TIMEOUT = getDurationWeighted(KEY_LOCATING_TIMEOUT,
+                LOCATING_TIMEOUT = mParser.getDurationMillis(KEY_LOCATING_TIMEOUT,
                         !COMPRESS_TIME ? 30 * 1000L : 15 * 1000L);
                 LOCATION_ACCURACY = mParser.getFloat(KEY_LOCATION_ACCURACY, 20);
-                MOTION_INACTIVE_TIMEOUT = getDurationWeighted(KEY_MOTION_INACTIVE_TIMEOUT,
+                MOTION_INACTIVE_TIMEOUT = mParser.getDurationMillis(KEY_MOTION_INACTIVE_TIMEOUT,
                         !COMPRESS_TIME ? 10 * 60 * 1000L : 60 * 1000L);
                 long idleAfterInactiveTimeout = (mSmallBatteryDevice ? 15 : 30) * 60 * 1000L;
-                IDLE_AFTER_INACTIVE_TIMEOUT = getDurationWeighted(
+                IDLE_AFTER_INACTIVE_TIMEOUT = mParser.getDurationMillis(
                         KEY_IDLE_AFTER_INACTIVE_TIMEOUT,
                         !COMPRESS_TIME ? idleAfterInactiveTimeout
                                        : (idleAfterInactiveTimeout / 10));
-                IDLE_PENDING_TIMEOUT = getDurationWeighted(KEY_IDLE_PENDING_TIMEOUT,
+                IDLE_PENDING_TIMEOUT = mParser.getDurationMillis(KEY_IDLE_PENDING_TIMEOUT,
                         !COMPRESS_TIME ? 5 * 60 * 1000L : 30 * 1000L);
-                MAX_IDLE_PENDING_TIMEOUT = getDurationWeighted(KEY_MAX_IDLE_PENDING_TIMEOUT,
+                MAX_IDLE_PENDING_TIMEOUT = mParser.getDurationMillis(KEY_MAX_IDLE_PENDING_TIMEOUT,
                         !COMPRESS_TIME ? 10 * 60 * 1000L : 60 * 1000L);
                 IDLE_PENDING_FACTOR = mParser.getFloat(KEY_IDLE_PENDING_FACTOR,
                         2f);
-                QUICK_DOZE_DELAY_TIMEOUT = getDurationWeighted(
+                QUICK_DOZE_DELAY_TIMEOUT = mParser.getDurationMillis(
                         KEY_QUICK_DOZE_DELAY_TIMEOUT, !COMPRESS_TIME ? 60 * 1000L : 15 * 1000L);
-                IDLE_TIMEOUT = getDurationWeighted(KEY_IDLE_TIMEOUT,
+                IDLE_TIMEOUT = mParser.getDurationMillis(KEY_IDLE_TIMEOUT,
                         !COMPRESS_TIME ? 60 * 60 * 1000L : 6 * 60 * 1000L);
-                MAX_IDLE_TIMEOUT = getDurationWeighted(KEY_MAX_IDLE_TIMEOUT,
+                MAX_IDLE_TIMEOUT = mParser.getDurationMillis(KEY_MAX_IDLE_TIMEOUT,
                         !COMPRESS_TIME ? 6 * 60 * 60 * 1000L : 30 * 60 * 1000L);
                 IDLE_FACTOR = mParser.getFloat(KEY_IDLE_FACTOR,
                         2f);
-                MIN_TIME_TO_ALARM = getDurationWeighted(KEY_MIN_TIME_TO_ALARM,
+                MIN_TIME_TO_ALARM = mParser.getDurationMillis(KEY_MIN_TIME_TO_ALARM,
                         !COMPRESS_TIME ? 30 * 60 * 1000L : 6 * 60 * 1000L);
-                MAX_TEMP_APP_WHITELIST_DURATION = getDurationWeighted(
+                MAX_TEMP_APP_WHITELIST_DURATION = mParser.getDurationMillis(
                         KEY_MAX_TEMP_APP_WHITELIST_DURATION, 5 * 60 * 1000L);
-                MMS_TEMP_APP_WHITELIST_DURATION = getDurationWeighted(
+                MMS_TEMP_APP_WHITELIST_DURATION = mParser.getDurationMillis(
                         KEY_MMS_TEMP_APP_WHITELIST_DURATION, 60 * 1000L);
-                SMS_TEMP_APP_WHITELIST_DURATION = getDurationWeighted(
+                SMS_TEMP_APP_WHITELIST_DURATION = mParser.getDurationMillis(
                         KEY_SMS_TEMP_APP_WHITELIST_DURATION, 20 * 1000L);
-                NOTIFICATION_WHITELIST_DURATION = getDurationWeighted(
+                NOTIFICATION_WHITELIST_DURATION = mParser.getDurationMillis(
                         KEY_NOTIFICATION_WHITELIST_DURATION, 30 * 1000L);
                 WAIT_FOR_UNLOCK = mParser.getBoolean(KEY_WAIT_FOR_UNLOCK, true);
                 PRE_IDLE_FACTOR_LONG = mParser.getFloat(KEY_PRE_IDLE_FACTOR_LONG, 1.67f);
@@ -1439,12 +1369,12 @@ public class DeviceIdleController extends SystemService
                 cancelSensingTimeoutAlarmLocked();
             }
         }
-        if (((result == AnyMotionDetector.RESULT_MOVED) ||
-            (result == AnyMotionDetector.RESULT_UNKNOWN)) && !mAggressiveIdle) {
+        if ((result == AnyMotionDetector.RESULT_MOVED) ||
+            (result == AnyMotionDetector.RESULT_UNKNOWN)) {
             synchronized (this) {
                 handleMotionDetectedLocked(mConstants.INACTIVE_TIMEOUT, "non_stationary");
             }
-        } else if ((result == AnyMotionDetector.RESULT_STATIONARY) || mAggressiveIdle) {
+        } else if (result == AnyMotionDetector.RESULT_STATIONARY) {
             if (mState == STATE_SENSING) {
                 // If we are currently sensing, it is time to move to locating.
                 synchronized (this) {
@@ -2186,10 +2116,6 @@ public class DeviceIdleController extends SystemService
                 filter.addAction(Intent.ACTION_SCREEN_OFF);
                 filter.addAction(Intent.ACTION_SCREEN_ON);
                 getContext().registerReceiver(mInteractivityReceiver, filter);
-
-                filter = new IntentFilter();
-                filter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
-                getContext().registerReceiver(mReceiver, filter);
 
                 mLocalActivityManager.setDeviceIdleWhitelist(
                         mPowerSaveWhitelistAllAppIdArray, mPowerSaveWhitelistExceptIdleAppIdArray);

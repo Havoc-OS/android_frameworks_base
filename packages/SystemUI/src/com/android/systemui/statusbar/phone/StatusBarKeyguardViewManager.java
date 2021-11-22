@@ -285,8 +285,7 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
     public void onTuningChanged(String key, String newValue) {
         switch (key) {
             case LOCKSCREEN_BLUR:
-                mLockScreenBlur =
-                    (float) TunerService.parseInteger(newValue, 0) / 100f;
+                mLockScreenBlur = (float) TunerService.parseInteger(newValue, 100) / 100f;
                 break;
             default:
                 break;

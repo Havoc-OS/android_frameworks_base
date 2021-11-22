@@ -298,20 +298,6 @@ public class SleepModeController {
                     Settings.Secure.DOZE_ALWAYS_ON, 0, UserHandle.USER_CURRENT);
         }
 
-        // Enable Aggressive battery
-        boolean enableAggressive = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SLEEP_MODE_AGGRESSIVE_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-        if (enableAggressive) {
-            mIdleState = Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_IDLE_ENABLED, 0);
-            mStandbyState = Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_STANDBY_ENABLED, 0);
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_IDLE_ENABLED, 1);
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_STANDBY_ENABLED, 1);
-        }
-
         // Set Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)
         int ringerMode = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.SLEEP_MODE_RINGER_MODE, 0, UserHandle.USER_CURRENT);
@@ -378,16 +364,6 @@ public class SleepModeController {
         if (disableAOD) {
             Settings.Secure.putIntForUser(mContext.getContentResolver(),
                     Settings.Secure.DOZE_ALWAYS_ON, mAODState, UserHandle.USER_CURRENT);
-        }
-
-        // Disable Aggressive battery
-        boolean enableAggressive = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                Settings.Secure.SLEEP_MODE_AGGRESSIVE_TOGGLE, 1, UserHandle.USER_CURRENT) == 1;
-        if (enableAggressive) {
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_IDLE_ENABLED, mIdleState);
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.AGGRESSIVE_STANDBY_ENABLED, mStandbyState);
         }
 
         // Set Ringer mode (0: Off, 1: Vibrate, 2:DND: 3:Silent)

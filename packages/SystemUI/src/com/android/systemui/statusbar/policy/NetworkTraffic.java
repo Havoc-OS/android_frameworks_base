@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.ContentObserver;
-import android.graphics.drawable.Drawable;
-import android.graphics.PorterDuff.Mode;
 import android.graphics.Typeface;
 import android.view.Gravity;
 import android.net.ConnectivityManager;
@@ -29,12 +27,6 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
-/*
-*
-* Seeing how an Integer object in java requires at least 16 Bytes, it seemed awfully wasteful
-* to only use it for a single boolean. 32-bits is plenty of room for what we need it to do.
-*
-*/
 public class NetworkTraffic extends TextView {
 
     private static final int KB = 1024;
@@ -83,7 +75,7 @@ public class NetworkTraffic extends TextView {
                 setVisibility(View.GONE);
             } else if (shouldShowUpload(rxData, txData, timeDelta)) {
                 // Show information for uplink if it's called for
-                CharSequence output = formatOutput(timeDelta, txData, symbol);
+                CharSequence output = formatOutput(timeDelta, txData);
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
@@ -92,7 +84,7 @@ public class NetworkTraffic extends TextView {
                 setVisibility(View.VISIBLE);
             } else {
                 // Add information for downlink if it's called for
-                CharSequence output = formatOutput(timeDelta, rxData, symbol);
+                CharSequence output = formatOutput(timeDelta, rxData);
 
                 // Update view if there's anything new to show
                 if (output != getText()) {
@@ -113,7 +105,7 @@ public class NetworkTraffic extends TextView {
             }
         }
 
-        private CharSequence formatOutput(long timeDelta, long data, String symbol) {
+        private CharSequence formatOutput(long timeDelta, long data) {
             long speed = (long)(data / (timeDelta / 1000F));
 
             return formatDecimal(speed);
@@ -180,10 +172,8 @@ public class NetworkTraffic extends TextView {
 
             if (mIndicatorMode == 0) {
                 return (speedTxKB > speedRxKB);
-            } else if (mIndicatorMode == 2) {
-                return true;
             } else {
-                return false;
+                return mIndicatorMode == 2;
             }
         }
     };
@@ -309,7 +299,6 @@ public class NetworkTraffic extends TextView {
             totalRxBytes = TrafficStats.getTotalRxBytes();
             lastUpdateTime = SystemClock.elapsedRealtime();
             mTrafficHandler.sendEmptyMessage(1);
-            return;
         }
     }
 
