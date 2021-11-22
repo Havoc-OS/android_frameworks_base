@@ -43,7 +43,6 @@ class FODAnimation(context: Context, y: Int) : ImageView(context) {
         animParams.type = LayoutParams.TYPE_VOLUME_OVERLAY
         animParams.flags = (LayoutParams.FLAG_NOT_FOCUSABLE
                 or LayoutParams.FLAG_NOT_TOUCH_MODAL
-                or LayoutParams.FLAG_NOT_TOUCHABLE
                 or LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         animParams.gravity = Gravity.TOP or Gravity.CENTER
         animParams.y = y - animationSize / 2
