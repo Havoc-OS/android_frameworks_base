@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 crDroid Android Project
+ * Copyright (C) 2021 Havoc-OS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,34 +18,28 @@ package com.android.systemui.statusbar.logo;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.android.systemui.R;
 import com.android.systemui.Dependency;
+import com.android.systemui.R;
 import com.android.systemui.plugins.DarkIconDispatcher;
 
 public class LogoImageView extends ImageView {
 
-    private Context mContext;
+    private final Context mContext;
 
+    protected boolean mLogoEnabled;
+    protected int mLogoPosition;
+    private int mLogoStyle;
     private boolean mAttached;
-    private boolean mHavocLogo;
-    private int mHavocLogoPosition;
-    private int mHavocLogoStyle;
-    private int mTintColor = Color.WHITE;
-    private final Handler mHandler = new Handler();
-    private ContentResolver mContentResolver;
+    private final ContentResolver mContentResolver;
 
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -53,12 +47,11 @@ public class LogoImageView extends ImageView {
         }
 
         void observe() {
-            ContentResolver resolver = mContext.getContentResolver();
-            resolver.registerContentObserver(Settings.System.getUriFor(
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_LOGO), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_LOGO_POSITION), false, this);
-            resolver.registerContentObserver(Settings.System.getUriFor(
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_LOGO_STYLE), false, this);
         }
 
@@ -67,8 +60,6 @@ public class LogoImageView extends ImageView {
             updateSettings();
         }
     }
-
-    private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
 
     public LogoImageView(Context context) {
         this(context, null);
@@ -80,8 +71,10 @@ public class LogoImageView extends ImageView {
 
     public LogoImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        final Resources resources = getResources();
         mContext = context;
+        mContentResolver = context.getContentResolver();
+        Handler mHandler = new Handler();
+        SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
         mSettingsObserver.observe();
         updateSettings();
     }
@@ -107,142 +100,185 @@ public class LogoImageView extends ImageView {
         Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(this);
     }
 
-    public void onDarkChanged(Rect area, float darkIntensity, int tint) {
-        mTintColor = DarkIconDispatcher.getTint(area, this, tint);
-        if (mHavocLogo && mHavocLogoPosition == 0) {
-            updateHavocLogo();
+    private Drawable getLogoDrawable() {
+        Drawable drawable;
+        switch (mLogoStyle) {
+            default:
+            case 0:
+                drawable = mContext.getDrawable(R.drawable.ic_havoc_logo);
+                break;
+            case 1:
+                drawable = mContext.getDrawable(R.drawable.ic_android_logo);
+                break;
+            case 2:
+                drawable = mContext.getDrawable(R.drawable.ic_apple_logo);
+                break;
+            case 3:
+                drawable = mContext.getDrawable(R.drawable.ic_beats);
+                break;
+            case 4:
+                drawable = mContext.getDrawable(R.drawable.ic_biohazard);
+                break;
+            case 5:
+                drawable = mContext.getDrawable(R.drawable.ic_blackberry);
+                break;
+            case 6:
+                drawable = mContext.getDrawable(R.drawable.ic_blogger);
+                break;
+            case 7:
+                drawable = mContext.getDrawable(R.drawable.ic_bomb);
+                break;
+            case 8:
+                drawable = mContext.getDrawable(R.drawable.ic_brain);
+                break;
+            case 9:
+                drawable = mContext.getDrawable(R.drawable.ic_cake);
+                break;
+            case 10:
+                drawable = mContext.getDrawable(R.drawable.ic_cannabis);
+                break;
+            case 11:
+                drawable = mContext.getDrawable(R.drawable.ic_death_star);
+                break;
+            case 12:
+                drawable = mContext.getDrawable(R.drawable.ic_emoticon);
+                break;
+            case 13:
+                drawable = mContext.getDrawable(R.drawable.ic_emoticon_cool);
+                break;
+            case 14:
+                drawable = mContext.getDrawable(R.drawable.ic_emoticon_dead);
+                break;
+            case 15:
+                drawable = mContext.getDrawable(R.drawable.ic_emoticon_devil);
+                break;
+            case 16:
+                drawable = mContext.getDrawable(R.drawable.ic_emoticon_happy);
+                break;
+            case 17:
+                drawable = mContext.getDrawable(R.drawable.ic_emoticon_neutral);
+                break;
+            case 18:
+                drawable = mContext.getDrawable(R.drawable.ic_emoticon_poop);
+                break;
+            case 19:
+                drawable = mContext.getDrawable(R.drawable.ic_emoticon_sad);
+                break;
+            case 20:
+                drawable = mContext.getDrawable(R.drawable.ic_emoticon_tongue);
+                break;
+            case 21:
+                drawable = mContext.getDrawable(R.drawable.ic_fire);
+                break;
+            case 22:
+                drawable = mContext.getDrawable(R.drawable.ic_flask);
+                break;
+            case 23:
+                drawable = mContext.getDrawable(R.drawable.ic_gender_female);
+                break;
+            case 24:
+                drawable = mContext.getDrawable(R.drawable.ic_gender_male);
+                break;
+            case 25:
+                drawable = mContext.getDrawable(R.drawable.ic_gender_male_female);
+                break;
+            case 26:
+                drawable = mContext.getDrawable(R.drawable.ic_ghost);
+                break;
+            case 27:
+                drawable = mContext.getDrawable(R.drawable.ic_google);
+                break;
+            case 28:
+                drawable = mContext.getDrawable(R.drawable.ic_guitar_acoustic);
+                break;
+            case 29:
+                drawable = mContext.getDrawable(R.drawable.ic_guitar_electric);
+                break;
+            case 30:
+                drawable = mContext.getDrawable(R.drawable.ic_heart);
+                break;
+            case 31:
+                drawable = mContext.getDrawable(R.drawable.ic_human_female);
+                break;
+            case 32:
+                drawable = mContext.getDrawable(R.drawable.ic_human_male);
+                break;
+            case 33:
+                drawable = mContext.getDrawable(R.drawable.ic_human_male_female);
+                break;
+            case 34:
+                drawable = mContext.getDrawable(R.drawable.ic_incognito);
+                break;
+            case 35:
+                drawable = mContext.getDrawable(R.drawable.ic_ios_logo);
+                break;
+            case 36:
+                drawable = mContext.getDrawable(R.drawable.ic_linux);
+                break;
+            case 37:
+                drawable = mContext.getDrawable(R.drawable.ic_lock);
+                break;
+            case 38:
+                drawable = mContext.getDrawable(R.drawable.ic_music);
+                break;
+            case 39:
+                drawable = mContext.getDrawable(R.drawable.ic_ninja);
+                break;
+            case 40:
+                drawable = mContext.getDrawable(R.drawable.ic_pac_man);
+                break;
+            case 41:
+                drawable = mContext.getDrawable(R.drawable.ic_peace);
+                break;
+            case 42:
+                drawable = mContext.getDrawable(R.drawable.ic_robot);
+                break;
+            case 43:
+                drawable = mContext.getDrawable(R.drawable.ic_skull);
+                break;
+            case 44:
+                drawable = mContext.getDrawable(R.drawable.ic_smoking);
+                break;
+            case 45:
+                drawable = mContext.getDrawable(R.drawable.ic_wallet);
+                break;
+            case 46:
+                drawable = mContext.getDrawable(R.drawable.ic_windows);
+                break;
+            case 47:
+                drawable = mContext.getDrawable(R.drawable.ic_xbox);
+                break;
+            case 48:
+                drawable = mContext.getDrawable(R.drawable.ic_xbox_controller);
+                break;
+            case 49:
+                drawable = mContext.getDrawable(R.drawable.ic_yin_yang);
+                break;
         }
-    }
-
-    public void updateHavocLogo() {
-        Drawable drawable = null;
-
-        if (!mHavocLogo || mHavocLogoPosition == 1) {
-            setImageDrawable(null);
-            setVisibility(View.GONE);
-            return;
-        } else {
-            setVisibility(View.VISIBLE);
-        }
-
-        if (mHavocLogoStyle == 0) {
-            drawable = mContext.getDrawable(R.drawable.ic_havoc_logo);
-        } else if (mHavocLogoStyle == 1) {
-            drawable = mContext.getDrawable(R.drawable.ic_android_logo);
-        } else if (mHavocLogoStyle == 2) {
-            drawable = mContext.getDrawable(R.drawable.ic_apple_logo);
-        } else if (mHavocLogoStyle == 3) {
-            drawable = mContext.getDrawable(R.drawable.ic_beats);
-        } else if (mHavocLogoStyle == 4) {
-            drawable = mContext.getDrawable(R.drawable.ic_biohazard);
-        } else if (mHavocLogoStyle == 5) {
-            drawable = mContext.getDrawable(R.drawable.ic_blackberry);
-        } else if (mHavocLogoStyle == 6) {
-            drawable = mContext.getDrawable(R.drawable.ic_blogger);
-        } else if (mHavocLogoStyle == 7) {
-            drawable = mContext.getDrawable(R.drawable.ic_bomb);
-        } else if (mHavocLogoStyle == 8) {
-            drawable = mContext.getDrawable(R.drawable.ic_brain);
-        } else if (mHavocLogoStyle == 9) {
-            drawable = mContext.getDrawable(R.drawable.ic_cake);
-        } else if (mHavocLogoStyle == 10) {
-            drawable = mContext.getDrawable(R.drawable.ic_cannabis);
-        } else if (mHavocLogoStyle == 11) {
-            drawable = mContext.getDrawable(R.drawable.ic_death_star);
-        } else if (mHavocLogoStyle == 12) {
-            drawable = mContext.getDrawable(R.drawable.ic_emoticon);
-        } else if (mHavocLogoStyle == 13) {
-            drawable = mContext.getDrawable(R.drawable.ic_emoticon_cool);
-        } else if (mHavocLogoStyle == 14) {
-            drawable = mContext.getDrawable(R.drawable.ic_emoticon_dead);
-        } else if (mHavocLogoStyle == 15) {
-            drawable = mContext.getDrawable(R.drawable.ic_emoticon_devil);
-        } else if (mHavocLogoStyle == 16) {
-            drawable = mContext.getDrawable(R.drawable.ic_emoticon_happy);
-        } else if (mHavocLogoStyle == 17) {
-            drawable = mContext.getDrawable(R.drawable.ic_emoticon_neutral);
-        } else if (mHavocLogoStyle == 18) {
-            drawable = mContext.getDrawable(R.drawable.ic_emoticon_poop);
-        } else if (mHavocLogoStyle == 19) {
-            drawable = mContext.getDrawable(R.drawable.ic_emoticon_sad);
-        } else if (mHavocLogoStyle == 20) {
-            drawable = mContext.getDrawable(R.drawable.ic_emoticon_tongue);
-        } else if (mHavocLogoStyle == 21) {
-            drawable = mContext.getDrawable(R.drawable.ic_fire);
-        } else if (mHavocLogoStyle == 22) {
-            drawable = mContext.getDrawable(R.drawable.ic_flask);
-        } else if (mHavocLogoStyle == 23) {
-            drawable = mContext.getDrawable(R.drawable.ic_gender_female);
-        } else if (mHavocLogoStyle == 24) {
-            drawable = mContext.getDrawable(R.drawable.ic_gender_male);
-        } else if (mHavocLogoStyle == 25) {
-            drawable = mContext.getDrawable(R.drawable.ic_gender_male_female);
-        } else if (mHavocLogoStyle == 26) {
-            drawable = mContext.getDrawable(R.drawable.ic_ghost);
-        } else if (mHavocLogoStyle == 27) {
-            drawable = mContext.getDrawable(R.drawable.ic_google);
-        } else if (mHavocLogoStyle == 28) {
-            drawable = mContext.getDrawable(R.drawable.ic_guitar_acoustic);
-        } else if (mHavocLogoStyle == 29) {
-            drawable = mContext.getDrawable(R.drawable.ic_guitar_electric);
-        } else if (mHavocLogoStyle == 30) {
-            drawable = mContext.getDrawable(R.drawable.ic_heart);
-        } else if (mHavocLogoStyle == 31) {
-            drawable = mContext.getDrawable(R.drawable.ic_human_female);
-        } else if (mHavocLogoStyle == 32) {
-            drawable = mContext.getDrawable(R.drawable.ic_human_male);
-        } else if (mHavocLogoStyle == 33) {
-            drawable = mContext.getDrawable(R.drawable.ic_human_male_female);
-        } else if (mHavocLogoStyle == 34) {
-            drawable = mContext.getDrawable(R.drawable.ic_incognito);
-        } else if (mHavocLogoStyle == 35) {
-            drawable = mContext.getDrawable(R.drawable.ic_ios_logo);
-        } else if (mHavocLogoStyle == 36) {
-            drawable = mContext.getDrawable(R.drawable.ic_linux);
-        } else if (mHavocLogoStyle == 37) {
-            drawable = mContext.getDrawable(R.drawable.ic_lock);
-        } else if (mHavocLogoStyle == 38) {
-            drawable = mContext.getDrawable(R.drawable.ic_music);
-        } else if (mHavocLogoStyle == 39) {
-            drawable = mContext.getDrawable(R.drawable.ic_ninja);
-        } else if (mHavocLogoStyle == 40) {
-            drawable = mContext.getDrawable(R.drawable.ic_pac_man);
-        } else if (mHavocLogoStyle == 41) {
-            drawable = mContext.getDrawable(R.drawable.ic_peace);
-        } else if (mHavocLogoStyle == 42) {
-            drawable = mContext.getDrawable(R.drawable.ic_robot);
-        } else if (mHavocLogoStyle == 43) {
-            drawable = mContext.getDrawable(R.drawable.ic_skull);
-        } else if (mHavocLogoStyle == 44) {
-            drawable = mContext.getDrawable(R.drawable.ic_smoking);
-        } else if (mHavocLogoStyle == 45) {
-            drawable = mContext.getDrawable(R.drawable.ic_wallet);
-        } else if (mHavocLogoStyle == 46) {
-            drawable = mContext.getDrawable(R.drawable.ic_windows);
-        } else if (mHavocLogoStyle == 47) {
-            drawable = mContext.getDrawable(R.drawable.ic_xbox);
-        } else if (mHavocLogoStyle == 48) {
-            drawable = mContext.getDrawable(R.drawable.ic_xbox_controller);
-        } else if (mHavocLogoStyle == 49) {
-            drawable = mContext.getDrawable(R.drawable.ic_yin_yang);
-        }
-
-        setImageDrawable(null);
-
-        clearColorFilter();
-
-        drawable.setTint(mTintColor);
-        setImageDrawable(drawable);
+        return drawable;
     }
 
     public void updateSettings() {
-        ContentResolver resolver = mContext.getContentResolver();
-        mHavocLogo = Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_LOGO, 0) == 1;
-        mHavocLogoPosition = Settings.System.getInt(resolver,
+        mLogoEnabled = Settings.System.getInt(mContentResolver,
+                Settings.System.STATUS_BAR_LOGO, 1) == 1;
+        mLogoPosition = Settings.System.getInt(mContentResolver,
                 Settings.System.STATUS_BAR_LOGO_POSITION, 0);
-        mHavocLogoStyle = Settings.System.getInt(resolver,
+        mLogoStyle = Settings.System.getInt(mContentResolver,
                 Settings.System.STATUS_BAR_LOGO_STYLE, 0);
-        updateHavocLogo();
+        updateVisibility();
+    }
+
+    public void updateVisibility() {
+        if (isEnabled()) {
+            setVisibility(View.VISIBLE);
+            setImageDrawable(getLogoDrawable());
+        } else {
+            setImageDrawable(null);
+            setVisibility(View.GONE);
+        }
+    }
+
+    public boolean isEnabled() {
+        return mLogoEnabled && mLogoPosition == 0;
     }
 }
