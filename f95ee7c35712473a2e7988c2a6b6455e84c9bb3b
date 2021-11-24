@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bee1214_9776c4a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000043
+      },
+      "writtenOn": "2021-11-24T08:08:57Z",
+      "side": 1,
+      "message": "Accidentally had messed up the line placement, now fixed.",
+      "revId": "f95ee7c35712473a2e7988c2a6b6455e84c9bb3b",
+      "serverId": "9060a12c-e4ac-4c6f-a232-1777a55b3a69"
+    }
+  ]
+}
