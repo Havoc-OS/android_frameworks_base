@@ -519,6 +519,7 @@ public class KeyguardSliceProvider extends SliceProvider implements
                 && TextUtils.equals(artist, mMediaArtist)) {
             return;
         }
+
         if (nowPlayingAvailable == mMediaIsVisible && TextUtils.equals(title, mMediaTitle)) {
             return;
         }
@@ -535,9 +536,10 @@ public class KeyguardSliceProvider extends SliceProvider implements
         mMediaIsVisible = nextVisible || nowPlayingAvailable;
 
         notifyChange();
+
         // if AoD is disabled, the device is not already dozing and we get a new track, trigger an ambient pulse event
         if (mPulseOnNewTracks && mMediaIsVisible
-                && !mDozeParameters.getAlwaysOn() && mDozing) {
+                && !mDozeParameters.getAlwaysOn() && mDozing && !isTwelveClock) {
             getContext().sendBroadcastAsUser(new Intent(PULSE_ACTION),
                     new UserHandle(UserHandle.USER_CURRENT));
         }
