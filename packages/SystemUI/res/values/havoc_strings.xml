@@ -49,4 +49,7 @@
     <string name="usage_data_default_suffix">Data</string>
     <string name="usage_wifi_default_suffix">Wi-Fi</string>
     <string name="usage_data_unavailable">Network unavailable</string>
+
+    <!-- Google lens screenshot notification -->
+    <string name="lens">Lens</string>
 </resources>
