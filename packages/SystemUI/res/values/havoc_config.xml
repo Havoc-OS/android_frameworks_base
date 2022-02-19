@@ -23,6 +23,6 @@
     <integer name="config_currentInfoDivider" translatable="false">1000</integer>
 
     <!-- StatusBar burn-in protection -->
-    <bool name="config_statusBarBurnInProtection">false</bool>
+    <bool name="config_disableStatusBarBurnInProtection">false</bool>
 
 </resources>
