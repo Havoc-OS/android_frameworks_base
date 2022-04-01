@@ -6223,13 +6223,13 @@ public class Notification implements Parcelable
             if (emphasizedMode) {
                 // change the background bgColor
                 CharSequence title = action.title;
-                int buttonFillColor = getColors(p).getSecondaryAccentColor();
+                int buttonFillColor = getStandardActionColor(p);
                 if (tombstone) {
                     buttonFillColor = setAlphaComponentByFloatDimen(mContext,
                             ContrastColorUtil.resolveSecondaryColor(
                                     mContext, getColors(p).getBackgroundColor(), mInNightMode),
                             R.dimen.notification_action_disabled_container_alpha);
-                }
+                }                
                 if (isLegacy()) {
                     title = ContrastColorUtil.clearColorSpans(title);
                 } else {
