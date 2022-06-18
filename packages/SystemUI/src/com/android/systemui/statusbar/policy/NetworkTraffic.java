@@ -310,7 +310,7 @@ public class NetworkTraffic extends TextView implements TunerService.Tunable {
         if (mIsEnabled) {
             if (mAttached) {
                 totalRxBytes = TrafficStats.getTotalRxBytes();
-                lastUpdateTime = SystemClock.elapsedRealtime();
+                totalTxBytes = TrafficStats.getTotalTxBytes();
                 mTrafficHandler.sendEmptyMessage(1);
             }
             if (mAutoHideThreshold == 0)
