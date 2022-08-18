@@ -30,6 +30,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternUtils.RequestThrottledException;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.keyguard.PasswordTextView.QuickUnlockListener;
+import com.android.keyguard.KeyguardSecurityModel.SecurityMode;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 import com.android.systemui.Dependency;
@@ -292,5 +293,8 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
             // do nothing
         }
         return pinPasswordLength >= 4 ? pinPasswordLength : -1;
+    @Override
+    public SecurityMode getSecurityMode() {
+        return SecurityMode.PIN;
     }
 }
