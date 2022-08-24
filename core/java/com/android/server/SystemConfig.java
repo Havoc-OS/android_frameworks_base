@@ -101,6 +101,9 @@ public class SystemConfig {
     // property for runtime configuration differentiation in vendor
     private static final String VENDOR_SKU_PROPERTY = "ro.boot.product.vendor.sku";
 
+    // property for runtime configuration differentiation based on baseband type
+    private static final String NO_RIL_PROPERTY = "ro.radio.noril";
+
     private static final ArrayMap<String, ArraySet<String>> EMPTY_PERMISSIONS =
             new ArrayMap<>();
 
@@ -639,6 +642,17 @@ public class SystemConfig {
                     vendorPermissionFlag);
             readPermissions(parser, Environment.buildPath(
                     Environment.getVendorDirectory(), "etc", "permissions", vendorSkuDir),
+                    vendorPermissionFlag);
+        }
+
+        boolean noRilSupport = SystemProperties.getBoolean(NO_RIL_PROPERTY, false);
+        if (noRilSupport) {
+            String noRilDir = "noRil";
+            readPermissions(parser, Environment.buildPath(
+                    Environment.getVendorDirectory(), "etc", "sysconfig", noRilDir),
+                    vendorPermissionFlag);
+            readPermissions(parser, Environment.buildPath(
+                    Environment.getVendorDirectory(), "etc", "permissions", noRilDir),
                     vendorPermissionFlag);
         }
 
