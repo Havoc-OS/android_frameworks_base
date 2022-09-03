@@ -32,4 +32,7 @@
     <string name="permgrouprequest_fake_package_signature">Allow
         &lt;b><xliff:g id="app_name" example="Gmail">%1$s</xliff:g>&lt;/b> to spoof package signature?</string>
 
+    <!-- Cycle through ringer modes -->
+    <string name="volume_dialog_ringer_guidance_normal">Calls and notifications will ring</string>
+
 </resources>
