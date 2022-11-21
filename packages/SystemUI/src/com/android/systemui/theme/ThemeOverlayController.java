@@ -162,8 +162,10 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
             new ConfigurationListener() {
                 @Override
                 public void onUiModeChanged() {
-                    Log.i(TAG, "Re-applying theme on UI change");
-                    reevaluateSystemTheme(true /* forceReload */);
+                    if (isBlackThemeEnabled()) {
+                        Log.i(TAG, "Re-applying theme on UI change");
+                        reevaluateSystemTheme(true /* forceReload */);
+                    }
                 }
             };
 
@@ -721,9 +723,7 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
             categoryToPackage.put(OVERLAY_CATEGORY_ACCENT_COLOR, mSecondaryOverlay.getIdentifier());
         }
 
-        boolean isBlackMode = (LineageSettings.Secure.getIntForUser(
-                mContext.getContentResolver(), LineageSettings.Secure.BERRY_BLACK_THEME,
-                0, currentUser) == 1) && isNightMode();
+        boolean isBlackMode = isBlackThemeEnabled() && isNightMode();
         if (categoryToPackage.containsKey(OVERLAY_CATEGORY_SYSTEM_PALETTE) && isBlackMode) {
             OverlayIdentifier blackTheme = new OverlayIdentifier(OVERLAY_BERRY_BLACK_THEME);
             categoryToPackage.put(OVERLAY_CATEGORY_SYSTEM_PALETTE, blackTheme);
@@ -781,6 +781,11 @@ public class ThemeOverlayController implements CoreStartable, Dumpable {
             }
         }
         return style;
+    }
+
+    private boolean isBlackThemeEnabled() {
+        return LineageSettings.Secure.getIntForUser(
+            mContext.getContentResolver(), LineageSettings.Secure.BERRY_BLACK_THEME, 0, mUserTracker.getUserId()) == 1;
     }
 
     @Override
