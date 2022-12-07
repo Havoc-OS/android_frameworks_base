@@ -322,8 +322,8 @@ class ColorScheme(
         }
 
         accent1 = TonalPalette(style.coreSpec.a1, seedArgb, luminanceFactor, chromaFactor)
-        accent2 = TonalPalette(style.coreSpec.a2, seedArgb, luminanceFactor, chromaFactor)
-        accent3 = TonalPalette(style.coreSpec.a3, seedArgb, luminanceFactor, chromaFactor)
+        accent2 = TonalPalette(style.coreSpec.a2, seedArgb)
+        accent3 = TonalPalette(style.coreSpec.a3, seedArgb)
         neutral1 = TonalPalette(style.coreSpec.n1, seedArgb)
         neutral2 = TonalPalette(style.coreSpec.n2, seedArgb)
     }
