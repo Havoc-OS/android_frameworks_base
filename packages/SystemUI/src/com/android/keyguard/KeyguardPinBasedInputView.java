@@ -26,7 +26,9 @@ import static com.android.keyguard.KeyguardSecurityView.PROMPT_REASON_TRUSTAGENT
 import static com.android.keyguard.KeyguardSecurityView.PROMPT_REASON_USER_REQUEST;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Rect;
@@ -50,6 +52,8 @@ public abstract class KeyguardPinBasedInputView extends KeyguardAbsKeyInputView 
     private NumPadButton mOkButton;
     private NumPadButton mDeleteButton;
     private NumPadKey[] mButtons = new NumPadKey[10];
+    private final ObjectAnimator mDeleteButtonAnimator = ObjectAnimator.ofFloat(null, View.ALPHA,
+            0f, 1f);
 
     public KeyguardPinBasedInputView(Context context) {
         this(context, null);
@@ -57,6 +61,18 @@ public abstract class KeyguardPinBasedInputView extends KeyguardAbsKeyInputView 
 
     public KeyguardPinBasedInputView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        mDeleteButtonAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation, boolean isReverse) {
+                mDeleteButton.setVisibility(isReverse ? View.INVISIBLE : View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationStart(Animator animation, boolean isReverse) {
+                mDeleteButton.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -163,7 +179,7 @@ public abstract class KeyguardPinBasedInputView extends KeyguardAbsKeyInputView 
         mOkButton = findViewById(R.id.key_enter);
 
         mDeleteButton = findViewById(R.id.delete_button);
-        mDeleteButton.setVisibility(View.VISIBLE);
+        mDeleteButtonAnimator.setTarget(mDeleteButton);
 
         mButtons[0] = findViewById(R.id.key0);
         mButtons[1] = findViewById(R.id.key1);
@@ -245,5 +261,19 @@ public abstract class KeyguardPinBasedInputView extends KeyguardAbsKeyInputView 
         }
         animatorSet.playTogether(animators);
         animatorSet.start();
+    }
+
+    public void showDeleteButton(boolean show) {
+        if (mDeleteButtonAnimator.isStarted()) {
+            mDeleteButtonAnimator.cancel();
+        }
+
+        if (show) {
+            mDeleteButtonAnimator.setDuration(250);
+            mDeleteButtonAnimator.start();
+        } else {
+            mDeleteButtonAnimator.setDuration(450);
+            mDeleteButtonAnimator.reverse();
+        }
     }
 }

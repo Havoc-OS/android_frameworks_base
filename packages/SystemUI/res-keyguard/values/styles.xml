@@ -61,6 +61,7 @@
     <style name="NumPadKey.Delete">
         <item name="android:colorControlNormal">@color/numpad_key_color_secondary</item>
         <item name="android:src">@drawable/ic_backspace_24dp</item>
+        <item name="android:visibility">invisible</item>
     </style>
     <style name="NumPadKey.Enter">
         <item name="android:colorControlNormal">@color/numpad_key_color_secondary</item>
