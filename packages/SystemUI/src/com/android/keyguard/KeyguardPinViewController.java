@@ -16,12 +16,7 @@
 
 package com.android.keyguard;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.view.View;
-import android.widget.LinearLayout;
-
-import androidx.constraintlayout.helper.widget.Flow;
 
 import com.android.internal.util.LatencyTracker;
 import com.android.internal.widget.LockPatternUtils;
@@ -29,12 +24,6 @@ import com.android.keyguard.KeyguardSecurityModel.SecurityMode;
 import com.android.systemui.R;
 import com.android.systemui.classifier.FalsingCollector;
 import com.android.systemui.statusbar.policy.DevicePostureController;
-import com.android.keyguard.PasswordTextView.QuickUnlockListener;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.List;
 
 public class KeyguardPinViewController
         extends KeyguardPinBasedInputViewController<KeyguardPINView> {
@@ -43,8 +32,7 @@ public class KeyguardPinViewController
     private final DevicePostureController.Callback mPostureCallback = posture ->
             mView.onDevicePostureChanged(posture);
     private final LockPatternUtils mLockPatternUtils;
-    private final View mDeleteButton;
-    private boolean mDeleteButtonShowing = true;
+    private int mPinLength = -1;
 
     protected KeyguardPinViewController(KeyguardPINView view,
             KeyguardUpdateMonitor keyguardUpdateMonitor,
@@ -61,49 +49,11 @@ public class KeyguardPinViewController
         mKeyguardUpdateMonitor = keyguardUpdateMonitor;
         mPostureController = postureController;
         mLockPatternUtils = lockPatternUtils;
-        mDeleteButton = mView.findViewById(R.id.delete_button);
     }
 
     @Override
     protected void onViewAttached() {
         super.onViewAttached();
-
-        int passwordLength = mLockPatternUtils.getPinPasswordLength(
-                KeyguardUpdateMonitor.getCurrentUser());
-
-        mPasswordEntry.setQuickUnlockListener(new QuickUnlockListener() {
-            public void onValidateQuickUnlock(String password) {
-                if (password != null) {
-                    int length = password.length();
-                    if (length > 0) {
-                        showDeleteButton(true, true);
-                    } else if (length == 0) {
-                        showDeleteButton(false, true);
-                    }
-                    if (length == passwordLength) {
-                        verifyPasswordAndUnlock();
-                    }
-                }
-            }
-        });
-
-        showDeleteButton(false, false);
-
-        View okButton = mView.findViewById(R.id.key_enter);
-        if (okButton != null) {
-            /* show okButton only if password length is unset
-               because quick unlock won't work */
-            if (passwordLength != -1) {
-                okButton.setVisibility(View.INVISIBLE);
-                Flow flow = (Flow) mView.findViewById(R.id.flow1);
-                if (flow != null) {
-                    List<Integer> ids = Arrays.stream(flow.getReferencedIds())
-                                            .boxed().collect(Collectors.toList());
-                    Collections.swap(ids, 9 /* delete_button */, 11 /* key_enter */);
-                    flow.setReferencedIds(ids.stream().mapToInt(i -> i).toArray());
-                }
-            }
-        }
 
         View cancelBtn = mView.findViewById(R.id.cancel_button);
         if (cancelBtn != null) {
@@ -123,34 +73,25 @@ public class KeyguardPinViewController
     }
 
     @Override
+    protected void onTextChanged(int textLength) {
+        super.onTextChanged(textLength);
+
+        if (textLength == mPinLength) {
+            verifyPasswordAndUnlock();
+        }
+    }
+
+    @Override
+    public void onResume(int reason) {
+        super.onResume(reason);
+
+        mPinLength = mLockPatternUtils.getPinPasswordLength(KeyguardUpdateMonitor.getCurrentUser());
+        mView.showUnlockButton(mPinLength == -1);
+    }
+
+    @Override
     public boolean startDisappearAnimation(Runnable finishRunnable) {
         return mView.startDisappearAnimation(
                 mKeyguardUpdateMonitor.needsSlowUnlockTransition(), finishRunnable);
-    }
-
-    private void showDeleteButton(boolean show, boolean animate) {
-        int visibility = show ? View.VISIBLE : View.INVISIBLE;
-        if (mDeleteButton != null && mDeleteButtonShowing != show) {
-            mDeleteButtonShowing = show;
-            if (animate) {
-                mDeleteButton.setAlpha(show ? 0.0f : 1.0f);
-                mDeleteButton.animate()
-                    .alpha(show ? 1.0f : 0.0f)
-                    .setDuration(show ? 250 : 450)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                            if (show) mDeleteButton.setVisibility(visibility);
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            if (!show) mDeleteButton.setVisibility(visibility);
-                        }
-                    });
-            } else {
-                mDeleteButton.setVisibility(visibility);
-            }
-        }
     }
 }

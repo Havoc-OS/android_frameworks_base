@@ -58,6 +58,7 @@ public class KeyguardPasswordViewController
     private EditText mPasswordEntry;
     private ImageView mSwitchImeButton;
     private boolean mPaused;
+    private int mPasswordLength = -1;
 
     private final OnEditorActionListener mOnEditorActionListener = (v, actionId, event) -> {
         // Check if this was the result of hitting the enter key
@@ -89,8 +90,7 @@ public class KeyguardPasswordViewController
         public void afterTextChanged(Editable s) {
             if (!TextUtils.isEmpty(s)) {
                 onUserInput();
-                if (s.length() == mLockPatternUtils.getPinPasswordLength(
-                        KeyguardUpdateMonitor.getCurrentUser())) {
+                if (s.length() == mPasswordLength) {
                     verifyPasswordAndUnlock();
                 }
             }
@@ -198,6 +198,9 @@ public class KeyguardPasswordViewController
         if (reason != KeyguardSecurityView.SCREEN_ON || mShowImeAtScreenOn) {
             showInput();
         }
+
+        mPasswordLength = mLockPatternUtils.getPinPasswordLength(
+                KeyguardUpdateMonitor.getCurrentUser());
     }
 
     private void showInput() {

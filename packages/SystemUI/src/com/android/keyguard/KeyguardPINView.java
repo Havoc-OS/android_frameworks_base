@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
+import androidx.constraintlayout.widget.ConstraintHelper;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
@@ -50,11 +51,15 @@ import java.util.List;
 public class KeyguardPINView extends KeyguardPinBasedInputView {
 
     ValueAnimator mAppearAnimator = ValueAnimator.ofFloat(0f, 1f);
+    private boolean mIsUnlockButtonShown = true;
     private final DisappearAnimationUtils mDisappearAnimationUtils;
     private final DisappearAnimationUtils mDisappearAnimationUtilsLocked;
     private ConstraintLayout mContainer;
     private int mDisappearYTranslation;
     private View[][] mViews;
+    private View mDeleteButton;
+    private View mOkButton;
+    private ConstraintHelper mFlow;
     private int mYTrans;
     private int mYTransOffset;
     private View mBouncerMessageView;
@@ -143,11 +148,23 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
         float halfOpenPercentage =
                 mContext.getResources().getFloat(R.dimen.half_opened_bouncer_height_ratio);
 
+        final int deleteButtonVisibility = mDeleteButton.getVisibility();
+        final int okButtonVisibility = mOkButton.getVisibility();
+
         ConstraintSet cs = new ConstraintSet();
         cs.clone(mContainer);
         cs.setGuidelinePercent(R.id.pin_pad_top_guideline,
                 mLastDevicePosture == DEVICE_POSTURE_HALF_OPENED ? halfOpenPercentage : 0.0f);
         cs.applyTo(mContainer);
+
+        /*
+         * Preserve visibility as the constraint set triggers
+         * {@link ConstraintHelper#applyLayoutFeatures} which ultimately sets the views
+         * visibility to the one from its controller
+         * TODO: remove when ConstraintHelper has been fixed
+         */
+        mDeleteButton.setVisibility(deleteButtonVisibility);
+        mOkButton.setVisibility(okButtonVisibility);
     }
 
     @Override
@@ -156,6 +173,9 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
 
         mContainer = findViewById(R.id.pin_container);
         mBouncerMessageView = findViewById(R.id.bouncer_message_area);
+        mDeleteButton = findViewById(R.id.delete_button);
+        mOkButton = findViewById(R.id.key_enter);
+        mFlow = findViewById(R.id.flow1);
         mViews = new View[][]{
                 new View[]{
                         findViewById(R.id.row0), null, null
@@ -173,8 +193,8 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
                         findViewById(R.id.key9)
                 },
                 new View[]{
-                        findViewById(R.id.delete_button), findViewById(R.id.key0),
-                        findViewById(R.id.key_enter)
+                        mDeleteButton, findViewById(R.id.key0),
+                        mOkButton
                 },
                 new View[]{
                         null, mEcaView, null
@@ -297,5 +317,30 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
                 }
             }
         }
+    }
+
+    public void showUnlockButton(boolean show) {
+        if (show == mIsUnlockButtonShown) {
+            return;
+        }
+
+        mIsUnlockButtonShown = show;
+        mOkButton.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+
+        // Swap margins
+        final View tmpView = mViews[4][0];
+        mViews[4][0] = mViews[4][2];
+        mViews[4][2] = tmpView;
+        final ConstraintLayout.LayoutParams tmpLp =
+                (ConstraintLayout.LayoutParams) mViews[4][0].getLayoutParams();
+        mViews[4][0].setLayoutParams(mViews[4][2].getLayoutParams());
+        mViews[4][2].setLayoutParams(tmpLp);
+
+        // Swap delete & enter keys
+        final int[] ids = mFlow.getReferencedIds();
+        final int tmpId = ids[9];
+        ids[9] = ids[11];
+        ids[11] = tmpId;
+        mFlow.setReferencedIds(ids);
     }
 }
