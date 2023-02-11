@@ -26,6 +26,7 @@ import android.compat.annotation.ChangeId;
 import android.compat.annotation.EnabledSince;
 import android.compat.annotation.UnsupportedAppUsage;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.BlendMode;
 import android.graphics.Canvas;
@@ -34,7 +35,11 @@ import android.graphics.Paint;
 import android.graphics.RecordingCanvas;
 import android.graphics.Rect;
 import android.graphics.RenderNode;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Vibrator;
+import android.os.VibrationEffect;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -217,6 +222,8 @@ public class EdgeEffect {
     private float mBaseGlowScale;
     private float mDisplacement = 0.5f;
     private float mTargetDisplacement = 0.5f;
+    private boolean callerHasVibratePermission;
+    private Vibrator vibrator;
 
     /**
      * Current edge effect type, consumers should always query
@@ -233,6 +240,9 @@ public class EdgeEffect {
      */
     public EdgeEffect(Context context) {
         this(context, null);
+        callerHasVibratePermission = context.checkCallingOrSelfPermission(
+                android.Manifest.permission.VIBRATE) == PackageManager.PERMISSION_GRANTED;
+        vibrator = context.getSystemService(Vibrator.class);
     }
 
     /**
@@ -253,6 +263,9 @@ public class EdgeEffect {
         mPaint.setColor((themeColor & 0xffffff) | 0x33000000);
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setBlendMode(DEFAULT_BLEND_MODE);
+        callerHasVibratePermission = context.checkCallingOrSelfPermission(
+                android.Manifest.permission.VIBRATE) == PackageManager.PERMISSION_GRANTED;
+        vibrator = context.getSystemService(Vibrator.class);
     }
 
     @EdgeEffectType
@@ -262,6 +275,14 @@ public class EdgeEffect {
         } else {
             return mEdgeEffectType;
         }
+    }
+
+    private void triggerVibration() {
+        if (vibrator == null || !callerHasVibratePermission) {
+            return;
+        }
+        AsyncTask.execute(
+                () -> vibrator.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_TICK)));
     }
 
     /**
@@ -497,6 +518,7 @@ public class EdgeEffect {
             mState = STATE_RECEDE;
             mVelocity = velocity * ON_ABSORB_VELOCITY_ADJUSTMENT;
             mStartTime = AnimationUtils.currentAnimationTimeMillis();
+            triggerVibration();
         } else if (edgeEffectBehavior == TYPE_GLOW) {
             mState = STATE_ABSORB;
             mVelocity = 0;
@@ -521,6 +543,7 @@ public class EdgeEffect {
                     mGlowAlphaStart,
                     Math.min(velocity * VELOCITY_GLOW_FACTOR * .00001f, MAX_ALPHA));
             mTargetDisplacement = 0.5f;
+            triggerVibration();
         } else {
             finish();
         }

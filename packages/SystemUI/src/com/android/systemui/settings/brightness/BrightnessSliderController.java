@@ -17,6 +17,9 @@
 package com.android.systemui.settings.brightness;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,6 +58,8 @@ public class BrightnessSliderController extends ViewController<BrightnessSliderV
     private boolean mTracking;
     private final FalsingManager mFalsingManager;
 
+    private Context mContext;
+
     private final Gefingerpoken mOnInterceptListener = new Gefingerpoken() {
         @Override
         public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -89,6 +94,15 @@ public class BrightnessSliderController extends ViewController<BrightnessSliderV
 
     public ImageView getIcon() {
         return mIcon;
+    }
+
+    private void triggerVibration(Context context, boolean tracking) {
+    	Vibrator vibrator = context.getSystemService(Vibrator.class);
+        if (vibrator == null || !tracking) {
+            return;
+        }
+        AsyncTask.execute(
+                () -> vibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_TEXTURE_TICK)));
     }
 
     @Override
@@ -207,6 +221,8 @@ public class BrightnessSliderController extends ViewController<BrightnessSliderV
             if (mListener != null) {
                 mListener.onChanged(mTracking, progress, false);
             }
+            mContext = mView.getContext();
+            triggerVibration(mContext, mTracking);
         }
 
         @Override
@@ -221,6 +237,9 @@ public class BrightnessSliderController extends ViewController<BrightnessSliderV
                 mMirrorController.showMirror();
                 mMirrorController.setLocationAndSize(mView);
             }
+            
+            mContext = mView.getContext();
+            triggerVibration(mContext, mTracking);
         }
 
         @Override
