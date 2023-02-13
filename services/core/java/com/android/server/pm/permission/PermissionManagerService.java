@@ -268,7 +268,7 @@ public class PermissionManagerService extends IPermissionManager.Stub {
         final long identity = Binder.clearCallingIdentity();
         try {
             mAppOpsManager.setMode(AppOpsManager.OP_AUTO_REVOKE_PERMISSIONS_IF_UNUSED, packageUid,
-                    pkg.getPackageName(), exempted ? MODE_IGNORED : MODE_ALLOWED);
+                    pkg.getPackageName(), /*exempted ?*/ MODE_IGNORED /*: MODE_ALLOWED*/);
         } finally {
             Binder.restoreCallingIdentity(identity);
         }

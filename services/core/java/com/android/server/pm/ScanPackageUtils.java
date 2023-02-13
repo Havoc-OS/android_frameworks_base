@@ -694,8 +694,8 @@ final class ScanPackageUtils {
                         pkg.getTargetSdkVersion());
         if (pkg.getSigningDetails().getSignatureSchemeVersion()
                 < minSignatureSchemeVersion) {
-            throw new PackageManagerException(INSTALL_PARSE_FAILED_NO_CERTIFICATES,
-                    "No signature found in package of version " + minSignatureSchemeVersion
+            //throw new PackageManagerException(INSTALL_PARSE_FAILED_NO_CERTIFICATES,
+                    Slog.e(TAG,"No signature found in package of version " + minSignatureSchemeVersion
                             + " or newer for package " + pkg.getPackageName());
         }
     }

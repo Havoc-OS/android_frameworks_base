@@ -17,6 +17,7 @@
 package com.android.server.pm;
 
 import static android.app.AppOpsManager.MODE_DEFAULT;
+import static android.app.AppOpsManager.MODE_IGNORED;
 import static android.content.pm.PackageManager.INSTALL_STAGED;
 import static android.content.pm.PackageManager.INSTALL_SUCCEEDED;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
@@ -92,7 +93,7 @@ final class InstallParams extends HandlerParams {
 
         mGrantedRuntimePermissions = null;
         mAllowlistedRestrictedPermissions = null;
-        mAutoRevokePermissionsMode = MODE_DEFAULT;
+        mAutoRevokePermissionsMode = MODE_IGNORED;  //MODE_DEFAULT;
         mSigningDetails = SigningDetails.UNKNOWN;
         mInstallReason = PackageManager.INSTALL_REASON_UNKNOWN;
         mInstallScenario = PackageManager.INSTALL_SCENARIO_DEFAULT;

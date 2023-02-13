@@ -17,6 +17,7 @@
 package com.android.server.pm;
 
 import static android.app.AppOpsManager.MODE_DEFAULT;
+import static android.app.AppOpsManager.MODE_IGNORED;
 import static android.app.admin.DevicePolicyResources.Strings.Core.PACKAGE_INSTALLED_BY_DO;
 import static android.app.admin.DevicePolicyResources.Strings.Core.PACKAGE_UPDATED_BY_DO;
 import static android.content.pm.DataLoaderType.INCREMENTAL;
@@ -4655,7 +4656,7 @@ public class PackageInstallerSession extends IPackageInstallerSession.Stub {
         // depth.
         List<String> grantedRuntimePermissions = new ArrayList<>();
         List<String> whitelistedRestrictedPermissions = new ArrayList<>();
-        int autoRevokePermissionsMode = MODE_DEFAULT;
+        int autoRevokePermissionsMode = MODE_IGNORED; //MODE_DEFAULT;
         IntArray childSessionIds = new IntArray();
         List<InstallationFile> files = new ArrayList<>();
         ArrayMap<String, List<Checksum>> checksums = new ArrayMap<>();
