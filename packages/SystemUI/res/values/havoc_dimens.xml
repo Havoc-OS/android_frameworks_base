@@ -19,4 +19,7 @@
     <dimen name="brightness_slider_icon_size">24dp</dimen>
     <dimen name="brightness_slider_icon_inset">12dp</dimen>
 
+    <!-- Maximum vertical offset of statusbar for burn-in protection -->
+    <dimen name="status_bar_offset_max_y">4dp</dimen>
+
 </resources>
