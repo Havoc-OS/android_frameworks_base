@@ -374,13 +374,13 @@ void CanvasContext::prepareTree(TreeInfo& info, int64_t* uiFrameInfo, int64_t sy
         // node(s) are non client / filler nodes.
         info.mode = (node.get() == target ? TreeInfo::MODE_FULL : TreeInfo::MODE_RT_ONLY);
         node->prepareTree(info);
-        GL_CHECKPOINT(MODERATE);
+        GL_CHECKPOINT(NONE);
     }
     mAnimationContext->runRemainingAnimations(info);
-    GL_CHECKPOINT(MODERATE);
+    GL_CHECKPOINT(NONE);
 
     freePrefetchedLayers();
-    GL_CHECKPOINT(MODERATE);
+    GL_CHECKPOINT(NONE);
 
     mIsDirty = true;
 
