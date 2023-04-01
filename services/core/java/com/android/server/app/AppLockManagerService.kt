@@ -189,7 +189,7 @@ class AppLockManagerService(
                         return@launch
                     }
                 }
-                if (intent?.action == Intent.ACTION_PACKAGE_REMOVED) {
+                if (intent.action == Intent.ACTION_PACKAGE_REMOVED) {
                     mutex.withLock {
                         if (config.shouldProtectApp(packageName)) {
                             logD {
@@ -213,7 +213,7 @@ class AppLockManagerService(
                             }
                         }
                     }
-                } else if (intent?.action == Intent.ACTION_PACKAGE_ADDED) {
+                } else if (intent.action == Intent.ACTION_PACKAGE_ADDED) {
                     logD {
                         "Package $packageName installed, configuring app lock"
                     }
@@ -875,7 +875,6 @@ class AppLockManagerService(
         ).map { it.packageName }
         var changed = false
         logD {
-            "Current packages = $currentPackages"
             "Valid packages = $validPackages"
         }
         for (i in 0 until currentPackages.size) {
