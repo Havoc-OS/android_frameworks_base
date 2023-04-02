@@ -56,7 +56,7 @@ constructor(
         get() = context.getString(R.string.accessibility_camera_button)
 
     override val pickerIconResourceId: Int
-        get() = R.drawable.ic_camera
+        get() = R.drawable.ic_statusbar_camera
 
     override val lockScreenState: Flow<KeyguardQuickAffordanceConfig.LockScreenState>
         get() =
@@ -64,7 +64,7 @@ constructor(
                 KeyguardQuickAffordanceConfig.LockScreenState.Visible(
                     icon =
                         Icon.Resource(
-                            R.drawable.ic_camera,
+                            R.drawable.ic_statusbar_camera,
                             ContentDescription.Resource(R.string.accessibility_camera_button)
                         )
                 )
