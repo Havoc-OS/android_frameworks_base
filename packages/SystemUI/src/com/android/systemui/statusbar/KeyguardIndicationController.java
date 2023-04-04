@@ -973,22 +973,26 @@ public class KeyguardIndicationController {
 
     protected String getBatteryInfo() {
         String batteryInfo = "";
+        int current = 0;
+        double voltage = 0;
         boolean showbatteryInfo = Settings.System.getIntForUser(mContext.getContentResolver(),
-            Settings.System.LOCKSCREEN_BATTERY_INFO, 0, UserHandle.USER_CURRENT) == 1;
-         if (showbatteryInfo) {
+                Settings.System.LOCKSCREEN_BATTERY_INFO, 0, UserHandle.USER_CURRENT) == 1;
+        if (showbatteryInfo) {
             if (mChargingCurrent > 0) {
-                batteryInfo = batteryInfo + (mChargingCurrent / mCurrentDivider) + "mA";
+                current = mChargingCurrent >= 23000 ? mChargingCurrent / 1000 : mChargingCurrent;
+                batteryInfo = batteryInfo + current + "mA";
             }
-            if (mChargingWattage > 0) {
-                batteryInfo = (batteryInfo == "" ? "" : batteryInfo + " • ") +
-                        String.format("%.1f" , (mChargingWattage / mCurrentDivider / 1000)) + "W";
+            if (mChargingVoltage > 0 && mChargingCurrent > 0) {
+                voltage = mChargingVoltage / 1000 / 1000;
+                batteryInfo = (batteryInfo == "" ? "" : batteryInfo + " \u2022 ") +
+                        String.format("%.1f" , ((double) current / 1000) * voltage) + "W";
             }
             if (mChargingVoltage > 0) {
-                batteryInfo = (batteryInfo == "" ? "" : batteryInfo + " • ") +
-                        String.format("%.1f", (float) (mChargingVoltage / 1000 / 1000)) + "V";
+                batteryInfo = (batteryInfo == "" ? "" : batteryInfo + " \u2022 ") +
+                        String.format("%.1f" , voltage) + "V";
             }
             if (mTemperature > 0) {
-                batteryInfo = (batteryInfo == "" ? "" : batteryInfo + " • ") +
+                batteryInfo = (batteryInfo == "" ? "" : batteryInfo + " \u2022 ") +
                         mTemperature / 10 + "°C";
             }
             if (batteryInfo != "") {
