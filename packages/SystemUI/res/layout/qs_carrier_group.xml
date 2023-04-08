@@ -24,7 +24,6 @@
     android:gravity="end|center_vertical"
     android:orientation="horizontal">
 
-
     <com.android.systemui.util.AutoMarqueeTextView
         android:id="@+id/no_carrier_text"
         android:layout_width="wrap_content"

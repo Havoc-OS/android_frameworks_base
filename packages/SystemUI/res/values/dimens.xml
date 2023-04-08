@@ -145,13 +145,13 @@
     <dimen name="status_bar_clock_size">14sp</dimen>
 
     <!-- The starting padding for the clock in the status bar. -->
-    <dimen name="status_bar_clock_starting_padding">16dp</dimen>
+    <dimen name="status_bar_clock_starting_padding">0dp</dimen>
 
     <!-- The end padding for the clock in the status bar. -->
     <dimen name="status_bar_clock_end_padding">0dp</dimen>
 
     <!-- Starting padding for a left-aligned status bar clock -->
-    <dimen name="status_bar_left_clock_starting_padding">0dp</dimen>
+    <dimen name="status_bar_left_clock_starting_padding">8dp</dimen>
 
     <!-- End padding for left-aligned status bar clock -->
     <dimen name="status_bar_left_clock_end_padding">2dp</dimen>
@@ -776,7 +776,7 @@
     <dimen name="qs_emergency_calls_only_text_size">12sp</dimen>
 
     <!-- Padding before battery level text in status bar, QS, and Keyguard -->
-    <dimen name="battery_level_padding_start">4dp</dimen>
+    <dimen name="battery_level_padding_start">6dp</dimen>
 
     <dimen name="notification_section_header_height">48dp</dimen>
 
