@@ -33,14 +33,14 @@
     />
     <TextView
         android:id="@+id/text"
-        android:textAppearance="@style/TextAppearance.HeadsUpStatusBarText"
+        android:textAppearance="@style/TextAppearance.StatusBar.Clock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:ellipsize="marquee"
         android:fadingEdge="horizontal"
         android:textAlignment="viewStart"
-        android:paddingStart="6dp"
+        android:paddingStart="@dimen/status_bar_left_clock_starting_padding"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
     />
