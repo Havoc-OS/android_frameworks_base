@@ -148,7 +148,7 @@ final class ActivityManagerConstants extends ContentObserver {
      */
     static final String KEY_NETWORK_ACCESS_TIMEOUT_MS = "network_access_timeout_ms";
 
-    private static int DEFAULT_MAX_CACHED_PROCESSES = 32;
+    private static int DEFAULT_MAX_CACHED_PROCESSES = 60;
     private static final long DEFAULT_FGSERVICE_MIN_SHOWN_TIME = 2*1000;
     private static final long DEFAULT_FGSERVICE_MIN_REPORT_TIME = 3*1000;
     private static final long DEFAULT_FGSERVICE_SCREEN_ON_BEFORE_TIME = 1*1000;
@@ -1096,8 +1096,7 @@ final class ActivityManagerConstants extends ContentObserver {
                 context.getResources().getStringArray(
                         com.android.internal.R.array.config_keep_warming_services))
                 .map(ComponentName::unflattenFromString).collect(Collectors.toSet()));
-        mCustomizedMaxCachedProcesses = context.getResources().getInteger(
-                com.android.internal.R.integer.config_customizedMaxCachedProcesses);
+        mCustomizedMaxCachedProcesses = Integer.valueOf(SystemProperties.get("persist.sys.fw.bg_apps_limit", "60"));
         CUR_MAX_CACHED_PROCESSES = mCustomizedMaxCachedProcesses;
         CUR_MAX_EMPTY_PROCESSES = computeEmptyProcessLimit(CUR_MAX_CACHED_PROCESSES);
     }
@@ -1172,25 +1171,25 @@ final class ActivityManagerConstants extends ContentObserver {
 
     public static int computeEmptyProcessLimit(int totalProcessLimit) {
         if(USE_TRIM_SETTINGS && allowTrim()) {
-            return totalProcessLimit*EMPTY_APP_PERCENT/100;
+            return totalProcessLimit * EMPTY_APP_PERCENT / 100;
         } else {
-            return totalProcessLimit/2;
+            return totalProcessLimit / 2;
         }
     }
 
     public static int computeTrimEmptyApps(int rawMaxEmptyProcesses) {
         if (USE_TRIM_SETTINGS && allowTrim()) {
-            return rawMaxEmptyProcesses*TRIM_EMPTY_PERCENT/100;
+            return rawMaxEmptyProcesses * TRIM_EMPTY_PERCENT / 100;
         } else {
-            return rawMaxEmptyProcesses/2;
+            return rawMaxEmptyProcesses / 2;
         }
     }
 
     public static int computeTrimCachedApps(int rawMaxEmptyProcesses, int totalProcessLimit) {
         if (USE_TRIM_SETTINGS && allowTrim()) {
-            return totalProcessLimit*TRIM_CACHE_PERCENT/100;
+            return totalProcessLimit*TRIM_CACHE_PERCENT / 100;
         } else {
-            return (totalProcessLimit-rawMaxEmptyProcesses)/3;
+            return (totalProcessLimit-rawMaxEmptyProcesses) / 3;
         }
     }
 
@@ -1720,9 +1719,7 @@ final class ActivityManagerConstants extends ContentObserver {
 
     private void updateMaxPhantomProcesses() {
         final int oldVal = MAX_PHANTOM_PROCESSES;
-        MAX_PHANTOM_PROCESSES = DeviceConfig.getInt(
-                DeviceConfig.NAMESPACE_ACTIVITY_MANAGER, KEY_MAX_PHANTOM_PROCESSES,
-                DEFAULT_MAX_PHANTOM_PROCESSES);
+        MAX_PHANTOM_PROCESSES = Integer.valueOf(SystemProperties.get("persist.sys.fw.bg_phantom_proc_limit", "60"));
         if (oldVal > MAX_PHANTOM_PROCESSES) {
             mService.mHandler.post(mService.mPhantomProcessList::trimPhantomProcessesIfNecessary);
         }
