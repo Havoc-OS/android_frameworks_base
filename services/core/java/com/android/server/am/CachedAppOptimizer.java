@@ -117,7 +117,7 @@ public final class CachedAppOptimizer {
     @VisibleForTesting static final boolean ENABLE_FILE_COMPACT = false;
 
     // Defaults for phenotype flags.
-    @VisibleForTesting static final Boolean DEFAULT_USE_COMPACTION = false;
+    @VisibleForTesting static final Boolean DEFAULT_USE_COMPACTION = true;
     @VisibleForTesting static final Boolean DEFAULT_USE_FREEZER = true;
     @VisibleForTesting static final int DEFAULT_COMPACT_ACTION_2 = COMPACT_ACTION_FULL;
     @VisibleForTesting static final int DEFAULT_COMPACT_ACTION_1 = COMPACT_ACTION_FILE;
@@ -497,9 +497,6 @@ public final class CachedAppOptimizer {
                     DeviceConfig.NAMESPACE_ACTIVITY_MANAGER, KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB,
                         String.valueOf(deltaRssThrottleKB), true);
         DeviceConfig.setProperty(
-                    DeviceConfig.NAMESPACE_ACTIVITY_MANAGER, KEY_USE_COMPACTION,
-                        String.valueOf(useCompaction), true);
-        DeviceConfig.setProperty(
                     DeviceConfig.NAMESPACE_ACTIVITY_MANAGER, KEY_DEBUG_COMPACTION,
                         String.valueOf(debugCompaction), true);
         DeviceConfig.setProperty(
@@ -761,19 +758,20 @@ public final class CachedAppOptimizer {
     @GuardedBy("mPhenotypeFlagLock")
     private void updateUseCompaction() {
         // If this property is null there must have been some unexpected reset
-        String useCompaction = DeviceConfig.getProperty(DeviceConfig.NAMESPACE_ACTIVITY_MANAGER, KEY_USE_COMPACTION);
+        String useCompaction = String.valueOf(SystemProperties.get("persist.sys.appcompact.enable_app_compact",
+                        "true"));
         if (useCompaction == null) {
             setAppCompactProperties();
         }
 
-        mUseCompaction = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_ACTIVITY_MANAGER,
-                    KEY_USE_COMPACTION, DEFAULT_USE_COMPACTION);
+        mUseCompaction = Boolean.valueOf(SystemProperties.get("persist.sys.appcompact.enable_app_compact",
+                        "true"));
 
         mDebugCompaction = DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_ACTIVITY_MANAGER,
                     KEY_DEBUG_COMPACTION, DEBUG_COMPACTION);
 
-        mCompactionPriority = DeviceConfig.getInt(DeviceConfig.NAMESPACE_ACTIVITY_MANAGER,
-                    KEY_COMPACTION_PRIORITY, Process.THREAD_GROUP_BACKGROUND);
+        mCompactionPriority = Integer.valueOf(SystemProperties.get("persist.sys.appcompact.thread_priority",
+                        String.valueOf(Process.THREAD_GROUP_BACKGROUND)));
 
         if (mUseCompaction && mCompactionHandler == null) {
             if (!mCachedAppOptimizerThread.isAlive()) {
