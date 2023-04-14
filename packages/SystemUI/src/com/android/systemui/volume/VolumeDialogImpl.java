@@ -795,9 +795,11 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
                 if (mSeparateNotification) {
                     addRow(AudioManager.STREAM_RING, R.drawable.ic_ring_volume,
                             R.drawable.ic_ring_volume_off, true, false);
+                    addRow(AudioManager.STREAM_NOTIFICATION, R.drawable.ic_volume_ringer,
+                            R.drawable.ic_volume_ringer_mute, true, false);
                 } else {
                     addRow(AudioManager.STREAM_RING, R.drawable.ic_volume_ringer,
-                            R.drawable.ic_volume_ringer, true, false);
+                            R.drawable.ic_volume_ringer_mute, true, false);
                 }
 
                 addRow(STREAM_ALARM,
@@ -1828,6 +1830,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
     private boolean isExpandableRowH(VolumeRow row) {
         return row != null && row != mDefaultRow && !row.defaultStream
                 && (row.stream == STREAM_RING
+                        || (row.stream == STREAM_NOTIFICATION && mSeparateNotification)
                         || row.stream == STREAM_ALARM
                         || row.stream == STREAM_MUSIC);
     }
@@ -2217,21 +2220,29 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         final boolean isVoiceCallStream = row.stream == AudioManager.STREAM_VOICE_CALL;
         final boolean isA11yStream = row.stream == STREAM_ACCESSIBILITY;
         final boolean isRingStream = row.stream == AudioManager.STREAM_RING;
+        final boolean isNotificationStream = row.stream == STREAM_NOTIFICATION;
         final boolean isSystemStream = row.stream == AudioManager.STREAM_SYSTEM;
         final boolean isAlarmStream = row.stream == STREAM_ALARM;
         final boolean isMusicStream = row.stream == AudioManager.STREAM_MUSIC;
         final boolean isRingVibrate = isRingStream
                 && mState.ringerModeInternal == AudioManager.RINGER_MODE_VIBRATE;
+        final boolean isNotificationVibrate = isNotificationStream
+                && mState.ringerModeInternal == AudioManager.RINGER_MODE_VIBRATE;
         final boolean isRingSilent = isRingStream
+                && mState.ringerModeInternal == AudioManager.RINGER_MODE_SILENT;
+        final boolean isNotificationSilentByPolicy = isNotificationStream
                 && mState.ringerModeInternal == AudioManager.RINGER_MODE_SILENT;
         final boolean isZenPriorityOnly = mState.zenMode == Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
         final boolean isZenAlarms = mState.zenMode == Global.ZEN_MODE_ALARMS;
         final boolean isZenNone = mState.zenMode == Global.ZEN_MODE_NO_INTERRUPTIONS;
-        final boolean zenMuted = isZenAlarms ? (isRingStream || isSystemStream)
-                : isZenNone ? (isRingStream || isSystemStream || isAlarmStream || isMusicStream)
+        final boolean zenMuted = isZenAlarms ? (isRingStream || isNotificationStream
+                        || isSystemStream)
+                : isZenNone ? (isRingStream || isNotificationStream || isSystemStream
+                        || isAlarmStream || isMusicStream)
                 : isZenPriorityOnly ? ((isAlarmStream && mState.disallowAlarms) ||
                         (isMusicStream && mState.disallowMedia) ||
                         (isRingStream && mState.disallowRinger) ||
+                        (isNotificationStream && mState.disallowRinger) ||
                         (isSystemStream && mState.disallowSystem))
                 : false;
 
@@ -2254,9 +2265,10 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         // update icon
         final boolean iconEnabled = (mAutomute || ss.muteSupported) && !zenMuted;
         final int iconRes;
-        if (isRingVibrate) {
+        if (isRingVibrate || isNotificationVibrate) {
             iconRes = R.drawable.ic_volume_ringer_vibrate;
-        } else if (isRingSilent || zenMuted) {
+        } else if (isRingSilent || isNotificationSilentByPolicy
+                || isNotificationStream && isStreamMuted(ss) || zenMuted) {
             iconRes = row.iconMuteRes;
         } else if (ss.routedToBluetooth) {
             if (isVoiceCallStream) {
@@ -2324,15 +2336,16 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
             }
         }
 
-        // ensure tracking is disabled if zenMuted
-        if (zenMuted) {
+        // ensure tracking is disabled if zenMuted or the ringer mode was set to silent/vibrate
+        if (zenMuted || isNotificationVibrate || isNotificationSilentByPolicy) {
             row.tracking = false;
         }
         enableVolumeRowViewsH(row, !zenMuted);
 
         // update slider
-        final boolean enableSlider = !zenMuted;
-        final int vlevel = row.ss.muted && (!isRingStream && !zenMuted) ? 0
+        final boolean enableSlider =
+                !zenMuted && !isNotificationVibrate && !isNotificationSilentByPolicy;
+        final int vlevel = row.ss.muted && (!isRingStream && !isNotificationStream && !zenMuted) ? 0
                 : row.ss.level;
         Trace.beginSection("VolumeDialogImpl#updateVolumeRowSliderH");
         updateVolumeRowSliderH(row, enableSlider, vlevel);
