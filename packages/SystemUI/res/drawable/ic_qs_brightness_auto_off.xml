@@ -1,23 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-    Copyright (C) 2017 The LineageOS Project
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-        http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:width="24dp"
-        android:height="24dp"
-        android:viewportWidth="24.0"
-        android:viewportHeight="24.0"
-        android:tint="?android:attr/colorControlNormal">
-    <path
-        android:fillColor="#FFFFFFFF"
-        android:pathData="M20,8.69L20,4h-4.69L12,0.69 8.69,4L4,4v4.69L0.69,12 4,15.31L4,20h4.69L12,23.31 15.31,20L20,20v-4.69L23.31,12 20,8.69zM12,18c-3.31,0 -6,-2.69 -6,-6s2.69,-6 6,-6 6,2.69 6,6 -2.69,6 -6,6zM12,8c-2.21,0 -4,1.79 -4,4s1.79,4 4,4 4,-1.79 4,-4 -1.79,-4 -4,-4z"/>
+    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960">
+
+  <path
+      android:fillColor="?android:attr/textColorPrimary"
+      android:pathData="M444.48,292.35L327.52,613.78Q322.52,628.48 330.37,641.17Q338.22,653.87 353.36,653.87Q363.89,653.87 372.53,648.07Q381.17,642.27 384,632.48L410.48,550.52L551.39,550.52L578.87,632.35Q581.53,642.21 589.61,648.04Q597.69,653.87 607.36,653.87Q622.16,653.87 631.1,640.99Q640.04,628.12 635.04,613.09L518.09,292.35Q513.9,280.95 503.39,273.95Q492.87,266.96 480.87,266.96Q468.87,266.96 458.48,273.95Q448.1,280.95 444.48,292.35ZM424.91,496.87L478.12,346.87L483,346.87L537.65,496.87L424.91,496.87ZM343.79,804.52L234.7,804.52Q202.02,804.52 178.75,781.25Q155.48,757.98 155.48,725.3L155.48,616.79L75.35,535.57Q52.13,512.24 52.13,479.94Q52.13,447.65 75.35,424.43L155.48,343.21L155.48,234.13Q155.48,201.45 178.75,178.18Q202.02,154.91 234.7,154.91L343.21,154.91L424.43,74.22Q447.91,51.57 480.41,51.57Q512.91,51.57 536.57,75.22L616.38,154.91L725.87,154.91Q758.55,154.91 781.82,178.18Q805.09,201.45 805.09,234.13L805.09,343.21L885.78,424.43Q908.43,447.76 908.43,480.06Q908.43,512.35 885.78,535.57L805.09,616.79L805.09,725.3Q805.09,757.98 781.82,781.25Q758.55,804.52 725.87,804.52L616.38,804.52L536.57,882.65Q513.24,905.87 480.94,905.87Q448.65,905.87 425.43,882.65L343.79,804.52ZM481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43L481.57,478.43ZM481,826.09L583.06,725.54L725.93,725.54L725.93,582.55L828.65,480L725.75,376.86L725.75,234.07L583.28,234.07L481,131.35L377.45,234.07L234.46,234.07L234.46,376.72L131.91,480L234.7,582.78L234.7,725.3L376.22,725.3L481,826.09Z"/>
 </vector>

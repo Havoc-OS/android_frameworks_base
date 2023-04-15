@@ -48,6 +48,7 @@ import com.android.internal.display.BrightnessSynchronizer;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settingslib.RestrictedLockUtilsInternal;
+import com.android.systemui.R;
 import com.android.systemui.dagger.qualifiers.Background;
 import com.android.systemui.dagger.qualifiers.Main;
 import com.android.systemui.settings.DisplayTracker;
@@ -408,6 +409,9 @@ public class BrightnessController implements ToggleSlider.Listener, MirroredBrig
             mIcon.setImageResource(mAutomatic ?
                     com.android.systemui.R.drawable.ic_qs_brightness_auto_on :
                     com.android.systemui.R.drawable.ic_qs_brightness_auto_off);
+            mIcon.setBackgroundResource(mAutomatic ?
+                    R.drawable.bg_qs_brightness_auto_on :
+                    R.drawable.bg_qs_brightness_auto_off);
         }
     }
 
