@@ -29,9 +29,9 @@
     <item
         android:id="@+id/slider_icon"
         android:gravity="center_vertical|right"
-        android:height="@dimen/rounded_slider_icon_size"
-        android:width="@dimen/rounded_slider_icon_size"
-        android:right="@dimen/rounded_slider_icon_inset">
+        android:height="@dimen/brightness_slider_icon_size"
+        android:width="@dimen/brightness_slider_icon_size"
+        android:right="@dimen/brightness_slider_icon_inset">
         <com.android.systemui.util.AlphaTintDrawableWrapper
             android:drawable="@drawable/ic_brightness"
             android:tint="?android:attr/textColorPrimaryInverse"
