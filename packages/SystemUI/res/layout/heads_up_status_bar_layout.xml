@@ -21,6 +21,7 @@
     android:visibility="invisible"
     android:id="@+id/heads_up_status_bar_view"
     android:alpha="0"
+    android:paddingStart="@dimen/status_bar_left_clock_starting_padding"
 >
     <!-- This is a space just used as a layout and it's not actually displaying anything. We're
          repositioning the statusbar icon to the position where this is laid out when showing this
@@ -40,7 +41,7 @@
         android:ellipsize="marquee"
         android:fadingEdge="horizontal"
         android:textAlignment="viewStart"
-        android:paddingStart="@dimen/status_bar_left_clock_starting_padding"
+        android:paddingStart="6dp"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
     />
