@@ -62,22 +62,6 @@
         </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/bluetooth_disconnect_icon_layout"
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
-            android:clickable="false"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="16dp"
-            android:visibility="gone">
-            <ImageView
-                android:id="@+id/bluetooth_disconnect_icon"
-                android:src="@drawable/settingslib_ic_cross"
-                android:layout_gravity="end|center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </FrameLayout>
-
-        <FrameLayout
             android:layout_width="24dp"
             android:layout_height="match_parent"
             android:clickable="false"
