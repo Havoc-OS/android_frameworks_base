@@ -131,8 +131,7 @@ public class BluetoothViewAdapter extends
         private final LinearLayout mContainerLayout, mBluetoothListLayout, mBluetoothDeviceLayout;
         private final ImageView mBluetoothIcon;
         private final TextView mBluetoothTitleText, mBluetoothSummaryText;
-        private final FrameLayout mDisconnectIconLayout;
-        private final ImageView mDisconnectIcon, mBluetoothEndIcon;
+        private final ImageView mBluetoothEndIcon;
         private final Context mContext;
         private final Drawable mBackgroundOn, mBackgroundOff;
         private final BluetoothDialog mDialog;
@@ -147,8 +146,6 @@ public class BluetoothViewAdapter extends
             mBluetoothIcon = view.requireViewById(R.id.bluetooth_icon);
             mBluetoothTitleText = view.requireViewById(R.id.bluetooth_title);
             mBluetoothSummaryText = view.requireViewById(R.id.bluetooth_summary);
-            mDisconnectIconLayout = view.requireViewById(R.id.bluetooth_disconnect_icon_layout);
-            mDisconnectIcon = view.requireViewById(R.id.bluetooth_disconnect_icon);
             mBluetoothEndIcon = view.requireViewById(R.id.bluetooth_end_icon);
             mBackgroundOn = mContext.getDrawable(R.drawable.settingslib_switch_bar_bg_on);
 
@@ -166,7 +163,9 @@ public class BluetoothViewAdapter extends
             mBluetoothListLayout.setVisibility(View.VISIBLE);
             mBluetoothListLayout.setBackground(isActive ? mBackgroundOn : mBackgroundOff);
             mBluetoothListLayout.setOnClickListener(v -> {
-                if (device.isConnected()) {
+                if (isActive) {
+                    device.disconnect();
+                } else if (device.isConnected()) {
                     device.setActive();
                 } else {
                     device.connect();
@@ -201,12 +200,8 @@ public class BluetoothViewAdapter extends
                 R.dimen.internet_dialog_wifi_network_height);
             mBluetoothListLayout.setLayoutParams(lp);
 
-            mDisconnectIconLayout.setVisibility(device.isConnected() ? View.VISIBLE : View.GONE);
-            mDisconnectIcon.setOnClickListener(v -> device.disconnect());
-
             final int iconColor = isActive ? mContext.getColor(R.color.connected_network_primary_color)
                     : Utils.getColorAttrDefaultColor(mContext, android.R.attr.colorControlNormal);
-            mDisconnectIcon.setColorFilter(iconColor);
             mBluetoothEndIcon.setColorFilter(iconColor);
 
             final Bundle args = new Bundle(1);
