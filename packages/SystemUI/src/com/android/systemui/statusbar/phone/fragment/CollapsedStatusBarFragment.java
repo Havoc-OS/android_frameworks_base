@@ -496,6 +496,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             if (!isRightClock) {
                 state |= DISABLE_CLOCK;
             }
+            state |= DISABLE_NOTIFICATION_ICONS;
         }
 
         if (mOngoingCallController.hasOngoingCall()) {
