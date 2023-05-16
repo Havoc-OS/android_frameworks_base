@@ -528,13 +528,14 @@ public class ViewConfiguration {
         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         final int density = (int) (100.0f * metrics.density);
 
-        ViewConfiguration configuration = sConfigurations.get(density);
-        if (configuration == null) {
-            configuration = new ViewConfiguration(context);
-            sConfigurations.put(density, configuration);
+        synchronized (ViewConfiguration.class) {
+            ViewConfiguration configuration = sConfigurations.get(density);
+            if (configuration == null) {
+                configuration = new ViewConfiguration(context);
+                sConfigurations.put(density, configuration);
+            }
+            return configuration;
         }
-
-        return configuration;
     }
 
     /**
