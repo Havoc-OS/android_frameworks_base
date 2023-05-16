@@ -293,16 +293,18 @@ public class InsetsSource implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mType);
-        mFrame.writeToParcel(dest, 0);
-        if (mVisibleFrame != null) {
-            dest.writeInt(1);
-            mVisibleFrame.writeToParcel(dest, 0);
-        } else {
-            dest.writeInt(0);
+        synchronized (this) {
+            dest.writeInt(mType);
+            mFrame.writeToParcel(dest, 0);
+            if (mVisibleFrame != null) {
+                dest.writeInt(1);
+                mVisibleFrame.writeToParcel(dest, 0);
+            } else {
+                dest.writeInt(0);
+            }
+            dest.writeBoolean(mVisible);
+            dest.writeBoolean(mInsetsRoundedCornerFrame);
         }
-        dest.writeBoolean(mVisible);
-        dest.writeBoolean(mInsetsRoundedCornerFrame);
     }
 
     @Override
