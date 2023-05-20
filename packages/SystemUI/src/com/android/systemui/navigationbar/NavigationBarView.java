@@ -667,7 +667,7 @@ public class NavigationBarView extends FrameLayout implements TunerService.Tunab
         boolean disableImeSwitcher =
                 (mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_IME_SWITCHER_SHOWN) == 0
                 || isImeRenderingNavButtons()
-                || (!QuickStepContract.isSwipeUpMode(mNavBarMode) && !disableCursorKeys) && hideIMESpace;
+                || (!QuickStepContract.isSwipeUpMode(mNavBarMode) && !disableCursorKeys && hideIMESpace);
         mContextualButtonGroup.setButtonVisibility(R.id.ime_switcher, !disableImeSwitcher);
 
         mBarTransitions.reapplyDarkIntensity();
