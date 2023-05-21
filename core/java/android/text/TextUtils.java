@@ -791,23 +791,18 @@ public class TextUtils {
      * Flatten a CharSequence and whatever styles can be copied across processes
      * into the parcel.
      */
-    public static void writeToParcel(@Nullable CharSequence cs, @NonNull Parcel p,
-            int parcelableFlags) {
+    public static void writeToParcel(@Nullable CharSequence cs, @NonNull Parcel p, int parcelableFlags) {
         if (cs instanceof Spanned) {
             p.writeInt(0);
-            p.writeString8(cs.toString());
+
+            String csString = cs.toString();
+            p.writeString8(csString);
 
             Spanned sp = (Spanned) cs;
             Object[] os = sp.getSpans(0, cs.length(), Object.class);
 
-            // note to people adding to this: check more specific types
-            // before more generic types.  also notice that it uses
-            // "if" instead of "else if" where there are interfaces
-            // so one object can be several.
-
-            for (int i = 0; i < os.length; i++) {
-                Object o = os[i];
-                Object prop = os[i];
+            for (Object o : os) {
+                Object prop = o;
 
                 if (prop instanceof CharacterStyle) {
                     prop = ((CharacterStyle) prop).getUnderlying();
@@ -816,6 +811,7 @@ public class TextUtils {
                 if (prop instanceof ParcelableSpan) {
                     final ParcelableSpan ps = (ParcelableSpan) prop;
                     final int spanTypeId = ps.getSpanTypeIdInternal();
+
                     if (spanTypeId < FIRST_SPAN || spanTypeId > LAST_SPAN) {
                         Log.e(TAG, "External class \"" + ps.getClass().getSimpleName()
                                 + "\" is attempting to use the frameworks-only ParcelableSpan"
@@ -831,11 +827,7 @@ public class TextUtils {
             p.writeInt(0);
         } else {
             p.writeInt(1);
-            if (cs != null) {
-                p.writeString8(cs.toString());
-            } else {
-                p.writeString8(null);
-            }
+            p.writeString8(cs != null ? cs.toString() : null);
         }
     }
 
