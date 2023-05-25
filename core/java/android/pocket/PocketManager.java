@@ -25,6 +25,8 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.util.Slog;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * A class that coordinates listening for pocket state.
  * <p>
@@ -88,7 +90,7 @@ public class PocketManager {
     private final PowerManager mPowerManager;
     private final TelecomManager mTelecomManager;
     private final Handler mHandler;
-    private boolean mPocketViewTimerActive;
+    private final AtomicBoolean mPocketViewTimerActive;
 
     public PocketManager(Context context, IPocketService service) {
         mContext = context;
@@ -99,6 +101,7 @@ public class PocketManager {
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mTelecomManager = (TelecomManager) mContext.getSystemService(Context.TELECOM_SERVICE);
         mHandler = new Handler();
+        mPocketViewTimerActive = new AtomicBoolean(false);
     }
 
     /**
@@ -146,17 +149,17 @@ public class PocketManager {
      */
     public void onInteractiveChanged(boolean interactive) {
         boolean isPocketViewShowing = (interactive && isDeviceInPocket());
-        synchronized (mPocketLockTimeout) {
-            if (mPocketViewTimerActive != isPocketViewShowing) {
+        synchronized (mPocketViewTimerActive) {
+            if (mPocketViewTimerActive.get() != isPocketViewShowing) {
                 if (isPocketViewShowing) {
                     if (DEBUG) Log.v(TAG, "Setting pocket timer");
                     mHandler.removeCallbacks(mPocketLockTimeout); // remove any pending requests
                     mHandler.postDelayed(mPocketLockTimeout, 10 * DateUtils.SECOND_IN_MILLIS);
-                    mPocketViewTimerActive = true;
+                    mPocketViewTimerActive.set(true);
                 } else {
                     if (DEBUG) Log.v(TAG, "Clearing pocket timer");
                     mHandler.removeCallbacks(mPocketLockTimeout);
-                    mPocketViewTimerActive = false;
+                    mPocketViewTimerActive.set(false);
                 }
             }
         }
@@ -178,10 +181,10 @@ public class PocketManager {
             Log.w(TAG, "Remote exception in setListeningExternal: ", e);
         }
         // Clear timeout when user hides pocket lock with long press power.
-        if (mPocketViewTimerActive && !listen) {
+        if (mPocketViewTimerActive.get() && !listen) {
             if (DEBUG) Log.v(TAG, "Clearing pocket timer due to override");
             mHandler.removeCallbacks(mPocketLockTimeout);
-            mPocketViewTimerActive = false;
+            mPocketViewTimerActive.set(false);
         }
     }
 
@@ -202,24 +205,29 @@ public class PocketManager {
     class PocketLockTimeout implements Runnable {
         @Override
         public void run() {
-            if (!mTelecomManager.isInCall())
-                mPowerManager.goToSleep(SystemClock.uptimeMillis());
-            mPocketViewTimerActive = false;
+            synchronized (mPocketViewTimerActive) {
+                if (!mTelecomManager.isInCall()) {
+                    mPowerManager.goToSleep(SystemClock.uptimeMillis());
+                    mPocketViewTimerActive.set(false);
+                }
+            }
         }
     }
 
     /** Custom methods **/
 
     public void setPocketLockVisible(boolean visible) {
-        if (!visible){
-            if (DEBUG) Log.v(TAG, "Clearing pocket timer");
-            mHandler.removeCallbacks(mPocketLockTimeout);
-            mPocketViewTimerActive = false;
-        }
-        if (mService != null) try {
-            mService.setPocketLockVisible(visible);
-        } catch (RemoteException e) {
-            Log.w(TAG, "Remote exception in setPocketLockVisible: ", e);
+        synchronized (mPocketViewTimerActive) {
+            if (!visible){
+                if (DEBUG) Log.v(TAG, "Clearing pocket timer");
+                mHandler.removeCallbacks(mPocketLockTimeout);
+                mPocketViewTimerActive.set(false);
+            }
+            if (mService != null) try {
+                mService.setPocketLockVisible(visible);
+            } catch (RemoteException e) {
+                Log.w(TAG, "Remote exception in setPocketLockVisible: ", e);
+            }
         }
     }
 
