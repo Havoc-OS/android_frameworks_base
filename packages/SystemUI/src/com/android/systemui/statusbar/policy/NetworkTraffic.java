@@ -91,7 +91,7 @@ public class NetworkTraffic extends TextView implements TunerService.Tunable {
 
             if (shouldHide(rxData, txData, timeDelta)) {
                 setText("");
-                setVisibility(View.INVISIBLE);
+                setVisibility(View.GONE);
                 mVisible = false;
             } else if (shouldShowUpload(rxData, txData, timeDelta)) {
                 // Show information for uplink if it's called for
