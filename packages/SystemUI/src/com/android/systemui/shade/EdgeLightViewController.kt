@@ -39,6 +39,7 @@ import com.android.systemui.statusbar.EdgeLightView
 import com.android.systemui.statusbar.NotificationListener
 import com.android.systemui.statusbar.phone.DozeParameters
 import com.android.systemui.statusbar.policy.ConfigurationController
+import com.android.systemui.statusbar.policy.KeyguardStateController
 import com.android.systemui.statusbar.StatusBarState
 import com.android.systemui.statusbar.SysuiStatusBarStateController
 import com.android.systemui.util.settings.SystemSettings
@@ -60,11 +61,13 @@ class EdgeLightViewController @Inject constructor(
     dozeParameters: DozeParameters,
     configurationController: ConfigurationController,
     userTracker: UserTracker,
-    private val sysuiStatusBarStateController: SysuiStatusBarStateController
+    private val sysuiStatusBarStateController: SysuiStatusBarStateController,
+    private val keyguardStateController: KeyguardStateController
 ) : ScreenLifecycle.Observer,
     NotificationListener.NotificationHandler,
     ConfigurationController.ConfigurationListener,
-    UserTracker.Callback {
+    UserTracker.Callback,
+    KeyguardStateController.Callback {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val wallpaperManager = context.getSystemService(WallpaperManager::class.java)
@@ -132,6 +135,9 @@ class EdgeLightViewController @Inject constructor(
                 it.run()
             }
         }
+        
+        // Listen for keyguard changes
+        keyguardStateController.addCallback(this)
     }
 
     private fun register(vararg keys: String) {
@@ -155,6 +161,10 @@ class EdgeLightViewController @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun canPulse(): Boolean {
+        return sysuiStatusBarStateController.isDozing() && sysuiStatusBarStateController.getState() == StatusBarState.KEYGUARD && !keyguardStateController.isUnlocked
     }
 
     private suspend fun isEdgeLightEnabled(): Boolean {
@@ -294,7 +304,7 @@ class EdgeLightViewController @Inject constructor(
         coroutineScope.launch {
             settingsMutex.withLock {
                 if (pulsing && (alwaysTriggerOnPulse ||
-                        reason == DozeLog.PULSE_REASON_NOTIFICATION) && sysuiStatusBarStateController.isDozing() && sysuiStatusBarStateController.getState() == StatusBarState.KEYGUARD) {
+                        reason == DozeLog.PULSE_REASON_NOTIFICATION)) {
                     this@EdgeLightViewController.pulsing = true
                     // Use accent color if color mode is set to notification color
                     // and pulse is not because of notification.
@@ -314,15 +324,29 @@ class EdgeLightViewController @Inject constructor(
     }
 
     private fun show() {
-        coroutineScope.launch {
-            settingsMutex.withLock {
-                if (edgeLightEnabled) edgeLightView?.show()
+        if (canPulse()) {
+            coroutineScope.launch {
+                settingsMutex.withLock {
+                    if (edgeLightEnabled) edgeLightView?.show()
+                }
             }
         }
     }
 
     private fun hide() {
         edgeLightView?.hide()
+    }
+
+    override fun onKeyguardGoingAwayChanged() {
+        if (!canPulse()) {
+            hide()
+        }
+    }
+
+    override fun onKeyguardFadingAwayChanged() {
+        if (!canPulse()) {
+            hide()
+        }
     }
 
     companion object {
