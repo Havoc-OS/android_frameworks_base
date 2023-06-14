@@ -5840,7 +5840,8 @@ class WindowState extends WindowContainer<WindowState> implements WindowManagerP
      */
     boolean isNonToastOrStartingOrPrivatePresentation() {
         return mAttrs.type != TYPE_TOAST && mAttrs.type != TYPE_APPLICATION_STARTING
-                && mAttrs.type != TYPE_PRIVATE_PRESENTATION;
+                && mAttrs.type != TYPE_PRIVATE_PRESENTATION
+                && !(mAttrs.type == TYPE_PRESENTATION && isOnVirtualDisplay());
     }
 
     boolean isNonToastWindowVisibleForUid(int callingUid) {
@@ -5851,6 +5852,10 @@ class WindowState extends WindowContainer<WindowState> implements WindowManagerP
     boolean isNonToastWindowVisibleForPid(int pid) {
         return mSession.mPid == pid && isNonToastOrStartingOrPrivatePresentation()
                 && isVisibleNow();
+    }
+
+    private boolean isOnVirtualDisplay() {
+        return getDisplayContent().mDisplay.getType() == Display.TYPE_VIRTUAL;
     }
 
     void setViewVisibility(int viewVisibility) {
