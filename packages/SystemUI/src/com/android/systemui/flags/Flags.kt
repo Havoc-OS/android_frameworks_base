@@ -215,7 +215,7 @@ object Flags {
     // TODO(b/266242192): Tracking Bug
     @JvmField
     val LOCK_SCREEN_LONG_PRESS_ENABLED =
-        unreleasedFlag(
+        releasedFlag(
             228,
             "lock_screen_long_press_enabled",
             teamfood = true,
