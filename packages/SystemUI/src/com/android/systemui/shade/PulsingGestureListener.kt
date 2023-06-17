@@ -32,6 +32,7 @@ import com.android.systemui.plugins.statusbar.StatusBarStateController
 import com.android.systemui.settings.UserTracker
 import com.android.systemui.statusbar.phone.CentralSurfaces
 import com.android.systemui.statusbar.phone.dagger.CentralSurfacesComponent
+import com.android.systemui.statusbar.StatusBarState
 import com.android.systemui.tuner.TunerService
 import com.android.systemui.tuner.TunerService.Tunable
 import lineageos.providers.LineageSettings;
@@ -143,6 +144,12 @@ class PulsingGestureListener @Inject constructor(
             } else if (!statusBarStateController.isDozing &&
                 doubleTapToSleepEnabled &&
                 e.getY() < quickQsOffsetHeight
+            ) {
+                powerManager.goToSleep(e.getEventTime())
+                return true
+            } else if (!statusBarStateController.isDozing &&
+                doubleTapToSleepEnabled &&
+                statusBarStateController.getState() == StatusBarState.KEYGUARD
             ) {
                 powerManager.goToSleep(e.getEventTime())
                 return true
