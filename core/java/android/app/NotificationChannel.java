@@ -1015,11 +1015,11 @@ public final class NotificationChannel implements Parcelable {
             return null;
         }
         Uri canonicalSound = context.getContentResolver().canonicalize(sound);
-        if (canonicalSound == null) {
-            // The content provider does not support canonical uris so we backup the default
+         try {
+            return canonicalSound != null ? canonicalSound : Settings.System.DEFAULT_NOTIFICATION_URI;
+        } catch (Exception e) {
             return Settings.System.DEFAULT_NOTIFICATION_URI;
         }
-        return canonicalSound;
     }
 
     /**
