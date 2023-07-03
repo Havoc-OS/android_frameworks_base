@@ -280,7 +280,7 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
         if (matched) {
             mPasswordEntry.setEnabled(false);
             mCallback.reportUnlockAttempt(userId, true, 0);
-            mCallback.dismiss(true, userId);
+            mCallback.dismiss(true, userId, SecurityMode.PIN);
             resetPasswordText(true, true);
         }
     }
@@ -293,6 +293,8 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
             // do nothing
         }
         return pinPasswordLength >= 4 ? pinPasswordLength : -1;
+    }
+    
     @Override
     public SecurityMode getSecurityMode() {
         return SecurityMode.PIN;
