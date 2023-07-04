@@ -17,6 +17,7 @@
 package com.android.systemui.keyguard.ui.binder
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration;
 import android.graphics.drawable.Animatable2
 import android.os.VibrationEffect
 import android.util.Size
@@ -311,7 +312,7 @@ object KeyguardBottomAreaViewBinder {
         view.drawable.setTint(
             Utils.getColorAttrDefaultColor(
                 view.context,
-                if (viewModel.isActivated) {
+                if (viewModel.isActivated && isNightMode(view)) {
                     com.android.internal.R.attr.textColorPrimaryInverse
                 } else {
                     com.android.internal.R.attr.textColorPrimary
@@ -324,7 +325,7 @@ object KeyguardBottomAreaViewBinder {
                 Utils.getColorAttr(
                     view.context,
                     if (viewModel.isActivated) {
-                        com.android.internal.R.attr.colorAccent
+                        com.android.internal.R.attr.colorAccentPrimary
                     } else {
                         com.android.internal.R.attr.colorSurface
                     }
@@ -609,6 +610,11 @@ object KeyguardBottomAreaViewBinder {
                     view.resources.getDimensionPixelSize(R.dimen.keyguard_affordance_fixed_height),
                 ),
         )
+    }
+
+    private fun isNightMode(view: View): Boolean {
+        return (view.context.resources.getConfiguration().uiMode
+                and Configuration.UI_MODE_NIGHT_MASK) === Configuration.UI_MODE_NIGHT_YES
     }
 
     private data class ConfigurationBasedDimensions(
