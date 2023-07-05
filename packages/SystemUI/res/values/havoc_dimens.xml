@@ -27,5 +27,6 @@
 
     <!-- Network traffic -->
     <dimen name="network_traffic_width">25sp</dimen>
+    <dimen name="network_traffic_padding">1dp</dimen>
 
 </resources>

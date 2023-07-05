@@ -21,4 +21,12 @@
     <string name="bluetooth_is_off">Bluetooth is off</string>
     <string name="tap_a_device_to_connect">Tap a device to connect / disconnect</string>
 
+    <!-- Status bar network traffic monitor strings -->
+    <string name="kilobitspersecond_short" translatable="false">kb/s</string>
+    <string name="megabitspersecond_short" translatable="false">Mb/s</string>
+    <string name="gigabitspersecond_short" translatable="false">Gb/s</string>
+    <string name="kilobytespersecond_short" translatable="false">kB/s</string>
+    <string name="megabytespersecond_short" translatable="false">MB/s</string>
+    <string name="gigabytespersecond_short" translatable="false">GB/s</string>
+
 </resources>
