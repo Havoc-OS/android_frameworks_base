@@ -412,7 +412,7 @@ public class PhoneStatusBarPolicy
         final boolean zenNone = zen == Global.ZEN_MODE_NO_INTERRUPTIONS;
         mIconController.setIcon(mSlotAlarmClock, zenNone ? R.drawable.stat_sys_alarm_dim
                 : R.drawable.stat_sys_alarm, buildAlarmContentDescription());
-        mIconController.setIconVisibility(mSlotAlarmClock, mCurrentUserSetup && hasAlarm);
+        mIconController.setIconVisibility(mSlotAlarmClock, hasAlarm);
     }
 
     private String buildAlarmContentDescription() {
