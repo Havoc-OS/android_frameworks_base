@@ -79,14 +79,10 @@ public class QSFooterViewController extends ViewController<QSFooterView> impleme
                     .postQSRunnableDismissingKeyguard(() -> mQsPanelController.showEdit(view));
         });
         mUsageText.setOnClickListener(view -> {
-            ActivityLaunchAnimator.Controller animationController =
-                mUsageText != null ? ActivityLaunchAnimator.Controller.fromView(
-                        mUsageText,
-                        InteractionJankMonitor.CUJ_SHADE_APP_LAUNCH_FROM_SETTINGS_BUTTON) : null;
-            Intent intent = new Intent();
-            intent.setClassName("com.android.settings",
+            Intent nIntent = new Intent(Intent.ACTION_MAIN);
+            nIntent.setClassName("com.android.settings",
                     "com.android.settings.Settings$DataUsageSummaryActivity");
-            mActivityStarter.startActivity(intent, true /* dismissShade */, animationController);
+            mActivityStarter.startActivity(nIntent, true /* dismissShade */);
         });
         mQsPanelController.setFooterPageIndicator(mPageIndicator);
         mView.updateEverything();
