@@ -860,20 +860,19 @@ public class ApplicationPackageManager extends PackageManager {
     @Override
     public boolean hasSystemFeature(String name, int version) {
         String packageName = ActivityThread.currentPackageName();
-        if (packageName != null &&
-                packageName.equals("com.google.android.apps.photos")) {
+        boolean isTensorDevice = Arrays.asList(pTensorCodenames).contains(SystemProperties.get("ro.product.device"));
+        if (packageName != null && packageName.equals("com.google.android.apps.photos")) {
             if (Arrays.asList(featuresPixel).contains(name)) return false;
             if (Arrays.asList(featuresTensor).contains(name)) return false;
             if (Arrays.asList(featuresNexus).contains(name)) return true;
         }
         if (Arrays.asList(featuresPixel).contains(name)) return true;
-        if (Arrays.asList(featuresTensor).contains(name) &&
-                !Arrays.asList(pTensorCodenames).contains(SystemProperties.get("ro.product.device"))) {
+        if (Arrays.asList(featuresTensor).contains(name) && !isTensorDevice) {
             return false;
         } else if (packageName != null &&
-                (packageName.contains("com.google.android.apps.nexuslauncher")
-                    || packageName.contains("com.google.android.apps.recorder"))
-                && Arrays.asList(featuresTensor).contains(name)) {
+                (packageName.contains("com.google.android.apps.nexuslauncher") ||
+                    packageName.contains("com.google.android.apps.recorder")) &&
+                Arrays.asList(featuresTensor).contains(name) && !isTensorDevice) {
            return false;
         }
 
