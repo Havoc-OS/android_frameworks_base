@@ -77,6 +77,7 @@ public class VolumeDialogComponent implements VolumeComponent, TunerService.Tuna
     private final ActivityStarter mActivityStarter;
     private VolumeDialog mDialog;
     private VolumePolicy mVolumePolicy;
+    boolean hasAlertSlider = false;
 
     @Inject
     public VolumeDialogComponent(
@@ -94,7 +95,7 @@ public class VolumeDialogComponent implements VolumeComponent, TunerService.Tuna
         mActivityStarter = activityStarter;
         mController = volumeDialogController;
         mController.setUserActivityListener(this);
-        boolean hasAlertSlider = mContext.getResources().
+        hasAlertSlider = mContext.getResources().
                 getBoolean(com.android.internal.R.bool.config_hasAlertSlider);
         // Allow plugins to reference the VolumeDialogController.
         pluginDependencyProvider.allowPluginDependency(VolumeDialogController.class);
@@ -216,7 +217,9 @@ public class VolumeDialogComponent implements VolumeComponent, TunerService.Tuna
 
     @Override
     public void onTriStateUserActivity() {
-        onUserActivity();
+        if (hasAlertSlider) {
+            onUserActivity();
+        }
     }
 
     private final VolumeDialogImpl.Callback mVolumeDialogCallback = new VolumeDialogImpl.Callback() {
