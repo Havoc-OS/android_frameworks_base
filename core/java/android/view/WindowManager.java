@@ -2055,7 +2055,7 @@ public interface WindowManager extends ViewManager {
          * @hide
          */
         public static final int PRIVATE_FLAG_INSET_PARENT_FRAME_BY_IME = 0x40000000;
-
+         /**
          * Flag to indicate that the window is a trusted overlay.
          * @hide
          */
