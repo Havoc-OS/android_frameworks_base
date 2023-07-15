@@ -100,12 +100,13 @@ class SmartPixelsService : Service() {
         val metrics = DisplayMetrics()
         windowManager.defaultDisplay.getRealMetrics(metrics)
         bmp = Bitmap.createBitmap(Grids.GridSideSize, Grids.GridSideSize, Bitmap.Config.ARGB_4444)
-        bmp.setDensity(metrics.densityDpi)
 
         updatePattern()
         val draw = BitmapDrawable(bmp).apply {
             setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT)
-            isFilterBitmap = false
+            setFilterBitmap(false)
+            setAntiAlias(false)
+            setTargetDensity(metrics.densityDpi)
         }
 
         view!!.background = draw
@@ -207,13 +208,13 @@ class SmartPixelsService : Service() {
     }
 
     private fun updatePattern() {
-        val shift = getShift()
+        val shift = getShift().toInt()
         val shiftX = shift % Grids.GridSideSize
         val shiftY = shift / Grids.GridSideSize
         for (i in 0 until Grids.GridSize) {
             val x = (i + shiftX) % Grids.GridSideSize
             val y = ((i / Grids.GridSideSize) + shiftY) % Grids.GridSideSize
-            val color = if (Grids.Patterns[mPattern][i].toInt() == 0) Color.TRANSPARENT else Color.BLACK
+            val color = if (Grids.Patterns[mPattern][i] == 0.toByte()) Color.TRANSPARENT else Color.BLACK
             bmp.setPixel(x, y, color)
         }
     }
