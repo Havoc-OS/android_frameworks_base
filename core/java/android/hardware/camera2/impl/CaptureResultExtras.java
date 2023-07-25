@@ -74,7 +74,20 @@ public class CaptureResultExtras implements Parcelable {
     public int describeContents() {
         return 0;
     }
-
+    // Backwards-compatible constructor
+    public CaptureResultExtras(int requestId, int subsequenceId, int afTriggerId,
+                               int precaptureTriggerId, long frameNumber,
+                               int partialResultCount, int errorStreamId,
+                               String errorPhysicalCameraId, long lastCompletedRegularFrameNumber,
+                               long lastCompletedReprocessFrameNumber,
+                               long lastCompletedZslFrameNumber) {
+        this(requestId, subsequenceId, afTriggerId, precaptureTriggerId, frameNumber,
+                partialResultCount, errorStreamId, errorPhysicalCameraId,
+                lastCompletedRegularFrameNumber, lastCompletedReprocessFrameNumber,
+                lastCompletedZslFrameNumber,
+                false /*hasReadOutTimestamp*/, 0 /*readoutTimestamp*/);
+    }
+    
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(requestId);
