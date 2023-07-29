@@ -99,7 +99,7 @@ open class BlurUtils @Inject constructor(
      * @return {@code true} when supported.
      */
     open fun supportsBlursOnWindows(): Boolean {
-        return blurSupportedSysProp && !blurDisabledSysProp && ActivityManager.isHighEndGfx()
+        return blurSupportedSysProp && !blurDisabledSysProp &&  !ActivityManager.isLowRamDeviceStatic()
     }
 
     override fun dump(fd: FileDescriptor, pw: PrintWriter, args: Array<out String>) {

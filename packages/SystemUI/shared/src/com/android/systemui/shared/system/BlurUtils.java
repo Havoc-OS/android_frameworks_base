@@ -32,6 +32,6 @@ public abstract class BlurUtils {
      * @return {@code true} when supported.
      */
     public static boolean supportsBlursOnWindows() {
-        return mBlurSupportedSysProp && !mBlurDisabledSysProp && ActivityManager.isHighEndGfx();
+        return mBlurSupportedSysProp && !mBlurDisabledSysProp && !ActivityManager.isLowRamDeviceStatic();
     }
 }
