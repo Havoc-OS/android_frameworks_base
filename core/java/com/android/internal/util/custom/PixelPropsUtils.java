@@ -33,7 +33,7 @@ public class PixelPropsUtils {
     private static final String TAG = PixelPropsUtils.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    private static final Map<String, Object> propsToChangeRN7;
+    private static final Map<String, Object> propsToChangePixel2;
 
     private static final Map<String, Object> propsToChangePixel5;
     private static final String[] packagesToChangePixel5 = {
@@ -105,6 +105,7 @@ public class PixelPropsUtils {
         "com.riotgames.league.wildrifttw",
         "com.riotgames.league.wildriftvn",
         "com.netease.lztgglobal",
+        "com.pubg.imobile",
         "com.pubg.krmobile",
         "com.pubg.newstate",
         "com.rekoo.pubgm",
@@ -118,11 +119,6 @@ public class PixelPropsUtils {
     private static final String[] packagesToChangeMI11 = {
         "com.mobile.legends",
         "com.tencent.tmgp.sgame"
-    };
-
-    private static final Map<String, Object> propsToChangeRK30U;
-    private static final String[] packagesToChangeRK30U = {
-        "com.pubg.imobile"
     };
 
     // Codenames for currently supported Pixels by Google
@@ -147,20 +143,21 @@ public class PixelPropsUtils {
     static {
         propsToKeep = new HashMap<>();
         propsToKeep.put("com.google.android.settings.intelligence", new ArrayList<>(Collections.singletonList("FINGERPRINT")));
-        propsToChangeRN7 = new HashMap<>();
-        propsToChangeRN7.put("BRAND", "Xiaomi");
-        propsToChangeRN7.put("MANUFACTURER", "Xiaomi");
-        propsToChangeRN7.put("DEVICE", "lavender");
-        propsToChangeRN7.put("PRODUCT", "lavender");
-        propsToChangeRN7.put("MODEL", "Redmi Note 7");
-        propsToChangeRN7.put("FINGERPRINT", "google/walleye/walleye:8.1.0/OPM1.171019.011/4448085:user/release-keys");
+        propsToChangePixel2 = new HashMap<>();
+        propsToChangePixel2.put("BRAND", "google");
+        propsToChangePixel2.put("MANUFACTURER", "Google");
+        propsToChangePixel2.put("DEVICE", "walleye");
+        propsToChangePixel2.put("PRODUCT", "walleye");
+        propsToChangePixel2.put("HARDWARE", "walleye");
+        propsToChangePixel2.put("MODEL", "Pixel 2");
+        propsToChangePixel2.put("FINGERPRINT", "google/walleye/walleye:8.1.0/OPM1.171019.011/4448085:user/release-keys");
         propsToChangePixel5 = new HashMap<>();
         propsToChangePixel5.put("BRAND", "google");
         propsToChangePixel5.put("MANUFACTURER", "Google");
         propsToChangePixel5.put("DEVICE", "redfin");
         propsToChangePixel5.put("PRODUCT", "redfin");
         propsToChangePixel5.put("MODEL", "Pixel 5");
-        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ3A.230705.001/10216780:user/release-keys");
+        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ3A.230805.001/10316531:user/release-keys");
         propsToChangePixelXL = new HashMap<>();
         propsToChangePixelXL.put("BRAND", "google");
         propsToChangePixelXL.put("MANUFACTURER", "Google");
@@ -182,12 +179,6 @@ public class PixelPropsUtils {
         propsToChangeMI11.put("DEVICE", "cmi");
         propsToChangeMI11.put("PRODUCT", "cmi");
         propsToChangeMI11.put("MODEL", "Mi 10 Pro");
-        propsToChangeRK30U = new HashMap<>();
-        propsToChangeRK30U.put("BRAND", "Xiaomi");
-        propsToChangeRK30U.put("MANUFACTURER", "Xiaomi");
-        propsToChangeRK30U.put("DEVICE", "cezanne");
-        propsToChangeRK30U.put("PRODUCT", "cezanne");
-        propsToChangeRK30U.put("MODEL", "M2006J10C");
     }
 
     public static void setProps(String packageName) {
@@ -203,7 +194,7 @@ public class PixelPropsUtils {
                 || Arrays.asList(extraPackagesToChange).contains(packageName)
                 || Arrays.asList(streamingPackagesToChange).contains(packageName))) {
 
-            Map<String, Object> propsToChange = propsToChangeRN7;
+            Map<String, Object> propsToChange = propsToChangePixel2;
 
             if (Arrays.asList(packagesToChangePixel5).contains(packageName)) {
                 propsToChange = propsToChangePixel5;
@@ -254,13 +245,6 @@ public class PixelPropsUtils {
             } else if (Arrays.asList(packagesToChangeMI11).contains(packageName)) {
                 if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
                 for (Map.Entry<String, Object> prop : propsToChangeMI11.entrySet()) {
-                    String key = prop.getKey();
-                    Object value = prop.getValue();
-                    setPropValue(key, value);
-                }
-            } else if (Arrays.asList(packagesToChangeRK30U).contains(packageName)) {
-                if (DEBUG) Log.d(TAG, "Defining props for: " + packageName);
-                for (Map.Entry<String, Object> prop : propsToChangeRK30U.entrySet()) {
                     String key = prop.getKey();
                     Object value = prop.getValue();
                     setPropValue(key, value);
