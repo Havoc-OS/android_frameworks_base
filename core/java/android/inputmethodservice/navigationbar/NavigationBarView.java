@@ -30,6 +30,7 @@ import android.app.StatusBarManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -270,7 +271,7 @@ public final class NavigationBarView extends FrameLayout {
                 (mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_IME_SWITCHER_SHOWN) != 0;
         getImeSwitchButton().setVisibility(imeSwitcherVisible ? View.VISIBLE : View.INVISIBLE);
 
-        getBackButton().setVisibility(View.VISIBLE);
+        getBackButton().setVisibility(isHideIMESpaceEnabled() ? View.GONE : View.VISIBLE);
         getHomeHandle().setVisibility(View.INVISIBLE);
 
         // We used to be reporting the touch regions via notifyActiveTouchRegions() here.
@@ -378,5 +379,10 @@ public final class NavigationBarView extends FrameLayout {
         for (int i = 0; i < mButtonDispatchers.size(); ++i) {
             mButtonDispatchers.valueAt(i).setDarkIntensity(intensity);
         }
+    }
+    
+    public boolean isHideIMESpaceEnabled() {
+        return Settings.System.getInt(getContext().getContentResolver(),
+                    Settings.System.HIDE_IME_SPACE_ENABLE, 0) != 0;
     }
 }
