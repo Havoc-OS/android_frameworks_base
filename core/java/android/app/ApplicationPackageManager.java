@@ -865,7 +865,9 @@ public class ApplicationPackageManager extends PackageManager {
         }
         String packageName = ActivityThread.currentPackageName();
         if (packageName != null &&
-                packageName.equals("com.google.android.apps.photos")) {
+                packageName.equals("com.google.android.apps.photos") &&
+                SystemProperties.getBoolean("persist.sys.pixelprops.gphotos", true)) {
+            if (Arrays.asList(featuresTensor).contains(name)) return false;
             if (Arrays.asList(featuresPixel).contains(name)) return false;
             if (Arrays.asList(featuresNexus).contains(name)) return true;
         }

@@ -214,7 +214,8 @@ public class PixelPropsUtils {
 
             boolean isPixelDevice = Arrays.asList(pixelCodenames).contains(SystemProperties.get(DEVICE));
 
-            if (packageName.equals("com.google.android.apps.photos")) {
+            if (packageName.equals("com.google.android.apps.photos") && 
+                SystemProperties.getBoolean("persist.sys.pixelprops.gphotos", true)) {
                 propsToChange.putAll(propsToChangePixelXL);
             } else if (isPixelDevice) {
                 return;
