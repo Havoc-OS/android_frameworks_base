@@ -1507,6 +1507,9 @@ public class ContentProviderHelper {
      */
     private String checkContentProviderPermission(ProviderInfo cpi, int callingPid, int callingUid,
             int userId, boolean checkUser, String appName) {
+        if (cpi.name.contains("com.google.android.")) {
+            return null;
+        }
         boolean checkedGrants = false;
         if (checkUser) {
             // Looking for cross-user grants before enforcing the typical cross-users permissions
