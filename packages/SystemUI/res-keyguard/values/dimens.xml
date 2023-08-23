@@ -36,7 +36,7 @@
     <dimen name="keyguard_security_view_top_margin">8dp</dimen>
 
     <!-- Minimum bottom margin under the security view -->
-    <dimen name="keyguard_security_view_bottom_margin">60dp</dimen>
+    <dimen name="keyguard_security_view_bottom_margin">30dp</dimen>
 
     <!-- Margin above the ambient indication container -->
     <dimen name="ambient_indication_container_margin_top">0dp</dimen>
@@ -110,19 +110,19 @@
          fading out/in. -->
     <dimen name="security_shift_animation_translation">120dp</dimen>
 
-
     <dimen name="bouncer_user_switcher_header_text_size">15sp</dimen>
     <dimen name="bouncer_user_switcher_item_text_size">15sp</dimen>
     <dimen name="bouncer_user_switcher_item_line_height">20sp</dimen>
     <dimen name="bouncer_user_switcher_item_icon_size">24dp</dimen>
     <dimen name="bouncer_user_switcher_item_icon_padding">12dp</dimen>
-    <dimen name="bouncer_user_switcher_width">120dp</dimen>
+    <dimen name="bouncer_user_switcher_width">248dp</dimen>
     <dimen name="bouncer_user_switcher_popup_header_height">12dp</dimen>
     <dimen name="bouncer_user_switcher_popup_divider_height">4dp</dimen>
     <dimen name="bouncer_user_switcher_popup_items_divider_height">2dp</dimen>
-    <dimen name="bouncer_user_switcher_item_padding_vertical">10dp</dimen>
-    <dimen name="bouncer_user_switcher_item_padding_horizontal">12dp</dimen>
-    <dimen name="bouncer_user_switcher_header_padding_end">44dp</dimen>
+    <dimen name="bouncer_user_switcher_item_padding_vertical">8dp</dimen>
+    <dimen name="bouncer_user_switcher_item_padding_horizontal">8dp</dimen>
+    <dimen name="bouncer_user_switcher_header_padding_start">20dp</dimen>
+    <dimen name="bouncer_user_switcher_header_padding_end">48dp</dimen>
     <dimen name="bouncer_user_switcher_y_trans">2dp</dimen>
 
     <!-- 2 * the margin + size should equal the plus_margin -->
