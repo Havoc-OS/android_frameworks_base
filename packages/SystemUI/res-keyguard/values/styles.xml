@@ -156,7 +156,9 @@
 
     <style name="Bouncer.UserSwitcher.Spinner.Header">
         <item name="android:background">@drawable/bouncer_user_switcher_header_bg</item>
+        <item name="android:maxWidth">@dimen/bouncer_user_switcher_width</item>
         <item name="android:textSize">@dimen/bouncer_user_switcher_header_text_size</item>
+        <item name="android:paddingStart">@dimen/bouncer_user_switcher_header_padding_start</item>
         <item name="android:paddingEnd">@dimen/bouncer_user_switcher_header_padding_end</item>
     </style>
 
