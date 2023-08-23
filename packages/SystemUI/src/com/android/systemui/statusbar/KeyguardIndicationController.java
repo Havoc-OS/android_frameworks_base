@@ -857,51 +857,8 @@ public class KeyguardIndicationController {
         // A few places might need to hide the indication, so always start by making it visible
         mIndicationArea.setVisibility(VISIBLE);
 
-        // Walk down a precedence-ordered list of what indication
-        // should be shown based on device state
         if (mDozing) {
-            mLockScreenIndicationView.setVisibility(View.GONE);
-            mTopIndicationView.setVisibility(VISIBLE);
-            // When dozing we ignore any text color and use white instead, because
-            // colors can be hard to read in low brightness.
-            mTopIndicationView.setTextColor(Color.WHITE);
-
-            CharSequence newIndication;
-            boolean setWakelock = false;
-
-            if (!TextUtils.isEmpty(mBiometricMessage)) {
-                newIndication = mBiometricMessage; // note: doesn't show mBiometricMessageFollowUp
-                setWakelock = true;
-            } else if (!TextUtils.isEmpty(mTransientIndication)) {
-                newIndication = mTransientIndication;
-                setWakelock = true;
-            } else if (!mBatteryPresent) {
-                // If there is no battery detected, hide the indication and bail
-                mIndicationArea.setVisibility(GONE);
-                return;
-            } else if (!TextUtils.isEmpty(mAlignmentIndication)) {
-                newIndication = mAlignmentIndication;
-                mTopIndicationView.setTextColor(mContext.getColor(R.color.misalignment_text_color));
-                setWakelock = false;
-            } else if (mPowerPluggedIn || mEnableBatteryDefender) {
-                newIndication = computePowerIndication();
-                setWakelock = animate;
-            } else {
-                newIndication = NumberFormat.getPercentInstance()
-                        .format(mBatteryLevel / 100f);
-                setWakelock = false;
-            }
-
-            if (!TextUtils.equals(mTopIndicationView.getText(), newIndication)) {
-                if (setWakelock) {
-                    mWakeLock.setAcquired(true);
-                    mTopIndicationView.switchIndication(newIndication, null,
-                            animate, () -> mWakeLock.setAcquired(false));
-                } else {
-                    mTopIndicationView.switchIndication(newIndication, null,
-                            false /* animate */, null /* onAnimationEndCallback */);
-                }
-            }
+            updateDozingIndication(animate);
             return;
         }
 
@@ -910,6 +867,53 @@ public class KeyguardIndicationController {
         mTopIndicationView.setText(null);
         mLockScreenIndicationView.setVisibility(View.VISIBLE);
         updateLockScreenIndications(animate, getCurrentUser());
+    }
+
+    private void updateDozingIndication(boolean animate) {
+        mLockScreenIndicationView.setVisibility(View.GONE);
+        mTopIndicationView.setVisibility(VISIBLE);
+        mTopIndicationView.setTextColor(Color.WHITE);
+
+        CharSequence newIndication;
+        boolean setWakelock = false;
+
+        if (!TextUtils.isEmpty(mBiometricMessage)) {
+            newIndication = mBiometricMessage;
+            setWakelock = true;
+        } else if (!TextUtils.isEmpty(mTransientIndication)) {
+            newIndication = mTransientIndication;
+            setWakelock = true;
+        } else if (!mBatteryPresent) {
+            mIndicationArea.setVisibility(GONE);
+            return;
+        } else {
+            newIndication = getDozingNonTransientIndication();
+            setWakelock = newIndication == computePowerIndication() && animate;
+        }
+
+        if (!TextUtils.equals(mTopIndicationView.getText(), newIndication)) {
+            if (setWakelock) {
+                mWakeLock.setAcquired(true);
+                try {
+                    mTopIndicationView.switchIndication(newIndication, null, animate, null);
+                } finally {
+                    mWakeLock.setAcquired(false);
+                }
+            } else {
+                mTopIndicationView.switchIndication(newIndication, null, false, null);
+            }
+        }
+    }
+
+    private CharSequence getDozingNonTransientIndication() {
+        if (!TextUtils.isEmpty(mAlignmentIndication)) {
+            mTopIndicationView.setTextColor(mContext.getColor(R.color.misalignment_text_color));
+            return mAlignmentIndication;
+        } else if (mPowerPluggedIn || mEnableBatteryDefender) {
+            return computePowerIndication();
+        } else {
+            return NumberFormat.getPercentInstance().format(mBatteryLevel / 100f);
+        }
     }
 
     /**
