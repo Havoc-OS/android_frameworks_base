@@ -28,10 +28,5 @@
         <item name="android:textColor">#ffffff</item>
         <item name="android:alpha">0.54</item>
     </style>
-    <style name="pocket_view_top_tag">
-        <item name="android:textSize">@dimen/pocket_view_top_tag_size</item>
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:alpha">0.54</item>
-    </style>
 
 </resources>

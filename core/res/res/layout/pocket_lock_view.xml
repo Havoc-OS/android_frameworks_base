@@ -43,7 +43,7 @@
             style="@style/pocket_view_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/pocket_view_title_margin_horizontal"
+            android:layout_marginHorizontal="@dimen/pocket_view_margin_horizontal"
             android:gravity="center_horizontal"
             android:text="@string/pocket_view_title" />
 
@@ -60,55 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/pocket_view_title_cancel_margin_top"
-            android:layout_marginHorizontal="@dimen/pocket_view_cancel_margin_horizontal"
-            android:gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/pocket_view_margin_horizontal"
+            android:gravity="center"
             android:text="@string/pocket_view_title_cancel" />
-
-        <LinearLayout
-            android:id="@+id/pocket_view_top_tag_view1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/pocket_view_top_tag_margin_top"
-            android:layout_marginHorizontal="@dimen/pocket_view_cancel_margin_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/pocket_view_top_tag_number1"
-                style="@style/pocket_view_top_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pocket_view_top_tag_number1" />
-
-            <TextView
-                android:id="@+id/pocket_view_top_tag_cancel"
-                style="@style/pocket_view_top_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pocket_view_top_tag_cancel" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/pocket_view_top_tag_view2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/pocket_view_top_tag_margin_top"
-            android:layout_marginHorizontal="@dimen/pocket_view_cancel_margin_horizontal"
-            android:gravity="bottom"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/pocket_view_top_tag_number2"
-                style="@style/pocket_view_top_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pocket_view_top_tag_number2" />
-
-            <TextView
-                android:id="@+id/pocket_view_top_tag_cancel2"
-                style="@style/pocket_view_top_tag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pocket_view_top_tag_cancel2" />
-        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

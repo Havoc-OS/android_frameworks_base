@@ -17,15 +17,12 @@
 <resources>
 
     <!-- Pocket Mode -->
-    <dimen name="pocket_view_img_height">350dp</dimen>
-    <dimen name="pocket_view_img_width">175dp</dimen>
-    <dimen name="pocket_view_img_margin_top">56dp</dimen>
-    <dimen name="pocket_view_title_size">24sp</dimen>
-    <dimen name="pocket_view_title_margin_horizontal">56dp</dimen>
-    <dimen name="pocket_view_title_cancel_size">18sp</dimen>
-    <dimen name="pocket_view_title_cancel_margin_top">56dp</dimen>
-    <dimen name="pocket_view_cancel_margin_horizontal">24dp</dimen>
-    <dimen name="pocket_view_top_tag_size">13sp</dimen>
-    <dimen name="pocket_view_top_tag_margin_top">8dp</dimen>
+    <dimen name="pocket_view_img_height">480dp</dimen>
+    <dimen name="pocket_view_img_width">240dp</dimen>
+    <dimen name="pocket_view_img_margin_top">32dp</dimen>
+    <dimen name="pocket_view_title_size">28sp</dimen>
+    <dimen name="pocket_view_title_cancel_size">20sp</dimen>
+    <dimen name="pocket_view_title_cancel_margin_top">48dp</dimen>
+    <dimen name="pocket_view_margin_horizontal">48dp</dimen>
 
 </resources>
